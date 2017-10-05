@@ -6,6 +6,8 @@ BEGIN_PROTECTED_MODE:
 	mov ebx, 0	; col
 	call vga_print_string_at_coords
 
+	call KERNEL_OFFSET
+
 	jmp $	; inf loop in protected mode (we don't want to ever get out of here)
 
 %include "vga_text_print.asm"

@@ -1,5 +1,7 @@
 [org 0x7c00]
 [bits 16]
+
+KERNEL_OFFSET equ 0x1000
 	; start of the OS
 os:
 	; ax, bx, cx - general registers - used as parameters
@@ -12,23 +14,36 @@ os:
 	; inits 
 	mov bp, 0x8000	; 0x8000 to 0xa000 - normal stack
 	mov sp, bp
+	mov [BOOT_DRIVE], dl	; saving the boot drive
 
-	; start
+	; start message
 	mov si, bios_os_start_msg
 	call bios_print_const_string
 	call bios_print_end_of_line
-	
-	mov [BOOT_DRIVE], dl
 
+	; proving hdd capabilities
 	mov bx, 0x9000	; address to load to
+	mov cl, 2		; where to read from
 	mov dh, 5		; how much to load 
 	mov dl, [BOOT_DRIVE]
 	call bios_load_memory
 
 	mov si, 0x9000
 	call bios_print_const_string
+	call bios_print_end_of_line
 
-	; start the protected world
+	; loading the kernel
+	mov si, bios_load_kernel
+	call bios_print_const_string
+	call bios_print_end_of_line
+
+	mov bx, KERNEL_OFFSET
+	mov cl, 3		; the first sector is the boot loader and the second is rubish
+	mov dh, 20		; 20 * 512 = 10240 bytes 
+	mov dl, [BOOT_DRIVE]
+	call bios_load_memory
+
+	; start the protected mode and starts the kernel
 	call switch_to_protected_mode
 	
 jmp $ ; halt the OS
@@ -75,6 +90,7 @@ init_protected:
 ; 	ret
 
 ; dh sectors to read
+; cl start sector
 bios_load_memory:
 	push bp
 	push sp
@@ -83,7 +99,9 @@ bios_load_memory:
 			mov al, dh 	; sectors to read
 			mov ch, 0 	; start from cylinder 0
 			mov dh, 0	; use head 0, the 
-			mov cl, 2	; start reading from sector 2 (our sector, boot loader, is 1)
+
+						; will asume 512 sector size becaus thats what some guy on google said
+			;mov cl,para; start reading from sector cl (our sector, boot loader, is 1)
 
 			int 0x13	; isue bios intrerupt
 
@@ -105,7 +123,10 @@ bios_load_memory:
 
 	; declarations of constants 										
 bios_os_start_msg:
-	db "Booting the OS", 0
+	db "Booting the OS ...", 0
+
+bios_load_kernel:
+	db "Loading the kernel from disk ...", 0
 
 ; bios_hello_msg:
 ; 	db "Hello user", 0
@@ -124,3 +145,5 @@ times  510-($-$$) db 0
 dw 0xaa55
 
 db "This string is on the drive ...", 0	; this string has 16 bytes
+
+times  1024-($-$$) db 0
