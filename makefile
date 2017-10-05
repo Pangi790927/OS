@@ -8,7 +8,7 @@ NAME = boot_sect
 all: clean hdd
 	VBoxManage startvm "MyOS"
 
-hdd: os-image
+hdd: os-image MyOS.vhd
 	dd conv=notrunc if=os-image of=MyOS.vhd
 
 boot_sect.o: boot_sect.asm
