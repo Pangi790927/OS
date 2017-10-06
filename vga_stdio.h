@@ -4,131 +4,22 @@
 namespace VGA {
 	const int MAX_ROW = 25;
 	const int MAX_COL = 80;
-
+	
 	const char WHITE_ON_BLACK = 0x0f;
 
-	char *_video_memory_address = (char *) 0xb8000;
-
-	int _row = 0;
-	int _col = 0;
-
-	int _pos_in_screen (int row, int col) {
-		return (row * MAX_COL + col) * 2;
-	}
-
-	char& _char_val_at (int row, int col) {
-		return _video_memory_address[_pos_in_screen(row, col) + 0];
-	}
-
-	char& _char_mode_at (int row, int col) {
-		return _video_memory_address[_pos_in_screen(row, col) + 1];
-	}
-
-	void scroll(char mode = WHITE_ON_BLACK) {
-		for (int i = 1; i < MAX_ROW; i++) {
-			for (int j = 0; j < MAX_COL; j++) {
-				_char_val_at(i - 1, j) = _char_val_at(i, j);
-				_char_mode_at(i - 1, j) = _char_mode_at(i, j);
-			}
-		}
-		
-		for (int j = 0; j < MAX_COL; j++) {
-			_char_val_at(MAX_ROW - 1, j) = ' ';
-			_char_mode_at(MAX_ROW - 1, j) = mode;
-		}
-
-		_row--;
-		if (_row < 0)
-			_row = 0;
-	}
-
-	void clear_screen(char mode = WHITE_ON_BLACK)
-	{
-		for (int row = 0; row < MAX_ROW; row++) {
-			for (int col = 0; col < MAX_COL; col++)
-			{
-				_char_val_at(row, col) = ' ';
-				_char_mode_at(row, col) = mode;
-			}
-		}
-		_row = 0;
-		_col = 0;
-	}
-
-	void putchar (char c, char mode = WHITE_ON_BLACK) {
-		bool can_print = true;
-		
-		if (c == '\n') {
-			_row++;
-			_col = 0;
-			can_print = false;
-		}
-
-		if (c == '\t') {
-			_col = (_col + 4) & ~(4 - 1);;
-			can_print = false;
-		}
-
-		if (c == '\r') {
-			_col = 0;
-			can_print = false;
-		}
-
-		if (_col >= MAX_COL) {
-			_row += _col / MAX_COL;
-			_col = 0;
-		}
-
-		if (_row >= MAX_ROW) {
-			scroll(mode);
-		}
-		
-		if (can_print) {
-			_char_val_at(_row, _col) = c;
-			_char_mode_at(_row, _col) = mode;
-			_col++;
-		}
-	}
-
-	void print (const char *str, char mode = 0x0f) {
-		
-		for (int i = 0; str[i]; i++)
-			putchar(str[i]);
-	}
-
-	char _digits[] = "0123456789abcdef";
-	void _put_nbr_base_rec (int number, int base) {
-		if (number) {
-			_put_nbr_base_rec(number / base, base);
-			putchar(_digits[number % base]);
-		}
-	}
-	
-	void _put_nbr_base (int number, int base) {
-		if (number < 0)
-			putchar('-');
-		
-		if (!number)
-			putchar(_digits[0]);
-
-		_put_nbr_base_rec(number, base);
-	}
-
-	void putHex (int number) {
-		_put_nbr_base(number, 16);
-	}
-
-	void putDec (int number) {
-		_put_nbr_base(number, 10);
-	}
-
-	void putOct (int number) {
-		_put_nbr_base(number, 8);
-	}
-
-	void putBin (int number) {
-		_put_nbr_base(number, 2);
-	}
+	int 	_pos_in_screen (int row, int col);
+	char& 	_char_val_at (int row, int col);
+	char& 	_char_mode_at (int row, int col);
+	void 	scroll (char mode = WHITE_ON_BLACK);
+	void 	clear_screen (char mode = WHITE_ON_BLACK);
+	void 	putchar (char c, char mode = WHITE_ON_BLACK);
+	void 	print (const char *str, char mode = WHITE_ON_BLACK);
+	void 	_put_nbr_base_rec (int number, int base);
+	void 	_put_nbr_base (int number, int base);
+	void 	putHex (int number);
+	void 	putDec (int number);
+	void 	putOct (int number);
+	void 	putBin (int number);
 }
 
 #endif

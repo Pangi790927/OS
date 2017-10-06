@@ -5,7 +5,7 @@ NAME = boot_sect
 # OBJS_ASM = boot_sect.o
 # OBJS_CXX = kernel.o
 
-DEPENDENCES = isr.o flushIDT.o isr_handler.o
+DEPENDENCES = vga_stdio.o isr_handler.o isr.o flushIDT.o 
 
 all: clean hdd
 	VBoxManage startvm "MyOS"
@@ -32,6 +32,10 @@ kernel.o:
 	g++ -m32 -ffreestanding -c kernel.cpp -o kernel.o -I. -O2
 
 ###########################################################################################
+# VGA print
+vga_stdio.o: vga_stdio.cpp
+	g++ -m32 -ffreestanding -c vga_stdio.cpp -o vga_stdio.o -I. -O2
+
 # intrerupts
 flushIDT.o: intrerupts/flushIDT.asm
 	nasm intrerupts/flushIDT.asm -f elf -o flushIDT.o
