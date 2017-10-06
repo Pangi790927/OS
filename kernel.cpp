@@ -1,11 +1,26 @@
+#include "vga_stdio.h"
 
+#include "intrerupts/intrerupts.h"
 
 int main() {
-	int row = 5;
-	int col = 0;
 
-	char *video_memory = (char *) 0xb8000;
+	VGA::clear_screen();
+	// VGA::print("string");
+	// VGA::putnbr(123);
+	
+	char str[] = "Welcome to MyOS";
+	VGA::print(str);
+	VGA::print("\n");
+	
+	VGA::putHex(10);
+	VGA::print("\n");
 
-	video_memory[(row * 80 + col) * 2 + 0] = 'X';
-	video_memory[(row * 80 + col) * 2 + 1] = 0x0f;
+	VGA::putDec(10);
+	VGA::print("\n");
+
+	VGA::putOct(10);
+	VGA::print("\n");
+
+	VGA::putBin(10);
+	VGA::print("\n");
 }

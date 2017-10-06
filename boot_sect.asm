@@ -39,7 +39,7 @@ os:
 
 	mov bx, KERNEL_OFFSET
 	mov cl, 3		; the first sector is the boot loader and the second is rubish
-	mov dh, 20		; 20 * 512 = 10240 bytes 
+	mov dh, 50		; 50 * 512 = 25600 bytes 
 	mov dl, [BOOT_DRIVE]
 	call bios_load_memory
 
