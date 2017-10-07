@@ -23,4 +23,14 @@ int main() {
 
 	VGA::putBin(10);
 	VGA::print("\n");
+
+	IntreruptDescriptorTable table;
+
+	table.sendTable();
+
+	// asm volatile ("int $0x3");
+
+	// while (true) {
+	// 	VGA::putHex(0xCACA);
+	// }
 }

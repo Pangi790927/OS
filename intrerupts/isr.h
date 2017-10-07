@@ -11,6 +11,9 @@ struct registers_isr
    u_int_32 eip, cs, eflags, useresp, ss;	 			// Pushed by the processor automatically.
 };
 
-void isr_handler (registers_isr regs);
+/// this asm("isr_handler") part took me a day to figure it out
+void isr_handler (registers_isr regs) asm("isr_handler");
+
+void int13 (registers_isr regs) asm("int13");
 
 #endif
