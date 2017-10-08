@@ -1,30 +1,22 @@
-#include "vga_stdio.h"
 #include "isr.h"
+#include "stdio.h"
+
+void registers_isr::dump_all() {
+	printf("INT nr: %d, err: %d\n", int_no, err_code);
+	printf("Data Seg: %p\n", ds);
+	printf("Registers pusha:\nedi:%x esi:%x ebp:%x esp:%x ebx:%x edx:%x ecx:%x eax:%x\n", 
+			edi, esi, ebp, esp, ebx, edx, ecx, eax);
+	printf("Registers cpu push:\neip:%x  cs:%x efl:%x usp:%x  ss:%x\n", 
+			eip, cs, eflags, useresp, ss);
+}
 
 void isr_handler (registers_isr regs) {
-	VGA::print(" interr no: ");
-	VGA::putHex(regs.int_no);
-	
-	VGA::print(" err code: ");
-	VGA::putHex(regs.err_code);
-
-	VGA::print(" data seg: ");
-	VGA::putHex(regs.ds);
-
-	VGA::print("\n");
+	printf("ISR no: %d, err: %d\n", regs.int_no, regs.err_code);
 }
 
 void int13 (registers_isr regs) {
-	/// well no isq13 is happening now ...
-	
-	// VGA::print(" ::int13:: E: ");
-	// VGA::putDec(regs.err_code & 0b1);
-
-	// VGA::print(" Tbl: ");
-	// VGA::putDec((regs.err_code & 0b110) >> 1);
-
-	// VGA::print(" Index: ");
-	// VGA::putDec((regs.err_code & 0b1111111111111000) >> 3);
-
-	// VGA::print("\n");
+	regs.dump_all();
+	printf("ERROR: hex: %x, bin: %b, E: %b, TLT: %b, Sel: %x\n",
+			regs.err_code, regs.err_code, 
+			regs.err_code & 0b1, (regs.err_code >> 1) & 0b11, (regs.err_code >> 3) & 0b1111111111111);
 }

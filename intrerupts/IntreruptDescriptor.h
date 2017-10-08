@@ -2,9 +2,11 @@
 #define INTRERUPT_DESCRIPTOR_H
 
 #include "Types.h"
+#include "stdio.h"
 
 extern void idt_flush (unsigned int table) asm("idt_flush");		/// present in a asm file
 
+/// main intrerupts
 extern void isr0 () asm("isr0");
 extern void isr1 () asm("isr1");
 extern void isr2 () asm("isr2");
@@ -38,7 +40,7 @@ extern void isr29() asm("isr29");
 extern void isr30() asm("isr30");
 extern void isr31() asm("isr31");
 
-class IntreruptDescriptor {
+class ID {
 public:
 	u_int_8 data[8];							// should be aligned now
 
@@ -48,7 +50,7 @@ public:
 	u_int_8& _flags()	 	{ return *((u_int_8* )(data + 5)); };
 	u_int_16& _baseHigh() 	{ return *((u_int_16*)(data + 6)); };
 
-	IntreruptDescriptor() {
+	ID () {
 		_zero() = 0;
 
 		setBase(0);
@@ -61,6 +63,10 @@ public:
 		_baseHigh() = ((baseAddr >> 16) & 0xffff);
 	}
 
+	u_int_32 getBase() {
+		return ((_baseHigh() << 16) | _baseLow());
+	}
+
 	void setSelector (u_int_16 selector) {
 		_selector() = selector;
 	}
@@ -70,7 +76,7 @@ public:
 	}
 };
 
-class IntreruptDescriptorPointer {
+class IDP {
 public:
 	u_int_16 data[3];
 
@@ -82,11 +88,11 @@ public:
 	}
 };
 
-class IntreruptDescriptorTable {
+class IDT {
 public:
-	IntreruptDescriptorPointer descPtr;
+	IDP descPtr;
 
-	IntreruptDescriptor descriptors[256];	// we only need 256 descriptors
+	ID descriptors[256];	// we only need 256 descriptors
 
 	void setGate (int number, u_int_32 func, u_int_16 sel, u_int_8 flags) {
 		descriptors[number].setBase(func);
@@ -94,13 +100,11 @@ public:
 		descriptors[number].setFlags(flags);
 	}
 
-	IntreruptDescriptorTable() {
+	IDT() {
 		descPtr._limit() = sizeof(descriptors) - 1;
 		descPtr._base() = (u_int_32)&descriptors;
 
-		VGA::print("here I am: ");
-		VGA::putDec(32);
-		VGA::print("\n");
+		// printf("here I am: %d\n", 32);
 	
 		setGate( 0, (u_int_32)isr0 , 0x08, 0x8E);
     	setGate( 1, (u_int_32)isr1 , 0x08, 0x8E);

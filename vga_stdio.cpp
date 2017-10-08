@@ -1,4 +1,5 @@
 #include "vga_stdio.h"
+#include "c_asm_func.h"
 
 namespace VGA {
 	int _row = 0;
@@ -6,6 +7,16 @@ namespace VGA {
 
 	char *_video_memory_address = (char *) 0xb8000;
 	char _digits[] = "0123456789abcdef";
+
+	void	_actualize_cursor(void) {
+		u_int_16 cursorLocation = _row * 80 + _col;
+
+	    port_byte_out(0x3D4, 14);                  // Tell the VGA board we are setting the high cursor byte.
+	    port_byte_out(0x3D5, cursorLocation >> 8); // Send the high cursor byte.
+	    port_byte_out(0x3D4, 15);                  // Tell the VGA board we are setting the low cursor byte.
+	    port_byte_out(0x3D5, cursorLocation);      // Send the low cursor byte.
+
+	}
 
 	int _pos_in_screen (int row, int col) {
 		return (row * MAX_COL + col) * 2;
@@ -35,6 +46,7 @@ namespace VGA {
 		_row--;
 		if (_row < 0)
 			_row = 0;
+		_actualize_cursor();
 	}
 
 	void clear_screen(char mode)
@@ -48,6 +60,7 @@ namespace VGA {
 		}
 		_row = 0;
 		_col = 0;
+		_actualize_cursor();
 	}
 
 	void putchar (char c, char mode) {
@@ -83,6 +96,7 @@ namespace VGA {
 			_char_mode_at(_row, _col) = mode;
 			_col++;
 		}
+		_actualize_cursor();
 	}
 
 	void print (const char *str, char mode) {

@@ -1,36 +1,43 @@
-#include "vga_stdio.h"
+#include "intrerupts.h"
+#include "stdio.h"
+#include "timer.h"
+#include "keyboard.h"
+#include "cpuid.h"
+#include "basic.h"
 
-#include "intrerupts/intrerupts.h"
+void cpuid_support_print() {
+	printf(" cpuid: %b \n", cpuid_suported());
+
+	u_int_32 name[4];
+	cpuid_string(0, name);
+
+	unsigned char *str = (unsigned char*)(name + 1);
+	swap(name[3], name[2]);
+
+	for (int i = 0; i < 12; i++)
+		printf("%c", str[i]);
+	printf("\n");
+	
+	if (cpuid_has_feature(CPUID_FEAT_EDX_APIC, CPUID_FETURE_REG_EDX))
+		printf("APIC Feature ... \n");
+	else
+		printf("NO APIC Feature ... \n");
+}
 
 int main() {
-
-	VGA::clear_screen();
-	// VGA::print("string");
-	// VGA::putnbr(123);
+	clear_screen();
+	printf("Welcome to MyOS\nHex: %x Dec: %d Oct: %o Bin: %b\n", 10, 10, 10, 10 );
 	
-	char str[] = "Welcome to MyOS";
-	VGA::print(str);
-	VGA::print("\n");
+	IDT table;
+	PIC intControlers(table);
 	
-	VGA::putHex(10);
-	VGA::print("\n");
-
-	VGA::putDec(10);
-	VGA::print("\n");
-
-	VGA::putOct(10);
-	VGA::print("\n");
-
-	VGA::putBin(10);
-	VGA::print("\n");
-
-	IntreruptDescriptorTable table;
-
 	table.sendTable();
+	enable_int();
 
-	// asm volatile ("int $0x3");
+	// init_timer(50);
+	init_keyboard();
 
-	// while (true) {
-	// 	VGA::putHex(0xCACA);
-	// }
+	for(;;) {	/// we stay in kernel
+		asm("hlt");
+	}
 }

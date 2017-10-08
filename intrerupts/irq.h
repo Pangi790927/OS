@@ -1,9 +1,9 @@
-#ifndef ISR_H
-#define ISR_H
+#ifndef IRQ_H
+#define IRQ_H
 
 #include "Types.h"
 
-struct registers_isr
+struct registers_irq
 {
 	u_int_32 ds;                  						// Data segment selector
 	u_int_32 edi, esi, ebp, esp, ebx, edx, ecx, eax; 	// Pushed by pusha.
@@ -13,9 +13,10 @@ struct registers_isr
 	void dump_all();
 };
 
-/// this asm("isr_handler") part took me a day to figure it out
-void isr_handler (registers_isr regs) asm("isr_handler");
+void register_callback (int intr_number, void (*func)(registers_irq&));
+u_int_32 get_callback (int number);
 
-void int13 (registers_isr regs) asm("int13");
+/// this asm("isr_handler") part took me a day to figure it out
+void irq_handler (registers_irq regs) asm("irq_handler");
 
 #endif

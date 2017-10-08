@@ -20,6 +20,7 @@ namespace VGA {
 	void 	putDec (int number);
 	void 	putOct (int number);
 	void 	putBin (int number);
+	void	_actualize_cursor(void);
 }
 
 #endif
