@@ -17,6 +17,7 @@ void timer_callback (registers_irq& registers);
 
 void init_timer (u_int_32 frequency);
 
-int get_timer ();
+long long get_timer ();
+void sleep (int millisecs);
 
 #endif

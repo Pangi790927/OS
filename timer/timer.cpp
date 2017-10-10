@@ -3,19 +3,25 @@
 #include "stdio.h"
 #include "c_asm_func.h"
 
-int timer = 0;
+long long volatile timer = 0;
 
-int get_timer () {
+long long get_timer () {
 	return timer;
+}
+
+void sleep (int millisecs) {
+	long long start = get_timer();
+	while (get_timer() - start < millisecs)
+		asm volatile("");
 }
 
 void timer_callback (registers_irq& registers) {
 	timer++;
-	printf("timer: %d, err: %d\n", timer, 0);
+	// printf("timer: %d, err: %d\n", timer, 0);
 }
 
 void init_timer (u_int_32 frequency) {
-	// printf("Registering callback %p %d\n", PIT_REPEATING_MODE, PIT_FREQUENCY);
+	printf("INIT Timer ... \n");;
 	register_callback(TIMER_IRQ, &timer_callback);
 
 	u_int_32 divisor = PIT_FREQUENCY / frequency;
@@ -24,4 +30,6 @@ void init_timer (u_int_32 frequency) {
 	
 	port_byte_out(PIT_ADDRESS_BASE, divisor);
 	port_byte_out(PIT_ADDRESS_BASE, divisor >> 8);
+
+	timer = 0;
 }

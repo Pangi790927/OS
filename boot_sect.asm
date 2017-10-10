@@ -38,8 +38,8 @@ os:
 	call bios_print_end_of_line
 
 	mov bx, KERNEL_OFFSET
-	mov cl, 3		; the first sector is the boot loader and the second is rubish
-	mov dh, 50		; 50 * 512 = 25600 bytes 
+	mov cl, 3		; the first sector is the boot loader and the second is trash
+	mov dh, 54		; 54 * 512 = 27648 bytes (28672 + boot sector and trash)
 	mov dl, [BOOT_DRIVE]
 	call bios_load_memory
 

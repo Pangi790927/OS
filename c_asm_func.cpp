@@ -9,9 +9,19 @@ void port_byte_out(u_int_16 port, u_int_8 val)
      * %1 expands to %dx because  port  is a uint16_t.  %w1 could be used if we had the port number a wider C type */
 }
 
-u_int_16 port_byte_in(u_int_16 port)
+u_int_32 port_dword_in (u_int_16 port) {
+    u_int_32 ret = 0;
+    asm volatile ("inl %1, %0" : "=a"(ret) : "Nd"(port));
+    return ret;
+}
+
+void port_dword_out (u_int_16 port, u_int_32 data) {
+    asm volatile ( "out %0, %1" : : "a"(data), "Nd"(port) );
+}
+
+u_int_8 port_byte_in(u_int_16 port)
 {
-    u_int_16 ret = 0;
+    u_int_8 ret = 0;
     asm volatile ( "inb %1, %0"
                    : "=a"(ret)
                    : "Nd"(port) );
@@ -20,12 +30,16 @@ u_int_16 port_byte_in(u_int_16 port)
 
 u_int_16 port_word_in(u_int_16 port) {
 	u_int_16 result = 0;
-	__asm__("in %%dx, %%ax" : "=a" (result) : "d" (port));
+	asm volatile ("in %%dx, %%ax" : "=a" (result) : "d" (port));
 	return  result;
 }
 
-void  port_word_out(u_int_16 port, u_int_16 data) {
-	__asm__("out %%ax, %%dx" : :"a" (data), "d" (port));
+void port_word_out(u_int_16 port, u_int_16 data) {
+	asm volatile ("out %%ax, %%dx" : :"a" (data), "d" (port));
+}
+
+void port_words_in (u_int_16 port, u_int_32 buffer, u_int_32 count) {
+    asm volatile ("cld; rep; insl" :: "D" (buffer), "d" (port), "c" (count));
 }
 
 void io_wait(void)
