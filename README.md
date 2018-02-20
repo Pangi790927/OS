@@ -20,13 +20,13 @@ The OS Image will start with the kernel as such:
 	... (to be completed)
 	... (to be completed)
 
-README HELP
+
+README HELP TITLE
 --------------------------------------------------------------------------------
-#Bold?
-#Unordered List
+### Unordered List
 	* item1
 	* item2 `code`
-#Ordered List
+### Ordered List
 	1. item1
 	2. item2
 
@@ -34,4 +34,4 @@ README HELP
 ## 2 Text
 ### 3 Text
 
-> This is a a quote ? 
+> This is a quote 
