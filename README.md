@@ -25,7 +25,7 @@ README HELP TITLE
 --------------------------------------------------------------------------------
 ### Unordered List
 	* item1
-	* item2 `code`
+	* item2
 ### Ordered List
 	1. item1
 	2. item2
@@ -37,3 +37,11 @@ README HELP TITLE
 > This is a quote 
 
 ### Heading *contains* **formating**
+
+### Inline code `code`
+	code block ? 
+	if (x == 0)
+		return y;
+	else 
+		while (true)
+			yield 2;
