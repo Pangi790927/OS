@@ -19,7 +19,8 @@ OS Image
 	* 0 - 512 -> Stage 1
 	* ... (to be completed)
 	* ... (to be completed)
-
+For testing the image is loaded in a OS.vhs file and run by virtualbox, this
+file won't be uploaded because it has 2 GB.
 
 README HELP TITLE
 --------------------------------------------------------------------------------
