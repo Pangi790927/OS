@@ -2,8 +2,8 @@
 OS_HDD = OS.vhd
 OS_IMAGE = os_image
 
-DIRS = $(shell find . -type d -printf ":%p")
-INCLUDES = $(patsubst %, -I %, $(DIRS))
+DIRS = $(shell find . -not -path '*/\.*' -type d -printf " %p")
+INCLUDES = $(patsubst %, -I%/, $(DIRS))
 
 STAGE_2_ASM_SOURCES = $(shell find stage_2_sources/ -type f -name "*.asm")
 STAGE_2_CPP_SOURCES = $(shell find stage_2_sources/ -type f -name "*.cpp")
