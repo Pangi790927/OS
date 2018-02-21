@@ -24,10 +24,10 @@ BOOT_DRIVE:
 	db 0
 
 %include "bios_load_memory.asm"
-%include "kernel_stage_2_32_protected.asm"
+%include "32_protected_mode.asm"
 
 ; we are putting the special number in his place
-times  510-($-$$) db 0
+times 510-($-$$) db 0
 dw 0xaa55
 
 ; the following string has 48 bytes, including the terminator

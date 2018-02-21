@@ -19,7 +19,7 @@ bios_load_memory:
 			jc .error	;	if carry flag set error occured 
 		pop dx
 
-		cmp dh, ah		;	if it didn't read as many sectors as we wanted
+		cmp dh, al		;	if it didn't read as many sectors as we wanted
 		jne .error
 		jmp .end
 
