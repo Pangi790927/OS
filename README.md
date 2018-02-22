@@ -17,8 +17,8 @@ OS Image
 --------------------------------------------------------------------------------
 ### The OS Image will start with the kernel as such:
 	* 0 - 512 -> Stage 1
-	* ... (to be completed)
-	* ... (to be completed)
+	* 1024 - max 32k -> stage 2
+	* 32k ... -> stage 3
 For testing the image is loaded in a OS.vhs file and run by virtualbox, this
 file won't be uploaded because it has 2 GB.
 
