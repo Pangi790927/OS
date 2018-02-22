@@ -35,7 +35,7 @@ bool ata::lba28Read (void *address, uint32 lba, uint32 sectorCount, uint8 device
 		if (!lba28PIORead(address, lba, toRead, device))
 			return false;
 		lba += toRead;
-		address = (void *)((uint16 *)address + toRead);
+		address = (void *)((char *)address + toRead * 512);
 	}
 	return true;
 }
