@@ -23,7 +23,6 @@
 				mov es, ax
 				mov fs, ax
 				mov gs, ax
-
 				
 				call %2
 

@@ -8,6 +8,14 @@ int kernel_2() asm("kernel_2");
 extern int check_A20_on() asm("check_A20_on");
 extern void enable_A20() asm("enable_A20");
 
+#define xstr(a) str(a)
+#define str(a) #a
+
+#define RAM_LOCATION 0x1000000
+#define HDD_LOCATION 0x8000					// must be multiple of 512
+#define SECTOR_COUNT (1 * 2024)				// * 512 is the byte count				
+#define ASM_COMMAND "call " xstr(RAM_LOCATION)
+
 int kernel_2()
 {
 	if (check_A20_on())
@@ -23,23 +31,20 @@ int kernel_2()
 	if (!isLba28) 
 		printf("Mode might be unsuported\n");
 
-	// 0x1000000 is the location in ram
-	// 0x8000 is the location on disk
-	// 64 * 2024 * 512 = 64M
 	// using disk 0
-	if (!ata::lba28Read((void *)0x1000000, 0x8000 / 512, 64 * 2048, 0))
+	if (!ata::lba28Read((void *)RAM_LOCATION, HDD_LOCATION / 512, SECTOR_COUNT, 0))
 		printf("Read Failed\n");
 	
 	for (int j = 0; j < 16; j++) {
 		for (int i = 0; i < 16; i++) {
-			printf("%x ", *((uint16 *)0x1000000 + i + j * 16));
+			printf("%x ", *((uint16 *)RAM_LOCATION + i + j * 16));
 		}
 		printf("\n");
 	}
 
-	printf("Data: %s\n", (void *)0x1000000);
+	printf("Data: %s\n", (void *)RAM_LOCATION);
 
-	asm volatile ("call 0x1000000");
+	asm volatile (ASM_COMMAND);
 
 	while (true) {
 		;				// you know it by now, never getting out

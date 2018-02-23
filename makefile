@@ -1,11 +1,14 @@
 # ------------------------------------------------------------------------------
+VIRTUAL_MACHINE = OS
 OS_HDD = OS.vhd
 OS_IMAGE = os_image
 
-DIRS = 	$(shell find stage_1_sources/ -not -path '*/\.*' -type d -printf " %p")\
-		$(shell find stage_2_sources/ -not -path '*/\.*' -type d -printf " %p")\
-		$(shell find stage_3_sources/ -not -path '*/\.*' -type d -printf " %p")
-INCLUDES = $(patsubst %, -I%/, $(DIRS))
+DIRS1 = $(shell find stage_1_sources/ -not -path '*/\.*' -type d -printf " %p")
+DIRS2 = $(shell find stage_2_sources/ -not -path '*/\.*' -type d -printf " %p")
+DIRS3 = $(shell find stage_3_sources/ -not -path '*/\.*' -type d -printf " %p")
+INCLUDES1 = $(patsubst %, -I%/, $(DIRS1))
+INCLUDES2 = $(patsubst %, -I%/, $(DIRS2))
+INCLUDES3 = $(patsubst %, -I%/, $(DIRS3))
 
 STAGE_2_ASM_SOURCES = $(shell find stage_2_sources/ -type f -name "*.asm")
 STAGE_2_CPP_SOURCES = $(shell find stage_2_sources/ -type f -name "*.cpp")
@@ -30,34 +33,34 @@ LD = ld
 
 CXX_FLAGS = -m32 -ffreestanding -nostdinc -std=c++1y -O2
 
-all: clean $(OS_HDD)
+all: $(OS_HDD)
 
 ${STAGE_2_ASM_OBJS}: %.o: %.asm
-	$(ASM) $(INCLUDES) $< -f elf -F stabs -o $@
+	$(ASM) $(INCLUDES2) $< -f elf -F stabs -o $@
 
 ${STAGE_2_CPP_OBJS}: %.o: %.cpp
-	$(CXX) $(CXX_FLAGS) -c $< -o $@ $(INCLUDES) 
+	$(CXX) $(CXX_FLAGS) -c $< -o $@ $(INCLUDES2)
 
 ${STAGE_3_ASM_OBJS}: %.o: %.asm
-	$(ASM) $(INCLUDES) $< -f elf -F stabs -o $@
+	$(ASM) $(INCLUDES3) $< -f elf -F stabs -o $@
 
 ${STAGE_3_CPP_OBJS}: %.o: %.cpp
-	$(CXX) $(CXX_FLAGS) -c $< -o $@ $(INCLUDES)
+	$(CXX) $(CXX_FLAGS) -c $< -o $@ $(INCLUDES3)
 
 # builds stage 1 (the one that must have only 512 bytes)
 stage1:
-	$(ASM) $(INCLUDES) kernel_stage_1.asm -f bin -o kernel_stage_1.o
+	$(ASM) $(INCLUDES1) kernel_stage_1.asm -f bin -o kernel_stage_1.o
 
 # builds stage 2 (this one is the transition from bios loading to own driver,
 # from unprotected to protected, from asm to c++ it will have around 32k bytes)
 stage2:
 	$(ASM) kernel_stage_2_start.asm -f elf -F stabs -o kernel_stage_2_start.o
-	$(CXX) $(CXX_FLAGS) $(INCLUDES) -c kernel_stage_2_load_3.cpp -o kernel_stage_2_load_3.o
+	$(CXX) $(CXX_FLAGS) $(INCLUDES2) -c kernel_stage_2_load_3.cpp -o kernel_stage_2_load_3.o
 
 # in this stage the real kernel starts as we are finaly able to load the hole os
 stage3:
 	$(ASM) kernel_stage_3_start.asm -f elf -F stabs -o kernel_stage_3_start.o
-	$(CXX) $(CXX_FLAGS) $(INCLUDES) -c kernel_stage_3.cpp -o kernel_stage_3.o
+	$(CXX) $(CXX_FLAGS) $(INCLUDES3) -c kernel_stage_3.cpp -o kernel_stage_3.o
 
 stage1.bin: stage1
 	cp kernel_stage_1.o stage1.bin
@@ -79,7 +82,7 @@ $(OS_IMAGE): stage1.bin stage2.bin stage3.bin
 
 # run the operating system on a virtual machine
 run: $(OS_HDD)
-	virtualbox --startvm $(OS_HDD)
+	virtualbox --startvm $(VIRTUAL_MACHINE)
 
 # copy the kernel image on the vhd
 $(OS_HDD): $(OS_IMAGE)
