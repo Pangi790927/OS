@@ -23,26 +23,32 @@ int kernel_2()
 
 	bool isLba28;
 	clear_screen();
-	printf("Hello world!\n");
+	printf("Stage 2!\n");
 
 	// pci::printBusses();
-	ata::sendIdentify(0, isLba28, false);
+	if (!ata::sendIdentify(0, isLba28, true))
+		printf("Identify Failed\n");
 
-	if (!isLba28) 
+	// using disk 0 in both cases
+	if (!isLba28) {
 		printf("Mode might be unsuported\n");
-
-	// using disk 0
-	if (!ata::lba28Read((void *)RAM_LOCATION, HDD_LOCATION / 512, SECTOR_COUNT, 0))
-		printf("Read Failed\n");
-	
-	for (int j = 0; j < 16; j++) {
-		for (int i = 0; i < 16; i++) {
-			printf("%x ", *((uint16 *)RAM_LOCATION + i + j * 16));
-		}
-		printf("\n");
+		// TO DO: add lba48 support
+	}
+	else {
+		if (!ata::lba28Read((void *)RAM_LOCATION, HDD_LOCATION / 512, SECTOR_COUNT, 0))
+			printf("Read Failed\n");
+		else
+			printf("Done Reading\n");	
 	}
 
-	printf("Data: %s\n", (void *)RAM_LOCATION);
+	// for (int j = 0; j < 16; j++) {
+	// 	for (int i = 0; i < 16; i++) {
+	// 		printf("%x ", *((uint16 *)RAM_LOCATION + i + j * 16));
+	// 	}
+	// 	printf("\n");
+	// }
+
+	// printf("Data: %s\n", (void *)RAM_LOCATION);
 
 	asm volatile (ASM_COMMAND);
 

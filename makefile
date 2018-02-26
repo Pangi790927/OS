@@ -36,31 +36,31 @@ CXX_FLAGS = -m32 -ffreestanding -nostdinc -std=c++1y -O2
 all: $(OS_HDD)
 
 ${STAGE_2_ASM_OBJS}: %.o: %.asm
-	$(ASM) $(INCLUDES2) $< -f elf -F stabs -o $@
+	$(ASM) $< -f elf -F stabs -o $@ $(INCLUDES2)
 
 ${STAGE_2_CPP_OBJS}: %.o: %.cpp
-	$(CXX) $(CXX_FLAGS) -c $< -o $@ $(INCLUDES2)
+	$(CXX) -c $< -o $@ $(CXX_FLAGS) $(INCLUDES2)
 
 ${STAGE_3_ASM_OBJS}: %.o: %.asm
-	$(ASM) $(INCLUDES3) $< -f elf -F stabs -o $@
+	$(ASM) $< -f elf -F stabs -o $@ $(INCLUDES3)
 
 ${STAGE_3_CPP_OBJS}: %.o: %.cpp
-	$(CXX) $(CXX_FLAGS) -c $< -o $@ $(INCLUDES3)
+	$(CXX) -c $< -o $@ $(CXX_FLAGS) $(INCLUDES3)
 
 # builds stage 1 (the one that must have only 512 bytes)
 stage1:
-	$(ASM) $(INCLUDES1) kernel_stage_1.asm -f bin -o kernel_stage_1.o
+	$(ASM) kernel_stage_1.asm -f bin -o kernel_stage_1.o $(INCLUDES1)
 
 # builds stage 2 (this one is the transition from bios loading to own driver,
 # from unprotected to protected, from asm to c++ it will have around 32k bytes)
 stage2:
 	$(ASM) kernel_stage_2_start.asm -f elf -F stabs -o kernel_stage_2_start.o
-	$(CXX) $(CXX_FLAGS) $(INCLUDES2) -c kernel_stage_2_load_3.cpp -o kernel_stage_2_load_3.o
+	$(CXX) -c kernel_stage_2_load_3.cpp -o kernel_stage_2_load_3.o $(CXX_FLAGS) $(INCLUDES2)
 
 # in this stage the real kernel starts as we are finaly able to load the hole os
 stage3:
 	$(ASM) kernel_stage_3_start.asm -f elf -F stabs -o kernel_stage_3_start.o
-	$(CXX) $(CXX_FLAGS) $(INCLUDES3) -c kernel_stage_3.cpp -o kernel_stage_3.o
+	$(CXX) -c kernel_stage_3.cpp -o kernel_stage_3.o $(CXX_FLAGS) $(INCLUDES3)
 
 stage1.bin: stage1
 	cp kernel_stage_1.o stage1.bin

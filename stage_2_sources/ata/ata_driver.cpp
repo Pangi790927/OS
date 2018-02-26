@@ -65,6 +65,10 @@ bool ata::lba28PIORead (void *address, uint32 lba, uint8 sectorCount, uint8 devi
 	return true;
 }
 
+bool ata::lba48PIORead (void *address, uint64 lba, uint16 sectorCount, uint8 device) {
+
+}
+
 bool ata::sendIdentify (uint8 device, bool &lba28, bool printData) {
 	// floating, no device here 
 	if (inb(status | primaryPort) == 0xff)

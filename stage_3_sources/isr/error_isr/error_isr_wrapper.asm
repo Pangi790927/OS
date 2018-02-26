@@ -1,6 +1,3 @@
-; we know that data segment must be at 0x10
-DATA_SEG equ 0x10
-
 [bits 32]
 ; first is the intr number, second the called func, third error or not
 %macro INTR 3

@@ -12,6 +12,6 @@ void		outb (uint16 port, uint8 data);
 void		outw (uint16 port, uint16 data);
 void		outd (uint16 port, uint32 data);
 
-void		io_wait (void);
+void		io_wait ();
 
 #endif

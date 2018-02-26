@@ -63,10 +63,7 @@ void isr_error_19 (err_reg_isr regs) {printf("Interrupt 19 ...\n");}
 void isr_error_20 (err_reg_isr regs) {printf("Interrupt 20 ...\n");}
 void isr_error_30 (err_reg_isr regs) {printf("Interrupt 30 ...\n");}
 
-
 void set_error_ISR() {
-	asm volatile ("cli");
-
 	uint8 attr = isr::makeAttr(1, 0, 0, isr::INTR_GATE);
 	isr::addISR(0, error_isr0, CODE_SEL, attr);
 	isr::addISR(1, error_isr1, CODE_SEL, attr);
