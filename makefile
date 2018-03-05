@@ -31,7 +31,7 @@ CXX = g++-7
 ASM = nasm
 LD = ld
 
-CXX_FLAGS = -m32 -ffreestanding -nostdinc -std=c++1y -O2
+CXX_FLAGS = -m32 -ffreestanding -nostdinc -std=c++1y -O2 -g
 
 all: $(OS_HDD)
 

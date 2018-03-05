@@ -4,9 +4,13 @@
 
 stage_1:
 	; inits
-	mov bp, 0x8000	; 0x8000 to 0xa000 - stack for stage_1 and 1/2 of stage_2
+	mov bp, 0x8000	; 0x8000 - stack for stage_1 and 1/2 of stage_2
 	mov sp, bp
 	mov [BOOT_DRIVE], dl	; saving the boot drive
+
+	mov si, STAGE_1_MESSAGE	; stage 1 message
+	call bios_print_const_string
+	call bios_print_end_of_line
 
 	mov bx, STAGE_2_OFFSET	
 	mov cl, 3				; we are loading from the third sector
@@ -25,6 +29,9 @@ BOOT_DRIVE:
 
 %include "bios_load_memory.asm"
 %include "32_protected_mode.asm"
+
+STAGE_1_MESSAGE:
+	db "Stage 1!", 0
 
 ; we are putting the special number in his place
 times 510-($-$$) db 0

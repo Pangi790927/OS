@@ -18,12 +18,12 @@ extern void enable_A20() asm("enable_A20");
 
 int kernel_2()
 {
-	if (check_A20_on())
-		enable_A20();
-
-	bool isLba28;
+	bool isLba28 = false;
 	clear_screen();
 	printf("Stage 2!\n");
+
+	if (check_A20_on())
+		enable_A20();
 
 	// pci::printBusses();
 	if (!ata::sendIdentify(0, isLba28, false))
@@ -31,8 +31,7 @@ int kernel_2()
 
 	// using disk 0 in both cases
 	if (!isLba28) {
-		printf("Mode might be unsuported\n");
-		// TO DO: add lba48 support
+		printf("Mode might be unsuported (if CHS)\n");
 		if (!ata::lba48Read((void *)RAM_LOCATION, HDD_LOCATION / 512,
 				KER_SECTOR_COUNT, 0))
 			printf("Read Failed\n");

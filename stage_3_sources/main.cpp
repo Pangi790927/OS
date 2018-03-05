@@ -42,7 +42,7 @@ int main()
 		printf("\n");
 		i++;
 	}
-
+ 
 	while (true)
 		asm volatile("hlt");
 	return 0;

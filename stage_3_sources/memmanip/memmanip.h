@@ -5,88 +5,43 @@
 #include "Types.h"
 #include "stdio.h"
 
-struct Node {
-	void *offset;
-	size_t size;
-	Node *prev = NULL, *next = NULL;
-
-	Node (void *offset, size_t size)
-	: offset(offset), size(size) {}
-};
-
 namespace memmanip
 {
-	Node *rootFree;
-	Node *rootAlloc;
+	void *start;
+	void *end;
 
-	void addAllocNode (Node *node) {
-		Node *currNode = rootAlloc;
-
-		while (currNode) {
-			
-		}
+	void *sbrk (uint32 size) {
+		void *ret = end;
+		end = (char *)end + size;
+		return ret;
 	}
 
-	void detachAllocNode (Node *node) {
-		// TO DO:
-	}
+	const uint32 MIN_CHUNK_SIZE = sizeof(uint32) * 2 + sizeof(void *) * 2;
+	const uint32 ALIGNMENT = 4;
+	const uint32 FREE_BIT = 0x80'00'00'00;
+	const uint32 ALLCATED_BIT = 0x00'00'00'00;
 
-	void addFreeNode (Node *node) {
-		// TO DO:
-	}
+	void *firstFree;
+	void *lastFree;
 
-	void detachFreeNode (Node *node) {
-		// TO DO:
-	} 
-
-	void malloc_init (void *buffer, size_t size) {
-		*((Node *)buffer) = Node((char *)buffer + sizeof(Node), size - sizeof(Node));
-		rootFree = (Node *)buffer;
-		rootAlloc = NULL;
-	}
-
-	void *malloc (size_t size) {
-		size_t toAlloc = size + sizeof(Node); 
-		Node *node = rootFree;
-		while (node) {
-			if (node->size < toAlloc) {
-				*((Node *)node->offset) = Node(node->offset, toAlloc);
-				Node *allocNode = (Node *)node->offset;
-				addAllocNode(allocNode);
-				node->offset = (char *)node->offset + toAlloc;
-				node->size -= toAlloc;
-				if (node->size == 0)
-					detachFreeNode(node);
-				return ((char *)allocNode->offset + sizeof(Node));
-			}
-			node = node->next;
-		}
-		return NULL;
-	}
-
-	void free (void *ptr) {
-		Node *node = rootAlloc;
-
-		while (node) {
-			if ((char *)node->offset + sizeof(Node) == ptr) {
-				detachAllocNode((Node *)node->offset);
-				*((Node *)node->offset) = Node((char *)node->offset + sizeof(Node),
-							node->size - sizeof(Node));
-				addFreeNode((Node *)node->offset);
-				return ;
-			}
-			node = node->next;
-		}
-		printf("Bad free\n");
-	}
+	void addFreeChunkTags (void *ptr, uint32 size, void *next, void *prev);
+	void init (void *buffer);
+	void addFreeChunkTags (void *ptr, uint32 wordCount, void *next, void *prev);
+	void addAllocChunkTags (void *ptr, uint32 wordCount);
+	uint32 getSize (void *ptr);
+	bool getFreeStatus (void *ptr);
+	void *getNext (void *ptr);
+	void *getPrev (void *ptr);
+	void setNext (void *ptr, void *next);
+	void setPrev (void *ptr, void *prev);
+	void setFreeStatus (void *ptr, uint32 status);
+	void *malloc (uint32 size);
+	void freeChunk (void *chunkPtr, uint32 size);
+	void free (void *ptr);
+	void printMemory();
 }
 
-void *malloc (size_t size) {
-	return memmanip::malloc(size);
-}
-
-void free (void *ptr) {
-	memmanip::free(ptr);
-}
+void *malloc (size_t size);
+void free (void *ptr);
 
 #endif
