@@ -3,6 +3,7 @@
 #define MEMMANIP_H
 
 #include "Types.h"
+#include "stdio.h"
 
 struct Node {
 	void *offset;
@@ -39,8 +40,8 @@ namespace memmanip
 	} 
 
 	void malloc_init (void *buffer, size_t size) {
-		*((Node *)buffer) = Node(buffer + sizeof(Node), size - sizeof(Node));
-		rootFree = buffer;
+		*((Node *)buffer) = Node((char *)buffer + sizeof(Node), size - sizeof(Node));
+		rootFree = (Node *)buffer;
 		rootAlloc = NULL;
 	}
 
@@ -50,13 +51,13 @@ namespace memmanip
 		while (node) {
 			if (node->size < toAlloc) {
 				*((Node *)node->offset) = Node(node->offset, toAlloc);
-				Node *allocNode = node->offset;
+				Node *allocNode = (Node *)node->offset;
 				addAllocNode(allocNode);
-				node->offset = node->offset + toAlloc;
+				node->offset = (char *)node->offset + toAlloc;
 				node->size -= toAlloc;
 				if (node->size == 0)
 					detachFreeNode(node);
-				return (allocNode->offset + sizeof(Node));
+				return ((char *)allocNode->offset + sizeof(Node));
 			}
 			node = node->next;
 		}
@@ -67,11 +68,11 @@ namespace memmanip
 		Node *node = rootAlloc;
 
 		while (node) {
-			if (node->offset + sizeof(Node) == ptr) {
-				detachAllocNode(node->offset);
-				*((Node *)node->offset) = Node(node->offset + sizeof(Node),
+			if ((char *)node->offset + sizeof(Node) == ptr) {
+				detachAllocNode((Node *)node->offset);
+				*((Node *)node->offset) = Node((char *)node->offset + sizeof(Node),
 							node->size - sizeof(Node));
-				addFreeNode(node->offset);
+				addFreeNode((Node *)node->offset);
 				return ;
 			}
 			node = node->next;
@@ -81,11 +82,11 @@ namespace memmanip
 }
 
 void *malloc (size_t size) {
-	return memalloc::malloc(size);
+	return memmanip::malloc(size);
 }
 
 void free (void *ptr) {
-	memalloc::free(size);
+	memmanip::free(ptr);
 }
 
 #endif
