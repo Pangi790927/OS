@@ -74,7 +74,9 @@ void irq_isr::aknowledge_irq_slave() {
 }
 
 void isr_irq_0 () {
-	printf("irq 0\n");
+	static int time = 0;
+	time++;
+	// printf("irq 0, time: %d\n", time++);
 	irq_isr::aknowledge_irq_master();
 }
 
@@ -101,20 +103,20 @@ void isr_irq_15 () {printf("irq 15\n");}
 
 void set_irq_ISR() {
 	uint8 attr = isr::makeAttr(1, 0, 0, isr::INTR_GATE);
-	isr::addISR(0x20, isr_irq_0, CODE_SEL, attr);
-	isr::addISR(0x21, isr_irq_1, CODE_SEL, attr);
-	isr::addISR(0x22, isr_irq_2, CODE_SEL, attr);
-	isr::addISR(0x23, isr_irq_3, CODE_SEL, attr);
-	isr::addISR(0x24, isr_irq_4, CODE_SEL, attr);
-	isr::addISR(0x25, isr_irq_5, CODE_SEL, attr);
-	isr::addISR(0x26, isr_irq_6, CODE_SEL, attr);
-	isr::addISR(0x27, isr_irq_7, CODE_SEL, attr);
-	isr::addISR(0x28, isr_irq_8, CODE_SEL, attr);
-	isr::addISR(0x29, isr_irq_9, CODE_SEL, attr);
-	isr::addISR(0x2a, isr_irq_10, CODE_SEL, attr);
-	isr::addISR(0x2b, isr_irq_11, CODE_SEL, attr);
-	isr::addISR(0x2c, isr_irq_12, CODE_SEL, attr);
-	isr::addISR(0x2d, isr_irq_13, CODE_SEL, attr);
-	isr::addISR(0x2e, isr_irq_14, CODE_SEL, attr);
-	isr::addISR(0x2f, isr_irq_15, CODE_SEL, attr);
+	isr::addISR(0x20, irq0, CODE_SEL, attr);
+	isr::addISR(0x21, irq1, CODE_SEL, attr);
+	isr::addISR(0x22, irq2, CODE_SEL, attr);
+	isr::addISR(0x23, irq3, CODE_SEL, attr);
+	isr::addISR(0x24, irq4, CODE_SEL, attr);
+	isr::addISR(0x25, irq5, CODE_SEL, attr);
+	isr::addISR(0x26, irq6, CODE_SEL, attr);
+	isr::addISR(0x27, irq7, CODE_SEL, attr);
+	isr::addISR(0x28, irq8, CODE_SEL, attr);
+	isr::addISR(0x29, irq9, CODE_SEL, attr);
+	isr::addISR(0x2a, irq10, CODE_SEL, attr);
+	isr::addISR(0x2b, irq11, CODE_SEL, attr);
+	isr::addISR(0x2c, irq12, CODE_SEL, attr);
+	isr::addISR(0x2d, irq13, CODE_SEL, attr);
+	isr::addISR(0x2e, irq14, CODE_SEL, attr);
+	isr::addISR(0x2f, irq15, CODE_SEL, attr);
 }

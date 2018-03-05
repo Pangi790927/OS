@@ -21,15 +21,27 @@ int main()
 		
 		pit::initDefault(1000);
 	asm volatile ("sti");
-	
-	// asm volatile ("int $0x22");
-	// asm volatile ("int $0x23");
-	// asm volatile ("int $0x2f");
-	// asm volatile ("int $0x2f");
 
-	// volatile int a = 0;
-	// volatile int b = 123;
-	// volatile int c = b / a;
+	uint8 a[][7] = {
+		{0x1, 0x2, 0x00},	// key code
+		{0x1, 0x00},
+		{0x2, 0x2, 0x00},
+		{0x1, 0x00},
+		{0x0}
+	};	
+
+	printf("sizeof(a) = %d\n", sizeof(a));
+
+	int i = 0, j = 0;
+	while (a[i][0] != 0) {
+		j = 0;
+		while (a[i][j] != 0) {
+			printf("%d, ", a[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
 
 	while (true)
 		asm volatile("hlt");
