@@ -1,7 +1,8 @@
-#ifndef MEMALLOC_H
-#define MEMALLOC_H
 
-#include "type.h"
+#ifndef MEMMANIP_H
+#define MEMMANIP_H
+
+#include "Types.h"
 
 struct Node {
 	void *offset;
@@ -12,7 +13,7 @@ struct Node {
 	: offset(offset), size(size) {}
 };
 
-namespace memalloc
+namespace memmanip
 {
 	Node *rootFree;
 	Node *rootAlloc;
@@ -78,7 +79,6 @@ namespace memalloc
 		printf("Bad free\n");
 	}
 }
-
 
 void *malloc (size_t size) {
 	return memalloc::malloc(size);
