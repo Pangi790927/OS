@@ -3,6 +3,8 @@
 #include "error_isr.h"
 #include "irq_isr.h"
 #include "pit.h"
+#include "memmanip.h"
+#include "global_defines.h"
 
 int main()
 {
@@ -22,27 +24,21 @@ int main()
 		pit::initDefault(1000);
 	asm volatile ("sti");
 
-	uint8 a[][7] = {
-		{0x1, 0x2, 0x00},	// key code
-		{0x1, 0x00},
-		{0x2, 0x2, 0x00},
-		{0x1, 0x00},
-		{0x0}
-	};	
+	memmanip::init((void *)HEAP_START);
 
-	printf("sizeof(a) = %d\n", sizeof(a));
+	char *a = new char [1001];
+ 	
+	float f = 32.132;
 
-	int i = 0, j = 0;
-	while (a[i][0] != 0) {
-		j = 0;
-		while (a[i][j] != 0) {
-			printf("%d, ", a[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
- 
+	for (int i = 0; i < 1000; i++)
+		a[i] = '0' + i % 10;
+	a[1000] = '\0';
+	printf("%s\n", a);
+
+	memmanip::printMemory();
+	free(a);
+	memmanip::printMemory();
+
 	while (true)
 		asm volatile("hlt");
 	return 0;

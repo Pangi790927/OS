@@ -7,22 +7,12 @@
 
 namespace memmanip
 {
-	void *start;
-	void *end;
-
-	void *sbrk (uint32 size) {
-		void *ret = end;
-		end = (char *)end + size;
-		return ret;
-	}
-
 	const uint32 MIN_CHUNK_SIZE = sizeof(uint32) * 2 + sizeof(void *) * 2;
 	const uint32 ALIGNMENT = 4;
 	const uint32 FREE_BIT = 0x80'00'00'00;
 	const uint32 ALLCATED_BIT = 0x00'00'00'00;
 
-	void *firstFree;
-	void *lastFree;
+	void *sbrk (uint32 size);
 
 	void addFreeChunkTags (void *ptr, uint32 size, void *next, void *prev);
 	void init (void *buffer);
@@ -43,5 +33,10 @@ namespace memmanip
 
 void *malloc (size_t size);
 void free (void *ptr);
+
+void *operator new (size_t count);
+void *operator new [] (size_t count);
+void operator delete (void* ptr);
+void operator delete [] (void* ptr);
 
 #endif

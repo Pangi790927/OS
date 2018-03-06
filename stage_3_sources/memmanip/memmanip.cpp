@@ -1,5 +1,30 @@
 #include "memmanip.h"
 
+namespace memmanip
+{
+	void *start;
+	void *end;
+
+	void *firstFree;
+	void *lastFree;
+}
+
+void *operator new (size_t count) {
+	return malloc(count);
+}
+
+void *operator new [] (size_t count) {
+	return malloc(count);	
+}
+
+void operator delete (void* ptr) {
+    free(ptr);
+}
+
+void operator delete [] (void* ptr) {
+    free(ptr);
+}
+
 template <typename Type>
 static Type max (Type a, Type b) {
 	return a > b ? a : b;
@@ -16,6 +41,12 @@ void *malloc (size_t size) {
 
 void free (void *ptr) {
 	memmanip::free(ptr);
+}
+
+void *memmanip::sbrk (uint32 size) {
+	void *ret = end;
+	end = (char *)end + size;
+	return ret;
 }
 
 void memmanip::init (void *buffer) {
@@ -172,7 +203,7 @@ void memmanip::printMemory() {
 	while (current < end) {
 		printf("(%d, %d, %d, %d)\n",
 				count++, (uint32)((char *)current - (char *)start), 
-				getSize(current), getFreeStatus(current));
+				getSize(current), (uint32)getFreeStatus(current));
 		
 		if (getSize(current) == 0) {
 			printf("Bad chunk\n");
