@@ -26,7 +26,7 @@ init_protected:			; a far jump..., it looks prety close to me
 	mov gs, ax
 
 	; finaly ebp, this also means that our stack moved 
-	mov ebp, 0xffffff
+	mov ebp, 0x0efffff
 	mov esp, ebp
 
 	call STAGE_2_OFFSET	; here we enter kernel_2

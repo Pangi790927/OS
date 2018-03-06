@@ -27,20 +27,24 @@ int main()
 
 	memmanip::init((void *)HEAP_START);
 	
-	memmanip::printMemory();
-	// {
-	// 	std::vector<int> v;
+	// memmanip::printMemory();
+	{
+		std::vector<std::vector<char>> v = 
+		std::vector<std::vector<char>> (
+			16, 
+			std::vector<char> (
+				16, 
+				'c'
+			)
+		);
 
-	// 	v.push_back(1);
-	// 	v.push_back(2);
-	// 	v.push_back(3);
-	// 	v.push_back(4);
-	// 	v.push_back(5);
-	// 	v.push_back(6);
-
-	// 	for (int i = 0; i < v.size(); i++)
-	// 		printf("%d\n", v[i]);
-	// }
+		for (int i = 0; i < v.size(); i++) {
+			for (int j = 0; j < v[i].size(); j++) {
+				printf("%c", v[i][j]);
+			}
+			printf("\n");
+		}
+	}
 	memmanip::printMemory();
 
 	// char *a = new char [1001];

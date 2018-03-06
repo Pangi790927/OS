@@ -111,18 +111,26 @@ namespace VGA {
 		}
 	}
 	
-	void _put_nbr_base (int number, int base) {
-		if (number < 0)
+	void _put_nbr_base (unsigned int number, int base, bool unsign) {
+		if ((number & 0x80000000) && !unsign)
 			putchar('-');
 		
 		if (!number)
 			putchar(_digits[0]);
-
-		_put_nbr_base_rec(number, base);
+		else {
+			if ((number & 0x80000000) && !unsign) {
+				_put_nbr_base_rec((int)number / base * -1, base);
+				putchar(_digits[((int)number * -1) % base]);
+			}	
+			else {
+				_put_nbr_base_rec(number / base, base);
+				putchar(_digits[number % base]);
+			}
+		}
 	}
 
 	void putHex (int number) {
-		_put_nbr_base(number, 16);
+		_put_nbr_base(number, 16, true);
 	}
 
 	void putDec (int number) {
@@ -134,6 +142,15 @@ namespace VGA {
 	}
 
 	void putBin (int number) {
-		_put_nbr_base(number, 2);
+		unsigned int nb = number;
+		unsigned int mask = 0x8000'0000;
+
+		while (mask) {
+			if (mask & nb)
+				putchar(_digits[1]);
+			else
+				putchar(_digits[0]);
+			mask = (mask >> 1);
+		}
 	}
 }

@@ -15,7 +15,7 @@ namespace VGA {
 	void 	putchar (char c, char mode = WHITE_ON_BLACK);
 	void 	print (const char *str, char mode = WHITE_ON_BLACK);
 	void 	_put_nbr_base_rec (int number, int base);
-	void 	_put_nbr_base (int number, int base);
+	void 	_put_nbr_base (unsigned int number, int base, bool unbase = false);
 	void 	putHex (int number);
 	void 	putDec (int number);
 	void 	putOct (int number);

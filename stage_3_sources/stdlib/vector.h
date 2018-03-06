@@ -111,7 +111,8 @@ Type *std::vector<Type>::allocAt (unsigned int index) {
 template <typename Type>
 void std::vector<Type>::freeAt (unsigned int index) {
 	Type *ptr = (Type *)((uint8 *)buffer + index * sizeof(Type));
-	// delete (ptr, ptr);
+	ptr->~Type();
+	// delete (ptr, ptr); not usefull and I don't really know how to use it anyway
 }
 
 template <typename Type>

@@ -2,30 +2,26 @@
 #include "algorithm.h"
 
 void *operator new (size_t size, void *p) { 
-	printf("Allocated in place something ... %d\n", size);
 	return p; 
 }
 
 void *operator new [] (size_t size, void *p) {
-	printf("Allocated in place something ... %d\n", size);
 	return p; 
 }
 
 void  operator delete (void *, void *) {
-	printf("deleted in place\n");
+
 };
 
 void  operator delete [] (void *, void *) {
-	printf("deleted in place\n");
+
 };
 
 void *operator new (size_t count) {
-	printf("Allocated something ... %d\n", count);
 	return malloc(count);
 }
 
 void *operator new [] (size_t count) {
-	printf("Allocated something ... %d\n", count);
 	return malloc(count);	
 }
 
@@ -69,11 +65,10 @@ void memmanip::init (void *buffer) {
 void memmanip::addFreeChunkTags (void *ptr, uint32 wordCount,
 			void *next, void *prev)
 {
-	*(uint32 *)((char *)ptr + wordCount * ALIGNMENT - sizeof(uint32)) =
-			wordCount | FREE_BIT;
 	*(uint32 *)ptr = wordCount | FREE_BIT;
 	*(void **)((char *)ptr + sizeof(uint32)) = next;
 	*(void **)((char *)ptr + sizeof(uint32) + sizeof(void *)) = prev;
+	*(uint32 *)((char *)ptr + wordCount * ALIGNMENT - sizeof(uint32)) = wordCount | FREE_BIT;
 }
 
 void memmanip::addAllocChunkTags (void *ptr, uint32 wordCount) {
