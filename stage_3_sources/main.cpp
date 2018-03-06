@@ -5,11 +5,12 @@
 #include "pit.h"
 #include "memmanip.h"
 #include "global_defines.h"
+#include "vector.h"
 
 int main()
 {
 	clear_screen();
-	printf("Stage 3\n");
+	printf("Stage 3!\n");
 
 	asm volatile ("cli");
 		set_error_ISR();
@@ -25,19 +26,34 @@ int main()
 	asm volatile ("sti");
 
 	memmanip::init((void *)HEAP_START);
+	
+	memmanip::printMemory();
+	// {
+	// 	std::vector<int> v;
 
-	char *a = new char [1001];
+	// 	v.push_back(1);
+	// 	v.push_back(2);
+	// 	v.push_back(3);
+	// 	v.push_back(4);
+	// 	v.push_back(5);
+	// 	v.push_back(6);
+
+	// 	for (int i = 0; i < v.size(); i++)
+	// 		printf("%d\n", v[i]);
+	// }
+	memmanip::printMemory();
+
+	// char *a = new char [1001];
  	
-	float f = 32.132;
+	// float f = 32.132;
 
-	for (int i = 0; i < 1000; i++)
-		a[i] = '0' + i % 10;
-	a[1000] = '\0';
-	printf("%s\n", a);
+	// for (int i = 0; i < 1000; i++)
+	// 	a[i] = '0' + i % 10;
+	// a[1000] = '\0';
+	// printf("%s\n", a);
 
-	memmanip::printMemory();
-	free(a);
-	memmanip::printMemory();
+	// free(a);
+	// memmanip::printMemory();
 
 	while (true)
 		asm volatile("hlt");

@@ -1,19 +1,31 @@
 #include "memmanip.h"
+#include "algorithm.h"
 
-namespace memmanip
-{
-	void *start;
-	void *end;
-
-	void *firstFree;
-	void *lastFree;
+void *operator new (size_t size, void *p) { 
+	printf("Allocated in place something ... %d\n", size);
+	return p; 
 }
 
+void *operator new [] (size_t size, void *p) {
+	printf("Allocated in place something ... %d\n", size);
+	return p; 
+}
+
+void  operator delete (void *, void *) {
+	printf("deleted in place\n");
+};
+
+void  operator delete [] (void *, void *) {
+	printf("deleted in place\n");
+};
+
 void *operator new (size_t count) {
+	printf("Allocated something ... %d\n", count);
 	return malloc(count);
 }
 
 void *operator new [] (size_t count) {
+	printf("Allocated something ... %d\n", count);
 	return malloc(count);	
 }
 
@@ -25,22 +37,21 @@ void operator delete [] (void* ptr) {
     free(ptr);
 }
 
-template <typename Type>
-static Type max (Type a, Type b) {
-	return a > b ? a : b;
-}
-
-template <typename Type>
-static Type min (Type a, Type b) {
-	return a < b ? a : b;
-}
-
 void *malloc (size_t size) {
 	return memmanip::malloc(size);
 }
 
 void free (void *ptr) {
 	memmanip::free(ptr);
+}
+
+namespace memmanip
+{
+	void *start;
+	void *end;
+
+	void *firstFree;
+	void *lastFree;
 }
 
 void *memmanip::sbrk (uint32 size) {
@@ -104,7 +115,7 @@ void memmanip::setFreeStatus (void *ptr, uint32 status) {
 void *memmanip::malloc (uint32 size) {
 	size = (size + ALIGNMENT - 1) & -ALIGNMENT;
 	size += sizeof(uint32) * 2;
-	size = max(size, MIN_CHUNK_SIZE);
+	size = std::max(size, MIN_CHUNK_SIZE);
 	for (void *current = firstFree; current; current = getNext(current)) {
 		uint32 chunk_size = 0;
 		if ((chunk_size = getSize(current)) >= size) {

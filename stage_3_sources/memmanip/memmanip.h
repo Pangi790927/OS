@@ -39,4 +39,9 @@ void *operator new [] (size_t count);
 void operator delete (void* ptr);
 void operator delete [] (void* ptr);
 
+void *operator new (size_t, void *p);
+void *operator new [] (size_t, void *p);
+void  operator delete (void *, void *);
+void  operator delete [] (void *, void *);
+
 #endif
