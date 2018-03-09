@@ -47,7 +47,13 @@ void isr_error_2 (err_reg_isr regs) {printf("Interrupt 2 ...\n");}
 void isr_error_3 (err_reg_isr regs) {printf("Interrupt 3 ...\n");}
 void isr_error_4 (err_reg_isr regs) {printf("Interrupt 4 ...\n");}
 void isr_error_5 (err_reg_isr regs) {printf("Interrupt 5 ...\n");}
-void isr_error_6 (err_reg_isr regs) {printf("Interrupt 6 ...\n");}
+void isr_error_6 (err_reg_isr regs) {
+	static bool flag = false;
+	if (!flag) {
+		printf("Interrupt 6 ...\n");
+		flag = true;
+	}
+}
 void isr_error_7 (err_reg_isr regs) {printf("Interrupt 7 ...\n");}
 void isr_error_8 (err_reg_isr regs) {printf("Interrupt 8 ...\n");}
 void isr_error_9 (err_reg_isr regs) {printf("Interrupt 9 ...\n");}

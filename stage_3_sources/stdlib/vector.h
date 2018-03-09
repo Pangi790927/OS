@@ -88,6 +88,7 @@ std::vector<Type> &std::vector<Type>::operator = (const vector<Type> &other) {
 	count = other.count;
 	reserve(other.containerSize);
 	memcpy(buffer, other.buffer, count * sizeof(Type));
+	return (*this);
 }
 
 template <typename Type>
@@ -96,6 +97,7 @@ std::vector<Type> &std::vector<Type>::operator = (const vector<Type> &&other) {
 	count = other.count;
 	containerSize = other.containerSize;
 	buffer = std::move(other.buffer);
+	return (*this);
 }
 
 template <typename Type>
@@ -119,8 +121,10 @@ template <typename Type>
 void std::vector<Type>::reserve (size_t capacity) {
 	uint8 *newBuffer = new uint8 [containerSize + capacity];
 
-	memcpy(newBuffer, buffer, count * sizeof(Type));
-	delete [] buffer;
+	if (buffer) {
+		memcpy(newBuffer, buffer, count * sizeof(Type));
+		delete [] buffer;
+	}
 
 	buffer = newBuffer;
 	containerSize = containerSize + capacity;

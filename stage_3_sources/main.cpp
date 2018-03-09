@@ -6,6 +6,8 @@
 #include "memmanip.h"
 #include "global_defines.h"
 #include "vector.h"
+#include "memory.h"
+#include "deque.h"
 
 int main()
 {
@@ -26,38 +28,21 @@ int main()
 	asm volatile ("sti");
 
 	memmanip::init((void *)HEAP_START);
-	
-	// memmanip::printMemory();
-	{
-		std::vector<std::vector<char>> v = 
-		std::vector<std::vector<char>> (
-			16, 
-			std::vector<char> (
-				16, 
-				'c'
-			)
-		);
 
-		for (int i = 0; i < v.size(); i++) {
-			for (int j = 0; j < v[i].size(); j++) {
-				printf("%c", v[i][j]);
-			}
-			printf("\n");
+/*	INITIALIZERS ABOVE ^^^ -------------------------------------------------- */
+
+	{
+		std::deque<int> numbers({1, 2, 3, 4, 5, 6, 7, 8});
+
+		for (auto&& number : numbers) {
+			printf("%d ", number);
 		}
+		printf("\n");
 	}
 	memmanip::printMemory();
 
-	// char *a = new char [1001];
- 	
-	// float f = 32.132;
-
-	// for (int i = 0; i < 1000; i++)
-	// 	a[i] = '0' + i % 10;
-	// a[1000] = '\0';
-	// printf("%s\n", a);
-
-	// free(a);
 	// memmanip::printMemory();
+	// printf("can continue...\n");
 
 	while (true)
 		asm volatile("hlt");

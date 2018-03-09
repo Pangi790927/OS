@@ -24,11 +24,12 @@ namespace memmanip
 	void *getPrev (void *ptr);
 	void setNext (void *ptr, void *next);
 	void setPrev (void *ptr, void *prev);
-	void setFreeStatus (void *ptr, uint32 status);
 	void *malloc (uint32 size);
-	void freeChunk (void *chunkPtr, uint32 size);
+	void freeChunk (void *chunkPtr, uint32 size, bool isNodeTag = false);
 	void free (void *ptr);
 	void printMemory();
+	void removeNode (void *node);
+	void pushNode (void *node);
 }
 
 void *malloc (size_t size);
@@ -38,6 +39,8 @@ void *operator new (size_t count);
 void *operator new [] (size_t count);
 void operator delete (void* ptr);
 void operator delete [] (void* ptr);
+void operator delete (void* ptr, size_t);
+void operator delete [] (void* ptr, size_t);
 
 void *operator new (size_t, void *p);
 void *operator new [] (size_t, void *p);

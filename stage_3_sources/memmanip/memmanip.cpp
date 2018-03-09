@@ -33,6 +33,14 @@ void operator delete [] (void* ptr) {
     free(ptr);
 }
 
+void operator delete (void* ptr, size_t) {
+    free(ptr);
+}
+
+void operator delete [] (void* ptr, size_t) {
+    free(ptr);
+}
+
 void *malloc (size_t size) {
 	return memmanip::malloc(size);
 }
@@ -75,6 +83,8 @@ void memmanip::addAllocChunkTags (void *ptr, uint32 wordCount) {
 	*(uint32 *)((char *)ptr + wordCount * ALIGNMENT - sizeof(uint32)) =
 			wordCount | ALLCATED_BIT;
 	*(uint32 *)ptr = wordCount | ALLCATED_BIT;
+	*(uint32 *)((char *)ptr + sizeof(uint32)) = 0x33;
+	*(uint32 *)((char *)ptr + sizeof(uint32) + sizeof(void *)) = 0x33;
 }
 
 uint32 memmanip::getSize (void *ptr) {
@@ -101,12 +111,6 @@ void memmanip::setPrev (void *ptr, void *prev) {
 	*(void **)((char *)ptr + sizeof(uint32) + sizeof(void *)) = prev;	
 }
 
-void memmanip::setFreeStatus (void *ptr, uint32 status) {
-	uint32 size = *(uint32 *)ptr & ~FREE_BIT;
-	*(uint32 *)ptr = size | status;
-	*(uint32 *)((char *)ptr + size * ALIGNMENT) = size | status;	
-}
-
 void *memmanip::malloc (uint32 size) {
 	size = (size + ALIGNMENT - 1) & -ALIGNMENT;
 	size += sizeof(uint32) * 2;
@@ -116,31 +120,19 @@ void *memmanip::malloc (uint32 size) {
 		if ((chunk_size = getSize(current)) >= size) {
 			if (chunk_size <= size + MIN_CHUNK_SIZE) {
 				// will use current as allocated
-				if (firstFree == current && lastFree == current)
-					firstFree = lastFree = NULL;
+				removeNode(current);
 
-				if (getPrev(current))
-					setNext(getPrev(current), getNext(current));
-				
-				if (getNext(current))
-					setNext(getNext(current), getPrev(current));
-
-				setFreeStatus(current, ALLCATED_BIT);
-
+				addAllocChunkTags(current, getSize(current) / ALIGNMENT);
 				return (char *)current + sizeof(uint32);
 			}
 			else {
 				// will split current in free and allocated
 				void *freePart = (char *)current + size;
 
-				if (getPrev(current))
-					setNext(getPrev(current), freePart);
+				removeNode(current);
+				addFreeChunkTags(freePart, (chunk_size - size) / ALIGNMENT, NULL, NULL);
+				pushNode(freePart);
 				
-				if (getNext(current))
-					setNext(getNext(current), freePart);
-
-				addFreeChunkTags(freePart, (chunk_size - size) / ALIGNMENT,
-						getNext(current), getPrev(current));
 				addAllocChunkTags(current, size / ALIGNMENT);
 
 				return (char *)current + sizeof(uint32);
@@ -154,40 +146,71 @@ void *memmanip::malloc (uint32 size) {
 	return (char *)result + sizeof(uint32);
 }
 
-void memmanip::freeChunk (void *chunkPtr, uint32 size) {
+void memmanip::removeNode (void *node) {
+	if (!node)
+		return ;
+
+	if (getPrev(node))
+		setNext(getPrev(node), getNext(node));
+	if (getNext(node))
+		setPrev(getNext(node), getPrev(node));
+
+	if (lastFree == node)
+		lastFree = getPrev(node);
+	if (firstFree == node)
+		firstFree = getNext(node);
+}
+
+void memmanip::pushNode (void *node) {
+	if (lastFree) {
+		setNext(lastFree, node);
+		setPrev(node, lastFree);
+		lastFree = node;
+	}
+	else {
+		lastFree = firstFree = node;
+		setNext(node, NULL);
+		setPrev(node, NULL);
+	}
+}
+
+void memmanip::freeChunk (void *chunkPtr, uint32 size, bool isNode) {
 	if ((char *)chunkPtr - sizeof(uint32) > start) {
 		uint32 sizeLeft = *(uint32 *)((char *)chunkPtr - sizeof(uint32));
 		if (sizeLeft & FREE_BIT) {
-			// we expand the left chunk with the right one (this one) 
+			// we expand this chunck with the left one) 
 			void *leftChunk = (char *)chunkPtr - (sizeLeft & ~FREE_BIT) * ALIGNMENT;
 			uint32 newSize = (getSize(leftChunk) + size);
 
-			addFreeChunkTags(leftChunk, newSize / ALIGNMENT,
-					getNext(leftChunk), getPrev(leftChunk));
+			if (isNode)
+				removeNode(chunkPtr);
+			removeNode(leftChunk);
+			addFreeChunkTags(leftChunk, newSize / ALIGNMENT, NULL, NULL);
+			pushNode(leftChunk);
 
-			freeChunk(leftChunk, newSize);
+			freeChunk(leftChunk, newSize, true);
 			return ;
 		}
 	}
 	if (*(uint32 *)((char *)chunkPtr + size) & FREE_BIT) {
+		// we expand this chunk with the right one 
 		void *rightChunk = (char *)chunkPtr + size;
 		uint32 sizeRight = getSize(rightChunk);
 		uint32 newSize = (sizeRight + size);
 
-		addFreeChunkTags(chunkPtr, newSize / ALIGNMENT, getNext(rightChunk),
-			getPrev(rightChunk));
+		if (isNode)
+			removeNode(chunkPtr);
+		removeNode(rightChunk);
+		addFreeChunkTags(chunkPtr, newSize / ALIGNMENT, NULL, NULL);
+		pushNode(chunkPtr);
 		
-		freeChunk(chunkPtr, newSize);
+		freeChunk(chunkPtr, newSize, true);
 		return ;
 	}
+	if (isNode)
+		return ;
 	addFreeChunkTags(chunkPtr, size / ALIGNMENT, NULL, lastFree);
-	if (lastFree) {
-		setNext(lastFree, chunkPtr);
-		lastFree = chunkPtr;
-	}
-	else {
-		lastFree = firstFree = chunkPtr;
-	}
+	pushNode(chunkPtr);
 }
 
 void memmanip::free (void *ptr) {
@@ -201,15 +224,15 @@ void memmanip::free (void *ptr) {
 	freeChunk(chunkPtr, size);
 }
 
-
 void memmanip::printMemory() {
-	printf("(count, offset, size, free)\n");
+	printf("(count, offset, size, free, next, prev); first: %x last: %x\n", firstFree, lastFree);	
 	void *current = start;
 	int count = 1;
 	while (current < end) {
-		printf("(%d, %d, %d, %d)\n",
+		printf("(%d, %d, %d, %d, %x, %x)\n",
 				count++, (uint32)((char *)current - (char *)start), 
-				getSize(current), (uint32)getFreeStatus(current));
+				getSize(current), (uint32)getFreeStatus(current),
+				getNext(current), getPrev(current));
 		
 		if (getSize(current) == 0) {
 			printf("Bad chunk\n");
