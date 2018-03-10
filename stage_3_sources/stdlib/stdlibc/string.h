@@ -1,0 +1,160 @@
+#ifndef STRING_H
+#define STRING_H
+
+#include "libft.h"
+
+namespace std
+{
+	class string {
+		char *internStr;
+		size_t internSize;
+	public:
+		string () {
+			internStr = strdup("");
+			internSize = 0;
+		}
+
+		string (const string& str) {
+			internStr = strdup(str.internStr);
+			internSize = strlen(internStr);
+		}
+
+		string (const string& str, size_t pos, size_t npos) {
+			internStr = (char *)malloc((npos + 1) * sizeof(char));
+			internStr = strncpy(internStr, str.internStr + pos, npos);
+			internStr[npos] = '\0';
+			internSize = npos;
+		}
+
+		string (const char* s) {
+			internStr = (char *)malloc((strlen(s) + 1) * sizeof(char));
+			strcpy(internStr, s);
+			internSize = strlen(s);
+		}
+
+		string (const char* s, size_t n) {
+			internStr = (char *)malloc((n + 1) * sizeof(char));
+			strncpy(internStr, s, n);
+			internStr[n] = '\0';
+			internSize = n;
+		}
+
+		string (size_t n, char c) {
+			internStr = (char *)malloc((n + 1) * sizeof(char));
+			for (int i = 0; i < n; i++)
+				internStr[i] = c;
+			internSize = n;
+		}
+
+		template <typename IteratorType>
+		string (IteratorType first, IteratorType last) {
+			std::vector<char> strVec;
+			for (IteratorType it = first; it != last; it++) {
+				strVec.push_back(*it);
+			}
+			internStr = (char *)malloc((strVec.size() + 1) * sizeof(char));
+			strncpy(internStr, &strVec[0], strVec.size());
+			internStr[strVec.size()] = '\0';
+			internSize = strVec.size();
+		}
+
+		string (const string&& str) {
+			internStr = std::move(str.internStr);
+			internSize = std::move(str.internSize);
+		}
+
+		~string() {
+			free(internStr);
+			internSize = 0;
+		}
+
+		string& operator = (const string& str) {
+			free(internStr);
+			internStr = strdup(str.internStr);
+			internSize = strlen(str.internStr);
+			return (*this);
+		}
+
+		string& operator = (const string&& str) {
+			free(internStr);
+			internStr = std::move(str.internStr);
+			internSize = std::move(str.internSize);
+			return (*this);
+		}
+
+		string& operator = (const char* s) {
+			free(internStr);
+			internStr = strdup(s);
+			internSize = strlen(s);
+			return (*this);
+		}
+
+		bool operator == (const string& str) {
+			return strcmp(internStr, str.internStr) == 0;
+		}
+
+		bool operator <  (const string& str) {
+			return strcmp(internStr, str.internStr) < 0;
+		}
+
+		bool operator <= (const string& str) {
+			return strcmp(internStr, str.internStr) <= 0;
+		}
+
+		bool operator >  (const string& str) {
+			return strcmp(internStr, str.internStr) > 0;
+		}
+
+		bool operator >= (const string& str) {
+			return strcmp(internStr, str.internStr) >= 0;
+		}
+
+		size_t size() const {
+			return internSize;
+		}
+
+		char *c_str() {
+			return internStr;
+		}
+
+		template <typename Type>
+		string& operator += (const Type& type) {
+			(*this) = (*this) + type;
+		}
+
+		string operator + (const string& str) {
+			string newString;
+
+			char *newStr = (char *)malloc((size() + str.size() + 1) * sizeof(char));	
+			strncpy(newStr, internStr, size());
+			strncpy(newStr + size(), str.internStr, str.size());
+			newStr[size() + str.size()] = '\0';
+
+			newString.internSize = size() + str.size();
+			free(newString.internStr);
+			newString.internStr = newStr;
+
+			return newString;
+		}
+
+		string operator + (const char* s) {
+			return (*this) + string(s);
+		}
+
+		string operator + (char c) {
+			return (*this) + string(1, c);
+		}
+
+		friend string operator + (const char* s, const string& str) {	
+			return string(s) + str;
+		}
+		
+		friend string operator + (char c, const string& str) {
+			return string(1, c) + str;
+		}
+
+		char& operator [] (size_t pos);
+	};	
+}
+
+#endif

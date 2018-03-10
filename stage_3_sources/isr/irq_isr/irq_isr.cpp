@@ -6,6 +6,8 @@
 #include "isr.h"
 #include "global_defines.h"
 
+#include "keyboard.h"
+
 extern void irq0 () asm ("irq0");
 extern void irq1 () asm ("irq1");
 extern void irq2 () asm ("irq2");
@@ -80,7 +82,14 @@ void isr_irq_0 () {
 	irq_isr::aknowledge_irq_master();
 }
 
-void isr_irq_1 () {printf("irq 1\n");}
+void isr_irq_1 () {
+	// printf("irq 1\n");
+	if (keyboard::checkInit())
+		keyboard::irq(inb(keyboard::DATA_PORT));
+	// printf("%d\n", result);
+	irq_isr::aknowledge_irq_master();
+}
+
 void isr_irq_2 () {printf("irq 2\n");}
 
 void isr_irq_3 () {

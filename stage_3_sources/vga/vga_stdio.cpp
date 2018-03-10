@@ -15,7 +15,6 @@ namespace VGA {
 	    outb(0x3D5, cursorLocation >> 8); // Send the high cursor byte.
 	    outb(0x3D4, 15);                  // Tell the VGA board we are setting the low cursor byte.
 	    outb(0x3D5, cursorLocation);      // Send the low cursor byte.
-
 	}
 
 	int _pos_in_screen (int row, int col) {

@@ -1,6 +1,8 @@
 #ifndef MEMORY_H
 #define MEMORY_H
 
+#include "utility.h"
+
 namespace std
 {
 	template <typename Type>

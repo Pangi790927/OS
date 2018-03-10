@@ -3,6 +3,7 @@ VIRTUAL_MACHINE = OS
 OS_HDD = OS.vhd
 OS_IMAGE = os_image
 
+
 DIRS1 = $(shell find stage_1_sources/ -not -path '*/\.*' -type d -printf " %p")
 DIRS2 = $(shell find stage_2_sources/ -not -path '*/\.*' -type d -printf " %p")
 DIRS3 = $(shell find stage_3_sources/ -not -path '*/\.*' -type d -printf " %p")
@@ -21,17 +22,23 @@ STAGE_3_CPP_SOURCES = $(shell find stage_3_sources/ -type f -name "*.cpp")
 STAGE_3_ASM_OBJS = $(patsubst %.asm, %.o, $(STAGE_3_ASM_SOURCES))
 STAGE_3_CPP_OBJS = $(patsubst %.cpp, %.o, $(STAGE_3_CPP_SOURCES))
 
-# stage 1 has no objs
-STAGE_2_OBJS = kernel_stage_2_load_3.o									\
-				$(STAGE_2_ASM_OBJS) $(STAGE_2_CPP_OBJS)
-STAGE_3_OBJS = kernel_stage_3.o											\
-				$(STAGE_3_ASM_OBJS) $(STAGE_3_CPP_OBJS)
-
 CXX = g++-7
 ASM = nasm
 LD = ld
 
-CXX_FLAGS = -m32 -fno-rtti -fno-exceptions -std=c++1y -O2 -g
+CXX_FLAGS_2 = -m32 -ffreestanding -fno-rtti -fno-exceptions -std=c++1y -O3 -g
+CXX_FLAGS_3 = -m32 -nostartfiles -ffreestanding -fno-rtti				\
+				-fno-exceptions -std=c++1y -O3 -g
+
+CRTBEGIN_OBJ:=$(shell $(CXX) $(CXX_FLAGS_3) -print-file-name=crtbegin.o)
+CRTEND_OBJ:=$(shell $(CXX) $(CXX_FLAGS_3) -print-file-name=crtend.o)
+
+# stage 1 has no objs
+STAGE_2_OBJS = kernel_stage_2_load_3.o									\
+				$(STAGE_2_ASM_OBJS) $(STAGE_2_CPP_OBJS)
+STAGE_3_OBJS = kernel_stage_3.o											\
+				$(STAGE_3_ASM_OBJS) $(STAGE_3_CPP_OBJS)			
+				# $(CRTBEGIN_OBJ) $(CRTEND_OBJ)
 
 all: $(OS_HDD)
 
@@ -39,13 +46,13 @@ ${STAGE_2_ASM_OBJS}: %.o: %.asm
 	$(ASM) $< -f elf -F stabs -o $@ $(INCLUDES2)
 
 ${STAGE_2_CPP_OBJS}: %.o: %.cpp
-	$(CXX) -c $< -o $@ $(CXX_FLAGS) $(INCLUDES2)
+	$(CXX) -c $< -o $@ $(CXX_FLAGS_2) $(INCLUDES2)
 
 ${STAGE_3_ASM_OBJS}: %.o: %.asm
 	$(ASM) $< -f elf -F stabs -o $@ $(INCLUDES3)
 
 ${STAGE_3_CPP_OBJS}: %.o: %.cpp
-	$(CXX) -c $< -o $@ $(CXX_FLAGS) $(INCLUDES3)
+	$(CXX) -c $< -o $@ $(CXX_FLAGS_3) $(INCLUDES3)
 
 # builds stage 1 (the one that must have only 512 bytes)
 stage1:
@@ -55,12 +62,12 @@ stage1:
 # from unprotected to protected, from asm to c++ it will have around 32k bytes)
 stage2:
 	$(ASM) kernel_stage_2_start.asm -f elf -F stabs -o kernel_stage_2_start.o
-	$(CXX) -c kernel_stage_2_load_3.cpp -o kernel_stage_2_load_3.o $(CXX_FLAGS) $(INCLUDES2)
+	$(CXX) -c kernel_stage_2_load_3.cpp -o kernel_stage_2_load_3.o $(CXX_FLAGS_2) $(INCLUDES2)
 
 # in this stage the real kernel starts as we are finaly able to load the hole os
 stage3:
 	$(ASM) kernel_stage_3_start.asm -f elf -F stabs -o kernel_stage_3_start.o
-	$(CXX) -c kernel_stage_3.cpp -o kernel_stage_3.o $(CXX_FLAGS) $(INCLUDES3)
+	$(CXX) -c kernel_stage_3.cpp -o kernel_stage_3.o $(CXX_FLAGS_3) $(INCLUDES3)
 
 stage1.bin: stage1
 	cp kernel_stage_1.o stage1.bin
