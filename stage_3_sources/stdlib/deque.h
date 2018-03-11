@@ -26,7 +26,7 @@ namespace std
 			std::shared_ptr<__dequeNode<Type>> ptr;
 
 			iterator (std::shared_ptr<__dequeNode<Type>> ptr
-					= std::shared_ptr<__dequeNode<Type>>()) : ptr(ptr) {}
+					= nullptr) : ptr(ptr) {}
 
 			iterator& operator = (std::shared_ptr<__dequeNode<Type>> ptr) {
 				this->ptr = ptr;
@@ -49,23 +49,25 @@ namespace std
 			}
 
 			iterator operator ++ (int) {
+				auto orig = (*this);
 				if (ptr)
-					return iterator(ptr->next);
-				return iterator(NULL);
+					ptr = ptr->next;
+				return orig;
 			}
 
 			iterator operator -- (int) {
+				auto orig = (*this);
 				if (ptr)
-					return iterator(ptr->prev);
-				return iterator(NULL);
+					ptr = ptr->prev;
+				return orig;
 			}
 
-			__dequeNode<Type>* operator -> () const {
-				return ptr.get();
+			Type* operator -> () const {
+				return &(ptr.get()->data);
 			}
 
-			__dequeNode<Type>& operator * () const {
-				return *ptr;
+			Type& operator * () const {
+				return ptr->data;
 			}
 
 			bool operator == (const iterator& other) {
@@ -73,6 +75,7 @@ namespace std
 			}
 
 			bool operator != (const iterator& other) {
+				printf("Not Equal\n");
 				return other.ptr != ptr;
 			}
 		};
@@ -144,17 +147,19 @@ namespace std
 				it->next->prev = it->prev;
 			if (it->prev)
 				it->prev->next = it->next;
-			it->next = (it->prev = std::shared_ptr<__dequeNode<Type>>());
+			it->next = (it->prev = nullptr);
 
 			count--;
 		}
 		
 		void push_back (const Type& value) {
 			if (!start) {
-				start = (stop = std::shared_ptr<__dequeNode<Type>>(new __dequeNode<Type>(value)));
+				start = (stop = std::shared_ptr<__dequeNode<Type>>(
+					new __dequeNode<Type>(value)));
 			}
 			else {
-				auto newNode = std::shared_ptr<__dequeNode<Type>>(new __dequeNode<Type>(value));
+				auto newNode = std::shared_ptr<__dequeNode<Type>>(
+					new __dequeNode<Type>(value));
 				stop->next = newNode;
 				newNode->prev = stop;
 				stop = newNode;
@@ -164,10 +169,12 @@ namespace std
 		
 		void push_front (const Type& value) {
 			if (!start) {
-				start = (stop = std::shared_ptr<__dequeNode<Type>>(new __dequeNode<Type>(value)));
+				start = (stop = std::shared_ptr<__dequeNode<Type>>(
+					new __dequeNode<Type>(value)));
 			}
 			else {
-				auto newNode = std::shared_ptr<__dequeNode<Type>>(new __dequeNode<Type>(value));
+				auto newNode = std::shared_ptr<__dequeNode<Type>>(
+					new __dequeNode<Type>(value));
 				start->prev = newNode;
 				newNode->next = start;
 				start = newNode;
@@ -177,24 +184,35 @@ namespace std
 		
 		void pop_back() {
 			if (start == stop) {
-				start = (stop = std::shared_ptr<__dequeNode<Type>>());
+				start = (stop = nullptr);
+				if (start) {
+					start->next = nullptr;
+					start->prev = nullptr;
+				}
 			}
 			
 			if (stop) {
+				stop->next = nullptr;
 				stop = stop->prev;
-				stop->next->prev = std::shared_ptr<__dequeNode<Type>>();
-				stop->next = std::shared_ptr<__dequeNode<Type>>();	/// this should delete last node
+				stop->next->prev = nullptr;
+				stop->next = nullptr;	/// this should delete last node
 			}
 			count--;
 		}
 
 		void pop_front() {
-			if (start == stop)
-				start = (stop = std::shared_ptr<__dequeNode<Type>>());
+			if (start == stop) {
+				if (start) {
+					start->next = nullptr;
+					start->prev = nullptr;
+				}
+				start = (stop = nullptr);
+			}
 			if (start) {
+				start->prev = nullptr;
 				start = start->next;
-				start->prev->next = std::shared_ptr<__dequeNode<Type>>();
-				start->prev = std::shared_ptr<__dequeNode<Type>>();
+				start->prev->next = nullptr;
+				start->prev = nullptr;
 			}
 			count--;
 		}
@@ -204,7 +222,7 @@ namespace std
 		}
 		
 		iterator end() {
-			return iterator(NULL);
+			return iterator(nullptr);
 		}
 
 		Type& front() {

@@ -11,23 +11,21 @@
 #include "deque.h"
 #include "string.h"
 #include "keyboard.h"
+#include "c_asm_func.h"
 
-class Construct {
-public:
-	Construct() {
-		clear_screen();
-		printf("Object wasa constructed ... \n");
-		asm volatile("hlt");
-	}
-
-	~Construct() {
-		clear_screen();
-		printf("Object wasa deconstructed ... \n");
-		asm volatile("hlt");
-	}
-};
-
-Construct obj;
+/*
+	Posible tasks:
+		* Repair Deque
+		* File system
+		* Read/Write with DMA
+		* VGA Graphics Mode
+		* Memory: paging 
+		* Task Scheduler
+		* Input functions
+		* Shell
+		* More advanced graphics 
+		* Network Driver
+*/
 
 int main()
 {
@@ -52,31 +50,85 @@ int main()
 	memmanip::init((void *)HEAP_START);
 
 /*	INITIALIZERS ABOVE ^^^ -------------------------------------------------- */
-
+{
 	{
-		std::string msg = "Ana are mere";
-		msg += " si george are masini";
+		using namespace std;
 
-		printf("%s\n", msg.c_str());
+		class Foo {
+		public:
+			string str;
+
+			Foo (string str) : str(str) {}
+
+			void print() {
+				printf("%s", str.c_str());
+			}
+
+			~Foo () {
+				printf("[dead: ");
+				print();
+				printf("]");
+			}
+		};
+
+		deque<Foo> que({Foo("1"), Foo("2"), Foo("3"), Foo("4"), Foo("5")});
+
+		for (auto it = que.begin(); it != que.end(); ++it) {
+			printf("Loop .. %x \n", it);
+			(*it).print();
+		}
+
+		auto ptr = que.begin().ptr;
+		printf("dying elemets ??? ");
+		while (que.size()) {
+			que.front().print();
+			que.pop_front();
+		}
+		memmanip::printMemory();
 	}
 	memmanip::printMemory();
 
-	while (true) {
+	keyboard::KeyState keyState;
+	keyboard::init2KeyState(keyState);
+
+	std::vector<uint32> keyList;
+
+	bool kernel_alive = true;
+	while (kernel_alive) {
+		/* main kernel loop */
 		if (keyboard::hasNewKey()) {
 			while (keyboard::keyCount()) {
-				printf("%x ", keyboard::getKey());
+				using namespace keyboard;
+				
+				uint32 intkey = getKey();
+				uint32 key = keyState.doEvent(intkey);
+				if (key) {
+					if (key & PRESS) {
+						if (!(key & NON_ASCII_KEY))
+							keyList.push_back(key);
+						printf("%c", (char)key);
+						
+						if ((char)key == '\n') {
+							for (auto&& keyElem : keyList) {
+								printf("%c", (char)(keyElem));
+							}
+							printf("\n%d\n", keyList.size());
+							printf("\n");
+						}
+					}
+					if (key == ESCAPE_PRESS) {
+						kernel_alive = false;
+					}
+				}
 				keyboard::popKey();
 			}
 			keyboard::ackKey();
 		}
 	}
-
-	__cxa_finalize(0);
-
-	// memmanip::printMemory();
-	// printf("can continue...\n");
-
-	while (true)
-		asm volatile("hlt");
+	printf("Tring to exit ... \n");
+	
+} // this is so the deconstructors are called
+	printf("Exiting ... \n");
+	outb(0xf4, 0x00);
 	return 0;
 }

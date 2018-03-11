@@ -26,9 +26,9 @@ CXX = g++-7
 ASM = nasm
 LD = ld
 
-CXX_FLAGS_2 = -m32 -ffreestanding -fno-rtti -fno-exceptions -std=c++1y -O3 -g
-CXX_FLAGS_3 = -m32 -nostartfiles -ffreestanding -fno-rtti				\
-				-fno-exceptions -std=c++1y -O3 -g
+CXX_FLAGS_2 = -m32 -ffreestanding -fno-rtti -fno-exceptions -std=c++1y -O2 -g
+CXX_FLAGS_3 = -m32 -ffreestanding -fno-rtti -nostartfiles				\
+				-fno-exceptions -std=c++1y -O2 
 
 CRTBEGIN_OBJ:=$(shell $(CXX) $(CXX_FLAGS_3) -print-file-name=crtbegin.o)
 CRTEND_OBJ:=$(shell $(CXX) $(CXX_FLAGS_3) -print-file-name=crtend.o)
@@ -39,6 +39,14 @@ STAGE_2_OBJS = kernel_stage_2_load_3.o									\
 STAGE_3_OBJS = kernel_stage_3.o											\
 				$(STAGE_3_ASM_OBJS) $(STAGE_3_CPP_OBJS)			
 				# $(CRTBEGIN_OBJ) $(CRTEND_OBJ)
+MAKE_ASM := false
+
+re: clean all
+
+asm: CXX_FLAGS_3 := $(CXX_FLAGS_3) -S -masm=intel
+asm: MAKE_ASM := true
+asm: clean ${STAGE_3_CPP_OBJS}
+	echo "called asm ............................"
 
 all: $(OS_HDD)
 
@@ -53,6 +61,10 @@ ${STAGE_3_ASM_OBJS}: %.o: %.asm
 
 ${STAGE_3_CPP_OBJS}: %.o: %.cpp
 	$(CXX) -c $< -o $@ $(CXX_FLAGS_3) $(INCLUDES3)
+	@if [ $(MAKE_ASM) = "true" ]; then\
+        mv $@ $@.asm;\
+        echo "build asm ...";\
+    fi
 
 # builds stage 1 (the one that must have only 512 bytes)
 stage1:
@@ -89,13 +101,14 @@ $(OS_IMAGE): stage1.bin stage2.bin stage3.bin
 
 # run the operating system on a virtual machine
 run: $(OS_HDD)
-	virtualbox --startvm $(VIRTUAL_MACHINE)
+	qemu-system-i386 $(OS_HDD) -device isa-debug-exit,iobase=0xf4,iosize=0x04
 
 # copy the kernel image on the vhd
 $(OS_HDD): $(OS_IMAGE)
 	dd conv=notrunc if=$(OS_IMAGE) of=$(OS_HDD)
 
 clean:
-	find . -type f -name '*.o' -exec rm {} +
-	find . -type f -name '*.bin' -exec rm {} +
+	find . -type f -name '*.o' -exec rm {} + -print
+	find . -type f -name '*.o.asm' -exec rm {} + -print
+	find . -type f -name '*.bin' -exec rm {} + -print
 	rm -f os_image

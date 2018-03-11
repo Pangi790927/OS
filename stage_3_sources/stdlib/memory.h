@@ -16,12 +16,13 @@ namespace std
 	class shared_ptr {
 	public:
 		struct Storage {
-			int count = 1;
+			int count = 0;
 
 			Type *dataPtr = NULL;
 			Deleter deleter;
 
-			Storage (Type *dataPtr, Deleter deleter) : dataPtr(dataPtr), deleter(deleter) {}
+			Storage (Type *dataPtr, Deleter deleter) : dataPtr(dataPtr),
+					deleter(deleter) {}
 
 			void dec () {
 				if (count == 1)
@@ -38,9 +39,11 @@ namespace std
 		Storage *storagePtr = NULL;
 
 		shared_ptr() {}
+		shared_ptr (nullptr_t) {}
 
 		shared_ptr (Type *dataPtr, Deleter deleter = Deleter()) {
 			storagePtr = new Storage(dataPtr, deleter);
+			inc();
 		}
 
 		shared_ptr (const shared_ptr& other) {
@@ -78,6 +81,12 @@ namespace std
 			dec();
 			storagePtr = other.storagePtr;
 			inc();
+			return (*this);
+		}
+
+		shared_ptr& operator = (nullptr_t) {
+			dec();
+			storagePtr = nullptr;
 			return (*this);
 		} 
 
@@ -124,7 +133,8 @@ namespace std
 		Deleter deleter;
 
 		unique_ptr() {}
-		unique_ptr (Type *ptr, Deleter deleter = Deleter()) : ptr(ptr), deleter(deleter) {}
+		unique_ptr (Type *ptr, Deleter deleter = Deleter()) : ptr(ptr),
+				deleter(deleter) {}
 
 		unique_ptr (const unique_ptr& other) = delete;
 		unique_ptr& operator = (const unique_ptr& other) = delete;

@@ -1,6 +1,7 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
+#include <initializer_list>
 #include "algorithm.h"
 #include "utility.h"
 #include "libft.h"
@@ -10,7 +11,6 @@ namespace std
 	template <class Type>
 	class vector {
 		static const size_t min_add = std::max(sizeof(void *) * 4, sizeof(Type) * 4);
-		typedef Type* iterator;
 
 		uint8 *buffer = NULL;
 		size_t count = 0;
@@ -20,7 +20,10 @@ namespace std
 		void freeAt (unsigned int index);
 
 	public:
+		typedef Type* iterator;
+		
 		vector();
+		vector (std::initializer_list<Type> list);
 		vector (size_t count);
 		vector (size_t count, const Type &initial);
 		vector (const vector<Type> &other);
@@ -55,6 +58,12 @@ namespace std
 
 template <typename Type>
 std::vector<Type>::vector() {}
+
+template <typename Type>
+std::vector<Type>::vector (std::initializer_list<Type> list) {
+	for (auto&& elem : list)
+		push_back(elem);
+}
 
 template <typename Type>
 std::vector<Type>::vector (size_t count) : count(count) {
@@ -176,12 +185,12 @@ Type &std::vector<Type>::operator [] (unsigned int index) {
 
 template <typename Type>
 typename std::vector<Type>::iterator std::vector<Type>::begin() {
-	return (iterator *)buffer; 
+	return (iterator)((Type *)buffer); 
 }
 
 template <typename Type>
 typename std::vector<Type>::iterator std::vector<Type>::end() {
-	return (iterator *)buffer + size;
+	return (iterator)((Type *)buffer + size());
 }
 
 template <typename Type>
