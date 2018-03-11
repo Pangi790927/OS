@@ -73,18 +73,16 @@ int main()
 
 		deque<Foo> que({Foo("1"), Foo("2"), Foo("3"), Foo("4"), Foo("5")});
 
-		for (auto it = que.begin(); it != que.end(); ++it) {
-			printf("Loop .. %x \n", it);
-			(*it).print();
+		for (auto&& elem : que) {
+			elem.print();
+			printf("\n");
 		}
 
-		auto ptr = que.begin().ptr;
-		printf("dying elemets ??? ");
+		auto ptr = que.begin();
 		while (que.size()) {
 			que.front().print();
 			que.pop_front();
 		}
-		memmanip::printMemory();
 	}
 	memmanip::printMemory();
 

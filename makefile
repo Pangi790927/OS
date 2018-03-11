@@ -10,6 +10,7 @@ DIRS3 = $(shell find stage_3_sources/ -not -path '*/\.*' -type d -printf " %p")
 INCLUDES1 = $(patsubst %, -I%/, $(DIRS1))
 INCLUDES2 = $(patsubst %, -I%/, $(DIRS2))
 INCLUDES3 = $(patsubst %, -I%/, $(DIRS3))
+HEADERS = $(shell find stage_2_sources/ -type f -name "*.h")
 
 STAGE_2_ASM_SOURCES = $(shell find stage_2_sources/ -type f -name "*.asm")
 STAGE_2_CPP_SOURCES = $(shell find stage_2_sources/ -type f -name "*.cpp")
@@ -103,12 +104,16 @@ $(OS_IMAGE): stage1.bin stage2.bin stage3.bin
 run: $(OS_HDD)
 	qemu-system-i386 $(OS_HDD) -device isa-debug-exit,iobase=0xf4,iosize=0x04
 
+rerun: clean $(OS_HDD)
+	qemu-system-i386 $(OS_HDD) -device isa-debug-exit,iobase=0xf4,iosize=0x04
+
 # copy the kernel image on the vhd
 $(OS_HDD): $(OS_IMAGE)
 	dd conv=notrunc if=$(OS_IMAGE) of=$(OS_HDD)
 
 clean:
 	find . -type f -name '*.o' -exec rm {} + -print
+	find . -type f -name '*.d' -exec rm {} + -print
 	find . -type f -name '*.o.asm' -exec rm {} + -print
 	find . -type f -name '*.bin' -exec rm {} + -print
 	rm -f os_image

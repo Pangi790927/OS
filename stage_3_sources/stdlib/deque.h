@@ -75,7 +75,6 @@ namespace std
 			}
 
 			bool operator != (const iterator& other) {
-				printf("Not Equal\n");
 				return other.ptr != ptr;
 			}
 		};
@@ -192,7 +191,6 @@ namespace std
 			}
 			
 			if (stop) {
-				stop->next = nullptr;
 				stop = stop->prev;
 				stop->next->prev = nullptr;
 				stop->next = nullptr;	/// this should delete last node
@@ -208,17 +206,20 @@ namespace std
 				}
 				start = (stop = nullptr);
 			}
+
 			if (start) {
-				start->prev = nullptr;
 				start = start->next;
-				start->prev->next = nullptr;
-				start->prev = nullptr;
+				if (start->next) {
+					start->prev->next = nullptr;
+					start->prev = nullptr;
+				}
+				// printf("%x\n", start);printf("%x\n", stop);
 			}
 			count--;
 		}
 
 		iterator begin() {
-			return iterator(start.get());
+			return iterator(start);
 		}
 		
 		iterator end() {
