@@ -3,7 +3,7 @@
 #define MEMMANIP_H
 
 #include "Types.h"
-#include "stdio.h"
+#include "kstdio.h"
 
 namespace memmanip
 {

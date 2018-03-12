@@ -1,7 +1,7 @@
 #include "irq_isr.h"
 #include "Types.h"
 #include "c_asm_func.h"
-#include "stdio.h"
+#include "kstdio.h"
 #include "idt.h"
 #include "isr.h"
 #include "global_defines.h"
@@ -90,25 +90,25 @@ void isr_irq_1 () {
 	irq_isr::aknowledge_irq_master();
 }
 
-void isr_irq_2 () {printf("irq 2\n");}
+void isr_irq_2 () {kprintf("irq 2\n");}
 
 void isr_irq_3 () {
-	printf("irq 3\n");
+	kprintf("irq 3\n");
 	irq_isr::aknowledge_irq_master();
 }
 
-void isr_irq_4 () {printf("irq 4\n");}
-void isr_irq_5 () {printf("irq 5\n");}
-void isr_irq_6 () {printf("irq 6\n");}
-void isr_irq_7 () {printf("irq 7\n");}
-void isr_irq_8 () {printf("irq 8\n");}
-void isr_irq_9 () {printf("irq 9\n");}
-void isr_irq_10 () {printf("irq 10\n");}
-void isr_irq_11 () {printf("irq 11\n");}
-void isr_irq_12 () {printf("irq 12\n");}
-void isr_irq_13 () {printf("irq 13\n");}
-void isr_irq_14 () {printf("irq 14\n");}
-void isr_irq_15 () {printf("irq 15\n");}
+void isr_irq_4 () {kprintf("irq 4\n");}
+void isr_irq_5 () {kprintf("irq 5\n");}
+void isr_irq_6 () {kprintf("irq 6\n");}
+void isr_irq_7 () {kprintf("irq 7\n");}
+void isr_irq_8 () {kprintf("irq 8\n");}
+void isr_irq_9 () {kprintf("irq 9\n");}
+void isr_irq_10 () {kprintf("irq 10\n");}
+void isr_irq_11 () {kprintf("irq 11\n");}
+void isr_irq_12 () {kprintf("irq 12\n");}
+void isr_irq_13 () {kprintf("irq 13\n");}
+void isr_irq_14 () {kprintf("irq 14\n");}
+void isr_irq_15 () {kprintf("irq 15\n");}
 
 void set_irq_ISR() {
 	uint8 attr = isr::makeAttr(1, 0, 0, isr::INTR_GATE);

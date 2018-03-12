@@ -216,7 +216,7 @@ void memmanip::freeChunk (void *chunkPtr, uint32 size, bool isNode) {
 void memmanip::free (void *ptr) {
 	void *chunkPtr = (char *)ptr - sizeof(uint32);
 	if (getFreeStatus(chunkPtr)) {
-		printf("Bad free, %p, %d\n", chunkPtr, (uint32)((char *)chunkPtr -
+		kprintf("Bad free, %p, %d\n", chunkPtr, (uint32)((char *)chunkPtr -
 				(char *)start));
 		return ;
 	}
@@ -225,17 +225,17 @@ void memmanip::free (void *ptr) {
 }
 
 void memmanip::printMemory() {
-	printf("(count, offset, size, free, next, prev); first: %x last: %x\n", firstFree, lastFree);	
+	kprintf("(count, offset, size, free, next, prev); first: %x last: %x\n", firstFree, lastFree);	
 	void *current = start;
 	int count = 1;
 	while (current < end) {
-		printf("(%d, %d, %d, %d, %x, %x)\n",
+		kprintf("(%d, %d, %d, %d, %x, %x)\n",
 				count++, (uint32)((char *)current - (char *)start), 
 				getSize(current), (uint32)getFreeStatus(current),
 				getNext(current), getPrev(current));
 		
 		if (getSize(current) == 0) {
-			printf("Bad chunk\n");
+			kprintf("Bad chunk\n");
 			return ;
 		}
 		current = (char *)current + getSize(current);

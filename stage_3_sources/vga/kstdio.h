@@ -1,14 +1,14 @@
-#ifndef STDIO_H
-#define STDIO_H
+#ifndef KSTDIO_H
+#define KSTDIO_H
 
-void clear_screen();
-void putchar(char c);
-void putdec (int number);
-void puthex (int number);
-void putoct (int number);
-void putbin (int number);
-void putstr (char *str);
-void printf (const char *str);
+void kclear_screen();
+void kputchar(char c);
+void kputdec (int number);
+void kputhex (int number);
+void kputoct (int number);
+void kputbin (int number);
+void kputstr (char *str);
+void kprintf (const char *str);
 
 template <typename Type>
 class IntType {
@@ -55,26 +55,26 @@ public:
 template <typename Type>
 int _manage_escape (const char *str, Type *toManage) {
 	switch (str[0]) {
-		case 'c': putchar( *((char *)toManage) ); return 1;
-		case 's': putstr( *((char **)toManage) ); return 1;
+		case 'c': kputchar( *((char *)toManage) ); return 1;
+		case 's': kputstr( *((char **)toManage) ); return 1;
 
-		case 'd': putdec( *((typename IntType<Type>::type *)toManage) ); return 1;
+		case 'd': kputdec( *((typename IntType<Type>::type *)toManage) ); return 1;
 		
 		case 'X':
-		case 'x': puthex( *((typename IntType<Type>::type *)toManage) ); return 1;
+		case 'x': kputhex( *((typename IntType<Type>::type *)toManage) ); return 1;
 		
 		case 'O':
-		case 'o': putoct( *((typename IntType<Type>::type *)toManage) ); return 1;
+		case 'o': kputoct( *((typename IntType<Type>::type *)toManage) ); return 1;
 		
 		case 'B':
-		case 'b': putbin( *((typename IntType<Type>::type *)toManage) ); return 1;
+		case 'b': kputbin( *((typename IntType<Type>::type *)toManage) ); return 1;
 
-		case 'p': printf("0x"); puthex( *((int *)toManage) ); return 1;
+		case 'p': kprintf("0x"); kputhex( *((int *)toManage) ); return 1;
 	}
 }
 
 template <typename Type, typename... Args>
-void printf(const char *str, Type arg, Args... args) {
+void kprintf(const char *str, Type arg, Args... args) {
 	int i = 0;
 	bool wasEscape = false; 
 	
@@ -82,25 +82,25 @@ void printf(const char *str, Type arg, Args... args) {
 		if (str[i] == '%') {
 			i++; // jump over escaper
 			if (str[i] == '%') {
-				putchar(str[i]);
+				kputchar(str[i]);
 			}
 			else if (str[i]) {
 				// this i will be parameter for next call
 				i += _manage_escape(str + i, &arg);
 				wasEscape = true;	
 				
-				printf(str + i, args...);
+				kprintf(str + i, args...);
 			}
 		}
 		else {
-			putchar(str[i]);
+			kputchar(str[i]);
 		}
 		i++;
 	}
 }
 
 template <typename Type>
-void printf(const char *str, Type arg) {
+void kprintf(const char *str, Type arg) {
 	int i = 0;
 	bool wasEscape = false;
 	
@@ -108,17 +108,17 @@ void printf(const char *str, Type arg) {
 		if (str[i] == '%') {
 			i++; // jump over escaper
 			if (str[i] == '%') {
-				putchar(str[i]);
+				kputchar(str[i]);
 			}
 			else if (str[i]) {
 				i += _manage_escape(str + i, &arg);
 				wasEscape = true;
 
-				printf(str + i);
+				kprintf(str + i);
 			}
 		}
 		else {
-			putchar(str[i]);
+			kputchar(str[i]);
 		}
 		i++;
 	}

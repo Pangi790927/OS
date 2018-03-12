@@ -1,4 +1,4 @@
-#include "stdio.h"
+#include "kstdio.h"
 #include "keyboard.h"
 #include "c_asm_func.h"
 
@@ -76,7 +76,7 @@ void keyboard::init() {
 			done = true;
 		}
 		else if (response != RESEND) {
-			printf("RESET_FAILED %x\n", response);
+			kprintf("RESET_FAILED %x\n", response);
 			break;
 		}
 	}
@@ -85,7 +85,7 @@ void keyboard::init() {
 	uint8 response = inb(DATA_PORT);
 
 	if (response != SELF_TEST_PASSED) {
-		printf("SELF_TEST_FAILED %x\n", response);
+		kprintf("SELF_TEST_FAILED %x\n", response);
 	}
 
 	for (int i = 0; i < 3 && !done; ++i) {
@@ -100,13 +100,13 @@ void keyboard::init() {
 			done = true;
 		}
 		else if (response != RESEND) {
-			printf("KEYBOARD_SCAN_CODE_FAIL %x\n", response);
+			kprintf("KEYBOARD_SCAN_CODE_FAIL %x\n", response);
 			break;
 		}
 	}
 
 	if (!done)
-		printf("Keyboard inactive\n");
+		kprintf("Keyboard inactive\n");
 }
 
 void keyboard::irq (uint8 key) {

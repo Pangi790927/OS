@@ -1,5 +1,5 @@
 #include "icxxabi.h"
-#include "stdio.h"
+#include "kstdio.h"
 #include "isr.h"
 #include "error_isr.h"
 #include "irq_isr.h"
@@ -12,10 +12,11 @@
 #include "string.h"
 #include "keyboard.h"
 #include "c_asm_func.h"
+#include "kiobuf.h"
+#include "ostream.h"
 
 /*
 	Posible tasks:
-		* Repair Deque
 		* File system
 		* Read/Write with DMA
 		* VGA Graphics Mode
@@ -29,8 +30,8 @@
 
 int main()
 {
-	clear_screen();
-	printf("Stage 3!\n");
+	kclear_screen();
+	kprintf("Stage 3!\n");
 
 	asm volatile ("cli");
 		set_error_ISR();
@@ -52,44 +53,17 @@ int main()
 /*	INITIALIZERS ABOVE ^^^ -------------------------------------------------- */
 {
 	{
-		using namespace std;
+		std::kiobuf<char> buff(256);
+		std::ostream cout(buff);
 
-		class Foo {
-		public:
-			string str;
-
-			Foo (string str) : str(str) {}
-
-			void print() {
-				printf("%s", str.c_str());
-			}
-
-			~Foo () {
-				printf("[dead: ");
-				print();
-				printf("]");
-			}
-		};
-
-		deque<Foo> que({Foo("1"), Foo("2"), Foo("3"), Foo("4"), Foo("5")});
-
-		for (auto&& elem : que) {
-			elem.print();
-			printf("\n");
-		}
-
-		auto ptr = que.begin();
-		while (que.size()) {
-			que.front().print();
-			que.pop_front();
-		}
+		cout << "this" << std::endl;
 	}
 	memmanip::printMemory();
 
 	keyboard::KeyState keyState;
 	keyboard::init2KeyState(keyState);
 
-	std::vector<uint32> keyList;
+	std::deque<uint32> keyList;
 
 	bool kernel_alive = true;
 	while (kernel_alive) {
@@ -104,14 +78,14 @@ int main()
 					if (key & PRESS) {
 						if (!(key & NON_ASCII_KEY))
 							keyList.push_back(key);
-						printf("%c", (char)key);
+						kprintf("%c", (char)key);
 						
 						if ((char)key == '\n') {
 							for (auto&& keyElem : keyList) {
-								printf("%c", (char)(keyElem));
+								kprintf("%c", (char)(keyElem));
 							}
-							printf("\n%d\n", keyList.size());
-							printf("\n");
+							kprintf("\n%d\n", keyList.size());
+							kprintf("\n");
 						}
 					}
 					if (key == ESCAPE_PRESS) {
@@ -123,10 +97,10 @@ int main()
 			keyboard::ackKey();
 		}
 	}
-	printf("Tring to exit ... \n");
+	kprintf("Tring to exit ... \n");
 	
 } // this is so the deconstructors are called
-	printf("Exiting ... \n");
+	kprintf("Exiting ... \n");
 	outb(0xf4, 0x00);
 	return 0;
 }

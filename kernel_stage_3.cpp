@@ -1,4 +1,4 @@
-#include "stdio.h"
+#include "kstdio.h"
 #include "c_asm_func.h"
 
 int kernel_3() asm("kernel_3");
