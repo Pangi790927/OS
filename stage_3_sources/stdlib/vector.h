@@ -87,8 +87,8 @@ std::vector<Type>::vector (const vector<Type>& other) : count(other.count) {
 
 template <typename Type>
 std::vector<Type>::vector (const vector<Type>&& other) : count(other.count) {
-	buffer = std::move(other.buffer);
-	containerSize = other.containerSize;
+	reserve(other.containerSize);
+	memcpy(buffer, other.buffer, containerSize);
 }
 
 template <typename Type>
@@ -104,8 +104,8 @@ template <typename Type>
 std::vector<Type> &std::vector<Type>::operator = (const vector<Type> &&other) {
 	clear();
 	count = other.count;
-	containerSize = other.containerSize;
-	buffer = std::move(other.buffer);
+	reserve(other.containerSize);
+	memcpy(buffer, other.buffer, count * sizeof(Type));
 	return (*this);
 }
 

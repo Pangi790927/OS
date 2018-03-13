@@ -13,7 +13,7 @@ namespace std
 		kiobuf (size_t size) : std::streambuf<CharT>(size) {}
 
 		virtual bool writeOut () {
-			if (std::streambuf<CharT>::startWriteIndex <=
+			if (std::streambuf<CharT>::startWriteIndex <
 					std::streambuf<CharT>::writeIndex)
 			{
 				kputchar(std::streambuf<CharT>::writeBuff[

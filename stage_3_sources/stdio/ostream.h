@@ -30,20 +30,21 @@ namespace std
 
 		friend ostream& operator << (ostream& stream, int value) {
 			stream.putInt(value);
-			stream.putString(":> int\n");
 			return stream;
 		}
 
 		friend ostream& operator << (ostream& stream, char c) {
-			stream.putString(":> char\n");
-
+			stream.put(c);
 			return stream;
 		}
 
 		friend ostream& operator << (ostream& stream, const char* c) {
 			stream.putString(std::string(c));
-			stream.putString(":> c string\n");
+			return stream;	
+		}
 
+		friend ostream& operator << (ostream& stream, const std::string& str) {
+			stream.putString(str);
 			return stream;	
 		}
 	};
@@ -51,7 +52,6 @@ namespace std
 	class EndlClass {
 	public:
 		friend ostream& operator << (ostream& stream, const EndlClass& obj) {
-			stream.putString(":> endl\n");
 			stream.put('\n');
 			stream.flush();
 			return stream;

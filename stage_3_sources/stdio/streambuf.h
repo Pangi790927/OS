@@ -10,7 +10,6 @@ namespace std
 	template <typename CharT>
 	class streambuf {
 	public:
-
 		streambuf (size_t size) {
 			setWriteSize(size);
 			setReadSize(size);
@@ -39,13 +38,17 @@ namespace std
 		}
 
 		virtual CharT get() {
-			CharT save = readBuff.front();
+			CharT save = 0;
+			if (readBuff.size())
+				save = readBuff.front();
 			readBuff.pop_front();
 			return save;
 		}
 
 		virtual CharT peek() {
-			return readBuff.front();
+			if (readBuff.size())
+				return readBuff.front();
+			return 0;
 		}
 
 		virtual void flush() {

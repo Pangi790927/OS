@@ -2,8 +2,9 @@
 #define ISTREAM_H
 
 #include "streambuf.h"
+#include "libft.h"
 
-namespace istream
+namespace std
 {
 	class istream {
 	public:
@@ -12,25 +13,52 @@ namespace istream
 		istream (std::streambuf<char> &buff) : buff(buff) {}
 
 		int getNextInt() {
-			char c = buff.peek();
-			// if (isdigit(c))
-			return 13;
+			int result = 0;
+			char minus = buff.peek();
+			if (minus == '-' || minus == '+')
+				buff.get();
+
+			std::string number;
+			while (isdigit(buff.peek())) {
+				number += buff.get();
+			}
+			return atoi(number.c_str()) * (-1 * (minus == '-'));
+		}
+
+		std::string getNextString() {
+			std::string ret;
+			while (!iswhitespace(buff.peek())) {
+				ret += buff.get();
+			}
+			return ret;
 		}
 
 		char getNextChar() {
 			return buff.get();
 		}
 
+		void advanceWhitSpace() {
+			while (iswhitespace(buff.peek())) {
+				buff.get();
+			}
+		}
+
 		friend istream& operator >> (istream& stream, int& value) {
 			value = stream.getNextInt();
-			printf(":> wrote into int\n");
+			stream.advanceWhitSpace();
 
 			return stream;
 		}
 
 		friend istream& operator >> (istream& stream, char& value) {
 			value = stream.getNextChar();
-			printf(":> wrote into char\n");
+
+			return stream;
+		}
+
+		friend istream& operator >> (istream& stream, std::string& value) {
+			value = stream.getNextString();
+			stream.advanceWhitSpace();
 
 			return stream;
 		}

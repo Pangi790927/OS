@@ -62,6 +62,15 @@ namespace VGA {
 		_actualize_cursor();
 	}
 
+	void backspace (char mode) {
+		if (_col > 0) {
+			_col--;
+			_char_val_at(_row, _col) = ' ';
+			_char_mode_at(_row, _col) = mode;
+		}
+		_actualize_cursor();
+	}
+
 	void putchar (char c, char mode) {
 		bool can_print = true;
 		

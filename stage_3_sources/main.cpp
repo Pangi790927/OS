@@ -1,4 +1,5 @@
 #include "icxxabi.h"
+#include "vga_stdio.h"
 #include "kstdio.h"
 #include "isr.h"
 #include "error_isr.h"
@@ -14,15 +15,19 @@
 #include "c_asm_func.h"
 #include "kiobuf.h"
 #include "ostream.h"
+#include "istream.h"
+#include "key_translate.h"
 
 /*
 	Posible tasks:
+		* Global constructors
+		* Input key translate to ASCII
 		* File system
-		* Read/Write with DMA
+		* Read/Write with DMA from HDD
+		* support multiple media for boot
 		* VGA Graphics Mode
-		* Memory: paging 
+		* Memory: paging
 		* Task Scheduler
-		* Input functions
 		* Shell
 		* More advanced graphics 
 		* Network Driver
@@ -31,7 +36,6 @@
 int main()
 {
 	kclear_screen();
-	kprintf("Stage 3!\n");
 
 	asm volatile ("cli");
 		set_error_ISR();
@@ -52,16 +56,16 @@ int main()
 
 /*	INITIALIZERS ABOVE ^^^ -------------------------------------------------- */
 {
-	{
-		std::kiobuf<char> buff(256);
-		std::ostream cout(buff);
+	std::kiobuf<char> buff(256);
+	std::ostream cout(buff);
+	std::istream cin(buff);
 
-		cout << "this" << std::endl;
-	}
-	memmanip::printMemory();
+	cout << "Wellcome to Stage 3 of the kernel" << std::endl;
+	cout << "Commands are ready to be typed" << std::endl;
 
 	keyboard::KeyState keyState;
 	keyboard::init2KeyState(keyState);
+	keyboard::KeyTranslator keyTranslate;
 
 	std::deque<uint32> keyList;
 
@@ -71,23 +75,35 @@ int main()
 		if (keyboard::hasNewKey()) {
 			while (keyboard::keyCount()) {
 				using namespace keyboard;
-				
 				uint32 intkey = getKey();
 				uint32 key = keyState.doEvent(intkey);
+				
 				if (key) {
-					if (key & PRESS) {
-						if (!(key & NON_ASCII_KEY))
-							keyList.push_back(key);
-						kprintf("%c", (char)key);
-						
-						if ((char)key == '\n') {
-							for (auto&& keyElem : keyList) {
-								kprintf("%c", (char)(keyElem));
-							}
-							kprintf("\n%d\n", keyList.size());
-							kprintf("\n");
+					char c = 0;
+					if ((char)key == '\b' && (key & PRESS)) {
+						keyList.pop_back();
+						VGA::backspace();
+					}
+					else if ((c = keyTranslate.translate(key))) {
+						if (key & PRESS) {
+							keyList.push_back(c);
+							cout << c;
+							cout.flush();
 						}
 					}
+
+					if ((char)key == '\n' && !(key & NON_ASCII_KEY) && (key & PRESS)) {
+						for (auto&& keyElem : keyList) {
+							buff.readIn((char)(keyElem));	
+						}
+						while (keyList.size())
+							keyList.pop_back();
+						
+						std::string command;
+						cin >> command;
+						cout << command << std::endl;
+					}
+
 					if (key == ESCAPE_PRESS) {
 						kernel_alive = false;
 					}
@@ -97,7 +113,7 @@ int main()
 			keyboard::ackKey();
 		}
 	}
-	kprintf("Tring to exit ... \n");
+	cout << "Tring to exit ... " << std::endl;
 	
 } // this is so the deconstructors are called
 	kprintf("Exiting ... \n");

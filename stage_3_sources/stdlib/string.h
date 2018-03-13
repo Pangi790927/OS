@@ -2,12 +2,15 @@
 #define STRING_H
 
 #include "libft.h"
+#include "vector.h"
 
 namespace std
 {
 	class string {
-		char *internStr;
+	private:
+		char *internStr = NULL;
 		size_t internSize;
+
 	public:
 		string () {
 			internStr = strdup("");
@@ -43,7 +46,15 @@ namespace std
 			internStr = (char *)malloc((n + 1) * sizeof(char));
 			for (int i = 0; i < n; i++)
 				internStr[i] = c;
+			internStr[n] = '\0';
 			internSize = n;
+		}
+
+		string (char c) {
+			internStr = (char *)malloc((2) * sizeof(char));
+			internStr[0] = c;
+			internStr[1] = '\0';
+			internSize = 1;
 		}
 
 		template <typename IteratorType>
@@ -59,8 +70,8 @@ namespace std
 		}
 
 		string (const string&& str) {
-			internStr = std::move(str.internStr);
-			internSize = std::move(str.internSize);
+			internStr = strdup(str.internStr);
+			internSize = str.internSize;
 		}
 
 		~string() {
@@ -76,9 +87,10 @@ namespace std
 		}
 
 		string& operator = (const string&& str) {
-			free(internStr);
-			internStr = std::move(str.internStr);
-			internSize = std::move(str.internSize);
+			if (internStr)
+				free(internStr);
+			internStr = strdup(str.internStr);
+			internSize = str.internSize;
 			return (*this);
 		}
 
@@ -153,8 +165,20 @@ namespace std
 			return string(1, c) + str;
 		}
 
-		char& operator [] (size_t pos);
-	};	
+		char& operator [] (size_t pos) {
+			return internStr[pos];
+		}
+	};
+
+	string to_string (int value);
+	string to_string (long value);
+	string to_string (long long value);
+	string to_string (unsigned value);
+	string to_string (unsigned long value);
+	string to_string (unsigned long long value);
+	string to_string (float value);
+	string to_string (double value);
+	string to_string (long double value);
 }
 
 #endif

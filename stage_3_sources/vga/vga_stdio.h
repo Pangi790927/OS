@@ -12,6 +12,7 @@ namespace VGA {
 	char& 	_char_mode_at (int row, int col);
 	void 	scroll (char mode = WHITE_ON_BLACK);
 	void 	clear_screen (char mode = WHITE_ON_BLACK);
+	void	backspace (char mode = WHITE_ON_BLACK);
 	void 	putchar (char c, char mode = WHITE_ON_BLACK);
 	void 	print (const char *str, char mode = WHITE_ON_BLACK);
 	void 	_put_nbr_base_rec (int number, int base);

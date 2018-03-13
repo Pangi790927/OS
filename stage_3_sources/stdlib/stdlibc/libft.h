@@ -26,6 +26,7 @@ int					isascii(int c);
 int					isalnum(int c);
 int					isdigit(int c);
 int					isalpha(int c);
+int					iswhitespace(char c);
 
 // unsuported __moddi3 __divd3 
 // char				*ft_itoa(int n);
