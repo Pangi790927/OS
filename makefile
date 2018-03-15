@@ -27,7 +27,7 @@ CXX = g++-7
 ASM = nasm
 LD = ld
 
-CXX_FLAGS_2 = -m32 -ffreestanding -fno-rtti -fno-exceptions -std=c++1y -O2 -g
+CXX_FLAGS_2 = -m32 -ffreestanding -fno-rtti -fno-exceptions -std=c++1y -O2
 CXX_FLAGS_3 = -m32 -ffreestanding -fno-rtti -nostartfiles				\
 				-fno-exceptions -std=c++1y -O2
 

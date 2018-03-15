@@ -8,4 +8,6 @@
 #define KERNEL_IN_RAM	0x1000000
 #define HEAP_START		0x2000000
 
+// #define MULTI_CORE
+
 #endif

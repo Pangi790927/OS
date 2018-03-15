@@ -17,20 +17,20 @@
 #include "ostream.h"
 #include "istream.h"
 #include "key_translate.h"
+#include "mutex.h"
 
 /*
 	Posible tasks:
-		* Global constructors
-		* Input key translate to ASCII
 		* File system
 		* Read/Write with DMA from HDD
 		* support multiple media for boot
 		* VGA Graphics Mode
+		* More advanced graphics 
+		* Network Driver
 		* Memory: paging
 		* Task Scheduler
 		* Shell
-		* More advanced graphics 
-		* Network Driver
+		* Global constructors
 */
 
 int main()
