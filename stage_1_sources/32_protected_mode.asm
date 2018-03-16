@@ -1,7 +1,7 @@
 ; ------------------------------------------------------------------------------
 [bits 16]
 
-STAGE_2_OFFSET equ 0x1000
+STAGE_2_OFFSET equ 0xA000
 
 stage_2:
 	cli							; stop intrerupts

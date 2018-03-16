@@ -86,7 +86,7 @@ stage1.bin: stage1
 
 # kernel_stage_2_start.o is directly here because it needs to be the first binary linked
 stage2.bin: stage2 $(STAGE_2_OBJS)
-	$(LD) -e kernel_2 -m elf_i386 -o stage2.bin -Ttext 0x1000 kernel_stage_2_start.o $(STAGE_2_OBJS) --oformat binary
+	$(LD) -e kernel_2 -m elf_i386 -o stage2.bin -Ttext 0xA000 kernel_stage_2_start.o $(STAGE_2_OBJS) --oformat binary
 
 stage3.bin: stage3 $(STAGE_3_OBJS)
 	$(LD) -e kernel_3 -m elf_i386 -o stage3.bin -Ttext 0x1000000 kernel_stage_3_start.o $(STAGE_3_OBJS) --oformat binary
@@ -94,7 +94,7 @@ stage3.bin: stage3 $(STAGE_3_OBJS)
 # stage 1 and 2 will ocupy only 32k or 
 $(OS_IMAGE): stage1.bin stage2.bin stage3.bin
 	cat stage1.bin stage2.bin > stage12.bin
-	dd if=/dev/zero of=stage12  bs=1K  count=32
+	dd if=/dev/zero of=stage12  bs=1K  count=64
 	dd conv=notrunc if=stage12.bin of=stage12
 	cat stage12 stage3.bin > ${OS_IMAGE}
 	rm -f stage12

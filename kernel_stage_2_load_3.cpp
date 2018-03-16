@@ -12,7 +12,7 @@ extern void enable_A20() asm("enable_A20");
 #define str(a) #a
 
 #define RAM_LOCATION 0x1000000
-#define HDD_LOCATION 0x8000					// must be multiple of 512 : ker3 at 0x8000
+#define HDD_LOCATION 0x10000				// must be multiple of 512 : ker3 at 0x10000
 #define KER_SECTOR_COUNT (1 * 2024)				// * 512 is the byte count	
 #define ASM_COMMAND "call " xstr(RAM_LOCATION)
 

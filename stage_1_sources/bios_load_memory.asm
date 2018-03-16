@@ -1,18 +1,19 @@
 ; ------------------------------------------------------------------------------
 ; dh - sectors to read
 ; cl - the starting sector 
+; ch - cylinder number
 ; bx - where to read the data to
 ; dl - the boot drive 
 bios_load_memory:
 	push bp
-	push sp
+	mov bp, sp
+	pusha
 		push dx		;	reading the disk
 			mov ah, 2	;	bios read interupt
 			mov al, dh	;	sectors to read
-			mov ch, 0	;	start from cylinder 0
 			mov dh, 0	;	use head 0
 
-			; will asume 512 sector size because that's that some 
+			; will asume 512 sector size because that's what some 
 			; guy on google said (i feel a litle deja vu)
 
 			int 0x13	;	isue BIOS interupt
@@ -30,7 +31,7 @@ bios_load_memory:
 			
 			jmp $		;	halt
 		.end:
-	pop sp
+	popa
 	pop bp
 	ret
 
