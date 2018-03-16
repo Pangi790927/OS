@@ -3,10 +3,9 @@ VIRTUAL_MACHINE = OS
 OS_HDD = OS.vhd
 OS_IMAGE = os_image
 
-
-DIRS1 = $(shell find stage_1_sources/ -not -path '*/\.*' -type d -printf " %p")
-DIRS2 = $(shell find stage_2_sources/ -not -path '*/\.*' -type d -printf " %p")
-DIRS3 = $(shell find stage_3_sources/ -not -path '*/\.*' -type d -printf " %p")
+DIRS1 = $(shell find stage_1_sources/ -not -path '*/\.*' -type d -print)
+DIRS2 = $(shell find stage_2_sources/ -not -path '*/\.*' -type d -print)
+DIRS3 = $(shell find stage_3_sources/ -not -path '*/\.*' -type d -print)
 INCLUDES1 = $(patsubst %, -I%/, $(DIRS1))
 INCLUDES2 = $(patsubst %, -I%/, $(DIRS2))
 INCLUDES3 = $(patsubst %, -I%/, $(DIRS3))
@@ -112,8 +111,8 @@ $(OS_HDD): $(OS_IMAGE)
 	dd conv=notrunc if=$(OS_IMAGE) of=$(OS_HDD)
 
 clean:
-	find . -type f -name '*.o' -exec rm {} + -print
-	find . -type f -name '*.d' -exec rm {} + -print
-	find . -type f -name '*.o.asm' -exec rm {} + -print
-	find . -type f -name '*.bin' -exec rm {} + -print
+	find . -type f -name '*.o' -delete -print
+	find . -type f -name '*.d' -delete -print
+	find . -type f -name '*.o.asm' -delete -print
+	find . -type f -name '*.bin' -delete -print
 	rm -f os_image
