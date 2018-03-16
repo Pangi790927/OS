@@ -13,14 +13,31 @@ Stages
 	* Stage 2 will load stage 3
 	* Stage 3 will ... (to be completed)
 
+The following should be updated from time to time as we make changes
+
 OS Image
 --------------------------------------------------------------------------------
 ### The OS Image will start with the kernel as such:
-	* 0 - 512 -> Stage 1
-	* 1024 - max 32k -> stage 2
-	* 32k ... -> stage 3
+	* 0 - 511 -> Stage 1, here the MBR should reside along the boot loader
+	* 512 - 1023 -> right now there is just a string
+	* 1024 - 64k -> stage 2
+	* 64k ... -> stage 3
 For testing the image is loaded in a OS.vhs file and run by virtualbox, this
 file won't be uploaded because it has 2 GB.
+
+RAM
+--------------------------------------------------------------------------------
+### RAM is partitioned as such:
+	* 0x0 - not a part of kernel
+	* 0x7c00 - boot loader (its size is 512 bytes andd will be loaded from disk)
+	* 0xA000 + the stack growing downoards, this stack is only for BIOS mode
+	* 0xA000 - the kernel loader (stage 2), maximum 63k
+	* 0x0efffff + the kernel and kernel loader stack, it can grow till 0x100000
+	* 0x1000000 - the kernel - maximum 16 MB
+	* 0x2000000 - the kernel heap
+
+Ignore the following, those are there for me because I am unable to remember
+how to properly make a readme
 
 README HELP TITLE
 --------------------------------------------------------------------------------
