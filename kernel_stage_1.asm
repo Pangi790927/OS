@@ -4,7 +4,7 @@
 
 stage_1:
 	; inits
-	mov bp, 0x8000	; 0x8000 - stack for stage_1 and 1/2 of stage_2
+	mov bp, 0xa000			; 0xa000 - stack for stage_1 and 1/2 of stage_2
 	mov sp, bp
 	mov [BOOT_DRIVE], dl	; saving the boot drive
 
@@ -32,6 +32,16 @@ BOOT_DRIVE:
 
 STAGE_1_MESSAGE:
 	db "Stage 1!", 0
+
+; from 220 to 223 we need to put the timestamp
+times 220-($-$$) db 0
+db 0x80
+db 0x0f
+db 0x0f
+db 0x0f
+
+[bits 16]
+%include "bios_print.asm"
 
 ; we are putting the special number in his place
 times 510-($-$$) db 0

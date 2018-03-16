@@ -1,9 +1,3 @@
-end_of_line:
-	db 0x0d, 0x0a, 0
-
-digits:
-	db '0123456789abcdef'
-
 ; al - character
 bios_print_character:		
 	pusha
@@ -80,3 +74,9 @@ bios_print_end_of_line:
 		call bios_print_const_string
 	popa
 	ret
+
+end_of_line:
+	db 0x0d, 0x0a, 0
+
+digits:
+	db '0123456789abcdef'

@@ -34,8 +34,6 @@ bios_load_memory:
 	pop bp
 	ret
 
-%include "bios_print.asm"
-
-LOAD_ERROR_MESSAGE
+LOAD_ERROR_MESSAGE:
 	db "Could not read sectors from memory", 0
 
