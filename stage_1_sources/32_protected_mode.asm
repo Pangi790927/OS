@@ -18,6 +18,8 @@ stage_2:
 
 [bits 32]
 init_protected:			; a far jump..., it looks prety close to me
+						; flushes CPU pipeline, sets the CS reg
+	; I really don't know why I can't set the cs reg manualy
 	mov ax, DATA_SEG
 	mov ds, ax
 	mov ss, ax
