@@ -1,5 +1,6 @@
 #include "kstdio.h"
 #include "c_asm_func.h"
+#include "icxxabi.h"
 
 int kernel_3() asm("kernel_3");
 int main();

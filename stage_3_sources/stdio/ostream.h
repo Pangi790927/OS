@@ -1,6 +1,7 @@
 #ifndef OSTREAM_H
 #define OSTREAM_H
 
+#include "string.h"
 #include "streambuf.h"
 
 namespace std
@@ -20,6 +21,10 @@ namespace std
 			putString(std::to_string(value));
 		}
 
+		void putUInt (unsigned int value) {
+			putString(std::to_string(value));
+		}
+
 		void put (char c) {
 			buff.put(c);
 		}
@@ -30,6 +35,11 @@ namespace std
 
 		friend ostream& operator << (ostream& stream, int value) {
 			stream.putInt(value);
+			return stream;
+		}
+
+		friend ostream& operator << (ostream& stream, unsigned int value) {
+			stream.putUInt(value);
 			return stream;
 		}
 
@@ -47,18 +57,13 @@ namespace std
 			stream.putString(str);
 			return stream;	
 		}
-	};
-
-	class EndlClass {
-	public:
-		friend ostream& operator << (ostream& stream, const EndlClass& obj) {
-			stream.put('\n');
-			stream.flush();
-			return stream;
+		
+		ostream& operator << (ostream& (*f)(ostream&)) {
+			return f(*this);
 		}
 	};
 
-	EndlClass endl;
+	ostream& endl (ostream& os);
 }
 
 #endif

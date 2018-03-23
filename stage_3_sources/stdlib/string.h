@@ -137,7 +137,8 @@ namespace std
 		string operator + (const string& str) {
 			string newString;
 
-			char *newStr = (char *)malloc((size() + str.size() + 1) * sizeof(char));	
+			char *newStr = (char *)malloc((size() + 
+					str.size() + 1) * sizeof(char));	
 			strncpy(newStr, internStr, size());
 			strncpy(newStr + size(), str.internStr, str.size());
 			newStr[size() + str.size()] = '\0';

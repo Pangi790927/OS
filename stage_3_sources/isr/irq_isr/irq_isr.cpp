@@ -4,7 +4,7 @@
 #include "kstdio.h"
 #include "idt.h"
 #include "isr.h"
-#include "global_defines.h"
+#include "gdt.h"
 
 #include "keyboard.h"
 
@@ -112,20 +112,20 @@ void isr_irq_15 () {kprintf("irq 15\n");}
 
 void set_irq_ISR() {
 	uint8 attr = isr::makeAttr(1, 0, 0, isr::INTR_GATE);
-	isr::addISR(0x20, irq0, CODE_SEL, attr);
-	isr::addISR(0x21, irq1, CODE_SEL, attr);
-	isr::addISR(0x22, irq2, CODE_SEL, attr);
-	isr::addISR(0x23, irq3, CODE_SEL, attr);
-	isr::addISR(0x24, irq4, CODE_SEL, attr);
-	isr::addISR(0x25, irq5, CODE_SEL, attr);
-	isr::addISR(0x26, irq6, CODE_SEL, attr);
-	isr::addISR(0x27, irq7, CODE_SEL, attr);
-	isr::addISR(0x28, irq8, CODE_SEL, attr);
-	isr::addISR(0x29, irq9, CODE_SEL, attr);
-	isr::addISR(0x2a, irq10, CODE_SEL, attr);
-	isr::addISR(0x2b, irq11, CODE_SEL, attr);
-	isr::addISR(0x2c, irq12, CODE_SEL, attr);
-	isr::addISR(0x2d, irq13, CODE_SEL, attr);
-	isr::addISR(0x2e, irq14, CODE_SEL, attr);
-	isr::addISR(0x2f, irq15, CODE_SEL, attr);
+	isr::addISR(0x20, irq0, KERNEL_CODE_SEL, attr);
+	isr::addISR(0x21, irq1, KERNEL_CODE_SEL, attr);
+	isr::addISR(0x22, irq2, KERNEL_CODE_SEL, attr);
+	isr::addISR(0x23, irq3, KERNEL_CODE_SEL, attr);
+	isr::addISR(0x24, irq4, KERNEL_CODE_SEL, attr);
+	isr::addISR(0x25, irq5, KERNEL_CODE_SEL, attr);
+	isr::addISR(0x26, irq6, KERNEL_CODE_SEL, attr);
+	isr::addISR(0x27, irq7, KERNEL_CODE_SEL, attr);
+	isr::addISR(0x28, irq8, KERNEL_CODE_SEL, attr);
+	isr::addISR(0x29, irq9, KERNEL_CODE_SEL, attr);
+	isr::addISR(0x2a, irq10, KERNEL_CODE_SEL, attr);
+	isr::addISR(0x2b, irq11, KERNEL_CODE_SEL, attr);
+	isr::addISR(0x2c, irq12, KERNEL_CODE_SEL, attr);
+	isr::addISR(0x2d, irq13, KERNEL_CODE_SEL, attr);
+	isr::addISR(0x2e, irq14, KERNEL_CODE_SEL, attr);
+	isr::addISR(0x2f, irq15, KERNEL_CODE_SEL, attr);
 }

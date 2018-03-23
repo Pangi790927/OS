@@ -33,7 +33,7 @@
 // unaware of this fact
 
 struct PageDir {
-	uint32 
+	// uint32 
 };
 
 #endif

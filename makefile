@@ -17,8 +17,8 @@ STAGE_2_ASM_OBJS = $(patsubst %.asm, %.o, $(STAGE_2_ASM_SOURCES))
 STAGE_2_CPP_OBJS = $(patsubst %.cpp, %.o, $(STAGE_2_CPP_SOURCES))
 
 # probably most of the files will be here
-STAGE_3_ASM_SOURCES = $(shell find stage_3_sources/ -type f -name "*.asm")
-STAGE_3_CPP_SOURCES = $(shell find stage_3_sources/ -type f -name "*.cpp")
+STAGE_3_ASM_SOURCES = $(shell find stage_3_sources/ -not -path '*/\.*' -type f -name "*.asm")
+STAGE_3_CPP_SOURCES = $(shell find stage_3_sources/ -not -path '*/\.*' -type f -name "*.cpp")
 STAGE_3_ASM_OBJS = $(patsubst %.asm, %.o, $(STAGE_3_ASM_SOURCES))
 STAGE_3_CPP_OBJS = $(patsubst %.cpp, %.o, $(STAGE_3_CPP_SOURCES))
 
@@ -32,13 +32,17 @@ CXX_FLAGS_3 = -m32 -ffreestanding -fno-rtti -nostartfiles				\
 
 CRTBEGIN_OBJ:=$(shell $(CXX) $(CXX_FLAGS_3) -print-file-name=crtbegin.o)
 CRTEND_OBJ:=$(shell $(CXX) $(CXX_FLAGS_3) -print-file-name=crtend.o)
+CRTI_ASM = $(shell find stage_3_sources/ -type f -name "crti.asm")
+CRTN_ASM = $(shell find stage_3_sources/ -type f -name "crtn.asm")
+CRTI_ASM_OBJ = $(patsubst %.asm, %.o, $(CRTI_ASM))
+CRTN_ASM_OBJ = $(patsubst %.asm, %.o, $(CRTN_ASM))
 
 # stage 1 has no objs
 STAGE_2_OBJS = kernel_stage_2_load_3.o									\
 				$(STAGE_2_ASM_OBJS) $(STAGE_2_CPP_OBJS)
-STAGE_3_OBJS = kernel_stage_3.o											\
-				$(STAGE_3_ASM_OBJS) $(STAGE_3_CPP_OBJS)			
-				# $(CRTBEGIN_OBJ) $(CRTEND_OBJ)
+STAGE_3_OBJS =  ${CRTI_ASM_OBJ}	$(CRTBEGIN_OBJ)	kernel_stage_3.o		\
+				$(STAGE_3_ASM_OBJS) $(STAGE_3_CPP_OBJS)					\
+				 $(CRTEND_OBJ) ${CRTN_ASM_OBJ}
 MAKE_ASM := false
 
 re: clean all
@@ -66,6 +70,12 @@ ${STAGE_3_CPP_OBJS}: %.o: %.cpp
         echo "build asm ...";\
     fi
 
+${CRTI_ASM_OBJ}: %.o: %.asm
+	$(ASM) $< -f elf -F stabs -o $@
+
+${CRTN_ASM_OBJ}: %.o: %.asm
+	$(ASM) $< -f elf -F stabs -o $@
+
 # builds stage 1 (the one that must have only 512 bytes)
 stage1:
 	$(ASM) kernel_stage_1.asm -f bin -o kernel_stage_1.o $(INCLUDES1)
@@ -89,7 +99,9 @@ stage2.bin: stage2 $(STAGE_2_OBJS)
 	$(LD) -e kernel_2 -m elf_i386 -o stage2.bin -Ttext 0xA000 kernel_stage_2_start.o $(STAGE_2_OBJS) --oformat binary
 
 stage3.bin: stage3 $(STAGE_3_OBJS)
-	$(LD) -e kernel_3 -m elf_i386 -o stage3.bin -Ttext 0x1000000 kernel_stage_3_start.o $(STAGE_3_OBJS) --oformat binary
+	$(LD) -T stage_3.ld -m elf_i386 -o stage3.elf kernel_stage_3_start.o $(STAGE_3_OBJS)
+	objdump -d stage3.elf -M intel > stage3.o.asm
+	objcopy -O binary stage3.elf stage3.bin
 
 # stage 1 and 2 will ocupy only 32k or 
 $(OS_IMAGE): stage1.bin stage2.bin stage3.bin
@@ -115,4 +127,5 @@ clean:
 	find . -type f -name '*.d' -delete -print
 	find . -type f -name '*.o.asm' -delete -print
 	find . -type f -name '*.bin' -delete -print
+	find . -type f -name '*.elf' -delete -print
 	rm -f os_image

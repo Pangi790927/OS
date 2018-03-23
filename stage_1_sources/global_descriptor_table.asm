@@ -8,9 +8,10 @@
 ; 	gr - granularity -> 0 means 1 byte / 1 means 4KiB
 ; 	sz - size bit -> 0 means 16 bit protected mode / 1 means 32 bits
 
-; access byte: pr | privl x 2 | 1 | ex | dc | rw | ac
+; access byte: pr | privl x 2 | ts | ex | dc | rw | ac
 ; 	pr - present bit -> must be 1 ???
 ; 	privl - privilege -> ring level 0 - kernel .. 3 app level
+; 	ts - must be 0 for tss and ldt
 ; 	ex - executable -> 1 if code from segment can be executed 
 ; 	dc - direction / conforming bit -> direction of growth in data segments (0 means up)
 ; 			-> for code segments 1 tels that less privileged can get here or something
@@ -28,7 +29,7 @@ CODE_GDT:
 	dw 0x0			;	base bits (0:15)
 	db 0x0			;	base bits (16:23)
 	db 10011010b	; 	1 | privl:0 | 1 | ex:1 | dc:0 | rw:1 | ac:0
-	db 11001111b	;	gr:1 | sz:1 | 0 | 0 | limit bits (16:23)
+	db 11001111b	;	gr:1 | sz:1 | 0 | 0 | limit bits (16:19)
 	db 0x0			;	base bits (24:31)
 
 DATA_GDT:
