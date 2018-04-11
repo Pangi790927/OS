@@ -96,7 +96,9 @@ stage1.bin: stage1
 
 # kernel_stage_2_start.o is directly here because it needs to be the first binary linked
 stage2.bin: stage2 $(STAGE_2_OBJS)
-	$(LD) -e kernel_2 -m elf_i386 -o stage2.bin -Ttext 0xA000 kernel_stage_2_start.o $(STAGE_2_OBJS) --oformat binary
+	$(LD) -T stage_2.ld -m elf_i386 -o stage2.elf kernel_stage_2_start.o $(STAGE_2_OBJS)
+	objdump -d stage2.elf -M intel > stage2.o.asm
+	objcopy -O binary stage2.elf stage2.bin
 
 stage3.bin: stage3 $(STAGE_3_OBJS)
 	$(LD) -T stage_3.ld -m elf_i386 -o stage3.elf kernel_stage_3_start.o $(STAGE_3_OBJS)
