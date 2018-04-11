@@ -19,9 +19,7 @@
 #include "key_translate.h"
 #include "mutex.h"
 #include "gdtInit.h"
-
-extern int __setIOPL(int level) asm("__setIOPL");
-extern int __getIOPL() asm("__getIOPL");
+#include "pci.h"
 
 /*
 	Tasks:
@@ -70,6 +68,8 @@ void printUserMode() {
 
 	cout << "Wellcome to user mode" << std::endl;
 	cout << "Commands are ready to be typed" << std::endl;
+
+	pci::printBusses();
 
 	keyboard::KeyState keyState;
 	keyboard::init2KeyState(keyState);
@@ -159,7 +159,7 @@ int main()
 	__setIOPL(3);
 
 	switchToRing3(USER_DATA_SEL | 3, USER_CODE_SEL | 3,
-	K_STACK_START, (uint32)&printUserMode);
+			K_STACK_START, (uint32)&printUserMode);
 
 	// we will never get here, 
 	// 
@@ -167,5 +167,7 @@ int main()
 	// 
 	// 
 	// usually ...
+	while (true)
+		asm volatile ("");
 	return 0;
 }

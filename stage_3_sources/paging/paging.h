@@ -6,23 +6,8 @@
 // Kernel paging:
 // 0:0xc0000000 
 // | 0xc0000000:inf the kernel
-// 
-// kernel: 
-// 0:1M kernel stack 
-// | 1M:a kernel code 
-// | a:b kernel data, paging, page management, process data
-// | heap
 
-// Program paging:
-// 0:16M paging, buffers, program data
-// | 16M:32M code
-// | 32M:48M stack
-// | 48M:0xc0000000 heap
-// | 0xc0000000:inf the kernel
-
-// to reload the kernel page you can find it at adrress a
-// a will be anounced
-
+// For programs code:
 // 		No memory will be allocated from the begining
 // the paging will allocate mostly the paging directory,
 // because the kernell will be loaded as 4M chunks,
@@ -32,8 +17,21 @@
 // kernell page memory and the program execution will continue
 // unaware of this fact
 
-struct PageDir {
-	// uint32 
-};
+namespace paging
+{
+	const uint32 CR0_PG_BIT = 0x80000000;
+	const uint32 CR0_PE_BIT = 0x80000001;
+	const uint32 CR4_PSE_BIT = 0x00000010;
+
+	const uint32 PAGE_SIZE_BIT =		0b10000000;
+	const uint32 ACCESSED_BIT =			0b100000;
+	const uint32 CACHE_DISABLE_BIT =	0b10000;
+	const uint32 WRITE_THROUGH_BIT =	0b1000;
+	const uint32 USER_BIT =				0b100;
+	const uint32 READ_WRITE_BIT =		0b10;
+	const uint32 PRESENT_BIT =			0b1;
+
+	void init_kernel_paging();	
+}
 
 #endif

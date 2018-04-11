@@ -37,7 +37,9 @@ RAM
 	* 0x1000000 - the kernel - maximum 16 MB
 	* 0x2000000 - kernel structures:
 		- paging 0x2000000
+		- physical pages
 	* 0x3000000 - the kernel heap
+	* 0x4000000 - kernel end, other programs
 
 Ignore the following, those are there for me because I am unable to remember
 how to properly make a readme

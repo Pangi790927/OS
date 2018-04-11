@@ -22,10 +22,35 @@
 */
 #define KERNEL_IN_RAM		0x1000000
 
+/* Must be updated here
+** also updated in README.md
+*/
+#define K_PAGING			0x2000000
+
+/* Must be updated here
+** also updated in README.md
+*/
+#define PHYS_PAGES_START	0x2401000
+
 /* Must be updated here and not overlap with others
 ** also updated in README.md
 */
 #define HEAP_START			0x3000000	// 48Mb - 64Mb
+
+/* Must be updated here
+** also updated in README.md
+*/
+#define KERNEL_END			0x4000000
+
+/* Must be updated here
+** also updated in README.md
+*/
+#define RAM_END				0x4000000
+
+/* Must be updated here
+** Must be 4MiB aligned
+*/
+#define V_KERNEL_START		0xc0000000
 
 /* Must be uncommented if the you want MULTI_CORE support
 ** !!! UNAVAILABLE FOR NOW !!!
