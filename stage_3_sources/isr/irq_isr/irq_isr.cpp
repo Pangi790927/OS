@@ -8,6 +8,8 @@
 
 #include "keyboard.h"
 
+extern void __getStack(uint32 *vec, uint32 count) asm("__getStack");
+
 extern void irq0 () asm ("irq0");
 extern void irq1 () asm ("irq1");
 extern void irq2 () asm ("irq2");
@@ -78,12 +80,19 @@ void irq_isr::aknowledge_irq_slave() {
 void isr_irq_0 () {
 	static int time = 0;
 	time++;
-	// printf("irq 0, time: %d\n", time++);
 	irq_isr::aknowledge_irq_master();
 }
 
 void isr_irq_1 () {
 	// printf("irq 1\n");
+	static const int stack_count = 20;
+	uint32 vec[stack_count];
+	kprintf("addr: %x\n", (uint32)vec);
+	__getStack(vec, stack_count);
+	for (int i = 0; i < stack_count; ++i) {
+		kprintf("i:%d: val: %x\n", i, vec[i]);
+	}
+	kprintf("--------------------\n");
 	if (keyboard::checkInit())
 		keyboard::irq(inb(keyboard::DATA_PORT));
 	// printf("%d\n", result);

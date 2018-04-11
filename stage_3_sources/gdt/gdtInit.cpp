@@ -6,6 +6,10 @@ gdt::Descriptor descriptorsTable[32];
 gdt::DescriptorPtr descriptorsTablePtr;
 gdt::tss ktaskStateSegment;
 
+gdt::tss *gdt::get_tss_addr() {
+	return &ktaskStateSegment;
+}
+
 gdt::Descriptor gdt::getAllRAMSeg() {
 	Descriptor segment;
 
@@ -18,7 +22,7 @@ gdt::Descriptor gdt::getAllRAMSeg() {
 	segment.setReadWrite(true);
 	segment.setAccessBit(false);	// must be 0
 	segment.setGranularity(true);	// page granularity
-	segment.setMode(true);			// 32 bit mode	
+	segment.set32Mode(true);			// 32 bit mode	
 
 	return segment;
 }
@@ -35,8 +39,9 @@ gdt::Descriptor gdt::makeTSSSeg (gdt::tss *addr) {
 	segment.setConfDir(false);
 	segment.setReadWrite(false);		// this sets busy/not for TSS
 	segment.setAccessBit(true);			// must be true for TSS
+	
 	segment.setGranularity(false);
-	segment.setMode(true);
+	segment.set32Mode(false);
 
 	return segment;	
 }
@@ -47,9 +52,10 @@ void gdt::init_gdt() {
 	gdt::Descriptor kernelData = getAllRAMSeg();
 	gdt::Descriptor userCode = getAllRAMSeg();
 	gdt::Descriptor userData = getAllRAMSeg();
+	gdt::Descriptor tssDesc;
 
-	ktaskStateSegment.init(K_STACK_START, KERNEL_DATA_SEL);
-	gdt::Descriptor tssDesc = makeTSSSeg(&ktaskStateSegment);
+	ktaskStateSegment.init(K_INT_STACK_START, KERNEL_DATA_SEL);
+	tssDesc = makeTSSSeg(&ktaskStateSegment);
 
 	nullDesc.zero();
 	descriptorsTable[0] = nullDesc;

@@ -1,5 +1,5 @@
-[global switchToRing0]
-switchToRing0:
+[global switchToRing3]
+switchToRing3:
 	push ebp
 	mov ebp, esp
 		cli 
@@ -16,7 +16,7 @@ switchToRing0:
 
 		push dword eax
 		push dword ecx
-		pushfd
+		pushf
 		or dword [esp], 0x200 	; Set IF in EFLAGS so that 
 								; interrupts will be reenabled in user mode
 		push dword ebx

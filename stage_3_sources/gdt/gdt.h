@@ -86,7 +86,7 @@ namespace gdt
 		uint8	getAccess() const;
 
 		void	setGranularity (bool paging = true);
-		void	setMode (bool mode = true);
+		void	set32Mode (bool mode = true);
 
 		bool	getGranularity() const;
 		bool	getMode() const;

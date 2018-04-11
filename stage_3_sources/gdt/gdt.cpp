@@ -110,7 +110,7 @@ void gdt::Descriptor::setGranularity (bool paging) {
 	flags_limitHi = flags_limitHi | ((uint8)paging << 7);
 }
 
-void gdt::Descriptor::setMode (bool mode) {
+void gdt::Descriptor::set32Mode (bool mode) {
 	flags_limitHi = flags_limitHi & 0b1011'1111;
 	flags_limitHi = flags_limitHi | ((uint8)mode << 6);
 }
@@ -126,10 +126,21 @@ bool gdt::Descriptor::getMode() const {
 std::ostream& operator << (std::ostream& stream, const gdt::Descriptor& arg) {
 	stream << "base: " << arg.getBase() << std::endl;
 	stream << "limit: " << arg.getLimit() << std::endl;
-	stream << "Priv: " << arg.getPrivilege() 
-			<< " Exec: " << arg.getExecutable() 
-			<< " CoDi: " << arg.getConfDir() 
+	stream << "Priv: " << arg.getPrivilege()
+			<< " Tss: " << arg.getTss()
+			<< " Exec: " << arg.getExecutable()
+			<< " CoDi: " << arg.getConfDir()
+			<< " RW: " << arg.getReadWrite()
 			<< " AccesedBit: " << arg.getAccessBit() << std::endl;
+	
+	uint8 acc = arg.getAccess();
+	uint8 mask = 128;
+	while (mask) {
+		stream << (bool)(mask & acc);
+		mask = mask >> 1;
+	}
+	stream << std::endl;
+
 	stream << "Gran: " << arg.getGranularity()
  			<< " Mode: " << arg.getMode() << std::endl;
 	return stream;

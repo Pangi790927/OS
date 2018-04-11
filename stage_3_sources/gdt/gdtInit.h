@@ -14,6 +14,7 @@ namespace gdt
 	// code and data are the same as the stage_1 ones
 	// so we will not need to reset segment registers
 	void load_gdt();
+	gdt::tss *get_tss_addr();
 }
 
 #endif

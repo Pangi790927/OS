@@ -32,9 +32,12 @@ RAM
 	* 0x7c00 - boot loader (its size is 512 bytes andd will be loaded from disk)
 	* 0xA000 + the stack growing downoards, this stack is only for BIOS mode
 	* 0xA000 - the kernel loader (stage 2), maximum 63k
-	* 0x0efffff + the kernel and kernel loader stack, it can grow till 0x100000
+	* 0x0e00000 + the kernel and kernel loader stack, it can grow till 0x700000
+		from 0x700000 to 0x100000 there is the interrupt stack
 	* 0x1000000 - the kernel - maximum 16 MB
-	* 0x2000000 - the kernel heap
+	* 0x2000000 - kernel structures:
+		- paging 0x2000000
+	* 0x3000000 - the kernel heap
 
 Ignore the following, those are there for me because I am unable to remember
 how to properly make a readme

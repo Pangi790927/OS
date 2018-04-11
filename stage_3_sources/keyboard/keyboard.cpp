@@ -58,7 +58,7 @@ void keyboard::init() {
 	outb(COMMAND_PORT, 0x60);
 
 	waitCanWrite();
-	outb(DATA_PORT, conf & 0b1011'1111);
+	outb(DATA_PORT, conf & 0b10111111);
 	
 	// waitCanWrite();
 	// outb(COMMAND_PORT, 0xAE);

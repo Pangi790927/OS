@@ -20,7 +20,13 @@
 #include "mutex.h"
 #include "gdtInit.h"
 
+extern int __setIOPL(int level) asm("__setIOPL");
+extern int __getIOPL() asm("__getIOPL");
+
 /*
+	Tasks:
+		* Memory: paging
+		* Task Scheduler
 	Posible tasks:
 		* File system
 		* Read/Write with DMA from HDD
@@ -28,8 +34,6 @@
 		* VGA Graphics Mode
 		* More advanced graphics 
 		* Network Driver
-		* Memory: paging
-		* Task Scheduler
 		* Shell
 		* Global constructors
 */
@@ -38,6 +42,7 @@ extern int _init() asm("_init");
 extern int _fini() asm("_fini");
 
 int constCount = 0;
+
 class HasConstructor {
 public:
 	HasConstructor() {
@@ -53,75 +58,18 @@ public:
 	~HasConstructor () {}
 };
 
+extern void switchToRing3 (int dataSel, int codeSel, int stack, int instrPtr)
+		asm ("switchToRing3");
+
 void printUserMode() asm ("printUserMode");
-extern void switchToRing0 (int dataSel, int codeSel, int stack, int instrPtr)
-		asm ("switchToRing0");
 
 void printUserMode() {
-	while (true)
-		asm volatile ("nop");
-}
-
-int main()
-{
-	kclear_screen();
-
-	gdt::init_gdt();
-	gdt::load_gdt();
-	gdt::flush_tss(KERNEL_TSS_SEL | 3);
-
-	memmanip::init((void *)HEAP_START);
-	
-	// _init(); // !@#$ global constructors don't work
-
-	asm volatile ("cli");
-		set_error_ISR();
-		set_irq_ISR();
-		
-		idt::loadIDT();
-		// 
-		irq_isr::remap();
-		// irq_isr::sendMasterMask(0b1111'1100);
-		irq_isr::sendSlaveMask(0xff);
-		
-		keyboard::init();
-		
-		pit::initDefault(1000);
-	asm volatile ("sti");
-
-/*	INITIALIZERS ABOVE ^^^ -------------------------------------------------- */
-{
 	std::kiobuf<char> buff(256);
 	std::ostream cout(buff);
 	std::istream cin(buff);
 
-	cout << "Wellcome to Stage 3 of the kernel" << std::endl;
+	cout << "Wellcome to user mode" << std::endl;
 	cout << "Commands are ready to be typed" << std::endl;
-
-	// printUserMode();
-
-	// asm ("int $6");
-	// switching to user mode ??? :
-	switchToRing0(USER_DATA_SEL | 3, USER_CODE_SEL | 3,
-			K_STACK_START, (uint32)&printUserMode);
-
-	// kprintf("%x\n", K_STACK_START);
-
-	// cout << "Null:" << std::endl;
-	// cout << gdt::entry(0) << std::endl;
-
-	// cout << "K_Code:" << std::endl;
-	// cout << gdt::entry(1) << std::endl;
-
-	// cout << "K_Data:" << std::endl;
-	// cout << gdt::entry(2) << std::endl;
-
-	// cout << "U_Code:" << std::endl;
-	// cout << gdt::entry(3) << std::endl;
-
-	// cout << "U_Data:" << std::endl;
-	// cout << gdt::entry(4) << std::endl;
-
 
 	keyboard::KeyState keyState;
 	keyboard::init2KeyState(keyState);
@@ -176,10 +124,48 @@ int main()
 		}
 	}
 	cout << "Tring to exit ... " << std::endl;
-	
-} // this is so the deconstructors are called
-	// _fini();
+
 	kprintf("Exiting ... \n");
 	outb(0xf4, 0x00);
+}
+
+int main()
+{
+	kclear_screen();
+
+	gdt::init_gdt();
+	gdt::load_gdt();
+	gdt::flush_tss(KERNEL_TSS_SEL | 3);
+
+	memmanip::init((void *)HEAP_START);
+	
+	// _init(); // !@#$ global constructors don't work
+
+	asm volatile ("cli");
+		set_error_ISR();
+		set_irq_ISR();
+		
+		idt::loadIDT();
+
+		irq_isr::remap();
+		irq_isr::sendMasterMask(0b1111'1100);
+		irq_isr::sendSlaveMask(0xff);
+		
+		keyboard::init();
+		
+		pit::initDefault(1000);
+	asm volatile ("sti");
+
+	__setIOPL(3);
+
+	switchToRing3(USER_DATA_SEL | 3, USER_CODE_SEL | 3,
+	K_STACK_START, (uint32)&printUserMode);
+
+	// we will never get here, 
+	// 
+	// 
+	// 
+	// 
+	// usually ...
 	return 0;
 }
