@@ -3,6 +3,7 @@
 
 #include "streambuf.h"
 #include "libft.h"
+#include "string.h"
 
 namespace std
 {
@@ -44,8 +45,8 @@ namespace std
 		}
 
 		friend istream& operator >> (istream& stream, int& value) {
-			value = stream.getNextInt();
 			stream.advanceWhitSpace();
+			value = stream.getNextInt();
 
 			return stream;
 		}
@@ -57,12 +58,15 @@ namespace std
 		}
 
 		friend istream& operator >> (istream& stream, std::string& value) {
-			value = stream.getNextString();
 			stream.advanceWhitSpace();
+			value = stream.getNextString();
 
 			return stream;
 		}
 	};
+
+	istream& getline (istream& stream, std::string& str);
+	istream& getline (istream& stream, std::string& str, char delim);
 }
 
 #endif

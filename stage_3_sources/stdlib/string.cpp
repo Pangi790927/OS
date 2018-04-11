@@ -78,3 +78,34 @@ std::string std::to_string (long double value) {
 	kprintf("to_string ::long double::\n");
 	return result;
 }
+
+bool std::has_char (const std::string &str, char c) {
+	for (int i = 0; i < str.size(); i++)
+		if (str[i] == c)
+			return true;
+	return false;
+}
+
+std::vector<std::string> std::tokenize (const std::string& str, std::string split) {
+	std::vector<string> tokens;
+	int k = 0;
+	int i = 0;
+	bool valid = false;
+
+	if (str.size() > 0 && !has_char(split, str[0]))
+		valid = true;
+	for (i = 0; i < str.size(); i++) {
+		if (has_char(split, str[i])) {
+			if (valid)
+				tokens.push_back(string(str, k, i - k));
+			k = i;
+			valid = false;
+		}
+		else {
+			valid = true;
+		}
+	}
+	if (valid)
+		tokens.push_back(string(str, k, i - k));
+	return tokens;
+}

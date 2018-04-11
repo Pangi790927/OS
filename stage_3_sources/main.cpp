@@ -39,25 +39,16 @@
 extern int _init() asm("_init");
 extern int _fini() asm("_fini");
 
-int constCount = 0;
-
-class HasConstructor {
-public:
-	HasConstructor() {
-		kclear_screen();
-		constCount++;
-		kprintf("Constructed! : %d\n", constCount);
-	}
-	HasConstructor (const HasConstructor& other) {}
-	HasConstructor (const HasConstructor&& other) {}
-	HasConstructor& operator = (const HasConstructor& other) {}
-	HasConstructor& operator = (const HasConstructor&& other) {}
-	
-	~HasConstructor () {}
-};
-
 extern void switchToRing3 (int dataSel, int codeSel, int stack, int instrPtr)
 		asm ("switchToRing3");
+
+void hexdump (std::vector<std::string> args) {
+	if (args.size() != 3) {
+		kprintf("hexdump address size\n");
+		return ;
+	}
+	kprintf("WIP\n");
+}
 
 void printUserMode() asm ("printUserMode");
 
@@ -69,13 +60,13 @@ void printUserMode() {
 	cout << "Wellcome to user mode" << std::endl;
 	cout << "Commands are ready to be typed" << std::endl;
 
-	pci::printBusses();
-
 	keyboard::KeyState keyState;
 	keyboard::init2KeyState(keyState);
 	keyboard::KeyTranslator keyTranslate;
 
 	std::deque<uint32> keyList;
+	cout << "os$ ";
+	cout.flush();
 
 	bool kernel_alive = true;
 	while (kernel_alive) {
@@ -89,8 +80,11 @@ void printUserMode() {
 				if (key) {
 					char c = 0;
 					if ((char)key == '\b' && (key & PRESS)) {
-						keyList.pop_back();
-						VGA::backspace();
+						if (keyList.size()) {
+							keyList.pop_back();
+							VGA::backspace();
+						}
+
 					}
 					else if ((c = keyTranslate.translate(key))) {
 						if (key & PRESS) {
@@ -110,8 +104,27 @@ void printUserMode() {
 							keyList.pop_back();
 						
 						std::string command;
-						cin >> command;
-						cout << command << std::endl;
+						std::getline(cin, command);
+
+						auto tokenVec = tokenize(command, " ");
+						if (tokenVec.size() != 0) {
+							if (tokenVec[0] == "pci")
+								pci::printBusses();
+							else if (tokenVec[0] == "clear")
+								kclear_screen();
+							else if (tokenVec[0] == "memprint")
+								memmanip::printMemory();
+							else if (tokenVec[0] == "hexdump")
+								hexdump(tokenVec);
+							else
+								cout << "command not found: " << tokenVec[0] << std::endl;
+							cout << "os$ ";
+							cout.flush();
+						}
+						else {
+							cout << "os$ ";
+							cout.flush();
+						}
 					}
 
 					if (key == ESCAPE_PRESS) {
@@ -138,7 +151,7 @@ int main()
 	gdt::flush_tss(KERNEL_TSS_SEL | 3);
 
 	memmanip::init((void *)HEAP_START);
-	
+
 	// _init(); // !@#$ global constructors don't work
 
 	asm volatile ("cli");

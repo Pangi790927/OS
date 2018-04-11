@@ -24,7 +24,7 @@ STAGE_3_CPP_OBJS = $(patsubst %.cpp, %.o, $(STAGE_3_CPP_SOURCES))
 
 CXX = g++-7
 ASM = nasm
-LD = ld
+# LD = ld
 
 CXX_FLAGS_2 = -m32 -ffreestanding -fno-rtti -fno-exceptions -std=c++1y -O2
 CXX_FLAGS_3 = -m32 -ffreestanding -fno-rtti -nostartfiles				\

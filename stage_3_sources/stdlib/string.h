@@ -169,6 +169,10 @@ namespace std
 		char& operator [] (size_t pos) {
 			return internStr[pos];
 		}
+
+		const char& operator [] (size_t pos) const {
+			return internStr[pos];
+		}
 	};
 
 	string to_string (int value);
@@ -180,6 +184,9 @@ namespace std
 	string to_string (float value);
 	string to_string (double value);
 	string to_string (long double value);
+
+	bool has_char (const string &str, char c);
+	std::vector<string> tokenize (const string& str, string tokens);
 }
 
 #endif
