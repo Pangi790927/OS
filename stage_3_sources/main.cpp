@@ -20,9 +20,11 @@
 #include "mutex.h"
 #include "gdtInit.h"
 #include "pci.h"
+#include "boot_data.h"
 
 /*
 	Tasks:
+		* Fix bug
 		* Memory: paging
 		* Task Scheduler
 	Posible tasks:
@@ -47,6 +49,7 @@ void hexdump (std::vector<std::string> args) {
 		kprintf("hexdump address size\n");
 		return ;
 	}
+	/// strange bug here ... 
 	kprintf("WIP\n");
 }
 
@@ -84,7 +87,6 @@ void printUserMode() {
 							keyList.pop_back();
 							VGA::backspace();
 						}
-
 					}
 					else if ((c = keyTranslate.translate(key))) {
 						if (key & PRESS) {
@@ -116,6 +118,11 @@ void printUserMode() {
 								memmanip::printMemory();
 							else if (tokenVec[0] == "hexdump")
 								hexdump(tokenVec);
+							else if (tokenVec[0] == "exit")
+								kernel_alive = false;
+							else if (tokenVec[0] == "ramsize")
+								cout << boot::get_ram_size() / 1024 / 1024 <<
+										"Mb" << std::endl;
 							else
 								cout << "command not found: " << tokenVec[0] << std::endl;
 							cout << "os$ ";

@@ -2,6 +2,7 @@
 #include "Types.h"
 #include "c_asm_func.h"
 #include "global_defines.h"
+#include "boot_data.h"
 
 void paging::init_kernel_paging() {
 	uint32 *kernel_page_dir = (uint32 *)K_PAGING;

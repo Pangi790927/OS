@@ -41,6 +41,10 @@ RAM
 	* 0x3000000 - the kernel heap
 	* 0x4000000 - kernel end, other programs
 
+### Useful RAM locations:
+	* 0x500:0x503 - ram size as returned by mov ax, 0xE801; int 0x15;
+		ax is at 0x500 and bx at 0x502 (ax + bx * 64 is size in KB)
+
 Ignore the following, those are there for me because I am unable to remember
 how to properly make a readme
 

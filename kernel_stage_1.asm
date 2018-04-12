@@ -18,6 +18,10 @@ stage_1:
 	mov dl, [BOOT_DRIVE]	; 	are there any computers who might throw it?
 	call bios_load_memory	; if it fails it will halt 
 
+	call get_ram_size
+	mov word [0x00000500], ax
+	mov word [0x00000502], bx
+	
 	; entering protected mode, this will call kernel_2 later on
 	call stage_2
 
@@ -27,6 +31,7 @@ stage_1:
 BOOT_DRIVE:
 	db 0
 
+%include "get_ram_size.asm"
 %include "32_protected_mode.asm"
 
 STAGE_1_MESSAGE:
