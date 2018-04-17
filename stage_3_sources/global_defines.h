@@ -6,51 +6,54 @@
 */
 #define KERNEL_ON_HDD		0x10000
 
-/* Must be updated here and in stage_1_sources/32_protected_mode.asm
+/* Must be updated here
+** Must be 4MiB aligned
+*/
+#define V_KERNEL_BASE		0xc0000000
+
+/* Must be updated here and in kernel_stage_3_start.asm
 ** The stack bellow might also need an update
 ** also updated in README.md
 */
 #define K_STACK_START		0x0e00000
+#define V_K_STACK_START		(K_STACK_START + V_KERNEL_BASE)
 
 /* Must be updated here and be part of K_STACK_START
 ** also updated in README.md
 */
-#define K_INT_STACK_START	0x0700000
+#define K_INT_STACK_START	0x0a00000
+#define V_K_INT_STACK_START	(K_INT_STACK_START + V_KERNEL_BASE)
 
-/* Must be updated here and in kernel_stage_2_load_3.cpp
+/* Must be updated here 
 ** also updated in README.md
+** linker should be updated with the virtual memory
 */
-#define KERNEL_IN_RAM		0x1000000
-
-/* Must be updated here
-** also updated in README.md
-*/
-#define K_PAGING			0x2000000
+#define KERNEL_START		0x01000000
+#define V_KERNEL_START		(0xc1000000)
 
 /* Must be updated here
 ** also updated in README.md
 */
-#define PHYS_PAGES_START	0x2401000
+#define K_PAGING			0x100000
+#define V_K_PAGING			(K_PAGING + V_KERNEL_BASE)
+
+/* Must be updated here
+** also updated in README.md
+*/
+#define PHYS_PAGES_START	0x2000000
+#define V_PHYS_PAGES_START	(PHYS_PAGES_START + V_KERNEL_BASE)
 
 /* Must be updated here and not overlap with others
 ** also updated in README.md
 */
 #define HEAP_START			0x3000000	// 48Mb - 64Mb
+#define V_HEAP_START		(HEAP_START + V_KERNEL_BASE)
 
 /* Must be updated here
 ** also updated in README.md
 */
 #define KERNEL_END			0x4000000
-
-/* Must be updated here
-** also updated in README.md
-*/
-#define RAM_END				0x4000000
-
-/* Must be updated here
-** Must be 4MiB aligned
-*/
-#define V_KERNEL_START		0xc0000000
+#define V_KERNEL_END		(KERNEL_END + V_KERNEL_BASE)
 
 /* Must be uncommented if the you want MULTI_CORE support
 ** !!! UNAVAILABLE FOR NOW !!!
@@ -60,5 +63,6 @@
 /* Must be updated here in README and in kernel_stage_1.asm
 */
 #define RAM_SIZE_LOCATION	0x00000500
+#define V_RAM_SIZE_LOCATION	(RAM_SIZE_LOCATION + V_KERNEL_BASE)
 
 #endif

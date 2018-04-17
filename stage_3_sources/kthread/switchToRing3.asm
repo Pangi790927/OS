@@ -2,7 +2,7 @@
 switchToRing3:
 	push ebp
 	mov ebp, esp
-		cli 
+		cli
 
 		mov eax, [ebp + 8]	; user data segment
 		mov ebx, [ebp + 12]	; user code segment

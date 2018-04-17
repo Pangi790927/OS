@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
 VIRTUAL_MACHINE = OS
-OS_HDD = OS.vhd
+OS_HDD = OS.img
 OS_IMAGE = os_image
 
 DIRS1 = $(shell find stage_1_sources/ -not -path '*/\.*' -type d -print)
@@ -117,8 +117,10 @@ $(OS_IMAGE): stage1.bin stage2.bin stage3.bin
 run: $(OS_HDD)
 	qemu-system-i386 $(OS_HDD) -device isa-debug-exit,iobase=0xf4,iosize=0x04
 
-rerun: clean $(OS_HDD)
-	qemu-system-i386 $(OS_HDD) -device isa-debug-exit,iobase=0xf4,iosize=0x04
+runb: $(OS_HDD)
+	bochs -q
+
+rerun: clean run
 
 # copy the kernel image on the vhd
 $(OS_HDD): $(OS_IMAGE)

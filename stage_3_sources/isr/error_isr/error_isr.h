@@ -5,6 +5,7 @@
 
 struct err_reg_isr
 {
+	uint32 edi, esi, ebp, esp, ebx, edx, ecx, eax;	// saved by us with pusha
 	uint32 int_no;									// interr no
 	uint32 err_code;								// err code
 	uint32 eip, cs, eflags, useresp, ss;	 		// Pushed by interrupt

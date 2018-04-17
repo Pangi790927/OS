@@ -21,6 +21,7 @@
 #include "gdtInit.h"
 #include "pci.h"
 #include "boot_data.h"
+#include "kiostream.h"
 
 /*
 	Tasks:
@@ -44,32 +45,106 @@ extern int _fini() asm("_fini");
 extern void switchToRing3 (int dataSel, int codeSel, int stack, int instrPtr)
 		asm ("switchToRing3");
 
-void hexdump (std::vector<std::string> args) {
+void hexdump (std::vector<std::string> &args) {
 	if (args.size() != 3) {
 		kprintf("hexdump address size\n");
 		return ;
 	}
-	/// strange bug here ... 
-	kprintf("WIP\n");
+	uint8 *address = (uint8 *)atoi(args[1].c_str());
+	uint32 size = atoi(args[2].c_str());
+	uint32 printedCount = 0;
+
+	std::string last = "";
+	std::string current = "";
+	bool printedStar = false;
+
+	char hex[] = "0123456789abcdef";
+	auto printNext = [&]() {
+		if (printedCount != size) {
+			current += hex[(address[printedCount] >> 4) & 0xf];
+			current += hex[address[printedCount] & 0xf];
+			printedCount++;
+		}
+	};
+	auto hexToStrPadded = [&](uint32 number, int padding) {
+		std::string strNumber;
+
+		while (number) {
+			strNumber = hex[number % 16] + strNumber;
+			number /= 16;
+			padding--;
+		}
+		while (padding > 0) {
+			strNumber = "0" + strNumber;
+			padding--;
+		}
+		return strNumber;
+	};
+	while (printedCount != size) {
+		for (int i = 0; i < 8 && printedCount != size; i++) {
+			current += " ";
+			printNext();
+			printNext();
+		}
+		if (current == last) {
+			if (!printedStar) {
+				printedStar = true;
+				std::cout << "*" << std::endl;
+			}
+		}
+		else {
+			last = current;
+			std::cout << hexToStrPadded(printedCount / 16, 8) << "0";
+			std::cout << current << std::endl;
+			printedStar = false;
+		}
+		current = "";
+	}
+	/// strange bug here if args is not a reference 
+}
+
+bool commandExecute (std::vector<std::string> &args) {
+	if (args[0] == "pci")
+		pci::printBusses();
+	else if (args[0] == "clear")
+		kclear_screen();
+	else if (args[0] == "memprint")
+		memmanip::printMemory();
+	else if (args[0] == "hexdump")
+		hexdump(args);
+	else if (args[0] == "exit")
+		return false;
+	else if (args[0] == "ramsize")
+		std::cout << " * " << boot::get_ram_size() / 1024 / 1024 <<
+				"Mb" << std::endl;
+	else if (args[0] == "help") {
+		std::cout << " * pci        - print pci status" << std::endl;
+		std::cout << " * clear      - clears the screen" << std::endl;
+		std::cout << " * memprint   - prints heap memory information" << std::endl;
+		std::cout << " * hexdump    - print memory at "
+				"address: hexdump [addr] [size]" << std::endl;
+		std::cout << " * exit       - closes the computer" << std::endl;
+		std::cout << " * ramsize    - print the size of RAM" << std::endl;
+		std::cout << " * help       - prints this help" << std::endl;
+	}
+	else
+		std::cout << "command not found: " << args[0] << std::endl;
+	return true;
 }
 
 void printUserMode() asm ("printUserMode");
 
 void printUserMode() {
-	std::kiobuf<char> buff(256);
-	std::ostream cout(buff);
-	std::istream cin(buff);
-
-	cout << "Wellcome to user mode" << std::endl;
-	cout << "Commands are ready to be typed" << std::endl;
+	std::cout << "Wellcome to user mode" << std::endl;
+	std::cout << "Commands are ready to be typed" << std::endl;
 
 	keyboard::KeyState keyState;
 	keyboard::init2KeyState(keyState);
 	keyboard::KeyTranslator keyTranslate;
 
 	std::deque<uint32> keyList;
-	cout << "os$ ";
-	cout.flush();
+	std::cout << "os$ ";
+	std::cout.flush();
 
 	bool kernel_alive = true;
 	while (kernel_alive) {
@@ -91,8 +166,8 @@ void printUserMode() {
 					else if ((c = keyTranslate.translate(key))) {
 						if (key & PRESS) {
 							keyList.push_back(c);
-							cout << c;
-							cout.flush();
+							std::cout << c;
+							std::cout.flush();
 						}
 					}
 
@@ -100,37 +175,24 @@ void printUserMode() {
 							&& (key & PRESS))
 					{
 						for (auto&& keyElem : keyList) {
-							buff.readIn((char)(keyElem));	
+							std::buff.readIn((char)(keyElem));	
 						}
 						while (keyList.size())
 							keyList.pop_back();
 						
 						std::string command;
-						std::getline(cin, command);
+						std::getline(std::cin, command);
 
 						auto tokenVec = tokenize(command, " ");
 						if (tokenVec.size() != 0) {
-							if (tokenVec[0] == "pci")
-								pci::printBusses();
-							else if (tokenVec[0] == "clear")
-								kclear_screen();
-							else if (tokenVec[0] == "memprint")
-								memmanip::printMemory();
-							else if (tokenVec[0] == "hexdump")
-								hexdump(tokenVec);
-							else if (tokenVec[0] == "exit")
+							if (!commandExecute(tokenVec))
 								kernel_alive = false;
-							else if (tokenVec[0] == "ramsize")
-								cout << boot::get_ram_size() / 1024 / 1024 <<
-										"Mb" << std::endl;
-							else
-								cout << "command not found: " << tokenVec[0] << std::endl;
-							cout << "os$ ";
-							cout.flush();
+							std::cout << "os$ ";
+							std::cout.flush();
 						}
 						else {
-							cout << "os$ ";
-							cout.flush();
+							std::cout << "os$ ";
+							std::cout.flush();
 						}
 					}
 
@@ -143,7 +205,7 @@ void printUserMode() {
 			keyboard::ackKey();
 		}
 	}
-	cout << "Tring to exit ... " << std::endl;
+	std::cout << "Tring to exit ..." << std::endl;
 
 	kprintf("Exiting ... \n");
 	outb(0xf4, 0x00);
@@ -157,8 +219,12 @@ int main()
 	gdt::load_gdt();
 	gdt::flush_tss(KERNEL_TSS_SEL | 3);
 
-	memmanip::init((void *)HEAP_START);
+	memmanip::init((void *)V_HEAP_START);
 
+	/* Global constructors till we are able to call them automaticaly*/
+	new (&std::buff) std::kiobuf<char>(256);
+	new (&std::cout) std::ostream(std::buff);
+	new (&std::cin) std::istream(std::buff);
 	// _init(); // !@#$ global constructors don't work
 
 	asm volatile ("cli");
@@ -179,7 +245,7 @@ int main()
 	__setIOPL(3);
 
 	switchToRing3(USER_DATA_SEL | 3, USER_CODE_SEL | 3,
-			K_STACK_START, (uint32)&printUserMode);
+			V_K_STACK_START, (uint32)&printUserMode);
 
 	// we will never get here, 
 	// 

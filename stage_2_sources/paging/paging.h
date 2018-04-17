@@ -20,7 +20,7 @@
 namespace paging
 {
 	const uint32 CR0_PG_BIT = 0x80000000;
-	const uint32 CR0_PE_BIT = 0x80000001;
+	const uint32 CR0_PE_BIT = 0x00000001;
 	const uint32 CR4_PSE_BIT = 0x00000010;
 
 	const uint32 PAGE_SIZE_BIT =		0b10000000;
@@ -30,6 +30,8 @@ namespace paging
 	const uint32 USER_BIT =				0b100;
 	const uint32 READ_WRITE_BIT =		0b10;
 	const uint32 PRESENT_BIT =			0b1;
+
+	void init_kernel_paging();	
 }
 
 #endif

@@ -1,5 +1,5 @@
 #include "gdt.h"
-#include "ostream.h"
+#include "kiostream.h"
 
 extern void callLGDT (uint32 gdtPtr) asm ("callLGDT");
 

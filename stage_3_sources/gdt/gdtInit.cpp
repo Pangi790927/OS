@@ -54,7 +54,7 @@ void gdt::init_gdt() {
 	gdt::Descriptor userData = getAllRAMSeg();
 	gdt::Descriptor tssDesc;
 
-	ktaskStateSegment.init(K_INT_STACK_START, KERNEL_DATA_SEL);
+	ktaskStateSegment.init(V_K_INT_STACK_START, KERNEL_DATA_SEL);
 	tssDesc = makeTSSSeg(&ktaskStateSegment);
 
 	nullDesc.zero();

@@ -21,4 +21,8 @@ typedef				short		int16;
 typedef				int			int32;
 typedef				long long	int64;
 
+typedef	unsigned	int			size_t;
+
+#define NULL (0)
+
 #endif

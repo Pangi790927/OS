@@ -4,10 +4,15 @@
 	[global error_isr%1]
 	[extern %2]
 	error_isr%1:
+		%if %3 == 0
+			push dword 0
+		%endif
+		push dword %1
 		pushad
 			cld
 			call %2
 		popad
+		add esp, 8	; pop the int number and the error code 
 		iret
 %endmacro
 

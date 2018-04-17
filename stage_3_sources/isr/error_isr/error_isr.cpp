@@ -3,6 +3,7 @@
 #include "idt.h"
 #include "isr.h"
 #include "gdt.h"
+#include "c_asm_func.h"
 
 extern void error_isr0 () asm("error_isr0");
 extern void error_isr1 () asm("error_isr1");
@@ -63,11 +64,22 @@ void isr_error_12 (err_reg_isr regs) {kprintf("Interrupt 12 ...\n");}
 void isr_error_13 (err_reg_isr regs) {
 	static bool flag = false;
 	if (!flag) {
-		kprintf("Interrupt 13 ...\n");
+		kprintf("Int 13 :: General Protection Fault\n");
+		kprintf("eip: %x\n", regs.eip);
+		kprintf("ino: %d err: %b\n", regs.int_no, regs.err_code);
 		flag = true;
 	}
+	while(true);
 }
-void isr_error_14 (err_reg_isr regs) {kprintf("Interrupt 14 ...\n");}
+void isr_error_14 (err_reg_isr regs) {
+	static int irq14_count = 0;
+
+	irq14_count++;
+	kprintf("Int 14 :: Page Fault, cr2: 0x%x\n", __getCR2());
+	kprintf("ebp: %x esp: %x\n", regs.ebp, regs.esp);
+	kprintf("ino: %d err: %b\n", regs.int_no, regs.err_code);
+	while(irq14_count == 5);
+}
 void isr_error_16 (err_reg_isr regs) {kprintf("Interrupt 16 ...\n");}
 void isr_error_17 (err_reg_isr regs) {kprintf("Interrupt 17 ...\n");}
 void isr_error_18 (err_reg_isr regs) {kprintf("Interrupt 18 ...\n");}

@@ -32,14 +32,19 @@ RAM
 	* 0x7c00 - boot loader (its size is 512 bytes andd will be loaded from disk)
 	* 0xA000 + the stack growing downoards, this stack is only for BIOS mode
 	* 0xA000 - the kernel loader (stage 2), maximum 63k
-	* 0x0e00000 + the kernel and kernel loader stack, it can grow till 0x700000
-		from 0x700000 to 0x100000 there is the interrupt stack
+	* 0x100000 - the kernel page directory followed by the page tables
+	* 0x0e00000 + the kernel and kernel loader stack, it can grow till 0xa00000
+		from 0xa00000 to 0x800000 there is the interrupt stack
 	* 0x1000000 - the kernel - maximum 16 MB
 	* 0x2000000 - kernel structures:
-		- paging 0x2000000
 		- physical pages
 	* 0x3000000 - the kernel heap
 	* 0x4000000 - kernel end, other programs
+	# Obdervation the first 8MB are identity mapped and the rest of the kernel
+		resides at 0xc0800000, the kernel starts at 0xc1000000
+	# 0x0600000 - the stack of stage 2 (1MB)
+	# 0x0100000 - kernel paging
+
 
 ### Useful RAM locations:
 	* 0x500:0x503 - ram size as returned by mov ax, 0xE801; int 0x15;

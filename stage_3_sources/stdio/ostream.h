@@ -62,8 +62,6 @@ namespace std
 			return f(*this);
 		}
 	};
-
-	ostream& endl (ostream& os);
 }
 
 #endif
