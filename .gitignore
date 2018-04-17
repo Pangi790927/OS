@@ -1,3 +1,5 @@
 OS.vhd
+OS.img
+os_image
 *.o
 *.bin
