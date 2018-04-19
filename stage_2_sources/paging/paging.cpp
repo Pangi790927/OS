@@ -11,7 +11,7 @@ void paging::init_kernel_paging() {
 	uint32 _4Mib = 1024 * 1024 * 4;
 	uint32 _4Kib = 1024 * 4;
 	uint32 kernel_4Mib_count = KERNEL_END / _4Mib + (KERNEL_END % _4Mib != 0);
-	uint32 kernel_4Kib_count = KERNEL_END / _4Kib + (KERNEL_END % _4Kib != 0);
+	// uint32 kernel_4Kib_count = KERNEL_END / _4Kib + (KERNEL_END % _4Kib != 0);
 
 	for (uint32 i = 0; i < 1024; i++)
 		kernel_page_dir[i] = 0;

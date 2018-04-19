@@ -12,7 +12,7 @@
 		iret
 %endmacro
 
-IRQ 			 0, isr_irq_0
+; IRQ 			 0, isr_irq_0
 IRQ 			 1, isr_irq_1
 IRQ 			 2, isr_irq_2
 IRQ 			 3, isr_irq_3
@@ -28,3 +28,23 @@ IRQ 			 12, isr_irq_12
 IRQ 			 13, isr_irq_13
 IRQ 			 14, isr_irq_14
 IRQ 			 15, isr_irq_15
+
+[global irq0]
+[extern isr_irq_0]
+irq0:
+	pushad
+		mov eax, esp
+		mov ebx, esp
+		; add eax, 32
+		add ebx, 32
+		push eax
+		call isr_irq_0
+		mov edi, ebx
+		mov eax, dword [edi + 16]
+		; mov ds, word ax
+		; mov es, word ax
+		; mov fs, word ax
+		; mov gs, word ax
+		pop eax
+	popad
+	iret

@@ -2,11 +2,13 @@
 #include "algorithm.h"
 
 void *operator new (size_t size, void *p) { 
+	(void)size;
 	return p; 
 }
 
 void *operator new [] (size_t size, void *p) {
-	return p; 
+	(void)size;
+	return p;
 }
 
 void  operator delete (void *, void *) {

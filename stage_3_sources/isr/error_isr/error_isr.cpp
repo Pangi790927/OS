@@ -39,53 +39,50 @@ extern void error_isr30() asm("error_isr30");
 extern void error_isr31() asm("error_isr31");
 
 void isr_error_handler (err_reg_isr regs) {
+	(void)regs;
 	kprintf("Interrupt occoured and entered generic handler\n");
 }
 
-void isr_error_0 (err_reg_isr regs) {kprintf("Interrupt 0 ...\n");}
-void isr_error_1 (err_reg_isr regs) {kprintf("Interrupt 1 ...\n");}
-void isr_error_2 (err_reg_isr regs) {kprintf("Interrupt 2 ...\n");}
-void isr_error_3 (err_reg_isr regs) {kprintf("Interrupt 3 ...\n");}
-void isr_error_4 (err_reg_isr regs) {kprintf("Interrupt 4 ...\n");}
-void isr_error_5 (err_reg_isr regs) {kprintf("Interrupt 5 ...\n");}
+void isr_error_0 (err_reg_isr regs) {kprintf("Interrupt 0 ...\n"); (void)regs;}
+void isr_error_1 (err_reg_isr regs) {kprintf("Interrupt 1 ...\n"); (void)regs;}
+void isr_error_2 (err_reg_isr regs) {kprintf("Interrupt 2 ...\n"); (void)regs;}
+void isr_error_3 (err_reg_isr regs) {kprintf("Interrupt 3 ...\n"); (void)regs;}
+void isr_error_4 (err_reg_isr regs) {kprintf("Interrupt 4 ...\n"); (void)regs;}
+void isr_error_5 (err_reg_isr regs) {kprintf("Interrupt 5 ...\n"); (void)regs;}
 void isr_error_6 (err_reg_isr regs) {
+	(void)regs;
 	static bool flag = false;
 	if (!flag) {
 		kprintf("Interrupt 6 ...\n");
 		flag = true;
 	}
 }
-void isr_error_7 (err_reg_isr regs) {kprintf("Interrupt 7 ...\n");}
-void isr_error_8 (err_reg_isr regs) {kprintf("Interrupt 8 ...\n");}
-void isr_error_9 (err_reg_isr regs) {kprintf("Interrupt 9 ...\n");}
-void isr_error_10 (err_reg_isr regs) {kprintf("Interrupt 10 ...\n");}
-void isr_error_11 (err_reg_isr regs) {kprintf("Interrupt 11 ...\n");}
-void isr_error_12 (err_reg_isr regs) {kprintf("Interrupt 12 ...\n");}
+void isr_error_7 (err_reg_isr regs) {kprintf("Interrupt 7 ...\n"); (void)regs;}
+void isr_error_8 (err_reg_isr regs) {kprintf("Interrupt 8 ...\n"); (void)regs;}
+void isr_error_9 (err_reg_isr regs) {kprintf("Interrupt 9 ...\n"); (void)regs;}
+void isr_error_10 (err_reg_isr regs) {kprintf("Interrupt 10 ...\n"); (void)regs;}
+void isr_error_11 (err_reg_isr regs) {kprintf("Interrupt 11 ...\n"); (void)regs;}
+void isr_error_12 (err_reg_isr regs) {kprintf("Interrupt 12 ...\n"); (void)regs;}
 void isr_error_13 (err_reg_isr regs) {
 	static bool flag = false;
 	if (!flag) {
 		kprintf("Int 13 :: General Protection Fault\n");
 		kprintf("eip: %x\n", regs.eip);
-		kprintf("ino: %d err: %b\n", regs.int_no, regs.err_code);
+		kprintf("ino: %d err: %x\n", regs.int_no, regs.err_code);
 		flag = true;
 	}
-	while(true);
 }
 void isr_error_14 (err_reg_isr regs) {
-	static int irq14_count = 0;
-
-	irq14_count++;
 	kprintf("Int 14 :: Page Fault, cr2: 0x%x\n", __getCR2());
 	kprintf("ebp: %x esp: %x\n", regs.ebp, regs.esp);
 	kprintf("ino: %d err: %b\n", regs.int_no, regs.err_code);
-	while(irq14_count == 5);
 }
-void isr_error_16 (err_reg_isr regs) {kprintf("Interrupt 16 ...\n");}
-void isr_error_17 (err_reg_isr regs) {kprintf("Interrupt 17 ...\n");}
-void isr_error_18 (err_reg_isr regs) {kprintf("Interrupt 18 ...\n");}
-void isr_error_19 (err_reg_isr regs) {kprintf("Interrupt 19 ...\n");}
-void isr_error_20 (err_reg_isr regs) {kprintf("Interrupt 20 ...\n");}
-void isr_error_30 (err_reg_isr regs) {kprintf("Interrupt 30 ...\n");}
+void isr_error_16 (err_reg_isr regs) {kprintf("Interrupt 16 ...\n"); (void)regs;}
+void isr_error_17 (err_reg_isr regs) {kprintf("Interrupt 17 ...\n"); (void)regs;}
+void isr_error_18 (err_reg_isr regs) {kprintf("Interrupt 18 ...\n"); (void)regs;}
+void isr_error_19 (err_reg_isr regs) {kprintf("Interrupt 19 ...\n"); (void)regs;}
+void isr_error_20 (err_reg_isr regs) {kprintf("Interrupt 20 ...\n"); (void)regs;}
+void isr_error_30 (err_reg_isr regs) {kprintf("Interrupt 30 ...\n"); (void)regs;}
 
 void set_error_ISR() {
 	uint8 attr = isr::makeAttr(1, 0, 0, isr::INTR_GATE);

@@ -22,11 +22,17 @@ namespace irq_isr
 
 	const uint8 ICW4_8086 = 0x01;
 	
+	const uint8 OCW3_READ_IRR = 0x0a;	/* OCW3 irq ready next CMD read */
+	const uint8 OCW3_READ_ISR = 0x0b;	/* OCW3 irq service next CMD read */
+	
 	void remap (uint8 masterOffset = PIC_MASTER_OFFSET,
 			uint8 slaveOffset = PIC_SLAVE_OFFSET);
 
 	void aknowledge_irq_master();
 	void aknowledge_irq_slave();
+
+	uint16 getIrqReg (uint32 ocw3);
+	uint16 getIsr();
 
 	void sendMasterMask (uint8 mask);
 	void sendSlaveMask (uint8 mask);
@@ -34,7 +40,7 @@ namespace irq_isr
 
 void set_irq_ISR();
 
-void isr_irq_0 () asm("isr_irq_0");
+void isr_irq_0 (uint32 base) asm("isr_irq_0");
 void isr_irq_1 () asm("isr_irq_1");
 void isr_irq_2 () asm("isr_irq_2");
 void isr_irq_3 () asm("isr_irq_3");

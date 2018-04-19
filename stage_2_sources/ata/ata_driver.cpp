@@ -76,7 +76,7 @@ bool ata::lba28PIORead (void *address, uint32 lba, uint8 sectorCount, uint8 devi
 		if (!waitDSQ())
 			return false;
 
-		for (int j = 0; j < SECTOR_SIZE / 2; j++) {
+		for (uint32 j = 0; j < SECTOR_SIZE / 2; j++) {
 			*((uint16 *)address + j + i * (SECTOR_SIZE / 2)) 
 					= inw(PRIMARY_PORT | DATA);
 		}
@@ -106,7 +106,7 @@ bool ata::lba48PIORead (void *address, uint64 lba, uint16 sectorCount, uint8 dev
 		if (!waitDSQ())
 			return false;
 
-		for (int j = 0; j < SECTOR_SIZE / 2; j++) {
+		for (uint32 j = 0; j < SECTOR_SIZE / 2; j++) {
 			*((uint16 *)address + j + i * SECTOR_SIZE / 2) 
 					= inw(PRIMARY_PORT | DATA);
 		}

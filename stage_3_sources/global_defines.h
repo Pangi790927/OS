@@ -35,7 +35,6 @@
 ** also updated in README.md
 */
 #define K_PAGING			0x100000
-#define V_K_PAGING			(K_PAGING + V_KERNEL_BASE)
 
 /* Must be updated here
 ** also updated in README.md
@@ -64,5 +63,9 @@
 */
 #define RAM_SIZE_LOCATION	0x00000500
 #define V_RAM_SIZE_LOCATION	(RAM_SIZE_LOCATION + V_KERNEL_BASE)
+
+/* Must be updated here
+*/
+#define MAX_PROCESS_COUNT	8000
 
 #endif

@@ -44,7 +44,7 @@ namespace std
 
 		string (size_t n, char c) {
 			internStr = (char *)malloc((n + 1) * sizeof(char));
-			for (int i = 0; i < n; i++)
+			for (size_t i = 0; i < n; i++)
 				internStr[i] = c;
 			internStr[n] = '\0';
 			internSize = n;
@@ -132,6 +132,7 @@ namespace std
 		template <typename Type>
 		string& operator += (const Type& type) {
 			(*this) = (*this) + type;
+			return (*this);
 		}
 
 		string operator + (const string& str) {

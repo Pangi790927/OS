@@ -22,11 +22,11 @@
 #include "pci.h"
 #include "boot_data.h"
 #include "kiostream.h"
+#include "scheduler.h"
 
 /*
 	Tasks:
-		* Fix bug
-		* Memory: paging
+		* Fix bug in hexdump
 		* Task Scheduler
 	Posible tasks:
 		* File system
@@ -41,9 +41,6 @@
 
 extern int _init() asm("_init");
 extern int _fini() asm("_fini");
-
-extern void switchToRing3 (int dataSel, int codeSel, int stack, int instrPtr)
-		asm ("switchToRing3");
 
 void hexdump (std::vector<std::string> &args) {
 	if (args.size() != 3) {
@@ -114,25 +111,30 @@ bool commandExecute (std::vector<std::string> &args) {
 		hexdump(args);
 	else if (args[0] == "exit")
 		return false;
+	else if (args[0] == "switchCount")
+		std::cout << scheduler::switchCount << std::endl;
+	else if (args[0] == "ss")
+		kprintf("%b\n", __getRegSS());
 	else if (args[0] == "ramsize")
 		std::cout << " * " << boot::get_ram_size() / 1024 / 1024 <<
 				"Mb" << std::endl;
 	else if (args[0] == "help") {
-		std::cout << " * pci        - print pci status" << std::endl;
-		std::cout << " * clear      - clears the screen" << std::endl;
-		std::cout << " * memprint   - prints heap memory information" << std::endl;
-		std::cout << " * hexdump    - print memory at "
+		std::cout << " * pci            - print pci status" << std::endl;
+		std::cout << " * clear          - clears the screen" << std::endl;
+		std::cout << " * memprint       - prints heap memory information" << std::endl;
+		std::cout << " * hexdump        - print memory at "
 				"address: hexdump [addr] [size]" << std::endl;
-		std::cout << " * exit       - closes the computer" << std::endl;
-		std::cout << " * ramsize    - print the size of RAM" << std::endl;
-		std::cout << " * help       - prints this help" << std::endl;
+		std::cout << " * exit           - closes the computer" << std::endl;
+		std::cout << " * ramsize        - print the size of RAM" << std::endl;
+		std::cout << " * help           - prints this help" << std::endl;
+		std::cout << " * switchCount    - prints total task switches" << std::endl;
 	}
 	else
 		std::cout << "command not found: " << args[0] << std::endl;
 	return true;
 }
 
-void printUserMode() asm ("printUserMode");
+// void printUserMode() asm ("printUserMode");
 
 void printUserMode() {
 	std::cout << "Wellcome to user mode" << std::endl;
@@ -211,6 +213,12 @@ void printUserMode() {
 	outb(0xf4, 0x00);
 }
 
+void putCharAt() {
+	while (true) {
+		VGA::_char_val_at(20, 20)++;
+	}
+}
+
 int main()
 {
 	kclear_screen();
@@ -240,11 +248,13 @@ int main()
 		keyboard::init();
 		
 		pit::initDefault(1000);
+
+		__setIOPL(3);
+		scheduler::init(V_K_STACK_START, (uint32)&printUserMode);
+		// scheduler::addProcess(V_K_STACK_START, (uint32)&printUserMode,
+		// 		USER_DATA_SEL | 3, USER_CODE_SEL | 3, K_PAGING, 100);
 	asm volatile ("sti");
-
-	__setIOPL(3);
-
-	switchToRing3(USER_DATA_SEL | 3, USER_CODE_SEL | 3,
+	__switchToProcess(USER_DATA_SEL | 3, USER_CODE_SEL | 3,
 			V_K_STACK_START, (uint32)&printUserMode);
 
 	// we will never get here, 

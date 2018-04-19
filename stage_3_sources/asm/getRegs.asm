@@ -43,3 +43,39 @@ __getRegEIP:
 	.get_eip: mov eax, [esp]
          ret
 	ret
+
+[global __getRegEFLAGS]
+__getRegEFLAGS:
+	pushf
+	pop eax
+	ret
+
+[global __getRegFS]
+__getRegFS:
+	mov eax, fs
+	ret
+
+[global __getRegGS]
+__getRegGS:
+	mov eax, gs
+	ret
+
+[global __getRegCS]
+__getRegCS:
+	mov eax, cs
+	ret
+
+[global __getRegSS]
+__getRegSS:
+	mov eax, ss
+	ret
+
+[global __getRegDS]
+__getRegDS:
+	mov eax, ds
+	ret
+
+[global __getRegES]
+__getRegES:
+	mov eax, es
+	ret

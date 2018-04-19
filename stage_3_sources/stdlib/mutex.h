@@ -21,7 +21,7 @@ namespace std
 		}
 
 		bool try_lock() {
-			lockVar.try_lock();
+			return lockVar.try_lock();
 		}
 
 		void unlock() {

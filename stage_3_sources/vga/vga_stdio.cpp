@@ -109,7 +109,7 @@ namespace VGA {
 
 	void print (const char *str, char mode) {
 		for (int i = 0; str[i]; i++)
-			putchar(str[i]);
+			putchar(str[i], mode);
 	}
 
 	void _put_nbr_base_rec (int number, int base) {

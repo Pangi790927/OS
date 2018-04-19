@@ -28,6 +28,15 @@ extern uint32	__getRegEBP() asm("__getRegEBP");
 extern uint32	__getRegESP() asm("__getRegESP");
 extern uint32	__getRegEIP() asm("__getRegEIP");
 
+extern uint32	__getRegEFLAGS() asm("__getRegEFLAGS");
+
+extern uint32	__getRegFS() asm("__getRegFS");
+extern uint32	__getRegGS() asm("__getRegGS");
+extern uint32	__getRegCS() asm("__getRegCS");
+extern uint32	__getRegSS() asm("__getRegSS");
+extern uint32	__getRegDS() asm("__getRegDS");
+extern uint32	__getRegES() asm("__getRegES");
+
 extern uint32	__getCR4() asm("__getCR4");
 extern uint32	__setCR4(uint32 arg) asm("__setCR4");
 extern uint32	__getCR3() asm("__getCR3");
@@ -40,5 +49,10 @@ extern uint32	__setCR0(uint32 arg) asm("__setCR0");
 // extern uint32	__isCpuidSuported() asm("__isCpuidSuported");
 // extern uint32	__getCpuidVendor (char vendor[12]) asm("__getCpuidVendor");
 // extern uint32	__getCpuidFeatures (uint32 vendor[2]) asm("__getCpuidFeatures");
+
+extern uint32	__setSegmentRegs(uint32 seg) asm("__setSegmentRegs");
+
+extern void __switchToProcess (int dataSel, int codeSel, int stack, int instrPtr)
+		asm ("__switchToProcess");
 
 #endif

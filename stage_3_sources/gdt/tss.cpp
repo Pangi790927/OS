@@ -1,7 +1,7 @@
 #include "tss.h"
 
 void gdt::tss::init (uint32 esp0, uint16 ss) {
-	for (int i = 0; i < sizeof(tss); i++)
+	for (size_t i = 0; i < sizeof(tss); i++)
 		((uint8 *)this)[i] = 0;
 	this->esp0 = esp0;
 	this->ss0 = ss;

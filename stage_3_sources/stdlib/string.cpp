@@ -26,12 +26,14 @@ std::string std::to_string (int value) {
 }
 
 std::string std::to_string (long value) {
+	(void)value;
 	std::string result;
 	kprintf("to_string ::long::\n");
 	return result;
 }
 
 std::string std::to_string (long long value) {
+	(void)value;
 	std::string result;	
 	kprintf("to_string ::long long::\n");
 	return result;	
@@ -50,37 +52,42 @@ std::string std::to_string (unsigned value) {
 }
 
 std::string std::to_string (unsigned long value) {
+	(void)value;
 	std::string result;
 	kprintf("to_string ::unsigned long::\n");
 	return result;
 }
 
 std::string std::to_string (unsigned long long value) {
+	(void)value;
 	std::string result;	
 	kprintf("to_string ::unsigned long long::\n");
 	return result;	
 }
 
 std::string std::to_string (float value) {
+	(void)value;
 	std::string result;	
 	kprintf("to_string ::float::\n");
 	return result;	
 }
 
 std::string std::to_string (double value) {
+	(void)value;
 	std::string result;
 	kprintf("to_string ::double::\n");
 	return result;
 }
 
 std::string std::to_string (long double value) {
+	(void)value;
 	std::string result;
 	kprintf("to_string ::long double::\n");
 	return result;
 }
 
 bool std::has_char (const std::string &str, char c) {
-	for (int i = 0; i < str.size(); i++)
+	for (size_t i = 0; i < str.size(); i++)
 		if (str[i] == c)
 			return true;
 	return false;
@@ -88,8 +95,8 @@ bool std::has_char (const std::string &str, char c) {
 
 std::vector<std::string> std::tokenize (const std::string& str, std::string split) {
 	std::vector<string> tokens;
-	int k = 0;
-	int i = 0;
+	size_t k = 0;
+	size_t i = 0;
 	bool valid = false;
 
 	if (str.size() > 0 && !has_char(split, str[0]))

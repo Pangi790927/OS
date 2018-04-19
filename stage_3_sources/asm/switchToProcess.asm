@@ -1,5 +1,5 @@
-[global switchToRing3]
-switchToRing3:
+[global __switchToProcess]
+__switchToProcess:
 	push ebp
 	mov ebp, esp
 		cli

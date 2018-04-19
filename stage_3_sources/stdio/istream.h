@@ -14,7 +14,6 @@ namespace std
 		istream (std::streambuf<char> &buff) : buff(buff) {}
 
 		int getNextInt() {
-			int result = 0;
 			char minus = buff.peek();
 			if (minus == '-' || minus == '+')
 				buff.get();

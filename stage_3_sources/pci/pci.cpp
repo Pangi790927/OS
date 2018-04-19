@@ -34,8 +34,8 @@ void pci::printBusses() {
 		for (int bus = 0; bus < 256; bus++) {
 			for (int device = 0; device < 32; device++) {
 				if (checkDevice(bus, device, func)) {
-					uint16 hi = pci::configReadWord(bus, device, func, 2, 1);
-					uint16 lo = pci::configReadWord(bus, device, func, 2, 0);
+					// uint16 hi = pci::configReadWord(bus, device, func, 2, 1);
+					// uint16 lo = pci::configReadWord(bus, device, func, 2, 0);
 
 					kprintf("Class code %x, Subclass %x, Prog IF %x, Rev ID %x, bus: %x, dev %x\n",
 						pci::configReadByte(bus, device, func, 2, 3),

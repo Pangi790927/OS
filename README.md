@@ -10,7 +10,7 @@ Stages
 
 ### Stages atributes
 	* Stage 1 must only load Stage 2 and start the protected mode
-	* Stage 2 will load stage 3
+	* Stage 2 will load stage 3 and init paging
 	* Stage 3 will ... (to be completed)
 
 The following should be updated from time to time as we make changes

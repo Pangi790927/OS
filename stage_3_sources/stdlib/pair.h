@@ -25,11 +25,13 @@ namespace std
 		pair& operator = (const pair& other) {
 			first = other.first;
 			second = other.second;
+			return (*this);
 		}
 
 		pair& operator = (const pair&& other) {
 			first = std::move(other.first);
 			second = std::move(other.second);
+			return (*this);
 		}
 
 		bool operator == (const pair& other) {

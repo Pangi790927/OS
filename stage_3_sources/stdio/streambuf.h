@@ -16,8 +16,8 @@ namespace std
 		}
 
 		std::vector<CharT> writeBuff;	// to device
-		int writeIndex = 0;
-		int startWriteIndex = 0;
+		size_t writeIndex = 0;
+		size_t startWriteIndex = 0;
 
 		std::deque<CharT> readBuff;	// from device
 		size_t readMax = 256;
@@ -52,7 +52,7 @@ namespace std
 		}
 
 		virtual void flush() {
-			for (int i = 0; i < writeBuff.size(); i++)
+			for (size_t i = 0; i < writeBuff.size(); i++)
 				writeOut();
 			writeIndex = 0;
 			startWriteIndex = 0;

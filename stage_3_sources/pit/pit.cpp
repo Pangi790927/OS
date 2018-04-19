@@ -11,9 +11,6 @@ void pit::initDefault (uint16 divider) {
 	if (divider <= 1)
 		divider = 2;
 	
-	if (divider > 65535)
-		divider = 65535;
-
 	uint8 command = makeCommand(CHANNEL_0, LO_HI_BYTE_ACCESS,
 			SQUARE_GENERATOR, BINARY_REP);
 

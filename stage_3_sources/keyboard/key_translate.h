@@ -8,8 +8,8 @@ namespace keyboard
 {
 	class KeyTranslator {
 	public:
-		bool leftShiftPressed;
-		bool rightShiftPressed;
+		bool leftShiftPressed = false;
+		bool rightShiftPressed = false;
 		bool capsLock = false;
 		bool capsLockReleased = false;
 

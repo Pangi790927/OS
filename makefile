@@ -26,9 +26,9 @@ CXX = g++-7
 ASM = nasm
 # LD = ld
 
-CXX_FLAGS_2 = -m32 -ffreestanding -fno-rtti -fno-exceptions -std=c++1y -O2
+CXX_FLAGS_2 = -m32 -ffreestanding -fno-rtti -fno-exceptions -std=c++1y -O2 -Wall -Wextra -Werror
 CXX_FLAGS_3 = -m32 -ffreestanding -fno-rtti -nostartfiles				\
-				-fno-exceptions -std=c++1y -O2
+				-fno-exceptions -std=c++1y -O2 -Wall -Wextra -Werror
 
 CRTBEGIN_OBJ:=$(shell $(CXX) $(CXX_FLAGS_3) -print-file-name=crtbegin.o)
 CRTEND_OBJ:=$(shell $(CXX) $(CXX_FLAGS_3) -print-file-name=crtend.o)

@@ -141,7 +141,7 @@ void std::vector<Type>::reserve (size_t capacity) {
 
 template <typename Type>
 void std::vector<Type>::clear () {
-	for (int i = 0; i < count; i++)
+	for (size_t i = 0; i < count; i++)
 		freeAt(i);
 	count = 0;
 	containerSize = 0;
@@ -157,11 +157,11 @@ void std::vector<Type>::resize (size_t size, const Type &value) {
 	}
 	
 	if (size < count) {
-		for (int i = size; i < count; i++)
+		for (size_t i = size; i < count; i++)
 			freeAt(i);
 	}
 	else {
-		for (int i = count; i < size; i++)
+		for (size_t i = count; i < size; i++)
 			*(Type *)allocAt(i) = value;
 	}
 	count = size;

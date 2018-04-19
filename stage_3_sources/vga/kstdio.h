@@ -71,6 +71,7 @@ int _manage_escape (const char *str, Type *toManage) {
 
 		case 'p': kprintf("0x"); kputhex( *((int *)toManage) ); return 1;
 	}
+	return 0;
 }
 
 template <typename Type, typename... Args>
