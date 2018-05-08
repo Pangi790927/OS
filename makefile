@@ -106,8 +106,8 @@ stage3.bin: stage3 $(STAGE_3_OBJS)
 	objcopy -O binary stage3.elf stage3.bin
 
 # stage 1 and 2 will ocupy only 32k or 
-$(OS_IMAGE): stage1.bin stage2.bin stage3.bin
-	cat stage1.bin stage2.bin > stage12.bin
+$(OS_IMAGE): stage1.bin stage2.bin stage3.bin superblock.ext2
+	cat stage1.bin superblock.ext2 stage2.bin > stage12.bin
 	dd if=/dev/zero of=stage12  bs=1K  count=64
 	dd conv=notrunc if=stage12.bin of=stage12
 	cat stage12 stage3.bin > ${OS_IMAGE}

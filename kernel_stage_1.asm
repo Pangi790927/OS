@@ -13,7 +13,7 @@ stage_1:
 	call bios_print_end_of_line
 
 	mov bx, STAGE_2_OFFSET	; should retry this 3 fun times, we only try it once
-	mov cl, 3				; we are loading from the third sector
+	mov cl, 5				; we are loading from the third sector
 	mov dh, 126				; 128 * 512 = 64k bytes, what is DMA error here? 
 	mov dl, [BOOT_DRIVE]	; 	are there any computers who might throw it?
 	call bios_load_memory	; if it fails it will halt 
@@ -21,7 +21,7 @@ stage_1:
 	call get_ram_size
 	mov word [0x00000500], ax
 	mov word [0x00000502], bx
-	
+
 	; entering protected mode, this will call kernel_2 later on
 	call stage_2
 
