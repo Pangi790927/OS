@@ -9,6 +9,7 @@ namespace std
 	class ostream {
 	public:
 		std::streambuf<char> &buff;
+		int mod = 10;
 
 		ostream (std::streambuf<char> &buff) : buff(buff) {}
 
@@ -18,11 +19,11 @@ namespace std
 		}
 
 		void putInt (int value) {
-			putString(std::to_string(value));
+			putString(std::to_string(value, mod));
 		}
 
 		void putUInt (unsigned int value) {
-			putString(std::to_string(value));
+			putString(std::to_string(value, mod));
 		}
 
 		void put (char c) {
@@ -62,6 +63,11 @@ namespace std
 			return f(*this);
 		}
 	};
+
+	ostream &endl (ostream& os);
+	ostream &hex (ostream& os);
+	ostream &dec (ostream& os);
+	ostream &oct (ostream& os);
 }
 
 #endif

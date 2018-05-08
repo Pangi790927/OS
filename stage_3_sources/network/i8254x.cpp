@@ -1,0 +1,46 @@
+#include "i8254x.h"
+
+namespace net
+{
+	namespace i8254x
+	{
+		uint32 vendorDevice[] = {
+			0x8086, 0x1019,
+			0x8086, 0x101A,
+			0x8086, 0x1010,
+			0x8086, 0x1012,
+			0x8086, 0x101D,
+			0x8086, 0x1079,
+			0x8086, 0x107A,
+			0x8086, 0x107B,
+			0x8086, 0x100F,
+			0x8086, 0x1011,
+			0x8086, 0x1026,
+			0x8086, 0x1027,
+			0x8086, 0x1028,
+			0x8086, 0x1107,
+			0x8086, 0x1112,
+			0x8086, 0x1013,
+			0x8086, 0x1018,
+			0x8086, 0x1077,
+			0x8086, 0x1076,
+			0x8086, 0x1017,
+			0x8086, 0x1078,
+			0x8086, 0x1016,
+			0x8086, 0x100E,
+			0x8086, 0x1015
+		};
+		
+		const uint32 deviceTypeCount = sizeof(vendorDevice) / sizeof(uint32) / 2;
+
+		pci::Device getFirstNetworkPciDevice() {
+			return pci::Device::getFirst([](const pci::Device& dev){
+				for (uint32 i = 0; i < deviceTypeCount; i++)
+					if (dev.vendorId == vendorDevice[i * 2 + 0] && 
+							dev.deviceId == vendorDevice[i * 2 + 1])
+						return true;
+				return false;
+			});
+		}
+	}
+}

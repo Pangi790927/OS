@@ -23,12 +23,13 @@
 #include "boot_data.h"
 #include "kiostream.h"
 #include "scheduler.h"
+#include "i8254x.h"
 
 /*
 	Tasks:
-		* Fix bug in hexdump
 		* Task Scheduler
 	Posible tasks:
+		* implement map
 		* File system
 		* Read/Write with DMA from HDD
 		* support multiple media for boot
@@ -37,6 +38,7 @@
 		* Network Driver
 		* Shell
 		* Global constructors
+		# Fix bug in hexdump ??---is it fixed---??
 */
 
 extern int _init() asm("_init");
@@ -102,7 +104,8 @@ void hexdump (std::vector<std::string> &args) {
 
 bool commandExecute (std::vector<std::string> &args) {
 	if (args[0] == "pci")
-		pci::printBusses();
+		for (auto&& dev : pci::Device::getAll())
+			std::cout << dev << std::endl;
 	else if (args[0] == "clear")
 		kclear_screen();
 	else if (args[0] == "memprint")
@@ -143,6 +146,8 @@ void printUserMode() {
 	keyboard::KeyState keyState;
 	keyboard::init2KeyState(keyState);
 	keyboard::KeyTranslator keyTranslate;
+
+	net::i8254x::Driver netDriver;
 
 	std::deque<uint32> keyList;
 	std::cout << "os$ ";
@@ -251,17 +256,17 @@ int main()
 
 		__setIOPL(3);
 		scheduler::init(V_K_STACK_START, (uint32)&printUserMode);
-		// scheduler::addProcess(V_K_STACK_START, (uint32)&printUserMode,
-		// 		USER_DATA_SEL | 3, USER_CODE_SEL | 3, K_PAGING, 100);
+		scheduler::addProcess(V_K_STACK_START - 1024 * 1024, (uint32)&putCharAt,
+				USER_DATA_SEL | 3, USER_CODE_SEL | 3, K_PAGING, 100);
 	asm volatile ("sti");
 	__switchToProcess(USER_DATA_SEL | 3, USER_CODE_SEL | 3,
 			V_K_STACK_START, (uint32)&printUserMode);
 
 	// we will never get here, 
-	// 
-	// 
-	// 
-	// 
+	//
+	//
+	//
+	//
 	// usually ...
 	while (true)
 		asm volatile ("");

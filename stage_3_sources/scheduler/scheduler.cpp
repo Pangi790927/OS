@@ -8,14 +8,13 @@ namespace scheduler
 	Process processVec[MAX_PROCESS_COUNT];
 	uint32 processCount;
 	uint32 currentProcess;
-	std::deque<uint32> readyQue;
-	std::deque<uint32> waitQue;
+	ProcessIdQue readyQue;
+	ProcessIdQue waitQue;
 	uint32 switchCount;
 
 	void init (uint32 kernel_esp, uint32 kernel_eip) {
-		// are here till we will be able to call global constructors
-		new (&readyQue) std::deque<uint32> ();
-		new (&waitQue) std::deque<uint32> ();
+		new (&readyQue) ProcessIdQue ();
+		new (&waitQue) ProcessIdQue ();
 		switchCount = 0;
 		processCount = 0;
 		for (int i = 0; i < MAX_PROCESS_COUNT; i++)
@@ -60,45 +59,16 @@ namespace scheduler
 	}
 
 	void update (uint32 intBase) {
-		kprintf("%x\n", intBase);
-		kprintf("  %x\n", ((uint32 *)intBase)[6]);
-		kprintf("  %x\n", ((uint32 *)intBase)[7]);
-		kprintf(": %x\n", ((uint32 *)intBase)[8]);
-		kprintf(": %x\n", ((uint32 *)intBase)[9]);
-		kprintf(": %b\n", ((uint32 *)intBase)[10]);
-		kprintf(": %x\n", ((uint32 *)intBase)[11]);
-		kprintf(": %x\n", ((uint32 *)intBase)[12]);
-		kprintf("  %x\n", ((uint32 *)intBase)[13]);
-		kprintf("  %x\n", ((uint32 *)intBase)[14]);
-		kprintf("s  %x\n", __getRegSS());
-		kprintf("s  %x\n", __getRegCS());
-		
 		processVec[currentProcess].timeLeft--;
 		if (processVec[currentProcess].timeLeft <= 0) {
-			// while(true);
 			switchCount++;
-			// kprintf("%x\n", processVec[currentProcess].eip);
-			// kprintf("%x\n", processVec[currentProcess].cs);
-			// kprintf("%x\n", processVec[currentProcess].eflags);
-			// kprintf("%x\n", processVec[currentProcess].esp);
-			// kprintf("%x\n", processVec[currentProcess].ss);
 			
-			// std::cout << "-------------------------------" << std::endl;
-			// kprintf("%x\n", processVec[currentProcess].eip);
-			// kprintf("%x\n", processVec[currentProcess].cs);
-			// kprintf("%x\n", processVec[currentProcess].eflags);
-			// kprintf("%x\n", processVec[currentProcess].esp);
-			// kprintf("%x\n", processVec[currentProcess].ss);
-
 			uint32 lastProcess = currentProcess;
 			uint32 newProcess = readyQue.front();
 			readyQue.push_back(readyQue.front());
 			readyQue.pop_front();
+			
 			if (lastProcess != newProcess) {
-				// save last process data
-				kprintf("switching %d, %d\n", lastProcess, newProcess);
-
-
 				processVec[currentProcess].edi = ((uint32 *)intBase)[0];
 				processVec[currentProcess].esi = ((uint32 *)intBase)[1];
 				processVec[currentProcess].ebp = ((uint32 *)intBase)[2];
@@ -110,13 +80,13 @@ namespace scheduler
 				
 				processVec[currentProcess].eip = ((uint32 *)intBase)[8];
 				processVec[currentProcess].cs = ((uint32 *)intBase)[9];
-				processVec[currentProcess].eflags = ((uint32 *)intBase)[10];
+				processVec[currentProcess].eflags = ((uint32 *)intBase)[10] | 0x200;
 				processVec[currentProcess].esp = ((uint32 *)intBase)[11];
 				processVec[currentProcess].ss = ((uint32 *)intBase)[12];
 	
-				// put new process data
 				currentProcess = newProcess;
-				processVec[currentProcess].timeLeft = processVec[currentProcess].timeGiven;
+				processVec[currentProcess].timeLeft =
+						processVec[currentProcess].timeGiven;
 				__setCR3(processVec[currentProcess].cr3);
 				
 				((uint32 *)intBase)[0] = processVec[currentProcess].edi;
@@ -130,18 +100,10 @@ namespace scheduler
 
 				((uint32 *)intBase)[8] = processVec[currentProcess].eip;
 				((uint32 *)intBase)[9] = processVec[currentProcess].cs;
-				((uint32 *)intBase)[10] = processVec[currentProcess].eflags;
+				((uint32 *)intBase)[10] = processVec[currentProcess].eflags | 0x200;
 				((uint32 *)intBase)[11] = processVec[currentProcess].esp;
 				((uint32 *)intBase)[12] = processVec[currentProcess].ss;
 			}
-			
-			// std::cout << "-------------------------------" << std::endl;
-			// kprintf(": %x\n", ((uint32 *)intBase)[0]);
-			// kprintf(": %x\n", ((uint32 *)intBase)[1]);
-			// kprintf(": %x\n", ((uint32 *)intBase)[2]);
-			// kprintf(": %x\n", ((uint32 *)intBase)[3]);
-			// kprintf(": %x\n", ((uint32 *)intBase)[4]);
-			// while (true);
 		}
 	}
 }

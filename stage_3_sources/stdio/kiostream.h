@@ -7,7 +7,6 @@
 
 namespace std
 {
-	ostream &endl (ostream& os);
 	extern kiobuf<char>& buff;
 	extern ostream& cout;
 	extern istream& cin;

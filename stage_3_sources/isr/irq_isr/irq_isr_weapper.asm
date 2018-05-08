@@ -41,10 +41,10 @@ irq0:
 		call isr_irq_0
 		mov edi, ebx
 		mov eax, dword [edi + 16]
-		; mov ds, word ax
-		; mov es, word ax
-		; mov fs, word ax
-		; mov gs, word ax
+		mov ds, word ax
+		mov es, word ax
+		mov fs, word ax
+		mov gs, word ax
 		pop eax
 	popad
 	iret

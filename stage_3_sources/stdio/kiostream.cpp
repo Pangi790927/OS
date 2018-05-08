@@ -4,13 +4,7 @@
 #include "kiobuf.h"
 
 namespace std
-{
-	ostream& endl (ostream& stream) {
-		stream.put('\n');
-		stream.flush();
-		return stream;
-	}
-	
+{	
 	uint8 __container_buff[sizeof(kiobuf<char>)];
 	uint8 __container_cout[sizeof(ostream)];
 	uint8 __container_cin[sizeof(istream)];

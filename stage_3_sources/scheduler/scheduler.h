@@ -8,11 +8,42 @@
 
 namespace scheduler
 {
+	class ProcessIdQue {
+	public:
+		uint32 que[MAX_PROCESS_COUNT];
+		int start;
+		int end;
+		size_t size;
+
+		ProcessIdQue() : start(0), end(0), size(0) {}
+
+		void push_back (uint32 id) {
+			que[start] = id;
+			start--;
+			size++;
+			if (start < 0) {
+				start = MAX_PROCESS_COUNT - 1;
+			}
+		}
+
+		void pop_front () {
+			end--;
+			size--;
+			if (end < 0) {
+				end = MAX_PROCESS_COUNT - 1;
+			}
+		}
+
+		uint32 front() {
+			return que[end];
+		}
+	};
+
 	extern Process processVec[MAX_PROCESS_COUNT];
 	extern uint32 currentProcess;
 	extern uint32 processCount;
-	extern std::deque<uint32> readyQue;
-	extern std::deque<uint32> waitQue;
+	extern ProcessIdQue readyQue;
+	extern ProcessIdQue waitQue;
 	extern uint32 switchCount;
 
 	void init (uint32 kernel_esp, uint32 kernel_eip);

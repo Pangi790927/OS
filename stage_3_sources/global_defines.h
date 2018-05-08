@@ -59,6 +59,11 @@
 */
 // #define MULTI_CORE
 
+/* Must be updated here
+*/
+#define V_NET_MEM_BASE		V_KERNEL_END
+#define V_NET_MEM_BASE_END	V_NET_MEM_BASE + 0x20000
+
 /* Must be updated here in README and in kernel_stage_1.asm
 */
 #define RAM_SIZE_LOCATION	0x00000500

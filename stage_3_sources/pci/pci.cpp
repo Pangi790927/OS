@@ -23,6 +23,14 @@ uint32 pci::configRead (uint8 bus, uint8 devNr, uint8 func, uint8 regNr) {
 	return (uint32)ind(CONFIG_DATA);
 }
 
+void pci::configWrite (uint8 bus, uint8 devNr, uint8 func,
+			uint8 regNr, uint32 data)
+{
+	uint32 addr = configAddress(bus, devNr, func, regNr);
+	outd(CONFIG_ADDRESS, addr);
+	outd(CONFIG_DATA, data);
+}
+
 bool pci::checkDevice (uint8 bus, uint8 device, uint8 func) {
 	if (pci::configReadWord(bus, device, func, 0, 0) == 0xffff)
 		return false;

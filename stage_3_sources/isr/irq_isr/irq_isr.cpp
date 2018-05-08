@@ -89,15 +89,8 @@ void irq_isr::aknowledge_irq_slave() {
 void isr_irq_0 (uint32 base) {
 	static int time = 0;
 	time++;
+	(void)base;
 	scheduler::update(base);
-	// kprintf("base: %x\n", base);
-	// kprintf("eip: %x\n", __getRegEIP());
-	// kprintf("esp: %x\n", __getRegESP());
-	// kprintf("saved eip: %x\n", ((uint32 *)base)[0]);
-	// kprintf("saved cs: %x\n", ((uint32 *)base)[1]);
-	// kprintf("saved eflags: %b\n", ((uint32 *)base)[2]);
-	// kprintf("saved esp: %x\n", ((uint32 *)base)[3]);
-	// kprintf("saved ss: %x\n", ((uint32 *)base)[4]);
 	irq_isr::aknowledge_irq_master();
 }
 

@@ -176,15 +176,15 @@ namespace std
 		}
 	};
 
-	string to_string (int value);
-	string to_string (long value);
-	string to_string (long long value);
-	string to_string (unsigned value);
-	string to_string (unsigned long value);
-	string to_string (unsigned long long value);
-	string to_string (float value);
-	string to_string (double value);
-	string to_string (long double value);
+	string to_string (int value, int mod);
+	string to_string (long value, int mod);
+	string to_string (long long value, int mod);
+	string to_string (unsigned value, int mod);
+	string to_string (unsigned long value, int mod);
+	string to_string (unsigned long long value, int mod);
+	string to_string (float value, int mod);
+	string to_string (double value, int mod);
+	string to_string (long double value, int mod);
 
 	bool has_char (const string &str, char c);
 	std::vector<string> tokenize (const string& str, string tokens);
