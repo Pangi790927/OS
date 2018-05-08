@@ -105,6 +105,9 @@ stage3.bin: stage3 $(STAGE_3_OBJS)
 	objdump -d stage3.elf -M intel > stage3.o.asm
 	objcopy -O binary stage3.elf stage3.bin
 
+superblock.ext2:
+	dd if=/dev/zero of=superblock.ext2  bs=1K  count=1
+
 # stage 1 and 2 will ocupy only 32k or 
 $(OS_IMAGE): stage1.bin stage2.bin stage3.bin superblock.ext2
 	cat stage1.bin superblock.ext2 stage2.bin > stage12.bin
