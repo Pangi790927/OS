@@ -6,7 +6,6 @@
 	[extern %2]
 	irq%1:
 		pushad
-			; cld
 			call %2
 		popad
 		iret
@@ -34,17 +33,10 @@ IRQ 			 15, isr_irq_15
 irq0:
 	pushad
 		mov eax, esp
-		mov ebx, esp
-		; add eax, 32
-		add ebx, 32
 		push eax
 		call isr_irq_0
-		mov edi, ebx
-		mov eax, dword [edi + 16]
-		mov ds, word ax
-		mov es, word ax
-		mov fs, word ax
-		mov gs, word ax
-		pop eax
+		pop ebx
+		
+		mov esp, eax
 	popad
 	iret

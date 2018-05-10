@@ -31,8 +31,14 @@ namespace paging
 	const uint32 READ_WRITE_BIT =		0b10;
 	const uint32 PRESENT_BIT =			0b1;
 
-	void registerPageK (void *physAddr, void *virtAddress, uint32 *pageDir);
-	void registerPageM (void *physAddr, void *virtAddress, uint32 *pageDir);
+	void registerPageK (void *physAddr, void *virtAddress, uint32 *pd,
+				uint32 ptFlags = READ_WRITE_BIT | PRESENT_BIT | USER_BIT,
+				uint32 pdFlags = READ_WRITE_BIT | PRESENT_BIT | USER_BIT);
+	void registerPageM (void *physAddr, void *virtAddress, uint32 *pd,
+				uint32 flags = READ_WRITE_BIT | PAGE_SIZE_BIT | PRESENT_BIT);
+	void printPD (uint32 *pd);
+	void printPT (uint32 *pd, uint32 index);
+	void loadCr3 (void *cr3);
 }
 
 #endif

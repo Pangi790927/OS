@@ -36,74 +36,57 @@ namespace scheduler
 		else
 			return -1;
 
-		processVec[pid].eax = 0;
-		processVec[pid].ecx = 0;
-		processVec[pid].edx = 0;
-		processVec[pid].ebx = 0;
-		processVec[pid].ebp = 0;
-		processVec[pid].esi = 0;
-		processVec[pid].edi = 0;
-		processVec[pid].cr3 = cr3;
-		processVec[pid].eip = eip;
+		/// push on the process stack the registers:
+		esp -= 48;
+		((uint32 *)esp)[0] = 0;							// edi
+		((uint32 *)esp)[1] = 0;							// esi
+		((uint32 *)esp)[2] = 0;							// ebp
+		((uint32 *)esp)[3] = esp + 48;					// esp
+		
+		((uint32 *)esp)[4] = 0;							// ebx
+		((uint32 *)esp)[5] = 0;							// edx
+		((uint32 *)esp)[6] = 0;							// ecx
+		((uint32 *)esp)[7] = 0;							// eax
+
+		((uint32 *)esp)[8] = eip;						// eip
+		((uint32 *)esp)[9] = cs;						// cs
+		((uint32 *)esp)[10] = __getRegEFLAGS() | 0x200;	// eflags
+		((uint32 *)esp)[11] = esp;						// esp
+		((uint32 *)esp)[12] = ss;						// ss
+
 		processVec[pid].esp = esp;
-		processVec[pid].ss = ss;
-		processVec[pid].cs = cs;
 		processVec[pid].dead = false;
 		processVec[pid].timeLeft = time;
 		processVec[pid].timeGiven = time;
 		processVec[pid].pid = pid;
+		processVec[pid].cr3 = cr3;
 
 		readyQue.push_back(pid);
 
 		return pid;
 	}
 
-	void update (uint32 intBase) {
+	uint32 update (uint32 esp) {
 		processVec[currentProcess].timeLeft--;
 		if (processVec[currentProcess].timeLeft <= 0) {
 			switchCount++;
-			
+
 			uint32 lastProcess = currentProcess;
 			uint32 newProcess = readyQue.front();
 			readyQue.push_back(readyQue.front());
 			readyQue.pop_front();
-			
+
 			if (lastProcess != newProcess) {
-				processVec[currentProcess].edi = ((uint32 *)intBase)[0];
-				processVec[currentProcess].esi = ((uint32 *)intBase)[1];
-				processVec[currentProcess].ebp = ((uint32 *)intBase)[2];
-				// esp (we get esp from what interr pushed)			 3
-				processVec[currentProcess].ebx = ((uint32 *)intBase)[4];
-				processVec[currentProcess].edx = ((uint32 *)intBase)[5];
-				processVec[currentProcess].ecx = ((uint32 *)intBase)[6];
-				processVec[currentProcess].eax = ((uint32 *)intBase)[7];
-				
-				processVec[currentProcess].eip = ((uint32 *)intBase)[8];
-				processVec[currentProcess].cs = ((uint32 *)intBase)[9];
-				processVec[currentProcess].eflags = ((uint32 *)intBase)[10] | 0x200;
-				processVec[currentProcess].esp = ((uint32 *)intBase)[11];
-				processVec[currentProcess].ss = ((uint32 *)intBase)[12];
-	
+				processVec[currentProcess].esp = esp;
+
 				currentProcess = newProcess;
 				processVec[currentProcess].timeLeft =
 						processVec[currentProcess].timeGiven;
 				__setCR3(processVec[currentProcess].cr3);
-				
-				((uint32 *)intBase)[0] = processVec[currentProcess].edi;
-				((uint32 *)intBase)[1] = processVec[currentProcess].esi;
-				((uint32 *)intBase)[2] = processVec[currentProcess].ebp;
-				// esp				3
-				((uint32 *)intBase)[4] = processVec[currentProcess].ebx;
-				((uint32 *)intBase)[5] = processVec[currentProcess].edx;
-				((uint32 *)intBase)[6] = processVec[currentProcess].ecx;
-				((uint32 *)intBase)[7] = processVec[currentProcess].eax;
 
-				((uint32 *)intBase)[8] = processVec[currentProcess].eip;
-				((uint32 *)intBase)[9] = processVec[currentProcess].cs;
-				((uint32 *)intBase)[10] = processVec[currentProcess].eflags | 0x200;
-				((uint32 *)intBase)[11] = processVec[currentProcess].esp;
-				((uint32 *)intBase)[12] = processVec[currentProcess].ss;
+				return processVec[currentProcess].esp;
 			}
 		}
+		return esp;
 	}
 }

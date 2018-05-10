@@ -3,7 +3,6 @@ __switchToProcess:
 	push ebp
 	mov ebp, esp
 		cli
-
 		mov eax, [ebp + 8]	; user data segment
 		mov ebx, [ebp + 12]	; user code segment
 		mov ecx, [ebp + 16]	; user esp

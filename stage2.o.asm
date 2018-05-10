@@ -1865,7 +1865,7 @@ Disassembly of section .text:
     b552:	0f 85 48 fe ff ff    	jne    b3a0 <_ZN3pci11printBussesEv+0x20>
     b558:	83 44 24 10 01       	add    DWORD PTR [esp+0x10],0x1
     b55d:	8b 44 24 10          	mov    eax,DWORD PTR [esp+0x10]
-    b561:	83 f8 03             	cmp    eax,0x3
+    b561:	83 f8 08             	cmp    eax,0x8
     b564:	0f 85 25 fe ff ff    	jne    b38f <_ZN3pci11printBussesEv+0xf>
     b56a:	83 ec 0c             	sub    esp,0xc
     b56d:	68 69 d1 00 00       	push   0xd169

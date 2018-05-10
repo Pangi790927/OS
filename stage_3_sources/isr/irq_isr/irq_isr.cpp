@@ -86,12 +86,13 @@ void irq_isr::aknowledge_irq_slave() {
 	outb(PIC_MASTER_COMM, PIC_EOI);
 }
 
-void isr_irq_0 (uint32 base) {
+uint32 isr_irq_0 (uint32 base) {
 	static int time = 0;
 	time++;
-	(void)base;
-	scheduler::update(base);
+	uint32 esp = scheduler::update(base);
 	irq_isr::aknowledge_irq_master();
+	
+	return esp;
 }
 
 void isr_irq_1 () {

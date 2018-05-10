@@ -63,7 +63,7 @@ namespace net
 
 					for (uint32 i = 0; i < REG_SPACE_SIZE / 0x1000; i++) {
 						paging::registerPageK((uint32 *)(mmio_phys + i * 0x1000),
-								(uint32 *)(mmio_phys + i * 0x1000),
+								(uint32 *)(V_NET_MEM_BASE + i * 0x1000),
 								(uint32 *)K_PAGING);
 					}
 					mmio = V_NET_MEM_BASE;

@@ -137,7 +137,7 @@ namespace pci
 		// and gets as parameter a device
 		template <typename FuncType>
 		static Device getFirst (FuncType rule, bool readBar = true) {
-			for (int func = 0; func < 3; func++) {
+			for (int func = 0; func < 8; func++) {
 				for (int bus = 0; bus < 256; bus++) {
 					for (int device = 0; device < 32; device++) {
 						Device toCheck = readDevice(bus, device, func, readBar);
@@ -156,7 +156,7 @@ namespace pci
 		template <typename FuncType>
 		static Device getNext (const Device& prev, FuncType rule, bool readBar = true) {
 			bool first = true;
-			for (int func = 0; func < 3; func++) {
+			for (int func = 0; func < 8; func++) {
 				if (first)
 					func = prev.func;
 				for (int bus = 0; bus < 256; bus++) {

@@ -47,7 +47,7 @@ namespace scheduler
 	extern uint32 switchCount;
 
 	void init (uint32 kernel_esp, uint32 kernel_eip);
-	void update (uint32 interruptPushBase);
+	uint32 update (uint32 interruptPushBase);
 	int addProcess (uint32 esp, uint32 eip, uint32 ss, uint32 cs,
 			uint32 cr3, uint32 time);
 }

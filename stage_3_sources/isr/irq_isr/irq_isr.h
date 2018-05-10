@@ -40,7 +40,7 @@ namespace irq_isr
 
 void set_irq_ISR();
 
-void isr_irq_0 (uint32 base) asm("isr_irq_0");
+uint32 isr_irq_0 (uint32 base) asm("isr_irq_0");
 void isr_irq_1 () asm("isr_irq_1");
 void isr_irq_2 () asm("isr_irq_2");
 void isr_irq_3 () asm("isr_irq_3");

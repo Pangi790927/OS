@@ -93,7 +93,7 @@ void hexdump (std::vector<std::string> &args) {
 		}
 		else {
 			last = current;
-			std::cout << hexToStrPadded(printedCount / 16, 8) << "0";
+			std::cout << hexToStrPadded((printedCount - 1) / 16, 8) << "0";
 			std::cout << current << std::endl;
 			printedStar = false;
 		}
@@ -121,6 +121,14 @@ bool commandExecute (std::vector<std::string> &args) {
 	else if (args[0] == "ramsize")
 		std::cout << " * " << boot::get_ram_size() / 1024 / 1024 <<
 				"Mb" << std::endl;
+	else if (args[0] == "printpd")
+		paging::printPD((uint32 *)K_PAGING);
+	else if (args[0] == "printpt") {
+		if (args.size() == 2)
+			paging::printPT((uint32 *)K_PAGING, atoi(args[1].c_str()));
+		else
+			std::cout << "usage: printpt index" << std::endl;
+	}
 	else if (args[0] == "help") {
 		std::cout << " * pci            - print pci status" << std::endl;
 		std::cout << " * clear          - clears the screen" << std::endl;
@@ -131,6 +139,8 @@ bool commandExecute (std::vector<std::string> &args) {
 		std::cout << " * ramsize        - print the size of RAM" << std::endl;
 		std::cout << " * help           - prints this help" << std::endl;
 		std::cout << " * switchCount    - prints total task switches" << std::endl;
+		std::cout << " * printpd        - prints paging directory" << std::endl;
+		std::cout << " * printpt        - prints paging table at index" << std::endl;
 	}
 	else
 		std::cout << "command not found: " << args[0] << std::endl;
@@ -140,14 +150,14 @@ bool commandExecute (std::vector<std::string> &args) {
 // void printUserMode() asm ("printUserMode");
 
 void printUserMode() {
+	net::i8254x::Driver netDriver;
+
 	std::cout << "Wellcome to user mode" << std::endl;
 	std::cout << "Commands are ready to be typed" << std::endl;
 
 	keyboard::KeyState keyState;
 	keyboard::init2KeyState(keyState);
 	keyboard::KeyTranslator keyTranslate;
-
-	net::i8254x::Driver netDriver;
 
 	std::deque<uint32> keyList;
 	std::cout << "os$ ";
@@ -221,6 +231,7 @@ void printUserMode() {
 void putCharAt() {
 	while (true) {
 		VGA::_char_val_at(20, 20)++;
+		;
 	}
 }
 
@@ -243,7 +254,7 @@ int main()
 	asm volatile ("cli");
 		set_error_ISR();
 		set_irq_ISR();
-		
+
 		idt::loadIDT();
 
 		irq_isr::remap();
@@ -258,8 +269,9 @@ int main()
 		scheduler::init(V_K_STACK_START, (uint32)&printUserMode);
 		scheduler::addProcess(V_K_STACK_START - 1024 * 1024, (uint32)&putCharAt,
 				USER_DATA_SEL | 3, USER_CODE_SEL | 3, K_PAGING, 100);
-	asm volatile ("sti");
-	__switchToProcess(USER_DATA_SEL | 3, USER_CODE_SEL | 3,
+
+	/// will enable interrupts:
+	__switchToProcess(KERNEL_DATA_SEL, KERNEL_CODE_SEL,
 			V_K_STACK_START, (uint32)&printUserMode);
 
 	// we will never get here, 

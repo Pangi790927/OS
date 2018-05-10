@@ -30,7 +30,7 @@ bool pci::checkDevice (uint8 bus, uint8 device, uint8 func) {
 }
 
 void pci::printBusses () {
-	for (int func = 0; func < 3; func++) {
+	for (int func = 0; func < 8; func++) {
 		for (int bus = 0; bus < 256; bus++) {
 			for (int device = 0; device < 32; device++) {
 				if (checkDevice(bus, device, func)) {
