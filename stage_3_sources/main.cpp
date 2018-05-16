@@ -148,11 +148,10 @@ bool commandExecute (std::vector<std::string> &args) {
 }
 
 // void printUserMode() asm ("printUserMode");
-
 void printUserMode() {
 	net::i8254x::Driver netDriver;
 
-	std::cout << "Wellcome to user mode" << std::endl;
+	std::cout << "Wellcome to OS" << std::endl;
 	std::cout << "Commands are ready to be typed" << std::endl;
 
 	keyboard::KeyState keyState;
@@ -230,8 +229,8 @@ void printUserMode() {
 
 void putCharAt() {
 	while (true) {
-		VGA::_char_val_at(20, 20)++;
-		;
+		VGA::_char_val_at(24, 79) = '/';
+		VGA::_char_val_at(24, 79) = '\\';
 	}
 }
 
