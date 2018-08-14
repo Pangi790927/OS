@@ -30,9 +30,13 @@ namespace net
 			uint64 checksumOffset	: 8;	// cso
 			uint64 command			: 8;	// cmd
 			uint64 status			: 4;	// status
-			uint64 reserved = 0		: 4;	
+			uint64 reserved			: 4;	
 			uint64 checkStatStart	: 8;	// css
 			uint64 special			: 16;
+
+			TxDesc() {
+				reserved = 0;
+			}
 		};
 
 		pci::Device getFirstNetworkPciDevice();
