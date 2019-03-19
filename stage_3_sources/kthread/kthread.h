@@ -18,7 +18,9 @@ namespace kthread
 		bool done = false; // must be replace with an atomic var
 
 		Thread (const Callback<void(void *)>& cbk,
-				uint32 stac_size = DEFAULT_STACK_SIZE);
+				uint32 stack_size = DEFAULT_STACK_SIZE);
+		Thread (void (*)(void *), void *ctx = NULL,
+				uint32 stack_size = DEFAULT_STACK_SIZE);
 		bool joinable();
 		void join();
 

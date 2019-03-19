@@ -12,6 +12,7 @@ struct Callback {
 
 	Callback() {}
 	Callback (FuncType *func, void *ctx = NULL) : func(func), ctx(ctx) {}
+	Callback (const FuncType& func, void *ctx = NULL) : func(&func), ctx(ctx) {}
 
 	template <typename ...Args, typename RetType = 
 			std::invoke_result_t<FuncType, Args..., void *>>

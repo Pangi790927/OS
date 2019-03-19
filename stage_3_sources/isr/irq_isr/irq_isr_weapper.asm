@@ -36,7 +36,6 @@ irq0:
 		push eax
 		call isr_irq_0
 		pop ebx
-
 		mov esp, eax
 	popad
 	iret

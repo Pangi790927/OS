@@ -14,7 +14,7 @@ extern void enable_A20() asm("enable_A20");
 #define xstr(a) str(a)
 #define str(a) #a
 
-#define KER_SECTOR_COUNT (1 * 2024)					// * 512 is the byte count	
+#define KER_SECTOR_COUNT (1 * 4096)					// * 512 is the byte count	
 #define ASM_COMMAND "call " xstr(V_KERNEL_START)
 
 int kernel_2()

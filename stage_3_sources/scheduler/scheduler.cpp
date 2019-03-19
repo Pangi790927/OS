@@ -5,118 +5,127 @@
 
 namespace scheduler
 {
-	Process processVec[MAX_PROCESS_COUNT];
-	uint32 processCount;
-	uint32 currentProcess;
-	ProcessIdQue readyQue;
-	ProcessIdQue waitQue;
-	uint32 switchCount;
+	Process proc_vec[MAX_PROCESS_COUNT];
+	uint32 proc_cnt;
+	uint32 curr_pid;
+	ProcessIdQue ready_que;
+	ProcessIdQue wait_que;
+	uint32 switch_cnt;
 
 	void init (uint32 kernel_esp, uint32 kernel_eip) {
-		new (&readyQue) ProcessIdQue ();
-		new (&waitQue) ProcessIdQue ();
-		switchCount = 0;
-		processCount = 0;
+		new (&ready_que) ProcessIdQue ();
+		new (&wait_que) ProcessIdQue ();
+		switch_cnt = 0;
+		proc_cnt = 0;
 		for (int i = 0; i < MAX_PROCESS_COUNT; i++)
-			processVec[i].dead = true;
-		currentProcess = addProcess(kernel_esp, kernel_eip,
+			proc_vec[i].dead = true;
+		curr_pid = addProcess(kernel_esp, kernel_eip,
 				KERNEL_DATA_SEL, KERNEL_CODE_SEL, K_PAGING, 100);
-		readyQue.pop_front(); // first process will not be in ready que
+		ready_que.pop_front(); // first process will not be in ready que
 	}
 
 	int addProcess (uint32 esp, uint32 eip, uint32 ss, uint32 cs,
 			uint32 cr3, uint32 time)
 	{
+		asm volatile("cli");
 		uint32 pid = 0;
 
-		while (pid < MAX_PROCESS_COUNT && processVec[pid].dead == false)
+		while (pid < MAX_PROCESS_COUNT && proc_vec[pid].dead == false)
 			pid++;
 
-		if (processVec[pid].dead)
-			processCount++;
+		if (proc_vec[pid].dead)
+			proc_cnt++;
 		else
 			return -1;
 
 		/// push on the process stack the registers:
-		esp -= 48;
-		((uint32 *)esp)[0] = 0;							// edi
-		((uint32 *)esp)[1] = 0;							// esi
-		((uint32 *)esp)[2] = 0;							// ebp
-		((uint32 *)esp)[3] = esp + 48;					// esp
+		esp -= sizeof(task_stack_t);
+		task_stack_t *task_stack = (task_stack_t *)esp;
 		
-		((uint32 *)esp)[4] = 0;							// ebx
-		((uint32 *)esp)[5] = 0;							// edx
-		((uint32 *)esp)[6] = 0;							// ecx
-		((uint32 *)esp)[7] = 0;							// eax
+		task_stack->edi = 0;
+		task_stack->esi = 0;
+		task_stack->ebp = 0;
+		task_stack->esp = esp + 32;	// actually ignored
 
-		((uint32 *)esp)[8] = eip;						// eip
-		((uint32 *)esp)[9] = cs;						// cs
-		((uint32 *)esp)[10] = __getRegEFLAGS() | 0x200;	// eflags
-		((uint32 *)esp)[11] = esp;						// esp
-		((uint32 *)esp)[12] = ss;						// ss
+		task_stack->ebx = 0;
+		task_stack->edx = 0;
+		task_stack->ecx = 0;
+		task_stack->eax = 0;
 
-		processVec[pid].esp = esp;
-		processVec[pid].dead = false;
-		processVec[pid].timeLeft = time;
-		processVec[pid].timeGiven = time;
-		processVec[pid].pid = pid;
-		processVec[pid].cr3 = cr3;
+		task_stack->it_eip = eip;
+		task_stack->it_cs = cs;
+		task_stack->it_flags = __getRegEFLAGS() | 0x200;
+		task_stack->it_esp = esp + sizeof(task_stack_t);
+		task_stack->it_ss = ss;
+		
+		proc_vec[pid].stack = *task_stack;
+		proc_vec[pid].esp = esp;
+		proc_vec[pid].dead = false;
+		proc_vec[pid].time_left = time;
+		proc_vec[pid].time_given = time;
+		proc_vec[pid].pid = pid;
+		proc_vec[pid].cr3 = cr3;
+		proc_vec[pid].priv_level = cs & 3;	// first 3 should 
 
-		readyQue.push_back(pid);
+		ready_que.push_back(pid);
 
+		asm volatile("sti");
 		return pid;
 	}
 
 	// probably needs protection
 	void kill (uint32 pid) {
-		processVec[pid].dead = true;
+		asm volatile("cli");
+		proc_vec[pid].dead = true;
+		asm volatile("sti");
 	}
 
 	// probably needs protection
 	uint32 getPid() {
-		return currentProcess;
+		asm volatile("sti");
+		uint32 ret_pid = curr_pid;
+		asm volatile("cli");
+		return ret_pid;
 	}
 
 	uint32 update (uint32 esp) {
-		// kprintf("pid %d esp: %x real_esp: %x\n", processVec[currentProcess].pid,
-		// 		processVec[currentProcess].esp, esp);
-		// static int upd_count = 0;
-		// if (upd_count++ > 205)
-		// 	while (true) {}
-		processVec[currentProcess].timeLeft--;
-		if (processVec[currentProcess].timeLeft <= 0 ||
-				processVec[currentProcess].dead)
-		{
-			switchCount++;
+		proc_vec[curr_pid].time_left--;
+		
+		if (proc_vec[curr_pid].time_left <= 0 || proc_vec[curr_pid].dead) {
+			switch_cnt++;
 
-			uint32 lastProcess = currentProcess;
-			readyQue.push_back(lastProcess);
+			uint32 prev_pid = curr_pid;
+			ready_que.push_back(prev_pid);
 
-			uint32 newProcess = readyQue.front();
-			readyQue.pop_front();
+			uint32 next_pid = ready_que.front();
+			ready_que.pop_front();
 
-			while (processVec[newProcess].dead) {
-				kprintf("%d finished execution\n", newProcess);
-				newProcess = readyQue.front();
-				readyQue.pop_front();
+			while (proc_vec[next_pid].dead) {
+				next_pid = ready_que.front();
+				ready_que.pop_front();
 			}
 
-			// kprintf("___ curr esp: %x", esp);
-			// kprintf("___ esp: %x", processVec[newProcess].esp);
-			// kprintf("___ pid: %x", processVec[newProcess].pid);
-			// kprintf("___ timeGiven: %x", processVec[newProcess].timeGiven);
-			// kprintf("\n");
+			if (prev_pid != next_pid) {
+				curr_pid = next_pid;
 
-			if (lastProcess != newProcess) {
-				processVec[lastProcess].esp = esp;
+				task_stack_t *task_stack = (task_stack_t *)esp;
 
-				currentProcess = newProcess;
-				processVec[newProcess].timeLeft =
-						processVec[newProcess].timeGiven;
-				__setCR3(processVec[newProcess].cr3);
+				if (proc_vec[prev_pid].priv_level == 3) {
+					proc_vec[prev_pid].stack = *task_stack;
+				}
+				else {
+					proc_vec[prev_pid].esp = esp;	
+				}
+				
+				proc_vec[next_pid].time_left = proc_vec[next_pid].time_given;
+				__setCR3(proc_vec[next_pid].cr3);
 
-				// kprintf("new process >> esp: %x\n", processVec[newProcess].esp);
-				return processVec[newProcess].esp;
+				if (proc_vec[next_pid].priv_level == 3) {
+					return (uint32)&proc_vec[next_pid].stack;
+				}
+				else {
+					return proc_vec[next_pid].esp;
+				}
 			}
 		}
 		return esp;

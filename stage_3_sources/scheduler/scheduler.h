@@ -39,12 +39,12 @@ namespace scheduler
 		}
 	};
 
-	extern Process processVec[MAX_PROCESS_COUNT];
-	extern uint32 currentProcess;
-	extern uint32 processCount;
-	extern ProcessIdQue readyQue;
-	extern ProcessIdQue waitQue;
-	extern uint32 switchCount;
+	extern Process proc_vec[MAX_PROCESS_COUNT];
+	extern uint32 curr_pid;
+	extern uint32 proc_cnt;
+	extern ProcessIdQue ready_que;
+	extern ProcessIdQue wait_que;
+	extern uint32 switch_cnt;
 
 	void kill (uint32 pid);
 	uint32 getPid();

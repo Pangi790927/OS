@@ -37,7 +37,7 @@ Disassembly of section .text:
     a060:	68 84 d1 00 00       	push   0xd184
     a065:	e8 36 11 00 00       	call   b1a0 <_Z6printfPKc>
     a06a:	c7 04 24 00 00 00 00 	mov    DWORD PTR [esp],0x0
-    a071:	68 e8 07 00 00       	push   0x7e8
+    a071:	68 00 10 00 00       	push   0x1000
     a076:	6a 00                	push   0x0
     a078:	68 80 00 00 00       	push   0x80
     a07d:	68 00 00 00 01       	push   0x1000000
@@ -53,7 +53,7 @@ Disassembly of section .text:
     a0a3:	e8 58 5f ff c0       	call   c1000000 <VGA_TEXT_MEMORY+0xc0f48000>
     a0a8:	eb fe                	jmp    a0a8 <kernel_2+0x98>
     a0aa:	6a 00                	push   0x0
-    a0ac:	68 e8 07 00 00       	push   0x7e8
+    a0ac:	68 00 10 00 00       	push   0x1000
     a0b1:	68 80 00 00 00       	push   0x80
     a0b6:	68 00 00 00 01       	push   0x1000000
     a0bb:	e8 10 03 00 00       	call   a3d0 <_ZN3ata9lba28ReadEPvjjh>

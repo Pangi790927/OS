@@ -43,7 +43,7 @@ STAGE_2_OBJS = kernel_stage_2_load_3.o									\
 STAGE_3_OBJS =  ${CRTI_ASM_OBJ}	$(CRTBEGIN_OBJ)	kernel_stage_3.o		\
 				$(STAGE_3_ASM_OBJS) $(STAGE_3_CPP_OBJS)					\
 				 $(CRTEND_OBJ) ${CRTN_ASM_OBJ}
-MAKE_ASM := true
+MAKE_ASM := false
 
 re: clean all
 

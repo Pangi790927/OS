@@ -1,5 +1,8 @@
 #include "memmanip.h"
 #include "algorithm.h"
+#include "klock.h"
+
+static kthread::Lock mem_lock;
 
 void *operator new (size_t size, void *p) { 
 	(void)size;
@@ -67,6 +70,7 @@ void *memmanip::sbrk (uint32 size) {
 }
 
 void memmanip::init (void *buffer) {
+	mem_lock.init();
 	start = end = buffer;	// this enables sbrk
 	addFreeChunkTags(firstFree = lastFree = sbrk(MIN_CHUNK_SIZE), 
 			MIN_CHUNK_SIZE / ALIGNMENT, NULL, NULL);
@@ -114,6 +118,7 @@ void memmanip::setPrev (void *ptr, void *prev) {
 }
 
 void *memmanip::malloc (uint32 size) {
+	mem_lock.lock();
 	size = (size + ALIGNMENT - 1) & -ALIGNMENT;
 	size += sizeof(uint32) * 2;
 	size = std::max(size, MIN_CHUNK_SIZE);
@@ -125,6 +130,8 @@ void *memmanip::malloc (uint32 size) {
 				removeNode(current);
 
 				addAllocChunkTags(current, getSize(current) / ALIGNMENT);
+
+				mem_lock.unlock();
 				return (char *)current + sizeof(uint32);
 			}
 			else {
@@ -137,6 +144,7 @@ void *memmanip::malloc (uint32 size) {
 				
 				addAllocChunkTags(current, size / ALIGNMENT);
 
+				mem_lock.unlock();
 				return (char *)current + sizeof(uint32);
 			}
 		}
@@ -145,6 +153,7 @@ void *memmanip::malloc (uint32 size) {
 	void *result = NULL;
 	addAllocChunkTags(result = sbrk(size), size / ALIGNMENT);
 
+	mem_lock.unlock();
 	return (char *)result + sizeof(uint32);
 }
 
@@ -216,17 +225,21 @@ void memmanip::freeChunk (void *chunkPtr, uint32 size, bool isNode) {
 }
 
 void memmanip::free (void *ptr) {
+	mem_lock.lock();
 	void *chunkPtr = (char *)ptr - sizeof(uint32);
 	if (getFreeStatus(chunkPtr)) {
 		kprintf("Bad free, %p, %d\n", chunkPtr, (uint32)((char *)chunkPtr -
 				(char *)start));
+		mem_lock.unlock();
 		return ;
 	}
 	uint32 size = getSize(chunkPtr);
 	freeChunk(chunkPtr, size);
+	mem_lock.unlock();
 }
 
 void memmanip::printMemory() {
+	mem_lock.lock();
 	kprintf("(count, offset, size, free, next, prev); first: %x last: %x\n", firstFree, lastFree);	
 	void *current = start;
 	int count = 1;
@@ -238,8 +251,10 @@ void memmanip::printMemory() {
 		
 		if (getSize(current) == 0) {
 			kprintf("Bad chunk\n");
+			mem_lock.unlock();
 			return ;
 		}
 		current = (char *)current + getSize(current);
 	}
+	mem_lock.unlock();
 }
