@@ -2,6 +2,7 @@
 #define IRQ_ISR_H
 
 #include "Types.h"
+#include "callbacks.h"
 
 namespace irq_isr
 {
@@ -25,8 +26,19 @@ namespace irq_isr
 	const uint8 OCW3_READ_IRR = 0x0a;	/* OCW3 irq ready next CMD read */
 	const uint8 OCW3_READ_ISR = 0x0b;	/* OCW3 irq service next CMD read */
 	
+	const uint32 MAX_CBK_COUNT = 128;
+	
+	void init(uint8 masterOffset = PIC_MASTER_OFFSET,
+			uint8 slaveOffset = PIC_SLAVE_OFFSET);
+
 	void remap (uint8 masterOffset = PIC_MASTER_OFFSET,
 			uint8 slaveOffset = PIC_SLAVE_OFFSET);
+
+	using fn_type = void(void *);
+	int add_interupt_fn (int int_number, const Callback<fn_type>& cbk);
+	int remove_interupt_fn (int int_number, const Callback<fn_type>& cbk);
+
+	uint64 get_irq0_count();
 
 	void aknowledge_irq_master();
 	void aknowledge_irq_slave();

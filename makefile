@@ -26,9 +26,9 @@ CXX = g++-7
 ASM = nasm
 # LD = ld
 
-CXX_FLAGS_2 = -m32 -ffreestanding -fno-rtti -fno-exceptions -std=c++1y -O2 -Wall -Wextra -Werror
-CXX_FLAGS_3 = -m32 -ffreestanding -fno-rtti -nostartfiles				\
-				-fno-exceptions -std=c++1y -O2 -Wall -Wextra -Werror
+CXX_FLAGS_2 = -m32 -ffreestanding -fno-rtti -fno-exceptions -g -std=c++1z -O2 -Wall -Wextra -Werror
+CXX_FLAGS_3 = -m32 -ffreestanding -fno-rtti -nostartfiles -g				\
+				-fno-exceptions -std=c++1z -O2 -Wall -Wextra -Werror
 
 CRTBEGIN_OBJ:=$(shell $(CXX) $(CXX_FLAGS_3) -print-file-name=crtbegin.o)
 CRTEND_OBJ:=$(shell $(CXX) $(CXX_FLAGS_3) -print-file-name=crtend.o)
@@ -43,7 +43,7 @@ STAGE_2_OBJS = kernel_stage_2_load_3.o									\
 STAGE_3_OBJS =  ${CRTI_ASM_OBJ}	$(CRTBEGIN_OBJ)	kernel_stage_3.o		\
 				$(STAGE_3_ASM_OBJS) $(STAGE_3_CPP_OBJS)					\
 				 $(CRTEND_OBJ) ${CRTN_ASM_OBJ}
-MAKE_ASM := false
+MAKE_ASM := true
 
 re: clean all
 
@@ -118,10 +118,10 @@ $(OS_IMAGE): stage1.bin stage2.bin stage3.bin superblock.ext2
 
 # run the operating system on a virtual machine
 run: $(OS_HDD)
-	qemu-system-i386 $(OS_HDD) -device isa-debug-exit,iobase=0xf4,iosize=0x04
+	qemu-system-i386 $(OS_HDD) -device isa-debug-exit,iobase=0xf4,iosize=0x04 -device e1000,mac=02:AA:BB:CC:DD:EE -gdb tcp::9000
 
 runb: $(OS_HDD)
-	bochs -q
+	bochs
 
 rerun: clean run
 

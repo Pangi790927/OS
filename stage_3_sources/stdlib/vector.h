@@ -2,8 +2,8 @@
 #define VECTOR_H
 
 #include <initializer_list>
+#include <utility>
 #include "algorithm.h"
-#include "utility.h"
 #include "libft.h"
 
 namespace std

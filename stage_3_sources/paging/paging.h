@@ -34,8 +34,7 @@ namespace paging
 	void registerPageK (void *physAddr, void *virtAddress, uint32 *pd,
 				uint32 ptFlags = READ_WRITE_BIT | PRESENT_BIT | USER_BIT,
 				uint32 pdFlags = READ_WRITE_BIT | PRESENT_BIT | USER_BIT);
-	void registerPageM (void *physAddr, void *virtAddress, uint32 *pd,
-				uint32 flags = READ_WRITE_BIT | PAGE_SIZE_BIT | PRESENT_BIT);
+	void adKernelToPd (uint32 *pd);
 	void printPD (uint32 *pd);
 	void printPT (uint32 *pd, uint32 index);
 	void loadCr3 (void *cr3);

@@ -12,7 +12,7 @@ static void __to_string_unsigned (IntType value, std::string& result, int mod) {
 	}
 }
 
-std::string std::to_string (int value, int mod = 10) {
+std::string std::to_string (int value, int mod) {
 	std::string result;
 
 	if (value == -2147483648) {
@@ -31,7 +31,7 @@ std::string std::to_string (int value, int mod = 10) {
 	return result;
 }
 
-std::string std::to_string (long value, int mod = 10) {
+std::string std::to_string (long value, int mod) {
 	(void)value;
 	(void)mod;
 	std::string result;
@@ -39,7 +39,7 @@ std::string std::to_string (long value, int mod = 10) {
 	return result;
 }
 
-std::string std::to_string (long long value, int mod = 10) {
+std::string std::to_string (long long value, int mod) {
 	(void)value;
 	(void)mod;
 	std::string result;	
@@ -47,13 +47,13 @@ std::string std::to_string (long long value, int mod = 10) {
 	return result;	
 }
 
-std::string std::to_string (unsigned value, int mod = 10) {
+std::string std::to_string (unsigned value, int mod) {
 	std::string result;
 	__to_string_unsigned(value, result, mod);
 	return result;
 }
 
-std::string std::to_string (unsigned long value, int mod = 10) {
+std::string std::to_string (unsigned long value, int mod) {
 	(void)value;
 	(void)mod;
 	std::string result;
@@ -61,7 +61,7 @@ std::string std::to_string (unsigned long value, int mod = 10) {
 	return result;
 }
 
-std::string std::to_string (unsigned long long value, int mod = 10) {
+std::string std::to_string (unsigned long long value, int mod) {
 	(void)value;
 	(void)mod;
 	std::string result;	
@@ -69,7 +69,7 @@ std::string std::to_string (unsigned long long value, int mod = 10) {
 	return result;	
 }
 
-std::string std::to_string (float value, int mod = 10) {
+std::string std::to_string (float value, int mod) {
 	(void)value;
 	(void)mod;
 	std::string result;	
@@ -77,7 +77,7 @@ std::string std::to_string (float value, int mod = 10) {
 	return result;	
 }
 
-std::string std::to_string (double value, int mod = 10) {
+std::string std::to_string (double value, int mod) {
 	(void)value;
 	(void)mod;
 	std::string result;
@@ -85,7 +85,7 @@ std::string std::to_string (double value, int mod = 10) {
 	return result;
 }
 
-std::string std::to_string (long double value, int mod = 10) {
+std::string std::to_string (long double value, int mod) {
 	(void)value;
 	(void)mod;
 	std::string result;

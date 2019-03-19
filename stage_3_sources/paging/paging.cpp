@@ -10,10 +10,12 @@ namespace paging
 	const uint32 _4Mib = 1024 * 1024 * 4;
 	const uint32 _4Kib = 1024 * 4;
 
+	// TO DO: CHECK IF PAGE CAN BE TAKEN
 	// physAddr and virtAddress must be 4Kib aligned
 	void registerPageK (void *physAddr, void *virtAddress, uint32 *pd,
 			uint32 ptFlags, uint32 pdFlags)
 	{
+		PhysPages *phys_pages = (PhysPages *)V_PHYS_PAGES_START;
 		// bits xxxx xxxx xx | xxxx xxxx xx | 0000 0000 0000 
 		// 		pd index		pt index
 		uint32 pdIndex = (uint32)virtAddress >> 22;
@@ -32,19 +34,41 @@ namespace paging
 			loadCr3(pd);
 		else
 			__invlpg((uint32)virtAddress);
+
+		(void)phys_pages;
+		phys_pages->remove_page((uint32)physAddr);
 	}
 
-	// physAddr and virtAddress must be 4Mib aligned
-	void registerPageM (void *physAddr, void *virtAddress, uint32 *pd,
-			uint32 flags)
-	{
-		// bits xxxx xxxx xx | 0000 0000 00 | 0000 0000 0000 
-		// 		pd index		pt index
-		uint32 pdIndex = (uint32)virtAddress >> 22;
+	void adKernelToPd (uint32 *pd) {
+		uint32 kernel_4Mib_count = KERNEL_END / _4Mib + 
+				(KERNEL_END % _4Mib != 0);
+		
+		pd[0] = READ_WRITE_BIT | PRESENT_BIT | 
+				PAGE_SIZE_BIT | USER_BIT | (0 * _4Mib);
+		pd[1] = READ_WRITE_BIT | PRESENT_BIT |
+				PAGE_SIZE_BIT | USER_BIT | (1 * _4Mib);
 
-		pd[pdIndex] = ((uint32)physAddr & 0xffc00000) | (flags & 0xfff);
-		loadCr3(pd);
+		/* Here we set the kernel pages acordignly */
+		for (uint32 i = 2; i < kernel_4Mib_count; i++)
+			pd[V_KERNEL_BASE / _4Mib + i] = (i * _4Mib) |
+					READ_WRITE_BIT | PRESENT_BIT | PAGE_SIZE_BIT | USER_BIT;
 	}
+
+	/* 4Mb pages are used only for mapping kernel pages */
+
+	// // physAddr and virtAddress must be 4Mib aligned
+	// void registerPageM (void *physAddr, void *virtAddress, uint32 *pd,
+	// 		uint32 flags)
+	// {
+	// 	// bits xxxx xxxx xx | 0000 0000 00 | 0000 0000 0000 
+	// 	// 		pd index		pt index
+	// 	uint32 pdIndex = (uint32)virtAddress >> 22;
+
+	// 	pd[pdIndex] = ((uint32)physAddr & 0xffc00000) | (flags & 0xfff);
+	// 	loadCr3(pd);
+
+	// 	phys_pages->remove_mb_page(physAddr);
+	// }
 
 	void printPD (uint32 *pd) {
 		for (int i = 0; i < 1024; i++) {
@@ -80,4 +104,39 @@ namespace paging
 	void loadCr3 (void *cr3) {
 		__setCR3((uint32)cr3);
 	}
+}
+
+/* Only those need to be implemented by the third stage */
+void PhysPages::add_page (uint32 address) {
+	// we asume the page was not already there
+	// the user must check it
+	kb_stack[kb_count++] = address;
+	uint32 index = (address / paging::_4Kib);
+	kb_bitmap[index / uint32_bit_count] |= 1 << (index % uint32_bit_count);
+}
+
+void PhysPages::remove_page (uint32 address) {
+	uint32 index = (address / paging::_4Kib);
+	kb_bitmap[index / uint32_bit_count] &= ~(1 << (index % uint32_bit_count));
+}
+
+uint32 PhysPages::pop_page() {
+	if (kb_count <= 0)
+		return NULL;
+
+	uint32 address = kb_stack[kb_count--];
+	uint32 index = (address / paging::_4Kib);
+
+	// we pop pages till we get a reall
+	while (!(kb_bitmap[index / uint32_bit_count] &
+			(1 << (index % uint32_bit_count))))
+	{
+		if (kb_count <= 0)
+			return NULL;
+
+		address = kb_stack[kb_count--];
+		index = kb_stack[kb_count--];
+	}
+
+	return address;
 }

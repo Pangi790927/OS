@@ -46,6 +46,8 @@ namespace scheduler
 	extern ProcessIdQue waitQue;
 	extern uint32 switchCount;
 
+	void kill (uint32 pid);
+	uint32 getPid();
 	void init (uint32 kernel_esp, uint32 kernel_eip);
 	uint32 update (uint32 interruptPushBase);
 	int addProcess (uint32 esp, uint32 eip, uint32 ss, uint32 cs,

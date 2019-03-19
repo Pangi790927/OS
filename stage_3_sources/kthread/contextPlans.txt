@@ -1,4 +1,0 @@
-
-while (lock.lock_try(lockVar)) {
-	
-} 

@@ -23,19 +23,24 @@
 #include "boot_data.h"
 #include "kiostream.h"
 #include "scheduler.h"
-#include "i8254x.h"
+#include "net.h"
+#include "netinfo.h"
+#include "kthread.h"
+#include "atomic32.h"
+#include "time.h"
 
 /*
 	Tasks:
+		* MAKE MALLOC, PRINTF and other functions THREAD SAFE !!!!!!
 		* Task Scheduler
 	Posible tasks:
+		* Network Driver
 		* implement map
 		* File system
 		* Read/Write with DMA from HDD
 		* support multiple media for boot
 		* VGA Graphics Mode
 		* More advanced graphics 
-		* Network Driver
 		* Shell
 		* Global constructors
 		# Fix bug in hexdump ??---is it fixed---??
@@ -123,6 +128,8 @@ bool commandExecute (std::vector<std::string> &args) {
 				"Mb" << std::endl;
 	else if (args[0] == "printpd")
 		paging::printPD((uint32 *)K_PAGING);
+	else if (args[0] == "netshow")
+		std::cout << net::netinfo() << std::endl;
 	else if (args[0] == "printpt") {
 		if (args.size() == 2)
 			paging::printPT((uint32 *)K_PAGING, atoi(args[1].c_str()));
@@ -141,6 +148,7 @@ bool commandExecute (std::vector<std::string> &args) {
 		std::cout << " * switchCount    - prints total task switches" << std::endl;
 		std::cout << " * printpd        - prints paging directory" << std::endl;
 		std::cout << " * printpt        - prints paging table at index" << std::endl;
+		std::cout << " * netshow        - prints network info" << std::endl;
 	}
 	else
 		std::cout << "command not found: " << args[0] << std::endl;
@@ -149,10 +157,80 @@ bool commandExecute (std::vector<std::string> &args) {
 
 // void printUserMode() asm ("printUserMode");
 void printUserMode() {
-	net::i8254x::Driver netDriver;
-
 	std::cout << "Wellcome to OS" << std::endl;
 	std::cout << "Commands are ready to be typed" << std::endl;
+
+	/* drivers that are not using port io can be initialized here */
+	/* putting them here enables us to use interrupts in iinitialization */
+	/* because in main interrupts are mainly disabled */
+	net::init();
+
+	// TO DO for kthreads:
+	// make them kernel space somehow ??
+	// repair double spawning thread
+	// repair locks and unlocks
+
+	// kthread::Thread t1(Callback<void(void *)>([](void *){
+	// 	for (int i = 0; i < 10; i++)
+	// 		kprintf("--%d--", i);
+	// }, NULL));
+
+	// kthread::Thread t2(Callback<void(void *)>([](void *){
+	// 	for (int i = 0; i < 10; i++)
+	// 		kprintf(",,%d--", i);
+	// }, NULL));
+
+	// kthread::Thread t3(Callback<void(void *)>([](void *){
+	// 	for (int i = 0; i < 10; i++)
+	// 		kprintf("..%d--", i);
+	// 	kprintf("\n");
+		
+	// }, NULL));
+
+	// kthread::Lock test_lock;
+	// kthread::Atomic32 i = -1;
+	// test_lock.init();
+
+	// struct ctx_t {
+	// 	kthread::Atomic32 *_i;
+	// 	kthread::Lock *lock;
+	// };
+	// ctx_t ctx = {&i, &test_lock};
+	// kthread::Thread t1(Callback<void(ctx_t *)>([](ctx_t *ctx) {
+	// 	kprintf("Will gpf here\n");
+	// 	asm volatile ("cli");
+	// 	asm volatile ("sti");
+	// 	kprintf("Ummm, no?\n");
+
+	// 	auto &i = *ctx->_i;
+	// 	while (i != 0)
+	// 		asm volatile ("");
+	// 	kprintf("i became 0\n");
+	// 	i++;
+	// 	kprintf("even i %d\n", i.load());
+	// 	while (i != 2)
+	// 		asm volatile ("");
+	// 		// kprintf("even i %d\n", i.load());
+	// 	kprintf("i became 2\n");
+	// 	i++;
+	// }, &ctx));
+
+	// kthread::Thread t2(Callback<void(ctx_t *)>([](ctx_t *ctx) {
+	// 	auto &i = *ctx->_i;
+	// 	while (i != 1)
+	// 		asm volatile ("");
+	// 		// kprintf("++: %d\n", i.load());
+	// 	kprintf("i became 1\n");
+	// 	i++;
+	// 	kprintf("odd i %d\n", i.load());
+	// 	while (i != 3)
+	// 		asm volatile ("");
+	// 		// kprintf("odd i %d\n", i.load());
+	// 	kprintf("i became 3\n");
+	// 	i++;
+	// }, &ctx));
+
+	// i = 0;
 
 	keyboard::KeyState keyState;
 	keyboard::init2KeyState(keyState);
@@ -223,19 +301,43 @@ void printUserMode() {
 	}
 	std::cout << "Tring to exit ..." << std::endl;
 
+	// if (t1.joinable())
+	// 	t1.join();
+	// if (t2.joinable())
+	// 	t2.join();
+	// if (t3.joinable())
+	// 	t3.join();
+
 	kprintf("Exiting ... \n");
 	outb(0xf4, 0x00);
 }
 
+bool last = false;
 void putCharAt() {
-	while (true) {
+	if (last)
 		VGA::_char_val_at(24, 79) = '/';
+	if (!last)
 		VGA::_char_val_at(24, 79) = '\\';
-	}
+	last = !last;
+	// scheduler::addProcess(V_K_STACK_START - 1024 * 1024, (uint32)&putCharAt,
+	// 			USER_DATA_SEL | 3, USER_CODE_SEL | 3, K_PAGING, 100);
+	// all processes must be killed before exiting and wait to be actualy killed
+	scheduler::kill(scheduler::getPid());
+	while (true)
+		asm volatile ("");
 }
 
 int main()
 {
+	/* -- entry -- */
+	/* gdt must be initialized first */
+	/* memory can be second */
+	/* idt, isr as soon as posible */
+	/* pit before scheduler is started */
+	/* drivers are initialized here (io ports will be unavailable) */
+	/* -- scheduler starts -- */
+	/* the rest can be initialized afterwards */
+
 	kclear_screen();
 
 	gdt::init_gdt();
@@ -256,21 +358,22 @@ int main()
 
 		idt::loadIDT();
 
-		irq_isr::remap();
-		irq_isr::sendMasterMask(0b1111'1100);
-		irq_isr::sendSlaveMask(0xff);
-		
-		keyboard::init();
+		irq_isr::init();
+		irq_isr::sendMasterMask(0b0000'0000);
+		irq_isr::sendSlaveMask(0b0000'0000);
 		
 		pit::initDefault(1000);
+		kthread::init();
+
+		keyboard::init();
 
 		__setIOPL(3);
 		scheduler::init(V_K_STACK_START, (uint32)&printUserMode);
-		scheduler::addProcess(V_K_STACK_START - 1024 * 1024, (uint32)&putCharAt,
-				USER_DATA_SEL | 3, USER_CODE_SEL | 3, K_PAGING, 100);
+		// scheduler::addProcess(V_K_STACK_START - 1024 * 1024, (uint32)&putCharAt,
+		// 		USER_DATA_SEL | 3, USER_CODE_SEL | 3, K_PAGING, 100);
 
 	/// will enable interrupts:
-	__switchToProcess(KERNEL_DATA_SEL, KERNEL_CODE_SEL,
+	__switchToProcess(USER_DATA_SEL | 3, USER_CODE_SEL | 3,
 			V_K_STACK_START, (uint32)&printUserMode);
 
 	// we will never get here, 

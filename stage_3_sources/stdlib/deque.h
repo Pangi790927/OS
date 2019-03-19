@@ -2,8 +2,8 @@
 #define DEQUE_H
 
 #include <initializer_list>
+#include <utility>
 #include "memory.h"
-#include "utility.h"
 
 namespace std
 {

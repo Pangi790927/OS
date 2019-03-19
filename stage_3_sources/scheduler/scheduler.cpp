@@ -21,6 +21,7 @@ namespace scheduler
 			processVec[i].dead = true;
 		currentProcess = addProcess(kernel_esp, kernel_eip,
 				KERNEL_DATA_SEL, KERNEL_CODE_SEL, K_PAGING, 100);
+		readyQue.pop_front(); // first process will not be in ready que
 	}
 
 	int addProcess (uint32 esp, uint32 eip, uint32 ss, uint32 cs,
@@ -66,25 +67,56 @@ namespace scheduler
 		return pid;
 	}
 
+	// probably needs protection
+	void kill (uint32 pid) {
+		processVec[pid].dead = true;
+	}
+
+	// probably needs protection
+	uint32 getPid() {
+		return currentProcess;
+	}
+
 	uint32 update (uint32 esp) {
+		// kprintf("pid %d esp: %x real_esp: %x\n", processVec[currentProcess].pid,
+		// 		processVec[currentProcess].esp, esp);
+		// static int upd_count = 0;
+		// if (upd_count++ > 205)
+		// 	while (true) {}
 		processVec[currentProcess].timeLeft--;
-		if (processVec[currentProcess].timeLeft <= 0) {
+		if (processVec[currentProcess].timeLeft <= 0 ||
+				processVec[currentProcess].dead)
+		{
 			switchCount++;
 
 			uint32 lastProcess = currentProcess;
+			readyQue.push_back(lastProcess);
+
 			uint32 newProcess = readyQue.front();
-			readyQue.push_back(readyQue.front());
 			readyQue.pop_front();
 
+			while (processVec[newProcess].dead) {
+				kprintf("%d finished execution\n", newProcess);
+				newProcess = readyQue.front();
+				readyQue.pop_front();
+			}
+
+			// kprintf("___ curr esp: %x", esp);
+			// kprintf("___ esp: %x", processVec[newProcess].esp);
+			// kprintf("___ pid: %x", processVec[newProcess].pid);
+			// kprintf("___ timeGiven: %x", processVec[newProcess].timeGiven);
+			// kprintf("\n");
+
 			if (lastProcess != newProcess) {
-				processVec[currentProcess].esp = esp;
+				processVec[lastProcess].esp = esp;
 
 				currentProcess = newProcess;
-				processVec[currentProcess].timeLeft =
-						processVec[currentProcess].timeGiven;
-				__setCR3(processVec[currentProcess].cr3);
+				processVec[newProcess].timeLeft =
+						processVec[newProcess].timeGiven;
+				__setCR3(processVec[newProcess].cr3);
 
-				return processVec[currentProcess].esp;
+				// kprintf("new process >> esp: %x\n", processVec[newProcess].esp);
+				return processVec[newProcess].esp;
 			}
 		}
 		return esp;

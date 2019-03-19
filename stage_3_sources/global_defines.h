@@ -1,6 +1,8 @@
 #ifndef GLOBAL_DEFINES_H
 #define GLOBAL_DEFINES_H
 
+#include "Types.h"
+
 /* Must be updated here and in kernel_stage_2_load_3.cpp
 ** also updated in README.md
 */
@@ -72,5 +74,31 @@
 /* Must be updated here
 */
 #define MAX_PROCESS_COUNT	8000
+
+/* Structure that holds physical pages info */
+struct PhysPages {
+	/*	The way it works:
+			You have all mb pages in the mb stack and what remains in kb
+			When you want a kb page you pop it from the kb stack. If the
+				stack is empty you pop a page from the mb stack and add all
+				1000 pages to the kb stack and pop it afterwards
+			If you want a mb page you pop it
+			Additionaly, if the page you pop is already in use you pop another
+			one. You remember what pages are in use in a bitmap. Whenever you
+			give back a page you set it in the bitmap
+	*/
+
+	static const uint32 kb_page_count = 1024 * 1024;
+	static const uint32 uint32_bit_count = sizeof(uint32) * 8;
+
+	uint32 kb_count;
+	uint32 kb_bitmap[kb_page_count / uint32_bit_count];
+	uint32 kb_stack[kb_page_count];
+
+	void init();
+	void add_page (uint32 address);
+	void remove_page (uint32 address);
+	uint32 pop_page();
+};
 
 #endif

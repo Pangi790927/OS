@@ -30,11 +30,11 @@ RAM
 ### RAM is partitioned as such:
 	* 0x0 - not a part of kernel
 	* 0x7c00 - boot loader (its size is 512 bytes andd will be loaded from disk)
-	* 0xA000 + the stack growing downoards, this stack is only for BIOS mode
+	* 0xA000 + the stack growing downoards, this stack is only for real mode
 	* 0xA000 - the kernel loader (stage 2), maximum 63k
-	* 0x100000 - the kernel page directory followed by the page tables
-	* 0x0e00000 + the kernel and kernel loader stack, it can grow till 0xa00000
-		from 0xa00000 to 0x800000 there is the interrupt stack
+	* 0x0100000 - the kernel page directory followed by the page tables
+	* 0x0e00000 + the kernel and kernel loader stack, it can grow till 0x0a00000
+		from 0x0a00000 to 0x0800000 there is the interrupt stack
 	* 0x1000000 - the kernel - maximum 16 MB
 	* 0x2000000 - kernel structures:
 		- physical pages

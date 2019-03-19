@@ -60,6 +60,12 @@ namespace pci
 		uint32 bar4;
 		uint32 bar5;
 
+		uint16 subsysID;
+		uint16 subsysVendorID;
+
+		uint8 intPin;
+		uint8 intLine;
+
 		Device () {}
 		Device (uint32 bus, uint32 device, uint32 func) 
 		: bus(bus), device(device), func(func) {}
@@ -126,7 +132,13 @@ namespace pci
 					toRead.bar4 = pci::configRead(bus, device, func, 8);
 					toRead.bar5 = pci::configRead(bus, device, func, 9);
 				}
-				return toRead; 
+
+				toRead.subsysVendorID = pci::configReadWord(bus, device, func, 11, 0);
+				toRead.subsysID = pci::configReadWord(bus, device, func, 11, 1);
+				toRead.intLine = pci::configReadByte(bus, device, func, 15, 0);
+				toRead.intPin = pci::configReadByte(bus, device, func, 15, 1);
+
+				return toRead;
 			}
 			else {
 				return Device(0, 0, 0);

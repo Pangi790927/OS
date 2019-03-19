@@ -70,12 +70,16 @@ void isr_error_13 (err_reg_isr regs) {
 		kprintf("eip: %x\n", regs.eip);
 		kprintf("ino: %d err: %x\n", regs.int_no, regs.err_code);
 		flag = true;
+		while (true)
+			asm volatile ("");
 	}
 }
 void isr_error_14 (err_reg_isr regs) {
 	kprintf("Int 14 :: Page Fault, cr2: 0x%x\n", __getCR2());
 	kprintf("ebp: %x esp: %x\n", regs.ebp, regs.esp);
 	kprintf("ino: %d err: %b\n", regs.int_no, regs.err_code);
+	while (true)
+		asm volatile ("");
 }
 void isr_error_16 (err_reg_isr regs) {kprintf("Interrupt 16 ...\n"); (void)regs;}
 void isr_error_17 (err_reg_isr regs) {kprintf("Interrupt 17 ...\n"); (void)regs;}
