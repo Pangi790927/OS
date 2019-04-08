@@ -47,6 +47,7 @@ namespace scheduler
 	extern uint32 switch_cnt;
 
 	void kill (uint32 pid);
+	void yield();
 	uint32 getPid();
 	void init (uint32 kernel_esp, uint32 kernel_eip);
 	uint32 update (uint32 interruptPushBase);

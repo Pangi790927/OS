@@ -82,6 +82,18 @@ namespace pci
 			return pci::configRead(bus, device, func, reg);
 		}
 
+		void writeByte (uint8 reg, uint8 byte, uint8 data) {
+			uint32 tmp = readReg(reg);
+			tmp = (tmp & ~(0xff << (8 * byte))) | (data << (8 * byte));
+			writeReg(reg, tmp);
+		}
+
+		void writeWord (uint8 reg, uint8 word, uint16 data) {
+			uint32 tmp = readReg(reg);
+			tmp = (tmp & ~(0xffff << (16 * word))) | (data << (16 * word));
+			writeReg(reg, tmp);
+		}
+
 		void writeReg (uint8 reg, uint32 data) {
 			pci::configWrite(bus, device, func, reg, data);
 		}

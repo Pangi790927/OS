@@ -39,6 +39,7 @@ namespace paging
 		phys_pages->remove_page((uint32)physAddr);
 	}
 
+	/* 4Mb pages are used only for mapping kernel pages */
 	void adKernelToPd (uint32 *pd) {
 		uint32 kernel_4Mib_count = KERNEL_END / _4Mib + 
 				(KERNEL_END % _4Mib != 0);
@@ -54,21 +55,29 @@ namespace paging
 					READ_WRITE_BIT | PRESENT_BIT | PAGE_SIZE_BIT | USER_BIT;
 	}
 
-	/* 4Mb pages are used only for mapping kernel pages */
+	uint32 addr2phy (uint32 virtual_addr, uint32 *pd) {
+		uint32 pd_index = virtual_addr >> 22;		
+		uint32 pt_index = (virtual_addr >> 12) & 0x3ff;
 
-	// // physAddr and virtAddress must be 4Mib aligned
-	// void registerPageM (void *physAddr, void *virtAddress, uint32 *pd,
-	// 		uint32 flags)
-	// {
-	// 	// bits xxxx xxxx xx | 0000 0000 00 | 0000 0000 0000 
-	// 	// 		pd index		pt index
-	// 	uint32 pdIndex = (uint32)virtAddress >> 22;
+		uint32 *pt = pd + 1024 + pd_index * 1024;
 
-	// 	pd[pdIndex] = ((uint32)physAddr & 0xffc00000) | (flags & 0xfff);
-	// 	loadCr3(pd);
+		/* If it isn't in pd than it is not mapped */
+		if (!(pd[pd_index] & PRESENT_BIT)) {
+			return 0;
+		}
 
-	// 	phys_pages->remove_mb_page(physAddr);
-	// }
+		/* Check to see if it is a 4MB page */
+		if (pd[pd_index] & PAGE_SIZE_BIT) {
+			return (pd[pd_index] & ~0x3ff'fff) + (virtual_addr & 0x3ff'fff);
+		}
+
+		/* If it isn't a 4MB and it isn't in pt thane it is not mapped */
+		if (!(pt[pt_index] & PRESENT_BIT)) {
+			return 0;
+		}
+
+		return (pt[pt_index] & ~0xfff) + (virtual_addr & 0xfff);
+	}
 
 	void printPD (uint32 *pd) {
 		for (int i = 0; i < 1024; i++) {
@@ -127,9 +136,9 @@ uint32 PhysPages::pop_page() {
 	uint32 address = kb_stack[kb_count--];
 	uint32 index = (address / paging::_4Kib);
 
-	// we pop pages till we get a reall
-	while (!(kb_bitmap[index / uint32_bit_count] &
-			(1 << (index % uint32_bit_count))))
+	// we pop pages till we get a really empty page
+	while (!(kb_bitmap[index / uint32_bit_count]
+			& (1 << (index % uint32_bit_count))))
 	{
 		if (kb_count <= 0)
 			return NULL;

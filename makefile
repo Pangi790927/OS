@@ -104,6 +104,7 @@ stage3.bin: stage3 $(STAGE_3_OBJS)
 	$(LD) -T stage_3.ld -m elf_i386 -o stage3.elf kernel_stage_3_start.o $(STAGE_3_OBJS)
 	objdump -d stage3.elf -M intel > stage3.o.asm
 	objcopy -O binary stage3.elf stage3.bin
+# 	cp stage3.elf stage3.bin
 
 superblock.ext2:
 	dd if=/dev/zero of=superblock.ext2  bs=1K  count=1
@@ -118,7 +119,12 @@ $(OS_IMAGE): stage1.bin stage2.bin stage3.bin superblock.ext2
 
 # run the operating system on a virtual machine
 run: $(OS_HDD)
-	qemu-system-i386 $(OS_HDD) -device isa-debug-exit,iobase=0xf4,iosize=0x04 -device e1000,mac=02:AA:BB:CC:DD:EE -gdb tcp::9000
+	sudo qemu-system-x86_64 $(OS_HDD)\
+			-device isa-debug-exit,iobase=0xf4,iosize=0x04\
+			-gdb tcp::9000\
+			-serial file:os_serial.log\
+			-net nic,model=e1000\
+			-net tap,ifname=tap0
 
 runb: $(OS_HDD)
 	bochs

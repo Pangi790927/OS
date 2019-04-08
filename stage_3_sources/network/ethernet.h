@@ -10,9 +10,16 @@ namespace net
 {
 	namespace eth
 	{
+		struct Ethernet {
+			std::shared_ptr<kthread::Thread> rx_thread;
+			
+			bool valid = false;
+		};
+
+		int init();
+		void uninit();
+		Ethernet &ethernet();
 		int send(void *packet, uint32 len);
-		int recv(void *packet, uint32 len);
-		int register_recv_cbk(void (*)(void));
 	}
 }
 

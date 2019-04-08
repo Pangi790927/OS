@@ -31,7 +31,7 @@
 ** linker should be updated with the virtual memory
 */
 #define KERNEL_START		0x01000000
-#define V_KERNEL_START		(0xc1000000)
+#define V_KERNEL_START		(KERNEL_START + V_KERNEL_BASE)
 
 /* Must be updated here
 ** also updated in README.md
@@ -43,6 +43,7 @@
 */
 #define PHYS_PAGES_START	0x2000000
 #define V_PHYS_PAGES_START	(PHYS_PAGES_START + V_KERNEL_BASE)
+#define V_KERNEL_SRC_END	V_PHYS_PAGES_START
 
 /* Must be updated here and not overlap with others
 ** also updated in README.md

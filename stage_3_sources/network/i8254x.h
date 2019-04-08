@@ -5,6 +5,10 @@
 #include "pci.h"
 #include "paging.h"
 #include "global_defines.h"
+#include "memory.h"
+#include "kthread.h"
+#include "klock.h"
+#include "atomic32.h"
 
 namespace net
 {
@@ -20,13 +24,24 @@ namespace net
 
 		static const uint32 REG_CTRL = 0x0000;
 		namespace CTRL { enum {
+			FD =	0b00000000'00000000'00000000'00000001,
 			ASDE =	0b00000000'00000000'00000000'00100000,
-			SLU =	0b00000000'00000000'00000000'01000000,
+			SLU =	0b00000000'00000000'00000000'01000000
 		};}
 		
 		static const uint32 REG_STATUS = 0x0008;
 		namespace STATUS { enum {
-
+			FD =		0b00000000'00000000'00000000'00000001,
+			LU =		0b00000000'00000000'00000000'00000010,
+			FN_ID =		0b00000000'00000000'00000000'00001100,
+			TXOFF =		0b00000000'00000000'00000000'00010000,
+			TBIMODE =	0b00000000'00000000'00000000'00100000,
+			SPEED =		0b00000000'00000000'00000000'11000000,
+			ASDV =		0b00000000'00000000'00000011'00000000,
+			PCI66 =		0b00000000'00000000'00001000'00000000,
+			BUS64 =		0b00000000'00000000'00010000'00000000,
+			PCIX_MODE =	0b00000000'00000000'00100000'00000000,
+			PCIXSPD =	0b00000000'00000000'11000000'00000000
 		};}
 
 		static const uint32 REG_EECD = 0x0010;
@@ -100,6 +115,30 @@ namespace net
 			NRTU =	0b00000010'00000000'00000000'00000000
 		};}
 
+		static const uint32 REG_MTA = 0x05200;
+		static const uint32 REG_RAL = 0x05400;
+		static const uint32 REG_RAH = 0x05404;
+		namespace RAH { enum {
+			RAH =	0b00000000'00000000'11111111'11111111,
+			AS =	0b00000000'00000011'00000000'00000000,
+			AV =	0b10000000'00000000'00000000'00000000
+		};}
+
+		namespace STATS { enum {
+			CRCERRS =	0x04000,
+			ALGNERRC =	0x04004,
+			RXERRC =	0x0400C,
+			MPC =		0x04010,
+			TPR =		0x040D0,
+			TPT =		0x040D4,
+			PTC64 =		0x040D8,
+			PTC127 =	0x040DC,
+			TORL =		0x040C0,
+			TORH =		0x040C4,
+			TOTL =		0x040C8,
+			TOTH =		0x040CC,
+		};}
+
 		static const uint32 interrupt_mask
 				= 	0b00000000'00000001'11110110'11011111;
 		static const uint32 bsex_val = 0b1;
@@ -128,7 +167,7 @@ namespace net
 			uint64 addr				: 64;	// addr
 			uint64 len				: 16;
 			uint64 crc_off			: 8;	// cso
-			uint64 comm				: 8;	// cmd
+			uint64 cmd				: 8;	// cmd
 			uint64 stat				: 4;	// status
 			uint64 reserved			: 4;	
 			uint64 css				: 8;	// css
@@ -140,33 +179,54 @@ namespace net
 		};
 		static_assert(sizeof(TxDesc) == TX_DESC_SIZE, "Wrong tx desc size");
 
-		pci::Device getFirstNetworkPciDevice();
-
 		class NetDriver {
 		public:
 			// those lengths must be a power of eight
-			static const uint32 RX_DESC_COUNT = 128;
+			static const uint32 RX_DESC_COUNT = 32;
 			static const uint32 TX_DESC_COUNT = 32;
 
 			static const uint32 REG_SPACE_SIZE = 0x20000;
 
+			/* Those values must be on a signle 64K cacheline and
+			alligned to 16 bytes, since this struct will be put on
+			the cacheline those descriptors must be first in class */
+			RxDesc rx_desc[RX_DESC_COUNT];
+			TxDesc tx_desc[TX_DESC_COUNT];
+			
+			uint8 *rx_buff[RX_DESC_COUNT];
+
 			bool valid;
-			pci::Device pciDevice;
+			pci::Device pci_device;
 			uint8 *mmio_base;
 			uint8 mac[6] = {0};
 
-			alignas(16) RxDesc rxDesc[RX_DESC_COUNT];
-			alignas(16) TxDesc txDesc[TX_DESC_COUNT];
+			uint32 rx_tail = 0;
+			uint32 tx_tail = RX_DESC_COUNT - 1;
+			kthread::Atomic32 tx_free_cnt = TX_DESC_COUNT;
+			kthread::Atomic32 rx_pending_cnt = 0;
 
-			uint16 rx_tail;
-			uint16 tx_tail;
+			kthread::Lock rx_lock;
+			kthread::Lock tx_lock;
 
 			NetDriver();
 			~NetDriver();
+			void enable();
+			void test_send (void *packet, uint32 len);
+			void interrupt_handle();
+			int tx_free();
+			int rx_pending();
+			int send (uint8 *packet, uint32 len);
+			int recv (uint8 *buff1, uint8 *buff2, uint32 max_len) ;
+
+		private:
+			uint16 read_eeprom(uint8 addr);
 			int initRX();
 			int initTX();
-			void enable();
-			uint16 readEEPROM(uint8 addr);
+			void insertReadAddress (uint8 addr[6], uint8 pos);
+			void update_pending_rx (bool in_int);
+			void update_free_tx (bool in_int);
+			void inc_tx_tail (bool in_int);
+			void inc_rx_tail (bool in_int);
 		};
 
 		int init();

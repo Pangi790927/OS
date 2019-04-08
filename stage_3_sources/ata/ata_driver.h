@@ -44,8 +44,8 @@ namespace ata
 	bool lba48PIORead (void *address, uint64 lba, uint16 sectorCount, uint8 device);
 	bool sendIdentify (uint8 device, bool &lba28, bool printData);
 
-	bool read (void *dst, uint64 hdd_addr, uint32 size, uint8 dev,
-			bool is_lba_32);
+	int init();
+	bool read (void *dst, uint64 hdd_addr, uint32 size, uint8 dev);
 }
 
 // if we decide that we need to discover the devices by hand

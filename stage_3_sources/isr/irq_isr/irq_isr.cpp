@@ -217,7 +217,7 @@ void isr_irq_15 () {
 }
 
 void set_irq_ISR() {
-	uint8 attr = isr::makeAttr(1, 0, 0, isr::INTR_GATE);
+	uint8 attr = isr::makeAttr(1, 3, 0, isr::INTR_GATE);
 	isr::addISR(0x20, irq0, KERNEL_CODE_SEL, attr);
 	isr::addISR(0x21, irq1, KERNEL_CODE_SEL, attr);
 	isr::addISR(0x22, irq2, KERNEL_CODE_SEL, attr);

@@ -38,6 +38,7 @@ namespace paging
 	void printPD (uint32 *pd);
 	void printPT (uint32 *pd, uint32 index);
 	void loadCr3 (void *cr3);
+	uint32 addr2phy (uint32 virtual_addr, uint32 *pd);
 }
 
 #endif

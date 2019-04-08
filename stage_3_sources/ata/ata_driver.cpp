@@ -1,7 +1,12 @@
 #include "ata_driver.h"
 #include "Types.h"
 #include "c_asm_func.h"
-#include "stdio.h"
+#include "kstdio.h"
+
+namespace ata
+{
+	bool is_lba_32 = false;
+}
 
 void ata::waitBSY() {
 	while (inb(PRIMARY_PORT | STATUS) & 0x80)
@@ -154,28 +159,36 @@ bool ata::sendIdentify (uint8 device, bool &lba28, bool printData) {
 	}
 
 	if (printData) {		
-		printf("identify result: \n");
-		for (int i = 0; i < 16; ++i) {
-			for (int j = 0; j < 16; ++j) {
-				printf("%x ", res[i * 16 + j]);
-			}
-			printf("\n");
-		}
-		printf("0 - %b\n83 - %b\n88 - %b\n", res[0], res[83], res[88]);
-		printf("60, 61 - %d\n", *(int *)(res + 60));
-		printf("100..103 - %x %x %x %x\n", res[100], res[101], res[102], res[103]);
+		kprintf("identify result: \n");
+		// for (int i = 0; i < 16; ++i) {
+		// 	for (int j = 0; j < 16; ++j) {
+		// 		kprintf("%x ", res[i * 16 + j]);
+		// 	}
+		// 	kprintf("\n");
+		// }
+		kprintf("0 - %b\n83 - %b\n88 - %b\n", res[0], res[83], res[88]);
+		kprintf("60, 61 - %d\n", *(int *)(res + 60));
+		kprintf("100..103 - %x %x %x %x\n", res[100], res[101], res[102], res[103]);
 
 		for (int i = 0; i < 40; i++)
-			printf("%c", ((char *)((uint16 *)res + 27))[i]);
-		printf("\n");
+			kprintf("%c", ((char *)((uint16 *)res + 27))[i]);
+		kprintf("\n");
+		// while (true) {}
 	}
 
 	lba28 = ((1 << 10) & res[83]) == 0;
 	return true;
 }
 
-bool ata::read (void *dst, uint64 hdd_addr, uint32 size, uint8 dev,
-		bool is_lba_32)
+int ata::init() {
+	if (!ata::sendIdentify(0, is_lba_32, false)) {
+		kprintf("Identify Failed\n");
+		return -1;
+	}
+	return 0;
+}
+
+bool ata::read (void *dst, uint64 hdd_addr, uint32 size, uint8 dev)
 {
 	using lba_read_t = decltype(&ata::lba48Read);
 	lba_read_t lba_read = is_lba_32 ? &ata::lba28Read : &ata::lba48Read;

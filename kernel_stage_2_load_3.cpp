@@ -5,47 +5,68 @@
 #include "paging.h"
 #include "../stage_3_sources/global_defines.h"
 #include "c_asm_func.h"
+#include "elf.h"
+#include "serial.h"
 
 int kernel_2() asm("kernel_2");
 
 extern int check_A20_on() asm("check_A20_on");
 extern void enable_A20() asm("enable_A20");
 
-#define xstr(a) str(a)
-#define str(a) #a
+#define KERN_SIZE (4096 * 512)
 
-#define KER_SECTOR_COUNT (1 * 4096)					// * 512 is the byte count	
-#define ASM_COMMAND "call " xstr(V_KERNEL_START)
+using lba_read_t = decltype(&ata::lba48Read);
+using stage3_entry_t = int (*)(void);
 
 int kernel_2()
 {
-	bool isLba28 = false;
+	serial::init();
+	serial::sendstr((char *)"first serial comm from os\n");
+
 	clear_screen();
 	printf("Stage 2!\n");
 
 	if (check_A20_on())
 		enable_A20();
 
+	paging::init_kernel_paging();
+	/* from here onwards we are in a limbo of virtual space and
+	indentity mapped pages */
+
+	bool isLba28 = false;
 	if (!ata::sendIdentify(0, isLba28, false))
 		printf("Identify Failed\n");
 
-	// using disk 0 in both cases
-	if (!isLba28) {
+	if (isLba28)
 		printf("Mode might be unsuported (if CHS)\n");
-		if (!ata::lba48Read((void *)KERNEL_START, KERNEL_ON_HDD / 512,
-				KER_SECTOR_COUNT, 0))
-			printf("Read Failed\n");
-		else
-			printf("Done Reading\n");
+
+	// int res = elf::load_elf_in_mem(KERNEL_ON_HDD,
+	// 	[](void *addr, uint32 hdd_addr, uint32 size, void *ctx) {
+	// 		if (!ata::read(addr, hdd_addr, size, 0, *(bool *)ctx))
+	// 			return -1;
+
+	// 		return 0;
+	// 	},
+	// 	&isLba28);
+
+	// if (res) {
+	// 	printf("Loading kernel in memory failed!\n");
+	// 	while (true) {}
+	// }
+
+	if (!ata::read((uint8 *)V_KERNEL_START, KERNEL_ON_HDD, KERN_SIZE, 0, isLba28))
+	{
+		printf("Loading kernel in memory failed!\n");
+		while (true) {}
 	}
-	else {
-		if (!ata::lba28Read((void *)KERNEL_START, KERNEL_ON_HDD / 512,
-				KER_SECTOR_COUNT, 0))
-			printf("Read Failed\n");
-		else
-			printf("Done Reading\n");
-	}
-	paging::init_kernel_paging();
+
+	stage3_entry_t stage3_entry = (stage3_entry_t)V_KERNEL_START;
+	stage3_entry();
+
+	/* you know it by now, never getting out */
+	while (true)
+		{}
+
 
 	// if (__isCpuidSuported()) {
 	// 	char vendorName[13];
@@ -80,11 +101,6 @@ int kernel_2()
 	// }
 	// printf("Data: %s\n", (void *)V_KERNEL_IN_RAM);
 	// while (  true);
-
-	asm volatile (ASM_COMMAND);
-	while (true) {
-		;				// you know it by now, never getting out
-	}
 
 	return 0;
 }

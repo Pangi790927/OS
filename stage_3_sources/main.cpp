@@ -28,6 +28,11 @@
 #include "kthread.h"
 #include "atomic32.h"
 #include "time.h"
+#include "netutils.h"
+#include "kerndiag.h"
+#include "ata_driver.h"
+#include "elf.h"
+#include "kern_elf.h"
 
 /*
 	Tasks:
@@ -109,7 +114,7 @@ void hexdump (std::vector<std::string> &args) {
 bool commandExecute (std::vector<std::string> &args) {
 	if (args[0] == "pci")
 		for (auto&& dev : pci::Device::getAll())
-			std::cout << dev << std::endl;
+			std::cout << dev;
 	else if (args[0] == "clear") {
 		kclear_screen();
 	}
@@ -138,6 +143,14 @@ bool commandExecute (std::vector<std::string> &args) {
 	else if (args[0] == "netshow") {
 		std::cout << net::netinfo() << std::endl;
 	}
+	else if (args[0] == "send") {
+		struct __attribute__((__packed__)) eth_hdr_t {
+				uint8 dest[6]; uint8 src[6]; uint16 type; };
+		auto &m = net::driver().mac;
+		eth_hdr_t eth_hdr = {{0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
+				{m[0], m[1], m[2], m[3], m[4], m[5]}, 0x0608};
+		net::driver().test_send(&eth_hdr, sizeof(eth_hdr));
+	}
 	else if (args[0] == "printpt") {
 		if (args.size() == 2) {
 			paging::printPT((uint32 *)K_PAGING, atoi(args[1].c_str()));
@@ -149,15 +162,18 @@ bool commandExecute (std::vector<std::string> &args) {
 	else if (args[0] == "help") {
 		std::cout << " * pci            - print pci status" << std::endl;
 		std::cout << " * clear          - clears the screen" << std::endl;
-		std::cout << " * memprint       - prints heap memory information" << std::endl;
+		std::cout << " * memprint       - prints heap memory information"
+				<< std::endl;
 		std::cout << " * hexdump        - print memory at "
 				"address: hexdump [addr] [size]" << std::endl;
 		std::cout << " * exit           - closes the computer" << std::endl;
 		std::cout << " * ramsize        - print the size of RAM" << std::endl;
 		std::cout << " * help           - prints this help" << std::endl;
-		std::cout << " * switchCount    - prints total task switches" << std::endl;
+		std::cout << " * switchCount    - prints total task switches"
+				<< std::endl;
 		std::cout << " * printpd        - prints paging directory" << std::endl;
-		std::cout << " * printpt        - prints paging table at index" << std::endl;
+		std::cout << " * printpt        - prints paging table at index"
+				<< std::endl;
 		std::cout << " * netshow        - prints network info" << std::endl;
 	}
 	else
@@ -173,7 +189,6 @@ void printUserMode() {
 	/* drivers that are not using port io can be initialized here */
 	/* putting them here enables us to use interrupts in iinitialization */
 	/* because in main interrupts are mainly disabled */
-
 	net::init();
 
 	keyboard::KeyState keyState;
@@ -183,6 +198,9 @@ void printUserMode() {
 	std::deque<uint32> keyList;
 	std::cout << "os$ ";
 	std::cout.flush();
+
+	KLOG("here I am\n");
+	kprintf("elf to str: %s\n", elf::kto_str().c_str());
 
 	bool kernel_alive = true;
 	while (kernel_alive) {
@@ -245,6 +263,8 @@ void printUserMode() {
 	}
 	std::cout << "Tring to exit ..." << std::endl;
 
+	kprintf("Cleaning up ...");
+	net::uninit();
 	kprintf("Exiting ... \n");
 	outb(0xf4, 0x00);
 }
@@ -253,7 +273,9 @@ char *put_char_stack;
 void putCharAt() {
 	while (true) {
 		VGA::_char_val_at(24, 79) = '/';
+		scheduler::yield();
 		VGA::_char_val_at(24, 79) = '\\';
+		scheduler::yield();
 	}
 	scheduler::kill(scheduler::getPid());
 	while (true)
@@ -264,7 +286,7 @@ int main()
 {
 	/* -- entry -- */
 	/* gdt must be initialized first */
-	/* memory can be second */
+	/* memory and diagnostics can be second */
 	/* idt, isr as soon as posible */
 	/* pit before scheduler is started */
 	/* drivers are initialized here (io ports will be unavailable) */
@@ -278,6 +300,9 @@ int main()
 	gdt::flush_tss(KERNEL_TSS_SEL | 3);
 
 	memmanip::init((void *)V_HEAP_START);
+	ata::init();
+	elf::init_kinfo();
+	kdbg::init();
 
 	/* Global constructors till we are able to call them automaticaly*/
 	new (&std::buff) std::kiobuf<char>(256);

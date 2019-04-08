@@ -153,12 +153,15 @@ namespace VGA {
 		unsigned int nb = number;
 		unsigned int mask = 0x8000'0000;
 
+		int i = 0;
 		while (mask) {
 			if (mask & nb)
 				putchar(_digits[1]);
 			else
 				putchar(_digits[0]);
 			mask = (mask >> 1);
+			if ((++i) % 8 == 0 && i != 32)
+				putchar('\'');
 		}
 	}
 }

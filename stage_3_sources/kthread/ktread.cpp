@@ -18,7 +18,7 @@ namespace kthread
 		stack = new char [stack_size];
 
 		scheduler::addProcess(uint32(stack + stack_size - 1), (uint32)&caller,
-			USER_DATA_SEL | 3, USER_CODE_SEL | 3, K_PAGING, 100);
+			KERNEL_DATA_SEL, KERNEL_CODE_SEL, K_PAGING, 100);
 	}
 
 	bool Thread::joinable() {
@@ -26,9 +26,9 @@ namespace kthread
 	}
 
 	void Thread::join() {
-		delete [] stack; 
 		while (done != true)
 			asm volatile ("");
+		delete [] stack; 
 	}
 
 	void Thread::caller() {

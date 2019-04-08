@@ -73,14 +73,28 @@ namespace scheduler
 		return pid;
 	}
 
-	// probably needs protection
 	void kill (uint32 pid) {
 		asm volatile("cli");
 		proc_vec[pid].dead = true;
 		asm volatile("sti");
+
+		/* We will now call the scheduler update interrupt (function bellow) */
+		asm volatile("int $32");
 	}
 
-	// probably needs protection
+	void yield() {
+		asm volatile("cli");
+		proc_vec[curr_pid].time_left = 0;
+		asm volatile("sti");
+
+		/* We will now call the scheduler update interrupt (function bellow) */
+		asm volatile("int $32");
+
+		/* A better system may be required because with this one we are
+		skipping sleep counts and we might call the update twice because a
+		task switch might happen right before the execution of int 32 */
+	}
+
 	uint32 getPid() {
 		asm volatile("sti");
 		uint32 ret_pid = curr_pid;

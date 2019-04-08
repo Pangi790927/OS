@@ -4,6 +4,7 @@
 #include "callbacks.h"
 #include "scheduler.h"
 #include "klock.h"
+#include "atomic32.h"
 #include "gdt.h"
 
 namespace kthread
@@ -15,7 +16,7 @@ namespace kthread
 		static const uint32 DEFAULT_STACK_SIZE = 65536;
 		char *stack;
 		Callback<void(void *)> cbk;
-		bool done = false; // must be replace with an atomic var
+		Atomic32 done = false; // must be replace with an atomic var
 
 		Thread (const Callback<void(void *)>& cbk,
 				uint32 stack_size = DEFAULT_STACK_SIZE);
