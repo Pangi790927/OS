@@ -67,19 +67,47 @@ namespace scheduler
 		proc_vec[pid].cr3 = cr3;
 		proc_vec[pid].priv_level = cs & 3;	// first 3 should 
 
+		proc_vec[pid].block_reason = NONE;
+		proc_vec[pid].in_queue = true;
+
 		ready_que.push_back(pid);
 
 		asm volatile("sti");
 		return pid;
 	}
 
+	static uint32 pop() {
+		uint32 next_pid = ready_que.front();
+		proc_vec[next_pid].in_queue = false;
+		ready_que.pop_front();
+		return next_pid;
+	}
+
+	static bool is_inactive (uint32 pid) {
+		return proc_vec[pid].dead || proc_vec[pid].block_reason != NONE;
+	}
+
+	static void push (uint32 pid) {
+		if (!is_inactive(pid))
+		{
+			proc_vec[pid].in_queue = true;
+			ready_que.push_back(pid);
+		}
+	}
+
 	void kill (uint32 pid) {
+		bool switch_task = false;
+
 		asm volatile("cli");
 		proc_vec[pid].dead = true;
+		proc_cnt--;
+		if (pid == curr_pid)
+			switch_task = true;
 		asm volatile("sti");
 
 		/* We will now call the scheduler update interrupt (function bellow) */
-		asm volatile("int $32");
+		if (switch_task)
+			asm volatile("int $32");
 	}
 
 	void yield() {
@@ -95,6 +123,30 @@ namespace scheduler
 		task switch might happen right before the execution of int 32 */
 	}
 
+	void block (uint32 pid, int reason) {
+		bool swtch_task = false;
+
+		asm volatile("cli");
+		if (!reason)
+			reason = ANY;
+		proc_vec[pid].block_reason = reason;
+		if (pid == curr_pid)
+			swtch_task = true;
+		asm volatile("sti");
+
+		if (swtch_task)
+			asm volatile("int $32");
+	}
+
+	void unblock (uint32 pid, int reason) {
+		(void)reason;
+		asm volatile("cli");
+		proc_vec[pid].block_reason = NONE;
+		if (!proc_vec[pid].in_queue)
+			push(pid);
+		asm volatile("sti");
+	}
+
 	uint32 getPid() {
 		asm volatile("sti");
 		uint32 ret_pid = curr_pid;
@@ -104,20 +156,20 @@ namespace scheduler
 
 	uint32 update (uint32 esp) {
 		proc_vec[curr_pid].time_left--;
-		
-		if (proc_vec[curr_pid].time_left <= 0 || proc_vec[curr_pid].dead) {
+
+		if (proc_vec[curr_pid].time_left <= 0 || is_inactive(curr_pid))
+		{
 			switch_cnt++;
 
+			if (proc_cnt <= 0)
+				kprintf("how did you manage to kill all pid's?");
+
 			uint32 prev_pid = curr_pid;
-			ready_que.push_back(prev_pid);
+			push(prev_pid);
 
-			uint32 next_pid = ready_que.front();
-			ready_que.pop_front();
-
-			while (proc_vec[next_pid].dead) {
-				next_pid = ready_que.front();
-				ready_que.pop_front();
-			}
+			uint32 next_pid = pop();
+			while (is_inactive(next_pid))
+				next_pid = pop();
 
 			if (prev_pid != next_pid) {
 				curr_pid = next_pid;
@@ -143,5 +195,17 @@ namespace scheduler
 			}
 		}
 		return esp;
+	}
+
+	std::vector<uint32> active_pids() {
+		std::vector<uint32> pid_list;
+		asm volatile("cli");
+		for (int i = ready_que.start; i != ready_que.end + 1;
+				i = (i + 1) % MAX_PROCESS_COUNT)
+		{
+			pid_list.push_back(ready_que.que[i]);
+		}
+		asm volatile("sti");
+		return pid_list;
 	}
 }

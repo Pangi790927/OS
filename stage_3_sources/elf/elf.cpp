@@ -40,10 +40,6 @@ namespace elf
 	}
 
 	int load_elf_in_mem (uint32 hdd_addr, load_fn load, void *ctx) {
-		(void)hdd_addr;
-		(void)load;
-		(void)ctx;
-
 		auto elf_hdr = load_file_hdr(hdd_addr, load, ctx);
 
 		kprintf("elf magic: %c%c%c%c\n", elf_hdr.magic[0], elf_hdr.magic[1],

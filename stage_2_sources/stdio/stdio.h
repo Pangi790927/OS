@@ -1,7 +1,10 @@
 #ifndef STDIO_H
 #define STDIO_H
 
-void clear_screen();
+#define LOG(fmt, ...)\
+	printf("[%s][line:%d][%s] " fmt "\n",\
+			__FILE__, __LINE__, __func__, ##__VA_ARGS__)
+
 void putchar(char c);
 void putdec (int number);
 void puthex (int number);

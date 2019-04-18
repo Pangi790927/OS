@@ -8,9 +8,11 @@ namespace elf
 	static uint8 file_hdr[sizeof(file_hdr_t)] = {0};
 	static prog_hdr_t *prog_hdrs = NULL;
 	static sect_hdr_t *sect_hdrs = NULL;
+	static char *str_section = NULL;
 
-	int store_kern_info (uint32 hdd_addr, load_fn load, void *ctx) {		
-		auto &file_hdr = kern_file_hdr() = load_file_hdr(hdd_addr, load, ctx);
+	int store_kern_info (uint32 hdd_addr, load_fn load, void *ctx) {
+		kern_file_hdr() = load_file_hdr(hdd_addr, load, ctx);
+		auto &file_hdr = kern_file_hdr();
 
 		if (file_hdr.magic[1] != 'E' || file_hdr.magic[2] != 'L' ||
 				file_hdr.magic[3] != 'F')
@@ -31,6 +33,19 @@ namespace elf
 		for (int i = 0; i < file_hdr.sect_cnt; i++)
 			sect_hdrs[i] = load_sect_hdr(hdd_addr + file_hdr.sect_off,
 					file_hdr.sect_hdr_size, i, load, ctx);
+
+		auto &str_sect_hdr = kern_sect_hdr(file_hdr.shstrndx);
+		if (str_sect_hdr.size) {
+			str_section = new char[str_sect_hdr.size];
+			if (!str_section)
+				return -1;
+		}
+
+		if (load(str_section, str_sect_hdr.offset + hdd_addr,
+				str_sect_hdr.size, ctx))
+		{
+			return -1;
+		}
 
 		return 0;
 	}
@@ -61,6 +76,10 @@ namespace elf
 			delete [] sect_hdrs;
 			sect_hdrs = NULL;
 		}
+		if (str_section) {
+			delete [] str_section;
+			str_section = NULL;
+		}
 	}
 
 	std::string kto_str() {
@@ -71,9 +90,14 @@ namespace elf
 		ret_str += file_hdr.magic[1];
 		ret_str += file_hdr.magic[2];
 		ret_str += file_hdr.magic[3];
+		ret_str += "\n";
 
-		kprintf("%c%c%c%c\n", file_hdr.magic[0], file_hdr.magic[1],
-				file_hdr.magic[2], file_hdr.magic[3]);
+		if (str_section) {
+			for (int i = 0; i < file_hdr.sect_cnt; i++) {
+				ret_str += str_section + sect_hdrs[i].name;
+				ret_str += "\n";
+			}
+		}
 
 		return ret_str;
 	}
@@ -85,7 +109,7 @@ namespace elf
 	prog_hdr_t &kern_prog_hdr (int index) {
 		if (index >= 0 && index < kern_file_hdr().prog_cnt)
 			return prog_hdrs[index];
-
+		kprintf("error selecting prog hdr!\n");
 		/* no way to detect the error without throwing an exception */
 		/* we can't throw exceptions yet */
 		return prog_hdrs[0];
@@ -94,6 +118,7 @@ namespace elf
 	sect_hdr_t &kern_sect_hdr (int index) {
 		if (index >= 0 && index < kern_file_hdr().sect_cnt)
 			return sect_hdrs[index];
+		kprintf("error selecting sector hdr!\n");
 		/* no way to detect the error without throwing an exception */
 		/* we can't throw exceptions yet */
 		return sect_hdrs[0];

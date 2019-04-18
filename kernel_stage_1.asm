@@ -13,7 +13,7 @@ stage_1:
 	call bios_print_end_of_line
 
 	mov bx, STAGE_2_OFFSET	; should retry this 3 fun times, we only try it once
-	mov cl, 5				; we are loading from the third sector
+	mov cl, 7				; we are loading from the 7'th sector
 	mov dh, 126				; 128 * 512 = 64k bytes, what is DMA error here? 
 	mov dl, [BOOT_DRIVE]	; 	are there any computers who might throw it?
 	call bios_load_memory	; if it fails it will halt 
@@ -53,6 +53,6 @@ times 510-($-$$) db 0
 dw 0xaa55
 
 ; the following string has 48 bytes, including the terminator
-db "This is a random string on the drive at pos 512", 0
+db "This is a random string on the drive at pos 512"
 
-times 1024-($-$$) db 0
+times 2048-($-$$) db '#'

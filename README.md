@@ -19,8 +19,9 @@ OS Image
 --------------------------------------------------------------------------------
 ### The OS Image will start with the kernel as such:
 	* 0 - 511 -> Stage 1, here the MBR should reside along the boot loader
-	* 512 - 1023 -> right now there is just a string
-	* 1024 - 64k -> stage 2
+	* 512 - 2048 -> right now there is just a string
+	* 2048 - 3072 -> superblock(will be moved at 1024 latter)
+	* 3072 - 64k -> stage 2
 	* 64k ... -> stage 3
 For testing the image is loaded in a OS.vhs file and run by virtualbox, this
 file won't be uploaded because it has 2 GB.

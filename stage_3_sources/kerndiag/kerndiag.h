@@ -6,11 +6,11 @@
 #define PRINT_LOG
 
 #define KLOG(fmt, ...)\
-		kdbg::log(__FILE__, __LINE__, __PRETTY_FUNCTION__\
+		kdbg::log(__FILE__, __LINE__, __func__\
 				, fmt ##__VA_ARGS__)
 
 #define PANIC(reason)\
-		panic(__FILE__, __LINE__, __PRETTY_FUNCTION__, reason)
+		panic(__FILE__, __LINE__, __func__, reason)
 
 namespace kdbg
 {

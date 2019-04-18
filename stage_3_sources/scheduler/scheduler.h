@@ -5,6 +5,7 @@
 #include "process.h"
 #include "global_defines.h"
 #include "deque.h"
+#include "vector.h"
 
 namespace scheduler
 {
@@ -39,6 +40,14 @@ namespace scheduler
 		}
 	};
 
+	enum BLOCK {
+		NONE = 0,
+		SEMAPHORE,
+		READ,
+		WRITE,
+		ANY
+	};
+
 	extern Process proc_vec[MAX_PROCESS_COUNT];
 	extern uint32 curr_pid;
 	extern uint32 proc_cnt;
@@ -49,10 +58,13 @@ namespace scheduler
 	void kill (uint32 pid);
 	void yield();
 	uint32 getPid();
+	void block (uint32 pid, int reason);
+	void unblock (uint32 pid, int reason);
 	void init (uint32 kernel_esp, uint32 kernel_eip);
 	uint32 update (uint32 interruptPushBase);
 	int addProcess (uint32 esp, uint32 eip, uint32 ss, uint32 cs,
 			uint32 cr3, uint32 time);
+	std::vector<uint32> active_pids();
 }
 
 #endif

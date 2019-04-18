@@ -36,6 +36,9 @@ public:
 	uint32 dead;
 	uint32 priv_level;
 	task_stack_t stack;
+
+	uint32 block_reason;
+	uint32 in_queue;
 };
 
 #endif

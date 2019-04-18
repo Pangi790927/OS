@@ -6,8 +6,9 @@ namespace net
 	{
 		enum ERROR {
 			NO_ERROR = 0,
-			DRIVER_NOT_LOADED = 1,
-			ETH_INIT_FAIL = 2
+			DRIVER_NOT_LOADED,
+			ETH_INIT_FAIL,
+			ETH_TOO_BIG
 		};
 
 		static uint8 eth_buff[sizeof(Ethernet)];
@@ -33,6 +34,10 @@ namespace net
 			return *(Ethernet *)&eth_buff;
 		}
 
-		int send(void *packet, uint32 len);
+		int send(void *packet, uint32 len) {
+			if (len > max_driver_tx_len())
+				return ETH_TOO_BIG;
+			return net::driver().send((uint8 *)packet, len);
+		}
 	}
 }

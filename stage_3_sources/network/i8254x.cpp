@@ -291,10 +291,6 @@ namespace net
 					rx_desc[i].addr = NULL;
 				}
 			}
-			// if (rx_thread) {
-			// 	if (rx_thread->joinable())
-			// 		rx_thread->join();
-			// }
 		}
 
 		void NetDriver::test_send (void *packet, uint32 len) {
@@ -323,7 +319,7 @@ namespace net
 					RXT0 - timer interrupt, we simply have packets on line
 				*/
 				/* head and tail should allways be 1 apart */
-
+				recv_cbk.call();
 				update_pending_rx(true);
 			}
 
@@ -356,6 +352,7 @@ namespace net
 			tx_lock.lock();
 			if (!tx_free()) {
 				/* No more space in send queue */
+				tx_lock.unlock();
 				return -1;	
 			}
 			TxDesc &first_free = tx_desc[tx_tail];
@@ -370,6 +367,10 @@ namespace net
 			update_free_tx(false);
 			tx_lock.unlock();
 
+			while (!first_free.stat /* IMPLEMENT TIMEOUT*/ ) 
+				{}
+			if (first_free.stat != TX_STAT::DD)
+				return -first_free.stat;
 			return 0;
 		}
 
@@ -380,10 +381,11 @@ namespace net
 			
 			// !! must be syncronized
 			/* here we will: move pending packet buff, update rx_tail */
-			
+
 			rx_lock.lock();
 			if (!rx_pending()) {
 				/* Can't recv if nothing is pending */
+				rx_lock.unlock();
 				return -1;
 			}
 			RxDesc &first_pending = rx_desc[madd(rx_tail, 1, RX_DESC_COUNT)];
@@ -391,7 +393,11 @@ namespace net
 			kprintf("recv err: %b\n", first_pending.err);
 			kprintf("recv stat: %b\n", first_pending.stat);
 			kprintf("recv len: %d\n", first_pending.len);
-			// check pending status
+
+			if (first_pending.err) {
+				rx_lock.unlock();
+				return -first_pending.err;
+			}
 			// move into buffers by lenght
 
 			inc_rx_tail(false);
@@ -399,6 +405,13 @@ namespace net
 			rx_lock.unlock();
 
 			return 0;
+		}
+
+		int NetDriver::add_cbk (const Callback<void(void *)>& cbk) {
+			asm volatile ("cli");
+			int ret = recv_cbk.insert(cbk);
+			asm volatile ("sti");
+			return ret;
 		}
 
 		void NetDriver::update_pending_rx (bool in_int) {
@@ -474,3 +487,4 @@ namespace net
 // -> follow qemu readme for build
 //			(git clone git://git.qemu-project.org/qemu.git)
 // -> sudo make install
+

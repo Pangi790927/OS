@@ -4,4466 +4,4323 @@ stage2.elf:     file format elf32-i386
 
 Disassembly of section .text:
 
-0000a000 <kernel_2-0x10>:
+0000a000 <_ZZ8kernel_2vENUlPvjjS_E_4_FUNES_jjS_-0x10>:
     a000:	bd 00 00 80 00       	mov    ebp,0x800000
     a005:	89 ec                	mov    esp,ebp
-    a007:	e8 04 00 00 00       	call   a010 <kernel_2>
-    a00c:	eb fe                	jmp    a00c <WHITE_ON_BLACK+0x9ffd>
+    a007:	e8 34 00 00 00       	call   a040 <kernel_2>
+    a00c:	eb fe                	jmp    a00c <_ZZ8kernel_2vENUlPvjjS_E_4_FUNES_jjS_-0x4>
     a00e:	66 90                	xchg   ax,ax
 
-0000a010 <kernel_2>:
-    a010:	83 ec 1c             	sub    esp,0x1c
-    a013:	e8 88 1b 00 00       	call   bba0 <_Z12clear_screenv>
-    a018:	83 ec 0c             	sub    esp,0xc
-    a01b:	68 d4 e1 00 00       	push   0xe1d4
-    a020:	e8 0b 1c 00 00       	call   bc30 <_Z6printfPKc>
-    a025:	e8 46 1c 00 00       	call   bc70 <_ZN6serial4initEv>
-    a02a:	c7 04 24 de e1 00 00 	mov    DWORD PTR [esp],0xe1de
-    a031:	e8 ba 1c 00 00       	call   bcf0 <_ZN6serial7sendstrEPc>
-    a036:	e8 b5 00 00 00       	call   a0f0 <check_A20_on>
-    a03b:	83 c4 10             	add    esp,0x10
-    a03e:	85 c0                	test   eax,eax
-    a040:	0f 85 92 00 00 00    	jne    a0d8 <kernel_2+0xc8>
-    a046:	e8 c5 0c 00 00       	call   ad10 <_ZN6paging18init_kernel_pagingEv>
-    a04b:	c6 44 24 0f 00       	mov    BYTE PTR [esp+0xf],0x0
-    a050:	83 ec 04             	sub    esp,0x4
-    a053:	6a 00                	push   0x0
-    a055:	8d 44 24 17          	lea    eax,[esp+0x17]
-    a059:	50                   	push   eax
-    a05a:	6a 00                	push   0x0
-    a05c:	e8 3f 09 00 00       	call   a9a0 <_ZN3ata12sendIdentifyEhRbb>
-    a061:	83 c4 10             	add    esp,0x10
-    a064:	84 c0                	test   al,al
-    a066:	74 5e                	je     a0c6 <kernel_2+0xb6>
-    a068:	0f b6 44 24 0f       	movzx  eax,BYTE PTR [esp+0xf]
-    a06d:	84 c0                	test   al,al
-    a06f:	75 3e                	jne    a0af <kernel_2+0x9f>
-    a071:	83 ec 08             	sub    esp,0x8
-    a074:	50                   	push   eax
-    a075:	6a 00                	push   0x0
-    a077:	68 00 00 20 00       	push   0x200000
-    a07c:	6a 00                	push   0x0
-    a07e:	68 00 00 01 00       	push   0x10000
-    a083:	68 00 00 00 c1       	push   0xc1000000
-    a088:	e8 33 06 00 00       	call   a6c0 <_ZN3ata4readEPvyjhb>
-    a08d:	83 c4 20             	add    esp,0x20
+0000a010 <_ZZ8kernel_2vENUlPvjjS_E_4_FUNES_jjS_>:
+    a010:	83 ec 14             	sub    esp,0x14
+    a013:	31 d2                	xor    edx,edx
+    a015:	8b 44 24 24          	mov    eax,DWORD PTR [esp+0x24]
+    a019:	0f b6 00             	movzx  eax,BYTE PTR [eax]
+    a01c:	50                   	push   eax
+    a01d:	6a 00                	push   0x0
+    a01f:	ff 74 24 28          	push   DWORD PTR [esp+0x28]
+    a023:	8b 44 24 28          	mov    eax,DWORD PTR [esp+0x28]
+    a027:	52                   	push   edx
+    a028:	50                   	push   eax
+    a029:	ff 74 24 2c          	push   DWORD PTR [esp+0x2c]
+    a02d:	e8 7e 08 00 00       	call   a8b0 <_ZN3ata4readEPvyjhb>
+    a032:	83 f0 01             	xor    eax,0x1
+    a035:	83 c4 2c             	add    esp,0x2c
+    a038:	0f b6 c0             	movzx  eax,al
+    a03b:	f7 d8                	neg    eax
+    a03d:	c3                   	ret    
+    a03e:	66 90                	xchg   ax,ax
+
+0000a040 <kernel_2>:
+    a040:	53                   	push   ebx
+    a041:	83 ec 18             	sub    esp,0x18
+    a044:	e8 97 1d 00 00       	call   bde0 <_ZN6serial4initEv>
+    a049:	83 ec 0c             	sub    esp,0xc
+    a04c:	68 20 03 01 00       	push   0x10320
+    a051:	e8 7a 1d 00 00       	call   bdd0 <_Z6printfPKc>
+    a056:	c7 04 24 30 09 01 00 	mov    DWORD PTR [esp],0x10930
+    a05d:	e8 6e 1d 00 00       	call   bdd0 <_Z6printfPKc>
+    a062:	e8 a9 02 00 00       	call   a310 <check_A20_on>
+    a067:	83 c4 10             	add    esp,0x10
+    a06a:	85 c0                	test   eax,eax
+    a06c:	0f 85 9d 00 00 00    	jne    a10f <kernel_2+0xcf>
+    a072:	e8 b9 0e 00 00       	call   af30 <_ZN6paging18init_kernel_pagingEv>
+    a077:	c6 44 24 0f 00       	mov    BYTE PTR [esp+0xf],0x0
+    a07c:	83 ec 04             	sub    esp,0x4
+    a07f:	6a 00                	push   0x0
+    a081:	8d 5c 24 17          	lea    ebx,[esp+0x17]
+    a085:	53                   	push   ebx
+    a086:	6a 00                	push   0x0
+    a088:	e8 83 0a 00 00       	call   ab10 <_ZN3ata12sendIdentifyEhRbb>
+    a08d:	83 c4 10             	add    esp,0x10
     a090:	84 c0                	test   al,al
-    a092:	74 09                	je     a09d <kernel_2+0x8d>
-    a094:	b8 00 00 00 c1       	mov    eax,0xc1000000
-    a099:	ff d0                	call   eax
-    a09b:	eb fe                	jmp    a09b <kernel_2+0x8b>
-    a09d:	83 ec 0c             	sub    esp,0xc
-    a0a0:	68 fc e2 00 00       	push   0xe2fc
-    a0a5:	e8 86 1b 00 00       	call   bc30 <_Z6printfPKc>
-    a0aa:	83 c4 10             	add    esp,0x10
-    a0ad:	eb fe                	jmp    a0ad <kernel_2+0x9d>
-    a0af:	83 ec 0c             	sub    esp,0xc
-    a0b2:	68 d8 e2 00 00       	push   0xe2d8
-    a0b7:	e8 74 1b 00 00       	call   bc30 <_Z6printfPKc>
-    a0bc:	0f b6 44 24 1f       	movzx  eax,BYTE PTR [esp+0x1f]
-    a0c1:	83 c4 10             	add    esp,0x10
-    a0c4:	eb ab                	jmp    a071 <kernel_2+0x61>
-    a0c6:	83 ec 0c             	sub    esp,0xc
-    a0c9:	68 f9 e1 00 00       	push   0xe1f9
-    a0ce:	e8 5d 1b 00 00       	call   bc30 <_Z6printfPKc>
-    a0d3:	83 c4 10             	add    esp,0x10
-    a0d6:	eb 90                	jmp    a068 <kernel_2+0x58>
-    a0d8:	e8 31 00 00 00       	call   a10e <enable_A20>
-    a0dd:	e9 64 ff ff ff       	jmp    a046 <kernel_2+0x36>
-    a0e2:	66 90                	xchg   ax,ax
-    a0e4:	66 90                	xchg   ax,ax
-    a0e6:	66 90                	xchg   ax,ax
-    a0e8:	66 90                	xchg   ax,ax
-    a0ea:	66 90                	xchg   ax,ax
-    a0ec:	66 90                	xchg   ax,ax
-    a0ee:	66 90                	xchg   ax,ax
+    a092:	74 60                	je     a0f4 <kernel_2+0xb4>
+    a094:	80 7c 24 0f 00       	cmp    BYTE PTR [esp+0xf],0x0
+    a099:	75 3e                	jne    a0d9 <kernel_2+0x99>
+    a09b:	83 ec 04             	sub    esp,0x4
+    a09e:	53                   	push   ebx
+    a09f:	68 10 a0 00 00       	push   0xa010
+    a0a4:	68 00 00 01 00       	push   0x10000
+    a0a9:	e8 c2 12 00 00       	call   b370 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_>
+    a0ae:	83 c4 10             	add    esp,0x10
+    a0b1:	85 c0                	test   eax,eax
+    a0b3:	75 09                	jne    a0be <kernel_2+0x7e>
+    a0b5:	b8 00 00 00 c1       	mov    eax,0xc1000000
+    a0ba:	ff d0                	call   eax
+    a0bc:	eb fe                	jmp    a0bc <kernel_2+0x7c>
+    a0be:	68 14 00 01 00       	push   0x10014
+    a0c3:	6a 3e                	push   0x3e
+    a0c5:	68 3a 09 01 00       	push   0x1093a
+    a0ca:	68 d0 03 01 00       	push   0x103d0
+    a0cf:	e8 fc 2f 00 00       	call   d0d0 <_Z6printfIPKcJiS1_EEvS1_T_DpT0_>
+    a0d4:	83 c4 10             	add    esp,0x10
+    a0d7:	eb fe                	jmp    a0d7 <kernel_2+0x97>
+    a0d9:	68 14 00 01 00       	push   0x10014
+    a0de:	6a 2b                	push   0x2b
+    a0e0:	68 3a 09 01 00       	push   0x1093a
+    a0e5:	68 98 03 01 00       	push   0x10398
+    a0ea:	e8 e1 2f 00 00       	call   d0d0 <_Z6printfIPKcJiS1_EEvS1_T_DpT0_>
+    a0ef:	83 c4 10             	add    esp,0x10
+    a0f2:	eb a7                	jmp    a09b <kernel_2+0x5b>
+    a0f4:	68 14 00 01 00       	push   0x10014
+    a0f9:	6a 28                	push   0x28
+    a0fb:	68 3a 09 01 00       	push   0x1093a
+    a100:	68 74 03 01 00       	push   0x10374
+    a105:	e8 c6 2f 00 00       	call   d0d0 <_Z6printfIPKcJiS1_EEvS1_T_DpT0_>
+    a10a:	83 c4 10             	add    esp,0x10
+    a10d:	eb 85                	jmp    a094 <kernel_2+0x54>
+    a10f:	e8 1a 02 00 00       	call   a32e <enable_A20>
+    a114:	e9 59 ff ff ff       	jmp    a072 <kernel_2+0x32>
+    a119:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
 
-0000a0f0 <check_A20_on>:
-    a0f0:	60                   	pusha  
-    a0f1:	bf 45 23 11 00       	mov    edi,0x112345
-    a0f6:	be 45 23 01 00       	mov    esi,0x12345
-    a0fb:	89 36                	mov    DWORD PTR [esi],esi
-    a0fd:	89 3f                	mov    DWORD PTR [edi],edi
-    a0ff:	a7                   	cmps   DWORD PTR ds:[esi],DWORD PTR es:[edi]
-    a100:	b8 00 00 00 00       	mov    eax,0x0
-    a105:	75 05                	jne    a10c <check_A20_on.A20_on>
-    a107:	b8 01 00 00 00       	mov    eax,0x1
-
-0000a10c <check_A20_on.A20_on>:
-    a10c:	61                   	popa   
-    a10d:	c3                   	ret    
-
-0000a10e <enable_A20>:
-    a10e:	60                   	pusha  
-    a10f:	e4 92                	in     al,0x92
-    a111:	0c 02                	or     al,0x2
-    a113:	e6 92                	out    0x92,al
-    a115:	61                   	popa   
-    a116:	c3                   	ret    
-    a117:	66 90                	xchg   ax,ax
-    a119:	66 90                	xchg   ax,ax
-    a11b:	66 90                	xchg   ax,ax
-    a11d:	66 90                	xchg   ax,ax
-    a11f:	90                   	nop
-
-0000a120 <vga_print_string_at_coords>:
-    a120:	60                   	pusha  
-    a121:	bf 00 80 0b 00       	mov    edi,0xb8000
-    a126:	b9 50 00 00 00       	mov    ecx,0x50
-    a12b:	f7 e1                	mul    ecx
-    a12d:	01 d8                	add    eax,ebx
-    a12f:	b9 02 00 00 00       	mov    ecx,0x2
-    a134:	f7 e1                	mul    ecx
-    a136:	01 c7                	add    edi,eax
-    a138:	eb 0b                	jmp    a145 <vga_print_string_at_coords.while_condition>
-
-0000a13a <vga_print_string_at_coords.while_start>:
-    a13a:	8a 06                	mov    al,BYTE PTR [esi]
-    a13c:	b4 0f                	mov    ah,0xf
-    a13e:	66 89 07             	mov    WORD PTR [edi],ax
-    a141:	83 c7 02             	add    edi,0x2
-    a144:	46                   	inc    esi
-
-0000a145 <vga_print_string_at_coords.while_condition>:
-    a145:	8a 06                	mov    al,BYTE PTR [esi]
-    a147:	3c 00                	cmp    al,0x0
-    a149:	75 ef                	jne    a13a <vga_print_string_at_coords.while_start>
-    a14b:	61                   	popa   
-    a14c:	c3                   	ret    
-    a14d:	66 90                	xchg   ax,ax
-    a14f:	90                   	nop
-
-0000a150 <__setCR4>:
-    a150:	55                   	push   ebp
-    a151:	89 e5                	mov    ebp,esp
-    a153:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
-    a156:	0f 22 e0             	mov    cr4,eax
-    a159:	5d                   	pop    ebp
-    a15a:	c3                   	ret    
-
-0000a15b <__getCR4>:
-    a15b:	0f 20 e0             	mov    eax,cr4
-    a15e:	c3                   	ret    
-
-0000a15f <__setCR3>:
-    a15f:	55                   	push   ebp
-    a160:	89 e5                	mov    ebp,esp
-    a162:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
-    a165:	0f 22 d8             	mov    cr3,eax
-    a168:	5d                   	pop    ebp
-    a169:	c3                   	ret    
-
-0000a16a <__getCR3>:
-    a16a:	0f 20 d8             	mov    eax,cr3
-    a16d:	c3                   	ret    
-
-0000a16e <__setCR2>:
-    a16e:	55                   	push   ebp
-    a16f:	89 e5                	mov    ebp,esp
-    a171:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
-    a174:	0f 22 d0             	mov    cr2,eax
-    a177:	5d                   	pop    ebp
-    a178:	c3                   	ret    
-
-0000a179 <__getCR2>:
-    a179:	0f 20 d0             	mov    eax,cr2
-    a17c:	c3                   	ret    
-
-0000a17d <__setCR0>:
-    a17d:	55                   	push   ebp
-    a17e:	89 e5                	mov    ebp,esp
-    a180:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
-    a183:	0f 22 c0             	mov    cr0,eax
-    a186:	5d                   	pop    ebp
-    a187:	c3                   	ret    
-
-0000a188 <__getCR0>:
-    a188:	0f 20 c0             	mov    eax,cr0
-    a18b:	c3                   	ret    
-    a18c:	66 90                	xchg   ax,ax
-    a18e:	66 90                	xchg   ax,ax
-
-0000a190 <__isCpuidSuported>:
-    a190:	9c                   	pushf  
-    a191:	9c                   	pushf  
-    a192:	81 34 24 00 00 20 00 	xor    DWORD PTR [esp],0x200000
-    a199:	9d                   	popf   
-    a19a:	9c                   	pushf  
-    a19b:	58                   	pop    eax
-    a19c:	33 04 24             	xor    eax,DWORD PTR [esp]
-    a19f:	9d                   	popf   
-    a1a0:	25 00 00 20 00       	and    eax,0x200000
-    a1a5:	c3                   	ret    
-
-0000a1a6 <__getCpuidVendor>:
-    a1a6:	55                   	push   ebp
-    a1a7:	89 e5                	mov    ebp,esp
-    a1a9:	53                   	push   ebx
-    a1aa:	51                   	push   ecx
-    a1ab:	52                   	push   edx
-    a1ac:	b8 00 00 00 00       	mov    eax,0x0
-    a1b1:	0f a2                	cpuid  
-    a1b3:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
-    a1b6:	89 18                	mov    DWORD PTR [eax],ebx
-    a1b8:	89 50 04             	mov    DWORD PTR [eax+0x4],edx
-    a1bb:	89 48 08             	mov    DWORD PTR [eax+0x8],ecx
-    a1be:	5a                   	pop    edx
-    a1bf:	59                   	pop    ecx
-    a1c0:	5b                   	pop    ebx
-    a1c1:	5d                   	pop    ebp
-    a1c2:	c3                   	ret    
-
-0000a1c3 <__getCpuidFeatures>:
-    a1c3:	55                   	push   ebp
-    a1c4:	89 e5                	mov    ebp,esp
-    a1c6:	51                   	push   ecx
-    a1c7:	52                   	push   edx
-    a1c8:	b8 01 00 00 00       	mov    eax,0x1
-    a1cd:	0f a2                	cpuid  
-    a1cf:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
-    a1d2:	89 10                	mov    DWORD PTR [eax],edx
-    a1d4:	89 48 04             	mov    DWORD PTR [eax+0x4],ecx
-    a1d7:	5a                   	pop    edx
-    a1d8:	59                   	pop    ecx
-    a1d9:	5d                   	pop    ebp
-    a1da:	c3                   	ret    
-    a1db:	66 90                	xchg   ax,ax
-    a1dd:	66 90                	xchg   ax,ax
-    a1df:	90                   	nop
-
-0000a1e0 <_ZN3ata7waitBSYEv>:
-    a1e0:	83 ec 0c             	sub    esp,0xc
-    a1e3:	90                   	nop
-    a1e4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    a1e8:	83 ec 0c             	sub    esp,0xc
-    a1eb:	68 f7 01 00 00       	push   0x1f7
-    a1f0:	e8 bb 1b 00 00       	call   bdb0 <_Z3inbt>
-    a1f5:	83 c4 10             	add    esp,0x10
-    a1f8:	84 c0                	test   al,al
-    a1fa:	78 ec                	js     a1e8 <_ZN3ata7waitBSYEv+0x8>
-    a1fc:	83 c4 0c             	add    esp,0xc
-    a1ff:	c3                   	ret    
-
-0000a200 <_ZN3ata7waitDSQEv>:
-    a200:	83 ec 0c             	sub    esp,0xc
-    a203:	eb 07                	jmp    a20c <_ZN3ata7waitDSQEv+0xc>
+0000a120 <_Z19self_check_test_atab>:
+    a120:	55                   	push   ebp
+    a121:	57                   	push   edi
+    a122:	56                   	push   esi
+    a123:	53                   	push   ebx
+    a124:	81 ec 2c 0a 00 00    	sub    esp,0xa2c
+    a12a:	8b 94 24 40 0a 00 00 	mov    edx,DWORD PTR [esp+0xa40]
+    a131:	8d 84 24 20 0a 00 00 	lea    eax,[esp+0xa20]
+    a138:	8d 5c 24 20          	lea    ebx,[esp+0x20]
+    a13c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    a140:	c6 03 00             	mov    BYTE PTR [ebx],0x0
+    a143:	83 c3 01             	add    ebx,0x1
+    a146:	39 c3                	cmp    ebx,eax
+    a148:	75 f6                	jne    a140 <_Z19self_check_test_atab+0x20>
+    a14a:	0f b6 c2             	movzx  eax,dl
+    a14d:	c7 44 24 1c 00 00 00 	mov    DWORD PTR [esp+0x1c],0x0
+    a154:	00 
+    a155:	89 44 24 18          	mov    DWORD PTR [esp+0x18],eax
+    a159:	83 ec 0c             	sub    esp,0xc
+    a15c:	be 00 02 00 00       	mov    esi,0x200
+    a161:	8b 7c 24 28          	mov    edi,DWORD PTR [esp+0x28]
+    a165:	57                   	push   edi
+    a166:	68 00 00 01 00       	push   0x10000
+    a16b:	6a 78                	push   0x78
+    a16d:	68 3a 09 01 00       	push   0x1093a
+    a172:	68 04 04 01 00       	push   0x10404
+    a177:	e8 c4 36 00 00       	call   d840 <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_>
+    a17c:	8d 44 24 40          	lea    eax,[esp+0x40]
+    a180:	01 f8                	add    eax,edi
+    a182:	31 ff                	xor    edi,edi
+    a184:	89 44 24 34          	mov    DWORD PTR [esp+0x34],eax
+    a188:	83 c4 20             	add    esp,0x20
+    a18b:	c7 44 24 10 00 00 00 	mov    DWORD PTR [esp+0x10],0x0
+    a192:	00 
+    a193:	83 ec 0c             	sub    esp,0xc
+    a196:	8b 6c 24 1c          	mov    ebp,DWORD PTR [esp+0x1c]
+    a19a:	55                   	push   ebp
+    a19b:	68 00 00 01 00       	push   0x10000
+    a1a0:	6a 7a                	push   0x7a
+    a1a2:	68 3a 09 01 00       	push   0x1093a
+    a1a7:	68 54 09 01 00       	push   0x10954
+    a1ac:	e8 8f 36 00 00       	call   d840 <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_>
+    a1b1:	83 c4 20             	add    esp,0x20
+    a1b4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    a1b8:	89 e9                	mov    ecx,ebp
+    a1ba:	2b 4c 24 10          	sub    ecx,DWORD PTR [esp+0x10]
+    a1be:	83 ec 08             	sub    esp,0x8
+    a1c1:	ff 74 24 20          	push   DWORD PTR [esp+0x20]
+    a1c5:	6a 00                	push   0x0
+    a1c7:	51                   	push   ecx
+    a1c8:	89 4c 24 20          	mov    DWORD PTR [esp+0x20],ecx
+    a1cc:	57                   	push   edi
+    a1cd:	56                   	push   esi
+    a1ce:	ff 74 24 30          	push   DWORD PTR [esp+0x30]
+    a1d2:	e8 d9 06 00 00       	call   a8b0 <_ZN3ata4readEPvyjhb>
+    a1d7:	83 c4 20             	add    esp,0x20
+    a1da:	84 c0                	test   al,al
+    a1dc:	8b 4c 24 0c          	mov    ecx,DWORD PTR [esp+0xc]
+    a1e0:	0f 84 f2 00 00 00    	je     a2d8 <_Z19self_check_test_atab+0x1b8>
+    a1e6:	8d 44 24 20          	lea    eax,[esp+0x20]
+    a1ea:	31 d2                	xor    edx,edx
+    a1ec:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    a1f0:	80 38 01             	cmp    BYTE PTR [eax],0x1
+    a1f3:	83 da ff             	sbb    edx,0xffffffff
+    a1f6:	83 c0 01             	add    eax,0x1
+    a1f9:	39 c3                	cmp    ebx,eax
+    a1fb:	75 f3                	jne    a1f0 <_Z19self_check_test_atab+0xd0>
+    a1fd:	39 ca                	cmp    edx,ecx
+    a1ff:	75 4f                	jne    a250 <_Z19self_check_test_atab+0x130>
+    a201:	8d 4c 24 20          	lea    ecx,[esp+0x20]
     a205:	8d 76 00             	lea    esi,[esi+0x0]
-    a208:	a8 08                	test   al,0x8
-    a20a:	75 24                	jne    a230 <_ZN3ata7waitDSQEv+0x30>
-    a20c:	83 ec 0c             	sub    esp,0xc
-    a20f:	68 f7 01 00 00       	push   0x1f7
-    a214:	e8 97 1b 00 00       	call   bdb0 <_Z3inbt>
-    a219:	83 c4 10             	add    esp,0x10
-    a21c:	a8 01                	test   al,0x1
-    a21e:	74 e8                	je     a208 <_ZN3ata7waitDSQEv+0x8>
-    a220:	31 c0                	xor    eax,eax
-    a222:	83 c4 0c             	add    esp,0xc
-    a225:	c3                   	ret    
-    a226:	8d 76 00             	lea    esi,[esi+0x0]
-    a229:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
-    a230:	b8 01 00 00 00       	mov    eax,0x1
-    a235:	83 c4 0c             	add    esp,0xc
-    a238:	c3                   	ret    
-    a239:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    a208:	c6 01 00             	mov    BYTE PTR [ecx],0x0
+    a20b:	83 c1 01             	add    ecx,0x1
+    a20e:	39 c8                	cmp    eax,ecx
+    a210:	75 f6                	jne    a208 <_Z19self_check_test_atab+0xe8>
+    a212:	83 c5 40             	add    ebp,0x40
+    a215:	81 fd ff 03 00 00    	cmp    ebp,0x3ff
+    a21b:	76 9b                	jbe    a1b8 <_Z19self_check_test_atab+0x98>
+    a21d:	83 44 24 10 40       	add    DWORD PTR [esp+0x10],0x40
+    a222:	83 c6 40             	add    esi,0x40
+    a225:	8b 44 24 10          	mov    eax,DWORD PTR [esp+0x10]
+    a229:	83 d7 00             	adc    edi,0x0
+    a22c:	3d 00 04 00 00       	cmp    eax,0x400
+    a231:	0f 85 5c ff ff ff    	jne    a193 <_Z19self_check_test_atab+0x73>
+    a237:	83 44 24 1c 01       	add    DWORD PTR [esp+0x1c],0x1
+    a23c:	8b 44 24 1c          	mov    eax,DWORD PTR [esp+0x1c]
+    a240:	3d 00 02 00 00       	cmp    eax,0x200
+    a245:	0f 85 0e ff ff ff    	jne    a159 <_Z19self_check_test_atab+0x39>
+    a24b:	31 c0                	xor    eax,eax
+    a24d:	eb 7e                	jmp    a2cd <_Z19self_check_test_atab+0x1ad>
+    a24f:	90                   	nop
+    a250:	89 c8                	mov    eax,ecx
+    a252:	89 54 24 18          	mov    DWORD PTR [esp+0x18],edx
+    a256:	83 ec 04             	sub    esp,0x4
+    a259:	89 44 24 10          	mov    DWORD PTR [esp+0x10],eax
+    a25d:	55                   	push   ebp
+    a25e:	ff 74 24 18          	push   DWORD PTR [esp+0x18]
+    a262:	ff 74 24 28          	push   DWORD PTR [esp+0x28]
+    a266:	68 00 00 01 00       	push   0x10000
+    a26b:	68 8a 00 00 00       	push   0x8a
+    a270:	68 3a 09 01 00       	push   0x1093a
+    a275:	68 58 04 01 00       	push   0x10458
+    a27a:	e8 21 3c 00 00       	call   dea0 <_Z6printfIPKcJiS1_jjjEEvS1_T_DpT0_>
+    a27f:	83 c4 18             	add    esp,0x18
+    a282:	8b 4c 24 20          	mov    ecx,DWORD PTR [esp+0x20]
+    a286:	51                   	push   ecx
+    a287:	8b 54 24 18          	mov    edx,DWORD PTR [esp+0x18]
+    a28b:	52                   	push   edx
+    a28c:	68 00 00 01 00       	push   0x10000
+    a291:	68 8b 00 00 00       	push   0x8b
+    a296:	68 3a 09 01 00       	push   0x1093a
+    a29b:	68 94 04 01 00       	push   0x10494
+    a2a0:	e8 6b 38 00 00       	call   db10 <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_>
+    a2a5:	83 c4 14             	add    esp,0x14
+    a2a8:	ff 74 24 20          	push   DWORD PTR [esp+0x20]
+    a2ac:	68 00 00 01 00       	push   0x10000
+    a2b1:	68 8c 00 00 00       	push   0x8c
+    a2b6:	68 3a 09 01 00       	push   0x1093a
+    a2bb:	68 c4 04 01 00       	push   0x104c4
+    a2c0:	e8 5b 32 00 00       	call   d520 <_Z6printfIPKcJiS1_PcEEvS1_T_DpT0_>
+    a2c5:	83 c4 20             	add    esp,0x20
+    a2c8:	b8 ff ff ff ff       	mov    eax,0xffffffff
+    a2cd:	81 c4 2c 0a 00 00    	add    esp,0xa2c
+    a2d3:	5b                   	pop    ebx
+    a2d4:	5e                   	pop    esi
+    a2d5:	5f                   	pop    edi
+    a2d6:	5d                   	pop    ebp
+    a2d7:	c3                   	ret    
+    a2d8:	68 00 00 01 00       	push   0x10000
+    a2dd:	6a 7f                	push   0x7f
+    a2df:	68 3a 09 01 00       	push   0x1093a
+    a2e4:	68 2c 04 01 00       	push   0x1042c
+    a2e9:	e8 e2 2d 00 00       	call   d0d0 <_Z6printfIPKcJiS1_EEvS1_T_DpT0_>
+    a2ee:	83 c4 10             	add    esp,0x10
+    a2f1:	b8 ff ff ff ff       	mov    eax,0xffffffff
+    a2f6:	81 c4 2c 0a 00 00    	add    esp,0xa2c
+    a2fc:	5b                   	pop    ebx
+    a2fd:	5e                   	pop    esi
+    a2fe:	5f                   	pop    edi
+    a2ff:	5d                   	pop    ebp
+    a300:	c3                   	ret    
+    a301:	66 90                	xchg   ax,ax
+    a303:	66 90                	xchg   ax,ax
+    a305:	66 90                	xchg   ax,ax
+    a307:	66 90                	xchg   ax,ax
+    a309:	66 90                	xchg   ax,ax
+    a30b:	66 90                	xchg   ax,ax
+    a30d:	66 90                	xchg   ax,ax
+    a30f:	90                   	nop
 
-0000a240 <_ZN3ata12lba28PIOReadEPvjhh>:
-    a240:	55                   	push   ebp
-    a241:	57                   	push   edi
-    a242:	56                   	push   esi
-    a243:	53                   	push   ebx
-    a244:	83 ec 24             	sub    esp,0x24
-    a247:	8b 5c 24 3c          	mov    ebx,DWORD PTR [esp+0x3c]
-    a24b:	0f b6 54 24 44       	movzx  edx,BYTE PTR [esp+0x44]
-    a250:	8b 7c 24 40          	mov    edi,DWORD PTR [esp+0x40]
-    a254:	89 d8                	mov    eax,ebx
-    a256:	c1 e8 18             	shr    eax,0x18
-    a259:	c1 e2 04             	shl    edx,0x4
-    a25c:	83 ca e0             	or     edx,0xffffffe0
-    a25f:	83 e0 0f             	and    eax,0xf
-    a262:	09 d0                	or     eax,edx
-    a264:	0f b6 c0             	movzx  eax,al
-    a267:	50                   	push   eax
-    a268:	68 f6 01 00 00       	push   0x1f6
-    a26d:	e8 ee 1a 00 00       	call   bd60 <_Z4outbth>
-    a272:	58                   	pop    eax
-    a273:	5a                   	pop    edx
-    a274:	6a 00                	push   0x0
-    a276:	68 f1 01 00 00       	push   0x1f1
-    a27b:	e8 e0 1a 00 00       	call   bd60 <_Z4outbth>
-    a280:	59                   	pop    ecx
-    a281:	89 f8                	mov    eax,edi
-    a283:	5e                   	pop    esi
-    a284:	0f b6 f8             	movzx  edi,al
-    a287:	57                   	push   edi
-    a288:	68 f2 01 00 00       	push   0x1f2
-    a28d:	e8 ce 1a 00 00       	call   bd60 <_Z4outbth>
-    a292:	5d                   	pop    ebp
-    a293:	58                   	pop    eax
-    a294:	0f b6 c3             	movzx  eax,bl
-    a297:	50                   	push   eax
-    a298:	68 f3 01 00 00       	push   0x1f3
-    a29d:	e8 be 1a 00 00       	call   bd60 <_Z4outbth>
-    a2a2:	58                   	pop    eax
-    a2a3:	5a                   	pop    edx
-    a2a4:	0f b6 c7             	movzx  eax,bh
-    a2a7:	50                   	push   eax
-    a2a8:	68 f4 01 00 00       	push   0x1f4
-    a2ad:	e8 ae 1a 00 00       	call   bd60 <_Z4outbth>
-    a2b2:	89 d8                	mov    eax,ebx
-    a2b4:	59                   	pop    ecx
-    a2b5:	c1 e8 10             	shr    eax,0x10
-    a2b8:	5e                   	pop    esi
-    a2b9:	0f b6 c0             	movzx  eax,al
-    a2bc:	50                   	push   eax
-    a2bd:	68 f5 01 00 00       	push   0x1f5
-    a2c2:	e8 99 1a 00 00       	call   bd60 <_Z4outbth>
-    a2c7:	83 c4 10             	add    esp,0x10
-    a2ca:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    a2d0:	83 ec 0c             	sub    esp,0xc
-    a2d3:	68 f7 01 00 00       	push   0x1f7
-    a2d8:	e8 d3 1a 00 00       	call   bdb0 <_Z3inbt>
-    a2dd:	83 c4 10             	add    esp,0x10
-    a2e0:	84 c0                	test   al,al
-    a2e2:	78 ec                	js     a2d0 <_ZN3ata12lba28PIOReadEPvjhh+0x90>
-    a2e4:	83 ec 08             	sub    esp,0x8
-    a2e7:	6a 20                	push   0x20
-    a2e9:	68 f7 01 00 00       	push   0x1f7
-    a2ee:	e8 6d 1a 00 00       	call   bd60 <_Z4outbth>
-    a2f3:	83 c4 10             	add    esp,0x10
-    a2f6:	85 ff                	test   edi,edi
-    a2f8:	0f 84 b0 00 00 00    	je     a3ae <_ZN3ata12lba28PIOReadEPvjhh+0x16e>
-    a2fe:	8b 44 24 30          	mov    eax,DWORD PTR [esp+0x30]
-    a302:	31 f6                	xor    esi,esi
-    a304:	05 00 02 00 00       	add    eax,0x200
-    a309:	89 44 24 0c          	mov    DWORD PTR [esp+0xc],eax
-    a30d:	8d 76 00             	lea    esi,[esi+0x0]
-    a310:	83 ec 0c             	sub    esp,0xc
-    a313:	68 f7 01 00 00       	push   0x1f7
-    a318:	e8 93 1a 00 00       	call   bdb0 <_Z3inbt>
-    a31d:	83 c4 10             	add    esp,0x10
-    a320:	84 c0                	test   al,al
-    a322:	78 ec                	js     a310 <_ZN3ata12lba28PIOReadEPvjhh+0xd0>
-    a324:	83 ec 0c             	sub    esp,0xc
-    a327:	68 f6 03 00 00       	push   0x3f6
-    a32c:	e8 7f 1a 00 00       	call   bdb0 <_Z3inbt>
-    a331:	c7 04 24 f6 03 00 00 	mov    DWORD PTR [esp],0x3f6
-    a338:	e8 73 1a 00 00       	call   bdb0 <_Z3inbt>
-    a33d:	c7 04 24 f6 03 00 00 	mov    DWORD PTR [esp],0x3f6
-    a344:	e8 67 1a 00 00       	call   bdb0 <_Z3inbt>
-    a349:	83 c4 10             	add    esp,0x10
-    a34c:	eb 06                	jmp    a354 <_ZN3ata12lba28PIOReadEPvjhh+0x114>
-    a34e:	66 90                	xchg   ax,ax
-    a350:	a8 08                	test   al,0x8
-    a352:	75 1e                	jne    a372 <_ZN3ata12lba28PIOReadEPvjhh+0x132>
-    a354:	83 ec 0c             	sub    esp,0xc
-    a357:	68 f7 01 00 00       	push   0x1f7
-    a35c:	e8 4f 1a 00 00       	call   bdb0 <_Z3inbt>
-    a361:	83 c4 10             	add    esp,0x10
-    a364:	a8 01                	test   al,0x1
-    a366:	74 e8                	je     a350 <_ZN3ata12lba28PIOReadEPvjhh+0x110>
-    a368:	83 c4 1c             	add    esp,0x1c
-    a36b:	31 c0                	xor    eax,eax
-    a36d:	5b                   	pop    ebx
-    a36e:	5e                   	pop    esi
-    a36f:	5f                   	pop    edi
-    a370:	5d                   	pop    ebp
-    a371:	c3                   	ret    
-    a372:	8b 6c 24 30          	mov    ebp,DWORD PTR [esp+0x30]
-    a376:	89 f3                	mov    ebx,esi
-    a378:	c1 e3 09             	shl    ebx,0x9
-    a37b:	01 dd                	add    ebp,ebx
-    a37d:	03 5c 24 0c          	add    ebx,DWORD PTR [esp+0xc]
-    a381:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    a388:	83 ec 0c             	sub    esp,0xc
-    a38b:	83 c5 02             	add    ebp,0x2
-    a38e:	68 f0 01 00 00       	push   0x1f0
-    a393:	e8 28 1a 00 00       	call   bdc0 <_Z3inwt>
-    a398:	66 89 45 fe          	mov    WORD PTR [ebp-0x2],ax
-    a39c:	83 c4 10             	add    esp,0x10
-    a39f:	39 dd                	cmp    ebp,ebx
-    a3a1:	75 e5                	jne    a388 <_ZN3ata12lba28PIOReadEPvjhh+0x148>
-    a3a3:	83 c6 01             	add    esi,0x1
-    a3a6:	39 f7                	cmp    edi,esi
-    a3a8:	0f 85 62 ff ff ff    	jne    a310 <_ZN3ata12lba28PIOReadEPvjhh+0xd0>
-    a3ae:	83 c4 1c             	add    esp,0x1c
-    a3b1:	b8 01 00 00 00       	mov    eax,0x1
-    a3b6:	5b                   	pop    ebx
-    a3b7:	5e                   	pop    esi
-    a3b8:	5f                   	pop    edi
-    a3b9:	5d                   	pop    ebp
-    a3ba:	c3                   	ret    
-    a3bb:	90                   	nop
-    a3bc:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+0000a310 <check_A20_on>:
+    a310:	60                   	pusha  
+    a311:	bf 45 23 11 00       	mov    edi,0x112345
+    a316:	be 45 23 01 00       	mov    esi,0x12345
+    a31b:	89 36                	mov    DWORD PTR [esi],esi
+    a31d:	89 3f                	mov    DWORD PTR [edi],edi
+    a31f:	a7                   	cmps   DWORD PTR ds:[esi],DWORD PTR es:[edi]
+    a320:	b8 00 00 00 00       	mov    eax,0x0
+    a325:	75 05                	jne    a32c <check_A20_on.A20_on>
+    a327:	b8 01 00 00 00       	mov    eax,0x1
 
-0000a3c0 <_ZN3ata9lba28ReadEPvyjh>:
-    a3c0:	55                   	push   ebp
-    a3c1:	57                   	push   edi
-    a3c2:	56                   	push   esi
-    a3c3:	53                   	push   ebx
-    a3c4:	83 ec 1c             	sub    esp,0x1c
-    a3c7:	8b 74 24 3c          	mov    esi,DWORD PTR [esp+0x3c]
-    a3cb:	8b 4c 24 30          	mov    ecx,DWORD PTR [esp+0x30]
-    a3cf:	8b 7c 24 34          	mov    edi,DWORD PTR [esp+0x34]
-    a3d3:	8b 6c 24 38          	mov    ebp,DWORD PTR [esp+0x38]
-    a3d7:	8b 44 24 40          	mov    eax,DWORD PTR [esp+0x40]
-    a3db:	85 f6                	test   esi,esi
-    a3dd:	74 59                	je     a438 <_ZN3ata9lba28ReadEPvyjh+0x78>
-    a3df:	0f b6 c0             	movzx  eax,al
-    a3e2:	89 44 24 0c          	mov    DWORD PTR [esp+0xc],eax
-    a3e6:	eb 1b                	jmp    a403 <_ZN3ata9lba28ReadEPvyjh+0x43>
-    a3e8:	90                   	nop
-    a3e9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    a3f0:	8b 4c 24 08          	mov    ecx,DWORD PTR [esp+0x8]
-    a3f4:	31 d2                	xor    edx,edx
-    a3f6:	01 df                	add    edi,ebx
-    a3f8:	11 d5                	adc    ebp,edx
-    a3fa:	c1 e3 09             	shl    ebx,0x9
-    a3fd:	01 d9                	add    ecx,ebx
-    a3ff:	85 f6                	test   esi,esi
-    a401:	74 35                	je     a438 <_ZN3ata9lba28ReadEPvyjh+0x78>
-    a403:	81 fe ff 00 00 00    	cmp    esi,0xff
-    a409:	bb ff 00 00 00       	mov    ebx,0xff
-    a40e:	ff 74 24 0c          	push   DWORD PTR [esp+0xc]
-    a412:	0f 46 de             	cmovbe ebx,esi
-    a415:	53                   	push   ebx
-    a416:	57                   	push   edi
-    a417:	29 de                	sub    esi,ebx
-    a419:	51                   	push   ecx
-    a41a:	89 4c 24 18          	mov    DWORD PTR [esp+0x18],ecx
-    a41e:	e8 1d fe ff ff       	call   a240 <_ZN3ata12lba28PIOReadEPvjhh>
-    a423:	83 c4 10             	add    esp,0x10
-    a426:	84 c0                	test   al,al
-    a428:	75 c6                	jne    a3f0 <_ZN3ata9lba28ReadEPvyjh+0x30>
-    a42a:	83 c4 1c             	add    esp,0x1c
-    a42d:	5b                   	pop    ebx
-    a42e:	5e                   	pop    esi
-    a42f:	5f                   	pop    edi
-    a430:	5d                   	pop    ebp
-    a431:	c3                   	ret    
-    a432:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    a438:	83 c4 1c             	add    esp,0x1c
-    a43b:	b8 01 00 00 00       	mov    eax,0x1
-    a440:	5b                   	pop    ebx
-    a441:	5e                   	pop    esi
-    a442:	5f                   	pop    edi
-    a443:	5d                   	pop    ebp
-    a444:	c3                   	ret    
-    a445:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    a449:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+0000a32c <check_A20_on.A20_on>:
+    a32c:	61                   	popa   
+    a32d:	c3                   	ret    
 
-0000a450 <_ZN3ata12lba48PIOReadEPvyth>:
-    a450:	55                   	push   ebp
-    a451:	57                   	push   edi
-    a452:	56                   	push   esi
-    a453:	53                   	push   ebx
-    a454:	83 ec 24             	sub    esp,0x24
-    a457:	0f b6 44 24 48       	movzx  eax,BYTE PTR [esp+0x48]
-    a45c:	8b 6c 24 40          	mov    ebp,DWORD PTR [esp+0x40]
-    a460:	8b 7c 24 3c          	mov    edi,DWORD PTR [esp+0x3c]
-    a464:	8b 5c 24 44          	mov    ebx,DWORD PTR [esp+0x44]
-    a468:	c1 e0 04             	shl    eax,0x4
-    a46b:	83 c8 e0             	or     eax,0xffffffe0
-    a46e:	0f b6 c0             	movzx  eax,al
-    a471:	50                   	push   eax
-    a472:	68 f6 01 00 00       	push   0x1f6
-    a477:	e8 e4 18 00 00       	call   bd60 <_Z4outbth>
-    a47c:	58                   	pop    eax
-    a47d:	5a                   	pop    edx
-    a47e:	6a 00                	push   0x0
-    a480:	68 f1 01 00 00       	push   0x1f1
-    a485:	e8 d6 18 00 00       	call   bd60 <_Z4outbth>
-    a48a:	59                   	pop    ecx
-    a48b:	5e                   	pop    esi
-    a48c:	0f b6 c7             	movzx  eax,bh
-    a48f:	50                   	push   eax
-    a490:	68 f2 01 00 00       	push   0x1f2
-    a495:	e8 c6 18 00 00       	call   bd60 <_Z4outbth>
-    a49a:	58                   	pop    eax
-    a49b:	89 f8                	mov    eax,edi
-    a49d:	0f ac e8 18          	shrd   eax,ebp,0x18
-    a4a1:	5a                   	pop    edx
-    a4a2:	0f b6 c0             	movzx  eax,al
-    a4a5:	50                   	push   eax
-    a4a6:	68 f3 01 00 00       	push   0x1f3
-    a4ab:	e8 b0 18 00 00       	call   bd60 <_Z4outbth>
-    a4b0:	5e                   	pop    esi
-    a4b1:	58                   	pop    eax
-    a4b2:	89 e8                	mov    eax,ebp
-    a4b4:	0f b6 c0             	movzx  eax,al
-    a4b7:	50                   	push   eax
-    a4b8:	68 f4 01 00 00       	push   0x1f4
-    a4bd:	e8 9e 18 00 00       	call   bd60 <_Z4outbth>
-    a4c2:	58                   	pop    eax
-    a4c3:	89 e8                	mov    eax,ebp
-    a4c5:	5a                   	pop    edx
-    a4c6:	0f b6 c4             	movzx  eax,ah
-    a4c9:	50                   	push   eax
-    a4ca:	68 f5 01 00 00       	push   0x1f5
-    a4cf:	e8 8c 18 00 00       	call   bd60 <_Z4outbth>
-    a4d4:	59                   	pop    ecx
-    a4d5:	5e                   	pop    esi
-    a4d6:	0f b6 c3             	movzx  eax,bl
-    a4d9:	50                   	push   eax
-    a4da:	68 f2 01 00 00       	push   0x1f2
-    a4df:	e8 7c 18 00 00       	call   bd60 <_Z4outbth>
-    a4e4:	58                   	pop    eax
-    a4e5:	89 f8                	mov    eax,edi
-    a4e7:	5a                   	pop    edx
-    a4e8:	0f b6 c0             	movzx  eax,al
-    a4eb:	50                   	push   eax
-    a4ec:	68 f3 01 00 00       	push   0x1f3
-    a4f1:	e8 6a 18 00 00       	call   bd60 <_Z4outbth>
-    a4f6:	89 f8                	mov    eax,edi
-    a4f8:	0f ac e8 08          	shrd   eax,ebp,0x8
-    a4fc:	59                   	pop    ecx
-    a4fd:	5e                   	pop    esi
-    a4fe:	0f b6 c0             	movzx  eax,al
-    a501:	50                   	push   eax
-    a502:	68 f4 01 00 00       	push   0x1f4
-    a507:	0f ac ef 10          	shrd   edi,ebp,0x10
-    a50b:	e8 50 18 00 00       	call   bd60 <_Z4outbth>
-    a510:	5e                   	pop    esi
-    a511:	58                   	pop    eax
-    a512:	89 f8                	mov    eax,edi
-    a514:	0f b6 f0             	movzx  esi,al
-    a517:	56                   	push   esi
-    a518:	68 f5 01 00 00       	push   0x1f5
-    a51d:	e8 3e 18 00 00       	call   bd60 <_Z4outbth>
-    a522:	83 c4 10             	add    esp,0x10
-    a525:	8d 76 00             	lea    esi,[esi+0x0]
-    a528:	83 ec 0c             	sub    esp,0xc
-    a52b:	68 f7 01 00 00       	push   0x1f7
-    a530:	e8 7b 18 00 00       	call   bdb0 <_Z3inbt>
-    a535:	83 c4 10             	add    esp,0x10
-    a538:	84 c0                	test   al,al
-    a53a:	78 ec                	js     a528 <_ZN3ata12lba48PIOReadEPvyth+0xd8>
-    a53c:	83 ec 08             	sub    esp,0x8
-    a53f:	89 df                	mov    edi,ebx
-    a541:	6a 24                	push   0x24
-    a543:	68 f7 01 00 00       	push   0x1f7
-    a548:	e8 13 18 00 00       	call   bd60 <_Z4outbth>
-    a54d:	83 c4 10             	add    esp,0x10
-    a550:	81 e7 ff ff 00 00    	and    edi,0xffff
-    a556:	0f 84 b2 00 00 00    	je     a60e <_ZN3ata12lba48PIOReadEPvyth+0x1be>
-    a55c:	8b 44 24 30          	mov    eax,DWORD PTR [esp+0x30]
-    a560:	31 f6                	xor    esi,esi
-    a562:	05 00 02 00 00       	add    eax,0x200
-    a567:	89 44 24 0c          	mov    DWORD PTR [esp+0xc],eax
-    a56b:	90                   	nop
-    a56c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    a570:	83 ec 0c             	sub    esp,0xc
-    a573:	68 f7 01 00 00       	push   0x1f7
-    a578:	e8 33 18 00 00       	call   bdb0 <_Z3inbt>
-    a57d:	83 c4 10             	add    esp,0x10
-    a580:	84 c0                	test   al,al
-    a582:	78 ec                	js     a570 <_ZN3ata12lba48PIOReadEPvyth+0x120>
-    a584:	83 ec 0c             	sub    esp,0xc
-    a587:	68 f6 03 00 00       	push   0x3f6
-    a58c:	e8 1f 18 00 00       	call   bdb0 <_Z3inbt>
-    a591:	c7 04 24 f6 03 00 00 	mov    DWORD PTR [esp],0x3f6
-    a598:	e8 13 18 00 00       	call   bdb0 <_Z3inbt>
-    a59d:	c7 04 24 f6 03 00 00 	mov    DWORD PTR [esp],0x3f6
-    a5a4:	e8 07 18 00 00       	call   bdb0 <_Z3inbt>
-    a5a9:	83 c4 10             	add    esp,0x10
-    a5ac:	eb 06                	jmp    a5b4 <_ZN3ata12lba48PIOReadEPvyth+0x164>
-    a5ae:	66 90                	xchg   ax,ax
-    a5b0:	a8 08                	test   al,0x8
-    a5b2:	75 1e                	jne    a5d2 <_ZN3ata12lba48PIOReadEPvyth+0x182>
-    a5b4:	83 ec 0c             	sub    esp,0xc
-    a5b7:	68 f7 01 00 00       	push   0x1f7
-    a5bc:	e8 ef 17 00 00       	call   bdb0 <_Z3inbt>
-    a5c1:	83 c4 10             	add    esp,0x10
-    a5c4:	a8 01                	test   al,0x1
-    a5c6:	74 e8                	je     a5b0 <_ZN3ata12lba48PIOReadEPvyth+0x160>
-    a5c8:	83 c4 1c             	add    esp,0x1c
-    a5cb:	31 c0                	xor    eax,eax
-    a5cd:	5b                   	pop    ebx
-    a5ce:	5e                   	pop    esi
-    a5cf:	5f                   	pop    edi
-    a5d0:	5d                   	pop    ebp
-    a5d1:	c3                   	ret    
-    a5d2:	8b 6c 24 30          	mov    ebp,DWORD PTR [esp+0x30]
-    a5d6:	89 f3                	mov    ebx,esi
-    a5d8:	c1 e3 09             	shl    ebx,0x9
-    a5db:	01 dd                	add    ebp,ebx
-    a5dd:	03 5c 24 0c          	add    ebx,DWORD PTR [esp+0xc]
-    a5e1:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    a5e8:	83 ec 0c             	sub    esp,0xc
-    a5eb:	83 c5 02             	add    ebp,0x2
-    a5ee:	68 f0 01 00 00       	push   0x1f0
-    a5f3:	e8 c8 17 00 00       	call   bdc0 <_Z3inwt>
-    a5f8:	66 89 45 fe          	mov    WORD PTR [ebp-0x2],ax
-    a5fc:	83 c4 10             	add    esp,0x10
-    a5ff:	39 dd                	cmp    ebp,ebx
-    a601:	75 e5                	jne    a5e8 <_ZN3ata12lba48PIOReadEPvyth+0x198>
-    a603:	83 c6 01             	add    esi,0x1
-    a606:	39 fe                	cmp    esi,edi
-    a608:	0f 85 62 ff ff ff    	jne    a570 <_ZN3ata12lba48PIOReadEPvyth+0x120>
-    a60e:	83 c4 1c             	add    esp,0x1c
-    a611:	b8 01 00 00 00       	mov    eax,0x1
-    a616:	5b                   	pop    ebx
-    a617:	5e                   	pop    esi
-    a618:	5f                   	pop    edi
-    a619:	5d                   	pop    ebp
-    a61a:	c3                   	ret    
-    a61b:	90                   	nop
-    a61c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+0000a32e <enable_A20>:
+    a32e:	60                   	pusha  
+    a32f:	e4 92                	in     al,0x92
+    a331:	0c 02                	or     al,0x2
+    a333:	e6 92                	out    0x92,al
+    a335:	61                   	popa   
+    a336:	c3                   	ret    
+    a337:	66 90                	xchg   ax,ax
+    a339:	66 90                	xchg   ax,ax
+    a33b:	66 90                	xchg   ax,ax
+    a33d:	66 90                	xchg   ax,ax
+    a33f:	90                   	nop
 
-0000a620 <_ZN3ata9lba48ReadEPvyjh>:
-    a620:	55                   	push   ebp
-    a621:	57                   	push   edi
-    a622:	56                   	push   esi
-    a623:	53                   	push   ebx
-    a624:	83 ec 1c             	sub    esp,0x1c
-    a627:	8b 6c 24 3c          	mov    ebp,DWORD PTR [esp+0x3c]
-    a62b:	8b 54 24 30          	mov    edx,DWORD PTR [esp+0x30]
-    a62f:	8b 74 24 34          	mov    esi,DWORD PTR [esp+0x34]
-    a633:	8b 7c 24 38          	mov    edi,DWORD PTR [esp+0x38]
-    a637:	8b 44 24 40          	mov    eax,DWORD PTR [esp+0x40]
-    a63b:	85 ed                	test   ebp,ebp
-    a63d:	74 69                	je     a6a8 <_ZN3ata9lba48ReadEPvyjh+0x88>
-    a63f:	0f b6 c0             	movzx  eax,al
-    a642:	89 44 24 0c          	mov    DWORD PTR [esp+0xc],eax
-    a646:	eb 1c                	jmp    a664 <_ZN3ata9lba48ReadEPvyjh+0x44>
-    a648:	90                   	nop
-    a649:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    a650:	8b 54 24 08          	mov    edx,DWORD PTR [esp+0x8]
-    a654:	03 34 24             	add    esi,DWORD PTR [esp]
-    a657:	13 7c 24 04          	adc    edi,DWORD PTR [esp+0x4]
-    a65b:	c1 e3 09             	shl    ebx,0x9
-    a65e:	01 da                	add    edx,ebx
-    a660:	85 ed                	test   ebp,ebp
-    a662:	74 44                	je     a6a8 <_ZN3ata9lba48ReadEPvyjh+0x88>
-    a664:	81 fd ff ff 00 00    	cmp    ebp,0xffff
-    a66a:	bb ff ff 00 00       	mov    ebx,0xffff
-    a66f:	c7 44 24 04 00 00 00 	mov    DWORD PTR [esp+0x4],0x0
-    a676:	00 
-    a677:	0f 46 dd             	cmovbe ebx,ebp
-    a67a:	83 ec 0c             	sub    esp,0xc
-    a67d:	89 5c 24 0c          	mov    DWORD PTR [esp+0xc],ebx
-    a681:	ff 74 24 18          	push   DWORD PTR [esp+0x18]
-    a685:	29 dd                	sub    ebp,ebx
-    a687:	53                   	push   ebx
-    a688:	57                   	push   edi
-    a689:	56                   	push   esi
-    a68a:	52                   	push   edx
-    a68b:	89 54 24 28          	mov    DWORD PTR [esp+0x28],edx
-    a68f:	e8 bc fd ff ff       	call   a450 <_ZN3ata12lba48PIOReadEPvyth>
-    a694:	83 c4 20             	add    esp,0x20
-    a697:	84 c0                	test   al,al
-    a699:	75 b5                	jne    a650 <_ZN3ata9lba48ReadEPvyjh+0x30>
-    a69b:	83 c4 1c             	add    esp,0x1c
-    a69e:	5b                   	pop    ebx
-    a69f:	5e                   	pop    esi
-    a6a0:	5f                   	pop    edi
-    a6a1:	5d                   	pop    ebp
-    a6a2:	c3                   	ret    
-    a6a3:	90                   	nop
-    a6a4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    a6a8:	83 c4 1c             	add    esp,0x1c
-    a6ab:	b8 01 00 00 00       	mov    eax,0x1
-    a6b0:	5b                   	pop    ebx
-    a6b1:	5e                   	pop    esi
-    a6b2:	5f                   	pop    edi
-    a6b3:	5d                   	pop    ebp
-    a6b4:	c3                   	ret    
-    a6b5:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    a6b9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+0000a340 <__setCR4>:
+    a340:	55                   	push   ebp
+    a341:	89 e5                	mov    ebp,esp
+    a343:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+    a346:	0f 22 e0             	mov    cr4,eax
+    a349:	5d                   	pop    ebp
+    a34a:	c3                   	ret    
 
-0000a6c0 <_ZN3ata4readEPvyjhb>:
-    a6c0:	55                   	push   ebp
-    a6c1:	57                   	push   edi
-    a6c2:	bd c0 a3 00 00       	mov    ebp,0xa3c0
-    a6c7:	56                   	push   esi
-    a6c8:	53                   	push   ebx
-    a6c9:	81 ec 3c 02 00 00    	sub    esp,0x23c
-    a6cf:	80 bc 24 64 02 00 00 	cmp    BYTE PTR [esp+0x264],0x0
-    a6d6:	00 
-    a6d7:	8b 84 24 60 02 00 00 	mov    eax,DWORD PTR [esp+0x260]
-    a6de:	8b b4 24 54 02 00 00 	mov    esi,DWORD PTR [esp+0x254]
-    a6e5:	8b bc 24 58 02 00 00 	mov    edi,DWORD PTR [esp+0x258]
-    a6ec:	89 44 24 10          	mov    DWORD PTR [esp+0x10],eax
-    a6f0:	b8 20 a6 00 00       	mov    eax,0xa620
-    a6f5:	0f 44 e8             	cmove  ebp,eax
-    a6f8:	8b 84 24 5c 02 00 00 	mov    eax,DWORD PTR [esp+0x25c]
-    a6ff:	31 d2                	xor    edx,edx
-    a701:	89 6c 24 0c          	mov    DWORD PTR [esp+0xc],ebp
-    a705:	01 f0                	add    eax,esi
-    a707:	11 fa                	adc    edx,edi
-    a709:	89 c3                	mov    ebx,eax
-    a70b:	89 04 24             	mov    DWORD PTR [esp],eax
-    a70e:	89 54 24 04          	mov    DWORD PTR [esp+0x4],edx
-    a712:	31 f3                	xor    ebx,esi
-    a714:	31 fa                	xor    edx,edi
-    a716:	09 da                	or     edx,ebx
-    a718:	0f 84 c2 00 00 00    	je     a7e0 <_ZN3ata4readEPvyjhb+0x120>
-    a71e:	8b 54 24 04          	mov    edx,DWORD PTR [esp+0x4]
-    a722:	8b 04 24             	mov    eax,DWORD PTR [esp]
-    a725:	39 d7                	cmp    edi,edx
-    a727:	76 17                	jbe    a740 <_ZN3ata4readEPvyjhb+0x80>
-    a729:	31 c0                	xor    eax,eax
-    a72b:	81 c4 3c 02 00 00    	add    esp,0x23c
-    a731:	5b                   	pop    ebx
-    a732:	5e                   	pop    esi
-    a733:	5f                   	pop    edi
-    a734:	5d                   	pop    ebp
-    a735:	c3                   	ret    
-    a736:	8d 76 00             	lea    esi,[esi+0x0]
-    a739:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
-    a740:	0f 83 aa 00 00 00    	jae    a7f0 <_ZN3ata4readEPvyjhb+0x130>
-    a746:	8b 5c 24 04          	mov    ebx,DWORD PTR [esp+0x4]
-    a74a:	89 fa                	mov    edx,edi
-    a74c:	8b 0c 24             	mov    ecx,DWORD PTR [esp]
-    a74f:	c1 ea 09             	shr    edx,0x9
-    a752:	89 f0                	mov    eax,esi
-    a754:	0f b6 6c 24 10       	movzx  ebp,BYTE PTR [esp+0x10]
-    a759:	89 54 24 14          	mov    DWORD PTR [esp+0x14],edx
-    a75d:	8b 54 24 14          	mov    edx,DWORD PTR [esp+0x14]
-    a761:	0f ac d9 09          	shrd   ecx,ebx,0x9
-    a765:	0f ac f8 09          	shrd   eax,edi,0x9
-    a769:	c1 eb 09             	shr    ebx,0x9
-    a76c:	89 4c 24 18          	mov    DWORD PTR [esp+0x18],ecx
-    a770:	89 6c 24 20          	mov    DWORD PTR [esp+0x20],ebp
-    a774:	89 44 24 10          	mov    DWORD PTR [esp+0x10],eax
-    a778:	31 da                	xor    edx,ebx
-    a77a:	31 c8                	xor    eax,ecx
-    a77c:	09 c2                	or     edx,eax
-    a77e:	89 5c 24 1c          	mov    DWORD PTR [esp+0x1c],ebx
-    a782:	75 7c                	jne    a800 <_ZN3ata4readEPvyjhb+0x140>
-    a784:	83 ec 0c             	sub    esp,0xc
-    a787:	55                   	push   ebp
-    a788:	6a 01                	push   0x1
-    a78a:	ff 74 24 28          	push   DWORD PTR [esp+0x28]
-    a78e:	ff 74 24 28          	push   DWORD PTR [esp+0x28]
-    a792:	8d 5c 24 4c          	lea    ebx,[esp+0x4c]
-    a796:	53                   	push   ebx
-    a797:	8b 44 24 2c          	mov    eax,DWORD PTR [esp+0x2c]
-    a79b:	ff d0                	call   eax
-    a79d:	83 c4 20             	add    esp,0x20
-    a7a0:	84 c0                	test   al,al
-    a7a2:	74 87                	je     a72b <_ZN3ata4readEPvyjhb+0x6b>
-    a7a4:	8b 0c 24             	mov    ecx,DWORD PTR [esp]
-    a7a7:	81 e6 ff 01 00 00    	and    esi,0x1ff
-    a7ad:	81 e1 ff 01 00 00    	and    ecx,0x1ff
-    a7b3:	39 ce                	cmp    esi,ecx
-    a7b5:	0f 83 70 ff ff ff    	jae    a72b <_ZN3ata4readEPvyjhb+0x6b>
-    a7bb:	8b bc 24 50 02 00 00 	mov    edi,DWORD PTR [esp+0x250]
-    a7c2:	29 f7                	sub    edi,esi
-    a7c4:	0f b6 14 33          	movzx  edx,BYTE PTR [ebx+esi*1]
-    a7c8:	88 14 37             	mov    BYTE PTR [edi+esi*1],dl
-    a7cb:	83 c6 01             	add    esi,0x1
-    a7ce:	39 ce                	cmp    esi,ecx
-    a7d0:	72 f2                	jb     a7c4 <_ZN3ata4readEPvyjhb+0x104>
-    a7d2:	81 c4 3c 02 00 00    	add    esp,0x23c
-    a7d8:	5b                   	pop    ebx
-    a7d9:	5e                   	pop    esi
-    a7da:	5f                   	pop    edi
-    a7db:	5d                   	pop    ebp
-    a7dc:	c3                   	ret    
-    a7dd:	8d 76 00             	lea    esi,[esi+0x0]
-    a7e0:	81 c4 3c 02 00 00    	add    esp,0x23c
-    a7e6:	b8 01 00 00 00       	mov    eax,0x1
-    a7eb:	5b                   	pop    ebx
-    a7ec:	5e                   	pop    esi
-    a7ed:	5f                   	pop    edi
-    a7ee:	5d                   	pop    ebp
-    a7ef:	c3                   	ret    
-    a7f0:	39 c6                	cmp    esi,eax
-    a7f2:	0f 87 31 ff ff ff    	ja     a729 <_ZN3ata4readEPvyjhb+0x69>
-    a7f8:	e9 49 ff ff ff       	jmp    a746 <_ZN3ata4readEPvyjhb+0x86>
-    a7fd:	8d 76 00             	lea    esi,[esi+0x0]
-    a800:	89 f0                	mov    eax,esi
-    a802:	25 ff 01 00 00       	and    eax,0x1ff
-    a807:	89 c5                	mov    ebp,eax
-    a809:	89 44 24 24          	mov    DWORD PTR [esp+0x24],eax
-    a80d:	0f 84 6d 01 00 00    	je     a980 <_ZN3ata4readEPvyjhb+0x2c0>
-    a813:	83 ec 0c             	sub    esp,0xc
-    a816:	ff 74 24 2c          	push   DWORD PTR [esp+0x2c]
-    a81a:	6a 01                	push   0x1
-    a81c:	ff 74 24 28          	push   DWORD PTR [esp+0x28]
-    a820:	ff 74 24 28          	push   DWORD PTR [esp+0x28]
-    a824:	8d 5c 24 4c          	lea    ebx,[esp+0x4c]
-    a828:	53                   	push   ebx
-    a829:	8b 44 24 2c          	mov    eax,DWORD PTR [esp+0x2c]
-    a82d:	ff d0                	call   eax
-    a82f:	83 c4 20             	add    esp,0x20
-    a832:	84 c0                	test   al,al
-    a834:	0f 84 f1 fe ff ff    	je     a72b <_ZN3ata4readEPvyjhb+0x6b>
-    a83a:	8b 94 24 50 02 00 00 	mov    edx,DWORD PTR [esp+0x250]
-    a841:	89 e8                	mov    eax,ebp
-    a843:	89 6c 24 2c          	mov    DWORD PTR [esp+0x2c],ebp
-    a847:	29 ea                	sub    edx,ebp
-    a849:	8b 6c 24 0c          	mov    ebp,DWORD PTR [esp+0xc]
-    a84d:	8d 76 00             	lea    esi,[esi+0x0]
-    a850:	0f b6 0c 03          	movzx  ecx,BYTE PTR [ebx+eax*1]
-    a854:	88 0c 02             	mov    BYTE PTR [edx+eax*1],cl
-    a857:	83 c0 01             	add    eax,0x1
-    a85a:	3d 00 02 00 00       	cmp    eax,0x200
-    a85f:	75 ef                	jne    a850 <_ZN3ata4readEPvyjhb+0x190>
-    a861:	8b 04 24             	mov    eax,DWORD PTR [esp]
-    a864:	83 44 24 10 01       	add    DWORD PTR [esp+0x10],0x1
-    a869:	83 54 24 14 00       	adc    DWORD PTR [esp+0x14],0x0
-    a86e:	89 6c 24 0c          	mov    DWORD PTR [esp+0xc],ebp
-    a872:	25 ff 01 00 00       	and    eax,0x1ff
-    a877:	89 44 24 28          	mov    DWORD PTR [esp+0x28],eax
-    a87b:	0f 84 ea 00 00 00    	je     a96b <_ZN3ata4readEPvyjhb+0x2ab>
-    a881:	83 ec 0c             	sub    esp,0xc
-    a884:	ff 74 24 2c          	push   DWORD PTR [esp+0x2c]
-    a888:	6a 01                	push   0x1
-    a88a:	8b 44 24 2c          	mov    eax,DWORD PTR [esp+0x2c]
-    a88e:	8b 54 24 30          	mov    edx,DWORD PTR [esp+0x30]
-    a892:	83 c0 01             	add    eax,0x1
-    a895:	83 d2 00             	adc    edx,0x0
-    a898:	52                   	push   edx
-    a899:	50                   	push   eax
-    a89a:	53                   	push   ebx
-    a89b:	8b 44 24 2c          	mov    eax,DWORD PTR [esp+0x2c]
-    a89f:	ff d0                	call   eax
-    a8a1:	83 c4 20             	add    esp,0x20
-    a8a4:	84 c0                	test   al,al
-    a8a6:	0f 84 7f fe ff ff    	je     a72b <_ZN3ata4readEPvyjhb+0x6b>
-    a8ac:	8b 04 24             	mov    eax,DWORD PTR [esp]
-    a8af:	8b 94 24 5c 02 00 00 	mov    edx,DWORD PTR [esp+0x25c]
-    a8b6:	8b 8c 24 50 02 00 00 	mov    ecx,DWORD PTR [esp+0x250]
-    a8bd:	89 34 24             	mov    DWORD PTR [esp],esi
-    a8c0:	89 7c 24 04          	mov    DWORD PTR [esp+0x4],edi
-    a8c4:	8b 6c 24 0c          	mov    ebp,DWORD PTR [esp+0xc]
-    a8c8:	25 ff 01 00 00       	and    eax,0x1ff
-    a8cd:	8b 7c 24 20          	mov    edi,DWORD PTR [esp+0x20]
-    a8d1:	8b 74 24 28          	mov    esi,DWORD PTR [esp+0x28]
-    a8d5:	29 c2                	sub    edx,eax
-    a8d7:	89 d0                	mov    eax,edx
-    a8d9:	31 d2                	xor    edx,edx
-    a8db:	01 c8                	add    eax,ecx
-    a8dd:	89 c1                	mov    ecx,eax
-    a8df:	90                   	nop
-    a8e0:	0f b6 04 13          	movzx  eax,BYTE PTR [ebx+edx*1]
-    a8e4:	88 04 11             	mov    BYTE PTR [ecx+edx*1],al
-    a8e7:	83 c2 01             	add    edx,0x1
-    a8ea:	39 f2                	cmp    edx,esi
-    a8ec:	75 f2                	jne    a8e0 <_ZN3ata4readEPvyjhb+0x220>
-    a8ee:	8b 54 24 24          	mov    edx,DWORD PTR [esp+0x24]
-    a8f2:	83 44 24 18 ff       	add    DWORD PTR [esp+0x18],0xffffffff
-    a8f7:	83 54 24 1c ff       	adc    DWORD PTR [esp+0x1c],0xffffffff
-    a8fc:	31 c0                	xor    eax,eax
-    a8fe:	89 6c 24 0c          	mov    DWORD PTR [esp+0xc],ebp
-    a902:	89 7c 24 20          	mov    DWORD PTR [esp+0x20],edi
-    a906:	8b 34 24             	mov    esi,DWORD PTR [esp]
-    a909:	85 d2                	test   edx,edx
-    a90b:	75 53                	jne    a960 <_ZN3ata4readEPvyjhb+0x2a0>
-    a90d:	8b 4c 24 10          	mov    ecx,DWORD PTR [esp+0x10]
-    a911:	8b 5c 24 14          	mov    ebx,DWORD PTR [esp+0x14]
-    a915:	8b 74 24 18          	mov    esi,DWORD PTR [esp+0x18]
-    a919:	8b 7c 24 1c          	mov    edi,DWORD PTR [esp+0x1c]
-    a91d:	89 ca                	mov    edx,ecx
-    a91f:	31 f2                	xor    edx,esi
-    a921:	31 fb                	xor    ebx,edi
-    a923:	09 d3                	or     ebx,edx
-    a925:	0f 84 b5 fe ff ff    	je     a7e0 <_ZN3ata4readEPvyjhb+0x120>
-    a92b:	01 84 24 50 02 00 00 	add    DWORD PTR [esp+0x250],eax
-    a932:	83 ec 0c             	sub    esp,0xc
-    a935:	ff 74 24 2c          	push   DWORD PTR [esp+0x2c]
-    a939:	8b 44 24 28          	mov    eax,DWORD PTR [esp+0x28]
-    a93d:	8b 4c 24 20          	mov    ecx,DWORD PTR [esp+0x20]
-    a941:	8b 5c 24 24          	mov    ebx,DWORD PTR [esp+0x24]
-    a945:	29 c8                	sub    eax,ecx
-    a947:	50                   	push   eax
-    a948:	53                   	push   ebx
-    a949:	51                   	push   ecx
-    a94a:	ff b4 24 6c 02 00 00 	push   DWORD PTR [esp+0x26c]
-    a951:	8b 44 24 2c          	mov    eax,DWORD PTR [esp+0x2c]
-    a955:	ff d0                	call   eax
-    a957:	83 c4 20             	add    esp,0x20
-    a95a:	e9 cc fd ff ff       	jmp    a72b <_ZN3ata4readEPvyjhb+0x6b>
-    a95f:	90                   	nop
-    a960:	89 f0                	mov    eax,esi
-    a962:	25 ff 01 00 00       	and    eax,0x1ff
-    a967:	89 44 24 2c          	mov    DWORD PTR [esp+0x2c],eax
-    a96b:	b8 00 02 00 00       	mov    eax,0x200
-    a970:	2b 44 24 2c          	sub    eax,DWORD PTR [esp+0x2c]
-    a974:	eb 97                	jmp    a90d <_ZN3ata4readEPvyjhb+0x24d>
-    a976:	8d 76 00             	lea    esi,[esi+0x0]
-    a979:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
-    a980:	8b 04 24             	mov    eax,DWORD PTR [esp]
-    a983:	25 ff 01 00 00       	and    eax,0x1ff
-    a988:	89 44 24 28          	mov    DWORD PTR [esp+0x28],eax
-    a98c:	74 a4                	je     a932 <_ZN3ata4readEPvyjhb+0x272>
-    a98e:	8d 5c 24 30          	lea    ebx,[esp+0x30]
-    a992:	e9 ea fe ff ff       	jmp    a881 <_ZN3ata4readEPvyjhb+0x1c1>
-    a997:	89 f6                	mov    esi,esi
-    a999:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+0000a34b <__getCR4>:
+    a34b:	0f 20 e0             	mov    eax,cr4
+    a34e:	c3                   	ret    
 
-0000a9a0 <_ZN3ata12sendIdentifyEhRbb>:
-    a9a0:	55                   	push   ebp
-    a9a1:	57                   	push   edi
-    a9a2:	56                   	push   esi
-    a9a3:	53                   	push   ebx
-    a9a4:	81 ec 38 02 00 00    	sub    esp,0x238
-    a9aa:	8b 9c 24 4c 02 00 00 	mov    ebx,DWORD PTR [esp+0x24c]
-    a9b1:	8b ac 24 54 02 00 00 	mov    ebp,DWORD PTR [esp+0x254]
-    a9b8:	68 f7 01 00 00       	push   0x1f7
-    a9bd:	e8 ee 13 00 00       	call   bdb0 <_Z3inbt>
-    a9c2:	83 c4 10             	add    esp,0x10
-    a9c5:	3c ff                	cmp    al,0xff
-    a9c7:	0f 84 e3 00 00 00    	je     aab0 <_ZN3ata12sendIdentifyEhRbb+0x110>
-    a9cd:	c1 e3 04             	shl    ebx,0x4
-    a9d0:	83 ec 08             	sub    esp,0x8
-    a9d3:	83 cb a0             	or     ebx,0xffffffa0
-    a9d6:	0f b6 c3             	movzx  eax,bl
-    a9d9:	50                   	push   eax
-    a9da:	68 f6 01 00 00       	push   0x1f6
-    a9df:	e8 7c 13 00 00       	call   bd60 <_Z4outbth>
-    a9e4:	c7 04 24 f6 03 00 00 	mov    DWORD PTR [esp],0x3f6
-    a9eb:	e8 c0 13 00 00       	call   bdb0 <_Z3inbt>
-    a9f0:	c7 04 24 f6 03 00 00 	mov    DWORD PTR [esp],0x3f6
-    a9f7:	e8 b4 13 00 00       	call   bdb0 <_Z3inbt>
-    a9fc:	c7 04 24 f6 03 00 00 	mov    DWORD PTR [esp],0x3f6
-    aa03:	e8 a8 13 00 00       	call   bdb0 <_Z3inbt>
-    aa08:	83 c4 10             	add    esp,0x10
-    aa0b:	90                   	nop
-    aa0c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    aa10:	83 ec 0c             	sub    esp,0xc
-    aa13:	68 f7 01 00 00       	push   0x1f7
-    aa18:	e8 93 13 00 00       	call   bdb0 <_Z3inbt>
-    aa1d:	83 c4 10             	add    esp,0x10
-    aa20:	84 c0                	test   al,al
-    aa22:	78 ec                	js     aa10 <_ZN3ata12sendIdentifyEhRbb+0x70>
-    aa24:	83 ec 08             	sub    esp,0x8
-    aa27:	6a 00                	push   0x0
-    aa29:	68 f2 01 00 00       	push   0x1f2
-    aa2e:	e8 2d 13 00 00       	call   bd60 <_Z4outbth>
-    aa33:	59                   	pop    ecx
-    aa34:	5b                   	pop    ebx
-    aa35:	6a 00                	push   0x0
-    aa37:	68 f3 01 00 00       	push   0x1f3
-    aa3c:	e8 1f 13 00 00       	call   bd60 <_Z4outbth>
-    aa41:	5e                   	pop    esi
-    aa42:	5f                   	pop    edi
-    aa43:	6a 00                	push   0x0
-    aa45:	68 f4 01 00 00       	push   0x1f4
-    aa4a:	e8 11 13 00 00       	call   bd60 <_Z4outbth>
-    aa4f:	58                   	pop    eax
-    aa50:	5a                   	pop    edx
-    aa51:	6a 00                	push   0x0
-    aa53:	68 f5 01 00 00       	push   0x1f5
-    aa58:	e8 03 13 00 00       	call   bd60 <_Z4outbth>
-    aa5d:	59                   	pop    ecx
-    aa5e:	5b                   	pop    ebx
-    aa5f:	68 ec 00 00 00       	push   0xec
-    aa64:	68 f7 01 00 00       	push   0x1f7
-    aa69:	e8 f2 12 00 00       	call   bd60 <_Z4outbth>
-    aa6e:	c7 04 24 f7 01 00 00 	mov    DWORD PTR [esp],0x1f7
-    aa75:	e8 36 13 00 00       	call   bdb0 <_Z3inbt>
-    aa7a:	83 c4 10             	add    esp,0x10
-    aa7d:	84 c0                	test   al,al
-    aa7f:	74 2f                	je     aab0 <_ZN3ata12sendIdentifyEhRbb+0x110>
-    aa81:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    aa88:	83 ec 0c             	sub    esp,0xc
-    aa8b:	68 f7 01 00 00       	push   0x1f7
-    aa90:	e8 1b 13 00 00       	call   bdb0 <_Z3inbt>
-    aa95:	83 c4 10             	add    esp,0x10
-    aa98:	84 c0                	test   al,al
-    aa9a:	78 ec                	js     aa88 <_ZN3ata12sendIdentifyEhRbb+0xe8>
-    aa9c:	83 ec 0c             	sub    esp,0xc
-    aa9f:	68 f4 01 00 00       	push   0x1f4
-    aaa4:	e8 07 13 00 00       	call   bdb0 <_Z3inbt>
-    aaa9:	83 c4 10             	add    esp,0x10
-    aaac:	84 c0                	test   al,al
-    aaae:	74 10                	je     aac0 <_ZN3ata12sendIdentifyEhRbb+0x120>
-    aab0:	31 c0                	xor    eax,eax
-    aab2:	81 c4 2c 02 00 00    	add    esp,0x22c
-    aab8:	5b                   	pop    ebx
-    aab9:	5e                   	pop    esi
-    aaba:	5f                   	pop    edi
-    aabb:	5d                   	pop    ebp
-    aabc:	c3                   	ret    
-    aabd:	8d 76 00             	lea    esi,[esi+0x0]
-    aac0:	83 ec 0c             	sub    esp,0xc
-    aac3:	68 f5 01 00 00       	push   0x1f5
-    aac8:	e8 e3 12 00 00       	call   bdb0 <_Z3inbt>
-    aacd:	83 c4 10             	add    esp,0x10
-    aad0:	84 c0                	test   al,al
-    aad2:	74 10                	je     aae4 <_ZN3ata12sendIdentifyEhRbb+0x144>
-    aad4:	eb da                	jmp    aab0 <_ZN3ata12sendIdentifyEhRbb+0x110>
-    aad6:	8d 76 00             	lea    esi,[esi+0x0]
-    aad9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
-    aae0:	a8 08                	test   al,0x8
-    aae2:	75 16                	jne    aafa <_ZN3ata12sendIdentifyEhRbb+0x15a>
-    aae4:	83 ec 0c             	sub    esp,0xc
-    aae7:	68 f7 01 00 00       	push   0x1f7
-    aaec:	e8 bf 12 00 00       	call   bdb0 <_Z3inbt>
-    aaf1:	83 c4 10             	add    esp,0x10
-    aaf4:	a8 01                	test   al,0x1
-    aaf6:	74 e8                	je     aae0 <_ZN3ata12sendIdentifyEhRbb+0x140>
-    aaf8:	eb b6                	jmp    aab0 <_ZN3ata12sendIdentifyEhRbb+0x110>
-    aafa:	8d 7c 24 20          	lea    edi,[esp+0x20]
-    aafe:	b9 80 00 00 00       	mov    ecx,0x80
-    ab03:	31 c0                	xor    eax,eax
-    ab05:	8d b4 24 20 02 00 00 	lea    esi,[esp+0x220]
-    ab0c:	8d 5c 24 20          	lea    ebx,[esp+0x20]
-    ab10:	f3 ab                	rep stos DWORD PTR es:[edi],eax
-    ab12:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    ab18:	83 ec 0c             	sub    esp,0xc
-    ab1b:	83 c3 02             	add    ebx,0x2
-    ab1e:	68 f0 01 00 00       	push   0x1f0
-    ab23:	e8 98 12 00 00       	call   bdc0 <_Z3inwt>
-    ab28:	66 89 43 fe          	mov    WORD PTR [ebx-0x2],ax
-    ab2c:	83 c4 10             	add    esp,0x10
-    ab2f:	39 de                	cmp    esi,ebx
-    ab31:	75 e5                	jne    ab18 <_ZN3ata12sendIdentifyEhRbb+0x178>
-    ab33:	0f b7 84 24 c6 00 00 	movzx  eax,WORD PTR [esp+0xc6]
-    ab3a:	00 
-    ab3b:	66 89 44 24 0a       	mov    WORD PTR [esp+0xa],ax
-    ab40:	89 e8                	mov    eax,ebp
-    ab42:	84 c0                	test   al,al
-    ab44:	75 22                	jne    ab68 <_ZN3ata12sendIdentifyEhRbb+0x1c8>
-    ab46:	0f b7 44 24 0a       	movzx  eax,WORD PTR [esp+0xa]
-    ab4b:	8b 94 24 44 02 00 00 	mov    edx,DWORD PTR [esp+0x244]
-    ab52:	66 c1 e8 0a          	shr    ax,0xa
-    ab56:	83 f0 01             	xor    eax,0x1
-    ab59:	83 e0 01             	and    eax,0x1
-    ab5c:	88 02                	mov    BYTE PTR [edx],al
-    ab5e:	b8 01 00 00 00       	mov    eax,0x1
-    ab63:	e9 4a ff ff ff       	jmp    aab2 <_ZN3ata12sendIdentifyEhRbb+0x112>
-    ab68:	83 ec 0c             	sub    esp,0xc
-    ab6b:	68 0a e2 00 00       	push   0xe20a
-    ab70:	e8 bb 10 00 00       	call   bc30 <_Z6printfPKc>
-    ab75:	83 c4 10             	add    esp,0x10
-    ab78:	8d 74 24 20          	lea    esi,[esp+0x20]
-    ab7c:	8d 6c 24 1c          	lea    ebp,[esp+0x1c]
-    ab80:	8d 7e 20             	lea    edi,[esi+0x20]
-    ab83:	90                   	nop
-    ab84:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    ab88:	0f b7 06             	movzx  eax,WORD PTR [esi]
-    ab8b:	83 ec 08             	sub    esp,0x8
-    ab8e:	83 c6 02             	add    esi,0x2
-    ab91:	66 89 44 24 24       	mov    WORD PTR [esp+0x24],ax
-    ab96:	55                   	push   ebp
-    ab97:	68 1e e2 00 00       	push   0xe21e
-    ab9c:	e8 cf 20 00 00       	call   cc70 <_Z14_manage_escapeItEiPKcPT_>
-    aba1:	05 1e e2 00 00       	add    eax,0xe21e
-    aba6:	89 04 24             	mov    DWORD PTR [esp],eax
-    aba9:	e8 82 10 00 00       	call   bc30 <_Z6printfPKc>
-    abae:	83 c4 10             	add    esp,0x10
-    abb1:	39 f7                	cmp    edi,esi
-    abb3:	75 d3                	jne    ab88 <_ZN3ata12sendIdentifyEhRbb+0x1e8>
-    abb5:	83 ec 0c             	sub    esp,0xc
-    abb8:	68 d3 e2 00 00       	push   0xe2d3
-    abbd:	e8 6e 10 00 00       	call   bc30 <_Z6printfPKc>
-    abc2:	83 c4 10             	add    esp,0x10
-    abc5:	39 fb                	cmp    ebx,edi
-    abc7:	75 b7                	jne    ab80 <_ZN3ata12sendIdentifyEhRbb+0x1e0>
-    abc9:	0f b7 84 24 d0 00 00 	movzx  eax,WORD PTR [esp+0xd0]
-    abd0:	00 
-    abd1:	31 ed                	xor    ebp,ebp
-    abd3:	50                   	push   eax
-    abd4:	0f b7 44 24 0e       	movzx  eax,WORD PTR [esp+0xe]
-    abd9:	50                   	push   eax
-    abda:	0f b7 44 24 28       	movzx  eax,WORD PTR [esp+0x28]
-    abdf:	50                   	push   eax
-    abe0:	68 21 e2 00 00       	push   0xe221
-    abe5:	e8 96 21 00 00       	call   cd80 <_Z6printfItJttEEvPKcT_DpT0_>
-    abea:	58                   	pop    eax
-    abeb:	5a                   	pop    edx
-    abec:	ff b4 24 a0 00 00 00 	push   DWORD PTR [esp+0xa0]
-    abf3:	68 39 e2 00 00       	push   0xe239
-    abf8:	e8 b3 1c 00 00       	call   c8b0 <_Z6printfIiEvPKcT_>
-    abfd:	0f b7 84 24 fc 00 00 	movzx  eax,WORD PTR [esp+0xfc]
-    ac04:	00 
-    ac05:	0f b7 bc 24 fe 00 00 	movzx  edi,WORD PTR [esp+0xfe]
-    ac0c:	00 
-    ac0d:	ba 31 00 00 00       	mov    edx,0x31
-    ac12:	89 c6                	mov    esi,eax
-    ac14:	0f b7 84 24 fa 00 00 	movzx  eax,WORD PTR [esp+0xfa]
-    ac1b:	00 
-    ac1c:	66 89 44 24 1c       	mov    WORD PTR [esp+0x1c],ax
-    ac21:	0f b7 84 24 f8 00 00 	movzx  eax,WORD PTR [esp+0xf8]
-    ac28:	00 
-    ac29:	66 89 44 24 2e       	mov    WORD PTR [esp+0x2e],ax
-    ac2e:	83 c4 10             	add    esp,0x10
-    ac31:	8d 5d 01             	lea    ebx,[ebp+0x1]
-    ac34:	80 fa 25             	cmp    dl,0x25
-    ac37:	0f b6 83 46 e2 00 00 	movzx  eax,BYTE PTR [ebx+0xe246]
-    ac3e:	8d 8b 46 e2 00 00    	lea    ecx,[ebx+0xe246]
-    ac44:	75 21                	jne    ac67 <_ZN3ata12sendIdentifyEhRbb+0x2c7>
-    ac46:	3c 25                	cmp    al,0x25
-    ac48:	0f 84 9d 00 00 00    	je     aceb <_ZN3ata12sendIdentifyEhRbb+0x34b>
-    ac4e:	84 c0                	test   al,al
-    ac50:	75 6e                	jne    acc0 <_ZN3ata12sendIdentifyEhRbb+0x320>
-    ac52:	8d 5d 02             	lea    ebx,[ebp+0x2]
-    ac55:	0f b6 83 46 e2 00 00 	movzx  eax,BYTE PTR [ebx+0xe246]
-    ac5c:	84 c0                	test   al,al
-    ac5e:	74 20                	je     ac80 <_ZN3ata12sendIdentifyEhRbb+0x2e0>
-    ac60:	0f be d0             	movsx  edx,al
-    ac63:	89 dd                	mov    ebp,ebx
-    ac65:	eb ca                	jmp    ac31 <_ZN3ata12sendIdentifyEhRbb+0x291>
-    ac67:	88 44 24 0f          	mov    BYTE PTR [esp+0xf],al
-    ac6b:	83 ec 0c             	sub    esp,0xc
-    ac6e:	52                   	push   edx
-    ac6f:	e8 3c 0f 00 00       	call   bbb0 <_Z7putcharc>
-    ac74:	83 c4 10             	add    esp,0x10
-    ac77:	0f b6 44 24 0f       	movzx  eax,BYTE PTR [esp+0xf]
-    ac7c:	84 c0                	test   al,al
-    ac7e:	75 e0                	jne    ac60 <_ZN3ata12sendIdentifyEhRbb+0x2c0>
-    ac80:	8d 5c 24 56          	lea    ebx,[esp+0x56]
-    ac84:	8d 7c 24 7e          	lea    edi,[esp+0x7e]
-    ac88:	90                   	nop
-    ac89:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    ac90:	0f be 03             	movsx  eax,BYTE PTR [ebx]
-    ac93:	83 ec 08             	sub    esp,0x8
-    ac96:	83 c3 01             	add    ebx,0x1
-    ac99:	50                   	push   eax
-    ac9a:	68 5e e2 00 00       	push   0xe25e
-    ac9f:	e8 dc 1d 00 00       	call   ca80 <_Z6printfIcEvPKcT_>
-    aca4:	83 c4 10             	add    esp,0x10
-    aca7:	39 df                	cmp    edi,ebx
-    aca9:	75 e5                	jne    ac90 <_ZN3ata12sendIdentifyEhRbb+0x2f0>
-    acab:	83 ec 0c             	sub    esp,0xc
-    acae:	68 d3 e2 00 00       	push   0xe2d3
-    acb3:	e8 78 0f 00 00       	call   bc30 <_Z6printfPKc>
-    acb8:	83 c4 10             	add    esp,0x10
-    acbb:	e9 86 fe ff ff       	jmp    ab46 <_ZN3ata12sendIdentifyEhRbb+0x1a6>
-    acc0:	83 ec 08             	sub    esp,0x8
-    acc3:	8d 44 24 26          	lea    eax,[esp+0x26]
-    acc7:	50                   	push   eax
-    acc8:	51                   	push   ecx
-    acc9:	e8 a2 1f 00 00       	call   cc70 <_Z14_manage_escapeItEiPKcPT_>
-    acce:	0f b7 d6             	movzx  edx,si
-    acd1:	57                   	push   edi
-    acd2:	8d 84 03 46 e2 00 00 	lea    eax,[ebx+eax*1+0xe246]
-    acd9:	52                   	push   edx
-    acda:	0f b7 54 24 24       	movzx  edx,WORD PTR [esp+0x24]
-    acdf:	52                   	push   edx
-    ace0:	50                   	push   eax
-    ace1:	e8 9a 20 00 00       	call   cd80 <_Z6printfItJttEEvPKcT_DpT0_>
-    ace6:	83 c4 20             	add    esp,0x20
-    ace9:	eb 95                	jmp    ac80 <_ZN3ata12sendIdentifyEhRbb+0x2e0>
-    aceb:	83 ec 0c             	sub    esp,0xc
-    acee:	8d 5d 02             	lea    ebx,[ebp+0x2]
-    acf1:	6a 25                	push   0x25
-    acf3:	e8 b8 0e 00 00       	call   bbb0 <_Z7putcharc>
-    acf8:	0f b6 83 46 e2 00 00 	movzx  eax,BYTE PTR [ebx+0xe246]
-    acff:	83 c4 10             	add    esp,0x10
-    ad02:	84 c0                	test   al,al
-    ad04:	0f 85 56 ff ff ff    	jne    ac60 <_ZN3ata12sendIdentifyEhRbb+0x2c0>
-    ad0a:	e9 71 ff ff ff       	jmp    ac80 <_ZN3ata12sendIdentifyEhRbb+0x2e0>
-    ad0f:	90                   	nop
+0000a34f <__setCR3>:
+    a34f:	55                   	push   ebp
+    a350:	89 e5                	mov    ebp,esp
+    a352:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+    a355:	0f 22 d8             	mov    cr3,eax
+    a358:	5d                   	pop    ebp
+    a359:	c3                   	ret    
 
-0000ad10 <_ZN6paging18init_kernel_pagingEv>:
-    ad10:	57                   	push   edi
-    ad11:	56                   	push   esi
-    ad12:	b8 00 00 10 00       	mov    eax,0x100000
-    ad17:	53                   	push   ebx
-    ad18:	90                   	nop
-    ad19:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    ad20:	c7 00 00 00 00 00    	mov    DWORD PTR [eax],0x0
-    ad26:	83 c0 04             	add    eax,0x4
-    ad29:	3d 00 10 10 00       	cmp    eax,0x101000
-    ad2e:	75 f0                	jne    ad20 <_ZN6paging18init_kernel_pagingEv+0x10>
-    ad30:	c7 00 00 00 00 00    	mov    DWORD PTR [eax],0x0
-    ad36:	83 c0 04             	add    eax,0x4
-    ad39:	3d 00 10 50 00       	cmp    eax,0x501000
-    ad3e:	75 f0                	jne    ad30 <_ZN6paging18init_kernel_pagingEv+0x20>
-    ad40:	c7 05 00 00 10 00 87 	mov    DWORD PTR ds:0x100000,0x87
-    ad47:	00 00 00 
-    ad4a:	c7 05 04 00 10 00 87 	mov    DWORD PTR ds:0x100004,0x400087
-    ad51:	00 40 00 
-    ad54:	31 c0                	xor    eax,eax
-    ad56:	c7 05 08 0c 10 00 87 	mov    DWORD PTR ds:0x100c08,0x800087
-    ad5d:	00 80 00 
-    ad60:	c7 05 0c 0c 10 00 87 	mov    DWORD PTR ds:0x100c0c,0xc00087
-    ad67:	00 c0 00 
-    ad6a:	c7 05 10 0c 10 00 87 	mov    DWORD PTR ds:0x100c10,0x1000087
-    ad71:	00 00 01 
-    ad74:	c7 05 14 0c 10 00 87 	mov    DWORD PTR ds:0x100c14,0x1400087
-    ad7b:	00 40 01 
-    ad7e:	c7 05 18 0c 10 00 87 	mov    DWORD PTR ds:0x100c18,0x1800087
-    ad85:	00 80 01 
-    ad88:	c7 05 1c 0c 10 00 87 	mov    DWORD PTR ds:0x100c1c,0x1c00087
-    ad8f:	00 c0 01 
-    ad92:	c7 05 20 0c 10 00 87 	mov    DWORD PTR ds:0x100c20,0x2000087
-    ad99:	00 00 02 
-    ad9c:	c7 05 24 0c 10 00 87 	mov    DWORD PTR ds:0x100c24,0x2400087
-    ada3:	00 40 02 
-    ada6:	c7 05 28 0c 10 00 87 	mov    DWORD PTR ds:0x100c28,0x2800087
-    adad:	00 80 02 
-    adb0:	c7 05 2c 0c 10 00 87 	mov    DWORD PTR ds:0x100c2c,0x2c00087
-    adb7:	00 c0 02 
-    adba:	c7 05 30 0c 10 00 87 	mov    DWORD PTR ds:0x100c30,0x3000087
-    adc1:	00 00 03 
-    adc4:	c7 05 34 0c 10 00 87 	mov    DWORD PTR ds:0x100c34,0x3400087
-    adcb:	00 40 03 
-    adce:	c7 05 38 0c 10 00 87 	mov    DWORD PTR ds:0x100c38,0x3800087
-    add5:	00 80 03 
-    add8:	c7 05 3c 0c 10 00 87 	mov    DWORD PTR ds:0x100c3c,0x3c00087
-    addf:	00 c0 03 
-    ade2:	c7 05 00 00 00 02 00 	mov    DWORD PTR ds:0x2000000,0x0
-    ade9:	00 00 00 
-    adec:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    adf0:	c7 04 85 04 00 00 02 	mov    DWORD PTR [eax*4+0x2000004],0x0
-    adf7:	00 00 00 00 
-    adfb:	83 c0 01             	add    eax,0x1
-    adfe:	3d 00 80 00 00       	cmp    eax,0x8000
-    ae03:	75 eb                	jne    adf0 <_ZN6paging18init_kernel_pagingEv+0xe0>
-    ae05:	e8 f6 00 00 00       	call   af00 <_ZN4boot12get_ram_sizeEv>
-    ae0a:	c1 e8 0c             	shr    eax,0xc
-    ae0d:	3d 00 40 00 00       	cmp    eax,0x4000
-    ae12:	76 4b                	jbe    ae5f <_ZN6paging18init_kernel_pagingEv+0x14f>
-    ae14:	8b 15 00 00 00 02    	mov    edx,DWORD PTR ds:0x2000000
-    ae1a:	b9 00 40 00 00       	mov    ecx,0x4000
-    ae1f:	be 01 00 00 00       	mov    esi,0x1
-    ae24:	8d 9a 00 c0 ff ff    	lea    ebx,[edx-0x4000]
-    ae2a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    ae30:	8d bc 19 00 80 00 00 	lea    edi,[ecx+ebx*1+0x8000]
-    ae37:	89 ca                	mov    edx,ecx
-    ae39:	c1 e2 0c             	shl    edx,0xc
-    ae3c:	89 14 bd 04 00 00 02 	mov    DWORD PTR [edi*4+0x2000004],edx
-    ae43:	89 f7                	mov    edi,esi
-    ae45:	c1 ea 11             	shr    edx,0x11
-    ae48:	d3 e7                	shl    edi,cl
-    ae4a:	83 c1 01             	add    ecx,0x1
-    ae4d:	09 3c 95 04 00 00 02 	or     DWORD PTR [edx*4+0x2000004],edi
-    ae54:	39 c8                	cmp    eax,ecx
-    ae56:	75 d8                	jne    ae30 <_ZN6paging18init_kernel_pagingEv+0x120>
-    ae58:	01 d8                	add    eax,ebx
-    ae5a:	a3 00 00 00 02       	mov    ds:0x2000000,eax
-    ae5f:	83 ec 0c             	sub    esp,0xc
-    ae62:	68 00 00 10 00       	push   0x100000
-    ae67:	e8 f3 f2 ff ff       	call   a15f <__setCR3>
-    ae6c:	e8 ea f2 ff ff       	call   a15b <__getCR4>
-    ae71:	83 c8 10             	or     eax,0x10
-    ae74:	89 04 24             	mov    DWORD PTR [esp],eax
-    ae77:	e8 d4 f2 ff ff       	call   a150 <__setCR4>
-    ae7c:	e8 07 f3 ff ff       	call   a188 <__getCR0>
-    ae81:	0d 01 00 00 80       	or     eax,0x80000001
-    ae86:	89 04 24             	mov    DWORD PTR [esp],eax
-    ae89:	e8 ef f2 ff ff       	call   a17d <__setCR0>
-    ae8e:	83 c4 10             	add    esp,0x10
-    ae91:	5b                   	pop    ebx
-    ae92:	5e                   	pop    esi
-    ae93:	5f                   	pop    edi
-    ae94:	c3                   	ret    
-    ae95:	90                   	nop
-    ae96:	8d 76 00             	lea    esi,[esi+0x0]
-    ae99:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+0000a35a <__getCR3>:
+    a35a:	0f 20 d8             	mov    eax,cr3
+    a35d:	c3                   	ret    
 
-0000aea0 <_ZN9PhysPages4initEv>:
-    aea0:	8b 54 24 04          	mov    edx,DWORD PTR [esp+0x4]
-    aea4:	c7 02 00 00 00 00    	mov    DWORD PTR [edx],0x0
-    aeaa:	8d 42 04             	lea    eax,[edx+0x4]
-    aead:	81 c2 04 00 02 00    	add    edx,0x20004
-    aeb3:	90                   	nop
-    aeb4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    aeb8:	c7 00 00 00 00 00    	mov    DWORD PTR [eax],0x0
-    aebe:	83 c0 04             	add    eax,0x4
-    aec1:	39 d0                	cmp    eax,edx
-    aec3:	75 f3                	jne    aeb8 <_ZN9PhysPages4initEv+0x18>
-    aec5:	f3 c3                	repz ret 
-    aec7:	90                   	nop
-    aec8:	90                   	nop
-    aec9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+0000a35e <__setCR2>:
+    a35e:	55                   	push   ebp
+    a35f:	89 e5                	mov    ebp,esp
+    a361:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+    a364:	0f 22 d0             	mov    cr2,eax
+    a367:	5d                   	pop    ebp
+    a368:	c3                   	ret    
 
-0000aed0 <_ZN9PhysPages8add_pageEj>:
-    aed0:	53                   	push   ebx
-    aed1:	8b 44 24 08          	mov    eax,DWORD PTR [esp+0x8]
-    aed5:	8b 4c 24 0c          	mov    ecx,DWORD PTR [esp+0xc]
-    aed9:	8b 10                	mov    edx,DWORD PTR [eax]
-    aedb:	8d 5a 01             	lea    ebx,[edx+0x1]
-    aede:	89 18                	mov    DWORD PTR [eax],ebx
-    aee0:	89 cb                	mov    ebx,ecx
-    aee2:	89 8c 90 04 00 02 00 	mov    DWORD PTR [eax+edx*4+0x20004],ecx
-    aee9:	c1 eb 11             	shr    ebx,0x11
-    aeec:	c1 e9 0c             	shr    ecx,0xc
-    aeef:	ba 01 00 00 00       	mov    edx,0x1
-    aef4:	d3 e2                	shl    edx,cl
-    aef6:	09 54 98 04          	or     DWORD PTR [eax+ebx*4+0x4],edx
-    aefa:	5b                   	pop    ebx
-    aefb:	c3                   	ret    
-    aefc:	66 90                	xchg   ax,ax
-    aefe:	66 90                	xchg   ax,ax
+0000a369 <__getCR2>:
+    a369:	0f 20 d0             	mov    eax,cr2
+    a36c:	c3                   	ret    
 
-0000af00 <_ZN4boot12get_ram_sizeEv>:
-    af00:	0f b7 05 02 05 00 00 	movzx  eax,WORD PTR ds:0x502
-    af07:	0f b7 15 00 05 00 00 	movzx  edx,WORD PTR ds:0x500
-    af0e:	c1 e0 06             	shl    eax,0x6
-    af11:	01 d0                	add    eax,edx
-    af13:	c1 e0 0a             	shl    eax,0xa
-    af16:	c3                   	ret    
-    af17:	66 90                	xchg   ax,ax
-    af19:	66 90                	xchg   ax,ax
-    af1b:	66 90                	xchg   ax,ax
-    af1d:	66 90                	xchg   ax,ax
-    af1f:	90                   	nop
+0000a36d <__setCR0>:
+    a36d:	55                   	push   ebp
+    a36e:	89 e5                	mov    ebp,esp
+    a370:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+    a373:	0f 22 c0             	mov    cr0,eax
+    a376:	5d                   	pop    ebp
+    a377:	c3                   	ret    
 
-0000af20 <_ZN3elf13load_file_hdrEjPFiPvjjS0_ES0_>:
-    af20:	57                   	push   edi
-    af21:	53                   	push   ebx
-    af22:	83 ec 44             	sub    esp,0x44
-    af25:	8b 5c 24 50          	mov    ebx,DWORD PTR [esp+0x50]
-    af29:	ff 74 24 5c          	push   DWORD PTR [esp+0x5c]
-    af2d:	6a 34                	push   0x34
-    af2f:	ff 74 24 5c          	push   DWORD PTR [esp+0x5c]
-    af33:	8d 44 24 18          	lea    eax,[esp+0x18]
-    af37:	50                   	push   eax
-    af38:	ff 54 24 68          	call   DWORD PTR [esp+0x68]
-    af3c:	83 c4 10             	add    esp,0x10
-    af3f:	85 c0                	test   eax,eax
-    af41:	75 6d                	jne    afb0 <_ZN3elf13load_file_hdrEjPFiPvjjS0_ES0_+0x90>
-    af43:	8b 44 24 0c          	mov    eax,DWORD PTR [esp+0xc]
-    af47:	89 03                	mov    DWORD PTR [ebx],eax
-    af49:	8b 44 24 10          	mov    eax,DWORD PTR [esp+0x10]
-    af4d:	89 43 04             	mov    DWORD PTR [ebx+0x4],eax
-    af50:	8b 44 24 14          	mov    eax,DWORD PTR [esp+0x14]
-    af54:	89 43 08             	mov    DWORD PTR [ebx+0x8],eax
-    af57:	8b 44 24 18          	mov    eax,DWORD PTR [esp+0x18]
-    af5b:	89 43 0c             	mov    DWORD PTR [ebx+0xc],eax
-    af5e:	8b 44 24 1c          	mov    eax,DWORD PTR [esp+0x1c]
-    af62:	89 43 10             	mov    DWORD PTR [ebx+0x10],eax
-    af65:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    af69:	89 43 14             	mov    DWORD PTR [ebx+0x14],eax
-    af6c:	8b 44 24 24          	mov    eax,DWORD PTR [esp+0x24]
-    af70:	89 43 18             	mov    DWORD PTR [ebx+0x18],eax
-    af73:	8b 44 24 28          	mov    eax,DWORD PTR [esp+0x28]
-    af77:	89 43 1c             	mov    DWORD PTR [ebx+0x1c],eax
-    af7a:	8b 44 24 2c          	mov    eax,DWORD PTR [esp+0x2c]
-    af7e:	89 43 20             	mov    DWORD PTR [ebx+0x20],eax
-    af81:	8b 44 24 30          	mov    eax,DWORD PTR [esp+0x30]
-    af85:	89 43 24             	mov    DWORD PTR [ebx+0x24],eax
-    af88:	8b 44 24 34          	mov    eax,DWORD PTR [esp+0x34]
-    af8c:	89 43 28             	mov    DWORD PTR [ebx+0x28],eax
-    af8f:	8b 44 24 38          	mov    eax,DWORD PTR [esp+0x38]
-    af93:	89 43 2c             	mov    DWORD PTR [ebx+0x2c],eax
-    af96:	8b 44 24 3c          	mov    eax,DWORD PTR [esp+0x3c]
-    af9a:	89 43 30             	mov    DWORD PTR [ebx+0x30],eax
-    af9d:	83 c4 44             	add    esp,0x44
-    afa0:	89 d8                	mov    eax,ebx
-    afa2:	5b                   	pop    ebx
-    afa3:	5f                   	pop    edi
-    afa4:	c2 04 00             	ret    0x4
-    afa7:	89 f6                	mov    esi,esi
-    afa9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
-    afb0:	8d 7b 04             	lea    edi,[ebx+0x4]
-    afb3:	89 d9                	mov    ecx,ebx
-    afb5:	31 c0                	xor    eax,eax
-    afb7:	c7 03 00 00 00 00    	mov    DWORD PTR [ebx],0x0
-    afbd:	c7 43 30 00 00 00 00 	mov    DWORD PTR [ebx+0x30],0x0
-    afc4:	83 e7 fc             	and    edi,0xfffffffc
-    afc7:	29 f9                	sub    ecx,edi
-    afc9:	83 c1 34             	add    ecx,0x34
-    afcc:	c1 e9 02             	shr    ecx,0x2
-    afcf:	f3 ab                	rep stos DWORD PTR es:[edi],eax
-    afd1:	83 c4 44             	add    esp,0x44
-    afd4:	89 d8                	mov    eax,ebx
-    afd6:	5b                   	pop    ebx
-    afd7:	5f                   	pop    edi
-    afd8:	c2 04 00             	ret    0x4
-    afdb:	90                   	nop
-    afdc:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+0000a378 <__getCR0>:
+    a378:	0f 20 c0             	mov    eax,cr0
+    a37b:	c3                   	ret    
+    a37c:	66 90                	xchg   ax,ax
+    a37e:	66 90                	xchg   ax,ax
 
-0000afe0 <_ZN3elf13load_prog_hdrEjjjPFiPvjjS0_ES0_>:
-    afe0:	56                   	push   esi
-    afe1:	53                   	push   ebx
-    afe2:	83 ec 24             	sub    esp,0x24
-    afe5:	8b 44 24 38          	mov    eax,DWORD PTR [esp+0x38]
-    afe9:	8b 5c 24 30          	mov    ebx,DWORD PTR [esp+0x30]
-    afed:	ff 74 24 44          	push   DWORD PTR [esp+0x44]
-    aff1:	50                   	push   eax
-    aff2:	0f af 44 24 44       	imul   eax,DWORD PTR [esp+0x44]
-    aff7:	03 44 24 3c          	add    eax,DWORD PTR [esp+0x3c]
-    affb:	50                   	push   eax
-    affc:	8d 44 24 0c          	lea    eax,[esp+0xc]
-    b000:	50                   	push   eax
-    b001:	ff 54 24 50          	call   DWORD PTR [esp+0x50]
-    b005:	83 c4 10             	add    esp,0x10
-    b008:	85 c0                	test   eax,eax
-    b00a:	75 44                	jne    b050 <_ZN3elf13load_prog_hdrEjjjPFiPvjjS0_ES0_+0x70>
-    b00c:	8b 04 24             	mov    eax,DWORD PTR [esp]
-    b00f:	89 03                	mov    DWORD PTR [ebx],eax
-    b011:	8b 44 24 04          	mov    eax,DWORD PTR [esp+0x4]
-    b015:	89 43 04             	mov    DWORD PTR [ebx+0x4],eax
-    b018:	8b 44 24 08          	mov    eax,DWORD PTR [esp+0x8]
-    b01c:	89 43 08             	mov    DWORD PTR [ebx+0x8],eax
-    b01f:	8b 44 24 0c          	mov    eax,DWORD PTR [esp+0xc]
-    b023:	89 43 0c             	mov    DWORD PTR [ebx+0xc],eax
-    b026:	8b 44 24 10          	mov    eax,DWORD PTR [esp+0x10]
-    b02a:	89 43 10             	mov    DWORD PTR [ebx+0x10],eax
-    b02d:	8b 44 24 14          	mov    eax,DWORD PTR [esp+0x14]
-    b031:	89 43 14             	mov    DWORD PTR [ebx+0x14],eax
-    b034:	8b 44 24 18          	mov    eax,DWORD PTR [esp+0x18]
-    b038:	89 43 18             	mov    DWORD PTR [ebx+0x18],eax
-    b03b:	8b 44 24 1c          	mov    eax,DWORD PTR [esp+0x1c]
-    b03f:	89 43 1c             	mov    DWORD PTR [ebx+0x1c],eax
-    b042:	83 c4 24             	add    esp,0x24
-    b045:	89 d8                	mov    eax,ebx
-    b047:	5b                   	pop    ebx
-    b048:	5e                   	pop    esi
-    b049:	c2 04 00             	ret    0x4
-    b04c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    b050:	8d 4b 04             	lea    ecx,[ebx+0x4]
-    b053:	89 d8                	mov    eax,ebx
-    b055:	31 f6                	xor    esi,esi
-    b057:	c7 03 00 00 00 00    	mov    DWORD PTR [ebx],0x0
-    b05d:	c7 43 1c 00 00 00 00 	mov    DWORD PTR [ebx+0x1c],0x0
-    b064:	31 d2                	xor    edx,edx
-    b066:	83 e1 fc             	and    ecx,0xfffffffc
-    b069:	29 c8                	sub    eax,ecx
-    b06b:	83 c0 20             	add    eax,0x20
-    b06e:	83 e0 fc             	and    eax,0xfffffffc
-    b071:	89 34 11             	mov    DWORD PTR [ecx+edx*1],esi
-    b074:	83 c2 04             	add    edx,0x4
-    b077:	39 c2                	cmp    edx,eax
-    b079:	72 f6                	jb     b071 <_ZN3elf13load_prog_hdrEjjjPFiPvjjS0_ES0_+0x91>
-    b07b:	eb c5                	jmp    b042 <_ZN3elf13load_prog_hdrEjjjPFiPvjjS0_ES0_+0x62>
-    b07d:	8d 76 00             	lea    esi,[esi+0x0]
+0000a380 <__isCpuidSuported>:
+    a380:	9c                   	pushf  
+    a381:	9c                   	pushf  
+    a382:	81 34 24 00 00 20 00 	xor    DWORD PTR [esp],0x200000
+    a389:	9d                   	popf   
+    a38a:	9c                   	pushf  
+    a38b:	58                   	pop    eax
+    a38c:	33 04 24             	xor    eax,DWORD PTR [esp]
+    a38f:	9d                   	popf   
+    a390:	25 00 00 20 00       	and    eax,0x200000
+    a395:	c3                   	ret    
 
-0000b080 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_>:
-    b080:	55                   	push   ebp
-    b081:	57                   	push   edi
-    b082:	56                   	push   esi
-    b083:	53                   	push   ebx
-    b084:	81 ec 9c 00 00 00    	sub    esp,0x9c
-    b08a:	8d 44 24 5c          	lea    eax,[esp+0x5c]
-    b08e:	ff b4 24 b8 00 00 00 	push   DWORD PTR [esp+0xb8]
-    b095:	ff b4 24 b8 00 00 00 	push   DWORD PTR [esp+0xb8]
-    b09c:	ff b4 24 b8 00 00 00 	push   DWORD PTR [esp+0xb8]
-    b0a3:	50                   	push   eax
-    b0a4:	e8 77 fe ff ff       	call   af20 <_ZN3elf13load_file_hdrEjPFiPvjjS0_ES0_>
-    b0a9:	0f b6 44 24 6b       	movzx  eax,BYTE PTR [esp+0x6b]
-    b0ae:	0f b6 4c 24 6a       	movzx  ecx,BYTE PTR [esp+0x6a]
-    b0b3:	0f b6 54 24 69       	movzx  edx,BYTE PTR [esp+0x69]
-    b0b8:	8b bc 24 84 00 00 00 	mov    edi,DWORD PTR [esp+0x84]
-    b0bf:	0f b7 ac 24 92 00 00 	movzx  ebp,WORD PTR [esp+0x92]
-    b0c6:	00 
-    b0c7:	0f b7 b4 24 94 00 00 	movzx  esi,WORD PTR [esp+0x94]
-    b0ce:	00 
-    b0cf:	50                   	push   eax
-    b0d0:	89 c3                	mov    ebx,eax
-    b0d2:	0f b6 c1             	movzx  eax,cl
-    b0d5:	88 4c 24 18          	mov    BYTE PTR [esp+0x18],cl
-    b0d9:	50                   	push   eax
-    b0da:	0f b6 c2             	movzx  eax,dl
-    b0dd:	88 54 24 18          	mov    BYTE PTR [esp+0x18],dl
-    b0e1:	50                   	push   eax
-    b0e2:	0f b6 44 24 74       	movzx  eax,BYTE PTR [esp+0x74]
-    b0e7:	50                   	push   eax
-    b0e8:	68 61 e2 00 00       	push   0xe261
-    b0ed:	e8 8e 25 00 00       	call   d680 <_Z6printfIhJhhhEEvPKcT_DpT0_>
-    b0f2:	83 c4 20             	add    esp,0x20
-    b0f5:	0f b6 4c 24 08       	movzx  ecx,BYTE PTR [esp+0x8]
-    b0fa:	0f b6 54 24 04       	movzx  edx,BYTE PTR [esp+0x4]
-    b0ff:	80 f9 4c             	cmp    cl,0x4c
-    b102:	0f 95 c0             	setne  al
-    b105:	80 fa 45             	cmp    dl,0x45
-    b108:	0f 95 c2             	setne  dl
-    b10b:	09 d0                	or     eax,edx
-    b10d:	80 fb 46             	cmp    bl,0x46
-    b110:	0f 95 c2             	setne  dl
-    b113:	08 d0                	or     al,dl
-    b115:	0f 85 15 02 00 00    	jne    b330 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x2b0>
-    b11b:	0f b7 c6             	movzx  eax,si
-    b11e:	83 ec 08             	sub    esp,0x8
-    b121:	31 f6                	xor    esi,esi
-    b123:	89 44 24 18          	mov    DWORD PTR [esp+0x18],eax
-    b127:	50                   	push   eax
-    b128:	68 76 e2 00 00       	push   0xe276
-    b12d:	e8 7e 1e 00 00       	call   cfb0 <_Z6printfItEvPKcT_>
-    b132:	89 7c 24 40          	mov    DWORD PTR [esp+0x40],edi
-    b136:	ba 70 00 00 00       	mov    edx,0x70
-    b13b:	83 c4 10             	add    esp,0x10
-    b13e:	66 90                	xchg   ax,ax
-    b140:	8d 5e 01             	lea    ebx,[esi+0x1]
-    b143:	80 fa 25             	cmp    dl,0x25
-    b146:	0f b6 83 83 e2 00 00 	movzx  eax,BYTE PTR [ebx+0xe283]
-    b14d:	8d 8b 83 e2 00 00    	lea    ecx,[ebx+0xe283]
-    b153:	75 2b                	jne    b180 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x100>
-    b155:	3c 25                	cmp    al,0x25
-    b157:	0f 84 50 02 00 00    	je     b3ad <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x32d>
-    b15d:	84 c0                	test   al,al
-    b15f:	0f 85 23 02 00 00    	jne    b388 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x308>
-    b165:	8d 5e 02             	lea    ebx,[esi+0x2]
-    b168:	0f b6 83 83 e2 00 00 	movzx  eax,BYTE PTR [ebx+0xe283]
-    b16f:	84 c0                	test   al,al
-    b171:	74 2d                	je     b1a0 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x120>
-    b173:	0f be d0             	movsx  edx,al
-    b176:	89 de                	mov    esi,ebx
-    b178:	eb c6                	jmp    b140 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0xc0>
-    b17a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    b180:	88 44 24 04          	mov    BYTE PTR [esp+0x4],al
-    b184:	83 ec 0c             	sub    esp,0xc
-    b187:	52                   	push   edx
-    b188:	e8 23 0a 00 00       	call   bbb0 <_Z7putcharc>
-    b18d:	83 c4 10             	add    esp,0x10
-    b190:	0f b6 44 24 04       	movzx  eax,BYTE PTR [esp+0x4]
-    b195:	84 c0                	test   al,al
-    b197:	75 da                	jne    b173 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0xf3>
-    b199:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    b1a0:	83 ec 08             	sub    esp,0x8
-    b1a3:	0f b7 c5             	movzx  eax,bp
-    b1a6:	89 44 24 1c          	mov    DWORD PTR [esp+0x1c],eax
-    b1aa:	50                   	push   eax
-    b1ab:	68 90 e2 00 00       	push   0xe290
-    b1b0:	e8 fb 1d 00 00       	call   cfb0 <_Z6printfItEvPKcT_>
-    b1b5:	83 c4 10             	add    esp,0x10
-    b1b8:	8b 54 24 10          	mov    edx,DWORD PTR [esp+0x10]
-    b1bc:	85 d2                	test   edx,edx
-    b1be:	0f 84 82 00 00 00    	je     b246 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x1c6>
-    b1c4:	03 bc 24 b0 00 00 00 	add    edi,DWORD PTR [esp+0xb0]
-    b1cb:	c7 44 24 04 00 00 00 	mov    DWORD PTR [esp+0x4],0x0
-    b1d2:	00 
-    b1d3:	89 7c 24 18          	mov    DWORD PTR [esp+0x18],edi
-    b1d7:	bf 01 00 00 00       	mov    edi,0x1
-    b1dc:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    b1e0:	83 ec 08             	sub    esp,0x8
-    b1e3:	ff b4 24 c0 00 00 00 	push   DWORD PTR [esp+0xc0]
-    b1ea:	ff b4 24 c0 00 00 00 	push   DWORD PTR [esp+0xc0]
-    b1f1:	ff 74 24 14          	push   DWORD PTR [esp+0x14]
-    b1f5:	ff 74 24 28          	push   DWORD PTR [esp+0x28]
-    b1f9:	ff 74 24 30          	push   DWORD PTR [esp+0x30]
-    b1fd:	8d 44 24 58          	lea    eax,[esp+0x58]
-    b201:	50                   	push   eax
-    b202:	e8 d9 fd ff ff       	call   afe0 <_ZN3elf13load_prog_hdrEjjjPFiPvjjS0_ES0_>
-    b207:	8b 5c 24 58          	mov    ebx,DWORD PTR [esp+0x58]
-    b20b:	b8 e0 e0 00 00       	mov    eax,0xe0e0
-    b210:	31 d2                	xor    edx,edx
-    b212:	31 c9                	xor    ecx,ecx
-    b214:	89 5c 24 28          	mov    DWORD PTR [esp+0x28],ebx
-    b218:	83 c4 1c             	add    esp,0x1c
-    b21b:	eb 08                	jmp    b225 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x1a5>
-    b21d:	8d 76 00             	lea    esi,[esi+0x0]
-    b220:	8b 08                	mov    ecx,DWORD PTR [eax]
-    b222:	83 c0 04             	add    eax,0x4
-    b225:	39 cb                	cmp    ebx,ecx
-    b227:	be f8 e0 00 00       	mov    esi,0xe0f8
-    b22c:	0f 44 d7             	cmove  edx,edi
-    b22f:	39 c6                	cmp    esi,eax
-    b231:	75 ed                	jne    b220 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x1a0>
-    b233:	84 d2                	test   dl,dl
-    b235:	75 21                	jne    b258 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x1d8>
-    b237:	83 44 24 04 01       	add    DWORD PTR [esp+0x4],0x1
-    b23c:	8b 44 24 04          	mov    eax,DWORD PTR [esp+0x4]
-    b240:	39 44 24 10          	cmp    DWORD PTR [esp+0x10],eax
-    b244:	75 9a                	jne    b1e0 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x160>
-    b246:	81 c4 9c 00 00 00    	add    esp,0x9c
-    b24c:	31 c0                	xor    eax,eax
-    b24e:	5b                   	pop    ebx
-    b24f:	5e                   	pop    esi
-    b250:	5f                   	pop    edi
-    b251:	5d                   	pop    ebp
-    b252:	c3                   	ret    
-    b253:	90                   	nop
-    b254:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    b258:	8b 44 24 44          	mov    eax,DWORD PTR [esp+0x44]
-    b25c:	83 ec 0c             	sub    esp,0xc
-    b25f:	89 44 24 28          	mov    DWORD PTR [esp+0x28],eax
-    b263:	8b 44 24 5c          	mov    eax,DWORD PTR [esp+0x5c]
-    b267:	89 44 24 2c          	mov    DWORD PTR [esp+0x2c],eax
-    b26b:	68 20 e3 00 00       	push   0xe320
-    b270:	e8 bb 09 00 00       	call   bc30 <_Z6printfPKc>
-    b275:	8b 44 24 5c          	mov    eax,DWORD PTR [esp+0x5c]
-    b279:	31 d2                	xor    edx,edx
-    b27b:	89 44 24 38          	mov    DWORD PTR [esp+0x38],eax
-    b27f:	8b 44 24 68          	mov    eax,DWORD PTR [esp+0x68]
-    b283:	89 44 24 3c          	mov    DWORD PTR [esp+0x3c],eax
-    b287:	8b 44 24 58          	mov    eax,DWORD PTR [esp+0x58]
-    b28b:	89 44 24 34          	mov    DWORD PTR [esp+0x34],eax
-    b28f:	83 c4 10             	add    esp,0x10
-    b292:	b8 70 00 00 00       	mov    eax,0x70
-    b297:	eb 2b                	jmp    b2c4 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x244>
-    b299:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    b2a0:	80 fb 25             	cmp    bl,0x25
-    b2a3:	0f 84 af 00 00 00    	je     b358 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x2d8>
-    b2a9:	84 db                	test   bl,bl
-    b2ab:	0f 85 8f 00 00 00    	jne    b340 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x2c0>
-    b2b1:	8d 72 02             	lea    esi,[edx+0x2]
-    b2b4:	0f b6 9e 58 e3 00 00 	movzx  ebx,BYTE PTR [esi+0xe358]
-    b2bb:	84 db                	test   bl,bl
-    b2bd:	74 31                	je     b2f0 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x270>
-    b2bf:	0f be c3             	movsx  eax,bl
-    b2c2:	89 f2                	mov    edx,esi
-    b2c4:	8d 72 01             	lea    esi,[edx+0x1]
-    b2c7:	3c 25                	cmp    al,0x25
-    b2c9:	0f b6 9e 58 e3 00 00 	movzx  ebx,BYTE PTR [esi+0xe358]
-    b2d0:	8d ae 58 e3 00 00    	lea    ebp,[esi+0xe358]
-    b2d6:	74 c8                	je     b2a0 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x220>
-    b2d8:	83 ec 0c             	sub    esp,0xc
-    b2db:	50                   	push   eax
-    b2dc:	e8 cf 08 00 00       	call   bbb0 <_Z7putcharc>
-    b2e1:	83 c4 10             	add    esp,0x10
-    b2e4:	84 db                	test   bl,bl
-    b2e6:	75 d7                	jne    b2bf <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x23f>
-    b2e8:	90                   	nop
-    b2e9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    b2f0:	83 ec 04             	sub    esp,0x4
-    b2f3:	ff 74 24 10          	push   DWORD PTR [esp+0x10]
-    b2f7:	8b 74 24 28          	mov    esi,DWORD PTR [esp+0x28]
-    b2fb:	56                   	push   esi
-    b2fc:	68 a2 e2 00 00       	push   0xe2a2
-    b301:	e8 aa 20 00 00       	call   d3b0 <_Z6printfIjJjEEvPKcT_DpT0_>
-    b306:	ff b4 24 c8 00 00 00 	push   DWORD PTR [esp+0xc8]
-    b30d:	56                   	push   esi
-    b30e:	8b 84 24 c8 00 00 00 	mov    eax,DWORD PTR [esp+0xc8]
-    b315:	03 44 24 58          	add    eax,DWORD PTR [esp+0x58]
-    b319:	50                   	push   eax
-    b31a:	ff 74 24 38          	push   DWORD PTR [esp+0x38]
-    b31e:	ff 94 24 d4 00 00 00 	call   DWORD PTR [esp+0xd4]
-    b325:	83 c4 20             	add    esp,0x20
-    b328:	85 c0                	test   eax,eax
-    b32a:	0f 84 07 ff ff ff    	je     b237 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x1b7>
-    b330:	81 c4 9c 00 00 00    	add    esp,0x9c
-    b336:	b8 ff ff ff ff       	mov    eax,0xffffffff
-    b33b:	5b                   	pop    ebx
-    b33c:	5e                   	pop    esi
-    b33d:	5f                   	pop    edi
-    b33e:	5d                   	pop    ebp
-    b33f:	c3                   	ret    
-    b340:	8d 43 be             	lea    eax,[ebx-0x42]
-    b343:	3c 36                	cmp    al,0x36
-    b345:	0f 87 38 01 00 00    	ja     b483 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x403>
-    b34b:	0f b6 c0             	movzx  eax,al
-    b34e:	ff 24 85 00 e0 00 00 	jmp    DWORD PTR [eax*4+0xe000]
-    b355:	8d 76 00             	lea    esi,[esi+0x0]
-    b358:	89 54 24 08          	mov    DWORD PTR [esp+0x8],edx
-    b35c:	83 ec 0c             	sub    esp,0xc
-    b35f:	6a 25                	push   0x25
-    b361:	e8 4a 08 00 00       	call   bbb0 <_Z7putcharc>
-    b366:	8b 54 24 18          	mov    edx,DWORD PTR [esp+0x18]
-    b36a:	83 c4 10             	add    esp,0x10
-    b36d:	8d 72 02             	lea    esi,[edx+0x2]
-    b370:	0f b6 9e 58 e3 00 00 	movzx  ebx,BYTE PTR [esi+0xe358]
-    b377:	84 db                	test   bl,bl
-    b379:	0f 85 40 ff ff ff    	jne    b2bf <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x23f>
-    b37f:	e9 6c ff ff ff       	jmp    b2f0 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x270>
-    b384:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    b388:	83 ec 08             	sub    esp,0x8
-    b38b:	8d 44 24 38          	lea    eax,[esp+0x38]
-    b38f:	50                   	push   eax
-    b390:	51                   	push   ecx
-    b391:	e8 1a 1f 00 00       	call   d2b0 <_Z14_manage_escapeIjEiPKcPT_>
-    b396:	8d 84 18 83 e2 00 00 	lea    eax,[eax+ebx*1+0xe283]
-    b39d:	89 04 24             	mov    DWORD PTR [esp],eax
-    b3a0:	e8 8b 08 00 00       	call   bc30 <_Z6printfPKc>
-    b3a5:	83 c4 10             	add    esp,0x10
-    b3a8:	e9 f3 fd ff ff       	jmp    b1a0 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x120>
-    b3ad:	83 ec 0c             	sub    esp,0xc
-    b3b0:	8d 5e 02             	lea    ebx,[esi+0x2]
-    b3b3:	6a 25                	push   0x25
-    b3b5:	e8 f6 07 00 00       	call   bbb0 <_Z7putcharc>
-    b3ba:	0f b6 83 83 e2 00 00 	movzx  eax,BYTE PTR [ebx+0xe283]
-    b3c1:	83 c4 10             	add    esp,0x10
-    b3c4:	84 c0                	test   al,al
-    b3c6:	0f 85 a7 fd ff ff    	jne    b173 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0xf3>
-    b3cc:	e9 cf fd ff ff       	jmp    b1a0 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x120>
-    b3d1:	89 54 24 08          	mov    DWORD PTR [esp+0x8],edx
-    b3d5:	83 ec 0c             	sub    esp,0xc
-    b3d8:	ff 74 24 10          	push   DWORD PTR [esp+0x10]
-    b3dc:	e8 2f 08 00 00       	call   bc10 <_Z6putstrPc>
-    b3e1:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    b3e8:	8b 54 24 18          	mov    edx,DWORD PTR [esp+0x18]
-    b3ec:	83 c4 10             	add    esp,0x10
-    b3ef:	8b 44 24 1c          	mov    eax,DWORD PTR [esp+0x1c]
-    b3f3:	0f b6 9a 5a e3 00 00 	movzx  ebx,BYTE PTR [edx+0xe35a]
-    b3fa:	8d aa 5a e3 00 00    	lea    ebp,[edx+0xe35a]
-    b400:	89 44 24 34          	mov    DWORD PTR [esp+0x34],eax
-    b404:	84 db                	test   bl,bl
-    b406:	0f 84 e4 fe ff ff    	je     b2f0 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x270>
-    b40c:	eb 7d                	jmp    b48b <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x40b>
-    b40e:	66 90                	xchg   ax,ax
-    b410:	89 54 24 08          	mov    DWORD PTR [esp+0x8],edx
-    b414:	83 ec 0c             	sub    esp,0xc
-    b417:	68 1c ff 00 00       	push   0xff1c
-    b41c:	e8 0f 08 00 00       	call   bc30 <_Z6printfPKc>
-    b421:	58                   	pop    eax
-    b422:	ff 74 24 10          	push   DWORD PTR [esp+0x10]
-    b426:	e8 b5 07 00 00       	call   bbe0 <_Z6puthexi>
-    b42b:	eb bb                	jmp    b3e8 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x368>
-    b42d:	89 54 24 08          	mov    DWORD PTR [esp+0x8],edx
-    b431:	83 ec 0c             	sub    esp,0xc
-    b434:	ff 74 24 10          	push   DWORD PTR [esp+0x10]
-    b438:	e8 b3 07 00 00       	call   bbf0 <_Z6putocti>
-    b43d:	eb a9                	jmp    b3e8 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x368>
-    b43f:	89 54 24 08          	mov    DWORD PTR [esp+0x8],edx
-    b443:	83 ec 0c             	sub    esp,0xc
-    b446:	ff 74 24 10          	push   DWORD PTR [esp+0x10]
-    b44a:	e8 b1 07 00 00       	call   bc00 <_Z6putbini>
-    b44f:	eb 97                	jmp    b3e8 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x368>
-    b451:	89 54 24 08          	mov    DWORD PTR [esp+0x8],edx
-    b455:	83 ec 0c             	sub    esp,0xc
-    b458:	0f be 44 24 10       	movsx  eax,BYTE PTR [esp+0x10]
-    b45d:	50                   	push   eax
-    b45e:	e8 4d 07 00 00       	call   bbb0 <_Z7putcharc>
-    b463:	eb 83                	jmp    b3e8 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x368>
-    b465:	89 54 24 08          	mov    DWORD PTR [esp+0x8],edx
-    b469:	83 ec 0c             	sub    esp,0xc
-    b46c:	eb b4                	jmp    b422 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x3a2>
-    b46e:	89 54 24 08          	mov    DWORD PTR [esp+0x8],edx
-    b472:	83 ec 0c             	sub    esp,0xc
-    b475:	ff 74 24 10          	push   DWORD PTR [esp+0x10]
-    b479:	e8 52 07 00 00       	call   bbd0 <_Z6putdeci>
-    b47e:	e9 65 ff ff ff       	jmp    b3e8 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x368>
-    b483:	8b 44 24 1c          	mov    eax,DWORD PTR [esp+0x1c]
-    b487:	89 44 24 34          	mov    DWORD PTR [esp+0x34],eax
-    b48b:	31 d2                	xor    edx,edx
-    b48d:	0f be c3             	movsx  eax,bl
-    b490:	89 d1                	mov    ecx,edx
-    b492:	89 ea                	mov    edx,ebp
-    b494:	89 cd                	mov    ebp,ecx
-    b496:	eb 2a                	jmp    b4c2 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x442>
-    b498:	90                   	nop
-    b499:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    b4a0:	80 fb 25             	cmp    bl,0x25
-    b4a3:	0f 84 ef 00 00 00    	je     b598 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x518>
-    b4a9:	84 db                	test   bl,bl
-    b4ab:	75 43                	jne    b4f0 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x470>
-    b4ad:	0f b6 5c 2a 02       	movzx  ebx,BYTE PTR [edx+ebp*1+0x2]
-    b4b2:	8d 75 02             	lea    esi,[ebp+0x2]
-    b4b5:	84 db                	test   bl,bl
-    b4b7:	0f 84 33 fe ff ff    	je     b2f0 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x270>
-    b4bd:	0f be c3             	movsx  eax,bl
-    b4c0:	89 f5                	mov    ebp,esi
-    b4c2:	8d 75 01             	lea    esi,[ebp+0x1]
-    b4c5:	3c 25                	cmp    al,0x25
-    b4c7:	8d 0c 32             	lea    ecx,[edx+esi*1]
-    b4ca:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
-    b4cd:	74 d1                	je     b4a0 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x420>
-    b4cf:	89 54 24 08          	mov    DWORD PTR [esp+0x8],edx
-    b4d3:	83 ec 0c             	sub    esp,0xc
-    b4d6:	50                   	push   eax
-    b4d7:	e8 d4 06 00 00       	call   bbb0 <_Z7putcharc>
-    b4dc:	83 c4 10             	add    esp,0x10
-    b4df:	84 db                	test   bl,bl
-    b4e1:	8b 54 24 08          	mov    edx,DWORD PTR [esp+0x8]
-    b4e5:	75 d6                	jne    b4bd <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x43d>
-    b4e7:	e9 04 fe ff ff       	jmp    b2f0 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x270>
-    b4ec:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    b4f0:	83 ec 08             	sub    esp,0x8
-    b4f3:	89 d5                	mov    ebp,edx
-    b4f5:	8d 44 24 3c          	lea    eax,[esp+0x3c]
-    b4f9:	50                   	push   eax
-    b4fa:	51                   	push   ecx
-    b4fb:	e8 b0 1d 00 00       	call   d2b0 <_Z14_manage_escapeIjEiPKcPT_>
-    b500:	01 c6                	add    esi,eax
-    b502:	8b 44 24 34          	mov    eax,DWORD PTR [esp+0x34]
-    b506:	01 f5                	add    ebp,esi
-    b508:	89 44 24 48          	mov    DWORD PTR [esp+0x48],eax
-    b50c:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
-    b510:	83 c4 10             	add    esp,0x10
-    b513:	84 c0                	test   al,al
-    b515:	0f 84 d5 fd ff ff    	je     b2f0 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x270>
-    b51b:	31 d2                	xor    edx,edx
-    b51d:	eb 23                	jmp    b542 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x4c2>
-    b51f:	90                   	nop
-    b520:	80 fb 25             	cmp    bl,0x25
-    b523:	0f 84 9f 00 00 00    	je     b5c8 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x548>
-    b529:	84 db                	test   bl,bl
-    b52b:	75 3b                	jne    b568 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x4e8>
-    b52d:	0f b6 5c 15 02       	movzx  ebx,BYTE PTR [ebp+edx*1+0x2]
-    b532:	8d 72 02             	lea    esi,[edx+0x2]
-    b535:	84 db                	test   bl,bl
-    b537:	0f 84 b3 fd ff ff    	je     b2f0 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x270>
-    b53d:	0f be c3             	movsx  eax,bl
-    b540:	89 f2                	mov    edx,esi
-    b542:	8d 72 01             	lea    esi,[edx+0x1]
-    b545:	3c 25                	cmp    al,0x25
-    b547:	8d 4c 35 00          	lea    ecx,[ebp+esi*1+0x0]
-    b54b:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
-    b54e:	74 d0                	je     b520 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x4a0>
-    b550:	83 ec 0c             	sub    esp,0xc
-    b553:	50                   	push   eax
-    b554:	e8 57 06 00 00       	call   bbb0 <_Z7putcharc>
-    b559:	83 c4 10             	add    esp,0x10
-    b55c:	84 db                	test   bl,bl
-    b55e:	75 dd                	jne    b53d <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x4bd>
-    b560:	e9 8b fd ff ff       	jmp    b2f0 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x270>
-    b565:	8d 76 00             	lea    esi,[esi+0x0]
-    b568:	83 ec 08             	sub    esp,0x8
-    b56b:	8d 44 24 40          	lea    eax,[esp+0x40]
-    b56f:	50                   	push   eax
-    b570:	51                   	push   ecx
-    b571:	e8 3a 1d 00 00       	call   d2b0 <_Z14_manage_escapeIjEiPKcPT_>
-    b576:	01 c6                	add    esi,eax
-    b578:	83 c4 0c             	add    esp,0xc
-    b57b:	01 f5                	add    ebp,esi
-    b57d:	ff 74 24 2c          	push   DWORD PTR [esp+0x2c]
-    b581:	ff 74 24 34          	push   DWORD PTR [esp+0x34]
-    b585:	55                   	push   ebp
-    b586:	e8 25 1e 00 00       	call   d3b0 <_Z6printfIjJjEEvPKcT_DpT0_>
-    b58b:	83 c4 10             	add    esp,0x10
-    b58e:	e9 5d fd ff ff       	jmp    b2f0 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x270>
-    b593:	90                   	nop
-    b594:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    b598:	89 54 24 08          	mov    DWORD PTR [esp+0x8],edx
-    b59c:	83 ec 0c             	sub    esp,0xc
-    b59f:	8d 75 02             	lea    esi,[ebp+0x2]
-    b5a2:	6a 25                	push   0x25
-    b5a4:	e8 07 06 00 00       	call   bbb0 <_Z7putcharc>
-    b5a9:	8b 54 24 18          	mov    edx,DWORD PTR [esp+0x18]
-    b5ad:	83 c4 10             	add    esp,0x10
-    b5b0:	0f b6 5c 2a 02       	movzx  ebx,BYTE PTR [edx+ebp*1+0x2]
-    b5b5:	84 db                	test   bl,bl
-    b5b7:	0f 85 00 ff ff ff    	jne    b4bd <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x43d>
-    b5bd:	e9 2e fd ff ff       	jmp    b2f0 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x270>
-    b5c2:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    b5c8:	89 54 24 08          	mov    DWORD PTR [esp+0x8],edx
-    b5cc:	83 ec 0c             	sub    esp,0xc
-    b5cf:	6a 25                	push   0x25
-    b5d1:	e8 da 05 00 00       	call   bbb0 <_Z7putcharc>
-    b5d6:	8b 54 24 18          	mov    edx,DWORD PTR [esp+0x18]
-    b5da:	83 c4 10             	add    esp,0x10
-    b5dd:	0f b6 5c 15 02       	movzx  ebx,BYTE PTR [ebp+edx*1+0x2]
-    b5e2:	8d 72 02             	lea    esi,[edx+0x2]
-    b5e5:	84 db                	test   bl,bl
-    b5e7:	0f 85 50 ff ff ff    	jne    b53d <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x4bd>
-    b5ed:	e9 fe fc ff ff       	jmp    b2f0 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x270>
-    b5f2:	66 90                	xchg   ax,ax
-    b5f4:	66 90                	xchg   ax,ax
-    b5f6:	66 90                	xchg   ax,ax
-    b5f8:	66 90                	xchg   ax,ax
-    b5fa:	66 90                	xchg   ax,ax
-    b5fc:	66 90                	xchg   ax,ax
-    b5fe:	66 90                	xchg   ax,ax
+0000a396 <__getCpuidVendor>:
+    a396:	55                   	push   ebp
+    a397:	89 e5                	mov    ebp,esp
+    a399:	53                   	push   ebx
+    a39a:	51                   	push   ecx
+    a39b:	52                   	push   edx
+    a39c:	b8 00 00 00 00       	mov    eax,0x0
+    a3a1:	0f a2                	cpuid  
+    a3a3:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+    a3a6:	89 18                	mov    DWORD PTR [eax],ebx
+    a3a8:	89 50 04             	mov    DWORD PTR [eax+0x4],edx
+    a3ab:	89 48 08             	mov    DWORD PTR [eax+0x8],ecx
+    a3ae:	5a                   	pop    edx
+    a3af:	59                   	pop    ecx
+    a3b0:	5b                   	pop    ebx
+    a3b1:	5d                   	pop    ebp
+    a3b2:	c3                   	ret    
 
-0000b600 <_ZN3VGA17_actualize_cursorEv>:
-    b600:	53                   	push   ebx
-    b601:	83 ec 10             	sub    esp,0x10
-    b604:	8b 1d 04 20 01 00    	mov    ebx,DWORD PTR ds:0x12004
-    b60a:	6a 0e                	push   0xe
-    b60c:	68 d4 03 00 00       	push   0x3d4
-    b611:	8d 1c 9b             	lea    ebx,[ebx+ebx*4]
-    b614:	c1 e3 04             	shl    ebx,0x4
-    b617:	66 03 1d 00 20 01 00 	add    bx,WORD PTR ds:0x12000
-    b61e:	e8 3d 07 00 00       	call   bd60 <_Z4outbth>
-    b623:	58                   	pop    eax
-    b624:	5a                   	pop    edx
-    b625:	0f b6 c7             	movzx  eax,bh
-    b628:	0f b6 db             	movzx  ebx,bl
-    b62b:	50                   	push   eax
-    b62c:	68 d5 03 00 00       	push   0x3d5
-    b631:	e8 2a 07 00 00       	call   bd60 <_Z4outbth>
-    b636:	59                   	pop    ecx
-    b637:	58                   	pop    eax
-    b638:	6a 0f                	push   0xf
-    b63a:	68 d4 03 00 00       	push   0x3d4
-    b63f:	e8 1c 07 00 00       	call   bd60 <_Z4outbth>
-    b644:	58                   	pop    eax
-    b645:	5a                   	pop    edx
-    b646:	53                   	push   ebx
-    b647:	68 d5 03 00 00       	push   0x3d5
-    b64c:	e8 0f 07 00 00       	call   bd60 <_Z4outbth>
-    b651:	83 c4 18             	add    esp,0x18
-    b654:	5b                   	pop    ebx
-    b655:	c3                   	ret    
-    b656:	8d 76 00             	lea    esi,[esi+0x0]
-    b659:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+0000a3b3 <__getCpuidFeatures>:
+    a3b3:	55                   	push   ebp
+    a3b4:	89 e5                	mov    ebp,esp
+    a3b6:	51                   	push   ecx
+    a3b7:	52                   	push   edx
+    a3b8:	b8 01 00 00 00       	mov    eax,0x1
+    a3bd:	0f a2                	cpuid  
+    a3bf:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+    a3c2:	89 10                	mov    DWORD PTR [eax],edx
+    a3c4:	89 48 04             	mov    DWORD PTR [eax+0x4],ecx
+    a3c7:	5a                   	pop    edx
+    a3c8:	59                   	pop    ecx
+    a3c9:	5d                   	pop    ebp
+    a3ca:	c3                   	ret    
+    a3cb:	66 90                	xchg   ax,ax
+    a3cd:	66 90                	xchg   ax,ax
+    a3cf:	90                   	nop
 
-0000b660 <_ZN3VGA14_pos_in_screenEii>:
-    b660:	8b 44 24 04          	mov    eax,DWORD PTR [esp+0x4]
-    b664:	8d 04 80             	lea    eax,[eax+eax*4]
-    b667:	c1 e0 04             	shl    eax,0x4
-    b66a:	03 44 24 08          	add    eax,DWORD PTR [esp+0x8]
-    b66e:	01 c0                	add    eax,eax
-    b670:	c3                   	ret    
-    b671:	eb 0d                	jmp    b680 <_ZN3VGA12_char_val_atEii>
-    b673:	90                   	nop
-    b674:	90                   	nop
-    b675:	90                   	nop
-    b676:	90                   	nop
-    b677:	90                   	nop
-    b678:	90                   	nop
-    b679:	90                   	nop
-    b67a:	90                   	nop
-    b67b:	90                   	nop
-    b67c:	90                   	nop
-    b67d:	90                   	nop
-    b67e:	90                   	nop
-    b67f:	90                   	nop
+0000a3d0 <_ZN3ata7waitBSYEv>:
+    a3d0:	83 ec 0c             	sub    esp,0xc
+    a3d3:	90                   	nop
+    a3d4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    a3d8:	83 ec 0c             	sub    esp,0xc
+    a3db:	68 f7 01 00 00       	push   0x1f7
+    a3e0:	e8 4b 1b 00 00       	call   bf30 <_Z3inbt>
+    a3e5:	83 c4 10             	add    esp,0x10
+    a3e8:	84 c0                	test   al,al
+    a3ea:	78 ec                	js     a3d8 <_ZN3ata7waitBSYEv+0x8>
+    a3ec:	83 c4 0c             	add    esp,0xc
+    a3ef:	c3                   	ret    
 
-0000b680 <_ZN3VGA12_char_val_atEii>:
-    b680:	8b 44 24 04          	mov    eax,DWORD PTR [esp+0x4]
-    b684:	8b 15 14 10 01 00    	mov    edx,DWORD PTR ds:0x11014
-    b68a:	8d 04 80             	lea    eax,[eax+eax*4]
-    b68d:	c1 e0 04             	shl    eax,0x4
-    b690:	03 44 24 08          	add    eax,DWORD PTR [esp+0x8]
-    b694:	8d 04 42             	lea    eax,[edx+eax*2]
-    b697:	c3                   	ret    
-    b698:	90                   	nop
-    b699:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+0000a3f0 <_ZN3ata7waitDSQEv>:
+    a3f0:	83 ec 0c             	sub    esp,0xc
+    a3f3:	eb 07                	jmp    a3fc <_ZN3ata7waitDSQEv+0xc>
+    a3f5:	8d 76 00             	lea    esi,[esi+0x0]
+    a3f8:	a8 08                	test   al,0x8
+    a3fa:	75 24                	jne    a420 <_ZN3ata7waitDSQEv+0x30>
+    a3fc:	83 ec 0c             	sub    esp,0xc
+    a3ff:	68 f7 01 00 00       	push   0x1f7
+    a404:	e8 27 1b 00 00       	call   bf30 <_Z3inbt>
+    a409:	83 c4 10             	add    esp,0x10
+    a40c:	a8 01                	test   al,0x1
+    a40e:	74 e8                	je     a3f8 <_ZN3ata7waitDSQEv+0x8>
+    a410:	31 c0                	xor    eax,eax
+    a412:	83 c4 0c             	add    esp,0xc
+    a415:	c3                   	ret    
+    a416:	8d 76 00             	lea    esi,[esi+0x0]
+    a419:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    a420:	b8 01 00 00 00       	mov    eax,0x1
+    a425:	83 c4 0c             	add    esp,0xc
+    a428:	c3                   	ret    
+    a429:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
 
-0000b6a0 <_ZN3VGA13_char_mode_atEii>:
-    b6a0:	8b 44 24 04          	mov    eax,DWORD PTR [esp+0x4]
-    b6a4:	8b 15 14 10 01 00    	mov    edx,DWORD PTR ds:0x11014
-    b6aa:	8d 04 80             	lea    eax,[eax+eax*4]
-    b6ad:	c1 e0 04             	shl    eax,0x4
-    b6b0:	03 44 24 08          	add    eax,DWORD PTR [esp+0x8]
-    b6b4:	8d 44 42 01          	lea    eax,[edx+eax*2+0x1]
-    b6b8:	c3                   	ret    
-    b6b9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+0000a430 <_ZN3ata12lba28PIOReadEPvjhh>:
+    a430:	55                   	push   ebp
+    a431:	57                   	push   edi
+    a432:	56                   	push   esi
+    a433:	53                   	push   ebx
+    a434:	83 ec 24             	sub    esp,0x24
+    a437:	8b 5c 24 3c          	mov    ebx,DWORD PTR [esp+0x3c]
+    a43b:	0f b6 54 24 44       	movzx  edx,BYTE PTR [esp+0x44]
+    a440:	8b 7c 24 40          	mov    edi,DWORD PTR [esp+0x40]
+    a444:	89 d8                	mov    eax,ebx
+    a446:	c1 e8 18             	shr    eax,0x18
+    a449:	c1 e2 04             	shl    edx,0x4
+    a44c:	83 ca e0             	or     edx,0xffffffe0
+    a44f:	83 e0 0f             	and    eax,0xf
+    a452:	09 d0                	or     eax,edx
+    a454:	0f b6 c0             	movzx  eax,al
+    a457:	50                   	push   eax
+    a458:	68 f6 01 00 00       	push   0x1f6
+    a45d:	e8 7e 1a 00 00       	call   bee0 <_Z4outbth>
+    a462:	58                   	pop    eax
+    a463:	5a                   	pop    edx
+    a464:	6a 00                	push   0x0
+    a466:	68 f1 01 00 00       	push   0x1f1
+    a46b:	e8 70 1a 00 00       	call   bee0 <_Z4outbth>
+    a470:	59                   	pop    ecx
+    a471:	89 f8                	mov    eax,edi
+    a473:	5e                   	pop    esi
+    a474:	0f b6 f8             	movzx  edi,al
+    a477:	57                   	push   edi
+    a478:	68 f2 01 00 00       	push   0x1f2
+    a47d:	e8 5e 1a 00 00       	call   bee0 <_Z4outbth>
+    a482:	5d                   	pop    ebp
+    a483:	58                   	pop    eax
+    a484:	0f b6 c3             	movzx  eax,bl
+    a487:	50                   	push   eax
+    a488:	68 f3 01 00 00       	push   0x1f3
+    a48d:	e8 4e 1a 00 00       	call   bee0 <_Z4outbth>
+    a492:	58                   	pop    eax
+    a493:	5a                   	pop    edx
+    a494:	0f b6 c7             	movzx  eax,bh
+    a497:	50                   	push   eax
+    a498:	68 f4 01 00 00       	push   0x1f4
+    a49d:	e8 3e 1a 00 00       	call   bee0 <_Z4outbth>
+    a4a2:	89 d8                	mov    eax,ebx
+    a4a4:	59                   	pop    ecx
+    a4a5:	c1 e8 10             	shr    eax,0x10
+    a4a8:	5e                   	pop    esi
+    a4a9:	0f b6 c0             	movzx  eax,al
+    a4ac:	50                   	push   eax
+    a4ad:	68 f5 01 00 00       	push   0x1f5
+    a4b2:	e8 29 1a 00 00       	call   bee0 <_Z4outbth>
+    a4b7:	83 c4 10             	add    esp,0x10
+    a4ba:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    a4c0:	83 ec 0c             	sub    esp,0xc
+    a4c3:	68 f7 01 00 00       	push   0x1f7
+    a4c8:	e8 63 1a 00 00       	call   bf30 <_Z3inbt>
+    a4cd:	83 c4 10             	add    esp,0x10
+    a4d0:	84 c0                	test   al,al
+    a4d2:	78 ec                	js     a4c0 <_ZN3ata12lba28PIOReadEPvjhh+0x90>
+    a4d4:	83 ec 08             	sub    esp,0x8
+    a4d7:	6a 20                	push   0x20
+    a4d9:	68 f7 01 00 00       	push   0x1f7
+    a4de:	e8 fd 19 00 00       	call   bee0 <_Z4outbth>
+    a4e3:	83 c4 10             	add    esp,0x10
+    a4e6:	85 ff                	test   edi,edi
+    a4e8:	0f 84 b0 00 00 00    	je     a59e <_ZN3ata12lba28PIOReadEPvjhh+0x16e>
+    a4ee:	8b 44 24 30          	mov    eax,DWORD PTR [esp+0x30]
+    a4f2:	31 f6                	xor    esi,esi
+    a4f4:	05 00 02 00 00       	add    eax,0x200
+    a4f9:	89 44 24 0c          	mov    DWORD PTR [esp+0xc],eax
+    a4fd:	8d 76 00             	lea    esi,[esi+0x0]
+    a500:	83 ec 0c             	sub    esp,0xc
+    a503:	68 f7 01 00 00       	push   0x1f7
+    a508:	e8 23 1a 00 00       	call   bf30 <_Z3inbt>
+    a50d:	83 c4 10             	add    esp,0x10
+    a510:	84 c0                	test   al,al
+    a512:	78 ec                	js     a500 <_ZN3ata12lba28PIOReadEPvjhh+0xd0>
+    a514:	83 ec 0c             	sub    esp,0xc
+    a517:	68 f6 03 00 00       	push   0x3f6
+    a51c:	e8 0f 1a 00 00       	call   bf30 <_Z3inbt>
+    a521:	c7 04 24 f6 03 00 00 	mov    DWORD PTR [esp],0x3f6
+    a528:	e8 03 1a 00 00       	call   bf30 <_Z3inbt>
+    a52d:	c7 04 24 f6 03 00 00 	mov    DWORD PTR [esp],0x3f6
+    a534:	e8 f7 19 00 00       	call   bf30 <_Z3inbt>
+    a539:	83 c4 10             	add    esp,0x10
+    a53c:	eb 06                	jmp    a544 <_ZN3ata12lba28PIOReadEPvjhh+0x114>
+    a53e:	66 90                	xchg   ax,ax
+    a540:	a8 08                	test   al,0x8
+    a542:	75 1e                	jne    a562 <_ZN3ata12lba28PIOReadEPvjhh+0x132>
+    a544:	83 ec 0c             	sub    esp,0xc
+    a547:	68 f7 01 00 00       	push   0x1f7
+    a54c:	e8 df 19 00 00       	call   bf30 <_Z3inbt>
+    a551:	83 c4 10             	add    esp,0x10
+    a554:	a8 01                	test   al,0x1
+    a556:	74 e8                	je     a540 <_ZN3ata12lba28PIOReadEPvjhh+0x110>
+    a558:	83 c4 1c             	add    esp,0x1c
+    a55b:	31 c0                	xor    eax,eax
+    a55d:	5b                   	pop    ebx
+    a55e:	5e                   	pop    esi
+    a55f:	5f                   	pop    edi
+    a560:	5d                   	pop    ebp
+    a561:	c3                   	ret    
+    a562:	8b 6c 24 30          	mov    ebp,DWORD PTR [esp+0x30]
+    a566:	89 f3                	mov    ebx,esi
+    a568:	c1 e3 09             	shl    ebx,0x9
+    a56b:	01 dd                	add    ebp,ebx
+    a56d:	03 5c 24 0c          	add    ebx,DWORD PTR [esp+0xc]
+    a571:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    a578:	83 ec 0c             	sub    esp,0xc
+    a57b:	83 c5 02             	add    ebp,0x2
+    a57e:	68 f0 01 00 00       	push   0x1f0
+    a583:	e8 b8 19 00 00       	call   bf40 <_Z3inwt>
+    a588:	66 89 45 fe          	mov    WORD PTR [ebp-0x2],ax
+    a58c:	83 c4 10             	add    esp,0x10
+    a58f:	39 dd                	cmp    ebp,ebx
+    a591:	75 e5                	jne    a578 <_ZN3ata12lba28PIOReadEPvjhh+0x148>
+    a593:	83 c6 01             	add    esi,0x1
+    a596:	39 f7                	cmp    edi,esi
+    a598:	0f 85 62 ff ff ff    	jne    a500 <_ZN3ata12lba28PIOReadEPvjhh+0xd0>
+    a59e:	83 c4 1c             	add    esp,0x1c
+    a5a1:	b8 01 00 00 00       	mov    eax,0x1
+    a5a6:	5b                   	pop    ebx
+    a5a7:	5e                   	pop    esi
+    a5a8:	5f                   	pop    edi
+    a5a9:	5d                   	pop    ebp
+    a5aa:	c3                   	ret    
+    a5ab:	90                   	nop
+    a5ac:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
 
-0000b6c0 <_ZN3VGA6scrollEc>:
-    b6c0:	55                   	push   ebp
-    b6c1:	57                   	push   edi
-    b6c2:	31 ed                	xor    ebp,ebp
-    b6c4:	56                   	push   esi
-    b6c5:	53                   	push   ebx
-    b6c6:	be 40 01 00 00       	mov    esi,0x140
-    b6cb:	bf 50 00 00 00       	mov    edi,0x50
-    b6d0:	83 ec 1c             	sub    esp,0x1c
-    b6d3:	0f b6 44 24 30       	movzx  eax,BYTE PTR [esp+0x30]
-    b6d8:	88 44 24 0f          	mov    BYTE PTR [esp+0xf],al
-    b6dc:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    b6e0:	89 e9                	mov    ecx,ebp
-    b6e2:	8d 04 3f             	lea    eax,[edi+edi*1]
-    b6e5:	29 f9                	sub    ecx,edi
-    b6e7:	01 c9                	add    ecx,ecx
-    b6e9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    b6f0:	8b 15 14 10 01 00    	mov    edx,DWORD PTR ds:0x11014
-    b6f6:	0f b6 1c 02          	movzx  ebx,BYTE PTR [edx+eax*1]
-    b6fa:	01 ca                	add    edx,ecx
-    b6fc:	88 1c 02             	mov    BYTE PTR [edx+eax*1],bl
-    b6ff:	8b 15 14 10 01 00    	mov    edx,DWORD PTR ds:0x11014
-    b705:	0f b6 5c 02 01       	movzx  ebx,BYTE PTR [edx+eax*1+0x1]
-    b70a:	01 ca                	add    edx,ecx
-    b70c:	83 c0 02             	add    eax,0x2
-    b70f:	88 5c 10 ff          	mov    BYTE PTR [eax+edx*1-0x1],bl
-    b713:	39 f0                	cmp    eax,esi
-    b715:	75 d9                	jne    b6f0 <_ZN3VGA6scrollEc+0x30>
-    b717:	83 c7 50             	add    edi,0x50
-    b71a:	83 c5 50             	add    ebp,0x50
-    b71d:	8d b0 a0 00 00 00    	lea    esi,[eax+0xa0]
-    b723:	81 ff d0 07 00 00    	cmp    edi,0x7d0
-    b729:	75 b5                	jne    b6e0 <_ZN3VGA6scrollEc+0x20>
-    b72b:	0f b6 4c 24 0f       	movzx  ecx,BYTE PTR [esp+0xf]
-    b730:	b8 00 0f 00 00       	mov    eax,0xf00
-    b735:	8d 76 00             	lea    esi,[esi+0x0]
-    b738:	8b 15 14 10 01 00    	mov    edx,DWORD PTR ds:0x11014
-    b73e:	c6 04 02 20          	mov    BYTE PTR [edx+eax*1],0x20
-    b742:	8b 15 14 10 01 00    	mov    edx,DWORD PTR ds:0x11014
-    b748:	88 4c 02 01          	mov    BYTE PTR [edx+eax*1+0x1],cl
-    b74c:	83 c0 02             	add    eax,0x2
-    b74f:	3d a0 0f 00 00       	cmp    eax,0xfa0
-    b754:	75 e2                	jne    b738 <_ZN3VGA6scrollEc+0x78>
-    b756:	a1 04 20 01 00       	mov    eax,ds:0x12004
-    b75b:	ba 00 00 00 00       	mov    edx,0x0
-    b760:	83 e8 01             	sub    eax,0x1
-    b763:	0f 48 c2             	cmovs  eax,edx
-    b766:	a3 04 20 01 00       	mov    ds:0x12004,eax
-    b76b:	83 c4 1c             	add    esp,0x1c
-    b76e:	5b                   	pop    ebx
-    b76f:	5e                   	pop    esi
-    b770:	5f                   	pop    edi
-    b771:	5d                   	pop    ebp
-    b772:	e9 89 fe ff ff       	jmp    b600 <_ZN3VGA17_actualize_cursorEv>
-    b777:	89 f6                	mov    esi,esi
-    b779:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+0000a5b0 <_ZN3ata9lba28ReadEPvyjh>:
+    a5b0:	55                   	push   ebp
+    a5b1:	57                   	push   edi
+    a5b2:	56                   	push   esi
+    a5b3:	53                   	push   ebx
+    a5b4:	83 ec 1c             	sub    esp,0x1c
+    a5b7:	8b 74 24 3c          	mov    esi,DWORD PTR [esp+0x3c]
+    a5bb:	8b 4c 24 30          	mov    ecx,DWORD PTR [esp+0x30]
+    a5bf:	8b 7c 24 34          	mov    edi,DWORD PTR [esp+0x34]
+    a5c3:	8b 6c 24 38          	mov    ebp,DWORD PTR [esp+0x38]
+    a5c7:	8b 44 24 40          	mov    eax,DWORD PTR [esp+0x40]
+    a5cb:	85 f6                	test   esi,esi
+    a5cd:	74 59                	je     a628 <_ZN3ata9lba28ReadEPvyjh+0x78>
+    a5cf:	0f b6 c0             	movzx  eax,al
+    a5d2:	89 44 24 0c          	mov    DWORD PTR [esp+0xc],eax
+    a5d6:	eb 1b                	jmp    a5f3 <_ZN3ata9lba28ReadEPvyjh+0x43>
+    a5d8:	90                   	nop
+    a5d9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    a5e0:	8b 4c 24 08          	mov    ecx,DWORD PTR [esp+0x8]
+    a5e4:	31 d2                	xor    edx,edx
+    a5e6:	01 df                	add    edi,ebx
+    a5e8:	11 d5                	adc    ebp,edx
+    a5ea:	c1 e3 09             	shl    ebx,0x9
+    a5ed:	01 d9                	add    ecx,ebx
+    a5ef:	85 f6                	test   esi,esi
+    a5f1:	74 35                	je     a628 <_ZN3ata9lba28ReadEPvyjh+0x78>
+    a5f3:	81 fe ff 00 00 00    	cmp    esi,0xff
+    a5f9:	bb ff 00 00 00       	mov    ebx,0xff
+    a5fe:	ff 74 24 0c          	push   DWORD PTR [esp+0xc]
+    a602:	0f 46 de             	cmovbe ebx,esi
+    a605:	53                   	push   ebx
+    a606:	57                   	push   edi
+    a607:	29 de                	sub    esi,ebx
+    a609:	51                   	push   ecx
+    a60a:	89 4c 24 18          	mov    DWORD PTR [esp+0x18],ecx
+    a60e:	e8 1d fe ff ff       	call   a430 <_ZN3ata12lba28PIOReadEPvjhh>
+    a613:	83 c4 10             	add    esp,0x10
+    a616:	84 c0                	test   al,al
+    a618:	75 c6                	jne    a5e0 <_ZN3ata9lba28ReadEPvyjh+0x30>
+    a61a:	83 c4 1c             	add    esp,0x1c
+    a61d:	5b                   	pop    ebx
+    a61e:	5e                   	pop    esi
+    a61f:	5f                   	pop    edi
+    a620:	5d                   	pop    ebp
+    a621:	c3                   	ret    
+    a622:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    a628:	83 c4 1c             	add    esp,0x1c
+    a62b:	b8 01 00 00 00       	mov    eax,0x1
+    a630:	5b                   	pop    ebx
+    a631:	5e                   	pop    esi
+    a632:	5f                   	pop    edi
+    a633:	5d                   	pop    ebp
+    a634:	c3                   	ret    
+    a635:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    a639:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
 
-0000b780 <_ZN3VGA12clear_screenEc>:
-    b780:	53                   	push   ebx
-    b781:	0f b6 5c 24 08       	movzx  ebx,BYTE PTR [esp+0x8]
-    b786:	31 c0                	xor    eax,eax
-    b788:	90                   	nop
-    b789:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    b790:	8d 88 a0 00 00 00    	lea    ecx,[eax+0xa0]
-    b796:	8d 76 00             	lea    esi,[esi+0x0]
-    b799:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
-    b7a0:	8b 15 14 10 01 00    	mov    edx,DWORD PTR ds:0x11014
-    b7a6:	c6 04 02 20          	mov    BYTE PTR [edx+eax*1],0x20
-    b7aa:	8b 15 14 10 01 00    	mov    edx,DWORD PTR ds:0x11014
-    b7b0:	88 5c 02 01          	mov    BYTE PTR [edx+eax*1+0x1],bl
-    b7b4:	83 c0 02             	add    eax,0x2
-    b7b7:	39 c1                	cmp    ecx,eax
-    b7b9:	75 e5                	jne    b7a0 <_ZN3VGA12clear_screenEc+0x20>
-    b7bb:	81 f9 a0 0f 00 00    	cmp    ecx,0xfa0
-    b7c1:	75 cd                	jne    b790 <_ZN3VGA12clear_screenEc+0x10>
-    b7c3:	5b                   	pop    ebx
-    b7c4:	c7 05 04 20 01 00 00 	mov    DWORD PTR ds:0x12004,0x0
-    b7cb:	00 00 00 
-    b7ce:	c7 05 00 20 01 00 00 	mov    DWORD PTR ds:0x12000,0x0
-    b7d5:	00 00 00 
-    b7d8:	e9 23 fe ff ff       	jmp    b600 <_ZN3VGA17_actualize_cursorEv>
-    b7dd:	8d 76 00             	lea    esi,[esi+0x0]
+0000a640 <_ZN3ata12lba48PIOReadEPvyth>:
+    a640:	55                   	push   ebp
+    a641:	57                   	push   edi
+    a642:	56                   	push   esi
+    a643:	53                   	push   ebx
+    a644:	83 ec 24             	sub    esp,0x24
+    a647:	0f b6 44 24 48       	movzx  eax,BYTE PTR [esp+0x48]
+    a64c:	8b 6c 24 40          	mov    ebp,DWORD PTR [esp+0x40]
+    a650:	8b 7c 24 3c          	mov    edi,DWORD PTR [esp+0x3c]
+    a654:	8b 5c 24 44          	mov    ebx,DWORD PTR [esp+0x44]
+    a658:	c1 e0 04             	shl    eax,0x4
+    a65b:	83 c8 e0             	or     eax,0xffffffe0
+    a65e:	0f b6 c0             	movzx  eax,al
+    a661:	50                   	push   eax
+    a662:	68 f6 01 00 00       	push   0x1f6
+    a667:	e8 74 18 00 00       	call   bee0 <_Z4outbth>
+    a66c:	58                   	pop    eax
+    a66d:	5a                   	pop    edx
+    a66e:	6a 00                	push   0x0
+    a670:	68 f1 01 00 00       	push   0x1f1
+    a675:	e8 66 18 00 00       	call   bee0 <_Z4outbth>
+    a67a:	59                   	pop    ecx
+    a67b:	5e                   	pop    esi
+    a67c:	0f b6 c7             	movzx  eax,bh
+    a67f:	50                   	push   eax
+    a680:	68 f2 01 00 00       	push   0x1f2
+    a685:	e8 56 18 00 00       	call   bee0 <_Z4outbth>
+    a68a:	58                   	pop    eax
+    a68b:	89 f8                	mov    eax,edi
+    a68d:	0f ac e8 18          	shrd   eax,ebp,0x18
+    a691:	5a                   	pop    edx
+    a692:	0f b6 c0             	movzx  eax,al
+    a695:	50                   	push   eax
+    a696:	68 f3 01 00 00       	push   0x1f3
+    a69b:	e8 40 18 00 00       	call   bee0 <_Z4outbth>
+    a6a0:	5e                   	pop    esi
+    a6a1:	58                   	pop    eax
+    a6a2:	89 e8                	mov    eax,ebp
+    a6a4:	0f b6 c0             	movzx  eax,al
+    a6a7:	50                   	push   eax
+    a6a8:	68 f4 01 00 00       	push   0x1f4
+    a6ad:	e8 2e 18 00 00       	call   bee0 <_Z4outbth>
+    a6b2:	58                   	pop    eax
+    a6b3:	89 e8                	mov    eax,ebp
+    a6b5:	5a                   	pop    edx
+    a6b6:	0f b6 c4             	movzx  eax,ah
+    a6b9:	50                   	push   eax
+    a6ba:	68 f5 01 00 00       	push   0x1f5
+    a6bf:	e8 1c 18 00 00       	call   bee0 <_Z4outbth>
+    a6c4:	59                   	pop    ecx
+    a6c5:	5e                   	pop    esi
+    a6c6:	0f b6 c3             	movzx  eax,bl
+    a6c9:	50                   	push   eax
+    a6ca:	68 f2 01 00 00       	push   0x1f2
+    a6cf:	e8 0c 18 00 00       	call   bee0 <_Z4outbth>
+    a6d4:	58                   	pop    eax
+    a6d5:	89 f8                	mov    eax,edi
+    a6d7:	5a                   	pop    edx
+    a6d8:	0f b6 c0             	movzx  eax,al
+    a6db:	50                   	push   eax
+    a6dc:	68 f3 01 00 00       	push   0x1f3
+    a6e1:	e8 fa 17 00 00       	call   bee0 <_Z4outbth>
+    a6e6:	89 f8                	mov    eax,edi
+    a6e8:	0f ac e8 08          	shrd   eax,ebp,0x8
+    a6ec:	59                   	pop    ecx
+    a6ed:	5e                   	pop    esi
+    a6ee:	0f b6 c0             	movzx  eax,al
+    a6f1:	50                   	push   eax
+    a6f2:	68 f4 01 00 00       	push   0x1f4
+    a6f7:	0f ac ef 10          	shrd   edi,ebp,0x10
+    a6fb:	e8 e0 17 00 00       	call   bee0 <_Z4outbth>
+    a700:	5e                   	pop    esi
+    a701:	58                   	pop    eax
+    a702:	89 f8                	mov    eax,edi
+    a704:	0f b6 f0             	movzx  esi,al
+    a707:	56                   	push   esi
+    a708:	68 f5 01 00 00       	push   0x1f5
+    a70d:	e8 ce 17 00 00       	call   bee0 <_Z4outbth>
+    a712:	83 c4 10             	add    esp,0x10
+    a715:	8d 76 00             	lea    esi,[esi+0x0]
+    a718:	83 ec 0c             	sub    esp,0xc
+    a71b:	68 f7 01 00 00       	push   0x1f7
+    a720:	e8 0b 18 00 00       	call   bf30 <_Z3inbt>
+    a725:	83 c4 10             	add    esp,0x10
+    a728:	84 c0                	test   al,al
+    a72a:	78 ec                	js     a718 <_ZN3ata12lba48PIOReadEPvyth+0xd8>
+    a72c:	83 ec 08             	sub    esp,0x8
+    a72f:	89 df                	mov    edi,ebx
+    a731:	6a 24                	push   0x24
+    a733:	68 f7 01 00 00       	push   0x1f7
+    a738:	e8 a3 17 00 00       	call   bee0 <_Z4outbth>
+    a73d:	83 c4 10             	add    esp,0x10
+    a740:	81 e7 ff ff 00 00    	and    edi,0xffff
+    a746:	0f 84 b2 00 00 00    	je     a7fe <_ZN3ata12lba48PIOReadEPvyth+0x1be>
+    a74c:	8b 44 24 30          	mov    eax,DWORD PTR [esp+0x30]
+    a750:	31 f6                	xor    esi,esi
+    a752:	05 00 02 00 00       	add    eax,0x200
+    a757:	89 44 24 0c          	mov    DWORD PTR [esp+0xc],eax
+    a75b:	90                   	nop
+    a75c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    a760:	83 ec 0c             	sub    esp,0xc
+    a763:	68 f7 01 00 00       	push   0x1f7
+    a768:	e8 c3 17 00 00       	call   bf30 <_Z3inbt>
+    a76d:	83 c4 10             	add    esp,0x10
+    a770:	84 c0                	test   al,al
+    a772:	78 ec                	js     a760 <_ZN3ata12lba48PIOReadEPvyth+0x120>
+    a774:	83 ec 0c             	sub    esp,0xc
+    a777:	68 f6 03 00 00       	push   0x3f6
+    a77c:	e8 af 17 00 00       	call   bf30 <_Z3inbt>
+    a781:	c7 04 24 f6 03 00 00 	mov    DWORD PTR [esp],0x3f6
+    a788:	e8 a3 17 00 00       	call   bf30 <_Z3inbt>
+    a78d:	c7 04 24 f6 03 00 00 	mov    DWORD PTR [esp],0x3f6
+    a794:	e8 97 17 00 00       	call   bf30 <_Z3inbt>
+    a799:	83 c4 10             	add    esp,0x10
+    a79c:	eb 06                	jmp    a7a4 <_ZN3ata12lba48PIOReadEPvyth+0x164>
+    a79e:	66 90                	xchg   ax,ax
+    a7a0:	a8 08                	test   al,0x8
+    a7a2:	75 1e                	jne    a7c2 <_ZN3ata12lba48PIOReadEPvyth+0x182>
+    a7a4:	83 ec 0c             	sub    esp,0xc
+    a7a7:	68 f7 01 00 00       	push   0x1f7
+    a7ac:	e8 7f 17 00 00       	call   bf30 <_Z3inbt>
+    a7b1:	83 c4 10             	add    esp,0x10
+    a7b4:	a8 01                	test   al,0x1
+    a7b6:	74 e8                	je     a7a0 <_ZN3ata12lba48PIOReadEPvyth+0x160>
+    a7b8:	83 c4 1c             	add    esp,0x1c
+    a7bb:	31 c0                	xor    eax,eax
+    a7bd:	5b                   	pop    ebx
+    a7be:	5e                   	pop    esi
+    a7bf:	5f                   	pop    edi
+    a7c0:	5d                   	pop    ebp
+    a7c1:	c3                   	ret    
+    a7c2:	8b 6c 24 30          	mov    ebp,DWORD PTR [esp+0x30]
+    a7c6:	89 f3                	mov    ebx,esi
+    a7c8:	c1 e3 09             	shl    ebx,0x9
+    a7cb:	01 dd                	add    ebp,ebx
+    a7cd:	03 5c 24 0c          	add    ebx,DWORD PTR [esp+0xc]
+    a7d1:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    a7d8:	83 ec 0c             	sub    esp,0xc
+    a7db:	83 c5 02             	add    ebp,0x2
+    a7de:	68 f0 01 00 00       	push   0x1f0
+    a7e3:	e8 58 17 00 00       	call   bf40 <_Z3inwt>
+    a7e8:	66 89 45 fe          	mov    WORD PTR [ebp-0x2],ax
+    a7ec:	83 c4 10             	add    esp,0x10
+    a7ef:	39 dd                	cmp    ebp,ebx
+    a7f1:	75 e5                	jne    a7d8 <_ZN3ata12lba48PIOReadEPvyth+0x198>
+    a7f3:	83 c6 01             	add    esi,0x1
+    a7f6:	39 fe                	cmp    esi,edi
+    a7f8:	0f 85 62 ff ff ff    	jne    a760 <_ZN3ata12lba48PIOReadEPvyth+0x120>
+    a7fe:	83 c4 1c             	add    esp,0x1c
+    a801:	b8 01 00 00 00       	mov    eax,0x1
+    a806:	5b                   	pop    ebx
+    a807:	5e                   	pop    esi
+    a808:	5f                   	pop    edi
+    a809:	5d                   	pop    ebp
+    a80a:	c3                   	ret    
+    a80b:	90                   	nop
+    a80c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
 
-0000b7e0 <_ZN3VGA7putcharEcc>:
-    b7e0:	55                   	push   ebp
-    b7e1:	57                   	push   edi
-    b7e2:	56                   	push   esi
-    b7e3:	53                   	push   ebx
-    b7e4:	83 ec 1c             	sub    esp,0x1c
-    b7e7:	8b 3d 04 20 01 00    	mov    edi,DWORD PTR ds:0x12004
-    b7ed:	8b 5c 24 30          	mov    ebx,DWORD PTR [esp+0x30]
-    b7f1:	8b 4c 24 34          	mov    ecx,DWORD PTR [esp+0x34]
-    b7f5:	80 fb 0a             	cmp    bl,0xa
-    b7f8:	0f 84 d2 00 00 00    	je     b8d0 <_ZN3VGA7putcharEcc+0xf0>
-    b7fe:	80 fb 09             	cmp    bl,0x9
-    b801:	0f 85 99 00 00 00    	jne    b8a0 <_ZN3VGA7putcharEcc+0xc0>
-    b807:	a1 00 20 01 00       	mov    eax,ds:0x12000
-    b80c:	31 f6                	xor    esi,esi
-    b80e:	8d 50 04             	lea    edx,[eax+0x4]
-    b811:	83 e2 fc             	and    edx,0xfffffffc
-    b814:	83 fa 4f             	cmp    edx,0x4f
-    b817:	89 15 00 20 01 00    	mov    DWORD PTR ds:0x12000,edx
-    b81d:	0f 8e 15 01 00 00    	jle    b938 <_ZN3VGA7putcharEcc+0x158>
-    b823:	bd cd cc cc cc       	mov    ebp,0xcccccccd
-    b828:	89 d0                	mov    eax,edx
-    b82a:	c7 05 00 20 01 00 00 	mov    DWORD PTR ds:0x12000,0x0
-    b831:	00 00 00 
-    b834:	f7 e5                	mul    ebp
-    b836:	c1 ea 06             	shr    edx,0x6
-    b839:	01 fa                	add    edx,edi
-    b83b:	83 fa 18             	cmp    edx,0x18
-    b83e:	89 15 04 20 01 00    	mov    DWORD PTR ds:0x12004,edx
-    b844:	0f 8f ce 00 00 00    	jg     b918 <_ZN3VGA7putcharEcc+0x138>
-    b84a:	89 f0                	mov    eax,esi
-    b84c:	84 c0                	test   al,al
-    b84e:	74 3f                	je     b88f <_ZN3VGA7putcharEcc+0xaf>
-    b850:	8b 3d 04 20 01 00    	mov    edi,DWORD PTR ds:0x12004
-    b856:	8b 2d 00 20 01 00    	mov    ebp,DWORD PTR ds:0x12000
-    b85c:	8d 04 bf             	lea    eax,[edi+edi*4]
-    b85f:	8b 15 14 10 01 00    	mov    edx,DWORD PTR ds:0x11014
-    b865:	c1 e0 04             	shl    eax,0x4
-    b868:	01 e8                	add    eax,ebp
-    b86a:	88 1c 42             	mov    BYTE PTR [edx+eax*2],bl
-    b86d:	a1 04 20 01 00       	mov    eax,ds:0x12004
-    b872:	8b 15 14 10 01 00    	mov    edx,DWORD PTR ds:0x11014
-    b878:	8d 04 80             	lea    eax,[eax+eax*4]
-    b87b:	c1 e0 04             	shl    eax,0x4
-    b87e:	03 05 00 20 01 00    	add    eax,DWORD PTR ds:0x12000
-    b884:	88 4c 42 01          	mov    BYTE PTR [edx+eax*2+0x1],cl
-    b888:	83 05 00 20 01 00 01 	add    DWORD PTR ds:0x12000,0x1
-    b88f:	83 c4 1c             	add    esp,0x1c
-    b892:	5b                   	pop    ebx
-    b893:	5e                   	pop    esi
-    b894:	5f                   	pop    edi
-    b895:	5d                   	pop    ebp
-    b896:	e9 65 fd ff ff       	jmp    b600 <_ZN3VGA17_actualize_cursorEv>
-    b89b:	90                   	nop
-    b89c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    b8a0:	80 fb 0d             	cmp    bl,0xd
-    b8a3:	75 4f                	jne    b8f4 <_ZN3VGA7putcharEcc+0x114>
-    b8a5:	83 ff 18             	cmp    edi,0x18
-    b8a8:	c7 05 00 20 01 00 00 	mov    DWORD PTR ds:0x12000,0x0
-    b8af:	00 00 00 
-    b8b2:	7e db                	jle    b88f <_ZN3VGA7putcharEcc+0xaf>
-    b8b4:	83 ec 0c             	sub    esp,0xc
-    b8b7:	0f be c9             	movsx  ecx,cl
-    b8ba:	51                   	push   ecx
-    b8bb:	e8 00 fe ff ff       	call   b6c0 <_ZN3VGA6scrollEc>
-    b8c0:	83 c4 10             	add    esp,0x10
-    b8c3:	83 c4 1c             	add    esp,0x1c
-    b8c6:	5b                   	pop    ebx
-    b8c7:	5e                   	pop    esi
-    b8c8:	5f                   	pop    edi
-    b8c9:	5d                   	pop    ebp
-    b8ca:	e9 31 fd ff ff       	jmp    b600 <_ZN3VGA17_actualize_cursorEv>
-    b8cf:	90                   	nop
-    b8d0:	8d 57 01             	lea    edx,[edi+0x1]
-    b8d3:	c7 05 00 20 01 00 00 	mov    DWORD PTR ds:0x12000,0x0
-    b8da:	00 00 00 
-    b8dd:	83 fa 18             	cmp    edx,0x18
-    b8e0:	89 15 04 20 01 00    	mov    DWORD PTR ds:0x12004,edx
-    b8e6:	7f cc                	jg     b8b4 <_ZN3VGA7putcharEcc+0xd4>
-    b8e8:	83 c4 1c             	add    esp,0x1c
-    b8eb:	5b                   	pop    ebx
-    b8ec:	5e                   	pop    esi
-    b8ed:	5f                   	pop    edi
-    b8ee:	5d                   	pop    ebp
-    b8ef:	e9 0c fd ff ff       	jmp    b600 <_ZN3VGA17_actualize_cursorEv>
-    b8f4:	8b 2d 00 20 01 00    	mov    ebp,DWORD PTR ds:0x12000
-    b8fa:	be 01 00 00 00       	mov    esi,0x1
-    b8ff:	83 fd 4f             	cmp    ebp,0x4f
-    b902:	89 ea                	mov    edx,ebp
-    b904:	0f 8f 19 ff ff ff    	jg     b823 <_ZN3VGA7putcharEcc+0x43>
-    b90a:	83 ff 18             	cmp    edi,0x18
-    b90d:	0f 8e 49 ff ff ff    	jle    b85c <_ZN3VGA7putcharEcc+0x7c>
-    b913:	90                   	nop
-    b914:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    b918:	83 ec 0c             	sub    esp,0xc
-    b91b:	0f be c1             	movsx  eax,cl
-    b91e:	89 4c 24 18          	mov    DWORD PTR [esp+0x18],ecx
-    b922:	50                   	push   eax
-    b923:	e8 98 fd ff ff       	call   b6c0 <_ZN3VGA6scrollEc>
-    b928:	83 c4 10             	add    esp,0x10
-    b92b:	8b 4c 24 0c          	mov    ecx,DWORD PTR [esp+0xc]
-    b92f:	e9 16 ff ff ff       	jmp    b84a <_ZN3VGA7putcharEcc+0x6a>
-    b934:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    b938:	83 ff 18             	cmp    edi,0x18
-    b93b:	0f 8e 4e ff ff ff    	jle    b88f <_ZN3VGA7putcharEcc+0xaf>
-    b941:	eb d5                	jmp    b918 <_ZN3VGA7putcharEcc+0x138>
-    b943:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    b949:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+0000a810 <_ZN3ata9lba48ReadEPvyjh>:
+    a810:	55                   	push   ebp
+    a811:	57                   	push   edi
+    a812:	56                   	push   esi
+    a813:	53                   	push   ebx
+    a814:	83 ec 1c             	sub    esp,0x1c
+    a817:	8b 6c 24 3c          	mov    ebp,DWORD PTR [esp+0x3c]
+    a81b:	8b 54 24 30          	mov    edx,DWORD PTR [esp+0x30]
+    a81f:	8b 74 24 34          	mov    esi,DWORD PTR [esp+0x34]
+    a823:	8b 7c 24 38          	mov    edi,DWORD PTR [esp+0x38]
+    a827:	8b 44 24 40          	mov    eax,DWORD PTR [esp+0x40]
+    a82b:	85 ed                	test   ebp,ebp
+    a82d:	74 69                	je     a898 <_ZN3ata9lba48ReadEPvyjh+0x88>
+    a82f:	0f b6 c0             	movzx  eax,al
+    a832:	89 44 24 0c          	mov    DWORD PTR [esp+0xc],eax
+    a836:	eb 1c                	jmp    a854 <_ZN3ata9lba48ReadEPvyjh+0x44>
+    a838:	90                   	nop
+    a839:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    a840:	8b 54 24 08          	mov    edx,DWORD PTR [esp+0x8]
+    a844:	03 34 24             	add    esi,DWORD PTR [esp]
+    a847:	13 7c 24 04          	adc    edi,DWORD PTR [esp+0x4]
+    a84b:	c1 e3 09             	shl    ebx,0x9
+    a84e:	01 da                	add    edx,ebx
+    a850:	85 ed                	test   ebp,ebp
+    a852:	74 44                	je     a898 <_ZN3ata9lba48ReadEPvyjh+0x88>
+    a854:	81 fd ff ff 00 00    	cmp    ebp,0xffff
+    a85a:	bb ff ff 00 00       	mov    ebx,0xffff
+    a85f:	c7 44 24 04 00 00 00 	mov    DWORD PTR [esp+0x4],0x0
+    a866:	00 
+    a867:	0f 46 dd             	cmovbe ebx,ebp
+    a86a:	83 ec 0c             	sub    esp,0xc
+    a86d:	89 5c 24 0c          	mov    DWORD PTR [esp+0xc],ebx
+    a871:	ff 74 24 18          	push   DWORD PTR [esp+0x18]
+    a875:	29 dd                	sub    ebp,ebx
+    a877:	53                   	push   ebx
+    a878:	57                   	push   edi
+    a879:	56                   	push   esi
+    a87a:	52                   	push   edx
+    a87b:	89 54 24 28          	mov    DWORD PTR [esp+0x28],edx
+    a87f:	e8 bc fd ff ff       	call   a640 <_ZN3ata12lba48PIOReadEPvyth>
+    a884:	83 c4 20             	add    esp,0x20
+    a887:	84 c0                	test   al,al
+    a889:	75 b5                	jne    a840 <_ZN3ata9lba48ReadEPvyjh+0x30>
+    a88b:	83 c4 1c             	add    esp,0x1c
+    a88e:	5b                   	pop    ebx
+    a88f:	5e                   	pop    esi
+    a890:	5f                   	pop    edi
+    a891:	5d                   	pop    ebp
+    a892:	c3                   	ret    
+    a893:	90                   	nop
+    a894:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    a898:	83 c4 1c             	add    esp,0x1c
+    a89b:	b8 01 00 00 00       	mov    eax,0x1
+    a8a0:	5b                   	pop    ebx
+    a8a1:	5e                   	pop    esi
+    a8a2:	5f                   	pop    edi
+    a8a3:	5d                   	pop    ebp
+    a8a4:	c3                   	ret    
+    a8a5:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    a8a9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
 
-0000b950 <_ZN3VGA5printEPKcc>:
-    b950:	56                   	push   esi
-    b951:	53                   	push   ebx
-    b952:	83 ec 04             	sub    esp,0x4
-    b955:	8b 5c 24 10          	mov    ebx,DWORD PTR [esp+0x10]
-    b959:	8b 54 24 14          	mov    edx,DWORD PTR [esp+0x14]
-    b95d:	0f be 03             	movsx  eax,BYTE PTR [ebx]
-    b960:	84 c0                	test   al,al
-    b962:	74 24                	je     b988 <_ZN3VGA5printEPKcc+0x38>
-    b964:	0f be f2             	movsx  esi,dl
-    b967:	83 c3 01             	add    ebx,0x1
-    b96a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    b970:	83 ec 08             	sub    esp,0x8
-    b973:	83 c3 01             	add    ebx,0x1
-    b976:	56                   	push   esi
-    b977:	50                   	push   eax
-    b978:	e8 63 fe ff ff       	call   b7e0 <_ZN3VGA7putcharEcc>
-    b97d:	0f be 43 ff          	movsx  eax,BYTE PTR [ebx-0x1]
-    b981:	83 c4 10             	add    esp,0x10
-    b984:	84 c0                	test   al,al
-    b986:	75 e8                	jne    b970 <_ZN3VGA5printEPKcc+0x20>
-    b988:	83 c4 04             	add    esp,0x4
-    b98b:	5b                   	pop    ebx
-    b98c:	5e                   	pop    esi
-    b98d:	c3                   	ret    
-    b98e:	66 90                	xchg   ax,ax
+0000a8b0 <_ZN3ata4readEPvyjhb>:
+    a8b0:	55                   	push   ebp
+    a8b1:	57                   	push   edi
+    a8b2:	ba 10 a8 00 00       	mov    edx,0xa810
+    a8b7:	56                   	push   esi
+    a8b8:	53                   	push   ebx
+    a8b9:	b8 b0 a5 00 00       	mov    eax,0xa5b0
+    a8be:	81 ec 2c 04 00 00    	sub    esp,0x42c
+    a8c4:	80 bc 24 54 04 00 00 	cmp    BYTE PTR [esp+0x454],0x0
+    a8cb:	00 
+    a8cc:	8b 8c 24 44 04 00 00 	mov    ecx,DWORD PTR [esp+0x444]
+    a8d3:	8b 9c 24 48 04 00 00 	mov    ebx,DWORD PTR [esp+0x448]
+    a8da:	8b ac 24 50 04 00 00 	mov    ebp,DWORD PTR [esp+0x450]
+    a8e1:	0f 44 c2             	cmove  eax,edx
+    a8e4:	89 44 24 18          	mov    DWORD PTR [esp+0x18],eax
+    a8e8:	8b 84 24 4c 04 00 00 	mov    eax,DWORD PTR [esp+0x44c]
+    a8ef:	85 c0                	test   eax,eax
+    a8f1:	0f 84 99 01 00 00    	je     aa90 <_ZN3ata4readEPvyjhb+0x1e0>
+    a8f7:	8b b4 24 4c 04 00 00 	mov    esi,DWORD PTR [esp+0x44c]
+    a8fe:	89 c8                	mov    eax,ecx
+    a900:	89 da                	mov    edx,ebx
+    a902:	83 c0 ff             	add    eax,0xffffffff
+    a905:	83 d2 ff             	adc    edx,0xffffffff
+    a908:	31 ff                	xor    edi,edi
+    a90a:	01 c6                	add    esi,eax
+    a90c:	11 d7                	adc    edi,edx
+    a90e:	39 fb                	cmp    ebx,edi
+    a910:	0f 83 62 01 00 00    	jae    aa78 <_ZN3ata4readEPvyjhb+0x1c8>
+    a916:	89 c8                	mov    eax,ecx
+    a918:	89 da                	mov    edx,ebx
+    a91a:	0f ac d8 09          	shrd   eax,ebx,0x9
+    a91e:	c1 ea 09             	shr    edx,0x9
+    a921:	89 cb                	mov    ebx,ecx
+    a923:	89 44 24 10          	mov    DWORD PTR [esp+0x10],eax
+    a927:	89 f0                	mov    eax,esi
+    a929:	89 54 24 14          	mov    DWORD PTR [esp+0x14],edx
+    a92d:	0f ac f8 09          	shrd   eax,edi,0x9
+    a931:	89 fa                	mov    edx,edi
+    a933:	81 e3 ff 01 00 00    	and    ebx,0x1ff
+    a939:	8b 4c 24 10          	mov    ecx,DWORD PTR [esp+0x10]
+    a93d:	c1 ea 09             	shr    edx,0x9
+    a940:	89 44 24 08          	mov    DWORD PTR [esp+0x8],eax
+    a944:	89 5c 24 1c          	mov    DWORD PTR [esp+0x1c],ebx
+    a948:	89 54 24 0c          	mov    DWORD PTR [esp+0xc],edx
+    a94c:	8b 5c 24 14          	mov    ebx,DWORD PTR [esp+0x14]
+    a950:	81 e6 ff 01 00 00    	and    esi,0x1ff
+    a956:	8b 7c 24 08          	mov    edi,DWORD PTR [esp+0x8]
+    a95a:	8b 54 24 0c          	mov    edx,DWORD PTR [esp+0xc]
+    a95e:	89 e8                	mov    eax,ebp
+    a960:	0f b6 e8             	movzx  ebp,al
+    a963:	31 cf                	xor    edi,ecx
+    a965:	31 da                	xor    edx,ebx
+    a967:	09 fa                	or     edx,edi
+    a969:	0f 84 41 01 00 00    	je     aab0 <_ZN3ata4readEPvyjhb+0x200>
+    a96f:	8d 7c 24 20          	lea    edi,[esp+0x20]
+    a973:	8d 9c 24 20 02 00 00 	lea    ebx,[esp+0x220]
+    a97a:	31 c0                	xor    eax,eax
+    a97c:	b9 80 00 00 00       	mov    ecx,0x80
+    a981:	83 ec 0c             	sub    esp,0xc
+    a984:	f3 ab                	rep stos DWORD PTR es:[edi],eax
+    a986:	b9 80 00 00 00       	mov    ecx,0x80
+    a98b:	89 df                	mov    edi,ebx
+    a98d:	f3 ab                	rep stos DWORD PTR es:[edi],eax
+    a98f:	55                   	push   ebp
+    a990:	6a 01                	push   0x1
+    a992:	ff 74 24 28          	push   DWORD PTR [esp+0x28]
+    a996:	ff 74 24 28          	push   DWORD PTR [esp+0x28]
+    a99a:	8d 7c 24 3c          	lea    edi,[esp+0x3c]
+    a99e:	57                   	push   edi
+    a99f:	8b 44 24 38          	mov    eax,DWORD PTR [esp+0x38]
+    a9a3:	ff d0                	call   eax
+    a9a5:	83 c4 20             	add    esp,0x20
+    a9a8:	84 c0                	test   al,al
+    a9aa:	0f 84 ca 00 00 00    	je     aa7a <_ZN3ata4readEPvyjhb+0x1ca>
+    a9b0:	83 ec 0c             	sub    esp,0xc
+    a9b3:	55                   	push   ebp
+    a9b4:	6a 01                	push   0x1
+    a9b6:	ff 74 24 20          	push   DWORD PTR [esp+0x20]
+    a9ba:	ff 74 24 20          	push   DWORD PTR [esp+0x20]
+    a9be:	53                   	push   ebx
+    a9bf:	8b 44 24 38          	mov    eax,DWORD PTR [esp+0x38]
+    a9c3:	ff d0                	call   eax
+    a9c5:	83 c4 20             	add    esp,0x20
+    a9c8:	84 c0                	test   al,al
+    a9ca:	0f 84 aa 00 00 00    	je     aa7a <_ZN3ata4readEPvyjhb+0x1ca>
+    a9d0:	8b 4c 24 1c          	mov    ecx,DWORD PTR [esp+0x1c]
+    a9d4:	8b 94 24 40 04 00 00 	mov    edx,DWORD PTR [esp+0x440]
+    a9db:	89 c8                	mov    eax,ecx
+    a9dd:	29 ca                	sub    edx,ecx
+    a9df:	90                   	nop
+    a9e0:	0f b6 0c 07          	movzx  ecx,BYTE PTR [edi+eax*1]
+    a9e4:	88 0c 02             	mov    BYTE PTR [edx+eax*1],cl
+    a9e7:	83 c0 01             	add    eax,0x1
+    a9ea:	3d 00 02 00 00       	cmp    eax,0x200
+    a9ef:	75 ef                	jne    a9e0 <_ZN3ata4readEPvyjhb+0x130>
+    a9f1:	8b 84 24 4c 04 00 00 	mov    eax,DWORD PTR [esp+0x44c]
+    a9f8:	8b bc 24 40 04 00 00 	mov    edi,DWORD PTR [esp+0x440]
+    a9ff:	31 d2                	xor    edx,edx
+    aa01:	8d 48 ff             	lea    ecx,[eax-0x1]
+    aa04:	8d 46 01             	lea    eax,[esi+0x1]
+    aa07:	29 f1                	sub    ecx,esi
+    aa09:	01 f9                	add    ecx,edi
+    aa0b:	89 c7                	mov    edi,eax
+    aa0d:	8d 76 00             	lea    esi,[esi+0x0]
+    aa10:	0f b6 04 13          	movzx  eax,BYTE PTR [ebx+edx*1]
+    aa14:	88 04 11             	mov    BYTE PTR [ecx+edx*1],al
+    aa17:	83 c2 01             	add    edx,0x1
+    aa1a:	39 fa                	cmp    edx,edi
+    aa1c:	75 f2                	jne    aa10 <_ZN3ata4readEPvyjhb+0x160>
+    aa1e:	8b 4c 24 10          	mov    ecx,DWORD PTR [esp+0x10]
+    aa22:	8b 5c 24 14          	mov    ebx,DWORD PTR [esp+0x14]
+    aa26:	be 00 02 00 00       	mov    esi,0x200
+    aa2b:	8b 44 24 08          	mov    eax,DWORD PTR [esp+0x8]
+    aa2f:	8b 54 24 0c          	mov    edx,DWORD PTR [esp+0xc]
+    aa33:	2b 74 24 1c          	sub    esi,DWORD PTR [esp+0x1c]
+    aa37:	83 c1 01             	add    ecx,0x1
+    aa3a:	83 d3 00             	adc    ebx,0x0
+    aa3d:	83 c0 ff             	add    eax,0xffffffff
+    aa40:	83 d2 ff             	adc    edx,0xffffffff
+    aa43:	39 d3                	cmp    ebx,edx
+    aa45:	77 49                	ja     aa90 <_ZN3ata4readEPvyjhb+0x1e0>
+    aa47:	72 04                	jb     aa4d <_ZN3ata4readEPvyjhb+0x19d>
+    aa49:	39 c1                	cmp    ecx,eax
+    aa4b:	77 43                	ja     aa90 <_ZN3ata4readEPvyjhb+0x1e0>
+    aa4d:	83 ec 0c             	sub    esp,0xc
+    aa50:	55                   	push   ebp
+    aa51:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    aa55:	f7 d0                	not    eax
+    aa57:	03 44 24 18          	add    eax,DWORD PTR [esp+0x18]
+    aa5b:	50                   	push   eax
+    aa5c:	53                   	push   ebx
+    aa5d:	51                   	push   ecx
+    aa5e:	03 b4 24 5c 04 00 00 	add    esi,DWORD PTR [esp+0x45c]
+    aa65:	56                   	push   esi
+    aa66:	8b 44 24 38          	mov    eax,DWORD PTR [esp+0x38]
+    aa6a:	ff d0                	call   eax
+    aa6c:	83 c4 20             	add    esp,0x20
+    aa6f:	eb 0b                	jmp    aa7c <_ZN3ata4readEPvyjhb+0x1cc>
+    aa71:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    aa78:	76 26                	jbe    aaa0 <_ZN3ata4readEPvyjhb+0x1f0>
+    aa7a:	31 c0                	xor    eax,eax
+    aa7c:	81 c4 2c 04 00 00    	add    esp,0x42c
+    aa82:	5b                   	pop    ebx
+    aa83:	5e                   	pop    esi
+    aa84:	5f                   	pop    edi
+    aa85:	5d                   	pop    ebp
+    aa86:	c3                   	ret    
+    aa87:	89 f6                	mov    esi,esi
+    aa89:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    aa90:	81 c4 2c 04 00 00    	add    esp,0x42c
+    aa96:	b8 01 00 00 00       	mov    eax,0x1
+    aa9b:	5b                   	pop    ebx
+    aa9c:	5e                   	pop    esi
+    aa9d:	5f                   	pop    edi
+    aa9e:	5d                   	pop    ebp
+    aa9f:	c3                   	ret    
+    aaa0:	39 f1                	cmp    ecx,esi
+    aaa2:	0f 86 6e fe ff ff    	jbe    a916 <_ZN3ata4readEPvyjhb+0x66>
+    aaa8:	eb d0                	jmp    aa7a <_ZN3ata4readEPvyjhb+0x1ca>
+    aaaa:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    aab0:	83 ec 0c             	sub    esp,0xc
+    aab3:	55                   	push   ebp
+    aab4:	6a 01                	push   0x1
+    aab6:	ff 74 24 28          	push   DWORD PTR [esp+0x28]
+    aaba:	ff 74 24 28          	push   DWORD PTR [esp+0x28]
+    aabe:	8d 9c 24 3c 02 00 00 	lea    ebx,[esp+0x23c]
+    aac5:	53                   	push   ebx
+    aac6:	8b 44 24 38          	mov    eax,DWORD PTR [esp+0x38]
+    aaca:	ff d0                	call   eax
+    aacc:	83 c4 20             	add    esp,0x20
+    aacf:	84 c0                	test   al,al
+    aad1:	74 a9                	je     aa7c <_ZN3ata4readEPvyjhb+0x1cc>
+    aad3:	8b 4c 24 1c          	mov    ecx,DWORD PTR [esp+0x1c]
+    aad7:	8b bc 24 40 04 00 00 	mov    edi,DWORD PTR [esp+0x440]
+    aade:	29 cf                	sub    edi,ecx
+    aae0:	39 f1                	cmp    ecx,esi
+    aae2:	77 98                	ja     aa7c <_ZN3ata4readEPvyjhb+0x1cc>
+    aae4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    aae8:	0f b6 14 0b          	movzx  edx,BYTE PTR [ebx+ecx*1]
+    aaec:	88 14 0f             	mov    BYTE PTR [edi+ecx*1],dl
+    aaef:	83 c1 01             	add    ecx,0x1
+    aaf2:	39 ce                	cmp    esi,ecx
+    aaf4:	72 86                	jb     aa7c <_ZN3ata4readEPvyjhb+0x1cc>
+    aaf6:	0f b6 14 0b          	movzx  edx,BYTE PTR [ebx+ecx*1]
+    aafa:	88 14 0f             	mov    BYTE PTR [edi+ecx*1],dl
+    aafd:	83 c1 01             	add    ecx,0x1
+    ab00:	39 ce                	cmp    esi,ecx
+    ab02:	73 e4                	jae    aae8 <_ZN3ata4readEPvyjhb+0x238>
+    ab04:	e9 73 ff ff ff       	jmp    aa7c <_ZN3ata4readEPvyjhb+0x1cc>
+    ab09:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
 
-0000b990 <_ZN3VGA17_put_nbr_base_recEii>:
-    b990:	8b 44 24 04          	mov    eax,DWORD PTR [esp+0x4]
-    b994:	8b 54 24 08          	mov    edx,DWORD PTR [esp+0x8]
-    b998:	85 c0                	test   eax,eax
-    b99a:	75 04                	jne    b9a0 <_ZN3VGA17_put_nbr_base_recEii+0x10>
-    b99c:	f3 c3                	repz ret 
-    b99e:	66 90                	xchg   ax,ax
-    b9a0:	eb 0e                	jmp    b9b0 <_ZN3VGA17_put_nbr_base_recEii.part.0>
-    b9a2:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    b9a9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+0000ab10 <_ZN3ata12sendIdentifyEhRbb>:
+    ab10:	55                   	push   ebp
+    ab11:	57                   	push   edi
+    ab12:	56                   	push   esi
+    ab13:	53                   	push   ebx
+    ab14:	81 ec 38 02 00 00    	sub    esp,0x238
+    ab1a:	8b 9c 24 4c 02 00 00 	mov    ebx,DWORD PTR [esp+0x24c]
+    ab21:	8b b4 24 54 02 00 00 	mov    esi,DWORD PTR [esp+0x254]
+    ab28:	68 f7 01 00 00       	push   0x1f7
+    ab2d:	e8 fe 13 00 00       	call   bf30 <_Z3inbt>
+    ab32:	83 c4 10             	add    esp,0x10
+    ab35:	3c ff                	cmp    al,0xff
+    ab37:	0f 84 e3 00 00 00    	je     ac20 <_ZN3ata12sendIdentifyEhRbb+0x110>
+    ab3d:	c1 e3 04             	shl    ebx,0x4
+    ab40:	83 ec 08             	sub    esp,0x8
+    ab43:	83 cb a0             	or     ebx,0xffffffa0
+    ab46:	0f b6 db             	movzx  ebx,bl
+    ab49:	53                   	push   ebx
+    ab4a:	68 f6 01 00 00       	push   0x1f6
+    ab4f:	e8 8c 13 00 00       	call   bee0 <_Z4outbth>
+    ab54:	c7 04 24 f6 03 00 00 	mov    DWORD PTR [esp],0x3f6
+    ab5b:	e8 d0 13 00 00       	call   bf30 <_Z3inbt>
+    ab60:	c7 04 24 f6 03 00 00 	mov    DWORD PTR [esp],0x3f6
+    ab67:	e8 c4 13 00 00       	call   bf30 <_Z3inbt>
+    ab6c:	c7 04 24 f6 03 00 00 	mov    DWORD PTR [esp],0x3f6
+    ab73:	e8 b8 13 00 00       	call   bf30 <_Z3inbt>
+    ab78:	83 c4 10             	add    esp,0x10
+    ab7b:	90                   	nop
+    ab7c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    ab80:	83 ec 0c             	sub    esp,0xc
+    ab83:	68 f7 01 00 00       	push   0x1f7
+    ab88:	e8 a3 13 00 00       	call   bf30 <_Z3inbt>
+    ab8d:	83 c4 10             	add    esp,0x10
+    ab90:	84 c0                	test   al,al
+    ab92:	78 ec                	js     ab80 <_ZN3ata12sendIdentifyEhRbb+0x70>
+    ab94:	83 ec 08             	sub    esp,0x8
+    ab97:	6a 00                	push   0x0
+    ab99:	68 f2 01 00 00       	push   0x1f2
+    ab9e:	e8 3d 13 00 00       	call   bee0 <_Z4outbth>
+    aba3:	5b                   	pop    ebx
+    aba4:	5f                   	pop    edi
+    aba5:	6a 00                	push   0x0
+    aba7:	68 f3 01 00 00       	push   0x1f3
+    abac:	e8 2f 13 00 00       	call   bee0 <_Z4outbth>
+    abb1:	5d                   	pop    ebp
+    abb2:	58                   	pop    eax
+    abb3:	6a 00                	push   0x0
+    abb5:	68 f4 01 00 00       	push   0x1f4
+    abba:	e8 21 13 00 00       	call   bee0 <_Z4outbth>
+    abbf:	58                   	pop    eax
+    abc0:	5a                   	pop    edx
+    abc1:	6a 00                	push   0x0
+    abc3:	68 f5 01 00 00       	push   0x1f5
+    abc8:	e8 13 13 00 00       	call   bee0 <_Z4outbth>
+    abcd:	59                   	pop    ecx
+    abce:	5b                   	pop    ebx
+    abcf:	68 ec 00 00 00       	push   0xec
+    abd4:	68 f7 01 00 00       	push   0x1f7
+    abd9:	e8 02 13 00 00       	call   bee0 <_Z4outbth>
+    abde:	c7 04 24 f7 01 00 00 	mov    DWORD PTR [esp],0x1f7
+    abe5:	e8 46 13 00 00       	call   bf30 <_Z3inbt>
+    abea:	83 c4 10             	add    esp,0x10
+    abed:	84 c0                	test   al,al
+    abef:	74 2f                	je     ac20 <_ZN3ata12sendIdentifyEhRbb+0x110>
+    abf1:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    abf8:	83 ec 0c             	sub    esp,0xc
+    abfb:	68 f7 01 00 00       	push   0x1f7
+    ac00:	e8 2b 13 00 00       	call   bf30 <_Z3inbt>
+    ac05:	83 c4 10             	add    esp,0x10
+    ac08:	84 c0                	test   al,al
+    ac0a:	78 ec                	js     abf8 <_ZN3ata12sendIdentifyEhRbb+0xe8>
+    ac0c:	83 ec 0c             	sub    esp,0xc
+    ac0f:	68 f4 01 00 00       	push   0x1f4
+    ac14:	e8 17 13 00 00       	call   bf30 <_Z3inbt>
+    ac19:	83 c4 10             	add    esp,0x10
+    ac1c:	84 c0                	test   al,al
+    ac1e:	74 10                	je     ac30 <_ZN3ata12sendIdentifyEhRbb+0x120>
+    ac20:	31 c0                	xor    eax,eax
+    ac22:	81 c4 2c 02 00 00    	add    esp,0x22c
+    ac28:	5b                   	pop    ebx
+    ac29:	5e                   	pop    esi
+    ac2a:	5f                   	pop    edi
+    ac2b:	5d                   	pop    ebp
+    ac2c:	c3                   	ret    
+    ac2d:	8d 76 00             	lea    esi,[esi+0x0]
+    ac30:	83 ec 0c             	sub    esp,0xc
+    ac33:	68 f5 01 00 00       	push   0x1f5
+    ac38:	e8 f3 12 00 00       	call   bf30 <_Z3inbt>
+    ac3d:	83 c4 10             	add    esp,0x10
+    ac40:	84 c0                	test   al,al
+    ac42:	74 10                	je     ac54 <_ZN3ata12sendIdentifyEhRbb+0x144>
+    ac44:	eb da                	jmp    ac20 <_ZN3ata12sendIdentifyEhRbb+0x110>
+    ac46:	8d 76 00             	lea    esi,[esi+0x0]
+    ac49:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    ac50:	a8 08                	test   al,0x8
+    ac52:	75 16                	jne    ac6a <_ZN3ata12sendIdentifyEhRbb+0x15a>
+    ac54:	83 ec 0c             	sub    esp,0xc
+    ac57:	68 f7 01 00 00       	push   0x1f7
+    ac5c:	e8 cf 12 00 00       	call   bf30 <_Z3inbt>
+    ac61:	83 c4 10             	add    esp,0x10
+    ac64:	a8 01                	test   al,0x1
+    ac66:	74 e8                	je     ac50 <_ZN3ata12sendIdentifyEhRbb+0x140>
+    ac68:	eb b6                	jmp    ac20 <_ZN3ata12sendIdentifyEhRbb+0x110>
+    ac6a:	8d 7c 24 20          	lea    edi,[esp+0x20]
+    ac6e:	b9 80 00 00 00       	mov    ecx,0x80
+    ac73:	31 c0                	xor    eax,eax
+    ac75:	8d 5c 24 20          	lea    ebx,[esp+0x20]
+    ac79:	f3 ab                	rep stos DWORD PTR es:[edi],eax
+    ac7b:	8d bc 24 20 02 00 00 	lea    edi,[esp+0x220]
+    ac82:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    ac88:	83 ec 0c             	sub    esp,0xc
+    ac8b:	83 c3 02             	add    ebx,0x2
+    ac8e:	68 f0 01 00 00       	push   0x1f0
+    ac93:	e8 a8 12 00 00       	call   bf40 <_Z3inwt>
+    ac98:	66 89 43 fe          	mov    WORD PTR [ebx-0x2],ax
+    ac9c:	83 c4 10             	add    esp,0x10
+    ac9f:	39 df                	cmp    edi,ebx
+    aca1:	75 e5                	jne    ac88 <_ZN3ata12sendIdentifyEhRbb+0x178>
+    aca3:	89 f0                	mov    eax,esi
+    aca5:	0f b7 9c 24 c6 00 00 	movzx  ebx,WORD PTR [esp+0xc6]
+    acac:	00 
+    acad:	84 c0                	test   al,al
+    acaf:	75 1d                	jne    acce <_ZN3ata12sendIdentifyEhRbb+0x1be>
+    acb1:	8b 84 24 44 02 00 00 	mov    eax,DWORD PTR [esp+0x244]
+    acb8:	66 c1 eb 0a          	shr    bx,0xa
+    acbc:	83 f3 01             	xor    ebx,0x1
+    acbf:	83 e3 01             	and    ebx,0x1
+    acc2:	88 18                	mov    BYTE PTR [eax],bl
+    acc4:	b8 01 00 00 00       	mov    eax,0x1
+    acc9:	e9 54 ff ff ff       	jmp    ac22 <_ZN3ata12sendIdentifyEhRbb+0x112>
+    acce:	68 20 00 01 00       	push   0x10020
+    acd3:	68 9d 00 00 00       	push   0x9d
+    acd8:	31 ff                	xor    edi,edi
+    acda:	68 ec 04 01 00       	push   0x104ec
+    acdf:	68 10 05 01 00       	push   0x10510
+    ace4:	89 dd                	mov    ebp,ebx
+    ace6:	e8 e5 23 00 00       	call   d0d0 <_Z6printfIPKcJiS1_EEvS1_T_DpT0_>
+    aceb:	83 c4 0c             	add    esp,0xc
+    acee:	0f b7 84 24 d4 00 00 	movzx  eax,WORD PTR [esp+0xd4]
+    acf5:	00 
+    acf6:	50                   	push   eax
+    acf7:	0f b7 c3             	movzx  eax,bx
+    acfa:	50                   	push   eax
+    acfb:	0f b7 44 24 2c       	movzx  eax,WORD PTR [esp+0x2c]
+    ad00:	50                   	push   eax
+    ad01:	68 20 00 01 00       	push   0x10020
+    ad06:	68 9e 00 00 00       	push   0x9e
+    ad0b:	68 ec 04 01 00       	push   0x104ec
+    ad10:	68 34 05 01 00       	push   0x10534
+    ad15:	e8 d6 3c 00 00       	call   e9f0 <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_>
+    ad1a:	83 c4 14             	add    esp,0x14
+    ad1d:	ff b4 24 a4 00 00 00 	push   DWORD PTR [esp+0xa4]
+    ad24:	68 20 00 01 00       	push   0x10020
+    ad29:	68 9f 00 00 00       	push   0x9f
+    ad2e:	68 ec 04 01 00       	push   0x104ec
+    ad33:	68 60 05 01 00       	push   0x10560
+    ad38:	e8 33 34 00 00       	call   e170 <_Z6printfIPKcJiS1_iEEvS1_T_DpT0_>
+    ad3d:	0f b7 84 24 0e 01 00 	movzx  eax,WORD PTR [esp+0x10e]
+    ad44:	00 
+    ad45:	c7 44 24 38 ec 04 01 	mov    DWORD PTR [esp+0x38],0x104ec
+    ad4c:	00 
+    ad4d:	ba 5b 00 00 00       	mov    edx,0x5b
+    ad52:	66 89 44 24 28       	mov    WORD PTR [esp+0x28],ax
+    ad57:	0f b7 84 24 0c 01 00 	movzx  eax,WORD PTR [esp+0x10c]
+    ad5e:	00 
+    ad5f:	66 89 44 24 2a       	mov    WORD PTR [esp+0x2a],ax
+    ad64:	0f b7 84 24 0a 01 00 	movzx  eax,WORD PTR [esp+0x10a]
+    ad6b:	00 
+    ad6c:	66 89 44 24 2c       	mov    WORD PTR [esp+0x2c],ax
+    ad71:	0f b7 84 24 08 01 00 	movzx  eax,WORD PTR [esp+0x108]
+    ad78:	00 
+    ad79:	66 89 44 24 2e       	mov    WORD PTR [esp+0x2e],ax
+    ad7e:	83 c4 20             	add    esp,0x20
+    ad81:	eb 20                	jmp    ada3 <_ZN3ata12sendIdentifyEhRbb+0x293>
+    ad83:	80 fb 25             	cmp    bl,0x25
+    ad86:	0f 84 08 01 00 00    	je     ae94 <_ZN3ata12sendIdentifyEhRbb+0x384>
+    ad8c:	84 db                	test   bl,bl
+    ad8e:	75 77                	jne    ae07 <_ZN3ata12sendIdentifyEhRbb+0x2f7>
+    ad90:	8d 77 02             	lea    esi,[edi+0x2]
+    ad93:	0f b6 9e 80 05 01 00 	movzx  ebx,BYTE PTR [esi+0x10580]
+    ad9a:	84 db                	test   bl,bl
+    ad9c:	74 2a                	je     adc8 <_ZN3ata12sendIdentifyEhRbb+0x2b8>
+    ad9e:	0f be d3             	movsx  edx,bl
+    ada1:	89 f7                	mov    edi,esi
+    ada3:	8d 77 01             	lea    esi,[edi+0x1]
+    ada6:	80 fa 25             	cmp    dl,0x25
+    ada9:	0f b6 9e 80 05 01 00 	movzx  ebx,BYTE PTR [esi+0x10580]
+    adb0:	8d 8e 80 05 01 00    	lea    ecx,[esi+0x10580]
+    adb6:	74 cb                	je     ad83 <_ZN3ata12sendIdentifyEhRbb+0x273>
+    adb8:	83 ec 0c             	sub    esp,0xc
+    adbb:	52                   	push   edx
+    adbc:	e8 0f 0f 00 00       	call   bcd0 <_Z7putcharc>
+    adc1:	83 c4 10             	add    esp,0x10
+    adc4:	84 db                	test   bl,bl
+    adc6:	75 d6                	jne    ad9e <_ZN3ata12sendIdentifyEhRbb+0x28e>
+    adc8:	89 eb                	mov    ebx,ebp
+    adca:	8d 74 24 56          	lea    esi,[esp+0x56]
+    adce:	8d 7c 24 7e          	lea    edi,[esp+0x7e]
+    add2:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    add8:	0f be 06             	movsx  eax,BYTE PTR [esi]
+    addb:	83 ec 0c             	sub    esp,0xc
+    adde:	83 c6 01             	add    esi,0x1
+    ade1:	50                   	push   eax
+    ade2:	68 20 00 01 00       	push   0x10020
+    ade7:	68 a3 00 00 00       	push   0xa3
+    adec:	68 ec 04 01 00       	push   0x104ec
+    adf1:	68 71 09 01 00       	push   0x10971
+    adf6:	e8 35 37 00 00       	call   e530 <_Z6printfIPKcJiS1_cEEvS1_T_DpT0_>
+    adfb:	83 c4 20             	add    esp,0x20
+    adfe:	39 f7                	cmp    edi,esi
+    ae00:	75 d6                	jne    add8 <_ZN3ata12sendIdentifyEhRbb+0x2c8>
+    ae02:	e9 aa fe ff ff       	jmp    acb1 <_ZN3ata12sendIdentifyEhRbb+0x1a1>
+    ae07:	83 ec 08             	sub    esp,0x8
+    ae0a:	89 eb                	mov    ebx,ebp
+    ae0c:	8d 44 24 20          	lea    eax,[esp+0x20]
+    ae10:	50                   	push   eax
+    ae11:	51                   	push   ecx
+    ae12:	e8 b9 20 00 00       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    ae17:	01 c6                	add    esi,eax
+    ae19:	c7 44 24 2c a0 00 00 	mov    DWORD PTR [esp+0x2c],0xa0
+    ae20:	00 
+    ae21:	83 c4 10             	add    esp,0x10
+    ae24:	0f be 96 80 05 01 00 	movsx  edx,BYTE PTR [esi+0x10580]
+    ae2b:	8d ae 80 05 01 00    	lea    ebp,[esi+0x10580]
+    ae31:	84 d2                	test   dl,dl
+    ae33:	74 95                	je     adca <_ZN3ata12sendIdentifyEhRbb+0x2ba>
+    ae35:	31 ff                	xor    edi,edi
+    ae37:	89 ee                	mov    esi,ebp
+    ae39:	80 fa 25             	cmp    dl,0x25
+    ae3c:	89 fd                	mov    ebp,edi
+    ae3e:	66 89 5c 24 06       	mov    WORD PTR [esp+0x6],bx
+    ae43:	8d 7d 01             	lea    edi,[ebp+0x1]
+    ae46:	8d 0c 3e             	lea    ecx,[esi+edi*1]
+    ae49:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
+    ae4c:	75 2c                	jne    ae7a <_ZN3ata12sendIdentifyEhRbb+0x36a>
+    ae4e:	80 fb 25             	cmp    bl,0x25
+    ae51:	0f 84 af 00 00 00    	je     af06 <_ZN3ata12sendIdentifyEhRbb+0x3f6>
+    ae57:	84 db                	test   bl,bl
+    ae59:	75 65                	jne    aec0 <_ZN3ata12sendIdentifyEhRbb+0x3b0>
+    ae5b:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
+    ae60:	8d 7d 02             	lea    edi,[ebp+0x2]
+    ae63:	84 db                	test   bl,bl
+    ae65:	74 23                	je     ae8a <_ZN3ata12sendIdentifyEhRbb+0x37a>
+    ae67:	89 fd                	mov    ebp,edi
+    ae69:	0f be d3             	movsx  edx,bl
+    ae6c:	8d 7d 01             	lea    edi,[ebp+0x1]
+    ae6f:	80 fa 25             	cmp    dl,0x25
+    ae72:	8d 0c 3e             	lea    ecx,[esi+edi*1]
+    ae75:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
+    ae78:	74 d4                	je     ae4e <_ZN3ata12sendIdentifyEhRbb+0x33e>
+    ae7a:	83 ec 0c             	sub    esp,0xc
+    ae7d:	52                   	push   edx
+    ae7e:	e8 4d 0e 00 00       	call   bcd0 <_Z7putcharc>
+    ae83:	83 c4 10             	add    esp,0x10
+    ae86:	84 db                	test   bl,bl
+    ae88:	75 dd                	jne    ae67 <_ZN3ata12sendIdentifyEhRbb+0x357>
+    ae8a:	0f b7 5c 24 06       	movzx  ebx,WORD PTR [esp+0x6]
+    ae8f:	e9 36 ff ff ff       	jmp    adca <_ZN3ata12sendIdentifyEhRbb+0x2ba>
+    ae94:	83 ec 0c             	sub    esp,0xc
+    ae97:	8d 77 02             	lea    esi,[edi+0x2]
+    ae9a:	6a 25                	push   0x25
+    ae9c:	e8 2f 0e 00 00       	call   bcd0 <_Z7putcharc>
+    aea1:	0f b6 9e 80 05 01 00 	movzx  ebx,BYTE PTR [esi+0x10580]
+    aea8:	83 c4 10             	add    esp,0x10
+    aeab:	84 db                	test   bl,bl
+    aead:	0f 85 eb fe ff ff    	jne    ad9e <_ZN3ata12sendIdentifyEhRbb+0x28e>
+    aeb3:	e9 10 ff ff ff       	jmp    adc8 <_ZN3ata12sendIdentifyEhRbb+0x2b8>
+    aeb8:	90                   	nop
+    aeb9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    aec0:	0f b7 5c 24 06       	movzx  ebx,WORD PTR [esp+0x6]
+    aec5:	83 ec 08             	sub    esp,0x8
+    aec8:	89 f5                	mov    ebp,esi
+    aeca:	8d 44 24 24          	lea    eax,[esp+0x24]
+    aece:	50                   	push   eax
+    aecf:	51                   	push   ecx
+    aed0:	e8 fb 20 00 00       	call   cfd0 <_Z14_manage_escapeIiEiPKcPT_>
+    aed5:	5a                   	pop    edx
+    aed6:	59                   	pop    ecx
+    aed7:	0f b7 54 24 10       	movzx  edx,WORD PTR [esp+0x10]
+    aedc:	01 f8                	add    eax,edi
+    aede:	01 e8                	add    eax,ebp
+    aee0:	52                   	push   edx
+    aee1:	0f b7 54 24 16       	movzx  edx,WORD PTR [esp+0x16]
+    aee6:	52                   	push   edx
+    aee7:	0f b7 54 24 1c       	movzx  edx,WORD PTR [esp+0x1c]
+    aeec:	52                   	push   edx
+    aeed:	0f b7 54 24 22       	movzx  edx,WORD PTR [esp+0x22]
+    aef2:	52                   	push   edx
+    aef3:	68 20 00 01 00       	push   0x10020
+    aef8:	50                   	push   eax
+    aef9:	e8 32 3d 00 00       	call   ec30 <_Z6printfIPKcJttttEEvS1_T_DpT0_>
+    aefe:	83 c4 20             	add    esp,0x20
+    af01:	e9 c4 fe ff ff       	jmp    adca <_ZN3ata12sendIdentifyEhRbb+0x2ba>
+    af06:	83 ec 0c             	sub    esp,0xc
+    af09:	8d 7d 02             	lea    edi,[ebp+0x2]
+    af0c:	6a 25                	push   0x25
+    af0e:	e8 bd 0d 00 00       	call   bcd0 <_Z7putcharc>
+    af13:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
+    af18:	83 c4 10             	add    esp,0x10
+    af1b:	84 db                	test   bl,bl
+    af1d:	0f 85 44 ff ff ff    	jne    ae67 <_ZN3ata12sendIdentifyEhRbb+0x357>
+    af23:	e9 62 ff ff ff       	jmp    ae8a <_ZN3ata12sendIdentifyEhRbb+0x37a>
+    af28:	66 90                	xchg   ax,ax
+    af2a:	66 90                	xchg   ax,ax
+    af2c:	66 90                	xchg   ax,ax
+    af2e:	66 90                	xchg   ax,ax
 
-0000b9b0 <_ZN3VGA17_put_nbr_base_recEii.part.0>:
-    b9b0:	89 d1                	mov    ecx,edx
-    b9b2:	99                   	cdq    
-    b9b3:	53                   	push   ebx
-    b9b4:	f7 f9                	idiv   ecx
-    b9b6:	83 ec 10             	sub    esp,0x10
-    b9b9:	51                   	push   ecx
-    b9ba:	50                   	push   eax
-    b9bb:	89 d3                	mov    ebx,edx
-    b9bd:	e8 ce ff ff ff       	call   b990 <_ZN3VGA17_put_nbr_base_recEii>
-    b9c2:	58                   	pop    eax
-    b9c3:	0f be 83 00 10 01 00 	movsx  eax,BYTE PTR [ebx+0x11000]
-    b9ca:	5a                   	pop    edx
-    b9cb:	6a 0f                	push   0xf
-    b9cd:	50                   	push   eax
-    b9ce:	e8 0d fe ff ff       	call   b7e0 <_ZN3VGA7putcharEcc>
-    b9d3:	83 c4 18             	add    esp,0x18
-    b9d6:	5b                   	pop    ebx
-    b9d7:	c3                   	ret    
-    b9d8:	90                   	nop
-    b9d9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+0000af30 <_ZN6paging18init_kernel_pagingEv>:
+    af30:	57                   	push   edi
+    af31:	56                   	push   esi
+    af32:	b8 00 00 10 00       	mov    eax,0x100000
+    af37:	53                   	push   ebx
+    af38:	90                   	nop
+    af39:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    af40:	c7 00 00 00 00 00    	mov    DWORD PTR [eax],0x0
+    af46:	83 c0 04             	add    eax,0x4
+    af49:	3d 00 10 10 00       	cmp    eax,0x101000
+    af4e:	75 f0                	jne    af40 <_ZN6paging18init_kernel_pagingEv+0x10>
+    af50:	c7 00 00 00 00 00    	mov    DWORD PTR [eax],0x0
+    af56:	83 c0 04             	add    eax,0x4
+    af59:	3d 00 10 50 00       	cmp    eax,0x501000
+    af5e:	75 f0                	jne    af50 <_ZN6paging18init_kernel_pagingEv+0x20>
+    af60:	c7 05 00 00 10 00 87 	mov    DWORD PTR ds:0x100000,0x87
+    af67:	00 00 00 
+    af6a:	c7 05 04 00 10 00 87 	mov    DWORD PTR ds:0x100004,0x400087
+    af71:	00 40 00 
+    af74:	31 c0                	xor    eax,eax
+    af76:	c7 05 08 0c 10 00 87 	mov    DWORD PTR ds:0x100c08,0x800087
+    af7d:	00 80 00 
+    af80:	c7 05 0c 0c 10 00 87 	mov    DWORD PTR ds:0x100c0c,0xc00087
+    af87:	00 c0 00 
+    af8a:	c7 05 10 0c 10 00 87 	mov    DWORD PTR ds:0x100c10,0x1000087
+    af91:	00 00 01 
+    af94:	c7 05 14 0c 10 00 87 	mov    DWORD PTR ds:0x100c14,0x1400087
+    af9b:	00 40 01 
+    af9e:	c7 05 18 0c 10 00 87 	mov    DWORD PTR ds:0x100c18,0x1800087
+    afa5:	00 80 01 
+    afa8:	c7 05 1c 0c 10 00 87 	mov    DWORD PTR ds:0x100c1c,0x1c00087
+    afaf:	00 c0 01 
+    afb2:	c7 05 20 0c 10 00 87 	mov    DWORD PTR ds:0x100c20,0x2000087
+    afb9:	00 00 02 
+    afbc:	c7 05 24 0c 10 00 87 	mov    DWORD PTR ds:0x100c24,0x2400087
+    afc3:	00 40 02 
+    afc6:	c7 05 28 0c 10 00 87 	mov    DWORD PTR ds:0x100c28,0x2800087
+    afcd:	00 80 02 
+    afd0:	c7 05 2c 0c 10 00 87 	mov    DWORD PTR ds:0x100c2c,0x2c00087
+    afd7:	00 c0 02 
+    afda:	c7 05 30 0c 10 00 87 	mov    DWORD PTR ds:0x100c30,0x3000087
+    afe1:	00 00 03 
+    afe4:	c7 05 34 0c 10 00 87 	mov    DWORD PTR ds:0x100c34,0x3400087
+    afeb:	00 40 03 
+    afee:	c7 05 38 0c 10 00 87 	mov    DWORD PTR ds:0x100c38,0x3800087
+    aff5:	00 80 03 
+    aff8:	c7 05 3c 0c 10 00 87 	mov    DWORD PTR ds:0x100c3c,0x3c00087
+    afff:	00 c0 03 
+    b002:	c7 05 00 00 00 02 00 	mov    DWORD PTR ds:0x2000000,0x0
+    b009:	00 00 00 
+    b00c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    b010:	c7 04 85 04 00 00 02 	mov    DWORD PTR [eax*4+0x2000004],0x0
+    b017:	00 00 00 00 
+    b01b:	83 c0 01             	add    eax,0x1
+    b01e:	3d 00 80 00 00       	cmp    eax,0x8000
+    b023:	75 eb                	jne    b010 <_ZN6paging18init_kernel_pagingEv+0xe0>
+    b025:	e8 f6 00 00 00       	call   b120 <_ZN4boot12get_ram_sizeEv>
+    b02a:	c1 e8 0c             	shr    eax,0xc
+    b02d:	3d 00 40 00 00       	cmp    eax,0x4000
+    b032:	76 4b                	jbe    b07f <_ZN6paging18init_kernel_pagingEv+0x14f>
+    b034:	8b 15 00 00 00 02    	mov    edx,DWORD PTR ds:0x2000000
+    b03a:	b9 00 40 00 00       	mov    ecx,0x4000
+    b03f:	be 01 00 00 00       	mov    esi,0x1
+    b044:	8d 9a 00 c0 ff ff    	lea    ebx,[edx-0x4000]
+    b04a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    b050:	8d bc 19 00 80 00 00 	lea    edi,[ecx+ebx*1+0x8000]
+    b057:	89 ca                	mov    edx,ecx
+    b059:	c1 e2 0c             	shl    edx,0xc
+    b05c:	89 14 bd 04 00 00 02 	mov    DWORD PTR [edi*4+0x2000004],edx
+    b063:	89 f7                	mov    edi,esi
+    b065:	c1 ea 11             	shr    edx,0x11
+    b068:	d3 e7                	shl    edi,cl
+    b06a:	83 c1 01             	add    ecx,0x1
+    b06d:	09 3c 95 04 00 00 02 	or     DWORD PTR [edx*4+0x2000004],edi
+    b074:	39 c8                	cmp    eax,ecx
+    b076:	75 d8                	jne    b050 <_ZN6paging18init_kernel_pagingEv+0x120>
+    b078:	01 d8                	add    eax,ebx
+    b07a:	a3 00 00 00 02       	mov    ds:0x2000000,eax
+    b07f:	83 ec 0c             	sub    esp,0xc
+    b082:	68 00 00 10 00       	push   0x100000
+    b087:	e8 c3 f2 ff ff       	call   a34f <__setCR3>
+    b08c:	e8 ba f2 ff ff       	call   a34b <__getCR4>
+    b091:	83 c8 10             	or     eax,0x10
+    b094:	89 04 24             	mov    DWORD PTR [esp],eax
+    b097:	e8 a4 f2 ff ff       	call   a340 <__setCR4>
+    b09c:	e8 d7 f2 ff ff       	call   a378 <__getCR0>
+    b0a1:	0d 01 00 00 80       	or     eax,0x80000001
+    b0a6:	89 04 24             	mov    DWORD PTR [esp],eax
+    b0a9:	e8 bf f2 ff ff       	call   a36d <__setCR0>
+    b0ae:	83 c4 10             	add    esp,0x10
+    b0b1:	5b                   	pop    ebx
+    b0b2:	5e                   	pop    esi
+    b0b3:	5f                   	pop    edi
+    b0b4:	c3                   	ret    
+    b0b5:	90                   	nop
+    b0b6:	8d 76 00             	lea    esi,[esi+0x0]
+    b0b9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
 
-0000b9e0 <_ZN3VGA13_put_nbr_baseEjib>:
-    b9e0:	56                   	push   esi
-    b9e1:	53                   	push   ebx
-    b9e2:	83 ec 04             	sub    esp,0x4
-    b9e5:	8b 5c 24 10          	mov    ebx,DWORD PTR [esp+0x10]
-    b9e9:	8b 74 24 14          	mov    esi,DWORD PTR [esp+0x14]
-    b9ed:	8b 44 24 18          	mov    eax,DWORD PTR [esp+0x18]
-    b9f1:	85 db                	test   ebx,ebx
-    b9f3:	79 04                	jns    b9f9 <_ZN3VGA13_put_nbr_baseEjib+0x19>
-    b9f5:	3c 01                	cmp    al,0x1
-    b9f7:	75 37                	jne    ba30 <_ZN3VGA13_put_nbr_baseEjib+0x50>
-    b9f9:	85 db                	test   ebx,ebx
-    b9fb:	74 7b                	je     ba78 <_ZN3VGA13_put_nbr_baseEjib+0x98>
-    b9fd:	89 d8                	mov    eax,ebx
-    b9ff:	31 d2                	xor    edx,edx
-    ba01:	f7 f6                	div    esi
-    ba03:	85 c0                	test   eax,eax
-    ba05:	89 d3                	mov    ebx,edx
-    ba07:	0f 85 8b 00 00 00    	jne    ba98 <_ZN3VGA13_put_nbr_baseEjib+0xb8>
-    ba0d:	0f be 83 00 10 01 00 	movsx  eax,BYTE PTR [ebx+0x11000]
-    ba14:	c7 44 24 14 0f 00 00 	mov    DWORD PTR [esp+0x14],0xf
-    ba1b:	00 
-    ba1c:	89 44 24 10          	mov    DWORD PTR [esp+0x10],eax
-    ba20:	83 c4 04             	add    esp,0x4
-    ba23:	5b                   	pop    ebx
-    ba24:	5e                   	pop    esi
-    ba25:	e9 b6 fd ff ff       	jmp    b7e0 <_ZN3VGA7putcharEcc>
-    ba2a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    ba30:	83 ec 08             	sub    esp,0x8
-    ba33:	6a 0f                	push   0xf
-    ba35:	6a 2d                	push   0x2d
-    ba37:	e8 a4 fd ff ff       	call   b7e0 <_ZN3VGA7putcharEcc>
-    ba3c:	89 d8                	mov    eax,ebx
-    ba3e:	83 c4 10             	add    esp,0x10
-    ba41:	99                   	cdq    
-    ba42:	f7 fe                	idiv   esi
-    ba44:	85 c0                	test   eax,eax
-    ba46:	74 09                	je     ba51 <_ZN3VGA13_put_nbr_baseEjib+0x71>
-    ba48:	f7 d8                	neg    eax
-    ba4a:	89 f2                	mov    edx,esi
-    ba4c:	e8 5f ff ff ff       	call   b9b0 <_ZN3VGA17_put_nbr_base_recEii.part.0>
-    ba51:	89 d8                	mov    eax,ebx
-    ba53:	c7 44 24 14 0f 00 00 	mov    DWORD PTR [esp+0x14],0xf
-    ba5a:	00 
-    ba5b:	f7 d8                	neg    eax
-    ba5d:	99                   	cdq    
-    ba5e:	f7 fe                	idiv   esi
-    ba60:	0f be 82 00 10 01 00 	movsx  eax,BYTE PTR [edx+0x11000]
-    ba67:	89 44 24 10          	mov    DWORD PTR [esp+0x10],eax
-    ba6b:	83 c4 04             	add    esp,0x4
-    ba6e:	5b                   	pop    ebx
-    ba6f:	5e                   	pop    esi
-    ba70:	e9 6b fd ff ff       	jmp    b7e0 <_ZN3VGA7putcharEcc>
-    ba75:	8d 76 00             	lea    esi,[esi+0x0]
-    ba78:	0f be 05 00 10 01 00 	movsx  eax,BYTE PTR ds:0x11000
-    ba7f:	c7 44 24 14 0f 00 00 	mov    DWORD PTR [esp+0x14],0xf
-    ba86:	00 
-    ba87:	89 44 24 10          	mov    DWORD PTR [esp+0x10],eax
-    ba8b:	83 c4 04             	add    esp,0x4
-    ba8e:	5b                   	pop    ebx
-    ba8f:	5e                   	pop    esi
-    ba90:	e9 4b fd ff ff       	jmp    b7e0 <_ZN3VGA7putcharEcc>
-    ba95:	8d 76 00             	lea    esi,[esi+0x0]
-    ba98:	89 f2                	mov    edx,esi
-    ba9a:	e8 11 ff ff ff       	call   b9b0 <_ZN3VGA17_put_nbr_base_recEii.part.0>
-    ba9f:	e9 69 ff ff ff       	jmp    ba0d <_ZN3VGA13_put_nbr_baseEjib+0x2d>
-    baa4:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    baaa:	8d bf 00 00 00 00    	lea    edi,[edi+0x0]
+0000b0c0 <_ZN9PhysPages4initEv>:
+    b0c0:	8b 54 24 04          	mov    edx,DWORD PTR [esp+0x4]
+    b0c4:	c7 02 00 00 00 00    	mov    DWORD PTR [edx],0x0
+    b0ca:	8d 42 04             	lea    eax,[edx+0x4]
+    b0cd:	81 c2 04 00 02 00    	add    edx,0x20004
+    b0d3:	90                   	nop
+    b0d4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    b0d8:	c7 00 00 00 00 00    	mov    DWORD PTR [eax],0x0
+    b0de:	83 c0 04             	add    eax,0x4
+    b0e1:	39 d0                	cmp    eax,edx
+    b0e3:	75 f3                	jne    b0d8 <_ZN9PhysPages4initEv+0x18>
+    b0e5:	f3 c3                	repz ret 
+    b0e7:	90                   	nop
+    b0e8:	90                   	nop
+    b0e9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
 
-0000bab0 <_ZN3VGA6putHexEi>:
-    bab0:	83 ec 10             	sub    esp,0x10
-    bab3:	6a 01                	push   0x1
-    bab5:	6a 10                	push   0x10
-    bab7:	ff 74 24 1c          	push   DWORD PTR [esp+0x1c]
-    babb:	e8 20 ff ff ff       	call   b9e0 <_ZN3VGA13_put_nbr_baseEjib>
-    bac0:	83 c4 1c             	add    esp,0x1c
-    bac3:	c3                   	ret    
-    bac4:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    baca:	8d bf 00 00 00 00    	lea    edi,[edi+0x0]
+0000b0f0 <_ZN9PhysPages8add_pageEj>:
+    b0f0:	53                   	push   ebx
+    b0f1:	8b 44 24 08          	mov    eax,DWORD PTR [esp+0x8]
+    b0f5:	8b 4c 24 0c          	mov    ecx,DWORD PTR [esp+0xc]
+    b0f9:	8b 10                	mov    edx,DWORD PTR [eax]
+    b0fb:	8d 5a 01             	lea    ebx,[edx+0x1]
+    b0fe:	89 18                	mov    DWORD PTR [eax],ebx
+    b100:	89 cb                	mov    ebx,ecx
+    b102:	89 8c 90 04 00 02 00 	mov    DWORD PTR [eax+edx*4+0x20004],ecx
+    b109:	c1 eb 11             	shr    ebx,0x11
+    b10c:	c1 e9 0c             	shr    ecx,0xc
+    b10f:	ba 01 00 00 00       	mov    edx,0x1
+    b114:	d3 e2                	shl    edx,cl
+    b116:	09 54 98 04          	or     DWORD PTR [eax+ebx*4+0x4],edx
+    b11a:	5b                   	pop    ebx
+    b11b:	c3                   	ret    
+    b11c:	66 90                	xchg   ax,ax
+    b11e:	66 90                	xchg   ax,ax
 
-0000bad0 <_ZN3VGA6putDecEi>:
-    bad0:	83 ec 10             	sub    esp,0x10
-    bad3:	6a 00                	push   0x0
-    bad5:	6a 0a                	push   0xa
-    bad7:	ff 74 24 1c          	push   DWORD PTR [esp+0x1c]
-    badb:	e8 00 ff ff ff       	call   b9e0 <_ZN3VGA13_put_nbr_baseEjib>
-    bae0:	83 c4 1c             	add    esp,0x1c
-    bae3:	c3                   	ret    
-    bae4:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    baea:	8d bf 00 00 00 00    	lea    edi,[edi+0x0]
+0000b120 <_ZN4boot12get_ram_sizeEv>:
+    b120:	0f b7 05 02 05 00 00 	movzx  eax,WORD PTR ds:0x502
+    b127:	0f b7 15 00 05 00 00 	movzx  edx,WORD PTR ds:0x500
+    b12e:	c1 e0 06             	shl    eax,0x6
+    b131:	01 d0                	add    eax,edx
+    b133:	c1 e0 0a             	shl    eax,0xa
+    b136:	c3                   	ret    
+    b137:	66 90                	xchg   ax,ax
+    b139:	66 90                	xchg   ax,ax
+    b13b:	66 90                	xchg   ax,ax
+    b13d:	66 90                	xchg   ax,ax
+    b13f:	90                   	nop
 
-0000baf0 <_ZN3VGA6putOctEi>:
-    baf0:	83 ec 10             	sub    esp,0x10
-    baf3:	6a 00                	push   0x0
-    baf5:	6a 08                	push   0x8
-    baf7:	ff 74 24 1c          	push   DWORD PTR [esp+0x1c]
-    bafb:	e8 e0 fe ff ff       	call   b9e0 <_ZN3VGA13_put_nbr_baseEjib>
-    bb00:	83 c4 1c             	add    esp,0x1c
-    bb03:	c3                   	ret    
-    bb04:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    bb0a:	8d bf 00 00 00 00    	lea    edi,[edi+0x0]
+0000b140 <_ZN3elf13load_file_hdrEjPFiPvjjS0_ES0_>:
+    b140:	57                   	push   edi
+    b141:	53                   	push   ebx
+    b142:	83 ec 44             	sub    esp,0x44
+    b145:	8b 5c 24 50          	mov    ebx,DWORD PTR [esp+0x50]
+    b149:	ff 74 24 5c          	push   DWORD PTR [esp+0x5c]
+    b14d:	6a 34                	push   0x34
+    b14f:	ff 74 24 5c          	push   DWORD PTR [esp+0x5c]
+    b153:	8d 44 24 18          	lea    eax,[esp+0x18]
+    b157:	50                   	push   eax
+    b158:	ff 54 24 68          	call   DWORD PTR [esp+0x68]
+    b15c:	83 c4 10             	add    esp,0x10
+    b15f:	85 c0                	test   eax,eax
+    b161:	75 6d                	jne    b1d0 <_ZN3elf13load_file_hdrEjPFiPvjjS0_ES0_+0x90>
+    b163:	8b 44 24 0c          	mov    eax,DWORD PTR [esp+0xc]
+    b167:	89 03                	mov    DWORD PTR [ebx],eax
+    b169:	8b 44 24 10          	mov    eax,DWORD PTR [esp+0x10]
+    b16d:	89 43 04             	mov    DWORD PTR [ebx+0x4],eax
+    b170:	8b 44 24 14          	mov    eax,DWORD PTR [esp+0x14]
+    b174:	89 43 08             	mov    DWORD PTR [ebx+0x8],eax
+    b177:	8b 44 24 18          	mov    eax,DWORD PTR [esp+0x18]
+    b17b:	89 43 0c             	mov    DWORD PTR [ebx+0xc],eax
+    b17e:	8b 44 24 1c          	mov    eax,DWORD PTR [esp+0x1c]
+    b182:	89 43 10             	mov    DWORD PTR [ebx+0x10],eax
+    b185:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    b189:	89 43 14             	mov    DWORD PTR [ebx+0x14],eax
+    b18c:	8b 44 24 24          	mov    eax,DWORD PTR [esp+0x24]
+    b190:	89 43 18             	mov    DWORD PTR [ebx+0x18],eax
+    b193:	8b 44 24 28          	mov    eax,DWORD PTR [esp+0x28]
+    b197:	89 43 1c             	mov    DWORD PTR [ebx+0x1c],eax
+    b19a:	8b 44 24 2c          	mov    eax,DWORD PTR [esp+0x2c]
+    b19e:	89 43 20             	mov    DWORD PTR [ebx+0x20],eax
+    b1a1:	8b 44 24 30          	mov    eax,DWORD PTR [esp+0x30]
+    b1a5:	89 43 24             	mov    DWORD PTR [ebx+0x24],eax
+    b1a8:	8b 44 24 34          	mov    eax,DWORD PTR [esp+0x34]
+    b1ac:	89 43 28             	mov    DWORD PTR [ebx+0x28],eax
+    b1af:	8b 44 24 38          	mov    eax,DWORD PTR [esp+0x38]
+    b1b3:	89 43 2c             	mov    DWORD PTR [ebx+0x2c],eax
+    b1b6:	8b 44 24 3c          	mov    eax,DWORD PTR [esp+0x3c]
+    b1ba:	89 43 30             	mov    DWORD PTR [ebx+0x30],eax
+    b1bd:	83 c4 44             	add    esp,0x44
+    b1c0:	89 d8                	mov    eax,ebx
+    b1c2:	5b                   	pop    ebx
+    b1c3:	5f                   	pop    edi
+    b1c4:	c2 04 00             	ret    0x4
+    b1c7:	89 f6                	mov    esi,esi
+    b1c9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    b1d0:	8d 7b 04             	lea    edi,[ebx+0x4]
+    b1d3:	89 d9                	mov    ecx,ebx
+    b1d5:	31 c0                	xor    eax,eax
+    b1d7:	c7 03 00 00 00 00    	mov    DWORD PTR [ebx],0x0
+    b1dd:	c7 43 30 00 00 00 00 	mov    DWORD PTR [ebx+0x30],0x0
+    b1e4:	83 e7 fc             	and    edi,0xfffffffc
+    b1e7:	29 f9                	sub    ecx,edi
+    b1e9:	83 c1 34             	add    ecx,0x34
+    b1ec:	c1 e9 02             	shr    ecx,0x2
+    b1ef:	f3 ab                	rep stos DWORD PTR es:[edi],eax
+    b1f1:	83 c4 44             	add    esp,0x44
+    b1f4:	89 d8                	mov    eax,ebx
+    b1f6:	5b                   	pop    ebx
+    b1f7:	5f                   	pop    edi
+    b1f8:	c2 04 00             	ret    0x4
+    b1fb:	90                   	nop
+    b1fc:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
 
-0000bb10 <_ZN3VGA6putBinEi>:
-    bb10:	57                   	push   edi
-    bb11:	56                   	push   esi
-    bb12:	be 00 00 00 80       	mov    esi,0x80000000
-    bb17:	53                   	push   ebx
-    bb18:	8b 7c 24 10          	mov    edi,DWORD PTR [esp+0x10]
-    bb1c:	31 db                	xor    ebx,ebx
-    bb1e:	66 90                	xchg   ax,ax
-    bb20:	85 f7                	test   edi,esi
-    bb22:	74 2c                	je     bb50 <_ZN3VGA6putBinEi+0x40>
-    bb24:	0f be 05 01 10 01 00 	movsx  eax,BYTE PTR ds:0x11001
-    bb2b:	83 ec 08             	sub    esp,0x8
-    bb2e:	83 c3 01             	add    ebx,0x1
-    bb31:	6a 0f                	push   0xf
-    bb33:	d1 ee                	shr    esi,1
-    bb35:	50                   	push   eax
-    bb36:	e8 a5 fc ff ff       	call   b7e0 <_ZN3VGA7putcharEcc>
-    bb3b:	83 c4 10             	add    esp,0x10
-    bb3e:	f6 c3 07             	test   bl,0x7
-    bb41:	75 2c                	jne    bb6f <_ZN3VGA6putBinEi+0x5f>
-    bb43:	83 fb 20             	cmp    ebx,0x20
-    bb46:	75 38                	jne    bb80 <_ZN3VGA6putBinEi+0x70>
-    bb48:	5b                   	pop    ebx
-    bb49:	5e                   	pop    esi
-    bb4a:	5f                   	pop    edi
-    bb4b:	c3                   	ret    
-    bb4c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    bb50:	0f be 05 00 10 01 00 	movsx  eax,BYTE PTR ds:0x11000
-    bb57:	83 ec 08             	sub    esp,0x8
-    bb5a:	83 c3 01             	add    ebx,0x1
-    bb5d:	6a 0f                	push   0xf
-    bb5f:	d1 ee                	shr    esi,1
-    bb61:	50                   	push   eax
-    bb62:	e8 79 fc ff ff       	call   b7e0 <_ZN3VGA7putcharEcc>
-    bb67:	83 c4 10             	add    esp,0x10
-    bb6a:	f6 c3 07             	test   bl,0x7
-    bb6d:	74 d4                	je     bb43 <_ZN3VGA6putBinEi+0x33>
-    bb6f:	83 fb 20             	cmp    ebx,0x20
-    bb72:	75 ac                	jne    bb20 <_ZN3VGA6putBinEi+0x10>
-    bb74:	eb d2                	jmp    bb48 <_ZN3VGA6putBinEi+0x38>
-    bb76:	8d 76 00             	lea    esi,[esi+0x0]
-    bb79:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
-    bb80:	83 ec 08             	sub    esp,0x8
-    bb83:	6a 0f                	push   0xf
-    bb85:	6a 27                	push   0x27
-    bb87:	e8 54 fc ff ff       	call   b7e0 <_ZN3VGA7putcharEcc>
-    bb8c:	83 c4 10             	add    esp,0x10
-    bb8f:	eb 8f                	jmp    bb20 <_ZN3VGA6putBinEi+0x10>
-    bb91:	66 90                	xchg   ax,ax
-    bb93:	66 90                	xchg   ax,ax
-    bb95:	66 90                	xchg   ax,ax
-    bb97:	66 90                	xchg   ax,ax
-    bb99:	66 90                	xchg   ax,ax
-    bb9b:	66 90                	xchg   ax,ax
-    bb9d:	66 90                	xchg   ax,ax
-    bb9f:	90                   	nop
+0000b200 <_ZN3elf13load_prog_hdrEjjjPFiPvjjS0_ES0_>:
+    b200:	56                   	push   esi
+    b201:	53                   	push   ebx
+    b202:	83 ec 24             	sub    esp,0x24
+    b205:	8b 44 24 38          	mov    eax,DWORD PTR [esp+0x38]
+    b209:	8b 5c 24 30          	mov    ebx,DWORD PTR [esp+0x30]
+    b20d:	ff 74 24 44          	push   DWORD PTR [esp+0x44]
+    b211:	50                   	push   eax
+    b212:	0f af 44 24 44       	imul   eax,DWORD PTR [esp+0x44]
+    b217:	03 44 24 3c          	add    eax,DWORD PTR [esp+0x3c]
+    b21b:	50                   	push   eax
+    b21c:	8d 44 24 0c          	lea    eax,[esp+0xc]
+    b220:	50                   	push   eax
+    b221:	ff 54 24 50          	call   DWORD PTR [esp+0x50]
+    b225:	83 c4 10             	add    esp,0x10
+    b228:	85 c0                	test   eax,eax
+    b22a:	75 44                	jne    b270 <_ZN3elf13load_prog_hdrEjjjPFiPvjjS0_ES0_+0x70>
+    b22c:	8b 04 24             	mov    eax,DWORD PTR [esp]
+    b22f:	89 03                	mov    DWORD PTR [ebx],eax
+    b231:	8b 44 24 04          	mov    eax,DWORD PTR [esp+0x4]
+    b235:	89 43 04             	mov    DWORD PTR [ebx+0x4],eax
+    b238:	8b 44 24 08          	mov    eax,DWORD PTR [esp+0x8]
+    b23c:	89 43 08             	mov    DWORD PTR [ebx+0x8],eax
+    b23f:	8b 44 24 0c          	mov    eax,DWORD PTR [esp+0xc]
+    b243:	89 43 0c             	mov    DWORD PTR [ebx+0xc],eax
+    b246:	8b 44 24 10          	mov    eax,DWORD PTR [esp+0x10]
+    b24a:	89 43 10             	mov    DWORD PTR [ebx+0x10],eax
+    b24d:	8b 44 24 14          	mov    eax,DWORD PTR [esp+0x14]
+    b251:	89 43 14             	mov    DWORD PTR [ebx+0x14],eax
+    b254:	8b 44 24 18          	mov    eax,DWORD PTR [esp+0x18]
+    b258:	89 43 18             	mov    DWORD PTR [ebx+0x18],eax
+    b25b:	8b 44 24 1c          	mov    eax,DWORD PTR [esp+0x1c]
+    b25f:	89 43 1c             	mov    DWORD PTR [ebx+0x1c],eax
+    b262:	83 c4 24             	add    esp,0x24
+    b265:	89 d8                	mov    eax,ebx
+    b267:	5b                   	pop    ebx
+    b268:	5e                   	pop    esi
+    b269:	c2 04 00             	ret    0x4
+    b26c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    b270:	8d 4b 04             	lea    ecx,[ebx+0x4]
+    b273:	89 d8                	mov    eax,ebx
+    b275:	31 f6                	xor    esi,esi
+    b277:	c7 03 00 00 00 00    	mov    DWORD PTR [ebx],0x0
+    b27d:	c7 43 1c 00 00 00 00 	mov    DWORD PTR [ebx+0x1c],0x0
+    b284:	31 d2                	xor    edx,edx
+    b286:	83 e1 fc             	and    ecx,0xfffffffc
+    b289:	29 c8                	sub    eax,ecx
+    b28b:	83 c0 20             	add    eax,0x20
+    b28e:	83 e0 fc             	and    eax,0xfffffffc
+    b291:	89 34 11             	mov    DWORD PTR [ecx+edx*1],esi
+    b294:	83 c2 04             	add    edx,0x4
+    b297:	39 c2                	cmp    edx,eax
+    b299:	72 f6                	jb     b291 <_ZN3elf13load_prog_hdrEjjjPFiPvjjS0_ES0_+0x91>
+    b29b:	eb c5                	jmp    b262 <_ZN3elf13load_prog_hdrEjjjPFiPvjjS0_ES0_+0x62>
+    b29d:	8d 76 00             	lea    esi,[esi+0x0]
 
-0000bba0 <_Z12clear_screenv>:
-    bba0:	83 ec 18             	sub    esp,0x18
-    bba3:	6a 0f                	push   0xf
-    bba5:	e8 d6 fb ff ff       	call   b780 <_ZN3VGA12clear_screenEc>
-    bbaa:	83 c4 1c             	add    esp,0x1c
-    bbad:	c3                   	ret    
-    bbae:	66 90                	xchg   ax,ax
+0000b2a0 <_ZN3elf13load_sect_hdrEjjjPFiPvjjS0_ES0_>:
+    b2a0:	57                   	push   edi
+    b2a1:	53                   	push   ebx
+    b2a2:	83 ec 34             	sub    esp,0x34
+    b2a5:	8b 44 24 48          	mov    eax,DWORD PTR [esp+0x48]
+    b2a9:	8b 5c 24 40          	mov    ebx,DWORD PTR [esp+0x40]
+    b2ad:	ff 74 24 54          	push   DWORD PTR [esp+0x54]
+    b2b1:	50                   	push   eax
+    b2b2:	0f af 44 24 54       	imul   eax,DWORD PTR [esp+0x54]
+    b2b7:	03 44 24 4c          	add    eax,DWORD PTR [esp+0x4c]
+    b2bb:	50                   	push   eax
+    b2bc:	8d 44 24 14          	lea    eax,[esp+0x14]
+    b2c0:	50                   	push   eax
+    b2c1:	ff 54 24 60          	call   DWORD PTR [esp+0x60]
+    b2c5:	83 c4 10             	add    esp,0x10
+    b2c8:	85 c0                	test   eax,eax
+    b2ca:	74 34                	je     b300 <_ZN3elf13load_sect_hdrEjjjPFiPvjjS0_ES0_+0x60>
+    b2cc:	8d 7b 04             	lea    edi,[ebx+0x4]
+    b2cf:	89 d9                	mov    ecx,ebx
+    b2d1:	31 c0                	xor    eax,eax
+    b2d3:	c7 03 00 00 00 00    	mov    DWORD PTR [ebx],0x0
+    b2d9:	c7 43 24 00 00 00 00 	mov    DWORD PTR [ebx+0x24],0x0
+    b2e0:	83 e7 fc             	and    edi,0xfffffffc
+    b2e3:	29 f9                	sub    ecx,edi
+    b2e5:	83 c1 28             	add    ecx,0x28
+    b2e8:	c1 e9 02             	shr    ecx,0x2
+    b2eb:	f3 ab                	rep stos DWORD PTR es:[edi],eax
+    b2ed:	83 c4 34             	add    esp,0x34
+    b2f0:	89 d8                	mov    eax,ebx
+    b2f2:	5b                   	pop    ebx
+    b2f3:	5f                   	pop    edi
+    b2f4:	c2 04 00             	ret    0x4
+    b2f7:	89 f6                	mov    esi,esi
+    b2f9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    b300:	83 ec 0c             	sub    esp,0xc
+    b303:	ff 74 24 20          	push   DWORD PTR [esp+0x20]
+    b307:	68 40 00 01 00       	push   0x10040
+    b30c:	6a 27                	push   0x27
+    b30e:	68 87 09 01 00       	push   0x10987
+    b313:	68 a3 09 01 00       	push   0x109a3
+    b318:	e8 23 25 00 00       	call   d840 <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_>
+    b31d:	8b 44 24 28          	mov    eax,DWORD PTR [esp+0x28]
+    b321:	89 03                	mov    DWORD PTR [ebx],eax
+    b323:	8b 44 24 2c          	mov    eax,DWORD PTR [esp+0x2c]
+    b327:	89 43 04             	mov    DWORD PTR [ebx+0x4],eax
+    b32a:	8b 44 24 30          	mov    eax,DWORD PTR [esp+0x30]
+    b32e:	89 43 08             	mov    DWORD PTR [ebx+0x8],eax
+    b331:	8b 44 24 34          	mov    eax,DWORD PTR [esp+0x34]
+    b335:	89 43 0c             	mov    DWORD PTR [ebx+0xc],eax
+    b338:	8b 44 24 38          	mov    eax,DWORD PTR [esp+0x38]
+    b33c:	89 43 10             	mov    DWORD PTR [ebx+0x10],eax
+    b33f:	8b 44 24 3c          	mov    eax,DWORD PTR [esp+0x3c]
+    b343:	89 43 14             	mov    DWORD PTR [ebx+0x14],eax
+    b346:	8b 44 24 40          	mov    eax,DWORD PTR [esp+0x40]
+    b34a:	89 43 18             	mov    DWORD PTR [ebx+0x18],eax
+    b34d:	8b 44 24 44          	mov    eax,DWORD PTR [esp+0x44]
+    b351:	89 43 1c             	mov    DWORD PTR [ebx+0x1c],eax
+    b354:	8b 44 24 48          	mov    eax,DWORD PTR [esp+0x48]
+    b358:	89 43 20             	mov    DWORD PTR [ebx+0x20],eax
+    b35b:	8b 44 24 4c          	mov    eax,DWORD PTR [esp+0x4c]
+    b35f:	83 c4 20             	add    esp,0x20
+    b362:	89 43 24             	mov    DWORD PTR [ebx+0x24],eax
+    b365:	83 c4 34             	add    esp,0x34
+    b368:	89 d8                	mov    eax,ebx
+    b36a:	5b                   	pop    ebx
+    b36b:	5f                   	pop    edi
+    b36c:	c2 04 00             	ret    0x4
+    b36f:	90                   	nop
 
-0000bbb0 <_Z7putcharc>:
-    bbb0:	83 ec 14             	sub    esp,0x14
-    bbb3:	6a 0f                	push   0xf
-    bbb5:	0f be 44 24 1c       	movsx  eax,BYTE PTR [esp+0x1c]
-    bbba:	50                   	push   eax
-    bbbb:	e8 20 fc ff ff       	call   b7e0 <_ZN3VGA7putcharEcc>
-    bbc0:	83 c4 1c             	add    esp,0x1c
-    bbc3:	c3                   	ret    
-    bbc4:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    bbca:	8d bf 00 00 00 00    	lea    edi,[edi+0x0]
+0000b370 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_>:
+    b370:	55                   	push   ebp
+    b371:	89 e5                	mov    ebp,esp
+    b373:	57                   	push   edi
+    b374:	56                   	push   esi
+    b375:	53                   	push   ebx
+    b376:	8d 45 b4             	lea    eax,[ebp-0x4c]
+    b379:	31 f6                	xor    esi,esi
+    b37b:	81 ec dc 00 00 00    	sub    esp,0xdc
+    b381:	ff 75 10             	push   DWORD PTR [ebp+0x10]
+    b384:	ff 75 0c             	push   DWORD PTR [ebp+0xc]
+    b387:	ff 75 08             	push   DWORD PTR [ebp+0x8]
+    b38a:	50                   	push   eax
+    b38b:	e8 b0 fd ff ff       	call   b140 <_ZN3elf13load_file_hdrEjPFiPvjjS0_ES0_>
+    b390:	0f b6 45 b5          	movzx  eax,BYTE PTR [ebp-0x4b]
+    b394:	c7 85 5c ff ff ff 87 	mov    DWORD PTR [ebp-0xa4],0x10987
+    b39b:	09 01 00 
+    b39e:	83 c4 0c             	add    esp,0xc
+    b3a1:	ba 5b 00 00 00       	mov    edx,0x5b
+    b3a6:	88 85 48 ff ff ff    	mov    BYTE PTR [ebp-0xb8],al
+    b3ac:	0f b6 45 b6          	movzx  eax,BYTE PTR [ebp-0x4a]
+    b3b0:	88 85 4c ff ff ff    	mov    BYTE PTR [ebp-0xb4],al
+    b3b6:	0f b6 45 b7          	movzx  eax,BYTE PTR [ebp-0x49]
+    b3ba:	88 85 50 ff ff ff    	mov    BYTE PTR [ebp-0xb0],al
+    b3c0:	8b 45 d0             	mov    eax,DWORD PTR [ebp-0x30]
+    b3c3:	89 85 44 ff ff ff    	mov    DWORD PTR [ebp-0xbc],eax
+    b3c9:	8b 45 d4             	mov    eax,DWORD PTR [ebp-0x2c]
+    b3cc:	89 85 24 ff ff ff    	mov    DWORD PTR [ebp-0xdc],eax
+    b3d2:	0f b7 45 de          	movzx  eax,WORD PTR [ebp-0x22]
+    b3d6:	66 89 85 40 ff ff ff 	mov    WORD PTR [ebp-0xc0],ax
+    b3dd:	0f b7 45 e0          	movzx  eax,WORD PTR [ebp-0x20]
+    b3e1:	66 89 85 3c ff ff ff 	mov    WORD PTR [ebp-0xc4],ax
+    b3e8:	0f b7 45 e2          	movzx  eax,WORD PTR [ebp-0x1e]
+    b3ec:	66 89 85 34 ff ff ff 	mov    WORD PTR [ebp-0xcc],ax
+    b3f3:	0f b7 45 e4          	movzx  eax,WORD PTR [ebp-0x1c]
+    b3f7:	66 89 85 1e ff ff ff 	mov    WORD PTR [ebp-0xe2],ax
+    b3fe:	0f b6 45 b4          	movzx  eax,BYTE PTR [ebp-0x4c]
+    b402:	88 85 38 ff ff ff    	mov    BYTE PTR [ebp-0xc8],al
+    b408:	eb 29                	jmp    b433 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0xc3>
+    b40a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    b410:	3c 25                	cmp    al,0x25
+    b412:	0f 84 30 07 00 00    	je     bb48 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x7d8>
+    b418:	84 c0                	test   al,al
+    b41a:	0f 85 38 06 00 00    	jne    ba58 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x6e8>
+    b420:	8d 5e 02             	lea    ebx,[esi+0x2]
+    b423:	0f b6 83 ac 05 01 00 	movzx  eax,BYTE PTR [ebx+0x105ac]
+    b42a:	84 c0                	test   al,al
+    b42c:	74 3a                	je     b468 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0xf8>
+    b42e:	0f be d0             	movsx  edx,al
+    b431:	89 de                	mov    esi,ebx
+    b433:	8d 5e 01             	lea    ebx,[esi+0x1]
+    b436:	80 fa 25             	cmp    dl,0x25
+    b439:	0f b6 83 ac 05 01 00 	movzx  eax,BYTE PTR [ebx+0x105ac]
+    b440:	8d 8b ac 05 01 00    	lea    ecx,[ebx+0x105ac]
+    b446:	74 c8                	je     b410 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0xa0>
+    b448:	83 ec 0c             	sub    esp,0xc
+    b44b:	88 85 54 ff ff ff    	mov    BYTE PTR [ebp-0xac],al
+    b451:	52                   	push   edx
+    b452:	e8 79 08 00 00       	call   bcd0 <_Z7putcharc>
+    b457:	0f b6 85 54 ff ff ff 	movzx  eax,BYTE PTR [ebp-0xac]
+    b45e:	83 c4 10             	add    esp,0x10
+    b461:	84 c0                	test   al,al
+    b463:	75 c9                	jne    b42e <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0xbe>
+    b465:	8d 76 00             	lea    esi,[esi+0x0]
+    b468:	80 bd 48 ff ff ff 45 	cmp    BYTE PTR [ebp-0xb8],0x45
+    b46f:	0f 95 c0             	setne  al
+    b472:	80 bd 4c ff ff ff 4c 	cmp    BYTE PTR [ebp-0xb4],0x4c
+    b479:	0f 95 c2             	setne  dl
+    b47c:	09 d0                	or     eax,edx
+    b47e:	80 bd 50 ff ff ff 46 	cmp    BYTE PTR [ebp-0xb0],0x46
+    b485:	0f 95 c2             	setne  dl
+    b488:	08 d0                	or     al,dl
+    b48a:	0f 85 ad 05 00 00    	jne    ba3d <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x6cd>
+    b490:	0f b7 85 3c ff ff ff 	movzx  eax,WORD PTR [ebp-0xc4]
+    b497:	83 ec 0c             	sub    esp,0xc
+    b49a:	50                   	push   eax
+    b49b:	68 30 00 01 00       	push   0x10030
+    b4a0:	6a 37                	push   0x37
+    b4a2:	68 87 09 01 00       	push   0x10987
+    b4a7:	68 d4 05 01 00       	push   0x105d4
+    b4ac:	89 85 3c ff ff ff    	mov    DWORD PTR [ebp-0xc4],eax
+    b4b2:	e8 99 3b 00 00       	call   f050 <_Z6printfIPKcJiS1_tEEvS1_T_DpT0_>
+    b4b7:	83 c4 14             	add    esp,0x14
+    b4ba:	ff b5 44 ff ff ff    	push   DWORD PTR [ebp-0xbc]
+    b4c0:	68 30 00 01 00       	push   0x10030
+    b4c5:	6a 38                	push   0x38
+    b4c7:	68 87 09 01 00       	push   0x10987
+    b4cc:	68 f4 05 01 00       	push   0x105f4
+    b4d1:	e8 6a 23 00 00       	call   d840 <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_>
+    b4d6:	0f b7 85 40 ff ff ff 	movzx  eax,WORD PTR [ebp-0xc0]
+    b4dd:	83 c4 14             	add    esp,0x14
+    b4e0:	50                   	push   eax
+    b4e1:	68 30 00 01 00       	push   0x10030
+    b4e6:	6a 39                	push   0x39
+    b4e8:	68 87 09 01 00       	push   0x10987
+    b4ed:	68 14 06 01 00       	push   0x10614
+    b4f2:	89 85 38 ff ff ff    	mov    DWORD PTR [ebp-0xc8],eax
+    b4f8:	e8 53 3b 00 00       	call   f050 <_Z6printfIPKcJiS1_tEEvS1_T_DpT0_>
+    b4fd:	8b 85 24 ff ff ff    	mov    eax,DWORD PTR [ebp-0xdc]
+    b503:	03 45 08             	add    eax,DWORD PTR [ebp+0x8]
+    b506:	83 c4 18             	add    esp,0x18
+    b509:	0f b7 bd 34 ff ff ff 	movzx  edi,WORD PTR [ebp-0xcc]
+    b510:	0f b7 55 e6          	movzx  edx,WORD PTR [ebp-0x1a]
+    b514:	ff 75 10             	push   DWORD PTR [ebp+0x10]
+    b517:	ff 75 0c             	push   DWORD PTR [ebp+0xc]
+    b51a:	89 c6                	mov    esi,eax
+    b51c:	89 85 2c ff ff ff    	mov    DWORD PTR [ebp-0xd4],eax
+    b522:	8d 85 64 ff ff ff    	lea    eax,[ebp-0x9c]
+    b528:	52                   	push   edx
+    b529:	57                   	push   edi
+    b52a:	56                   	push   esi
+    b52b:	50                   	push   eax
+    b52c:	89 bd 30 ff ff ff    	mov    DWORD PTR [ebp-0xd0],edi
+    b532:	e8 69 fd ff ff       	call   b2a0 <_ZN3elf13load_sect_hdrEjjjPFiPvjjS0_ES0_>
+    b537:	8b 95 78 ff ff ff    	mov    edx,DWORD PTR [ebp-0x88]
+    b53d:	83 c4 1c             	add    esp,0x1c
+    b540:	8d 4a 0f             	lea    ecx,[edx+0xf]
+    b543:	8d 5a ff             	lea    ebx,[edx-0x1]
+    b546:	89 ce                	mov    esi,ecx
+    b548:	83 e6 f0             	and    esi,0xfffffff0
+    b54b:	29 f4                	sub    esp,esi
+    b54d:	83 fa 01             	cmp    edx,0x1
+    b550:	89 a5 28 ff ff ff    	mov    DWORD PTR [ebp-0xd8],esp
+    b556:	c6 04 24 00          	mov    BYTE PTR [esp],0x0
+    b55a:	8d 44 24 01          	lea    eax,[esp+0x1]
+    b55e:	0f 8e 3a 06 00 00    	jle    bb9e <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x82e>
+    b564:	8d 34 14             	lea    esi,[esp+edx*1]
+    b567:	89 f6                	mov    esi,esi
+    b569:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    b570:	c6 00 00             	mov    BYTE PTR [eax],0x0
+    b573:	83 c0 01             	add    eax,0x1
+    b576:	39 f0                	cmp    eax,esi
+    b578:	75 f6                	jne    b570 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x200>
+    b57a:	83 e1 f0             	and    ecx,0xfffffff0
+    b57d:	29 cc                	sub    esp,ecx
+    b57f:	8d 44 24 01          	lea    eax,[esp+0x1]
+    b583:	8d 0c 14             	lea    ecx,[esp+edx*1]
+    b586:	89 e6                	mov    esi,esp
+    b588:	c6 04 24 00          	mov    BYTE PTR [esp],0x0
+    b58c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    b590:	c6 00 00             	mov    BYTE PTR [eax],0x0
+    b593:	83 c0 01             	add    eax,0x1
+    b596:	39 c1                	cmp    ecx,eax
+    b598:	75 f6                	jne    b590 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x220>
+    b59a:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+    b59d:	03 85 74 ff ff ff    	add    eax,DWORD PTR [ebp-0x8c]
+    b5a3:	ff 75 10             	push   DWORD PTR [ebp+0x10]
+    b5a6:	52                   	push   edx
+    b5a7:	50                   	push   eax
+    b5a8:	ff b5 28 ff ff ff    	push   DWORD PTR [ebp-0xd8]
+    b5ae:	ff 55 0c             	call   DWORD PTR [ebp+0xc]
+    b5b1:	83 c4 10             	add    esp,0x10
+    b5b4:	85 c0                	test   eax,eax
+    b5b6:	89 85 20 ff ff ff    	mov    DWORD PTR [ebp-0xe0],eax
+    b5bc:	0f 85 e9 05 00 00    	jne    bbab <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x83b>
+    b5c2:	85 db                	test   ebx,ebx
+    b5c4:	78 32                	js     b5f8 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x288>
+    b5c6:	31 d2                	xor    edx,edx
+    b5c8:	8b 8d 28 ff ff ff    	mov    ecx,DWORD PTR [ebp-0xd8]
+    b5ce:	eb 0c                	jmp    b5dc <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x26c>
+    b5d0:	c6 04 1e 20          	mov    BYTE PTR [esi+ebx*1],0x20
+    b5d4:	83 eb 01             	sub    ebx,0x1
+    b5d7:	83 fb ff             	cmp    ebx,0xffffffff
+    b5da:	74 1c                	je     b5f8 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x288>
+    b5dc:	0f b6 04 19          	movzx  eax,BYTE PTR [ecx+ebx*1]
+    b5e0:	84 c0                	test   al,al
+    b5e2:	88 04 1e             	mov    BYTE PTR [esi+ebx*1],al
+    b5e5:	75 ed                	jne    b5d4 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x264>
+    b5e7:	84 d2                	test   dl,dl
+    b5e9:	75 e5                	jne    b5d0 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x260>
+    b5eb:	83 eb 01             	sub    ebx,0x1
+    b5ee:	ba 01 00 00 00       	mov    edx,0x1
+    b5f3:	83 fb ff             	cmp    ebx,0xffffffff
+    b5f6:	75 e4                	jne    b5dc <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x26c>
+    b5f8:	83 ec 0c             	sub    esp,0xc
+    b5fb:	56                   	push   esi
+    b5fc:	68 30 00 01 00       	push   0x10030
+    b601:	6a 4f                	push   0x4f
+    b603:	68 87 09 01 00       	push   0x10987
+    b608:	68 68 06 01 00       	push   0x10668
+    b60d:	e8 0e 1f 00 00       	call   d520 <_Z6printfIPKcJiS1_PcEEvS1_T_DpT0_>
+    b612:	8b 85 3c ff ff ff    	mov    eax,DWORD PTR [ebp-0xc4]
+    b618:	83 c4 20             	add    esp,0x20
+    b61b:	85 c0                	test   eax,eax
+    b61d:	0f 84 32 01 00 00    	je     b755 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x3e5>
+    b623:	8b 85 44 ff ff ff    	mov    eax,DWORD PTR [ebp-0xbc]
+    b629:	03 45 08             	add    eax,DWORD PTR [ebp+0x8]
+    b62c:	be 68 00 01 00       	mov    esi,0x10068
+    b631:	c7 85 54 ff ff ff 00 	mov    DWORD PTR [ebp-0xac],0x0
+    b638:	00 00 00 
+    b63b:	bb 01 00 00 00       	mov    ebx,0x1
+    b640:	89 85 34 ff ff ff    	mov    DWORD PTR [ebp-0xcc],eax
+    b646:	8d 45 8c             	lea    eax,[ebp-0x74]
+    b649:	89 85 40 ff ff ff    	mov    DWORD PTR [ebp-0xc0],eax
+    b64f:	90                   	nop
+    b650:	83 ec 08             	sub    esp,0x8
+    b653:	ff 75 10             	push   DWORD PTR [ebp+0x10]
+    b656:	ff 75 0c             	push   DWORD PTR [ebp+0xc]
+    b659:	ff b5 54 ff ff ff    	push   DWORD PTR [ebp-0xac]
+    b65f:	ff b5 38 ff ff ff    	push   DWORD PTR [ebp-0xc8]
+    b665:	31 ff                	xor    edi,edi
+    b667:	ff b5 34 ff ff ff    	push   DWORD PTR [ebp-0xcc]
+    b66d:	ff b5 40 ff ff ff    	push   DWORD PTR [ebp-0xc0]
+    b673:	e8 88 fb ff ff       	call   b200 <_ZN3elf13load_prog_hdrEjjjPFiPvjjS0_ES0_>
+    b678:	8b 45 90             	mov    eax,DWORD PTR [ebp-0x70]
+    b67b:	8b 4d 8c             	mov    ecx,DWORD PTR [ebp-0x74]
+    b67e:	83 c4 1c             	add    esp,0x1c
+    b681:	ba 01 00 00 00       	mov    edx,0x1
+    b686:	89 85 4c ff ff ff    	mov    DWORD PTR [ebp-0xb4],eax
+    b68c:	8b 45 94             	mov    eax,DWORD PTR [ebp-0x6c]
+    b68f:	89 85 50 ff ff ff    	mov    DWORD PTR [ebp-0xb0],eax
+    b695:	8b 45 9c             	mov    eax,DWORD PTR [ebp-0x64]
+    b698:	89 85 48 ff ff ff    	mov    DWORD PTR [ebp-0xb8],eax
+    b69e:	b8 54 00 01 00       	mov    eax,0x10054
+    b6a3:	eb 08                	jmp    b6ad <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x33d>
+    b6a5:	8d 76 00             	lea    esi,[esi+0x0]
+    b6a8:	8b 10                	mov    edx,DWORD PTR [eax]
+    b6aa:	83 c0 04             	add    eax,0x4
+    b6ad:	39 d1                	cmp    ecx,edx
+    b6af:	0f 44 fb             	cmove  edi,ebx
+    b6b2:	39 c6                	cmp    esi,eax
+    b6b4:	75 f2                	jne    b6a8 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x338>
+    b6b6:	83 ec 0c             	sub    esp,0xc
+    b6b9:	ff b5 54 ff ff ff    	push   DWORD PTR [ebp-0xac]
+    b6bf:	89 8d 44 ff ff ff    	mov    DWORD PTR [ebp-0xbc],ecx
+    b6c5:	68 30 00 01 00       	push   0x10030
+    b6ca:	6a 5d                	push   0x5d
+    b6cc:	68 87 09 01 00       	push   0x10987
+    b6d1:	68 8c 06 01 00       	push   0x1068c
+    b6d6:	e8 95 2a 00 00       	call   e170 <_Z6printfIPKcJiS1_iEEvS1_T_DpT0_>
+    b6db:	83 c4 20             	add    esp,0x20
+    b6de:	ff b5 48 ff ff ff    	push   DWORD PTR [ebp-0xb8]
+    b6e4:	ff 75 a8             	push   DWORD PTR [ebp-0x58]
+    b6e7:	ff 75 98             	push   DWORD PTR [ebp-0x68]
+    b6ea:	ff b5 50 ff ff ff    	push   DWORD PTR [ebp-0xb0]
+    b6f0:	68 30 00 01 00       	push   0x10030
+    b6f5:	6a 60                	push   0x60
+    b6f7:	68 87 09 01 00       	push   0x10987
+    b6fc:	68 b0 06 01 00       	push   0x106b0
+    b701:	e8 aa 3d 00 00       	call   f4b0 <_Z6printfIPKcJiS1_jjjjEEvS1_T_DpT0_>
+    b706:	8b 8d 44 ff ff ff    	mov    ecx,DWORD PTR [ebp-0xbc]
+    b70c:	83 c4 1c             	add    esp,0x1c
+    b70f:	ff b5 4c ff ff ff    	push   DWORD PTR [ebp-0xb4]
+    b715:	51                   	push   ecx
+    b716:	ff 75 a0             	push   DWORD PTR [ebp-0x60]
+    b719:	68 30 00 01 00       	push   0x10030
+    b71e:	6a 62                	push   0x62
+    b720:	68 87 09 01 00       	push   0x10987
+    b725:	68 ec 06 01 00       	push   0x106ec
+    b72a:	e8 71 27 00 00       	call   dea0 <_Z6printfIPKcJiS1_jjjEEvS1_T_DpT0_>
+    b72f:	89 f8                	mov    eax,edi
+    b731:	83 c4 20             	add    esp,0x20
+    b734:	84 c0                	test   al,al
+    b736:	0f 85 c4 02 00 00    	jne    ba00 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x690>
+    b73c:	83 85 54 ff ff ff 01 	add    DWORD PTR [ebp-0xac],0x1
+    b743:	8b 85 54 ff ff ff    	mov    eax,DWORD PTR [ebp-0xac]
+    b749:	39 85 3c ff ff ff    	cmp    DWORD PTR [ebp-0xc4],eax
+    b74f:	0f 85 fb fe ff ff    	jne    b650 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x2e0>
+    b755:	0f b7 85 1e ff ff ff 	movzx  eax,WORD PTR [ebp-0xe2]
+    b75c:	83 ec 0c             	sub    esp,0xc
+    b75f:	50                   	push   eax
+    b760:	68 30 00 01 00       	push   0x10030
+    b765:	89 c6                	mov    esi,eax
+    b767:	6a 6e                	push   0x6e
+    b769:	68 87 09 01 00       	push   0x10987
+    b76e:	68 40 07 01 00       	push   0x10740
+    b773:	89 85 54 ff ff ff    	mov    DWORD PTR [ebp-0xac],eax
+    b779:	e8 d2 38 00 00       	call   f050 <_Z6printfIPKcJiS1_tEEvS1_T_DpT0_>
+    b77e:	83 c4 14             	add    esp,0x14
+    b781:	ff b5 24 ff ff ff    	push   DWORD PTR [ebp-0xdc]
+    b787:	68 30 00 01 00       	push   0x10030
+    b78c:	6a 6f                	push   0x6f
+    b78e:	68 87 09 01 00       	push   0x10987
+    b793:	68 60 07 01 00       	push   0x10760
+    b798:	e8 a3 20 00 00       	call   d840 <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_>
+    b79d:	83 c4 14             	add    esp,0x14
+    b7a0:	ff b5 30 ff ff ff    	push   DWORD PTR [ebp-0xd0]
+    b7a6:	68 30 00 01 00       	push   0x10030
+    b7ab:	6a 70                	push   0x70
+    b7ad:	68 87 09 01 00       	push   0x10987
+    b7b2:	68 80 07 01 00       	push   0x10780
+    b7b7:	e8 94 38 00 00       	call   f050 <_Z6printfIPKcJiS1_tEEvS1_T_DpT0_>
+    b7bc:	83 c4 20             	add    esp,0x20
+    b7bf:	85 f6                	test   esi,esi
+    b7c1:	0f 84 09 02 00 00    	je     b9d0 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x660>
+    b7c7:	8d 45 8c             	lea    eax,[ebp-0x74]
+    b7ca:	31 ff                	xor    edi,edi
+    b7cc:	89 85 40 ff ff ff    	mov    DWORD PTR [ebp-0xc0],eax
+    b7d2:	e9 9e 00 00 00       	jmp    b875 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x505>
+    b7d7:	89 f6                	mov    esi,esi
+    b7d9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    b7e0:	83 ec 0c             	sub    esp,0xc
+    b7e3:	89 95 3c ff ff ff    	mov    DWORD PTR [ebp-0xc4],edx
+    b7e9:	89 85 44 ff ff ff    	mov    DWORD PTR [ebp-0xbc],eax
+    b7ef:	51                   	push   ecx
+    b7f0:	68 30 00 01 00       	push   0x10030
+    b7f5:	68 81 00 00 00       	push   0x81
+    b7fa:	68 87 09 01 00       	push   0x10987
+    b7ff:	68 dd 09 01 00       	push   0x109dd
+    b804:	e8 17 1d 00 00       	call   d520 <_Z6printfIPKcJiS1_PcEEvS1_T_DpT0_>
+    b809:	8b 85 44 ff ff ff    	mov    eax,DWORD PTR [ebp-0xbc]
+    b80f:	83 c4 20             	add    esp,0x20
+    b812:	50                   	push   eax
+    b813:	ff b5 4c ff ff ff    	push   DWORD PTR [ebp-0xb4]
+    b819:	53                   	push   ebx
+    b81a:	ff b5 50 ff ff ff    	push   DWORD PTR [ebp-0xb0]
+    b820:	68 30 00 01 00       	push   0x10030
+    b825:	68 84 00 00 00       	push   0x84
+    b82a:	68 87 09 01 00       	push   0x10987
+    b82f:	68 f0 07 01 00       	push   0x107f0
+    b834:	e8 77 3c 00 00       	call   f4b0 <_Z6printfIPKcJiS1_jjjjEEvS1_T_DpT0_>
+    b839:	8b 95 3c ff ff ff    	mov    edx,DWORD PTR [ebp-0xc4]
+    b83f:	83 c4 1c             	add    esp,0x1c
+    b842:	ff b5 48 ff ff ff    	push   DWORD PTR [ebp-0xb8]
+    b848:	56                   	push   esi
+    b849:	52                   	push   edx
+    b84a:	68 30 00 01 00       	push   0x10030
+    b84f:	68 86 00 00 00       	push   0x86
+    b854:	68 87 09 01 00       	push   0x10987
+    b859:	68 2c 08 01 00       	push   0x1082c
+    b85e:	e8 3d 26 00 00       	call   dea0 <_Z6printfIPKcJiS1_jjjEEvS1_T_DpT0_>
+    b863:	83 c4 20             	add    esp,0x20
+    b866:	83 c7 01             	add    edi,0x1
+    b869:	39 bd 54 ff ff ff    	cmp    DWORD PTR [ebp-0xac],edi
+    b86f:	0f 84 5b 01 00 00    	je     b9d0 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x660>
+    b875:	83 ec 0c             	sub    esp,0xc
+    b878:	57                   	push   edi
+    b879:	68 30 00 01 00       	push   0x10030
+    b87e:	6a 73                	push   0x73
+    b880:	68 87 09 01 00       	push   0x10987
+    b885:	68 a4 07 01 00       	push   0x107a4
+    b88a:	e8 e1 28 00 00       	call   e170 <_Z6printfIPKcJiS1_iEEvS1_T_DpT0_>
+    b88f:	83 c4 18             	add    esp,0x18
+    b892:	ff 75 10             	push   DWORD PTR [ebp+0x10]
+    b895:	ff 75 0c             	push   DWORD PTR [ebp+0xc]
+    b898:	57                   	push   edi
+    b899:	ff b5 30 ff ff ff    	push   DWORD PTR [ebp-0xd0]
+    b89f:	ff b5 2c ff ff ff    	push   DWORD PTR [ebp-0xd4]
+    b8a5:	ff b5 40 ff ff ff    	push   DWORD PTR [ebp-0xc0]
+    b8ab:	e8 f0 f9 ff ff       	call   b2a0 <_ZN3elf13load_sect_hdrEjjjPFiPvjjS0_ES0_>
+    b8b0:	8b 75 90             	mov    esi,DWORD PTR [ebp-0x70]
+    b8b3:	83 c4 1c             	add    esp,0x1c
+    b8b6:	85 f6                	test   esi,esi
+    b8b8:	74 ac                	je     b866 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x4f6>
+    b8ba:	8b 45 94             	mov    eax,DWORD PTR [ebp-0x6c]
+    b8bd:	8b 8d 28 ff ff ff    	mov    ecx,DWORD PTR [ebp-0xd8]
+    b8c3:	8b 5d 98             	mov    ebx,DWORD PTR [ebp-0x68]
+    b8c6:	8b 55 a0             	mov    edx,DWORD PTR [ebp-0x60]
+    b8c9:	89 85 50 ff ff ff    	mov    DWORD PTR [ebp-0xb0],eax
+    b8cf:	8b 45 9c             	mov    eax,DWORD PTR [ebp-0x64]
+    b8d2:	89 85 48 ff ff ff    	mov    DWORD PTR [ebp-0xb8],eax
+    b8d8:	8b 45 ac             	mov    eax,DWORD PTR [ebp-0x54]
+    b8db:	89 85 4c ff ff ff    	mov    DWORD PTR [ebp-0xb4],eax
+    b8e1:	8b 45 8c             	mov    eax,DWORD PTR [ebp-0x74]
+    b8e4:	01 c1                	add    ecx,eax
+    b8e6:	83 fe 08             	cmp    esi,0x8
+    b8e9:	0f 85 f1 fe ff ff    	jne    b7e0 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x470>
+    b8ef:	83 ec 0c             	sub    esp,0xc
+    b8f2:	89 95 3c ff ff ff    	mov    DWORD PTR [ebp-0xc4],edx
+    b8f8:	89 85 44 ff ff ff    	mov    DWORD PTR [ebp-0xbc],eax
+    b8fe:	51                   	push   ecx
+    b8ff:	68 30 00 01 00       	push   0x10030
+    b904:	68 81 00 00 00       	push   0x81
+    b909:	68 87 09 01 00       	push   0x10987
+    b90e:	68 dd 09 01 00       	push   0x109dd
+    b913:	e8 08 1c 00 00       	call   d520 <_Z6printfIPKcJiS1_PcEEvS1_T_DpT0_>
+    b918:	8b 85 44 ff ff ff    	mov    eax,DWORD PTR [ebp-0xbc]
+    b91e:	83 c4 20             	add    esp,0x20
+    b921:	50                   	push   eax
+    b922:	ff b5 4c ff ff ff    	push   DWORD PTR [ebp-0xb4]
+    b928:	53                   	push   ebx
+    b929:	ff b5 50 ff ff ff    	push   DWORD PTR [ebp-0xb0]
+    b92f:	68 30 00 01 00       	push   0x10030
+    b934:	68 84 00 00 00       	push   0x84
+    b939:	68 87 09 01 00       	push   0x10987
+    b93e:	68 f0 07 01 00       	push   0x107f0
+    b943:	e8 68 3b 00 00       	call   f4b0 <_Z6printfIPKcJiS1_jjjjEEvS1_T_DpT0_>
+    b948:	8b 95 3c ff ff ff    	mov    edx,DWORD PTR [ebp-0xc4]
+    b94e:	83 c4 1c             	add    esp,0x1c
+    b951:	ff b5 48 ff ff ff    	push   DWORD PTR [ebp-0xb8]
+    b957:	6a 08                	push   0x8
+    b959:	52                   	push   edx
+    b95a:	68 30 00 01 00       	push   0x10030
+    b95f:	68 86 00 00 00       	push   0x86
+    b964:	68 87 09 01 00       	push   0x10987
+    b969:	68 2c 08 01 00       	push   0x1082c
+    b96e:	89 95 50 ff ff ff    	mov    DWORD PTR [ebp-0xb0],edx
+    b974:	e8 27 25 00 00       	call   dea0 <_Z6printfIPKcJiS1_jjjEEvS1_T_DpT0_>
+    b979:	8b 95 50 ff ff ff    	mov    edx,DWORD PTR [ebp-0xb0]
+    b97f:	83 c4 20             	add    esp,0x20
+    b982:	85 d2                	test   edx,edx
+    b984:	8d 04 13             	lea    eax,[ebx+edx*1]
+    b987:	74 11                	je     b99a <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x62a>
+    b989:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    b990:	c6 03 00             	mov    BYTE PTR [ebx],0x0
+    b993:	83 c3 01             	add    ebx,0x1
+    b996:	39 d8                	cmp    eax,ebx
+    b998:	75 f6                	jne    b990 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x620>
+    b99a:	83 ec 0c             	sub    esp,0xc
+    b99d:	83 c7 01             	add    edi,0x1
+    b9a0:	52                   	push   edx
+    b9a1:	68 30 00 01 00       	push   0x10030
+    b9a6:	68 8b 00 00 00       	push   0x8b
+    b9ab:	68 87 09 01 00       	push   0x10987
+    b9b0:	68 c8 07 01 00       	push   0x107c8
+    b9b5:	e8 86 1e 00 00       	call   d840 <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_>
+    b9ba:	83 c4 20             	add    esp,0x20
+    b9bd:	39 bd 54 ff ff ff    	cmp    DWORD PTR [ebp-0xac],edi
+    b9c3:	0f 85 ac fe ff ff    	jne    b875 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x505>
+    b9c9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    b9d0:	68 30 00 01 00       	push   0x10030
+    b9d5:	68 8f 00 00 00       	push   0x8f
+    b9da:	68 87 09 01 00       	push   0x10987
+    b9df:	68 c0 09 01 00       	push   0x109c0
+    b9e4:	e8 e7 16 00 00       	call   d0d0 <_Z6printfIPKcJiS1_EEvS1_T_DpT0_>
+    b9e9:	83 c4 10             	add    esp,0x10
+    b9ec:	8b 85 20 ff ff ff    	mov    eax,DWORD PTR [ebp-0xe0]
+    b9f2:	8d 65 f4             	lea    esp,[ebp-0xc]
+    b9f5:	5b                   	pop    ebx
+    b9f6:	5e                   	pop    esi
+    b9f7:	5f                   	pop    edi
+    b9f8:	5d                   	pop    ebp
+    b9f9:	c3                   	ret    
+    b9fa:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    ba00:	68 30 00 01 00       	push   0x10030
+    ba05:	6a 65                	push   0x65
+    ba07:	68 87 09 01 00       	push   0x10987
+    ba0c:	68 1c 07 01 00       	push   0x1071c
+    ba11:	e8 ba 16 00 00       	call   d0d0 <_Z6printfIPKcJiS1_EEvS1_T_DpT0_>
+    ba16:	8b 85 4c ff ff ff    	mov    eax,DWORD PTR [ebp-0xb4]
+    ba1c:	03 45 08             	add    eax,DWORD PTR [ebp+0x8]
+    ba1f:	ff 75 10             	push   DWORD PTR [ebp+0x10]
+    ba22:	ff b5 48 ff ff ff    	push   DWORD PTR [ebp-0xb8]
+    ba28:	50                   	push   eax
+    ba29:	ff b5 50 ff ff ff    	push   DWORD PTR [ebp-0xb0]
+    ba2f:	ff 55 0c             	call   DWORD PTR [ebp+0xc]
+    ba32:	83 c4 20             	add    esp,0x20
+    ba35:	85 c0                	test   eax,eax
+    ba37:	0f 84 ff fc ff ff    	je     b73c <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x3cc>
+    ba3d:	c7 85 20 ff ff ff ff 	mov    DWORD PTR [ebp-0xe0],0xffffffff
+    ba44:	ff ff ff 
+    ba47:	8b 85 20 ff ff ff    	mov    eax,DWORD PTR [ebp-0xe0]
+    ba4d:	8d 65 f4             	lea    esp,[ebp-0xc]
+    ba50:	5b                   	pop    ebx
+    ba51:	5e                   	pop    esi
+    ba52:	5f                   	pop    edi
+    ba53:	5d                   	pop    ebp
+    ba54:	c3                   	ret    
+    ba55:	8d 76 00             	lea    esi,[esi+0x0]
+    ba58:	8d 85 5c ff ff ff    	lea    eax,[ebp-0xa4]
+    ba5e:	83 ec 08             	sub    esp,0x8
+    ba61:	50                   	push   eax
+    ba62:	51                   	push   ecx
+    ba63:	e8 68 14 00 00       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    ba68:	01 c3                	add    ebx,eax
+    ba6a:	83 c4 10             	add    esp,0x10
+    ba6d:	c7 85 60 ff ff ff 2f 	mov    DWORD PTR [ebp-0xa0],0x2f
+    ba74:	00 00 00 
+    ba77:	0f be 83 ac 05 01 00 	movsx  eax,BYTE PTR [ebx+0x105ac]
+    ba7e:	8d 93 ac 05 01 00    	lea    edx,[ebx+0x105ac]
+    ba84:	84 c0                	test   al,al
+    ba86:	0f 84 dc f9 ff ff    	je     b468 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0xf8>
+    ba8c:	31 ff                	xor    edi,edi
+    ba8e:	3c 25                	cmp    al,0x25
+    ba90:	8d 77 01             	lea    esi,[edi+0x1]
+    ba93:	8d 0c 32             	lea    ecx,[edx+esi*1]
+    ba96:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
+    ba99:	75 34                	jne    bacf <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x75f>
+    ba9b:	90                   	nop
+    ba9c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    baa0:	80 fb 25             	cmp    bl,0x25
+    baa3:	0f 84 c7 00 00 00    	je     bb70 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x800>
+    baa9:	84 db                	test   bl,bl
+    baab:	75 43                	jne    baf0 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x780>
+    baad:	0f b6 5c 3a 02       	movzx  ebx,BYTE PTR [edx+edi*1+0x2]
+    bab2:	8d 77 02             	lea    esi,[edi+0x2]
+    bab5:	84 db                	test   bl,bl
+    bab7:	0f 84 ab f9 ff ff    	je     b468 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0xf8>
+    babd:	89 f7                	mov    edi,esi
+    babf:	0f be c3             	movsx  eax,bl
+    bac2:	8d 77 01             	lea    esi,[edi+0x1]
+    bac5:	3c 25                	cmp    al,0x25
+    bac7:	8d 0c 32             	lea    ecx,[edx+esi*1]
+    baca:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
+    bacd:	74 d1                	je     baa0 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x730>
+    bacf:	83 ec 0c             	sub    esp,0xc
+    bad2:	89 95 54 ff ff ff    	mov    DWORD PTR [ebp-0xac],edx
+    bad8:	50                   	push   eax
+    bad9:	e8 f2 01 00 00       	call   bcd0 <_Z7putcharc>
+    bade:	83 c4 10             	add    esp,0x10
+    bae1:	84 db                	test   bl,bl
+    bae3:	8b 95 54 ff ff ff    	mov    edx,DWORD PTR [ebp-0xac]
+    bae9:	75 d2                	jne    babd <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x74d>
+    baeb:	e9 78 f9 ff ff       	jmp    b468 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0xf8>
+    baf0:	8d 85 60 ff ff ff    	lea    eax,[ebp-0xa0]
+    baf6:	83 ec 08             	sub    esp,0x8
+    baf9:	89 95 54 ff ff ff    	mov    DWORD PTR [ebp-0xac],edx
+    baff:	50                   	push   eax
+    bb00:	51                   	push   ecx
+    bb01:	e8 ca 14 00 00       	call   cfd0 <_Z14_manage_escapeIiEiPKcPT_>
+    bb06:	5a                   	pop    edx
+    bb07:	59                   	pop    ecx
+    bb08:	0f b6 8d 50 ff ff ff 	movzx  ecx,BYTE PTR [ebp-0xb0]
+    bb0f:	8b 95 54 ff ff ff    	mov    edx,DWORD PTR [ebp-0xac]
+    bb15:	01 f0                	add    eax,esi
+    bb17:	01 c2                	add    edx,eax
+    bb19:	51                   	push   ecx
+    bb1a:	0f b6 8d 4c ff ff ff 	movzx  ecx,BYTE PTR [ebp-0xb4]
+    bb21:	51                   	push   ecx
+    bb22:	0f b6 8d 48 ff ff ff 	movzx  ecx,BYTE PTR [ebp-0xb8]
+    bb29:	51                   	push   ecx
+    bb2a:	0f b6 8d 38 ff ff ff 	movzx  ecx,BYTE PTR [ebp-0xc8]
+    bb31:	51                   	push   ecx
+    bb32:	68 30 00 01 00       	push   0x10030
+    bb37:	52                   	push   edx
+    bb38:	e8 33 3e 00 00       	call   f970 <_Z6printfIPKcJhhhhEEvS1_T_DpT0_>
+    bb3d:	83 c4 20             	add    esp,0x20
+    bb40:	e9 23 f9 ff ff       	jmp    b468 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0xf8>
+    bb45:	8d 76 00             	lea    esi,[esi+0x0]
+    bb48:	83 ec 0c             	sub    esp,0xc
+    bb4b:	8d 5e 02             	lea    ebx,[esi+0x2]
+    bb4e:	6a 25                	push   0x25
+    bb50:	e8 7b 01 00 00       	call   bcd0 <_Z7putcharc>
+    bb55:	0f b6 83 ac 05 01 00 	movzx  eax,BYTE PTR [ebx+0x105ac]
+    bb5c:	83 c4 10             	add    esp,0x10
+    bb5f:	84 c0                	test   al,al
+    bb61:	0f 85 c7 f8 ff ff    	jne    b42e <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0xbe>
+    bb67:	e9 fc f8 ff ff       	jmp    b468 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0xf8>
+    bb6c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    bb70:	83 ec 0c             	sub    esp,0xc
+    bb73:	89 95 54 ff ff ff    	mov    DWORD PTR [ebp-0xac],edx
+    bb79:	8d 77 02             	lea    esi,[edi+0x2]
+    bb7c:	6a 25                	push   0x25
+    bb7e:	e8 4d 01 00 00       	call   bcd0 <_Z7putcharc>
+    bb83:	8b 95 54 ff ff ff    	mov    edx,DWORD PTR [ebp-0xac]
+    bb89:	83 c4 10             	add    esp,0x10
+    bb8c:	0f b6 5c 3a 02       	movzx  ebx,BYTE PTR [edx+edi*1+0x2]
+    bb91:	84 db                	test   bl,bl
+    bb93:	0f 85 24 ff ff ff    	jne    babd <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x74d>
+    bb99:	e9 ca f8 ff ff       	jmp    b468 <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0xf8>
+    bb9e:	29 f4                	sub    esp,esi
+    bba0:	89 e6                	mov    esi,esp
+    bba2:	c6 04 24 00          	mov    BYTE PTR [esp],0x0
+    bba6:	e9 ef f9 ff ff       	jmp    b59a <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x22a>
+    bbab:	68 30 00 01 00       	push   0x10030
+    bbb0:	6a 43                	push   0x43
+    bbb2:	68 87 09 01 00       	push   0x10987
+    bbb7:	68 38 06 01 00       	push   0x10638
+    bbbc:	e8 0f 15 00 00       	call   d0d0 <_Z6printfIPKcJiS1_EEvS1_T_DpT0_>
+    bbc1:	83 c4 10             	add    esp,0x10
+    bbc4:	c7 85 20 ff ff ff ff 	mov    DWORD PTR [ebp-0xe0],0xffffffff
+    bbcb:	ff ff ff 
+    bbce:	e9 19 fe ff ff       	jmp    b9ec <_ZN3elf15load_elf_in_memEjPFiPvjjS0_ES0_+0x67c>
+    bbd3:	66 90                	xchg   ax,ax
+    bbd5:	66 90                	xchg   ax,ax
+    bbd7:	66 90                	xchg   ax,ax
+    bbd9:	66 90                	xchg   ax,ax
+    bbdb:	66 90                	xchg   ax,ax
+    bbdd:	66 90                	xchg   ax,ax
+    bbdf:	90                   	nop
 
-0000bbd0 <_Z6putdeci>:
-    bbd0:	e9 fb fe ff ff       	jmp    bad0 <_ZN3VGA6putDecEi>
-    bbd5:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    bbd9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+0000bbe0 <_ZL17_put_nbr_base_recii.part.0>:
+    bbe0:	89 d1                	mov    ecx,edx
+    bbe2:	99                   	cdq    
+    bbe3:	53                   	push   ebx
+    bbe4:	f7 f9                	idiv   ecx
+    bbe6:	83 ec 08             	sub    esp,0x8
+    bbe9:	85 c0                	test   eax,eax
+    bbeb:	89 d3                	mov    ebx,edx
+    bbed:	75 19                	jne    bc08 <_ZL17_put_nbr_base_recii.part.0+0x28>
+    bbef:	0f be 83 68 00 01 00 	movsx  eax,BYTE PTR [ebx+0x10068]
+    bbf6:	83 ec 0c             	sub    esp,0xc
+    bbf9:	50                   	push   eax
+    bbfa:	e8 61 02 00 00       	call   be60 <_ZN6serial7sendchrEc>
+    bbff:	83 c4 18             	add    esp,0x18
+    bc02:	5b                   	pop    ebx
+    bc03:	c3                   	ret    
+    bc04:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    bc08:	89 ca                	mov    edx,ecx
+    bc0a:	e8 d1 ff ff ff       	call   bbe0 <_ZL17_put_nbr_base_recii.part.0>
+    bc0f:	eb de                	jmp    bbef <_ZL17_put_nbr_base_recii.part.0+0xf>
+    bc11:	eb 0d                	jmp    bc20 <_ZL13_put_nbr_basejib>
+    bc13:	90                   	nop
+    bc14:	90                   	nop
+    bc15:	90                   	nop
+    bc16:	90                   	nop
+    bc17:	90                   	nop
+    bc18:	90                   	nop
+    bc19:	90                   	nop
+    bc1a:	90                   	nop
+    bc1b:	90                   	nop
+    bc1c:	90                   	nop
+    bc1d:	90                   	nop
+    bc1e:	90                   	nop
+    bc1f:	90                   	nop
 
-0000bbe0 <_Z6puthexi>:
-    bbe0:	e9 cb fe ff ff       	jmp    bab0 <_ZN3VGA6putHexEi>
-    bbe5:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    bbe9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+0000bc20 <_ZL13_put_nbr_basejib>:
+    bc20:	56                   	push   esi
+    bc21:	53                   	push   ebx
+    bc22:	89 d6                	mov    esi,edx
+    bc24:	89 c3                	mov    ebx,eax
+    bc26:	83 ec 04             	sub    esp,0x4
+    bc29:	85 c0                	test   eax,eax
+    bc2b:	79 05                	jns    bc32 <_ZL13_put_nbr_basejib+0x12>
+    bc2d:	80 f9 01             	cmp    cl,0x1
+    bc30:	75 2e                	jne    bc60 <_ZL13_put_nbr_basejib+0x40>
+    bc32:	85 db                	test   ebx,ebx
+    bc34:	74 6a                	je     bca0 <_ZL13_put_nbr_basejib+0x80>
+    bc36:	89 d8                	mov    eax,ebx
+    bc38:	31 d2                	xor    edx,edx
+    bc3a:	f7 f6                	div    esi
+    bc3c:	85 c0                	test   eax,eax
+    bc3e:	89 d3                	mov    ebx,edx
+    bc40:	75 76                	jne    bcb8 <_ZL13_put_nbr_basejib+0x98>
+    bc42:	0f be 83 68 00 01 00 	movsx  eax,BYTE PTR [ebx+0x10068]
+    bc49:	83 ec 0c             	sub    esp,0xc
+    bc4c:	50                   	push   eax
+    bc4d:	e8 0e 02 00 00       	call   be60 <_ZN6serial7sendchrEc>
+    bc52:	83 c4 10             	add    esp,0x10
+    bc55:	83 c4 04             	add    esp,0x4
+    bc58:	5b                   	pop    ebx
+    bc59:	5e                   	pop    esi
+    bc5a:	c3                   	ret    
+    bc5b:	90                   	nop
+    bc5c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    bc60:	83 ec 0c             	sub    esp,0xc
+    bc63:	6a 2d                	push   0x2d
+    bc65:	e8 f6 01 00 00       	call   be60 <_ZN6serial7sendchrEc>
+    bc6a:	89 d8                	mov    eax,ebx
+    bc6c:	83 c4 10             	add    esp,0x10
+    bc6f:	99                   	cdq    
+    bc70:	f7 fe                	idiv   esi
+    bc72:	85 c0                	test   eax,eax
+    bc74:	74 09                	je     bc7f <_ZL13_put_nbr_basejib+0x5f>
+    bc76:	f7 d8                	neg    eax
+    bc78:	89 f2                	mov    edx,esi
+    bc7a:	e8 61 ff ff ff       	call   bbe0 <_ZL17_put_nbr_base_recii.part.0>
+    bc7f:	89 d8                	mov    eax,ebx
+    bc81:	83 ec 0c             	sub    esp,0xc
+    bc84:	f7 d8                	neg    eax
+    bc86:	99                   	cdq    
+    bc87:	f7 fe                	idiv   esi
+    bc89:	0f be 82 68 00 01 00 	movsx  eax,BYTE PTR [edx+0x10068]
+    bc90:	50                   	push   eax
+    bc91:	e8 ca 01 00 00       	call   be60 <_ZN6serial7sendchrEc>
+    bc96:	83 c4 10             	add    esp,0x10
+    bc99:	83 c4 04             	add    esp,0x4
+    bc9c:	5b                   	pop    ebx
+    bc9d:	5e                   	pop    esi
+    bc9e:	c3                   	ret    
+    bc9f:	90                   	nop
+    bca0:	83 ec 0c             	sub    esp,0xc
+    bca3:	6a 30                	push   0x30
+    bca5:	e8 b6 01 00 00       	call   be60 <_ZN6serial7sendchrEc>
+    bcaa:	83 c4 10             	add    esp,0x10
+    bcad:	83 c4 04             	add    esp,0x4
+    bcb0:	5b                   	pop    ebx
+    bcb1:	5e                   	pop    esi
+    bcb2:	c3                   	ret    
+    bcb3:	90                   	nop
+    bcb4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    bcb8:	89 f2                	mov    edx,esi
+    bcba:	e8 21 ff ff ff       	call   bbe0 <_ZL17_put_nbr_base_recii.part.0>
+    bcbf:	eb 81                	jmp    bc42 <_ZL13_put_nbr_basejib+0x22>
+    bcc1:	eb 0d                	jmp    bcd0 <_Z7putcharc>
+    bcc3:	90                   	nop
+    bcc4:	90                   	nop
+    bcc5:	90                   	nop
+    bcc6:	90                   	nop
+    bcc7:	90                   	nop
+    bcc8:	90                   	nop
+    bcc9:	90                   	nop
+    bcca:	90                   	nop
+    bccb:	90                   	nop
+    bccc:	90                   	nop
+    bccd:	90                   	nop
+    bcce:	90                   	nop
+    bccf:	90                   	nop
 
-0000bbf0 <_Z6putocti>:
-    bbf0:	e9 fb fe ff ff       	jmp    baf0 <_ZN3VGA6putOctEi>
-    bbf5:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    bbf9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+0000bcd0 <_Z7putcharc>:
+    bcd0:	0f be 44 24 04       	movsx  eax,BYTE PTR [esp+0x4]
+    bcd5:	89 44 24 04          	mov    DWORD PTR [esp+0x4],eax
+    bcd9:	e9 82 01 00 00       	jmp    be60 <_ZN6serial7sendchrEc>
+    bcde:	66 90                	xchg   ax,ax
 
-0000bc00 <_Z6putbini>:
-    bc00:	e9 0b ff ff ff       	jmp    bb10 <_ZN3VGA6putBinEi>
-    bc05:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    bc09:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+0000bce0 <_Z6putdeci>:
+    bce0:	8b 44 24 04          	mov    eax,DWORD PTR [esp+0x4]
+    bce4:	31 c9                	xor    ecx,ecx
+    bce6:	ba 0a 00 00 00       	mov    edx,0xa
+    bceb:	e9 30 ff ff ff       	jmp    bc20 <_ZL13_put_nbr_basejib>
 
-0000bc10 <_Z6putstrPc>:
-    bc10:	83 ec 14             	sub    esp,0x14
-    bc13:	6a 0f                	push   0xf
-    bc15:	ff 74 24 1c          	push   DWORD PTR [esp+0x1c]
-    bc19:	e8 32 fd ff ff       	call   b950 <_ZN3VGA5printEPKcc>
-    bc1e:	83 c4 1c             	add    esp,0x1c
-    bc21:	c3                   	ret    
-    bc22:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    bc29:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+0000bcf0 <_Z6puthexi>:
+    bcf0:	8b 44 24 04          	mov    eax,DWORD PTR [esp+0x4]
+    bcf4:	b9 01 00 00 00       	mov    ecx,0x1
+    bcf9:	ba 10 00 00 00       	mov    edx,0x10
+    bcfe:	e9 1d ff ff ff       	jmp    bc20 <_ZL13_put_nbr_basejib>
+    bd03:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    bd09:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
 
-0000bc30 <_Z6printfPKc>:
-    bc30:	53                   	push   ebx
-    bc31:	83 ec 08             	sub    esp,0x8
-    bc34:	8b 5c 24 10          	mov    ebx,DWORD PTR [esp+0x10]
-    bc38:	0f be 03             	movsx  eax,BYTE PTR [ebx]
-    bc3b:	84 c0                	test   al,al
-    bc3d:	74 22                	je     bc61 <_Z6printfPKc+0x31>
-    bc3f:	83 c3 01             	add    ebx,0x1
-    bc42:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    bc48:	83 ec 08             	sub    esp,0x8
-    bc4b:	83 c3 01             	add    ebx,0x1
-    bc4e:	6a 0f                	push   0xf
-    bc50:	50                   	push   eax
-    bc51:	e8 8a fb ff ff       	call   b7e0 <_ZN3VGA7putcharEcc>
-    bc56:	0f be 43 ff          	movsx  eax,BYTE PTR [ebx-0x1]
-    bc5a:	83 c4 10             	add    esp,0x10
-    bc5d:	84 c0                	test   al,al
-    bc5f:	75 e7                	jne    bc48 <_Z6printfPKc+0x18>
-    bc61:	83 c4 08             	add    esp,0x8
-    bc64:	5b                   	pop    ebx
-    bc65:	c3                   	ret    
-    bc66:	66 90                	xchg   ax,ax
-    bc68:	66 90                	xchg   ax,ax
-    bc6a:	66 90                	xchg   ax,ax
-    bc6c:	66 90                	xchg   ax,ax
-    bc6e:	66 90                	xchg   ax,ax
+0000bd10 <_Z6putocti>:
+    bd10:	8b 44 24 04          	mov    eax,DWORD PTR [esp+0x4]
+    bd14:	31 c9                	xor    ecx,ecx
+    bd16:	ba 08 00 00 00       	mov    edx,0x8
+    bd1b:	e9 00 ff ff ff       	jmp    bc20 <_ZL13_put_nbr_basejib>
 
-0000bc70 <_ZN6serial4initEv>:
-    bc70:	83 ec 14             	sub    esp,0x14
-    bc73:	6a 00                	push   0x0
-    bc75:	68 fb 03 00 00       	push   0x3fb
-    bc7a:	e8 e1 00 00 00       	call   bd60 <_Z4outbth>
-    bc7f:	58                   	pop    eax
-    bc80:	5a                   	pop    edx
-    bc81:	6a 00                	push   0x0
-    bc83:	68 f9 03 00 00       	push   0x3f9
-    bc88:	e8 d3 00 00 00       	call   bd60 <_Z4outbth>
-    bc8d:	59                   	pop    ecx
-    bc8e:	58                   	pop    eax
-    bc8f:	68 80 00 00 00       	push   0x80
-    bc94:	68 fb 03 00 00       	push   0x3fb
-    bc99:	e8 c2 00 00 00       	call   bd60 <_Z4outbth>
-    bc9e:	58                   	pop    eax
-    bc9f:	5a                   	pop    edx
-    bca0:	6a 01                	push   0x1
-    bca2:	68 f8 03 00 00       	push   0x3f8
-    bca7:	e8 b4 00 00 00       	call   bd60 <_Z4outbth>
-    bcac:	59                   	pop    ecx
-    bcad:	58                   	pop    eax
-    bcae:	6a 00                	push   0x0
-    bcb0:	68 f9 03 00 00       	push   0x3f9
-    bcb5:	e8 a6 00 00 00       	call   bd60 <_Z4outbth>
-    bcba:	58                   	pop    eax
-    bcbb:	5a                   	pop    edx
-    bcbc:	6a 03                	push   0x3
-    bcbe:	68 fb 03 00 00       	push   0x3fb
-    bcc3:	e8 98 00 00 00       	call   bd60 <_Z4outbth>
-    bcc8:	59                   	pop    ecx
-    bcc9:	58                   	pop    eax
-    bcca:	68 c7 00 00 00       	push   0xc7
-    bccf:	68 fa 03 00 00       	push   0x3fa
-    bcd4:	e8 87 00 00 00       	call   bd60 <_Z4outbth>
-    bcd9:	83 c4 1c             	add    esp,0x1c
-    bcdc:	c3                   	ret    
-    bcdd:	8d 76 00             	lea    esi,[esi+0x0]
+0000bd20 <_Z6putbini>:
+    bd20:	57                   	push   edi
+    bd21:	56                   	push   esi
+    bd22:	be 00 00 00 80       	mov    esi,0x80000000
+    bd27:	53                   	push   ebx
+    bd28:	8b 7c 24 10          	mov    edi,DWORD PTR [esp+0x10]
+    bd2c:	31 db                	xor    ebx,ebx
+    bd2e:	66 90                	xchg   ax,ax
+    bd30:	85 f7                	test   edi,esi
+    bd32:	74 24                	je     bd58 <_Z6putbini+0x38>
+    bd34:	83 ec 0c             	sub    esp,0xc
+    bd37:	83 c3 01             	add    ebx,0x1
+    bd3a:	d1 ee                	shr    esi,1
+    bd3c:	6a 31                	push   0x31
+    bd3e:	e8 1d 01 00 00       	call   be60 <_ZN6serial7sendchrEc>
+    bd43:	83 c4 10             	add    esp,0x10
+    bd46:	f6 c3 07             	test   bl,0x7
+    bd49:	75 24                	jne    bd6f <_Z6putbini+0x4f>
+    bd4b:	83 fb 20             	cmp    ebx,0x20
+    bd4e:	75 30                	jne    bd80 <_Z6putbini+0x60>
+    bd50:	5b                   	pop    ebx
+    bd51:	5e                   	pop    esi
+    bd52:	5f                   	pop    edi
+    bd53:	c3                   	ret    
+    bd54:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    bd58:	83 ec 0c             	sub    esp,0xc
+    bd5b:	83 c3 01             	add    ebx,0x1
+    bd5e:	d1 ee                	shr    esi,1
+    bd60:	6a 30                	push   0x30
+    bd62:	e8 f9 00 00 00       	call   be60 <_ZN6serial7sendchrEc>
+    bd67:	83 c4 10             	add    esp,0x10
+    bd6a:	f6 c3 07             	test   bl,0x7
+    bd6d:	74 dc                	je     bd4b <_Z6putbini+0x2b>
+    bd6f:	83 fb 20             	cmp    ebx,0x20
+    bd72:	75 bc                	jne    bd30 <_Z6putbini+0x10>
+    bd74:	eb da                	jmp    bd50 <_Z6putbini+0x30>
+    bd76:	8d 76 00             	lea    esi,[esi+0x0]
+    bd79:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    bd80:	83 ec 0c             	sub    esp,0xc
+    bd83:	6a 27                	push   0x27
+    bd85:	e8 d6 00 00 00       	call   be60 <_ZN6serial7sendchrEc>
+    bd8a:	83 c4 10             	add    esp,0x10
+    bd8d:	eb a1                	jmp    bd30 <_Z6putbini+0x10>
+    bd8f:	90                   	nop
 
-0000bce0 <_ZN6serial6uninitEv>:
-    bce0:	f3 c3                	repz ret 
-    bce2:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    bce9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+0000bd90 <_Z6putstrPc>:
+    bd90:	53                   	push   ebx
+    bd91:	83 ec 08             	sub    esp,0x8
+    bd94:	8b 5c 24 10          	mov    ebx,DWORD PTR [esp+0x10]
+    bd98:	0f be 03             	movsx  eax,BYTE PTR [ebx]
+    bd9b:	84 c0                	test   al,al
+    bd9d:	74 20                	je     bdbf <_Z6putstrPc+0x2f>
+    bd9f:	83 c3 01             	add    ebx,0x1
+    bda2:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    bda8:	83 ec 0c             	sub    esp,0xc
+    bdab:	83 c3 01             	add    ebx,0x1
+    bdae:	50                   	push   eax
+    bdaf:	e8 ac 00 00 00       	call   be60 <_ZN6serial7sendchrEc>
+    bdb4:	0f be 43 ff          	movsx  eax,BYTE PTR [ebx-0x1]
+    bdb8:	83 c4 10             	add    esp,0x10
+    bdbb:	84 c0                	test   al,al
+    bdbd:	75 e9                	jne    bda8 <_Z6putstrPc+0x18>
+    bdbf:	83 c4 08             	add    esp,0x8
+    bdc2:	5b                   	pop    ebx
+    bdc3:	c3                   	ret    
+    bdc4:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    bdca:	8d bf 00 00 00 00    	lea    edi,[edi+0x0]
 
-0000bcf0 <_ZN6serial7sendstrEPc>:
-    bcf0:	53                   	push   ebx
-    bcf1:	83 ec 14             	sub    esp,0x14
-    bcf4:	8b 5c 24 1c          	mov    ebx,DWORD PTR [esp+0x1c]
-    bcf8:	53                   	push   ebx
-    bcf9:	e8 12 ff ff ff       	call   bc10 <_Z6putstrPc>
-    bcfe:	c7 04 24 b8 e2 00 00 	mov    DWORD PTR [esp],0xe2b8
-    bd05:	e8 26 ff ff ff       	call   bc30 <_Z6printfPKc>
-    bd0a:	83 c4 10             	add    esp,0x10
-    bd0d:	85 db                	test   ebx,ebx
-    bd0f:	74 3f                	je     bd50 <_ZN6serial7sendstrEPc+0x60>
-    bd11:	80 3b 00             	cmp    BYTE PTR [ebx],0x0
-    bd14:	74 3a                	je     bd50 <_ZN6serial7sendstrEPc+0x60>
-    bd16:	8d 76 00             	lea    esi,[esi+0x0]
-    bd19:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
-    bd20:	83 ec 0c             	sub    esp,0xc
-    bd23:	68 fd 03 00 00       	push   0x3fd
-    bd28:	e8 83 00 00 00       	call   bdb0 <_Z3inbt>
-    bd2d:	83 c4 10             	add    esp,0x10
-    bd30:	a8 20                	test   al,0x20
-    bd32:	74 ec                	je     bd20 <_ZN6serial7sendstrEPc+0x30>
-    bd34:	0f b6 03             	movzx  eax,BYTE PTR [ebx]
-    bd37:	83 ec 08             	sub    esp,0x8
-    bd3a:	83 c3 01             	add    ebx,0x1
-    bd3d:	50                   	push   eax
-    bd3e:	68 f8 03 00 00       	push   0x3f8
-    bd43:	e8 18 00 00 00       	call   bd60 <_Z4outbth>
-    bd48:	83 c4 10             	add    esp,0x10
-    bd4b:	80 3b 00             	cmp    BYTE PTR [ebx],0x0
-    bd4e:	75 d0                	jne    bd20 <_ZN6serial7sendstrEPc+0x30>
-    bd50:	83 c4 08             	add    esp,0x8
-    bd53:	5b                   	pop    ebx
-    bd54:	c3                   	ret    
-    bd55:	66 90                	xchg   ax,ax
-    bd57:	66 90                	xchg   ax,ax
-    bd59:	66 90                	xchg   ax,ax
-    bd5b:	66 90                	xchg   ax,ax
-    bd5d:	66 90                	xchg   ax,ax
-    bd5f:	90                   	nop
+0000bdd0 <_Z6printfPKc>:
+    bdd0:	eb be                	jmp    bd90 <_Z6putstrPc>
+    bdd2:	66 90                	xchg   ax,ax
+    bdd4:	66 90                	xchg   ax,ax
+    bdd6:	66 90                	xchg   ax,ax
+    bdd8:	66 90                	xchg   ax,ax
+    bdda:	66 90                	xchg   ax,ax
+    bddc:	66 90                	xchg   ax,ax
+    bdde:	66 90                	xchg   ax,ax
 
-0000bd60 <_Z4outbth>:
-    bd60:	8b 54 24 04          	mov    edx,DWORD PTR [esp+0x4]
-    bd64:	8b 44 24 08          	mov    eax,DWORD PTR [esp+0x8]
-    bd68:	ee                   	out    dx,al
-    bd69:	c3                   	ret    
-    bd6a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+0000bde0 <_ZN6serial4initEv>:
+    bde0:	83 ec 14             	sub    esp,0x14
+    bde3:	6a 00                	push   0x0
+    bde5:	68 fb 03 00 00       	push   0x3fb
+    bdea:	e8 f1 00 00 00       	call   bee0 <_Z4outbth>
+    bdef:	58                   	pop    eax
+    bdf0:	5a                   	pop    edx
+    bdf1:	6a 00                	push   0x0
+    bdf3:	68 f9 03 00 00       	push   0x3f9
+    bdf8:	e8 e3 00 00 00       	call   bee0 <_Z4outbth>
+    bdfd:	59                   	pop    ecx
+    bdfe:	58                   	pop    eax
+    bdff:	68 80 00 00 00       	push   0x80
+    be04:	68 fb 03 00 00       	push   0x3fb
+    be09:	e8 d2 00 00 00       	call   bee0 <_Z4outbth>
+    be0e:	58                   	pop    eax
+    be0f:	5a                   	pop    edx
+    be10:	6a 01                	push   0x1
+    be12:	68 f8 03 00 00       	push   0x3f8
+    be17:	e8 c4 00 00 00       	call   bee0 <_Z4outbth>
+    be1c:	59                   	pop    ecx
+    be1d:	58                   	pop    eax
+    be1e:	6a 00                	push   0x0
+    be20:	68 f9 03 00 00       	push   0x3f9
+    be25:	e8 b6 00 00 00       	call   bee0 <_Z4outbth>
+    be2a:	58                   	pop    eax
+    be2b:	5a                   	pop    edx
+    be2c:	6a 03                	push   0x3
+    be2e:	68 fb 03 00 00       	push   0x3fb
+    be33:	e8 a8 00 00 00       	call   bee0 <_Z4outbth>
+    be38:	59                   	pop    ecx
+    be39:	58                   	pop    eax
+    be3a:	68 c7 00 00 00       	push   0xc7
+    be3f:	68 fa 03 00 00       	push   0x3fa
+    be44:	e8 97 00 00 00       	call   bee0 <_Z4outbth>
+    be49:	83 c4 1c             	add    esp,0x1c
+    be4c:	c3                   	ret    
+    be4d:	8d 76 00             	lea    esi,[esi+0x0]
 
-0000bd70 <_Z4outwtt>:
-    bd70:	8b 54 24 04          	mov    edx,DWORD PTR [esp+0x4]
-    bd74:	8b 44 24 08          	mov    eax,DWORD PTR [esp+0x8]
-    bd78:	66 ef                	out    dx,ax
-    bd7a:	c3                   	ret    
-    bd7b:	90                   	nop
-    bd7c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+0000be50 <_ZN6serial6uninitEv>:
+    be50:	f3 c3                	repz ret 
+    be52:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    be59:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
 
-0000bd80 <_Z4outdtj>:
-    bd80:	8b 54 24 04          	mov    edx,DWORD PTR [esp+0x4]
-    bd84:	8b 44 24 08          	mov    eax,DWORD PTR [esp+0x8]
-    bd88:	ef                   	out    dx,eax
-    bd89:	c3                   	ret    
-    bd8a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+0000be60 <_ZN6serial7sendchrEc>:
+    be60:	53                   	push   ebx
+    be61:	83 ec 08             	sub    esp,0x8
+    be64:	8b 5c 24 10          	mov    ebx,DWORD PTR [esp+0x10]
+    be68:	90                   	nop
+    be69:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    be70:	83 ec 0c             	sub    esp,0xc
+    be73:	68 fd 03 00 00       	push   0x3fd
+    be78:	e8 b3 00 00 00       	call   bf30 <_Z3inbt>
+    be7d:	83 c4 10             	add    esp,0x10
+    be80:	a8 20                	test   al,0x20
+    be82:	74 ec                	je     be70 <_ZN6serial7sendchrEc+0x10>
+    be84:	83 ec 08             	sub    esp,0x8
+    be87:	0f b6 db             	movzx  ebx,bl
+    be8a:	53                   	push   ebx
+    be8b:	68 f8 03 00 00       	push   0x3f8
+    be90:	e8 4b 00 00 00       	call   bee0 <_Z4outbth>
+    be95:	83 c4 18             	add    esp,0x18
+    be98:	5b                   	pop    ebx
+    be99:	c3                   	ret    
+    be9a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
 
-0000bd90 <_Z4inwstjj>:
-    bd90:	57                   	push   edi
-    bd91:	8b 54 24 08          	mov    edx,DWORD PTR [esp+0x8]
-    bd95:	8b 4c 24 10          	mov    ecx,DWORD PTR [esp+0x10]
-    bd99:	8b 7c 24 0c          	mov    edi,DWORD PTR [esp+0xc]
-    bd9d:	fc                   	cld    
-    bd9e:	f3 6d                	rep ins DWORD PTR es:[edi],dx
-    bda0:	5f                   	pop    edi
-    bda1:	c3                   	ret    
-    bda2:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    bda9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+0000bea0 <_ZN6serial7sendstrEPc>:
+    bea0:	53                   	push   ebx
+    bea1:	83 ec 08             	sub    esp,0x8
+    bea4:	8b 5c 24 10          	mov    ebx,DWORD PTR [esp+0x10]
+    bea8:	85 db                	test   ebx,ebx
+    beaa:	74 22                	je     bece <_ZN6serial7sendstrEPc+0x2e>
+    beac:	0f be 03             	movsx  eax,BYTE PTR [ebx]
+    beaf:	84 c0                	test   al,al
+    beb1:	74 1b                	je     bece <_ZN6serial7sendstrEPc+0x2e>
+    beb3:	90                   	nop
+    beb4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    beb8:	83 ec 0c             	sub    esp,0xc
+    bebb:	83 c3 01             	add    ebx,0x1
+    bebe:	50                   	push   eax
+    bebf:	e8 9c ff ff ff       	call   be60 <_ZN6serial7sendchrEc>
+    bec4:	0f be 03             	movsx  eax,BYTE PTR [ebx]
+    bec7:	83 c4 10             	add    esp,0x10
+    beca:	84 c0                	test   al,al
+    becc:	75 ea                	jne    beb8 <_ZN6serial7sendstrEPc+0x18>
+    bece:	83 c4 08             	add    esp,0x8
+    bed1:	5b                   	pop    ebx
+    bed2:	c3                   	ret    
+    bed3:	66 90                	xchg   ax,ax
+    bed5:	66 90                	xchg   ax,ax
+    bed7:	66 90                	xchg   ax,ax
+    bed9:	66 90                	xchg   ax,ax
+    bedb:	66 90                	xchg   ax,ax
+    bedd:	66 90                	xchg   ax,ax
+    bedf:	90                   	nop
 
-0000bdb0 <_Z3inbt>:
-    bdb0:	8b 54 24 04          	mov    edx,DWORD PTR [esp+0x4]
-    bdb4:	ec                   	in     al,dx
-    bdb5:	c3                   	ret    
-    bdb6:	8d 76 00             	lea    esi,[esi+0x0]
-    bdb9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+0000bee0 <_Z4outbth>:
+    bee0:	8b 54 24 04          	mov    edx,DWORD PTR [esp+0x4]
+    bee4:	8b 44 24 08          	mov    eax,DWORD PTR [esp+0x8]
+    bee8:	ee                   	out    dx,al
+    bee9:	c3                   	ret    
+    beea:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
 
-0000bdc0 <_Z3inwt>:
-    bdc0:	8b 54 24 04          	mov    edx,DWORD PTR [esp+0x4]
-    bdc4:	66 ed                	in     ax,dx
-    bdc6:	c3                   	ret    
-    bdc7:	89 f6                	mov    esi,esi
-    bdc9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+0000bef0 <_Z4outwtt>:
+    bef0:	8b 54 24 04          	mov    edx,DWORD PTR [esp+0x4]
+    bef4:	8b 44 24 08          	mov    eax,DWORD PTR [esp+0x8]
+    bef8:	66 ef                	out    dx,ax
+    befa:	c3                   	ret    
+    befb:	90                   	nop
+    befc:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
 
-0000bdd0 <_Z3indt>:
-    bdd0:	8b 54 24 04          	mov    edx,DWORD PTR [esp+0x4]
-    bdd4:	ed                   	in     eax,dx
-    bdd5:	c3                   	ret    
-    bdd6:	8d 76 00             	lea    esi,[esi+0x0]
-    bdd9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+0000bf00 <_Z4outdtj>:
+    bf00:	8b 54 24 04          	mov    edx,DWORD PTR [esp+0x4]
+    bf04:	8b 44 24 08          	mov    eax,DWORD PTR [esp+0x8]
+    bf08:	ef                   	out    dx,eax
+    bf09:	c3                   	ret    
+    bf0a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
 
-0000bde0 <_Z7io_waitv>:
-    bde0:	31 c0                	xor    eax,eax
-    bde2:	e6 80                	out    0x80,al
-    bde4:	c3                   	ret    
-    bde5:	66 90                	xchg   ax,ax
-    bde7:	66 90                	xchg   ax,ax
-    bde9:	66 90                	xchg   ax,ax
-    bdeb:	66 90                	xchg   ax,ax
-    bded:	66 90                	xchg   ax,ax
-    bdef:	90                   	nop
+0000bf10 <_Z4inwstjj>:
+    bf10:	57                   	push   edi
+    bf11:	8b 54 24 08          	mov    edx,DWORD PTR [esp+0x8]
+    bf15:	8b 4c 24 10          	mov    ecx,DWORD PTR [esp+0x10]
+    bf19:	8b 7c 24 0c          	mov    edi,DWORD PTR [esp+0xc]
+    bf1d:	fc                   	cld    
+    bf1e:	f3 6d                	rep ins DWORD PTR es:[edi],dx
+    bf20:	5f                   	pop    edi
+    bf21:	c3                   	ret    
+    bf22:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    bf29:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
 
-0000bdf0 <_ZN3pci13configAddressEhhhh>:
-    bdf0:	0f b6 44 24 10       	movzx  eax,BYTE PTR [esp+0x10]
-    bdf5:	0f b6 54 24 0c       	movzx  edx,BYTE PTR [esp+0xc]
-    bdfa:	c1 e0 02             	shl    eax,0x2
-    bdfd:	c1 e2 08             	shl    edx,0x8
-    be00:	0f b6 c0             	movzx  eax,al
-    be03:	09 d0                	or     eax,edx
-    be05:	0f b6 54 24 08       	movzx  edx,BYTE PTR [esp+0x8]
-    be0a:	c1 e2 0b             	shl    edx,0xb
-    be0d:	09 d0                	or     eax,edx
-    be0f:	0f b6 54 24 04       	movzx  edx,BYTE PTR [esp+0x4]
-    be14:	c1 e2 10             	shl    edx,0x10
-    be17:	09 d0                	or     eax,edx
-    be19:	0d 00 00 00 80       	or     eax,0x80000000
-    be1e:	c3                   	ret    
-    be1f:	90                   	nop
+0000bf30 <_Z3inbt>:
+    bf30:	8b 54 24 04          	mov    edx,DWORD PTR [esp+0x4]
+    bf34:	ec                   	in     al,dx
+    bf35:	c3                   	ret    
+    bf36:	8d 76 00             	lea    esi,[esi+0x0]
+    bf39:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
 
-0000be20 <_ZN3pci14configReadByteEhhhhh>:
-    be20:	53                   	push   ebx
-    be21:	83 ec 10             	sub    esp,0x10
-    be24:	0f b6 44 24 18       	movzx  eax,BYTE PTR [esp+0x18]
-    be29:	0f b6 54 24 1c       	movzx  edx,BYTE PTR [esp+0x1c]
-    be2e:	8b 5c 24 28          	mov    ebx,DWORD PTR [esp+0x28]
-    be32:	c1 e2 0b             	shl    edx,0xb
-    be35:	c1 e0 10             	shl    eax,0x10
-    be38:	09 d0                	or     eax,edx
-    be3a:	0f b6 54 24 20       	movzx  edx,BYTE PTR [esp+0x20]
-    be3f:	c1 e2 08             	shl    edx,0x8
-    be42:	09 d0                	or     eax,edx
-    be44:	0f b6 54 24 24       	movzx  edx,BYTE PTR [esp+0x24]
-    be49:	c1 e2 02             	shl    edx,0x2
-    be4c:	0f b6 d2             	movzx  edx,dl
-    be4f:	09 d0                	or     eax,edx
-    be51:	0d 00 00 00 80       	or     eax,0x80000000
-    be56:	50                   	push   eax
-    be57:	68 f8 0c 00 00       	push   0xcf8
-    be5c:	e8 1f ff ff ff       	call   bd80 <_Z4outdtj>
-    be61:	c7 04 24 fc 0c 00 00 	mov    DWORD PTR [esp],0xcfc
-    be68:	e8 63 ff ff ff       	call   bdd0 <_Z3indt>
-    be6d:	0f b6 cb             	movzx  ecx,bl
-    be70:	83 c4 18             	add    esp,0x18
-    be73:	c1 e1 03             	shl    ecx,0x3
-    be76:	d3 e8                	shr    eax,cl
-    be78:	5b                   	pop    ebx
-    be79:	c3                   	ret    
-    be7a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+0000bf40 <_Z3inwt>:
+    bf40:	8b 54 24 04          	mov    edx,DWORD PTR [esp+0x4]
+    bf44:	66 ed                	in     ax,dx
+    bf46:	c3                   	ret    
+    bf47:	89 f6                	mov    esi,esi
+    bf49:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
 
-0000be80 <_ZN3pci14configReadWordEhhhhh>:
-    be80:	53                   	push   ebx
-    be81:	83 ec 10             	sub    esp,0x10
-    be84:	0f b6 44 24 18       	movzx  eax,BYTE PTR [esp+0x18]
-    be89:	0f b6 54 24 1c       	movzx  edx,BYTE PTR [esp+0x1c]
-    be8e:	8b 5c 24 28          	mov    ebx,DWORD PTR [esp+0x28]
-    be92:	c1 e2 0b             	shl    edx,0xb
-    be95:	c1 e0 10             	shl    eax,0x10
-    be98:	09 d0                	or     eax,edx
-    be9a:	0f b6 54 24 20       	movzx  edx,BYTE PTR [esp+0x20]
-    be9f:	c1 e2 08             	shl    edx,0x8
-    bea2:	09 d0                	or     eax,edx
-    bea4:	0f b6 54 24 24       	movzx  edx,BYTE PTR [esp+0x24]
-    bea9:	c1 e2 02             	shl    edx,0x2
-    beac:	0f b6 d2             	movzx  edx,dl
-    beaf:	09 d0                	or     eax,edx
-    beb1:	0d 00 00 00 80       	or     eax,0x80000000
-    beb6:	50                   	push   eax
-    beb7:	68 f8 0c 00 00       	push   0xcf8
-    bebc:	e8 bf fe ff ff       	call   bd80 <_Z4outdtj>
-    bec1:	c7 04 24 fc 0c 00 00 	mov    DWORD PTR [esp],0xcfc
-    bec8:	e8 03 ff ff ff       	call   bdd0 <_Z3indt>
-    becd:	0f b6 cb             	movzx  ecx,bl
-    bed0:	83 c4 18             	add    esp,0x18
-    bed3:	c1 e1 04             	shl    ecx,0x4
-    bed6:	d3 e8                	shr    eax,cl
-    bed8:	5b                   	pop    ebx
-    bed9:	c3                   	ret    
-    beda:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+0000bf50 <_Z3indt>:
+    bf50:	8b 54 24 04          	mov    edx,DWORD PTR [esp+0x4]
+    bf54:	ed                   	in     eax,dx
+    bf55:	c3                   	ret    
+    bf56:	8d 76 00             	lea    esi,[esi+0x0]
+    bf59:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
 
-0000bee0 <_ZN3pci10configReadEhhhh>:
-    bee0:	83 ec 14             	sub    esp,0x14
-    bee3:	0f b6 44 24 18       	movzx  eax,BYTE PTR [esp+0x18]
-    bee8:	0f b6 54 24 1c       	movzx  edx,BYTE PTR [esp+0x1c]
-    beed:	c1 e0 10             	shl    eax,0x10
-    bef0:	c1 e2 0b             	shl    edx,0xb
-    bef3:	09 d0                	or     eax,edx
-    bef5:	0f b6 54 24 20       	movzx  edx,BYTE PTR [esp+0x20]
-    befa:	c1 e2 08             	shl    edx,0x8
-    befd:	09 d0                	or     eax,edx
-    beff:	0f b6 54 24 24       	movzx  edx,BYTE PTR [esp+0x24]
-    bf04:	c1 e2 02             	shl    edx,0x2
-    bf07:	0f b6 d2             	movzx  edx,dl
-    bf0a:	09 d0                	or     eax,edx
-    bf0c:	0d 00 00 00 80       	or     eax,0x80000000
-    bf11:	50                   	push   eax
-    bf12:	68 f8 0c 00 00       	push   0xcf8
-    bf17:	e8 64 fe ff ff       	call   bd80 <_Z4outdtj>
-    bf1c:	c7 44 24 20 fc 0c 00 	mov    DWORD PTR [esp+0x20],0xcfc
-    bf23:	00 
-    bf24:	83 c4 1c             	add    esp,0x1c
-    bf27:	e9 a4 fe ff ff       	jmp    bdd0 <_Z3indt>
-    bf2c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+0000bf60 <_Z7io_waitv>:
+    bf60:	31 c0                	xor    eax,eax
+    bf62:	e6 80                	out    0x80,al
+    bf64:	c3                   	ret    
+    bf65:	66 90                	xchg   ax,ax
+    bf67:	66 90                	xchg   ax,ax
+    bf69:	66 90                	xchg   ax,ax
+    bf6b:	66 90                	xchg   ax,ax
+    bf6d:	66 90                	xchg   ax,ax
+    bf6f:	90                   	nop
 
-0000bf30 <_ZN3pci11checkDeviceEhhh>:
-    bf30:	83 ec 18             	sub    esp,0x18
-    bf33:	6a 00                	push   0x0
-    bf35:	6a 00                	push   0x0
-    bf37:	0f b6 44 24 2c       	movzx  eax,BYTE PTR [esp+0x2c]
-    bf3c:	50                   	push   eax
-    bf3d:	0f b6 44 24 2c       	movzx  eax,BYTE PTR [esp+0x2c]
-    bf42:	50                   	push   eax
-    bf43:	0f b6 44 24 2c       	movzx  eax,BYTE PTR [esp+0x2c]
-    bf48:	50                   	push   eax
-    bf49:	e8 32 ff ff ff       	call   be80 <_ZN3pci14configReadWordEhhhhh>
-    bf4e:	66 83 f8 ff          	cmp    ax,0xffff
-    bf52:	0f 95 c0             	setne  al
-    bf55:	83 c4 2c             	add    esp,0x2c
-    bf58:	c3                   	ret    
-    bf59:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+0000bf70 <_ZN3pci13configAddressEhhhh>:
+    bf70:	0f b6 44 24 10       	movzx  eax,BYTE PTR [esp+0x10]
+    bf75:	0f b6 54 24 0c       	movzx  edx,BYTE PTR [esp+0xc]
+    bf7a:	c1 e0 02             	shl    eax,0x2
+    bf7d:	c1 e2 08             	shl    edx,0x8
+    bf80:	0f b6 c0             	movzx  eax,al
+    bf83:	09 d0                	or     eax,edx
+    bf85:	0f b6 54 24 08       	movzx  edx,BYTE PTR [esp+0x8]
+    bf8a:	c1 e2 0b             	shl    edx,0xb
+    bf8d:	09 d0                	or     eax,edx
+    bf8f:	0f b6 54 24 04       	movzx  edx,BYTE PTR [esp+0x4]
+    bf94:	c1 e2 10             	shl    edx,0x10
+    bf97:	09 d0                	or     eax,edx
+    bf99:	0d 00 00 00 80       	or     eax,0x80000000
+    bf9e:	c3                   	ret    
+    bf9f:	90                   	nop
 
-0000bf60 <_ZN3pci11printBussesEv>:
-    bf60:	55                   	push   ebp
-    bf61:	57                   	push   edi
-    bf62:	56                   	push   esi
-    bf63:	53                   	push   ebx
-    bf64:	83 ec 4c             	sub    esp,0x4c
-    bf67:	c7 44 24 10 00 00 00 	mov    DWORD PTR [esp+0x10],0x0
-    bf6e:	00 
-    bf6f:	c7 44 24 0c 00 00 00 	mov    DWORD PTR [esp+0xc],0x0
-    bf76:	00 
-    bf77:	89 f6                	mov    esi,esi
-    bf79:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
-    bf80:	31 f6                	xor    esi,esi
-    bf82:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    bf88:	83 ec 0c             	sub    esp,0xc
-    bf8b:	6a 00                	push   0x0
-    bf8d:	6a 00                	push   0x0
-    bf8f:	8b 5c 24 24          	mov    ebx,DWORD PTR [esp+0x24]
-    bf93:	53                   	push   ebx
-    bf94:	56                   	push   esi
-    bf95:	8b 7c 24 28          	mov    edi,DWORD PTR [esp+0x28]
-    bf99:	57                   	push   edi
-    bf9a:	e8 e1 fe ff ff       	call   be80 <_ZN3pci14configReadWordEhhhhh>
-    bf9f:	83 c4 20             	add    esp,0x20
-    bfa2:	66 83 f8 ff          	cmp    ax,0xffff
-    bfa6:	0f 84 6c 01 00 00    	je     c118 <_ZN3pci11printBussesEv+0x1b8>
-    bfac:	83 ec 0c             	sub    esp,0xc
-    bfaf:	6a 00                	push   0x0
-    bfb1:	6a 02                	push   0x2
-    bfb3:	53                   	push   ebx
-    bfb4:	56                   	push   esi
-    bfb5:	57                   	push   edi
-    bfb6:	e8 65 fe ff ff       	call   be20 <_ZN3pci14configReadByteEhhhhh>
-    bfbb:	88 44 24 38          	mov    BYTE PTR [esp+0x38],al
-    bfbf:	83 c4 14             	add    esp,0x14
-    bfc2:	6a 01                	push   0x1
-    bfc4:	6a 02                	push   0x2
-    bfc6:	53                   	push   ebx
-    bfc7:	56                   	push   esi
-    bfc8:	57                   	push   edi
-    bfc9:	e8 52 fe ff ff       	call   be20 <_ZN3pci14configReadByteEhhhhh>
-    bfce:	88 44 24 34          	mov    BYTE PTR [esp+0x34],al
-    bfd2:	83 c4 14             	add    esp,0x14
-    bfd5:	6a 02                	push   0x2
-    bfd7:	6a 02                	push   0x2
-    bfd9:	53                   	push   ebx
-    bfda:	56                   	push   esi
-    bfdb:	57                   	push   edi
-    bfdc:	e8 3f fe ff ff       	call   be20 <_ZN3pci14configReadByteEhhhhh>
-    bfe1:	83 c4 14             	add    esp,0x14
-    bfe4:	89 c5                	mov    ebp,eax
-    bfe6:	6a 03                	push   0x3
-    bfe8:	6a 02                	push   0x2
-    bfea:	53                   	push   ebx
-    bfeb:	56                   	push   esi
-    bfec:	57                   	push   edi
-    bfed:	31 ff                	xor    edi,edi
-    bfef:	e8 2c fe ff ff       	call   be20 <_ZN3pci14configReadByteEhhhhh>
-    bff4:	ba 43 00 00 00       	mov    edx,0x43
-    bff9:	88 44 24 4f          	mov    BYTE PTR [esp+0x4f],al
-    bffd:	83 c4 20             	add    esp,0x20
-    c000:	eb 29                	jmp    c02b <_ZN3pci11printBussesEv+0xcb>
-    c002:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    c008:	3c 25                	cmp    al,0x25
-    c00a:	0f 84 90 03 00 00    	je     c3a0 <_ZN3pci11printBussesEv+0x440>
-    c010:	84 c0                	test   al,al
-    c012:	0f 85 d8 01 00 00    	jne    c1f0 <_ZN3pci11printBussesEv+0x290>
-    c018:	8d 5f 02             	lea    ebx,[edi+0x2]
-    c01b:	0f b6 83 90 e3 00 00 	movzx  eax,BYTE PTR [ebx+0xe390]
-    c022:	84 c0                	test   al,al
-    c024:	74 3a                	je     c060 <_ZN3pci11printBussesEv+0x100>
-    c026:	0f be d0             	movsx  edx,al
-    c029:	89 df                	mov    edi,ebx
-    c02b:	8d 5f 01             	lea    ebx,[edi+0x1]
-    c02e:	80 fa 25             	cmp    dl,0x25
-    c031:	0f b6 83 90 e3 00 00 	movzx  eax,BYTE PTR [ebx+0xe390]
-    c038:	8d 8b 90 e3 00 00    	lea    ecx,[ebx+0xe390]
-    c03e:	74 c8                	je     c008 <_ZN3pci11printBussesEv+0xa8>
-    c040:	88 44 24 08          	mov    BYTE PTR [esp+0x8],al
-    c044:	83 ec 0c             	sub    esp,0xc
-    c047:	52                   	push   edx
-    c048:	e8 63 fb ff ff       	call   bbb0 <_Z7putcharc>
-    c04d:	83 c4 10             	add    esp,0x10
-    c050:	0f b6 44 24 08       	movzx  eax,BYTE PTR [esp+0x8]
-    c055:	84 c0                	test   al,al
-    c057:	75 cd                	jne    c026 <_ZN3pci11printBussesEv+0xc6>
-    c059:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    c060:	6a 04                	push   0x4
-    c062:	8b 6c 24 14          	mov    ebp,DWORD PTR [esp+0x14]
-    c066:	55                   	push   ebp
-    c067:	56                   	push   esi
-    c068:	8b 5c 24 18          	mov    ebx,DWORD PTR [esp+0x18]
-    c06c:	53                   	push   ebx
-    c06d:	e8 6e fe ff ff       	call   bee0 <_ZN3pci10configReadEhhhh>
-    c072:	c7 04 24 03 00 00 00 	mov    DWORD PTR [esp],0x3
-    c079:	89 44 24 28          	mov    DWORD PTR [esp+0x28],eax
-    c07d:	6a 03                	push   0x3
-    c07f:	55                   	push   ebp
-    c080:	56                   	push   esi
-    c081:	53                   	push   ebx
-    c082:	e8 99 fd ff ff       	call   be20 <_ZN3pci14configReadByteEhhhhh>
-    c087:	88 44 24 34          	mov    BYTE PTR [esp+0x34],al
-    c08b:	83 c4 14             	add    esp,0x14
-    c08e:	6a 01                	push   0x1
-    c090:	6a 00                	push   0x0
-    c092:	55                   	push   ebp
-    c093:	56                   	push   esi
-    c094:	53                   	push   ebx
-    c095:	e8 e6 fd ff ff       	call   be80 <_ZN3pci14configReadWordEhhhhh>
-    c09a:	83 c4 14             	add    esp,0x14
-    c09d:	89 c7                	mov    edi,eax
-    c09f:	6a 00                	push   0x0
-    c0a1:	6a 00                	push   0x0
-    c0a3:	55                   	push   ebp
-    c0a4:	56                   	push   esi
-    c0a5:	31 ed                	xor    ebp,ebp
-    c0a7:	53                   	push   ebx
-    c0a8:	e8 d3 fd ff ff       	call   be80 <_ZN3pci14configReadWordEhhhhh>
-    c0ad:	ba 56 00 00 00       	mov    edx,0x56
-    c0b2:	66 89 44 24 54       	mov    WORD PTR [esp+0x54],ax
-    c0b7:	83 c4 20             	add    esp,0x20
-    c0ba:	eb 27                	jmp    c0e3 <_ZN3pci11printBussesEv+0x183>
-    c0bc:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    c0c0:	3c 25                	cmp    al,0x25
-    c0c2:	0f 84 00 03 00 00    	je     c3c8 <_ZN3pci11printBussesEv+0x468>
-    c0c8:	84 c0                	test   al,al
-    c0ca:	0f 85 90 00 00 00    	jne    c160 <_ZN3pci11printBussesEv+0x200>
-    c0d0:	8d 5d 02             	lea    ebx,[ebp+0x2]
-    c0d3:	0f b6 83 d4 e3 00 00 	movzx  eax,BYTE PTR [ebx+0xe3d4]
-    c0da:	84 c0                	test   al,al
-    c0dc:	74 3a                	je     c118 <_ZN3pci11printBussesEv+0x1b8>
-    c0de:	0f be d0             	movsx  edx,al
-    c0e1:	89 dd                	mov    ebp,ebx
-    c0e3:	8d 5d 01             	lea    ebx,[ebp+0x1]
-    c0e6:	80 fa 25             	cmp    dl,0x25
-    c0e9:	0f b6 83 d4 e3 00 00 	movzx  eax,BYTE PTR [ebx+0xe3d4]
-    c0f0:	8d 8b d4 e3 00 00    	lea    ecx,[ebx+0xe3d4]
-    c0f6:	74 c8                	je     c0c0 <_ZN3pci11printBussesEv+0x160>
-    c0f8:	88 44 24 08          	mov    BYTE PTR [esp+0x8],al
-    c0fc:	83 ec 0c             	sub    esp,0xc
-    c0ff:	52                   	push   edx
-    c100:	e8 ab fa ff ff       	call   bbb0 <_Z7putcharc>
-    c105:	83 c4 10             	add    esp,0x10
-    c108:	0f b6 44 24 08       	movzx  eax,BYTE PTR [esp+0x8]
-    c10d:	84 c0                	test   al,al
-    c10f:	75 cd                	jne    c0de <_ZN3pci11printBussesEv+0x17e>
-    c111:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    c118:	83 c6 01             	add    esi,0x1
-    c11b:	83 fe 20             	cmp    esi,0x20
-    c11e:	0f 85 64 fe ff ff    	jne    bf88 <_ZN3pci11printBussesEv+0x28>
-    c124:	83 44 24 0c 01       	add    DWORD PTR [esp+0xc],0x1
-    c129:	8b 44 24 0c          	mov    eax,DWORD PTR [esp+0xc]
-    c12d:	3d 00 01 00 00       	cmp    eax,0x100
-    c132:	0f 85 48 fe ff ff    	jne    bf80 <_ZN3pci11printBussesEv+0x20>
-    c138:	83 44 24 10 01       	add    DWORD PTR [esp+0x10],0x1
-    c13d:	8b 44 24 10          	mov    eax,DWORD PTR [esp+0x10]
-    c141:	83 f8 08             	cmp    eax,0x8
-    c144:	0f 85 25 fe ff ff    	jne    bf6f <_ZN3pci11printBussesEv+0xf>
-    c14a:	83 ec 0c             	sub    esp,0xc
-    c14d:	68 ba e2 00 00       	push   0xe2ba
-    c152:	e8 d9 fa ff ff       	call   bc30 <_Z6printfPKc>
-    c157:	83 c4 5c             	add    esp,0x5c
-    c15a:	5b                   	pop    ebx
-    c15b:	5e                   	pop    esi
-    c15c:	5f                   	pop    edi
-    c15d:	5d                   	pop    ebp
-    c15e:	c3                   	ret    
-    c15f:	90                   	nop
-    c160:	83 ec 08             	sub    esp,0x8
-    c163:	8d 44 24 3c          	lea    eax,[esp+0x3c]
-    c167:	50                   	push   eax
-    c168:	51                   	push   ecx
-    c169:	e8 02 0b 00 00       	call   cc70 <_Z14_manage_escapeItEiPKcPT_>
-    c16e:	01 c3                	add    ebx,eax
-    c170:	66 89 7c 24 46       	mov    WORD PTR [esp+0x46],di
-    c175:	83 c4 10             	add    esp,0x10
-    c178:	0f be 83 d4 e3 00 00 	movsx  eax,BYTE PTR [ebx+0xe3d4]
-    c17f:	8d ab d4 e3 00 00    	lea    ebp,[ebx+0xe3d4]
-    c185:	84 c0                	test   al,al
-    c187:	74 8f                	je     c118 <_ZN3pci11printBussesEv+0x1b8>
-    c189:	31 d2                	xor    edx,edx
-    c18b:	89 74 24 08          	mov    DWORD PTR [esp+0x8],esi
-    c18f:	89 ee                	mov    esi,ebp
-    c191:	89 d5                	mov    ebp,edx
-    c193:	eb 25                	jmp    c1ba <_ZN3pci11printBussesEv+0x25a>
-    c195:	8d 76 00             	lea    esi,[esi+0x0]
-    c198:	80 fb 25             	cmp    bl,0x25
-    c19b:	0f 84 7f 03 00 00    	je     c520 <_ZN3pci11printBussesEv+0x5c0>
-    c1a1:	84 db                	test   bl,bl
-    c1a3:	0f 85 d7 00 00 00    	jne    c280 <_ZN3pci11printBussesEv+0x320>
-    c1a9:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
-    c1ae:	8d 7d 02             	lea    edi,[ebp+0x2]
-    c1b1:	84 db                	test   bl,bl
-    c1b3:	74 22                	je     c1d7 <_ZN3pci11printBussesEv+0x277>
-    c1b5:	0f be c3             	movsx  eax,bl
-    c1b8:	89 fd                	mov    ebp,edi
-    c1ba:	8d 7d 01             	lea    edi,[ebp+0x1]
-    c1bd:	3c 25                	cmp    al,0x25
-    c1bf:	8d 0c 3e             	lea    ecx,[esi+edi*1]
-    c1c2:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
-    c1c5:	74 d1                	je     c198 <_ZN3pci11printBussesEv+0x238>
-    c1c7:	83 ec 0c             	sub    esp,0xc
-    c1ca:	50                   	push   eax
-    c1cb:	e8 e0 f9 ff ff       	call   bbb0 <_Z7putcharc>
-    c1d0:	83 c4 10             	add    esp,0x10
-    c1d3:	84 db                	test   bl,bl
-    c1d5:	75 de                	jne    c1b5 <_ZN3pci11printBussesEv+0x255>
-    c1d7:	8b 74 24 08          	mov    esi,DWORD PTR [esp+0x8]
-    c1db:	83 c6 01             	add    esi,0x1
-    c1de:	83 fe 20             	cmp    esi,0x20
-    c1e1:	0f 85 a1 fd ff ff    	jne    bf88 <_ZN3pci11printBussesEv+0x28>
-    c1e7:	e9 38 ff ff ff       	jmp    c124 <_ZN3pci11printBussesEv+0x1c4>
-    c1ec:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    c1f0:	83 ec 08             	sub    esp,0x8
-    c1f3:	8d 44 24 37          	lea    eax,[esp+0x37]
-    c1f7:	50                   	push   eax
-    c1f8:	51                   	push   ecx
-    c1f9:	e8 a2 0f 00 00       	call   d1a0 <_Z14_manage_escapeIhEiPKcPT_>
-    c1fe:	01 c3                	add    ebx,eax
-    c200:	89 e8                	mov    eax,ebp
-    c202:	88 44 24 40          	mov    BYTE PTR [esp+0x40],al
-    c206:	0f be 83 90 e3 00 00 	movsx  eax,BYTE PTR [ebx+0xe390]
-    c20d:	83 c4 10             	add    esp,0x10
-    c210:	8d 93 90 e3 00 00    	lea    edx,[ebx+0xe390]
-    c216:	84 c0                	test   al,al
-    c218:	0f 84 42 fe ff ff    	je     c060 <_ZN3pci11printBussesEv+0x100>
-    c21e:	89 74 24 1c          	mov    DWORD PTR [esp+0x1c],esi
-    c222:	31 ed                	xor    ebp,ebp
-    c224:	89 d6                	mov    esi,edx
-    c226:	eb 2a                	jmp    c252 <_ZN3pci11printBussesEv+0x2f2>
-    c228:	90                   	nop
-    c229:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    c230:	80 fb 25             	cmp    bl,0x25
-    c233:	0f 84 17 03 00 00    	je     c550 <_ZN3pci11printBussesEv+0x5f0>
-    c239:	84 db                	test   bl,bl
-    c23b:	0f 85 cf 00 00 00    	jne    c310 <_ZN3pci11printBussesEv+0x3b0>
-    c241:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
-    c246:	8d 7d 02             	lea    edi,[ebp+0x2]
-    c249:	84 db                	test   bl,bl
-    c24b:	74 22                	je     c26f <_ZN3pci11printBussesEv+0x30f>
-    c24d:	0f be c3             	movsx  eax,bl
-    c250:	89 fd                	mov    ebp,edi
-    c252:	8d 7d 01             	lea    edi,[ebp+0x1]
-    c255:	3c 25                	cmp    al,0x25
-    c257:	8d 0c 3e             	lea    ecx,[esi+edi*1]
-    c25a:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
-    c25d:	74 d1                	je     c230 <_ZN3pci11printBussesEv+0x2d0>
-    c25f:	83 ec 0c             	sub    esp,0xc
-    c262:	50                   	push   eax
-    c263:	e8 48 f9 ff ff       	call   bbb0 <_Z7putcharc>
-    c268:	83 c4 10             	add    esp,0x10
-    c26b:	84 db                	test   bl,bl
-    c26d:	75 de                	jne    c24d <_ZN3pci11printBussesEv+0x2ed>
-    c26f:	8b 74 24 1c          	mov    esi,DWORD PTR [esp+0x1c]
-    c273:	e9 e8 fd ff ff       	jmp    c060 <_ZN3pci11printBussesEv+0x100>
-    c278:	90                   	nop
-    c279:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    c280:	83 ec 08             	sub    esp,0x8
-    c283:	89 f5                	mov    ebp,esi
-    c285:	8b 74 24 10          	mov    esi,DWORD PTR [esp+0x10]
-    c289:	8d 44 24 3e          	lea    eax,[esp+0x3e]
-    c28d:	50                   	push   eax
-    c28e:	51                   	push   ecx
-    c28f:	e8 dc 09 00 00       	call   cc70 <_Z14_manage_escapeItEiPKcPT_>
-    c294:	8d 1c 38             	lea    ebx,[eax+edi*1]
-    c297:	0f b6 44 24 24       	movzx  eax,BYTE PTR [esp+0x24]
-    c29c:	01 dd                	add    ebp,ebx
-    c29e:	0f be 55 00          	movsx  edx,BYTE PTR [ebp+0x0]
-    c2a2:	88 44 24 43          	mov    BYTE PTR [esp+0x43],al
-    c2a6:	83 c4 10             	add    esp,0x10
-    c2a9:	84 d2                	test   dl,dl
-    c2ab:	0f 84 67 fe ff ff    	je     c118 <_ZN3pci11printBussesEv+0x1b8>
-    c2b1:	31 ff                	xor    edi,edi
-    c2b3:	89 74 24 08          	mov    DWORD PTR [esp+0x8],esi
-    c2b7:	89 ee                	mov    esi,ebp
-    c2b9:	89 fd                	mov    ebp,edi
-    c2bb:	eb 29                	jmp    c2e6 <_ZN3pci11printBussesEv+0x386>
-    c2bd:	8d 76 00             	lea    esi,[esi+0x0]
-    c2c0:	80 fb 25             	cmp    bl,0x25
-    c2c3:	0f 84 57 04 00 00    	je     c720 <_ZN3pci11printBussesEv+0x7c0>
-    c2c9:	84 db                	test   bl,bl
-    c2cb:	0f 85 2f 01 00 00    	jne    c400 <_ZN3pci11printBussesEv+0x4a0>
-    c2d1:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
-    c2d6:	8d 7d 02             	lea    edi,[ebp+0x2]
-    c2d9:	84 db                	test   bl,bl
-    c2db:	0f 84 f6 fe ff ff    	je     c1d7 <_ZN3pci11printBussesEv+0x277>
-    c2e1:	0f be d3             	movsx  edx,bl
-    c2e4:	89 fd                	mov    ebp,edi
-    c2e6:	8d 7d 01             	lea    edi,[ebp+0x1]
-    c2e9:	80 fa 25             	cmp    dl,0x25
-    c2ec:	8d 0c 3e             	lea    ecx,[esi+edi*1]
-    c2ef:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
-    c2f2:	74 cc                	je     c2c0 <_ZN3pci11printBussesEv+0x360>
-    c2f4:	83 ec 0c             	sub    esp,0xc
-    c2f7:	52                   	push   edx
-    c2f8:	e8 b3 f8 ff ff       	call   bbb0 <_Z7putcharc>
-    c2fd:	83 c4 10             	add    esp,0x10
-    c300:	84 db                	test   bl,bl
-    c302:	75 dd                	jne    c2e1 <_ZN3pci11printBussesEv+0x381>
-    c304:	8b 74 24 08          	mov    esi,DWORD PTR [esp+0x8]
-    c308:	e9 ce fe ff ff       	jmp    c1db <_ZN3pci11printBussesEv+0x27b>
-    c30d:	8d 76 00             	lea    esi,[esi+0x0]
-    c310:	89 74 24 08          	mov    DWORD PTR [esp+0x8],esi
-    c314:	8b 74 24 1c          	mov    esi,DWORD PTR [esp+0x1c]
-    c318:	83 ec 08             	sub    esp,0x8
-    c31b:	8d 44 24 38          	lea    eax,[esp+0x38]
-    c31f:	50                   	push   eax
-    c320:	51                   	push   ecx
-    c321:	e8 7a 0e 00 00       	call   d1a0 <_Z14_manage_escapeIhEiPKcPT_>
-    c326:	8b 54 24 18          	mov    edx,DWORD PTR [esp+0x18]
-    c32a:	01 c7                	add    edi,eax
-    c32c:	0f b6 44 24 24       	movzx  eax,BYTE PTR [esp+0x24]
-    c331:	01 fa                	add    edx,edi
-    c333:	88 44 24 41          	mov    BYTE PTR [esp+0x41],al
-    c337:	0f be 02             	movsx  eax,BYTE PTR [edx]
-    c33a:	83 c4 10             	add    esp,0x10
-    c33d:	84 c0                	test   al,al
-    c33f:	0f 84 1b fd ff ff    	je     c060 <_ZN3pci11printBussesEv+0x100>
-    c345:	89 74 24 14          	mov    DWORD PTR [esp+0x14],esi
-    c349:	31 ff                	xor    edi,edi
-    c34b:	89 d6                	mov    esi,edx
-    c34d:	eb 23                	jmp    c372 <_ZN3pci11printBussesEv+0x412>
-    c34f:	90                   	nop
-    c350:	80 fb 25             	cmp    bl,0x25
-    c353:	0f 84 97 03 00 00    	je     c6f0 <_ZN3pci11printBussesEv+0x790>
+0000bfa0 <_ZN3pci14configReadByteEhhhhh>:
+    bfa0:	53                   	push   ebx
+    bfa1:	83 ec 10             	sub    esp,0x10
+    bfa4:	0f b6 44 24 18       	movzx  eax,BYTE PTR [esp+0x18]
+    bfa9:	0f b6 54 24 1c       	movzx  edx,BYTE PTR [esp+0x1c]
+    bfae:	8b 5c 24 28          	mov    ebx,DWORD PTR [esp+0x28]
+    bfb2:	c1 e2 0b             	shl    edx,0xb
+    bfb5:	c1 e0 10             	shl    eax,0x10
+    bfb8:	09 d0                	or     eax,edx
+    bfba:	0f b6 54 24 20       	movzx  edx,BYTE PTR [esp+0x20]
+    bfbf:	c1 e2 08             	shl    edx,0x8
+    bfc2:	09 d0                	or     eax,edx
+    bfc4:	0f b6 54 24 24       	movzx  edx,BYTE PTR [esp+0x24]
+    bfc9:	c1 e2 02             	shl    edx,0x2
+    bfcc:	0f b6 d2             	movzx  edx,dl
+    bfcf:	09 d0                	or     eax,edx
+    bfd1:	0d 00 00 00 80       	or     eax,0x80000000
+    bfd6:	50                   	push   eax
+    bfd7:	68 f8 0c 00 00       	push   0xcf8
+    bfdc:	e8 1f ff ff ff       	call   bf00 <_Z4outdtj>
+    bfe1:	c7 04 24 fc 0c 00 00 	mov    DWORD PTR [esp],0xcfc
+    bfe8:	e8 63 ff ff ff       	call   bf50 <_Z3indt>
+    bfed:	0f b6 cb             	movzx  ecx,bl
+    bff0:	83 c4 18             	add    esp,0x18
+    bff3:	c1 e1 03             	shl    ecx,0x3
+    bff6:	d3 e8                	shr    eax,cl
+    bff8:	5b                   	pop    ebx
+    bff9:	c3                   	ret    
+    bffa:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+
+0000c000 <_ZN3pci14configReadWordEhhhhh>:
+    c000:	53                   	push   ebx
+    c001:	83 ec 10             	sub    esp,0x10
+    c004:	0f b6 44 24 18       	movzx  eax,BYTE PTR [esp+0x18]
+    c009:	0f b6 54 24 1c       	movzx  edx,BYTE PTR [esp+0x1c]
+    c00e:	8b 5c 24 28          	mov    ebx,DWORD PTR [esp+0x28]
+    c012:	c1 e2 0b             	shl    edx,0xb
+    c015:	c1 e0 10             	shl    eax,0x10
+    c018:	09 d0                	or     eax,edx
+    c01a:	0f b6 54 24 20       	movzx  edx,BYTE PTR [esp+0x20]
+    c01f:	c1 e2 08             	shl    edx,0x8
+    c022:	09 d0                	or     eax,edx
+    c024:	0f b6 54 24 24       	movzx  edx,BYTE PTR [esp+0x24]
+    c029:	c1 e2 02             	shl    edx,0x2
+    c02c:	0f b6 d2             	movzx  edx,dl
+    c02f:	09 d0                	or     eax,edx
+    c031:	0d 00 00 00 80       	or     eax,0x80000000
+    c036:	50                   	push   eax
+    c037:	68 f8 0c 00 00       	push   0xcf8
+    c03c:	e8 bf fe ff ff       	call   bf00 <_Z4outdtj>
+    c041:	c7 04 24 fc 0c 00 00 	mov    DWORD PTR [esp],0xcfc
+    c048:	e8 03 ff ff ff       	call   bf50 <_Z3indt>
+    c04d:	0f b6 cb             	movzx  ecx,bl
+    c050:	83 c4 18             	add    esp,0x18
+    c053:	c1 e1 04             	shl    ecx,0x4
+    c056:	d3 e8                	shr    eax,cl
+    c058:	5b                   	pop    ebx
+    c059:	c3                   	ret    
+    c05a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+
+0000c060 <_ZN3pci10configReadEhhhh>:
+    c060:	83 ec 14             	sub    esp,0x14
+    c063:	0f b6 44 24 18       	movzx  eax,BYTE PTR [esp+0x18]
+    c068:	0f b6 54 24 1c       	movzx  edx,BYTE PTR [esp+0x1c]
+    c06d:	c1 e0 10             	shl    eax,0x10
+    c070:	c1 e2 0b             	shl    edx,0xb
+    c073:	09 d0                	or     eax,edx
+    c075:	0f b6 54 24 20       	movzx  edx,BYTE PTR [esp+0x20]
+    c07a:	c1 e2 08             	shl    edx,0x8
+    c07d:	09 d0                	or     eax,edx
+    c07f:	0f b6 54 24 24       	movzx  edx,BYTE PTR [esp+0x24]
+    c084:	c1 e2 02             	shl    edx,0x2
+    c087:	0f b6 d2             	movzx  edx,dl
+    c08a:	09 d0                	or     eax,edx
+    c08c:	0d 00 00 00 80       	or     eax,0x80000000
+    c091:	50                   	push   eax
+    c092:	68 f8 0c 00 00       	push   0xcf8
+    c097:	e8 64 fe ff ff       	call   bf00 <_Z4outdtj>
+    c09c:	c7 44 24 20 fc 0c 00 	mov    DWORD PTR [esp+0x20],0xcfc
+    c0a3:	00 
+    c0a4:	83 c4 1c             	add    esp,0x1c
+    c0a7:	e9 a4 fe ff ff       	jmp    bf50 <_Z3indt>
+    c0ac:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+
+0000c0b0 <_ZN3pci11checkDeviceEhhh>:
+    c0b0:	83 ec 18             	sub    esp,0x18
+    c0b3:	6a 00                	push   0x0
+    c0b5:	6a 00                	push   0x0
+    c0b7:	0f b6 44 24 2c       	movzx  eax,BYTE PTR [esp+0x2c]
+    c0bc:	50                   	push   eax
+    c0bd:	0f b6 44 24 2c       	movzx  eax,BYTE PTR [esp+0x2c]
+    c0c2:	50                   	push   eax
+    c0c3:	0f b6 44 24 2c       	movzx  eax,BYTE PTR [esp+0x2c]
+    c0c8:	50                   	push   eax
+    c0c9:	e8 32 ff ff ff       	call   c000 <_ZN3pci14configReadWordEhhhhh>
+    c0ce:	66 83 f8 ff          	cmp    ax,0xffff
+    c0d2:	0f 95 c0             	setne  al
+    c0d5:	83 c4 2c             	add    esp,0x2c
+    c0d8:	c3                   	ret    
+    c0d9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+
+0000c0e0 <_ZN3pci11printBussesEv>:
+    c0e0:	55                   	push   ebp
+    c0e1:	57                   	push   edi
+    c0e2:	56                   	push   esi
+    c0e3:	53                   	push   ebx
+    c0e4:	83 ec 5c             	sub    esp,0x5c
+    c0e7:	c7 44 24 0c 00 00 00 	mov    DWORD PTR [esp+0xc],0x0
+    c0ee:	00 
+    c0ef:	c7 44 24 08 00 00 00 	mov    DWORD PTR [esp+0x8],0x0
+    c0f6:	00 
+    c0f7:	89 f6                	mov    esi,esi
+    c0f9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    c100:	31 f6                	xor    esi,esi
+    c102:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    c108:	83 ec 0c             	sub    esp,0xc
+    c10b:	6a 00                	push   0x0
+    c10d:	6a 00                	push   0x0
+    c10f:	8b 5c 24 20          	mov    ebx,DWORD PTR [esp+0x20]
+    c113:	53                   	push   ebx
+    c114:	56                   	push   esi
+    c115:	8b 7c 24 24          	mov    edi,DWORD PTR [esp+0x24]
+    c119:	57                   	push   edi
+    c11a:	e8 e1 fe ff ff       	call   c000 <_ZN3pci14configReadWordEhhhhh>
+    c11f:	83 c4 20             	add    esp,0x20
+    c122:	66 83 f8 ff          	cmp    ax,0xffff
+    c126:	0f 84 7c 01 00 00    	je     c2a8 <_ZN3pci11printBussesEv+0x1c8>
+    c12c:	83 ec 0c             	sub    esp,0xc
+    c12f:	6a 00                	push   0x0
+    c131:	6a 02                	push   0x2
+    c133:	53                   	push   ebx
+    c134:	56                   	push   esi
+    c135:	57                   	push   edi
+    c136:	e8 65 fe ff ff       	call   bfa0 <_ZN3pci14configReadByteEhhhhh>
+    c13b:	88 44 24 38          	mov    BYTE PTR [esp+0x38],al
+    c13f:	83 c4 14             	add    esp,0x14
+    c142:	6a 01                	push   0x1
+    c144:	6a 02                	push   0x2
+    c146:	53                   	push   ebx
+    c147:	56                   	push   esi
+    c148:	57                   	push   edi
+    c149:	e8 52 fe ff ff       	call   bfa0 <_ZN3pci14configReadByteEhhhhh>
+    c14e:	88 44 24 37          	mov    BYTE PTR [esp+0x37],al
+    c152:	83 c4 14             	add    esp,0x14
+    c155:	6a 02                	push   0x2
+    c157:	6a 02                	push   0x2
+    c159:	53                   	push   ebx
+    c15a:	56                   	push   esi
+    c15b:	57                   	push   edi
+    c15c:	e8 3f fe ff ff       	call   bfa0 <_ZN3pci14configReadByteEhhhhh>
+    c161:	88 44 24 34          	mov    BYTE PTR [esp+0x34],al
+    c165:	83 c4 14             	add    esp,0x14
+    c168:	6a 03                	push   0x3
+    c16a:	6a 02                	push   0x2
+    c16c:	53                   	push   ebx
+    c16d:	56                   	push   esi
+    c16e:	57                   	push   edi
+    c16f:	31 ff                	xor    edi,edi
+    c171:	e8 2a fe ff ff       	call   bfa0 <_ZN3pci14configReadByteEhhhhh>
+    c176:	c7 44 24 54 f9 09 01 	mov    DWORD PTR [esp+0x54],0x109f9
+    c17d:	00 
+    c17e:	88 44 24 30          	mov    BYTE PTR [esp+0x30],al
+    c182:	ba 5b 00 00 00       	mov    edx,0x5b
+    c187:	83 c4 20             	add    esp,0x20
+    c18a:	eb 27                	jmp    c1b3 <_ZN3pci11printBussesEv+0xd3>
+    c18c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    c190:	3c 25                	cmp    al,0x25
+    c192:	0f 84 d8 03 00 00    	je     c570 <_ZN3pci11printBussesEv+0x490>
+    c198:	84 c0                	test   al,al
+    c19a:	0f 85 f8 01 00 00    	jne    c398 <_ZN3pci11printBussesEv+0x2b8>
+    c1a0:	8d 5f 02             	lea    ebx,[edi+0x2]
+    c1a3:	0f b6 83 5c 08 01 00 	movzx  eax,BYTE PTR [ebx+0x1085c]
+    c1aa:	84 c0                	test   al,al
+    c1ac:	74 3a                	je     c1e8 <_ZN3pci11printBussesEv+0x108>
+    c1ae:	0f be d0             	movsx  edx,al
+    c1b1:	89 df                	mov    edi,ebx
+    c1b3:	8d 5f 01             	lea    ebx,[edi+0x1]
+    c1b6:	80 fa 25             	cmp    dl,0x25
+    c1b9:	0f b6 83 5c 08 01 00 	movzx  eax,BYTE PTR [ebx+0x1085c]
+    c1c0:	8d 8b 5c 08 01 00    	lea    ecx,[ebx+0x1085c]
+    c1c6:	74 c8                	je     c190 <_ZN3pci11printBussesEv+0xb0>
+    c1c8:	88 44 24 04          	mov    BYTE PTR [esp+0x4],al
+    c1cc:	83 ec 0c             	sub    esp,0xc
+    c1cf:	52                   	push   edx
+    c1d0:	e8 fb fa ff ff       	call   bcd0 <_Z7putcharc>
+    c1d5:	83 c4 10             	add    esp,0x10
+    c1d8:	0f b6 44 24 04       	movzx  eax,BYTE PTR [esp+0x4]
+    c1dd:	84 c0                	test   al,al
+    c1df:	75 cd                	jne    c1ae <_ZN3pci11printBussesEv+0xce>
+    c1e1:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    c1e8:	6a 04                	push   0x4
+    c1ea:	8b 5c 24 10          	mov    ebx,DWORD PTR [esp+0x10]
+    c1ee:	53                   	push   ebx
+    c1ef:	56                   	push   esi
+    c1f0:	8b 7c 24 14          	mov    edi,DWORD PTR [esp+0x14]
+    c1f4:	57                   	push   edi
+    c1f5:	e8 66 fe ff ff       	call   c060 <_ZN3pci10configReadEhhhh>
+    c1fa:	c7 04 24 03 00 00 00 	mov    DWORD PTR [esp],0x3
+    c201:	89 44 24 28          	mov    DWORD PTR [esp+0x28],eax
+    c205:	6a 03                	push   0x3
+    c207:	53                   	push   ebx
+    c208:	56                   	push   esi
+    c209:	57                   	push   edi
+    c20a:	e8 91 fd ff ff       	call   bfa0 <_ZN3pci14configReadByteEhhhhh>
+    c20f:	88 44 24 37          	mov    BYTE PTR [esp+0x37],al
+    c213:	83 c4 14             	add    esp,0x14
+    c216:	6a 01                	push   0x1
+    c218:	6a 00                	push   0x0
+    c21a:	53                   	push   ebx
+    c21b:	56                   	push   esi
+    c21c:	57                   	push   edi
+    c21d:	e8 de fd ff ff       	call   c000 <_ZN3pci14configReadWordEhhhhh>
+    c222:	66 89 44 24 34       	mov    WORD PTR [esp+0x34],ax
+    c227:	83 c4 14             	add    esp,0x14
+    c22a:	6a 00                	push   0x0
+    c22c:	6a 00                	push   0x0
+    c22e:	53                   	push   ebx
+    c22f:	56                   	push   esi
+    c230:	57                   	push   edi
+    c231:	31 ff                	xor    edi,edi
+    c233:	e8 c8 fd ff ff       	call   c000 <_ZN3pci14configReadWordEhhhhh>
+    c238:	c7 44 24 50 f9 09 01 	mov    DWORD PTR [esp+0x50],0x109f9
+    c23f:	00 
+    c240:	66 89 44 24 30       	mov    WORD PTR [esp+0x30],ax
+    c245:	ba 5b 00 00 00       	mov    edx,0x5b
+    c24a:	83 c4 20             	add    esp,0x20
+    c24d:	eb 24                	jmp    c273 <_ZN3pci11printBussesEv+0x193>
+    c24f:	90                   	nop
+    c250:	3c 25                	cmp    al,0x25
+    c252:	0f 84 e8 02 00 00    	je     c540 <_ZN3pci11printBussesEv+0x460>
+    c258:	84 c0                	test   al,al
+    c25a:	0f 85 a0 00 00 00    	jne    c300 <_ZN3pci11printBussesEv+0x220>
+    c260:	8d 5f 02             	lea    ebx,[edi+0x2]
+    c263:	0f b6 83 b4 08 01 00 	movzx  eax,BYTE PTR [ebx+0x108b4]
+    c26a:	84 c0                	test   al,al
+    c26c:	74 3a                	je     c2a8 <_ZN3pci11printBussesEv+0x1c8>
+    c26e:	0f be d0             	movsx  edx,al
+    c271:	89 df                	mov    edi,ebx
+    c273:	8d 5f 01             	lea    ebx,[edi+0x1]
+    c276:	80 fa 25             	cmp    dl,0x25
+    c279:	0f b6 83 b4 08 01 00 	movzx  eax,BYTE PTR [ebx+0x108b4]
+    c280:	8d 8b b4 08 01 00    	lea    ecx,[ebx+0x108b4]
+    c286:	74 c8                	je     c250 <_ZN3pci11printBussesEv+0x170>
+    c288:	88 44 24 04          	mov    BYTE PTR [esp+0x4],al
+    c28c:	83 ec 0c             	sub    esp,0xc
+    c28f:	52                   	push   edx
+    c290:	e8 3b fa ff ff       	call   bcd0 <_Z7putcharc>
+    c295:	83 c4 10             	add    esp,0x10
+    c298:	0f b6 44 24 04       	movzx  eax,BYTE PTR [esp+0x4]
+    c29d:	84 c0                	test   al,al
+    c29f:	75 cd                	jne    c26e <_ZN3pci11printBussesEv+0x18e>
+    c2a1:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    c2a8:	83 c6 01             	add    esi,0x1
+    c2ab:	83 fe 20             	cmp    esi,0x20
+    c2ae:	0f 85 54 fe ff ff    	jne    c108 <_ZN3pci11printBussesEv+0x28>
+    c2b4:	83 44 24 08 01       	add    DWORD PTR [esp+0x8],0x1
+    c2b9:	8b 44 24 08          	mov    eax,DWORD PTR [esp+0x8]
+    c2bd:	3d 00 01 00 00       	cmp    eax,0x100
+    c2c2:	0f 85 38 fe ff ff    	jne    c100 <_ZN3pci11printBussesEv+0x20>
+    c2c8:	83 44 24 0c 01       	add    DWORD PTR [esp+0xc],0x1
+    c2cd:	8b 44 24 0c          	mov    eax,DWORD PTR [esp+0xc]
+    c2d1:	83 f8 08             	cmp    eax,0x8
+    c2d4:	0f 85 15 fe ff ff    	jne    c0ef <_ZN3pci11printBussesEv+0xf>
+    c2da:	68 58 01 01 00       	push   0x10158
+    c2df:	6a 3a                	push   0x3a
+    c2e1:	68 f9 09 01 00       	push   0x109f9
+    c2e6:	68 00 09 01 00       	push   0x10900
+    c2eb:	e8 e0 0d 00 00       	call   d0d0 <_Z6printfIPKcJiS1_EEvS1_T_DpT0_>
+    c2f0:	83 c4 6c             	add    esp,0x6c
+    c2f3:	5b                   	pop    ebx
+    c2f4:	5e                   	pop    esi
+    c2f5:	5f                   	pop    edi
+    c2f6:	5d                   	pop    ebp
+    c2f7:	c3                   	ret    
+    c2f8:	90                   	nop
+    c2f9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    c300:	83 ec 08             	sub    esp,0x8
+    c303:	8d 44 24 38          	lea    eax,[esp+0x38]
+    c307:	50                   	push   eax
+    c308:	51                   	push   ecx
+    c309:	e8 c2 0b 00 00       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    c30e:	01 c3                	add    ebx,eax
+    c310:	c7 44 24 58 35 00 00 	mov    DWORD PTR [esp+0x58],0x35
+    c317:	00 
+    c318:	83 c4 10             	add    esp,0x10
+    c31b:	0f be 83 b4 08 01 00 	movsx  eax,BYTE PTR [ebx+0x108b4]
+    c322:	8d 93 b4 08 01 00    	lea    edx,[ebx+0x108b4]
+    c328:	84 c0                	test   al,al
+    c32a:	0f 84 78 ff ff ff    	je     c2a8 <_ZN3pci11printBussesEv+0x1c8>
+    c330:	89 74 24 1c          	mov    DWORD PTR [esp+0x1c],esi
+    c334:	31 ed                	xor    ebp,ebp
+    c336:	89 d6                	mov    esi,edx
+    c338:	eb 28                	jmp    c362 <_ZN3pci11printBussesEv+0x282>
+    c33a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    c340:	80 fb 25             	cmp    bl,0x25
+    c343:	0f 84 87 03 00 00    	je     c6d0 <_ZN3pci11printBussesEv+0x5f0>
+    c349:	84 db                	test   bl,bl
+    c34b:	0f 85 cf 00 00 00    	jne    c420 <_ZN3pci11printBussesEv+0x340>
+    c351:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
+    c356:	8d 7d 02             	lea    edi,[ebp+0x2]
     c359:	84 db                	test   bl,bl
-    c35b:	0f 85 27 01 00 00    	jne    c488 <_ZN3pci11printBussesEv+0x528>
-    c361:	0f b6 5c 3e 02       	movzx  ebx,BYTE PTR [esi+edi*1+0x2]
-    c366:	8d 6f 02             	lea    ebp,[edi+0x2]
-    c369:	84 db                	test   bl,bl
-    c36b:	74 22                	je     c38f <_ZN3pci11printBussesEv+0x42f>
-    c36d:	0f be c3             	movsx  eax,bl
-    c370:	89 ef                	mov    edi,ebp
-    c372:	8d 6f 01             	lea    ebp,[edi+0x1]
-    c375:	3c 25                	cmp    al,0x25
-    c377:	8d 0c 2e             	lea    ecx,[esi+ebp*1]
-    c37a:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
-    c37d:	74 d1                	je     c350 <_ZN3pci11printBussesEv+0x3f0>
-    c37f:	83 ec 0c             	sub    esp,0xc
-    c382:	50                   	push   eax
-    c383:	e8 28 f8 ff ff       	call   bbb0 <_Z7putcharc>
-    c388:	83 c4 10             	add    esp,0x10
-    c38b:	84 db                	test   bl,bl
-    c38d:	75 de                	jne    c36d <_ZN3pci11printBussesEv+0x40d>
-    c38f:	8b 74 24 14          	mov    esi,DWORD PTR [esp+0x14]
-    c393:	e9 c8 fc ff ff       	jmp    c060 <_ZN3pci11printBussesEv+0x100>
-    c398:	90                   	nop
-    c399:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    c3a0:	83 ec 0c             	sub    esp,0xc
-    c3a3:	8d 5f 02             	lea    ebx,[edi+0x2]
-    c3a6:	6a 25                	push   0x25
-    c3a8:	e8 03 f8 ff ff       	call   bbb0 <_Z7putcharc>
-    c3ad:	0f b6 83 90 e3 00 00 	movzx  eax,BYTE PTR [ebx+0xe390]
-    c3b4:	83 c4 10             	add    esp,0x10
-    c3b7:	84 c0                	test   al,al
-    c3b9:	0f 85 67 fc ff ff    	jne    c026 <_ZN3pci11printBussesEv+0xc6>
-    c3bf:	e9 9c fc ff ff       	jmp    c060 <_ZN3pci11printBussesEv+0x100>
-    c3c4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    c3c8:	83 ec 0c             	sub    esp,0xc
-    c3cb:	8d 5d 02             	lea    ebx,[ebp+0x2]
-    c3ce:	6a 25                	push   0x25
-    c3d0:	e8 db f7 ff ff       	call   bbb0 <_Z7putcharc>
-    c3d5:	0f b6 83 d4 e3 00 00 	movzx  eax,BYTE PTR [ebx+0xe3d4]
-    c3dc:	83 c4 10             	add    esp,0x10
-    c3df:	84 c0                	test   al,al
-    c3e1:	0f 85 f7 fc ff ff    	jne    c0de <_ZN3pci11printBussesEv+0x17e>
-    c3e7:	83 c6 01             	add    esi,0x1
-    c3ea:	83 fe 20             	cmp    esi,0x20
-    c3ed:	0f 85 95 fb ff ff    	jne    bf88 <_ZN3pci11printBussesEv+0x28>
-    c3f3:	e9 2c fd ff ff       	jmp    c124 <_ZN3pci11printBussesEv+0x1c4>
-    c3f8:	90                   	nop
-    c3f9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    c400:	83 ec 08             	sub    esp,0x8
-    c403:	89 f5                	mov    ebp,esi
-    c405:	8b 74 24 10          	mov    esi,DWORD PTR [esp+0x10]
-    c409:	8d 44 24 3b          	lea    eax,[esp+0x3b]
-    c40d:	89 fb                	mov    ebx,edi
-    c40f:	50                   	push   eax
-    c410:	51                   	push   ecx
-    c411:	e8 8a 0d 00 00       	call   d1a0 <_Z14_manage_escapeIhEiPKcPT_>
-    c416:	01 c3                	add    ebx,eax
-    c418:	83 c4 10             	add    esp,0x10
-    c41b:	01 eb                	add    ebx,ebp
-    c41d:	0f be 13             	movsx  edx,BYTE PTR [ebx]
-    c420:	84 d2                	test   dl,dl
-    c422:	0f 84 f0 fc ff ff    	je     c118 <_ZN3pci11printBussesEv+0x1b8>
-    c428:	89 74 24 08          	mov    DWORD PTR [esp+0x8],esi
-    c42c:	31 ed                	xor    ebp,ebp
-    c42e:	89 de                	mov    esi,ebx
-    c430:	eb 2c                	jmp    c45e <_ZN3pci11printBussesEv+0x4fe>
-    c432:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    c438:	80 fb 25             	cmp    bl,0x25
-    c43b:	0f 84 bf 03 00 00    	je     c800 <_ZN3pci11printBussesEv+0x8a0>
-    c441:	84 db                	test   bl,bl
-    c443:	0f 85 37 01 00 00    	jne    c580 <_ZN3pci11printBussesEv+0x620>
-    c449:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
-    c44e:	8d 7d 02             	lea    edi,[ebp+0x2]
-    c451:	84 db                	test   bl,bl
-    c453:	0f 84 7e fd ff ff    	je     c1d7 <_ZN3pci11printBussesEv+0x277>
-    c459:	0f be d3             	movsx  edx,bl
-    c45c:	89 fd                	mov    ebp,edi
-    c45e:	8d 7d 01             	lea    edi,[ebp+0x1]
-    c461:	80 fa 25             	cmp    dl,0x25
-    c464:	8d 0c 3e             	lea    ecx,[esi+edi*1]
-    c467:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
-    c46a:	74 cc                	je     c438 <_ZN3pci11printBussesEv+0x4d8>
-    c46c:	83 ec 0c             	sub    esp,0xc
-    c46f:	52                   	push   edx
-    c470:	e8 3b f7 ff ff       	call   bbb0 <_Z7putcharc>
-    c475:	83 c4 10             	add    esp,0x10
-    c478:	84 db                	test   bl,bl
-    c47a:	75 dd                	jne    c459 <_ZN3pci11printBussesEv+0x4f9>
-    c47c:	8b 74 24 08          	mov    esi,DWORD PTR [esp+0x8]
-    c480:	e9 56 fd ff ff       	jmp    c1db <_ZN3pci11printBussesEv+0x27b>
-    c485:	8d 76 00             	lea    esi,[esi+0x0]
-    c488:	89 74 24 08          	mov    DWORD PTR [esp+0x8],esi
-    c48c:	8b 74 24 14          	mov    esi,DWORD PTR [esp+0x14]
-    c490:	83 ec 08             	sub    esp,0x8
-    c493:	8d 44 24 39          	lea    eax,[esp+0x39]
-    c497:	50                   	push   eax
-    c498:	51                   	push   ecx
-    c499:	e8 02 0d 00 00       	call   d1a0 <_Z14_manage_escapeIhEiPKcPT_>
-    c49e:	8b 54 24 18          	mov    edx,DWORD PTR [esp+0x18]
-    c4a2:	01 c5                	add    ebp,eax
-    c4a4:	0f b6 44 24 28       	movzx  eax,BYTE PTR [esp+0x28]
-    c4a9:	01 d5                	add    ebp,edx
-    c4ab:	0f be 55 00          	movsx  edx,BYTE PTR [ebp+0x0]
-    c4af:	88 44 24 42          	mov    BYTE PTR [esp+0x42],al
-    c4b3:	83 c4 10             	add    esp,0x10
-    c4b6:	84 d2                	test   dl,dl
-    c4b8:	0f 84 a2 fb ff ff    	je     c060 <_ZN3pci11printBussesEv+0x100>
-    c4be:	31 ff                	xor    edi,edi
-    c4c0:	89 74 24 08          	mov    DWORD PTR [esp+0x8],esi
-    c4c4:	89 ee                	mov    esi,ebp
-    c4c6:	89 fd                	mov    ebp,edi
-    c4c8:	eb 28                	jmp    c4f2 <_ZN3pci11printBussesEv+0x592>
-    c4ca:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    c4d0:	80 fb 25             	cmp    bl,0x25
-    c4d3:	0f 84 f7 02 00 00    	je     c7d0 <_ZN3pci11printBussesEv+0x870>
-    c4d9:	84 db                	test   bl,bl
-    c4db:	0f 85 7f 01 00 00    	jne    c660 <_ZN3pci11printBussesEv+0x700>
-    c4e1:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
-    c4e6:	8d 7d 02             	lea    edi,[ebp+0x2]
-    c4e9:	84 db                	test   bl,bl
-    c4eb:	74 23                	je     c510 <_ZN3pci11printBussesEv+0x5b0>
-    c4ed:	0f be d3             	movsx  edx,bl
-    c4f0:	89 fd                	mov    ebp,edi
-    c4f2:	8d 7d 01             	lea    edi,[ebp+0x1]
-    c4f5:	80 fa 25             	cmp    dl,0x25
-    c4f8:	8d 0c 3e             	lea    ecx,[esi+edi*1]
-    c4fb:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
-    c4fe:	74 d0                	je     c4d0 <_ZN3pci11printBussesEv+0x570>
-    c500:	83 ec 0c             	sub    esp,0xc
-    c503:	52                   	push   edx
-    c504:	e8 a7 f6 ff ff       	call   bbb0 <_Z7putcharc>
-    c509:	83 c4 10             	add    esp,0x10
-    c50c:	84 db                	test   bl,bl
-    c50e:	75 dd                	jne    c4ed <_ZN3pci11printBussesEv+0x58d>
-    c510:	8b 74 24 08          	mov    esi,DWORD PTR [esp+0x8]
-    c514:	e9 47 fb ff ff       	jmp    c060 <_ZN3pci11printBussesEv+0x100>
-    c519:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    c520:	83 ec 0c             	sub    esp,0xc
-    c523:	8d 7d 02             	lea    edi,[ebp+0x2]
-    c526:	6a 25                	push   0x25
-    c528:	e8 83 f6 ff ff       	call   bbb0 <_Z7putcharc>
-    c52d:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
-    c532:	83 c4 10             	add    esp,0x10
-    c535:	84 db                	test   bl,bl
-    c537:	0f 85 78 fc ff ff    	jne    c1b5 <_ZN3pci11printBussesEv+0x255>
-    c53d:	8b 74 24 08          	mov    esi,DWORD PTR [esp+0x8]
-    c541:	e9 95 fc ff ff       	jmp    c1db <_ZN3pci11printBussesEv+0x27b>
-    c546:	8d 76 00             	lea    esi,[esi+0x0]
-    c549:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
-    c550:	83 ec 0c             	sub    esp,0xc
-    c553:	8d 7d 02             	lea    edi,[ebp+0x2]
-    c556:	6a 25                	push   0x25
-    c558:	e8 53 f6 ff ff       	call   bbb0 <_Z7putcharc>
-    c55d:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
-    c562:	83 c4 10             	add    esp,0x10
-    c565:	84 db                	test   bl,bl
-    c567:	0f 85 e0 fc ff ff    	jne    c24d <_ZN3pci11printBussesEv+0x2ed>
-    c56d:	8b 74 24 1c          	mov    esi,DWORD PTR [esp+0x1c]
-    c571:	e9 ea fa ff ff       	jmp    c060 <_ZN3pci11printBussesEv+0x100>
-    c576:	8d 76 00             	lea    esi,[esi+0x0]
-    c579:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
-    c580:	89 d8                	mov    eax,ebx
-    c582:	89 f3                	mov    ebx,esi
-    c584:	8b 74 24 08          	mov    esi,DWORD PTR [esp+0x8]
-    c588:	83 e8 42             	sub    eax,0x42
-    c58b:	3c 36                	cmp    al,0x36
-    c58d:	77 21                	ja     c5b0 <_ZN3pci11printBussesEv+0x650>
-    c58f:	0f b6 c0             	movzx  eax,al
-    c592:	ff 24 85 f8 e0 00 00 	jmp    DWORD PTR [eax*4+0xe0f8]
-    c599:	83 ec 0c             	sub    esp,0xc
-    c59c:	ff 74 24 24          	push   DWORD PTR [esp+0x24]
-    c5a0:	e8 6b f6 ff ff       	call   bc10 <_Z6putstrPc>
-    c5a5:	8d 4c 2b 02          	lea    ecx,[ebx+ebp*1+0x2]
-    c5a9:	83 c4 10             	add    esp,0x10
-    c5ac:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    c5b0:	83 ec 0c             	sub    esp,0xc
-    c5b3:	83 c6 01             	add    esi,0x1
-    c5b6:	51                   	push   ecx
-    c5b7:	e8 74 f6 ff ff       	call   bc30 <_Z6printfPKc>
-    c5bc:	83 c4 10             	add    esp,0x10
-    c5bf:	83 fe 20             	cmp    esi,0x20
-    c5c2:	0f 85 c0 f9 ff ff    	jne    bf88 <_ZN3pci11printBussesEv+0x28>
-    c5c8:	e9 57 fb ff ff       	jmp    c124 <_ZN3pci11printBussesEv+0x1c4>
-    c5cd:	83 ec 0c             	sub    esp,0xc
-    c5d0:	0f be 44 24 24       	movsx  eax,BYTE PTR [esp+0x24]
-    c5d5:	50                   	push   eax
-    c5d6:	e8 d5 f5 ff ff       	call   bbb0 <_Z7putcharc>
-    c5db:	8d 4c 2b 02          	lea    ecx,[ebx+ebp*1+0x2]
-    c5df:	83 c4 10             	add    esp,0x10
-    c5e2:	eb cc                	jmp    c5b0 <_ZN3pci11printBussesEv+0x650>
-    c5e4:	83 ec 0c             	sub    esp,0xc
-    c5e7:	ff 74 24 24          	push   DWORD PTR [esp+0x24]
-    c5eb:	e8 f0 f5 ff ff       	call   bbe0 <_Z6puthexi>
-    c5f0:	8d 4c 2b 02          	lea    ecx,[ebx+ebp*1+0x2]
-    c5f4:	83 c4 10             	add    esp,0x10
-    c5f7:	eb b7                	jmp    c5b0 <_ZN3pci11printBussesEv+0x650>
-    c5f9:	83 ec 0c             	sub    esp,0xc
-    c5fc:	ff 74 24 24          	push   DWORD PTR [esp+0x24]
-    c600:	e8 eb f5 ff ff       	call   bbf0 <_Z6putocti>
-    c605:	8d 4c 2b 02          	lea    ecx,[ebx+ebp*1+0x2]
-    c609:	83 c4 10             	add    esp,0x10
-    c60c:	eb a2                	jmp    c5b0 <_ZN3pci11printBussesEv+0x650>
-    c60e:	83 ec 0c             	sub    esp,0xc
-    c611:	ff 74 24 24          	push   DWORD PTR [esp+0x24]
-    c615:	e8 e6 f5 ff ff       	call   bc00 <_Z6putbini>
-    c61a:	8d 4c 2b 02          	lea    ecx,[ebx+ebp*1+0x2]
-    c61e:	83 c4 10             	add    esp,0x10
-    c621:	eb 8d                	jmp    c5b0 <_ZN3pci11printBussesEv+0x650>
-    c623:	83 ec 0c             	sub    esp,0xc
-    c626:	68 b4 01 01 00       	push   0x101b4
-    c62b:	e8 00 f6 ff ff       	call   bc30 <_Z6printfPKc>
-    c630:	58                   	pop    eax
-    c631:	ff 74 24 24          	push   DWORD PTR [esp+0x24]
-    c635:	e8 a6 f5 ff ff       	call   bbe0 <_Z6puthexi>
-    c63a:	8d 4c 2b 02          	lea    ecx,[ebx+ebp*1+0x2]
-    c63e:	83 c4 10             	add    esp,0x10
-    c641:	e9 6a ff ff ff       	jmp    c5b0 <_ZN3pci11printBussesEv+0x650>
-    c646:	83 ec 0c             	sub    esp,0xc
-    c649:	ff 74 24 24          	push   DWORD PTR [esp+0x24]
-    c64d:	e8 7e f5 ff ff       	call   bbd0 <_Z6putdeci>
-    c652:	8d 4c 2b 02          	lea    ecx,[ebx+ebp*1+0x2]
-    c656:	83 c4 10             	add    esp,0x10
-    c659:	e9 52 ff ff ff       	jmp    c5b0 <_ZN3pci11printBussesEv+0x650>
-    c65e:	66 90                	xchg   ax,ax
-    c660:	83 ec 08             	sub    esp,0x8
-    c663:	89 f5                	mov    ebp,esi
-    c665:	8b 74 24 10          	mov    esi,DWORD PTR [esp+0x10]
-    c669:	8d 44 24 3a          	lea    eax,[esp+0x3a]
-    c66d:	89 fb                	mov    ebx,edi
-    c66f:	50                   	push   eax
-    c670:	51                   	push   ecx
-    c671:	e8 2a 0b 00 00       	call   d1a0 <_Z14_manage_escapeIhEiPKcPT_>
-    c676:	01 c3                	add    ebx,eax
-    c678:	8b 44 24 1c          	mov    eax,DWORD PTR [esp+0x1c]
-    c67c:	01 eb                	add    ebx,ebp
-    c67e:	0f be 13             	movsx  edx,BYTE PTR [ebx]
-    c681:	89 44 24 48          	mov    DWORD PTR [esp+0x48],eax
-    c685:	83 c4 10             	add    esp,0x10
-    c688:	84 d2                	test   dl,dl
-    c68a:	0f 84 d0 f9 ff ff    	je     c060 <_ZN3pci11printBussesEv+0x100>
-    c690:	89 74 24 08          	mov    DWORD PTR [esp+0x8],esi
-    c694:	31 ed                	xor    ebp,ebp
-    c696:	89 de                	mov    esi,ebx
-    c698:	eb 2c                	jmp    c6c6 <_ZN3pci11printBussesEv+0x766>
-    c69a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    c6a0:	80 fb 25             	cmp    bl,0x25
-    c6a3:	0f 84 af 01 00 00    	je     c858 <_ZN3pci11printBussesEv+0x8f8>
-    c6a9:	84 db                	test   bl,bl
-    c6ab:	0f 85 9f 00 00 00    	jne    c750 <_ZN3pci11printBussesEv+0x7f0>
-    c6b1:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
-    c6b6:	8d 7d 02             	lea    edi,[ebp+0x2]
-    c6b9:	84 db                	test   bl,bl
-    c6bb:	0f 84 4f fe ff ff    	je     c510 <_ZN3pci11printBussesEv+0x5b0>
-    c6c1:	0f be d3             	movsx  edx,bl
-    c6c4:	89 fd                	mov    ebp,edi
-    c6c6:	8d 7d 01             	lea    edi,[ebp+0x1]
-    c6c9:	80 fa 25             	cmp    dl,0x25
-    c6cc:	8d 0c 3e             	lea    ecx,[esi+edi*1]
-    c6cf:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
-    c6d2:	74 cc                	je     c6a0 <_ZN3pci11printBussesEv+0x740>
-    c6d4:	83 ec 0c             	sub    esp,0xc
-    c6d7:	52                   	push   edx
-    c6d8:	e8 d3 f4 ff ff       	call   bbb0 <_Z7putcharc>
-    c6dd:	83 c4 10             	add    esp,0x10
-    c6e0:	84 db                	test   bl,bl
-    c6e2:	75 dd                	jne    c6c1 <_ZN3pci11printBussesEv+0x761>
-    c6e4:	8b 74 24 08          	mov    esi,DWORD PTR [esp+0x8]
-    c6e8:	e9 73 f9 ff ff       	jmp    c060 <_ZN3pci11printBussesEv+0x100>
-    c6ed:	8d 76 00             	lea    esi,[esi+0x0]
-    c6f0:	83 ec 0c             	sub    esp,0xc
-    c6f3:	8d 6f 02             	lea    ebp,[edi+0x2]
-    c6f6:	6a 25                	push   0x25
-    c6f8:	e8 b3 f4 ff ff       	call   bbb0 <_Z7putcharc>
-    c6fd:	0f b6 5c 3e 02       	movzx  ebx,BYTE PTR [esi+edi*1+0x2]
-    c702:	83 c4 10             	add    esp,0x10
-    c705:	84 db                	test   bl,bl
-    c707:	0f 85 60 fc ff ff    	jne    c36d <_ZN3pci11printBussesEv+0x40d>
-    c70d:	8b 74 24 14          	mov    esi,DWORD PTR [esp+0x14]
-    c711:	e9 4a f9 ff ff       	jmp    c060 <_ZN3pci11printBussesEv+0x100>
-    c716:	8d 76 00             	lea    esi,[esi+0x0]
-    c719:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
-    c720:	83 ec 0c             	sub    esp,0xc
-    c723:	8d 7d 02             	lea    edi,[ebp+0x2]
-    c726:	6a 25                	push   0x25
-    c728:	e8 83 f4 ff ff       	call   bbb0 <_Z7putcharc>
-    c72d:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
-    c732:	83 c4 10             	add    esp,0x10
-    c735:	84 db                	test   bl,bl
-    c737:	0f 85 a4 fb ff ff    	jne    c2e1 <_ZN3pci11printBussesEv+0x381>
-    c73d:	8b 74 24 08          	mov    esi,DWORD PTR [esp+0x8]
-    c741:	e9 95 fa ff ff       	jmp    c1db <_ZN3pci11printBussesEv+0x27b>
-    c746:	8d 76 00             	lea    esi,[esi+0x0]
-    c749:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
-    c750:	83 ec 08             	sub    esp,0x8
-    c753:	89 f3                	mov    ebx,esi
-    c755:	8b 74 24 10          	mov    esi,DWORD PTR [esp+0x10]
-    c759:	8d 44 24 40          	lea    eax,[esp+0x40]
-    c75d:	50                   	push   eax
-    c75e:	51                   	push   ecx
-    c75f:	e8 bc 10 00 00       	call   d820 <_Z14_manage_escapeIiEiPKcPT_>
-    c764:	01 c7                	add    edi,eax
-    c766:	89 74 24 4c          	mov    DWORD PTR [esp+0x4c],esi
-    c76a:	83 c4 10             	add    esp,0x10
-    c76d:	01 df                	add    edi,ebx
-    c76f:	0f be 07             	movsx  eax,BYTE PTR [edi]
-    c772:	84 c0                	test   al,al
-    c774:	0f 84 e6 f8 ff ff    	je     c060 <_ZN3pci11printBussesEv+0x100>
-    c77a:	31 d2                	xor    edx,edx
-    c77c:	eb 28                	jmp    c7a6 <_ZN3pci11printBussesEv+0x846>
-    c77e:	66 90                	xchg   ax,ax
-    c780:	80 fb 25             	cmp    bl,0x25
-    c783:	0f 84 f7 00 00 00    	je     c880 <_ZN3pci11printBussesEv+0x920>
+    c35b:	74 22                	je     c37f <_ZN3pci11printBussesEv+0x29f>
+    c35d:	0f be c3             	movsx  eax,bl
+    c360:	89 fd                	mov    ebp,edi
+    c362:	8d 7d 01             	lea    edi,[ebp+0x1]
+    c365:	3c 25                	cmp    al,0x25
+    c367:	8d 0c 3e             	lea    ecx,[esi+edi*1]
+    c36a:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
+    c36d:	74 d1                	je     c340 <_ZN3pci11printBussesEv+0x260>
+    c36f:	83 ec 0c             	sub    esp,0xc
+    c372:	50                   	push   eax
+    c373:	e8 58 f9 ff ff       	call   bcd0 <_Z7putcharc>
+    c378:	83 c4 10             	add    esp,0x10
+    c37b:	84 db                	test   bl,bl
+    c37d:	75 de                	jne    c35d <_ZN3pci11printBussesEv+0x27d>
+    c37f:	8b 74 24 1c          	mov    esi,DWORD PTR [esp+0x1c]
+    c383:	83 c6 01             	add    esi,0x1
+    c386:	83 fe 20             	cmp    esi,0x20
+    c389:	0f 85 79 fd ff ff    	jne    c108 <_ZN3pci11printBussesEv+0x28>
+    c38f:	e9 20 ff ff ff       	jmp    c2b4 <_ZN3pci11printBussesEv+0x1d4>
+    c394:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    c398:	83 ec 08             	sub    esp,0x8
+    c39b:	8d 44 24 3c          	lea    eax,[esp+0x3c]
+    c39f:	50                   	push   eax
+    c3a0:	51                   	push   ecx
+    c3a1:	e8 2a 0b 00 00       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    c3a6:	01 c3                	add    ebx,eax
+    c3a8:	c7 44 24 48 2f 00 00 	mov    DWORD PTR [esp+0x48],0x2f
+    c3af:	00 
+    c3b0:	83 c4 10             	add    esp,0x10
+    c3b3:	0f be 83 5c 08 01 00 	movsx  eax,BYTE PTR [ebx+0x1085c]
+    c3ba:	8d 93 5c 08 01 00    	lea    edx,[ebx+0x1085c]
+    c3c0:	84 c0                	test   al,al
+    c3c2:	0f 84 20 fe ff ff    	je     c1e8 <_ZN3pci11printBussesEv+0x108>
+    c3c8:	89 74 24 1c          	mov    DWORD PTR [esp+0x1c],esi
+    c3cc:	31 ed                	xor    ebp,ebp
+    c3ce:	89 d6                	mov    esi,edx
+    c3d0:	eb 28                	jmp    c3fa <_ZN3pci11printBussesEv+0x31a>
+    c3d2:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    c3d8:	80 fb 25             	cmp    bl,0x25
+    c3db:	0f 84 1f 03 00 00    	je     c700 <_ZN3pci11printBussesEv+0x620>
+    c3e1:	84 db                	test   bl,bl
+    c3e3:	0f 85 c7 00 00 00    	jne    c4b0 <_ZN3pci11printBussesEv+0x3d0>
+    c3e9:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
+    c3ee:	8d 7d 02             	lea    edi,[ebp+0x2]
+    c3f1:	84 db                	test   bl,bl
+    c3f3:	74 22                	je     c417 <_ZN3pci11printBussesEv+0x337>
+    c3f5:	0f be c3             	movsx  eax,bl
+    c3f8:	89 fd                	mov    ebp,edi
+    c3fa:	8d 7d 01             	lea    edi,[ebp+0x1]
+    c3fd:	3c 25                	cmp    al,0x25
+    c3ff:	8d 0c 3e             	lea    ecx,[esi+edi*1]
+    c402:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
+    c405:	74 d1                	je     c3d8 <_ZN3pci11printBussesEv+0x2f8>
+    c407:	83 ec 0c             	sub    esp,0xc
+    c40a:	50                   	push   eax
+    c40b:	e8 c0 f8 ff ff       	call   bcd0 <_Z7putcharc>
+    c410:	83 c4 10             	add    esp,0x10
+    c413:	84 db                	test   bl,bl
+    c415:	75 de                	jne    c3f5 <_ZN3pci11printBussesEv+0x315>
+    c417:	8b 74 24 1c          	mov    esi,DWORD PTR [esp+0x1c]
+    c41b:	e9 c8 fd ff ff       	jmp    c1e8 <_ZN3pci11printBussesEv+0x108>
+    c420:	89 74 24 04          	mov    DWORD PTR [esp+0x4],esi
+    c424:	8b 74 24 1c          	mov    esi,DWORD PTR [esp+0x1c]
+    c428:	83 ec 08             	sub    esp,0x8
+    c42b:	8d 44 24 50          	lea    eax,[esp+0x50]
+    c42f:	50                   	push   eax
+    c430:	51                   	push   ecx
+    c431:	e8 9a 0b 00 00       	call   cfd0 <_Z14_manage_escapeIiEiPKcPT_>
+    c436:	8b 54 24 14          	mov    edx,DWORD PTR [esp+0x14]
+    c43a:	01 c7                	add    edi,eax
+    c43c:	c7 44 24 5c 58 01 01 	mov    DWORD PTR [esp+0x5c],0x10158
+    c443:	00 
+    c444:	83 c4 10             	add    esp,0x10
+    c447:	01 fa                	add    edx,edi
+    c449:	0f be 02             	movsx  eax,BYTE PTR [edx]
+    c44c:	84 c0                	test   al,al
+    c44e:	0f 84 54 fe ff ff    	je     c2a8 <_ZN3pci11printBussesEv+0x1c8>
+    c454:	89 74 24 1c          	mov    DWORD PTR [esp+0x1c],esi
+    c458:	31 ff                	xor    edi,edi
+    c45a:	89 d6                	mov    esi,edx
+    c45c:	eb 28                	jmp    c486 <_ZN3pci11printBussesEv+0x3a6>
+    c45e:	66 90                	xchg   ax,ax
+    c460:	80 fb 25             	cmp    bl,0x25
+    c463:	0f 84 17 04 00 00    	je     c880 <_ZN3pci11printBussesEv+0x7a0>
+    c469:	84 db                	test   bl,bl
+    c46b:	0f 85 bf 01 00 00    	jne    c630 <_ZN3pci11printBussesEv+0x550>
+    c471:	0f b6 5c 3e 02       	movzx  ebx,BYTE PTR [esi+edi*1+0x2]
+    c476:	8d 6f 02             	lea    ebp,[edi+0x2]
+    c479:	84 db                	test   bl,bl
+    c47b:	0f 84 fe fe ff ff    	je     c37f <_ZN3pci11printBussesEv+0x29f>
+    c481:	0f be c3             	movsx  eax,bl
+    c484:	89 ef                	mov    edi,ebp
+    c486:	8d 6f 01             	lea    ebp,[edi+0x1]
+    c489:	3c 25                	cmp    al,0x25
+    c48b:	8d 0c 2e             	lea    ecx,[esi+ebp*1]
+    c48e:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
+    c491:	74 cd                	je     c460 <_ZN3pci11printBussesEv+0x380>
+    c493:	83 ec 0c             	sub    esp,0xc
+    c496:	50                   	push   eax
+    c497:	e8 34 f8 ff ff       	call   bcd0 <_Z7putcharc>
+    c49c:	83 c4 10             	add    esp,0x10
+    c49f:	84 db                	test   bl,bl
+    c4a1:	75 de                	jne    c481 <_ZN3pci11printBussesEv+0x3a1>
+    c4a3:	8b 74 24 1c          	mov    esi,DWORD PTR [esp+0x1c]
+    c4a7:	e9 d7 fe ff ff       	jmp    c383 <_ZN3pci11printBussesEv+0x2a3>
+    c4ac:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    c4b0:	89 74 24 04          	mov    DWORD PTR [esp+0x4],esi
+    c4b4:	8b 74 24 1c          	mov    esi,DWORD PTR [esp+0x1c]
+    c4b8:	83 ec 08             	sub    esp,0x8
+    c4bb:	8d 44 24 40          	lea    eax,[esp+0x40]
+    c4bf:	50                   	push   eax
+    c4c0:	51                   	push   ecx
+    c4c1:	e8 0a 0b 00 00       	call   cfd0 <_Z14_manage_escapeIiEiPKcPT_>
+    c4c6:	8b 54 24 14          	mov    edx,DWORD PTR [esp+0x14]
+    c4ca:	01 c7                	add    edi,eax
+    c4cc:	c7 44 24 4c 58 01 01 	mov    DWORD PTR [esp+0x4c],0x10158
+    c4d3:	00 
+    c4d4:	83 c4 10             	add    esp,0x10
+    c4d7:	01 fa                	add    edx,edi
+    c4d9:	0f be 02             	movsx  eax,BYTE PTR [edx]
+    c4dc:	84 c0                	test   al,al
+    c4de:	0f 84 04 fd ff ff    	je     c1e8 <_ZN3pci11printBussesEv+0x108>
+    c4e4:	89 74 24 1c          	mov    DWORD PTR [esp+0x1c],esi
+    c4e8:	31 ff                	xor    edi,edi
+    c4ea:	89 d6                	mov    esi,edx
+    c4ec:	eb 28                	jmp    c516 <_ZN3pci11printBussesEv+0x436>
+    c4ee:	66 90                	xchg   ax,ax
+    c4f0:	80 fb 25             	cmp    bl,0x25
+    c4f3:	0f 84 57 03 00 00    	je     c850 <_ZN3pci11printBussesEv+0x770>
+    c4f9:	84 db                	test   bl,bl
+    c4fb:	0f 85 97 00 00 00    	jne    c598 <_ZN3pci11printBussesEv+0x4b8>
+    c501:	0f b6 5c 3e 02       	movzx  ebx,BYTE PTR [esi+edi*1+0x2]
+    c506:	8d 6f 02             	lea    ebp,[edi+0x2]
+    c509:	84 db                	test   bl,bl
+    c50b:	0f 84 06 ff ff ff    	je     c417 <_ZN3pci11printBussesEv+0x337>
+    c511:	0f be c3             	movsx  eax,bl
+    c514:	89 ef                	mov    edi,ebp
+    c516:	8d 6f 01             	lea    ebp,[edi+0x1]
+    c519:	3c 25                	cmp    al,0x25
+    c51b:	8d 0c 2e             	lea    ecx,[esi+ebp*1]
+    c51e:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
+    c521:	74 cd                	je     c4f0 <_ZN3pci11printBussesEv+0x410>
+    c523:	83 ec 0c             	sub    esp,0xc
+    c526:	50                   	push   eax
+    c527:	e8 a4 f7 ff ff       	call   bcd0 <_Z7putcharc>
+    c52c:	83 c4 10             	add    esp,0x10
+    c52f:	84 db                	test   bl,bl
+    c531:	75 de                	jne    c511 <_ZN3pci11printBussesEv+0x431>
+    c533:	8b 74 24 1c          	mov    esi,DWORD PTR [esp+0x1c]
+    c537:	e9 ac fc ff ff       	jmp    c1e8 <_ZN3pci11printBussesEv+0x108>
+    c53c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    c540:	83 ec 0c             	sub    esp,0xc
+    c543:	8d 5f 02             	lea    ebx,[edi+0x2]
+    c546:	6a 25                	push   0x25
+    c548:	e8 83 f7 ff ff       	call   bcd0 <_Z7putcharc>
+    c54d:	0f b6 83 b4 08 01 00 	movzx  eax,BYTE PTR [ebx+0x108b4]
+    c554:	83 c4 10             	add    esp,0x10
+    c557:	84 c0                	test   al,al
+    c559:	0f 85 0f fd ff ff    	jne    c26e <_ZN3pci11printBussesEv+0x18e>
+    c55f:	83 c6 01             	add    esi,0x1
+    c562:	83 fe 20             	cmp    esi,0x20
+    c565:	0f 85 9d fb ff ff    	jne    c108 <_ZN3pci11printBussesEv+0x28>
+    c56b:	e9 44 fd ff ff       	jmp    c2b4 <_ZN3pci11printBussesEv+0x1d4>
+    c570:	83 ec 0c             	sub    esp,0xc
+    c573:	8d 5f 02             	lea    ebx,[edi+0x2]
+    c576:	6a 25                	push   0x25
+    c578:	e8 53 f7 ff ff       	call   bcd0 <_Z7putcharc>
+    c57d:	0f b6 83 5c 08 01 00 	movzx  eax,BYTE PTR [ebx+0x1085c]
+    c584:	83 c4 10             	add    esp,0x10
+    c587:	84 c0                	test   al,al
+    c589:	0f 85 1f fc ff ff    	jne    c1ae <_ZN3pci11printBussesEv+0xce>
+    c58f:	e9 54 fc ff ff       	jmp    c1e8 <_ZN3pci11printBussesEv+0x108>
+    c594:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    c598:	89 74 24 04          	mov    DWORD PTR [esp+0x4],esi
+    c59c:	8b 74 24 1c          	mov    esi,DWORD PTR [esp+0x1c]
+    c5a0:	83 ec 08             	sub    esp,0x8
+    c5a3:	8d 44 24 44          	lea    eax,[esp+0x44]
+    c5a7:	50                   	push   eax
+    c5a8:	51                   	push   ecx
+    c5a9:	e8 22 09 00 00       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    c5ae:	8b 54 24 14          	mov    edx,DWORD PTR [esp+0x14]
+    c5b2:	01 c5                	add    ebp,eax
+    c5b4:	0f b6 44 24 20       	movzx  eax,BYTE PTR [esp+0x20]
+    c5b9:	01 d5                	add    ebp,edx
+    c5bb:	0f be 55 00          	movsx  edx,BYTE PTR [ebp+0x0]
+    c5bf:	88 44 24 37          	mov    BYTE PTR [esp+0x37],al
+    c5c3:	83 c4 10             	add    esp,0x10
+    c5c6:	84 d2                	test   dl,dl
+    c5c8:	0f 84 1a fc ff ff    	je     c1e8 <_ZN3pci11printBussesEv+0x108>
+    c5ce:	31 ff                	xor    edi,edi
+    c5d0:	89 74 24 04          	mov    DWORD PTR [esp+0x4],esi
+    c5d4:	89 ee                	mov    esi,ebp
+    c5d6:	89 fd                	mov    ebp,edi
+    c5d8:	eb 28                	jmp    c602 <_ZN3pci11printBussesEv+0x522>
+    c5da:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    c5e0:	80 fb 25             	cmp    bl,0x25
+    c5e3:	0f 84 17 04 00 00    	je     ca00 <_ZN3pci11printBussesEv+0x920>
+    c5e9:	84 db                	test   bl,bl
+    c5eb:	0f 85 3f 01 00 00    	jne    c730 <_ZN3pci11printBussesEv+0x650>
+    c5f1:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
+    c5f6:	8d 7d 02             	lea    edi,[ebp+0x2]
+    c5f9:	84 db                	test   bl,bl
+    c5fb:	74 23                	je     c620 <_ZN3pci11printBussesEv+0x540>
+    c5fd:	0f be d3             	movsx  edx,bl
+    c600:	89 fd                	mov    ebp,edi
+    c602:	8d 7d 01             	lea    edi,[ebp+0x1]
+    c605:	80 fa 25             	cmp    dl,0x25
+    c608:	8d 0c 3e             	lea    ecx,[esi+edi*1]
+    c60b:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
+    c60e:	74 d0                	je     c5e0 <_ZN3pci11printBussesEv+0x500>
+    c610:	83 ec 0c             	sub    esp,0xc
+    c613:	52                   	push   edx
+    c614:	e8 b7 f6 ff ff       	call   bcd0 <_Z7putcharc>
+    c619:	83 c4 10             	add    esp,0x10
+    c61c:	84 db                	test   bl,bl
+    c61e:	75 dd                	jne    c5fd <_ZN3pci11printBussesEv+0x51d>
+    c620:	8b 74 24 04          	mov    esi,DWORD PTR [esp+0x4]
+    c624:	e9 bf fb ff ff       	jmp    c1e8 <_ZN3pci11printBussesEv+0x108>
+    c629:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    c630:	89 74 24 04          	mov    DWORD PTR [esp+0x4],esi
+    c634:	8b 74 24 1c          	mov    esi,DWORD PTR [esp+0x1c]
+    c638:	83 ec 08             	sub    esp,0x8
+    c63b:	8d 44 24 54          	lea    eax,[esp+0x54]
+    c63f:	50                   	push   eax
+    c640:	51                   	push   ecx
+    c641:	e8 8a 08 00 00       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    c646:	8b 54 24 14          	mov    edx,DWORD PTR [esp+0x14]
+    c64a:	01 c5                	add    ebp,eax
+    c64c:	0f b7 44 24 20       	movzx  eax,WORD PTR [esp+0x20]
+    c651:	01 d5                	add    ebp,edx
+    c653:	0f be 55 00          	movsx  edx,BYTE PTR [ebp+0x0]
+    c657:	66 89 44 24 3c       	mov    WORD PTR [esp+0x3c],ax
+    c65c:	83 c4 10             	add    esp,0x10
+    c65f:	84 d2                	test   dl,dl
+    c661:	0f 84 41 fc ff ff    	je     c2a8 <_ZN3pci11printBussesEv+0x1c8>
+    c667:	31 ff                	xor    edi,edi
+    c669:	89 74 24 04          	mov    DWORD PTR [esp+0x4],esi
+    c66d:	89 ee                	mov    esi,ebp
+    c66f:	89 fd                	mov    ebp,edi
+    c671:	eb 27                	jmp    c69a <_ZN3pci11printBussesEv+0x5ba>
+    c673:	90                   	nop
+    c674:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    c678:	80 fb 25             	cmp    bl,0x25
+    c67b:	0f 84 4f 03 00 00    	je     c9d0 <_ZN3pci11printBussesEv+0x8f0>
+    c681:	84 db                	test   bl,bl
+    c683:	0f 85 37 01 00 00    	jne    c7c0 <_ZN3pci11printBussesEv+0x6e0>
+    c689:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
+    c68e:	8d 7d 02             	lea    edi,[ebp+0x2]
+    c691:	84 db                	test   bl,bl
+    c693:	74 23                	je     c6b8 <_ZN3pci11printBussesEv+0x5d8>
+    c695:	0f be d3             	movsx  edx,bl
+    c698:	89 fd                	mov    ebp,edi
+    c69a:	8d 7d 01             	lea    edi,[ebp+0x1]
+    c69d:	80 fa 25             	cmp    dl,0x25
+    c6a0:	8d 0c 3e             	lea    ecx,[esi+edi*1]
+    c6a3:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
+    c6a6:	74 d0                	je     c678 <_ZN3pci11printBussesEv+0x598>
+    c6a8:	83 ec 0c             	sub    esp,0xc
+    c6ab:	52                   	push   edx
+    c6ac:	e8 1f f6 ff ff       	call   bcd0 <_Z7putcharc>
+    c6b1:	83 c4 10             	add    esp,0x10
+    c6b4:	84 db                	test   bl,bl
+    c6b6:	75 dd                	jne    c695 <_ZN3pci11printBussesEv+0x5b5>
+    c6b8:	8b 74 24 04          	mov    esi,DWORD PTR [esp+0x4]
+    c6bc:	83 c6 01             	add    esi,0x1
+    c6bf:	83 fe 20             	cmp    esi,0x20
+    c6c2:	0f 85 40 fa ff ff    	jne    c108 <_ZN3pci11printBussesEv+0x28>
+    c6c8:	e9 e7 fb ff ff       	jmp    c2b4 <_ZN3pci11printBussesEv+0x1d4>
+    c6cd:	8d 76 00             	lea    esi,[esi+0x0]
+    c6d0:	83 ec 0c             	sub    esp,0xc
+    c6d3:	8d 7d 02             	lea    edi,[ebp+0x2]
+    c6d6:	6a 25                	push   0x25
+    c6d8:	e8 f3 f5 ff ff       	call   bcd0 <_Z7putcharc>
+    c6dd:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
+    c6e2:	83 c4 10             	add    esp,0x10
+    c6e5:	84 db                	test   bl,bl
+    c6e7:	0f 85 70 fc ff ff    	jne    c35d <_ZN3pci11printBussesEv+0x27d>
+    c6ed:	8b 74 24 1c          	mov    esi,DWORD PTR [esp+0x1c]
+    c6f1:	e9 8d fc ff ff       	jmp    c383 <_ZN3pci11printBussesEv+0x2a3>
+    c6f6:	8d 76 00             	lea    esi,[esi+0x0]
+    c6f9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    c700:	83 ec 0c             	sub    esp,0xc
+    c703:	8d 7d 02             	lea    edi,[ebp+0x2]
+    c706:	6a 25                	push   0x25
+    c708:	e8 c3 f5 ff ff       	call   bcd0 <_Z7putcharc>
+    c70d:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
+    c712:	83 c4 10             	add    esp,0x10
+    c715:	84 db                	test   bl,bl
+    c717:	0f 85 d8 fc ff ff    	jne    c3f5 <_ZN3pci11printBussesEv+0x315>
+    c71d:	8b 74 24 1c          	mov    esi,DWORD PTR [esp+0x1c]
+    c721:	e9 c2 fa ff ff       	jmp    c1e8 <_ZN3pci11printBussesEv+0x108>
+    c726:	8d 76 00             	lea    esi,[esi+0x0]
+    c729:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    c730:	83 ec 08             	sub    esp,0x8
+    c733:	89 f5                	mov    ebp,esi
+    c735:	8b 74 24 0c          	mov    esi,DWORD PTR [esp+0xc]
+    c739:	8d 44 24 2f          	lea    eax,[esp+0x2f]
+    c73d:	89 fb                	mov    ebx,edi
+    c73f:	50                   	push   eax
+    c740:	51                   	push   ecx
+    c741:	e8 ea 2e 00 00       	call   f630 <_Z14_manage_escapeIhEiPKcPT_>
+    c746:	01 c3                	add    ebx,eax
+    c748:	0f b6 44 24 24       	movzx  eax,BYTE PTR [esp+0x24]
+    c74d:	01 eb                	add    ebx,ebp
+    c74f:	0f be 13             	movsx  edx,BYTE PTR [ebx]
+    c752:	88 44 24 38          	mov    BYTE PTR [esp+0x38],al
+    c756:	83 c4 10             	add    esp,0x10
+    c759:	84 d2                	test   dl,dl
+    c75b:	0f 84 87 fa ff ff    	je     c1e8 <_ZN3pci11printBussesEv+0x108>
+    c761:	89 74 24 04          	mov    DWORD PTR [esp+0x4],esi
+    c765:	31 ed                	xor    ebp,ebp
+    c767:	89 de                	mov    esi,ebx
+    c769:	eb 2b                	jmp    c796 <_ZN3pci11printBussesEv+0x6b6>
+    c76b:	90                   	nop
+    c76c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    c770:	80 fb 25             	cmp    bl,0x25
+    c773:	0f 84 f7 03 00 00    	je     cb70 <_ZN3pci11printBussesEv+0xa90>
+    c779:	84 db                	test   bl,bl
+    c77b:	0f 85 bf 01 00 00    	jne    c940 <_ZN3pci11printBussesEv+0x860>
+    c781:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
+    c786:	8d 7d 02             	lea    edi,[ebp+0x2]
     c789:	84 db                	test   bl,bl
-    c78b:	0f 85 9f 00 00 00    	jne    c830 <_ZN3pci11printBussesEv+0x8d0>
-    c791:	0f b6 5c 17 02       	movzx  ebx,BYTE PTR [edi+edx*1+0x2]
-    c796:	8d 6a 02             	lea    ebp,[edx+0x2]
-    c799:	84 db                	test   bl,bl
-    c79b:	0f 84 bf f8 ff ff    	je     c060 <_ZN3pci11printBussesEv+0x100>
-    c7a1:	0f be c3             	movsx  eax,bl
-    c7a4:	89 ea                	mov    edx,ebp
-    c7a6:	8d 6a 01             	lea    ebp,[edx+0x1]
-    c7a9:	3c 25                	cmp    al,0x25
-    c7ab:	8d 0c 2f             	lea    ecx,[edi+ebp*1]
-    c7ae:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
-    c7b1:	74 cd                	je     c780 <_ZN3pci11printBussesEv+0x820>
-    c7b3:	83 ec 0c             	sub    esp,0xc
-    c7b6:	50                   	push   eax
-    c7b7:	e8 f4 f3 ff ff       	call   bbb0 <_Z7putcharc>
-    c7bc:	83 c4 10             	add    esp,0x10
-    c7bf:	84 db                	test   bl,bl
-    c7c1:	75 de                	jne    c7a1 <_ZN3pci11printBussesEv+0x841>
-    c7c3:	e9 98 f8 ff ff       	jmp    c060 <_ZN3pci11printBussesEv+0x100>
-    c7c8:	90                   	nop
-    c7c9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    c7d0:	83 ec 0c             	sub    esp,0xc
-    c7d3:	8d 7d 02             	lea    edi,[ebp+0x2]
-    c7d6:	6a 25                	push   0x25
-    c7d8:	e8 d3 f3 ff ff       	call   bbb0 <_Z7putcharc>
-    c7dd:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
-    c7e2:	83 c4 10             	add    esp,0x10
-    c7e5:	84 db                	test   bl,bl
-    c7e7:	0f 85 00 fd ff ff    	jne    c4ed <_ZN3pci11printBussesEv+0x58d>
-    c7ed:	8b 74 24 08          	mov    esi,DWORD PTR [esp+0x8]
-    c7f1:	e9 6a f8 ff ff       	jmp    c060 <_ZN3pci11printBussesEv+0x100>
-    c7f6:	8d 76 00             	lea    esi,[esi+0x0]
-    c7f9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
-    c800:	83 ec 0c             	sub    esp,0xc
-    c803:	8d 7d 02             	lea    edi,[ebp+0x2]
-    c806:	6a 25                	push   0x25
-    c808:	e8 a3 f3 ff ff       	call   bbb0 <_Z7putcharc>
-    c80d:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
-    c812:	83 c4 10             	add    esp,0x10
-    c815:	84 db                	test   bl,bl
-    c817:	0f 85 3c fc ff ff    	jne    c459 <_ZN3pci11printBussesEv+0x4f9>
-    c81d:	8b 74 24 08          	mov    esi,DWORD PTR [esp+0x8]
-    c821:	e9 b5 f9 ff ff       	jmp    c1db <_ZN3pci11printBussesEv+0x27b>
-    c826:	8d 76 00             	lea    esi,[esi+0x0]
-    c829:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
-    c830:	83 ec 08             	sub    esp,0x8
-    c833:	8d 44 24 44          	lea    eax,[esp+0x44]
-    c837:	50                   	push   eax
-    c838:	51                   	push   ecx
-    c839:	e8 e2 0f 00 00       	call   d820 <_Z14_manage_escapeIiEiPKcPT_>
-    c83e:	8d 1c 28             	lea    ebx,[eax+ebp*1]
-    c841:	01 fb                	add    ebx,edi
-    c843:	89 1c 24             	mov    DWORD PTR [esp],ebx
-    c846:	e8 e5 f3 ff ff       	call   bc30 <_Z6printfPKc>
-    c84b:	83 c4 10             	add    esp,0x10
-    c84e:	e9 0d f8 ff ff       	jmp    c060 <_ZN3pci11printBussesEv+0x100>
-    c853:	90                   	nop
-    c854:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    c858:	83 ec 0c             	sub    esp,0xc
-    c85b:	8d 7d 02             	lea    edi,[ebp+0x2]
-    c85e:	6a 25                	push   0x25
-    c860:	e8 4b f3 ff ff       	call   bbb0 <_Z7putcharc>
-    c865:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
-    c86a:	83 c4 10             	add    esp,0x10
-    c86d:	84 db                	test   bl,bl
-    c86f:	0f 85 4c fe ff ff    	jne    c6c1 <_ZN3pci11printBussesEv+0x761>
-    c875:	8b 74 24 08          	mov    esi,DWORD PTR [esp+0x8]
-    c879:	e9 e2 f7 ff ff       	jmp    c060 <_ZN3pci11printBussesEv+0x100>
-    c87e:	66 90                	xchg   ax,ax
-    c880:	89 54 24 08          	mov    DWORD PTR [esp+0x8],edx
-    c884:	83 ec 0c             	sub    esp,0xc
-    c887:	6a 25                	push   0x25
-    c889:	e8 22 f3 ff ff       	call   bbb0 <_Z7putcharc>
-    c88e:	8b 54 24 18          	mov    edx,DWORD PTR [esp+0x18]
+    c78b:	0f 84 8f fe ff ff    	je     c620 <_ZN3pci11printBussesEv+0x540>
+    c791:	0f be d3             	movsx  edx,bl
+    c794:	89 fd                	mov    ebp,edi
+    c796:	8d 7d 01             	lea    edi,[ebp+0x1]
+    c799:	80 fa 25             	cmp    dl,0x25
+    c79c:	8d 0c 3e             	lea    ecx,[esi+edi*1]
+    c79f:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
+    c7a2:	74 cc                	je     c770 <_ZN3pci11printBussesEv+0x690>
+    c7a4:	83 ec 0c             	sub    esp,0xc
+    c7a7:	52                   	push   edx
+    c7a8:	e8 23 f5 ff ff       	call   bcd0 <_Z7putcharc>
+    c7ad:	83 c4 10             	add    esp,0x10
+    c7b0:	84 db                	test   bl,bl
+    c7b2:	75 dd                	jne    c791 <_ZN3pci11printBussesEv+0x6b1>
+    c7b4:	8b 74 24 04          	mov    esi,DWORD PTR [esp+0x4]
+    c7b8:	e9 2b fa ff ff       	jmp    c1e8 <_ZN3pci11printBussesEv+0x108>
+    c7bd:	8d 76 00             	lea    esi,[esi+0x0]
+    c7c0:	83 ec 08             	sub    esp,0x8
+    c7c3:	89 f5                	mov    ebp,esi
+    c7c5:	8b 74 24 0c          	mov    esi,DWORD PTR [esp+0xc]
+    c7c9:	8d 44 24 34          	lea    eax,[esp+0x34]
+    c7cd:	89 fb                	mov    ebx,edi
+    c7cf:	50                   	push   eax
+    c7d0:	51                   	push   ecx
+    c7d1:	e8 da 1e 00 00       	call   e6b0 <_Z14_manage_escapeItEiPKcPT_>
+    c7d6:	01 c3                	add    ebx,eax
+    c7d8:	0f b7 44 24 24       	movzx  eax,WORD PTR [esp+0x24]
+    c7dd:	01 eb                	add    ebx,ebp
+    c7df:	0f be 13             	movsx  edx,BYTE PTR [ebx]
+    c7e2:	66 89 44 24 3e       	mov    WORD PTR [esp+0x3e],ax
+    c7e7:	83 c4 10             	add    esp,0x10
+    c7ea:	84 d2                	test   dl,dl
+    c7ec:	0f 84 b6 fa ff ff    	je     c2a8 <_ZN3pci11printBussesEv+0x1c8>
+    c7f2:	89 74 24 04          	mov    DWORD PTR [esp+0x4],esi
+    c7f6:	31 ed                	xor    ebp,ebp
+    c7f8:	89 de                	mov    esi,ebx
+    c7fa:	eb 2a                	jmp    c826 <_ZN3pci11printBussesEv+0x746>
+    c7fc:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    c800:	80 fb 25             	cmp    bl,0x25
+    c803:	0f 84 37 03 00 00    	je     cb40 <_ZN3pci11printBussesEv+0xa60>
+    c809:	84 db                	test   bl,bl
+    c80b:	0f 85 9f 00 00 00    	jne    c8b0 <_ZN3pci11printBussesEv+0x7d0>
+    c811:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
+    c816:	8d 7d 02             	lea    edi,[ebp+0x2]
+    c819:	84 db                	test   bl,bl
+    c81b:	0f 84 97 fe ff ff    	je     c6b8 <_ZN3pci11printBussesEv+0x5d8>
+    c821:	0f be d3             	movsx  edx,bl
+    c824:	89 fd                	mov    ebp,edi
+    c826:	8d 7d 01             	lea    edi,[ebp+0x1]
+    c829:	80 fa 25             	cmp    dl,0x25
+    c82c:	8d 0c 3e             	lea    ecx,[esi+edi*1]
+    c82f:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
+    c832:	74 cc                	je     c800 <_ZN3pci11printBussesEv+0x720>
+    c834:	83 ec 0c             	sub    esp,0xc
+    c837:	52                   	push   edx
+    c838:	e8 93 f4 ff ff       	call   bcd0 <_Z7putcharc>
+    c83d:	83 c4 10             	add    esp,0x10
+    c840:	84 db                	test   bl,bl
+    c842:	75 dd                	jne    c821 <_ZN3pci11printBussesEv+0x741>
+    c844:	8b 74 24 04          	mov    esi,DWORD PTR [esp+0x4]
+    c848:	e9 6f fe ff ff       	jmp    c6bc <_ZN3pci11printBussesEv+0x5dc>
+    c84d:	8d 76 00             	lea    esi,[esi+0x0]
+    c850:	83 ec 0c             	sub    esp,0xc
+    c853:	8d 6f 02             	lea    ebp,[edi+0x2]
+    c856:	6a 25                	push   0x25
+    c858:	e8 73 f4 ff ff       	call   bcd0 <_Z7putcharc>
+    c85d:	0f b6 5c 3e 02       	movzx  ebx,BYTE PTR [esi+edi*1+0x2]
+    c862:	83 c4 10             	add    esp,0x10
+    c865:	84 db                	test   bl,bl
+    c867:	0f 85 a4 fc ff ff    	jne    c511 <_ZN3pci11printBussesEv+0x431>
+    c86d:	8b 74 24 1c          	mov    esi,DWORD PTR [esp+0x1c]
+    c871:	e9 72 f9 ff ff       	jmp    c1e8 <_ZN3pci11printBussesEv+0x108>
+    c876:	8d 76 00             	lea    esi,[esi+0x0]
+    c879:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    c880:	83 ec 0c             	sub    esp,0xc
+    c883:	8d 6f 02             	lea    ebp,[edi+0x2]
+    c886:	6a 25                	push   0x25
+    c888:	e8 43 f4 ff ff       	call   bcd0 <_Z7putcharc>
+    c88d:	0f b6 5c 3e 02       	movzx  ebx,BYTE PTR [esi+edi*1+0x2]
     c892:	83 c4 10             	add    esp,0x10
-    c895:	0f b6 5c 17 02       	movzx  ebx,BYTE PTR [edi+edx*1+0x2]
-    c89a:	8d 6a 02             	lea    ebp,[edx+0x2]
-    c89d:	84 db                	test   bl,bl
-    c89f:	0f 85 fc fe ff ff    	jne    c7a1 <_ZN3pci11printBussesEv+0x841>
-    c8a5:	e9 b6 f7 ff ff       	jmp    c060 <_ZN3pci11printBussesEv+0x100>
-
-Disassembly of section .text._Z6printfIiEvPKcT_:
-
-0000c8b0 <_Z6printfIiEvPKcT_>:
-    c8b0:	55                   	push   ebp
-    c8b1:	57                   	push   edi
-    c8b2:	31 ff                	xor    edi,edi
-    c8b4:	56                   	push   esi
-    c8b5:	53                   	push   ebx
-    c8b6:	83 ec 1c             	sub    esp,0x1c
-    c8b9:	8b 44 24 34          	mov    eax,DWORD PTR [esp+0x34]
-    c8bd:	8b 74 24 30          	mov    esi,DWORD PTR [esp+0x30]
-    c8c1:	89 44 24 0c          	mov    DWORD PTR [esp+0xc],eax
-    c8c5:	0f be 06             	movsx  eax,BYTE PTR [esi]
-    c8c8:	84 c0                	test   al,al
-    c8ca:	74 4c                	je     c918 <_Z6printfIiEvPKcT_+0x68>
-    c8cc:	8d 5f 01             	lea    ebx,[edi+0x1]
-    c8cf:	3c 25                	cmp    al,0x25
-    c8d1:	8d 2c 1e             	lea    ebp,[esi+ebx*1]
-    c8d4:	75 2e                	jne    c904 <_Z6printfIiEvPKcT_+0x54>
-    c8d6:	8d 76 00             	lea    esi,[esi+0x0]
-    c8d9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
-    c8e0:	0f b6 45 00          	movzx  eax,BYTE PTR [ebp+0x0]
-    c8e4:	3c 25                	cmp    al,0x25
-    c8e6:	74 78                	je     c960 <_Z6printfIiEvPKcT_+0xb0>
-    c8e8:	84 c0                	test   al,al
-    c8ea:	75 34                	jne    c920 <_Z6printfIiEvPKcT_+0x70>
-    c8ec:	0f be 44 3e 02       	movsx  eax,BYTE PTR [esi+edi*1+0x2]
-    c8f1:	8d 5f 02             	lea    ebx,[edi+0x2]
-    c8f4:	84 c0                	test   al,al
-    c8f6:	74 20                	je     c918 <_Z6printfIiEvPKcT_+0x68>
-    c8f8:	89 df                	mov    edi,ebx
-    c8fa:	8d 5f 01             	lea    ebx,[edi+0x1]
-    c8fd:	3c 25                	cmp    al,0x25
-    c8ff:	8d 2c 1e             	lea    ebp,[esi+ebx*1]
-    c902:	74 dc                	je     c8e0 <_Z6printfIiEvPKcT_+0x30>
-    c904:	83 ec 0c             	sub    esp,0xc
-    c907:	50                   	push   eax
-    c908:	e8 a3 f2 ff ff       	call   bbb0 <_Z7putcharc>
-    c90d:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
-    c911:	83 c4 10             	add    esp,0x10
-    c914:	84 c0                	test   al,al
-    c916:	75 e0                	jne    c8f8 <_Z6printfIiEvPKcT_+0x48>
-    c918:	83 c4 1c             	add    esp,0x1c
-    c91b:	5b                   	pop    ebx
-    c91c:	5e                   	pop    esi
-    c91d:	5f                   	pop    edi
-    c91e:	5d                   	pop    ebp
-    c91f:	c3                   	ret    
-    c920:	83 e8 42             	sub    eax,0x42
-    c923:	3c 36                	cmp    al,0x36
-    c925:	77 26                	ja     c94d <_Z6printfIiEvPKcT_+0x9d>
-    c927:	0f b6 c0             	movzx  eax,al
-    c92a:	ff 24 85 88 fc 00 00 	jmp    DWORD PTR [eax*4+0xfc88]
-    c931:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    c938:	83 ec 0c             	sub    esp,0xc
-    c93b:	8d 6c 3e 02          	lea    ebp,[esi+edi*1+0x2]
-    c93f:	0f be 44 24 18       	movsx  eax,BYTE PTR [esp+0x18]
-    c944:	50                   	push   eax
-    c945:	e8 66 f2 ff ff       	call   bbb0 <_Z7putcharc>
-    c94a:	83 c4 10             	add    esp,0x10
-    c94d:	89 6c 24 30          	mov    DWORD PTR [esp+0x30],ebp
-    c951:	83 c4 1c             	add    esp,0x1c
-    c954:	5b                   	pop    ebx
-    c955:	5e                   	pop    esi
-    c956:	5f                   	pop    edi
-    c957:	5d                   	pop    ebp
-    c958:	e9 d3 f2 ff ff       	jmp    bc30 <_Z6printfPKc>
-    c95d:	8d 76 00             	lea    esi,[esi+0x0]
-    c960:	83 ec 0c             	sub    esp,0xc
-    c963:	8d 5f 02             	lea    ebx,[edi+0x2]
-    c966:	6a 25                	push   0x25
-    c968:	e8 43 f2 ff ff       	call   bbb0 <_Z7putcharc>
-    c96d:	0f be 44 3e 02       	movsx  eax,BYTE PTR [esi+edi*1+0x2]
-    c972:	83 c4 10             	add    esp,0x10
-    c975:	84 c0                	test   al,al
-    c977:	74 9f                	je     c918 <_Z6printfIiEvPKcT_+0x68>
-    c979:	89 df                	mov    edi,ebx
-    c97b:	e9 7a ff ff ff       	jmp    c8fa <_Z6printfIiEvPKcT_+0x4a>
-    c980:	83 ec 0c             	sub    esp,0xc
-    c983:	8d 6c 3e 02          	lea    ebp,[esi+edi*1+0x2]
-    c987:	ff 74 24 18          	push   DWORD PTR [esp+0x18]
-    c98b:	e8 80 f2 ff ff       	call   bc10 <_Z6putstrPc>
-    c990:	83 c4 10             	add    esp,0x10
-    c993:	89 6c 24 30          	mov    DWORD PTR [esp+0x30],ebp
-    c997:	83 c4 1c             	add    esp,0x1c
-    c99a:	5b                   	pop    ebx
-    c99b:	5e                   	pop    esi
-    c99c:	5f                   	pop    edi
-    c99d:	5d                   	pop    ebp
-    c99e:	e9 8d f2 ff ff       	jmp    bc30 <_Z6printfPKc>
-    c9a3:	90                   	nop
-    c9a4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    c9a8:	83 ec 0c             	sub    esp,0xc
-    c9ab:	8d 6c 3e 02          	lea    ebp,[esi+edi*1+0x2]
-    c9af:	ff 74 24 18          	push   DWORD PTR [esp+0x18]
-    c9b3:	e8 48 f2 ff ff       	call   bc00 <_Z6putbini>
+    c895:	84 db                	test   bl,bl
+    c897:	0f 85 e4 fb ff ff    	jne    c481 <_ZN3pci11printBussesEv+0x3a1>
+    c89d:	8b 74 24 1c          	mov    esi,DWORD PTR [esp+0x1c]
+    c8a1:	e9 dd fa ff ff       	jmp    c383 <_ZN3pci11printBussesEv+0x2a3>
+    c8a6:	8d 76 00             	lea    esi,[esi+0x0]
+    c8a9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    c8b0:	83 ec 08             	sub    esp,0x8
+    c8b3:	89 f3                	mov    ebx,esi
+    c8b5:	8b 74 24 0c          	mov    esi,DWORD PTR [esp+0xc]
+    c8b9:	8d 44 24 36          	lea    eax,[esp+0x36]
+    c8bd:	50                   	push   eax
+    c8be:	51                   	push   ecx
+    c8bf:	e8 ec 1d 00 00       	call   e6b0 <_Z14_manage_escapeItEiPKcPT_>
+    c8c4:	01 c7                	add    edi,eax
+    c8c6:	0f b6 44 24 27       	movzx  eax,BYTE PTR [esp+0x27]
+    c8cb:	01 fb                	add    ebx,edi
+    c8cd:	0f be 13             	movsx  edx,BYTE PTR [ebx]
+    c8d0:	88 44 24 3b          	mov    BYTE PTR [esp+0x3b],al
+    c8d4:	83 c4 10             	add    esp,0x10
+    c8d7:	84 d2                	test   dl,dl
+    c8d9:	0f 84 c9 f9 ff ff    	je     c2a8 <_ZN3pci11printBussesEv+0x1c8>
+    c8df:	89 74 24 04          	mov    DWORD PTR [esp+0x4],esi
+    c8e3:	31 ed                	xor    ebp,ebp
+    c8e5:	89 de                	mov    esi,ebx
+    c8e7:	eb 2d                	jmp    c916 <_ZN3pci11printBussesEv+0x836>
+    c8e9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    c8f0:	80 fb 25             	cmp    bl,0x25
+    c8f3:	0f 84 17 04 00 00    	je     cd10 <_ZN3pci11printBussesEv+0xc30>
+    c8f9:	84 db                	test   bl,bl
+    c8fb:	0f 85 2f 01 00 00    	jne    ca30 <_ZN3pci11printBussesEv+0x950>
+    c901:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
+    c906:	8d 7d 02             	lea    edi,[ebp+0x2]
+    c909:	84 db                	test   bl,bl
+    c90b:	0f 84 a7 fd ff ff    	je     c6b8 <_ZN3pci11printBussesEv+0x5d8>
+    c911:	0f be d3             	movsx  edx,bl
+    c914:	89 fd                	mov    ebp,edi
+    c916:	8d 7d 01             	lea    edi,[ebp+0x1]
+    c919:	80 fa 25             	cmp    dl,0x25
+    c91c:	8d 0c 3e             	lea    ecx,[esi+edi*1]
+    c91f:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
+    c922:	74 cc                	je     c8f0 <_ZN3pci11printBussesEv+0x810>
+    c924:	83 ec 0c             	sub    esp,0xc
+    c927:	52                   	push   edx
+    c928:	e8 a3 f3 ff ff       	call   bcd0 <_Z7putcharc>
+    c92d:	83 c4 10             	add    esp,0x10
+    c930:	84 db                	test   bl,bl
+    c932:	75 dd                	jne    c911 <_ZN3pci11printBussesEv+0x831>
+    c934:	8b 74 24 04          	mov    esi,DWORD PTR [esp+0x4]
+    c938:	e9 7f fd ff ff       	jmp    c6bc <_ZN3pci11printBussesEv+0x5dc>
+    c93d:	8d 76 00             	lea    esi,[esi+0x0]
+    c940:	83 ec 08             	sub    esp,0x8
+    c943:	89 f3                	mov    ebx,esi
+    c945:	8b 74 24 0c          	mov    esi,DWORD PTR [esp+0xc]
+    c949:	8d 44 24 30          	lea    eax,[esp+0x30]
+    c94d:	50                   	push   eax
+    c94e:	51                   	push   ecx
+    c94f:	e8 dc 2c 00 00       	call   f630 <_Z14_manage_escapeIhEiPKcPT_>
+    c954:	01 c7                	add    edi,eax
+    c956:	0f b6 44 24 27       	movzx  eax,BYTE PTR [esp+0x27]
+    c95b:	8d 14 3b             	lea    edx,[ebx+edi*1]
+    c95e:	88 44 24 39          	mov    BYTE PTR [esp+0x39],al
+    c962:	0f be 02             	movsx  eax,BYTE PTR [edx]
+    c965:	83 c4 10             	add    esp,0x10
+    c968:	84 c0                	test   al,al
+    c96a:	0f 84 78 f8 ff ff    	je     c1e8 <_ZN3pci11printBussesEv+0x108>
+    c970:	89 74 24 10          	mov    DWORD PTR [esp+0x10],esi
+    c974:	31 ed                	xor    ebp,ebp
+    c976:	89 d6                	mov    esi,edx
+    c978:	eb 28                	jmp    c9a2 <_ZN3pci11printBussesEv+0x8c2>
+    c97a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    c980:	80 fb 25             	cmp    bl,0x25
+    c983:	0f 84 b7 03 00 00    	je     cd40 <_ZN3pci11printBussesEv+0xc60>
+    c989:	84 db                	test   bl,bl
+    c98b:	0f 85 1f 01 00 00    	jne    cab0 <_ZN3pci11printBussesEv+0x9d0>
+    c991:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
+    c996:	8d 7d 02             	lea    edi,[ebp+0x2]
+    c999:	84 db                	test   bl,bl
+    c99b:	74 22                	je     c9bf <_ZN3pci11printBussesEv+0x8df>
+    c99d:	0f be c3             	movsx  eax,bl
+    c9a0:	89 fd                	mov    ebp,edi
+    c9a2:	8d 7d 01             	lea    edi,[ebp+0x1]
+    c9a5:	3c 25                	cmp    al,0x25
+    c9a7:	8d 0c 3e             	lea    ecx,[esi+edi*1]
+    c9aa:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
+    c9ad:	74 d1                	je     c980 <_ZN3pci11printBussesEv+0x8a0>
+    c9af:	83 ec 0c             	sub    esp,0xc
+    c9b2:	50                   	push   eax
+    c9b3:	e8 18 f3 ff ff       	call   bcd0 <_Z7putcharc>
     c9b8:	83 c4 10             	add    esp,0x10
-    c9bb:	89 6c 24 30          	mov    DWORD PTR [esp+0x30],ebp
-    c9bf:	83 c4 1c             	add    esp,0x1c
-    c9c2:	5b                   	pop    ebx
-    c9c3:	5e                   	pop    esi
-    c9c4:	5f                   	pop    edi
-    c9c5:	5d                   	pop    ebp
-    c9c6:	e9 65 f2 ff ff       	jmp    bc30 <_Z6printfPKc>
-    c9cb:	90                   	nop
-    c9cc:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    c9bb:	84 db                	test   bl,bl
+    c9bd:	75 de                	jne    c99d <_ZN3pci11printBussesEv+0x8bd>
+    c9bf:	8b 74 24 10          	mov    esi,DWORD PTR [esp+0x10]
+    c9c3:	e9 20 f8 ff ff       	jmp    c1e8 <_ZN3pci11printBussesEv+0x108>
+    c9c8:	90                   	nop
+    c9c9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
     c9d0:	83 ec 0c             	sub    esp,0xc
-    c9d3:	8d 6c 3e 02          	lea    ebp,[esi+edi*1+0x2]
-    c9d7:	ff 74 24 18          	push   DWORD PTR [esp+0x18]
-    c9db:	e8 10 f2 ff ff       	call   bbf0 <_Z6putocti>
-    c9e0:	83 c4 10             	add    esp,0x10
-    c9e3:	89 6c 24 30          	mov    DWORD PTR [esp+0x30],ebp
-    c9e7:	83 c4 1c             	add    esp,0x1c
-    c9ea:	5b                   	pop    ebx
-    c9eb:	5e                   	pop    esi
-    c9ec:	5f                   	pop    edi
-    c9ed:	5d                   	pop    ebp
-    c9ee:	e9 3d f2 ff ff       	jmp    bc30 <_Z6printfPKc>
-    c9f3:	90                   	nop
-    c9f4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    c9f8:	83 ec 0c             	sub    esp,0xc
-    c9fb:	8d 6c 3e 02          	lea    ebp,[esi+edi*1+0x2]
-    c9ff:	ff 74 24 18          	push   DWORD PTR [esp+0x18]
-    ca03:	e8 d8 f1 ff ff       	call   bbe0 <_Z6puthexi>
-    ca08:	83 c4 10             	add    esp,0x10
-    ca0b:	89 6c 24 30          	mov    DWORD PTR [esp+0x30],ebp
-    ca0f:	83 c4 1c             	add    esp,0x1c
-    ca12:	5b                   	pop    ebx
-    ca13:	5e                   	pop    esi
-    ca14:	5f                   	pop    edi
-    ca15:	5d                   	pop    ebp
-    ca16:	e9 15 f2 ff ff       	jmp    bc30 <_Z6printfPKc>
-    ca1b:	90                   	nop
-    ca1c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    ca20:	83 ec 0c             	sub    esp,0xc
-    ca23:	8d 6c 3e 02          	lea    ebp,[esi+edi*1+0x2]
-    ca27:	ff 74 24 18          	push   DWORD PTR [esp+0x18]
-    ca2b:	e8 a0 f1 ff ff       	call   bbd0 <_Z6putdeci>
-    ca30:	83 c4 10             	add    esp,0x10
-    ca33:	89 6c 24 30          	mov    DWORD PTR [esp+0x30],ebp
-    ca37:	83 c4 1c             	add    esp,0x1c
-    ca3a:	5b                   	pop    ebx
-    ca3b:	5e                   	pop    esi
-    ca3c:	5f                   	pop    edi
-    ca3d:	5d                   	pop    ebp
-    ca3e:	e9 ed f1 ff ff       	jmp    bc30 <_Z6printfPKc>
-    ca43:	90                   	nop
-    ca44:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    ca48:	83 ec 0c             	sub    esp,0xc
-    ca4b:	8d 6c 3e 02          	lea    ebp,[esi+edi*1+0x2]
-    ca4f:	68 84 fc 00 00       	push   0xfc84
-    ca54:	e8 d7 f1 ff ff       	call   bc30 <_Z6printfPKc>
-    ca59:	58                   	pop    eax
-    ca5a:	ff 74 24 18          	push   DWORD PTR [esp+0x18]
-    ca5e:	e8 7d f1 ff ff       	call   bbe0 <_Z6puthexi>
-    ca63:	83 c4 10             	add    esp,0x10
-    ca66:	89 6c 24 30          	mov    DWORD PTR [esp+0x30],ebp
-    ca6a:	83 c4 1c             	add    esp,0x1c
-    ca6d:	5b                   	pop    ebx
-    ca6e:	5e                   	pop    esi
-    ca6f:	5f                   	pop    edi
-    ca70:	5d                   	pop    ebp
-    ca71:	e9 ba f1 ff ff       	jmp    bc30 <_Z6printfPKc>
-
-Disassembly of section .text._Z6printfIcEvPKcT_:
-
-0000ca80 <_Z6printfIcEvPKcT_>:
-    ca80:	55                   	push   ebp
-    ca81:	57                   	push   edi
-    ca82:	56                   	push   esi
-    ca83:	53                   	push   ebx
-    ca84:	31 f6                	xor    esi,esi
-    ca86:	83 ec 1c             	sub    esp,0x1c
-    ca89:	8b 44 24 34          	mov    eax,DWORD PTR [esp+0x34]
-    ca8d:	8b 6c 24 30          	mov    ebp,DWORD PTR [esp+0x30]
-    ca91:	88 44 24 0c          	mov    BYTE PTR [esp+0xc],al
-    ca95:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
-    ca99:	84 c0                	test   al,al
-    ca9b:	74 4e                	je     caeb <_Z6printfIcEvPKcT_+0x6b>
-    ca9d:	8d 5e 01             	lea    ebx,[esi+0x1]
-    caa0:	3c 25                	cmp    al,0x25
-    caa2:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
-    caa6:	75 30                	jne    cad8 <_Z6printfIcEvPKcT_+0x58>
-    caa8:	90                   	nop
-    caa9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    cab0:	0f b6 07             	movzx  eax,BYTE PTR [edi]
-    cab3:	3c 25                	cmp    al,0x25
-    cab5:	0f 84 85 00 00 00    	je     cb40 <_Z6printfIcEvPKcT_+0xc0>
-    cabb:	84 c0                	test   al,al
-    cabd:	75 39                	jne    caf8 <_Z6printfIcEvPKcT_+0x78>
-    cabf:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
-    cac4:	8d 5e 02             	lea    ebx,[esi+0x2]
-    cac7:	84 c0                	test   al,al
-    cac9:	74 20                	je     caeb <_Z6printfIcEvPKcT_+0x6b>
-    cacb:	89 de                	mov    esi,ebx
-    cacd:	8d 5e 01             	lea    ebx,[esi+0x1]
-    cad0:	3c 25                	cmp    al,0x25
-    cad2:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
-    cad6:	74 d8                	je     cab0 <_Z6printfIcEvPKcT_+0x30>
-    cad8:	83 ec 0c             	sub    esp,0xc
-    cadb:	50                   	push   eax
-    cadc:	e8 cf f0 ff ff       	call   bbb0 <_Z7putcharc>
-    cae1:	0f be 07             	movsx  eax,BYTE PTR [edi]
-    cae4:	83 c4 10             	add    esp,0x10
-    cae7:	84 c0                	test   al,al
-    cae9:	75 e0                	jne    cacb <_Z6printfIcEvPKcT_+0x4b>
-    caeb:	83 c4 1c             	add    esp,0x1c
-    caee:	5b                   	pop    ebx
-    caef:	5e                   	pop    esi
-    caf0:	5f                   	pop    edi
-    caf1:	5d                   	pop    ebp
-    caf2:	c3                   	ret    
-    caf3:	90                   	nop
-    caf4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    caf8:	83 e8 42             	sub    eax,0x42
-    cafb:	3c 36                	cmp    al,0x36
-    cafd:	77 26                	ja     cb25 <_Z6printfIcEvPKcT_+0xa5>
-    caff:	0f b6 c0             	movzx  eax,al
-    cb02:	ff 24 85 64 fd 00 00 	jmp    DWORD PTR [eax*4+0xfd64]
-    cb09:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    cb10:	83 ec 0c             	sub    esp,0xc
-    cb13:	8d 7c 35 02          	lea    edi,[ebp+esi*1+0x2]
-    cb17:	0f be 44 24 18       	movsx  eax,BYTE PTR [esp+0x18]
-    cb1c:	50                   	push   eax
-    cb1d:	e8 8e f0 ff ff       	call   bbb0 <_Z7putcharc>
-    cb22:	83 c4 10             	add    esp,0x10
-    cb25:	83 ec 0c             	sub    esp,0xc
-    cb28:	57                   	push   edi
-    cb29:	e8 02 f1 ff ff       	call   bc30 <_Z6printfPKc>
-    cb2e:	83 c4 10             	add    esp,0x10
-    cb31:	83 c4 1c             	add    esp,0x1c
-    cb34:	5b                   	pop    ebx
-    cb35:	5e                   	pop    esi
-    cb36:	5f                   	pop    edi
-    cb37:	5d                   	pop    ebp
-    cb38:	c3                   	ret    
-    cb39:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    c9d3:	8d 7d 02             	lea    edi,[ebp+0x2]
+    c9d6:	6a 25                	push   0x25
+    c9d8:	e8 f3 f2 ff ff       	call   bcd0 <_Z7putcharc>
+    c9dd:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
+    c9e2:	83 c4 10             	add    esp,0x10
+    c9e5:	84 db                	test   bl,bl
+    c9e7:	0f 85 a8 fc ff ff    	jne    c695 <_ZN3pci11printBussesEv+0x5b5>
+    c9ed:	8b 74 24 04          	mov    esi,DWORD PTR [esp+0x4]
+    c9f1:	e9 c6 fc ff ff       	jmp    c6bc <_ZN3pci11printBussesEv+0x5dc>
+    c9f6:	8d 76 00             	lea    esi,[esi+0x0]
+    c9f9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    ca00:	83 ec 0c             	sub    esp,0xc
+    ca03:	8d 7d 02             	lea    edi,[ebp+0x2]
+    ca06:	6a 25                	push   0x25
+    ca08:	e8 c3 f2 ff ff       	call   bcd0 <_Z7putcharc>
+    ca0d:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
+    ca12:	83 c4 10             	add    esp,0x10
+    ca15:	84 db                	test   bl,bl
+    ca17:	0f 85 e0 fb ff ff    	jne    c5fd <_ZN3pci11printBussesEv+0x51d>
+    ca1d:	8b 74 24 04          	mov    esi,DWORD PTR [esp+0x4]
+    ca21:	e9 c2 f7 ff ff       	jmp    c1e8 <_ZN3pci11printBussesEv+0x108>
+    ca26:	8d 76 00             	lea    esi,[esi+0x0]
+    ca29:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    ca30:	83 ec 08             	sub    esp,0x8
+    ca33:	89 f3                	mov    ebx,esi
+    ca35:	8b 74 24 0c          	mov    esi,DWORD PTR [esp+0xc]
+    ca39:	8d 44 24 33          	lea    eax,[esp+0x33]
+    ca3d:	50                   	push   eax
+    ca3e:	51                   	push   ecx
+    ca3f:	e8 ec 2b 00 00       	call   f630 <_Z14_manage_escapeIhEiPKcPT_>
+    ca44:	01 c7                	add    edi,eax
+    ca46:	83 c4 10             	add    esp,0x10
+    ca49:	01 fb                	add    ebx,edi
+    ca4b:	0f be 13             	movsx  edx,BYTE PTR [ebx]
+    ca4e:	84 d2                	test   dl,dl
+    ca50:	0f 84 52 f8 ff ff    	je     c2a8 <_ZN3pci11printBussesEv+0x1c8>
+    ca56:	89 74 24 04          	mov    DWORD PTR [esp+0x4],esi
+    ca5a:	31 ed                	xor    ebp,ebp
+    ca5c:	89 de                	mov    esi,ebx
+    ca5e:	eb 26                	jmp    ca86 <_ZN3pci11printBussesEv+0x9a6>
+    ca60:	80 fb 25             	cmp    bl,0x25
+    ca63:	0f 84 b7 03 00 00    	je     ce20 <_ZN3pci11printBussesEv+0xd40>
+    ca69:	84 db                	test   bl,bl
+    ca6b:	0f 85 bf 01 00 00    	jne    cc30 <_ZN3pci11printBussesEv+0xb50>
+    ca71:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
+    ca76:	8d 7d 02             	lea    edi,[ebp+0x2]
+    ca79:	84 db                	test   bl,bl
+    ca7b:	0f 84 37 fc ff ff    	je     c6b8 <_ZN3pci11printBussesEv+0x5d8>
+    ca81:	0f be d3             	movsx  edx,bl
+    ca84:	89 fd                	mov    ebp,edi
+    ca86:	8d 7d 01             	lea    edi,[ebp+0x1]
+    ca89:	80 fa 25             	cmp    dl,0x25
+    ca8c:	8d 0c 3e             	lea    ecx,[esi+edi*1]
+    ca8f:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
+    ca92:	74 cc                	je     ca60 <_ZN3pci11printBussesEv+0x980>
+    ca94:	83 ec 0c             	sub    esp,0xc
+    ca97:	52                   	push   edx
+    ca98:	e8 33 f2 ff ff       	call   bcd0 <_Z7putcharc>
+    ca9d:	83 c4 10             	add    esp,0x10
+    caa0:	84 db                	test   bl,bl
+    caa2:	75 dd                	jne    ca81 <_ZN3pci11printBussesEv+0x9a1>
+    caa4:	8b 74 24 04          	mov    esi,DWORD PTR [esp+0x4]
+    caa8:	e9 0f fc ff ff       	jmp    c6bc <_ZN3pci11printBussesEv+0x5dc>
+    caad:	8d 76 00             	lea    esi,[esi+0x0]
+    cab0:	89 74 24 04          	mov    DWORD PTR [esp+0x4],esi
+    cab4:	8b 74 24 10          	mov    esi,DWORD PTR [esp+0x10]
+    cab8:	83 ec 08             	sub    esp,0x8
+    cabb:	8d 44 24 31          	lea    eax,[esp+0x31]
+    cabf:	50                   	push   eax
+    cac0:	51                   	push   ecx
+    cac1:	e8 6a 2b 00 00       	call   f630 <_Z14_manage_escapeIhEiPKcPT_>
+    cac6:	8b 54 24 14          	mov    edx,DWORD PTR [esp+0x14]
+    caca:	8d 1c 07             	lea    ebx,[edi+eax*1]
+    cacd:	0f b6 44 24 28       	movzx  eax,BYTE PTR [esp+0x28]
+    cad2:	01 d3                	add    ebx,edx
+    cad4:	0f be 13             	movsx  edx,BYTE PTR [ebx]
+    cad7:	88 44 24 3a          	mov    BYTE PTR [esp+0x3a],al
+    cadb:	83 c4 10             	add    esp,0x10
+    cade:	84 d2                	test   dl,dl
+    cae0:	0f 84 02 f7 ff ff    	je     c1e8 <_ZN3pci11printBussesEv+0x108>
+    cae6:	89 74 24 04          	mov    DWORD PTR [esp+0x4],esi
+    caea:	31 ed                	xor    ebp,ebp
+    caec:	89 de                	mov    esi,ebx
+    caee:	eb 26                	jmp    cb16 <_ZN3pci11printBussesEv+0xa36>
+    caf0:	80 fb 25             	cmp    bl,0x25
+    caf3:	0f 84 ff 02 00 00    	je     cdf8 <_ZN3pci11printBussesEv+0xd18>
+    caf9:	84 db                	test   bl,bl
+    cafb:	0f 85 9f 00 00 00    	jne    cba0 <_ZN3pci11printBussesEv+0xac0>
+    cb01:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
+    cb06:	8d 7d 02             	lea    edi,[ebp+0x2]
+    cb09:	84 db                	test   bl,bl
+    cb0b:	0f 84 0f fb ff ff    	je     c620 <_ZN3pci11printBussesEv+0x540>
+    cb11:	0f be d3             	movsx  edx,bl
+    cb14:	89 fd                	mov    ebp,edi
+    cb16:	8d 7d 01             	lea    edi,[ebp+0x1]
+    cb19:	80 fa 25             	cmp    dl,0x25
+    cb1c:	8d 0c 3e             	lea    ecx,[esi+edi*1]
+    cb1f:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
+    cb22:	74 cc                	je     caf0 <_ZN3pci11printBussesEv+0xa10>
+    cb24:	83 ec 0c             	sub    esp,0xc
+    cb27:	52                   	push   edx
+    cb28:	e8 a3 f1 ff ff       	call   bcd0 <_Z7putcharc>
+    cb2d:	83 c4 10             	add    esp,0x10
+    cb30:	84 db                	test   bl,bl
+    cb32:	75 dd                	jne    cb11 <_ZN3pci11printBussesEv+0xa31>
+    cb34:	8b 74 24 04          	mov    esi,DWORD PTR [esp+0x4]
+    cb38:	e9 ab f6 ff ff       	jmp    c1e8 <_ZN3pci11printBussesEv+0x108>
+    cb3d:	8d 76 00             	lea    esi,[esi+0x0]
     cb40:	83 ec 0c             	sub    esp,0xc
-    cb43:	8d 5e 02             	lea    ebx,[esi+0x2]
+    cb43:	8d 7d 02             	lea    edi,[ebp+0x2]
     cb46:	6a 25                	push   0x25
-    cb48:	e8 63 f0 ff ff       	call   bbb0 <_Z7putcharc>
-    cb4d:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    cb48:	e8 83 f1 ff ff       	call   bcd0 <_Z7putcharc>
+    cb4d:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
     cb52:	83 c4 10             	add    esp,0x10
-    cb55:	84 c0                	test   al,al
-    cb57:	74 92                	je     caeb <_Z6printfIcEvPKcT_+0x6b>
-    cb59:	89 de                	mov    esi,ebx
-    cb5b:	e9 6d ff ff ff       	jmp    cacd <_Z6printfIcEvPKcT_+0x4d>
-    cb60:	83 ec 0c             	sub    esp,0xc
-    cb63:	8d 7c 35 02          	lea    edi,[ebp+esi*1+0x2]
-    cb67:	ff 74 24 18          	push   DWORD PTR [esp+0x18]
-    cb6b:	e8 a0 f0 ff ff       	call   bc10 <_Z6putstrPc>
-    cb70:	83 c4 10             	add    esp,0x10
-    cb73:	83 ec 0c             	sub    esp,0xc
-    cb76:	57                   	push   edi
-    cb77:	e8 b4 f0 ff ff       	call   bc30 <_Z6printfPKc>
-    cb7c:	83 c4 10             	add    esp,0x10
-    cb7f:	eb b0                	jmp    cb31 <_Z6printfIcEvPKcT_+0xb1>
-    cb81:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    cb88:	83 ec 0c             	sub    esp,0xc
-    cb8b:	8d 7c 35 02          	lea    edi,[ebp+esi*1+0x2]
-    cb8f:	0f be 44 24 18       	movsx  eax,BYTE PTR [esp+0x18]
-    cb94:	50                   	push   eax
-    cb95:	e8 66 f0 ff ff       	call   bc00 <_Z6putbini>
-    cb9a:	83 c4 10             	add    esp,0x10
-    cb9d:	83 ec 0c             	sub    esp,0xc
-    cba0:	57                   	push   edi
-    cba1:	e8 8a f0 ff ff       	call   bc30 <_Z6printfPKc>
-    cba6:	83 c4 10             	add    esp,0x10
-    cba9:	eb 86                	jmp    cb31 <_Z6printfIcEvPKcT_+0xb1>
-    cbab:	90                   	nop
-    cbac:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    cbb0:	83 ec 0c             	sub    esp,0xc
-    cbb3:	8d 7c 35 02          	lea    edi,[ebp+esi*1+0x2]
-    cbb7:	0f be 44 24 18       	movsx  eax,BYTE PTR [esp+0x18]
-    cbbc:	50                   	push   eax
-    cbbd:	e8 2e f0 ff ff       	call   bbf0 <_Z6putocti>
-    cbc2:	83 c4 10             	add    esp,0x10
-    cbc5:	83 ec 0c             	sub    esp,0xc
-    cbc8:	57                   	push   edi
-    cbc9:	e8 62 f0 ff ff       	call   bc30 <_Z6printfPKc>
-    cbce:	83 c4 10             	add    esp,0x10
-    cbd1:	e9 5b ff ff ff       	jmp    cb31 <_Z6printfIcEvPKcT_+0xb1>
-    cbd6:	8d 76 00             	lea    esi,[esi+0x0]
-    cbd9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
-    cbe0:	83 ec 0c             	sub    esp,0xc
-    cbe3:	8d 7c 35 02          	lea    edi,[ebp+esi*1+0x2]
-    cbe7:	0f be 44 24 18       	movsx  eax,BYTE PTR [esp+0x18]
-    cbec:	50                   	push   eax
-    cbed:	e8 ee ef ff ff       	call   bbe0 <_Z6puthexi>
-    cbf2:	83 c4 10             	add    esp,0x10
-    cbf5:	83 ec 0c             	sub    esp,0xc
-    cbf8:	57                   	push   edi
-    cbf9:	e8 32 f0 ff ff       	call   bc30 <_Z6printfPKc>
-    cbfe:	83 c4 10             	add    esp,0x10
-    cc01:	e9 2b ff ff ff       	jmp    cb31 <_Z6printfIcEvPKcT_+0xb1>
-    cc06:	8d 76 00             	lea    esi,[esi+0x0]
-    cc09:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
-    cc10:	83 ec 0c             	sub    esp,0xc
-    cc13:	8d 7c 35 02          	lea    edi,[ebp+esi*1+0x2]
-    cc17:	0f be 44 24 18       	movsx  eax,BYTE PTR [esp+0x18]
-    cc1c:	50                   	push   eax
-    cc1d:	e8 ae ef ff ff       	call   bbd0 <_Z6putdeci>
-    cc22:	83 c4 10             	add    esp,0x10
-    cc25:	83 ec 0c             	sub    esp,0xc
-    cc28:	57                   	push   edi
-    cc29:	e8 02 f0 ff ff       	call   bc30 <_Z6printfPKc>
-    cc2e:	83 c4 10             	add    esp,0x10
-    cc31:	e9 fb fe ff ff       	jmp    cb31 <_Z6printfIcEvPKcT_+0xb1>
-    cc36:	8d 76 00             	lea    esi,[esi+0x0]
-    cc39:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
-    cc40:	83 ec 0c             	sub    esp,0xc
-    cc43:	8d 7c 35 02          	lea    edi,[ebp+esi*1+0x2]
-    cc47:	68 84 fc 00 00       	push   0xfc84
-    cc4c:	e8 df ef ff ff       	call   bc30 <_Z6printfPKc>
-    cc51:	58                   	pop    eax
-    cc52:	ff 74 24 18          	push   DWORD PTR [esp+0x18]
-    cc56:	e8 85 ef ff ff       	call   bbe0 <_Z6puthexi>
-    cc5b:	83 c4 10             	add    esp,0x10
-    cc5e:	83 ec 0c             	sub    esp,0xc
-    cc61:	57                   	push   edi
-    cc62:	e8 c9 ef ff ff       	call   bc30 <_Z6printfPKc>
-    cc67:	83 c4 10             	add    esp,0x10
-    cc6a:	e9 c2 fe ff ff       	jmp    cb31 <_Z6printfIcEvPKcT_+0xb1>
-
-Disassembly of section .text._Z14_manage_escapeItEiPKcPT_:
-
-0000cc70 <_Z14_manage_escapeItEiPKcPT_>:
-    cc70:	83 ec 0c             	sub    esp,0xc
-    cc73:	8b 44 24 10          	mov    eax,DWORD PTR [esp+0x10]
-    cc77:	0f b6 00             	movzx  eax,BYTE PTR [eax]
-    cc7a:	83 e8 42             	sub    eax,0x42
-    cc7d:	3c 36                	cmp    al,0x36
-    cc7f:	0f 87 f3 00 00 00    	ja     cd78 <_Z14_manage_escapeItEiPKcPT_+0x108>
-    cc85:	0f b6 c0             	movzx  eax,al
-    cc88:	ff 24 85 40 fe 00 00 	jmp    DWORD PTR [eax*4+0xfe40]
-    cc8f:	90                   	nop
-    cc90:	83 ec 0c             	sub    esp,0xc
-    cc93:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    cc97:	ff 30                	push   DWORD PTR [eax]
-    cc99:	e8 72 ef ff ff       	call   bc10 <_Z6putstrPc>
-    cc9e:	83 c4 10             	add    esp,0x10
-    cca1:	b8 01 00 00 00       	mov    eax,0x1
-    cca6:	83 c4 0c             	add    esp,0xc
-    cca9:	c3                   	ret    
-    ccaa:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    ccb0:	83 ec 0c             	sub    esp,0xc
-    ccb3:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    ccb7:	0f b7 00             	movzx  eax,WORD PTR [eax]
-    ccba:	50                   	push   eax
-    ccbb:	e8 40 ef ff ff       	call   bc00 <_Z6putbini>
-    ccc0:	83 c4 10             	add    esp,0x10
-    ccc3:	b8 01 00 00 00       	mov    eax,0x1
-    ccc8:	83 c4 0c             	add    esp,0xc
-    cccb:	c3                   	ret    
-    cccc:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    ccd0:	83 ec 0c             	sub    esp,0xc
-    ccd3:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    ccd7:	0f b7 00             	movzx  eax,WORD PTR [eax]
-    ccda:	50                   	push   eax
-    ccdb:	e8 10 ef ff ff       	call   bbf0 <_Z6putocti>
-    cce0:	83 c4 10             	add    esp,0x10
-    cce3:	b8 01 00 00 00       	mov    eax,0x1
-    cce8:	83 c4 0c             	add    esp,0xc
-    cceb:	c3                   	ret    
-    ccec:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    ccf0:	83 ec 0c             	sub    esp,0xc
-    ccf3:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    ccf7:	0f b7 00             	movzx  eax,WORD PTR [eax]
-    ccfa:	50                   	push   eax
-    ccfb:	e8 e0 ee ff ff       	call   bbe0 <_Z6puthexi>
-    cd00:	83 c4 10             	add    esp,0x10
-    cd03:	b8 01 00 00 00       	mov    eax,0x1
-    cd08:	83 c4 0c             	add    esp,0xc
-    cd0b:	c3                   	ret    
-    cd0c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    cb55:	84 db                	test   bl,bl
+    cb57:	0f 85 c4 fc ff ff    	jne    c821 <_ZN3pci11printBussesEv+0x741>
+    cb5d:	8b 74 24 04          	mov    esi,DWORD PTR [esp+0x4]
+    cb61:	e9 56 fb ff ff       	jmp    c6bc <_ZN3pci11printBussesEv+0x5dc>
+    cb66:	8d 76 00             	lea    esi,[esi+0x0]
+    cb69:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    cb70:	83 ec 0c             	sub    esp,0xc
+    cb73:	8d 7d 02             	lea    edi,[ebp+0x2]
+    cb76:	6a 25                	push   0x25
+    cb78:	e8 53 f1 ff ff       	call   bcd0 <_Z7putcharc>
+    cb7d:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
+    cb82:	83 c4 10             	add    esp,0x10
+    cb85:	84 db                	test   bl,bl
+    cb87:	0f 85 04 fc ff ff    	jne    c791 <_ZN3pci11printBussesEv+0x6b1>
+    cb8d:	8b 74 24 04          	mov    esi,DWORD PTR [esp+0x4]
+    cb91:	e9 52 f6 ff ff       	jmp    c1e8 <_ZN3pci11printBussesEv+0x108>
+    cb96:	8d 76 00             	lea    esi,[esi+0x0]
+    cb99:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    cba0:	83 ec 08             	sub    esp,0x8
+    cba3:	89 f3                	mov    ebx,esi
+    cba5:	8b 74 24 0c          	mov    esi,DWORD PTR [esp+0xc]
+    cba9:	8d 44 24 32          	lea    eax,[esp+0x32]
+    cbad:	50                   	push   eax
+    cbae:	51                   	push   ecx
+    cbaf:	e8 7c 2a 00 00       	call   f630 <_Z14_manage_escapeIhEiPKcPT_>
+    cbb4:	01 c7                	add    edi,eax
+    cbb6:	8b 44 24 18          	mov    eax,DWORD PTR [esp+0x18]
+    cbba:	8d 14 3b             	lea    edx,[ebx+edi*1]
+    cbbd:	89 44 24 50          	mov    DWORD PTR [esp+0x50],eax
+    cbc1:	0f be 02             	movsx  eax,BYTE PTR [edx]
+    cbc4:	83 c4 10             	add    esp,0x10
+    cbc7:	84 c0                	test   al,al
+    cbc9:	0f 84 19 f6 ff ff    	je     c1e8 <_ZN3pci11printBussesEv+0x108>
+    cbcf:	89 74 24 10          	mov    DWORD PTR [esp+0x10],esi
+    cbd3:	31 ff                	xor    edi,edi
+    cbd5:	89 d6                	mov    esi,edx
+    cbd7:	eb 2d                	jmp    cc06 <_ZN3pci11printBussesEv+0xb26>
+    cbd9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    cbe0:	80 fb 25             	cmp    bl,0x25
+    cbe3:	0f 84 8f 02 00 00    	je     ce78 <_ZN3pci11printBussesEv+0xd98>
+    cbe9:	84 db                	test   bl,bl
+    cbeb:	0f 85 7f 01 00 00    	jne    cd70 <_ZN3pci11printBussesEv+0xc90>
+    cbf1:	0f b6 5c 3e 02       	movzx  ebx,BYTE PTR [esi+edi*1+0x2]
+    cbf6:	8d 6f 02             	lea    ebp,[edi+0x2]
+    cbf9:	84 db                	test   bl,bl
+    cbfb:	0f 84 be fd ff ff    	je     c9bf <_ZN3pci11printBussesEv+0x8df>
+    cc01:	0f be c3             	movsx  eax,bl
+    cc04:	89 ef                	mov    edi,ebp
+    cc06:	8d 6f 01             	lea    ebp,[edi+0x1]
+    cc09:	3c 25                	cmp    al,0x25
+    cc0b:	8d 0c 2e             	lea    ecx,[esi+ebp*1]
+    cc0e:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
+    cc11:	74 cd                	je     cbe0 <_ZN3pci11printBussesEv+0xb00>
+    cc13:	83 ec 0c             	sub    esp,0xc
+    cc16:	50                   	push   eax
+    cc17:	e8 b4 f0 ff ff       	call   bcd0 <_Z7putcharc>
+    cc1c:	83 c4 10             	add    esp,0x10
+    cc1f:	84 db                	test   bl,bl
+    cc21:	75 de                	jne    cc01 <_ZN3pci11printBussesEv+0xb21>
+    cc23:	8b 74 24 10          	mov    esi,DWORD PTR [esp+0x10]
+    cc27:	e9 bc f5 ff ff       	jmp    c1e8 <_ZN3pci11printBussesEv+0x108>
+    cc2c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    cc30:	89 d8                	mov    eax,ebx
+    cc32:	89 f3                	mov    ebx,esi
+    cc34:	8b 74 24 04          	mov    esi,DWORD PTR [esp+0x4]
+    cc38:	83 e8 42             	sub    eax,0x42
+    cc3b:	3c 36                	cmp    al,0x36
+    cc3d:	77 21                	ja     cc60 <_ZN3pci11printBussesEv+0xb80>
+    cc3f:	0f b6 c0             	movzx  eax,al
+    cc42:	ff 24 85 7c 00 01 00 	jmp    DWORD PTR [eax*4+0x1007c]
+    cc49:	83 ec 0c             	sub    esp,0xc
+    cc4c:	ff 74 24 24          	push   DWORD PTR [esp+0x24]
+    cc50:	e8 3b f1 ff ff       	call   bd90 <_Z6putstrPc>
+    cc55:	8d 4c 2b 02          	lea    ecx,[ebx+ebp*1+0x2]
+    cc59:	83 c4 10             	add    esp,0x10
+    cc5c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    cc60:	83 ec 0c             	sub    esp,0xc
+    cc63:	83 c6 01             	add    esi,0x1
+    cc66:	51                   	push   ecx
+    cc67:	e8 64 f1 ff ff       	call   bdd0 <_Z6printfPKc>
+    cc6c:	83 c4 10             	add    esp,0x10
+    cc6f:	83 fe 20             	cmp    esi,0x20
+    cc72:	0f 85 90 f4 ff ff    	jne    c108 <_ZN3pci11printBussesEv+0x28>
+    cc78:	e9 37 f6 ff ff       	jmp    c2b4 <_ZN3pci11printBussesEv+0x1d4>
+    cc7d:	83 ec 0c             	sub    esp,0xc
+    cc80:	0f be 44 24 24       	movsx  eax,BYTE PTR [esp+0x24]
+    cc85:	50                   	push   eax
+    cc86:	e8 45 f0 ff ff       	call   bcd0 <_Z7putcharc>
+    cc8b:	8d 4c 2b 02          	lea    ecx,[ebx+ebp*1+0x2]
+    cc8f:	83 c4 10             	add    esp,0x10
+    cc92:	eb cc                	jmp    cc60 <_ZN3pci11printBussesEv+0xb80>
+    cc94:	83 ec 0c             	sub    esp,0xc
+    cc97:	ff 74 24 24          	push   DWORD PTR [esp+0x24]
+    cc9b:	e8 50 f0 ff ff       	call   bcf0 <_Z6puthexi>
+    cca0:	8d 4c 2b 02          	lea    ecx,[ebx+ebp*1+0x2]
+    cca4:	83 c4 10             	add    esp,0x10
+    cca7:	eb b7                	jmp    cc60 <_ZN3pci11printBussesEv+0xb80>
+    cca9:	83 ec 0c             	sub    esp,0xc
+    ccac:	ff 74 24 24          	push   DWORD PTR [esp+0x24]
+    ccb0:	e8 5b f0 ff ff       	call   bd10 <_Z6putocti>
+    ccb5:	8d 4c 2b 02          	lea    ecx,[ebx+ebp*1+0x2]
+    ccb9:	83 c4 10             	add    esp,0x10
+    ccbc:	eb a2                	jmp    cc60 <_ZN3pci11printBussesEv+0xb80>
+    ccbe:	83 ec 0c             	sub    esp,0xc
+    ccc1:	ff 74 24 24          	push   DWORD PTR [esp+0x24]
+    ccc5:	e8 56 f0 ff ff       	call   bd20 <_Z6putbini>
+    ccca:	8d 4c 2b 02          	lea    ecx,[ebx+ebp*1+0x2]
+    ccce:	83 c4 10             	add    esp,0x10
+    ccd1:	eb 8d                	jmp    cc60 <_ZN3pci11printBussesEv+0xb80>
+    ccd3:	83 ec 0c             	sub    esp,0xc
+    ccd6:	68 64 01 01 00       	push   0x10164
+    ccdb:	e8 f0 f0 ff ff       	call   bdd0 <_Z6printfPKc>
+    cce0:	58                   	pop    eax
+    cce1:	ff 74 24 24          	push   DWORD PTR [esp+0x24]
+    cce5:	e8 06 f0 ff ff       	call   bcf0 <_Z6puthexi>
+    ccea:	8d 4c 2b 02          	lea    ecx,[ebx+ebp*1+0x2]
+    ccee:	83 c4 10             	add    esp,0x10
+    ccf1:	e9 6a ff ff ff       	jmp    cc60 <_ZN3pci11printBussesEv+0xb80>
+    ccf6:	83 ec 0c             	sub    esp,0xc
+    ccf9:	ff 74 24 24          	push   DWORD PTR [esp+0x24]
+    ccfd:	e8 de ef ff ff       	call   bce0 <_Z6putdeci>
+    cd02:	8d 4c 2b 02          	lea    ecx,[ebx+ebp*1+0x2]
+    cd06:	83 c4 10             	add    esp,0x10
+    cd09:	e9 52 ff ff ff       	jmp    cc60 <_ZN3pci11printBussesEv+0xb80>
+    cd0e:	66 90                	xchg   ax,ax
     cd10:	83 ec 0c             	sub    esp,0xc
-    cd13:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    cd17:	0f be 00             	movsx  eax,BYTE PTR [eax]
-    cd1a:	50                   	push   eax
-    cd1b:	e8 90 ee ff ff       	call   bbb0 <_Z7putcharc>
-    cd20:	83 c4 10             	add    esp,0x10
-    cd23:	b8 01 00 00 00       	mov    eax,0x1
-    cd28:	83 c4 0c             	add    esp,0xc
-    cd2b:	c3                   	ret    
-    cd2c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    cd30:	83 ec 0c             	sub    esp,0xc
-    cd33:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    cd37:	0f b7 00             	movzx  eax,WORD PTR [eax]
-    cd3a:	50                   	push   eax
-    cd3b:	e8 90 ee ff ff       	call   bbd0 <_Z6putdeci>
-    cd40:	83 c4 10             	add    esp,0x10
-    cd43:	b8 01 00 00 00       	mov    eax,0x1
-    cd48:	83 c4 0c             	add    esp,0xc
-    cd4b:	c3                   	ret    
-    cd4c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    cd50:	83 ec 0c             	sub    esp,0xc
-    cd53:	68 84 fc 00 00       	push   0xfc84
-    cd58:	e8 d3 ee ff ff       	call   bc30 <_Z6printfPKc>
-    cd5d:	58                   	pop    eax
-    cd5e:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    cd62:	ff 30                	push   DWORD PTR [eax]
-    cd64:	e8 77 ee ff ff       	call   bbe0 <_Z6puthexi>
-    cd69:	83 c4 10             	add    esp,0x10
-    cd6c:	b8 01 00 00 00       	mov    eax,0x1
-    cd71:	83 c4 0c             	add    esp,0xc
-    cd74:	c3                   	ret    
-    cd75:	8d 76 00             	lea    esi,[esi+0x0]
-    cd78:	31 c0                	xor    eax,eax
-    cd7a:	e9 27 ff ff ff       	jmp    cca6 <_Z14_manage_escapeItEiPKcPT_+0x36>
+    cd13:	8d 7d 02             	lea    edi,[ebp+0x2]
+    cd16:	6a 25                	push   0x25
+    cd18:	e8 b3 ef ff ff       	call   bcd0 <_Z7putcharc>
+    cd1d:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
+    cd22:	83 c4 10             	add    esp,0x10
+    cd25:	84 db                	test   bl,bl
+    cd27:	0f 85 e4 fb ff ff    	jne    c911 <_ZN3pci11printBussesEv+0x831>
+    cd2d:	8b 74 24 04          	mov    esi,DWORD PTR [esp+0x4]
+    cd31:	e9 86 f9 ff ff       	jmp    c6bc <_ZN3pci11printBussesEv+0x5dc>
+    cd36:	8d 76 00             	lea    esi,[esi+0x0]
+    cd39:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    cd40:	83 ec 0c             	sub    esp,0xc
+    cd43:	8d 7d 02             	lea    edi,[ebp+0x2]
+    cd46:	6a 25                	push   0x25
+    cd48:	e8 83 ef ff ff       	call   bcd0 <_Z7putcharc>
+    cd4d:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
+    cd52:	83 c4 10             	add    esp,0x10
+    cd55:	84 db                	test   bl,bl
+    cd57:	0f 85 40 fc ff ff    	jne    c99d <_ZN3pci11printBussesEv+0x8bd>
+    cd5d:	8b 74 24 10          	mov    esi,DWORD PTR [esp+0x10]
+    cd61:	e9 82 f4 ff ff       	jmp    c1e8 <_ZN3pci11printBussesEv+0x108>
+    cd66:	8d 76 00             	lea    esi,[esi+0x0]
+    cd69:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    cd70:	89 74 24 04          	mov    DWORD PTR [esp+0x4],esi
+    cd74:	8b 74 24 10          	mov    esi,DWORD PTR [esp+0x10]
+    cd78:	83 ec 08             	sub    esp,0x8
+    cd7b:	8d 44 24 48          	lea    eax,[esp+0x48]
+    cd7f:	50                   	push   eax
+    cd80:	51                   	push   ecx
+    cd81:	e8 4a 02 00 00       	call   cfd0 <_Z14_manage_escapeIiEiPKcPT_>
+    cd86:	8b 54 24 14          	mov    edx,DWORD PTR [esp+0x14]
+    cd8a:	01 c5                	add    ebp,eax
+    cd8c:	89 74 24 54          	mov    DWORD PTR [esp+0x54],esi
+    cd90:	83 c4 10             	add    esp,0x10
+    cd93:	01 d5                	add    ebp,edx
+    cd95:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    cd99:	84 c0                	test   al,al
+    cd9b:	0f 84 47 f4 ff ff    	je     c1e8 <_ZN3pci11printBussesEv+0x108>
+    cda1:	31 d2                	xor    edx,edx
+    cda3:	eb 29                	jmp    cdce <_ZN3pci11printBussesEv+0xcee>
+    cda5:	8d 76 00             	lea    esi,[esi+0x0]
+    cda8:	80 fb 25             	cmp    bl,0x25
+    cdab:	0f 84 ef 00 00 00    	je     cea0 <_ZN3pci11printBussesEv+0xdc0>
+    cdb1:	84 db                	test   bl,bl
+    cdb3:	0f 85 97 00 00 00    	jne    ce50 <_ZN3pci11printBussesEv+0xd70>
+    cdb9:	0f b6 5c 15 02       	movzx  ebx,BYTE PTR [ebp+edx*1+0x2]
+    cdbe:	8d 7a 02             	lea    edi,[edx+0x2]
+    cdc1:	84 db                	test   bl,bl
+    cdc3:	0f 84 1f f4 ff ff    	je     c1e8 <_ZN3pci11printBussesEv+0x108>
+    cdc9:	0f be c3             	movsx  eax,bl
+    cdcc:	89 fa                	mov    edx,edi
+    cdce:	8d 7a 01             	lea    edi,[edx+0x1]
+    cdd1:	3c 25                	cmp    al,0x25
+    cdd3:	8d 4c 3d 00          	lea    ecx,[ebp+edi*1+0x0]
+    cdd7:	0f b6 19             	movzx  ebx,BYTE PTR [ecx]
+    cdda:	74 cc                	je     cda8 <_ZN3pci11printBussesEv+0xcc8>
+    cddc:	83 ec 0c             	sub    esp,0xc
+    cddf:	50                   	push   eax
+    cde0:	e8 eb ee ff ff       	call   bcd0 <_Z7putcharc>
+    cde5:	83 c4 10             	add    esp,0x10
+    cde8:	84 db                	test   bl,bl
+    cdea:	75 dd                	jne    cdc9 <_ZN3pci11printBussesEv+0xce9>
+    cdec:	e9 f7 f3 ff ff       	jmp    c1e8 <_ZN3pci11printBussesEv+0x108>
+    cdf1:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    cdf8:	83 ec 0c             	sub    esp,0xc
+    cdfb:	8d 7d 02             	lea    edi,[ebp+0x2]
+    cdfe:	6a 25                	push   0x25
+    ce00:	e8 cb ee ff ff       	call   bcd0 <_Z7putcharc>
+    ce05:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
+    ce0a:	83 c4 10             	add    esp,0x10
+    ce0d:	84 db                	test   bl,bl
+    ce0f:	0f 85 fc fc ff ff    	jne    cb11 <_ZN3pci11printBussesEv+0xa31>
+    ce15:	8b 74 24 04          	mov    esi,DWORD PTR [esp+0x4]
+    ce19:	e9 ca f3 ff ff       	jmp    c1e8 <_ZN3pci11printBussesEv+0x108>
+    ce1e:	66 90                	xchg   ax,ax
+    ce20:	83 ec 0c             	sub    esp,0xc
+    ce23:	8d 7d 02             	lea    edi,[ebp+0x2]
+    ce26:	6a 25                	push   0x25
+    ce28:	e8 a3 ee ff ff       	call   bcd0 <_Z7putcharc>
+    ce2d:	0f b6 5c 2e 02       	movzx  ebx,BYTE PTR [esi+ebp*1+0x2]
+    ce32:	83 c4 10             	add    esp,0x10
+    ce35:	84 db                	test   bl,bl
+    ce37:	0f 85 44 fc ff ff    	jne    ca81 <_ZN3pci11printBussesEv+0x9a1>
+    ce3d:	8b 74 24 04          	mov    esi,DWORD PTR [esp+0x4]
+    ce41:	e9 76 f8 ff ff       	jmp    c6bc <_ZN3pci11printBussesEv+0x5dc>
+    ce46:	8d 76 00             	lea    esi,[esi+0x0]
+    ce49:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    ce50:	83 ec 08             	sub    esp,0x8
+    ce53:	8d 44 24 4c          	lea    eax,[esp+0x4c]
+    ce57:	50                   	push   eax
+    ce58:	51                   	push   ecx
+    ce59:	e8 72 01 00 00       	call   cfd0 <_Z14_manage_escapeIiEiPKcPT_>
+    ce5e:	8d 14 38             	lea    edx,[eax+edi*1]
+    ce61:	01 ea                	add    edx,ebp
+    ce63:	89 14 24             	mov    DWORD PTR [esp],edx
+    ce66:	e8 65 ef ff ff       	call   bdd0 <_Z6printfPKc>
+    ce6b:	83 c4 10             	add    esp,0x10
+    ce6e:	e9 75 f3 ff ff       	jmp    c1e8 <_ZN3pci11printBussesEv+0x108>
+    ce73:	90                   	nop
+    ce74:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    ce78:	83 ec 0c             	sub    esp,0xc
+    ce7b:	8d 6f 02             	lea    ebp,[edi+0x2]
+    ce7e:	6a 25                	push   0x25
+    ce80:	e8 4b ee ff ff       	call   bcd0 <_Z7putcharc>
+    ce85:	0f b6 5c 3e 02       	movzx  ebx,BYTE PTR [esi+edi*1+0x2]
+    ce8a:	83 c4 10             	add    esp,0x10
+    ce8d:	84 db                	test   bl,bl
+    ce8f:	0f 85 6c fd ff ff    	jne    cc01 <_ZN3pci11printBussesEv+0xb21>
+    ce95:	8b 74 24 10          	mov    esi,DWORD PTR [esp+0x10]
+    ce99:	e9 4a f3 ff ff       	jmp    c1e8 <_ZN3pci11printBussesEv+0x108>
+    ce9e:	66 90                	xchg   ax,ax
+    cea0:	89 54 24 04          	mov    DWORD PTR [esp+0x4],edx
+    cea4:	83 ec 0c             	sub    esp,0xc
+    cea7:	6a 25                	push   0x25
+    cea9:	e8 22 ee ff ff       	call   bcd0 <_Z7putcharc>
+    ceae:	8b 54 24 14          	mov    edx,DWORD PTR [esp+0x14]
+    ceb2:	83 c4 10             	add    esp,0x10
+    ceb5:	0f b6 5c 15 02       	movzx  ebx,BYTE PTR [ebp+edx*1+0x2]
+    ceba:	8d 7a 02             	lea    edi,[edx+0x2]
+    cebd:	84 db                	test   bl,bl
+    cebf:	0f 85 04 ff ff ff    	jne    cdc9 <_ZN3pci11printBussesEv+0xce9>
+    cec5:	e9 1e f3 ff ff       	jmp    c1e8 <_ZN3pci11printBussesEv+0x108>
 
-Disassembly of section .text._Z6printfItJttEEvPKcT_DpT0_:
+Disassembly of section .text._Z14_manage_escapeIPKcEiS1_PT_:
 
-0000cd80 <_Z6printfItJttEEvPKcT_DpT0_>:
-    cd80:	55                   	push   ebp
-    cd81:	57                   	push   edi
-    cd82:	31 c9                	xor    ecx,ecx
-    cd84:	56                   	push   esi
-    cd85:	53                   	push   ebx
-    cd86:	83 ec 2c             	sub    esp,0x2c
-    cd89:	8b 44 24 4c          	mov    eax,DWORD PTR [esp+0x4c]
-    cd8d:	8b 6c 24 40          	mov    ebp,DWORD PTR [esp+0x40]
-    cd91:	8b 74 24 48          	mov    esi,DWORD PTR [esp+0x48]
-    cd95:	89 44 24 04          	mov    DWORD PTR [esp+0x4],eax
-    cd99:	8b 44 24 44          	mov    eax,DWORD PTR [esp+0x44]
-    cd9d:	66 89 44 24 0c       	mov    WORD PTR [esp+0xc],ax
-    cda2:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
-    cda6:	84 c0                	test   al,al
-    cda8:	74 49                	je     cdf3 <_Z6printfItJttEEvPKcT_DpT0_+0x73>
-    cdaa:	8d 79 01             	lea    edi,[ecx+0x1]
-    cdad:	3c 25                	cmp    al,0x25
-    cdaf:	8d 5c 3d 00          	lea    ebx,[ebp+edi*1+0x0]
-    cdb3:	75 2b                	jne    cde0 <_Z6printfItJttEEvPKcT_DpT0_+0x60>
-    cdb5:	8d 76 00             	lea    esi,[esi+0x0]
-    cdb8:	0f b6 03             	movzx  eax,BYTE PTR [ebx]
-    cdbb:	3c 25                	cmp    al,0x25
-    cdbd:	0f 84 3d 01 00 00    	je     cf00 <_Z6printfItJttEEvPKcT_DpT0_+0x180>
-    cdc3:	84 c0                	test   al,al
-    cdc5:	75 39                	jne    ce00 <_Z6printfItJttEEvPKcT_DpT0_+0x80>
-    cdc7:	0f be 44 0d 02       	movsx  eax,BYTE PTR [ebp+ecx*1+0x2]
-    cdcc:	8d 79 02             	lea    edi,[ecx+0x2]
-    cdcf:	84 c0                	test   al,al
-    cdd1:	74 20                	je     cdf3 <_Z6printfItJttEEvPKcT_DpT0_+0x73>
-    cdd3:	89 f9                	mov    ecx,edi
-    cdd5:	8d 79 01             	lea    edi,[ecx+0x1]
-    cdd8:	3c 25                	cmp    al,0x25
-    cdda:	8d 5c 3d 00          	lea    ebx,[ebp+edi*1+0x0]
-    cdde:	74 d8                	je     cdb8 <_Z6printfItJttEEvPKcT_DpT0_+0x38>
-    cde0:	83 ec 0c             	sub    esp,0xc
-    cde3:	50                   	push   eax
-    cde4:	e8 c7 ed ff ff       	call   bbb0 <_Z7putcharc>
-    cde9:	0f be 03             	movsx  eax,BYTE PTR [ebx]
-    cdec:	83 c4 10             	add    esp,0x10
-    cdef:	84 c0                	test   al,al
-    cdf1:	75 e0                	jne    cdd3 <_Z6printfItJttEEvPKcT_DpT0_+0x53>
-    cdf3:	83 c4 2c             	add    esp,0x2c
-    cdf6:	5b                   	pop    ebx
-    cdf7:	5e                   	pop    esi
-    cdf8:	5f                   	pop    edi
-    cdf9:	5d                   	pop    ebp
-    cdfa:	c3                   	ret    
-    cdfb:	90                   	nop
-    cdfc:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    ce00:	83 ec 08             	sub    esp,0x8
-    ce03:	8d 44 24 14          	lea    eax,[esp+0x14]
-    ce07:	50                   	push   eax
-    ce08:	53                   	push   ebx
-    ce09:	e8 62 fe ff ff       	call   cc70 <_Z14_manage_escapeItEiPKcPT_>
-    ce0e:	01 c7                	add    edi,eax
-    ce10:	66 89 74 24 2c       	mov    WORD PTR [esp+0x2c],si
-    ce15:	83 c4 10             	add    esp,0x10
-    ce18:	01 fd                	add    ebp,edi
-    ce1a:	31 ff                	xor    edi,edi
-    ce1c:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
-    ce20:	84 c0                	test   al,al
-    ce22:	74 cf                	je     cdf3 <_Z6printfItJttEEvPKcT_DpT0_+0x73>
-    ce24:	8d 77 01             	lea    esi,[edi+0x1]
-    ce27:	3c 25                	cmp    al,0x25
-    ce29:	8d 5c 35 00          	lea    ebx,[ebp+esi*1+0x0]
-    ce2d:	75 29                	jne    ce58 <_Z6printfItJttEEvPKcT_DpT0_+0xd8>
-    ce2f:	90                   	nop
-    ce30:	0f b6 03             	movzx  eax,BYTE PTR [ebx]
-    ce33:	3c 25                	cmp    al,0x25
-    ce35:	0f 84 1d 01 00 00    	je     cf58 <_Z6printfItJttEEvPKcT_DpT0_+0x1d8>
-    ce3b:	84 c0                	test   al,al
-    ce3d:	75 31                	jne    ce70 <_Z6printfItJttEEvPKcT_DpT0_+0xf0>
-    ce3f:	0f be 44 3d 02       	movsx  eax,BYTE PTR [ebp+edi*1+0x2]
-    ce44:	8d 77 02             	lea    esi,[edi+0x2]
-    ce47:	84 c0                	test   al,al
-    ce49:	74 a8                	je     cdf3 <_Z6printfItJttEEvPKcT_DpT0_+0x73>
-    ce4b:	89 f7                	mov    edi,esi
-    ce4d:	8d 77 01             	lea    esi,[edi+0x1]
-    ce50:	3c 25                	cmp    al,0x25
-    ce52:	8d 5c 35 00          	lea    ebx,[ebp+esi*1+0x0]
-    ce56:	74 d8                	je     ce30 <_Z6printfItJttEEvPKcT_DpT0_+0xb0>
-    ce58:	83 ec 0c             	sub    esp,0xc
-    ce5b:	50                   	push   eax
-    ce5c:	e8 4f ed ff ff       	call   bbb0 <_Z7putcharc>
-    ce61:	0f be 03             	movsx  eax,BYTE PTR [ebx]
-    ce64:	83 c4 10             	add    esp,0x10
-    ce67:	84 c0                	test   al,al
-    ce69:	74 88                	je     cdf3 <_Z6printfItJttEEvPKcT_DpT0_+0x73>
-    ce6b:	89 f7                	mov    edi,esi
-    ce6d:	eb de                	jmp    ce4d <_Z6printfItJttEEvPKcT_DpT0_+0xcd>
-    ce6f:	90                   	nop
-    ce70:	83 ec 08             	sub    esp,0x8
-    ce73:	8d 44 24 24          	lea    eax,[esp+0x24]
-    ce77:	50                   	push   eax
-    ce78:	53                   	push   ebx
-    ce79:	e8 f2 fd ff ff       	call   cc70 <_Z14_manage_escapeItEiPKcPT_>
-    ce7e:	01 c6                	add    esi,eax
-    ce80:	0f b7 44 24 14       	movzx  eax,WORD PTR [esp+0x14]
-    ce85:	01 f5                	add    ebp,esi
-    ce87:	66 89 44 24 2e       	mov    WORD PTR [esp+0x2e],ax
-    ce8c:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
-    ce90:	83 c4 10             	add    esp,0x10
-    ce93:	84 c0                	test   al,al
-    ce95:	0f 84 58 ff ff ff    	je     cdf3 <_Z6printfItJttEEvPKcT_DpT0_+0x73>
-    ce9b:	31 f6                	xor    esi,esi
-    ce9d:	3c 25                	cmp    al,0x25
-    ce9f:	8d 5e 01             	lea    ebx,[esi+0x1]
-    cea2:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
-    cea6:	75 34                	jne    cedc <_Z6printfItJttEEvPKcT_DpT0_+0x15c>
-    cea8:	90                   	nop
-    cea9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    ceb0:	0f b6 07             	movzx  eax,BYTE PTR [edi]
-    ceb3:	3c 25                	cmp    al,0x25
-    ceb5:	0f 84 c5 00 00 00    	je     cf80 <_Z6printfItJttEEvPKcT_DpT0_+0x200>
-    cebb:	84 c0                	test   al,al
-    cebd:	75 71                	jne    cf30 <_Z6printfItJttEEvPKcT_DpT0_+0x1b0>
-    cebf:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
-    cec4:	8d 5e 02             	lea    ebx,[esi+0x2]
-    cec7:	84 c0                	test   al,al
-    cec9:	0f 84 24 ff ff ff    	je     cdf3 <_Z6printfItJttEEvPKcT_DpT0_+0x73>
-    cecf:	89 de                	mov    esi,ebx
-    ced1:	8d 5e 01             	lea    ebx,[esi+0x1]
-    ced4:	3c 25                	cmp    al,0x25
-    ced6:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
-    ceda:	74 d4                	je     ceb0 <_Z6printfItJttEEvPKcT_DpT0_+0x130>
-    cedc:	83 ec 0c             	sub    esp,0xc
-    cedf:	50                   	push   eax
-    cee0:	e8 cb ec ff ff       	call   bbb0 <_Z7putcharc>
-    cee5:	0f be 07             	movsx  eax,BYTE PTR [edi]
-    cee8:	83 c4 10             	add    esp,0x10
-    ceeb:	84 c0                	test   al,al
-    ceed:	0f 84 00 ff ff ff    	je     cdf3 <_Z6printfItJttEEvPKcT_DpT0_+0x73>
-    cef3:	89 de                	mov    esi,ebx
-    cef5:	eb da                	jmp    ced1 <_Z6printfItJttEEvPKcT_DpT0_+0x151>
-    cef7:	89 f6                	mov    esi,esi
-    cef9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
-    cf00:	89 4c 24 08          	mov    DWORD PTR [esp+0x8],ecx
-    cf04:	83 ec 0c             	sub    esp,0xc
-    cf07:	6a 25                	push   0x25
-    cf09:	e8 a2 ec ff ff       	call   bbb0 <_Z7putcharc>
-    cf0e:	8b 4c 24 18          	mov    ecx,DWORD PTR [esp+0x18]
-    cf12:	83 c4 10             	add    esp,0x10
-    cf15:	0f be 44 0d 02       	movsx  eax,BYTE PTR [ebp+ecx*1+0x2]
-    cf1a:	8d 79 02             	lea    edi,[ecx+0x2]
-    cf1d:	84 c0                	test   al,al
-    cf1f:	0f 84 ce fe ff ff    	je     cdf3 <_Z6printfItJttEEvPKcT_DpT0_+0x73>
-    cf25:	89 f9                	mov    ecx,edi
-    cf27:	e9 a9 fe ff ff       	jmp    cdd5 <_Z6printfItJttEEvPKcT_DpT0_+0x55>
-    cf2c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    cf30:	83 ec 08             	sub    esp,0x8
-    cf33:	8d 44 24 26          	lea    eax,[esp+0x26]
-    cf37:	50                   	push   eax
-    cf38:	57                   	push   edi
-    cf39:	e8 32 fd ff ff       	call   cc70 <_Z14_manage_escapeItEiPKcPT_>
-    cf3e:	01 c3                	add    ebx,eax
-    cf40:	01 dd                	add    ebp,ebx
-    cf42:	89 2c 24             	mov    DWORD PTR [esp],ebp
-    cf45:	e8 e6 ec ff ff       	call   bc30 <_Z6printfPKc>
-    cf4a:	83 c4 10             	add    esp,0x10
-    cf4d:	83 c4 2c             	add    esp,0x2c
-    cf50:	5b                   	pop    ebx
-    cf51:	5e                   	pop    esi
-    cf52:	5f                   	pop    edi
-    cf53:	5d                   	pop    ebp
-    cf54:	c3                   	ret    
-    cf55:	8d 76 00             	lea    esi,[esi+0x0]
-    cf58:	83 ec 0c             	sub    esp,0xc
-    cf5b:	8d 77 02             	lea    esi,[edi+0x2]
-    cf5e:	6a 25                	push   0x25
-    cf60:	e8 4b ec ff ff       	call   bbb0 <_Z7putcharc>
-    cf65:	0f be 44 3d 02       	movsx  eax,BYTE PTR [ebp+edi*1+0x2]
-    cf6a:	83 c4 10             	add    esp,0x10
-    cf6d:	84 c0                	test   al,al
-    cf6f:	0f 84 7e fe ff ff    	je     cdf3 <_Z6printfItJttEEvPKcT_DpT0_+0x73>
-    cf75:	89 f7                	mov    edi,esi
-    cf77:	e9 d1 fe ff ff       	jmp    ce4d <_Z6printfItJttEEvPKcT_DpT0_+0xcd>
-    cf7c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    cf80:	83 ec 0c             	sub    esp,0xc
-    cf83:	8d 5e 02             	lea    ebx,[esi+0x2]
-    cf86:	6a 25                	push   0x25
-    cf88:	e8 23 ec ff ff       	call   bbb0 <_Z7putcharc>
-    cf8d:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
-    cf92:	83 c4 10             	add    esp,0x10
-    cf95:	84 c0                	test   al,al
-    cf97:	0f 84 56 fe ff ff    	je     cdf3 <_Z6printfItJttEEvPKcT_DpT0_+0x73>
-    cf9d:	89 de                	mov    esi,ebx
-    cf9f:	e9 2d ff ff ff       	jmp    ced1 <_Z6printfItJttEEvPKcT_DpT0_+0x151>
+0000ced0 <_Z14_manage_escapeIPKcEiS1_PT_>:
+    ced0:	83 ec 0c             	sub    esp,0xc
+    ced3:	8b 44 24 10          	mov    eax,DWORD PTR [esp+0x10]
+    ced7:	0f b6 00             	movzx  eax,BYTE PTR [eax]
+    ceda:	83 e8 42             	sub    eax,0x42
+    cedd:	3c 36                	cmp    al,0x36
+    cedf:	0f 87 db 00 00 00    	ja     cfc0 <_Z14_manage_escapeIPKcEiS1_PT_+0xf0>
+    cee5:	0f b6 c0             	movzx  eax,al
+    cee8:	ff 24 85 68 01 01 00 	jmp    DWORD PTR [eax*4+0x10168]
+    ceef:	90                   	nop
+    cef0:	83 ec 0c             	sub    esp,0xc
+    cef3:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    cef7:	ff 30                	push   DWORD PTR [eax]
+    cef9:	e8 92 ee ff ff       	call   bd90 <_Z6putstrPc>
+    cefe:	83 c4 10             	add    esp,0x10
+    cf01:	b8 01 00 00 00       	mov    eax,0x1
+    cf06:	83 c4 0c             	add    esp,0xc
+    cf09:	c3                   	ret    
+    cf0a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    cf10:	83 ec 0c             	sub    esp,0xc
+    cf13:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    cf17:	ff 30                	push   DWORD PTR [eax]
+    cf19:	e8 02 ee ff ff       	call   bd20 <_Z6putbini>
+    cf1e:	83 c4 10             	add    esp,0x10
+    cf21:	b8 01 00 00 00       	mov    eax,0x1
+    cf26:	83 c4 0c             	add    esp,0xc
+    cf29:	c3                   	ret    
+    cf2a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    cf30:	83 ec 0c             	sub    esp,0xc
+    cf33:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    cf37:	ff 30                	push   DWORD PTR [eax]
+    cf39:	e8 d2 ed ff ff       	call   bd10 <_Z6putocti>
+    cf3e:	83 c4 10             	add    esp,0x10
+    cf41:	b8 01 00 00 00       	mov    eax,0x1
+    cf46:	83 c4 0c             	add    esp,0xc
+    cf49:	c3                   	ret    
+    cf4a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    cf50:	83 ec 0c             	sub    esp,0xc
+    cf53:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    cf57:	ff 30                	push   DWORD PTR [eax]
+    cf59:	e8 92 ed ff ff       	call   bcf0 <_Z6puthexi>
+    cf5e:	83 c4 10             	add    esp,0x10
+    cf61:	b8 01 00 00 00       	mov    eax,0x1
+    cf66:	83 c4 0c             	add    esp,0xc
+    cf69:	c3                   	ret    
+    cf6a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    cf70:	83 ec 0c             	sub    esp,0xc
+    cf73:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    cf77:	0f be 00             	movsx  eax,BYTE PTR [eax]
+    cf7a:	50                   	push   eax
+    cf7b:	e8 50 ed ff ff       	call   bcd0 <_Z7putcharc>
+    cf80:	83 c4 10             	add    esp,0x10
+    cf83:	b8 01 00 00 00       	mov    eax,0x1
+    cf88:	83 c4 0c             	add    esp,0xc
+    cf8b:	c3                   	ret    
+    cf8c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    cf90:	83 ec 0c             	sub    esp,0xc
+    cf93:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    cf97:	ff 30                	push   DWORD PTR [eax]
+    cf99:	e8 42 ed ff ff       	call   bce0 <_Z6putdeci>
+    cf9e:	83 c4 10             	add    esp,0x10
+    cfa1:	b8 01 00 00 00       	mov    eax,0x1
+    cfa6:	83 c4 0c             	add    esp,0xc
+    cfa9:	c3                   	ret    
+    cfaa:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    cfb0:	83 ec 0c             	sub    esp,0xc
+    cfb3:	68 64 01 01 00       	push   0x10164
+    cfb8:	e8 13 ee ff ff       	call   bdd0 <_Z6printfPKc>
+    cfbd:	58                   	pop    eax
+    cfbe:	eb 93                	jmp    cf53 <_Z14_manage_escapeIPKcEiS1_PT_+0x83>
+    cfc0:	31 c0                	xor    eax,eax
+    cfc2:	e9 3f ff ff ff       	jmp    cf06 <_Z14_manage_escapeIPKcEiS1_PT_+0x36>
 
-Disassembly of section .text._Z6printfItEvPKcT_:
+Disassembly of section .text._Z14_manage_escapeIiEiPKcPT_:
 
-0000cfb0 <_Z6printfItEvPKcT_>:
-    cfb0:	55                   	push   ebp
-    cfb1:	57                   	push   edi
-    cfb2:	56                   	push   esi
-    cfb3:	53                   	push   ebx
-    cfb4:	31 f6                	xor    esi,esi
-    cfb6:	83 ec 1c             	sub    esp,0x1c
-    cfb9:	8b 44 24 34          	mov    eax,DWORD PTR [esp+0x34]
-    cfbd:	8b 6c 24 30          	mov    ebp,DWORD PTR [esp+0x30]
-    cfc1:	66 89 44 24 0c       	mov    WORD PTR [esp+0xc],ax
-    cfc6:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
-    cfca:	84 c0                	test   al,al
-    cfcc:	74 4d                	je     d01b <_Z6printfItEvPKcT_+0x6b>
-    cfce:	8d 5e 01             	lea    ebx,[esi+0x1]
-    cfd1:	3c 25                	cmp    al,0x25
-    cfd3:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
-    cfd7:	75 2f                	jne    d008 <_Z6printfItEvPKcT_+0x58>
-    cfd9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    cfe0:	0f b6 07             	movzx  eax,BYTE PTR [edi]
-    cfe3:	3c 25                	cmp    al,0x25
-    cfe5:	0f 84 85 00 00 00    	je     d070 <_Z6printfItEvPKcT_+0xc0>
-    cfeb:	84 c0                	test   al,al
-    cfed:	75 39                	jne    d028 <_Z6printfItEvPKcT_+0x78>
-    cfef:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
-    cff4:	8d 5e 02             	lea    ebx,[esi+0x2]
-    cff7:	84 c0                	test   al,al
-    cff9:	74 20                	je     d01b <_Z6printfItEvPKcT_+0x6b>
-    cffb:	89 de                	mov    esi,ebx
-    cffd:	8d 5e 01             	lea    ebx,[esi+0x1]
-    d000:	3c 25                	cmp    al,0x25
-    d002:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
-    d006:	74 d8                	je     cfe0 <_Z6printfItEvPKcT_+0x30>
-    d008:	83 ec 0c             	sub    esp,0xc
-    d00b:	50                   	push   eax
-    d00c:	e8 9f eb ff ff       	call   bbb0 <_Z7putcharc>
-    d011:	0f be 07             	movsx  eax,BYTE PTR [edi]
-    d014:	83 c4 10             	add    esp,0x10
-    d017:	84 c0                	test   al,al
-    d019:	75 e0                	jne    cffb <_Z6printfItEvPKcT_+0x4b>
-    d01b:	83 c4 1c             	add    esp,0x1c
-    d01e:	5b                   	pop    ebx
-    d01f:	5e                   	pop    esi
-    d020:	5f                   	pop    edi
-    d021:	5d                   	pop    ebp
-    d022:	c3                   	ret    
-    d023:	90                   	nop
-    d024:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    d028:	83 e8 42             	sub    eax,0x42
-    d02b:	3c 36                	cmp    al,0x36
-    d02d:	77 26                	ja     d055 <_Z6printfItEvPKcT_+0xa5>
-    d02f:	0f b6 c0             	movzx  eax,al
-    d032:	ff 24 85 20 ff 00 00 	jmp    DWORD PTR [eax*4+0xff20]
-    d039:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    d040:	83 ec 0c             	sub    esp,0xc
-    d043:	8d 7c 35 02          	lea    edi,[ebp+esi*1+0x2]
-    d047:	0f be 44 24 18       	movsx  eax,BYTE PTR [esp+0x18]
-    d04c:	50                   	push   eax
-    d04d:	e8 5e eb ff ff       	call   bbb0 <_Z7putcharc>
-    d052:	83 c4 10             	add    esp,0x10
-    d055:	83 ec 0c             	sub    esp,0xc
-    d058:	57                   	push   edi
-    d059:	e8 d2 eb ff ff       	call   bc30 <_Z6printfPKc>
+0000cfd0 <_Z14_manage_escapeIiEiPKcPT_>:
+    cfd0:	83 ec 0c             	sub    esp,0xc
+    cfd3:	8b 44 24 10          	mov    eax,DWORD PTR [esp+0x10]
+    cfd7:	0f b6 00             	movzx  eax,BYTE PTR [eax]
+    cfda:	83 e8 42             	sub    eax,0x42
+    cfdd:	3c 36                	cmp    al,0x36
+    cfdf:	0f 87 db 00 00 00    	ja     d0c0 <_Z14_manage_escapeIiEiPKcPT_+0xf0>
+    cfe5:	0f b6 c0             	movzx  eax,al
+    cfe8:	ff 24 85 44 02 01 00 	jmp    DWORD PTR [eax*4+0x10244]
+    cfef:	90                   	nop
+    cff0:	83 ec 0c             	sub    esp,0xc
+    cff3:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    cff7:	ff 30                	push   DWORD PTR [eax]
+    cff9:	e8 92 ed ff ff       	call   bd90 <_Z6putstrPc>
+    cffe:	83 c4 10             	add    esp,0x10
+    d001:	b8 01 00 00 00       	mov    eax,0x1
+    d006:	83 c4 0c             	add    esp,0xc
+    d009:	c3                   	ret    
+    d00a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    d010:	83 ec 0c             	sub    esp,0xc
+    d013:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    d017:	ff 30                	push   DWORD PTR [eax]
+    d019:	e8 02 ed ff ff       	call   bd20 <_Z6putbini>
+    d01e:	83 c4 10             	add    esp,0x10
+    d021:	b8 01 00 00 00       	mov    eax,0x1
+    d026:	83 c4 0c             	add    esp,0xc
+    d029:	c3                   	ret    
+    d02a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    d030:	83 ec 0c             	sub    esp,0xc
+    d033:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    d037:	ff 30                	push   DWORD PTR [eax]
+    d039:	e8 d2 ec ff ff       	call   bd10 <_Z6putocti>
+    d03e:	83 c4 10             	add    esp,0x10
+    d041:	b8 01 00 00 00       	mov    eax,0x1
+    d046:	83 c4 0c             	add    esp,0xc
+    d049:	c3                   	ret    
+    d04a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    d050:	83 ec 0c             	sub    esp,0xc
+    d053:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    d057:	ff 30                	push   DWORD PTR [eax]
+    d059:	e8 92 ec ff ff       	call   bcf0 <_Z6puthexi>
     d05e:	83 c4 10             	add    esp,0x10
-    d061:	83 c4 1c             	add    esp,0x1c
-    d064:	5b                   	pop    ebx
-    d065:	5e                   	pop    esi
-    d066:	5f                   	pop    edi
-    d067:	5d                   	pop    ebp
-    d068:	c3                   	ret    
-    d069:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    d061:	b8 01 00 00 00       	mov    eax,0x1
+    d066:	83 c4 0c             	add    esp,0xc
+    d069:	c3                   	ret    
+    d06a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
     d070:	83 ec 0c             	sub    esp,0xc
-    d073:	8d 5e 02             	lea    ebx,[esi+0x2]
-    d076:	6a 25                	push   0x25
-    d078:	e8 33 eb ff ff       	call   bbb0 <_Z7putcharc>
-    d07d:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
-    d082:	83 c4 10             	add    esp,0x10
-    d085:	84 c0                	test   al,al
-    d087:	74 92                	je     d01b <_Z6printfItEvPKcT_+0x6b>
-    d089:	89 de                	mov    esi,ebx
-    d08b:	e9 6d ff ff ff       	jmp    cffd <_Z6printfItEvPKcT_+0x4d>
+    d073:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    d077:	0f be 00             	movsx  eax,BYTE PTR [eax]
+    d07a:	50                   	push   eax
+    d07b:	e8 50 ec ff ff       	call   bcd0 <_Z7putcharc>
+    d080:	83 c4 10             	add    esp,0x10
+    d083:	b8 01 00 00 00       	mov    eax,0x1
+    d088:	83 c4 0c             	add    esp,0xc
+    d08b:	c3                   	ret    
+    d08c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
     d090:	83 ec 0c             	sub    esp,0xc
-    d093:	8d 7c 35 02          	lea    edi,[ebp+esi*1+0x2]
-    d097:	ff 74 24 18          	push   DWORD PTR [esp+0x18]
-    d09b:	e8 70 eb ff ff       	call   bc10 <_Z6putstrPc>
-    d0a0:	83 c4 10             	add    esp,0x10
-    d0a3:	83 ec 0c             	sub    esp,0xc
-    d0a6:	57                   	push   edi
-    d0a7:	e8 84 eb ff ff       	call   bc30 <_Z6printfPKc>
-    d0ac:	83 c4 10             	add    esp,0x10
-    d0af:	eb b0                	jmp    d061 <_Z6printfItEvPKcT_+0xb1>
-    d0b1:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    d0b8:	83 ec 0c             	sub    esp,0xc
-    d0bb:	8d 7c 35 02          	lea    edi,[ebp+esi*1+0x2]
-    d0bf:	0f b7 44 24 18       	movzx  eax,WORD PTR [esp+0x18]
-    d0c4:	50                   	push   eax
-    d0c5:	e8 36 eb ff ff       	call   bc00 <_Z6putbini>
-    d0ca:	83 c4 10             	add    esp,0x10
-    d0cd:	83 ec 0c             	sub    esp,0xc
-    d0d0:	57                   	push   edi
-    d0d1:	e8 5a eb ff ff       	call   bc30 <_Z6printfPKc>
-    d0d6:	83 c4 10             	add    esp,0x10
-    d0d9:	eb 86                	jmp    d061 <_Z6printfItEvPKcT_+0xb1>
-    d0db:	90                   	nop
-    d0dc:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    d0e0:	83 ec 0c             	sub    esp,0xc
-    d0e3:	8d 7c 35 02          	lea    edi,[ebp+esi*1+0x2]
-    d0e7:	0f b7 44 24 18       	movzx  eax,WORD PTR [esp+0x18]
-    d0ec:	50                   	push   eax
-    d0ed:	e8 fe ea ff ff       	call   bbf0 <_Z6putocti>
-    d0f2:	83 c4 10             	add    esp,0x10
-    d0f5:	83 ec 0c             	sub    esp,0xc
-    d0f8:	57                   	push   edi
-    d0f9:	e8 32 eb ff ff       	call   bc30 <_Z6printfPKc>
-    d0fe:	83 c4 10             	add    esp,0x10
-    d101:	e9 5b ff ff ff       	jmp    d061 <_Z6printfItEvPKcT_+0xb1>
-    d106:	8d 76 00             	lea    esi,[esi+0x0]
-    d109:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
-    d110:	83 ec 0c             	sub    esp,0xc
-    d113:	8d 7c 35 02          	lea    edi,[ebp+esi*1+0x2]
-    d117:	0f b7 44 24 18       	movzx  eax,WORD PTR [esp+0x18]
-    d11c:	50                   	push   eax
-    d11d:	e8 be ea ff ff       	call   bbe0 <_Z6puthexi>
-    d122:	83 c4 10             	add    esp,0x10
-    d125:	83 ec 0c             	sub    esp,0xc
-    d128:	57                   	push   edi
-    d129:	e8 02 eb ff ff       	call   bc30 <_Z6printfPKc>
-    d12e:	83 c4 10             	add    esp,0x10
-    d131:	e9 2b ff ff ff       	jmp    d061 <_Z6printfItEvPKcT_+0xb1>
-    d136:	8d 76 00             	lea    esi,[esi+0x0]
-    d139:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
-    d140:	83 ec 0c             	sub    esp,0xc
-    d143:	8d 7c 35 02          	lea    edi,[ebp+esi*1+0x2]
-    d147:	0f b7 44 24 18       	movzx  eax,WORD PTR [esp+0x18]
-    d14c:	50                   	push   eax
-    d14d:	e8 7e ea ff ff       	call   bbd0 <_Z6putdeci>
-    d152:	83 c4 10             	add    esp,0x10
-    d155:	83 ec 0c             	sub    esp,0xc
-    d158:	57                   	push   edi
-    d159:	e8 d2 ea ff ff       	call   bc30 <_Z6printfPKc>
-    d15e:	83 c4 10             	add    esp,0x10
-    d161:	e9 fb fe ff ff       	jmp    d061 <_Z6printfItEvPKcT_+0xb1>
-    d166:	8d 76 00             	lea    esi,[esi+0x0]
-    d169:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
-    d170:	83 ec 0c             	sub    esp,0xc
-    d173:	8d 7c 35 02          	lea    edi,[ebp+esi*1+0x2]
-    d177:	68 1c ff 00 00       	push   0xff1c
-    d17c:	e8 af ea ff ff       	call   bc30 <_Z6printfPKc>
-    d181:	58                   	pop    eax
-    d182:	ff 74 24 18          	push   DWORD PTR [esp+0x18]
-    d186:	e8 55 ea ff ff       	call   bbe0 <_Z6puthexi>
-    d18b:	83 c4 10             	add    esp,0x10
-    d18e:	83 ec 0c             	sub    esp,0xc
-    d191:	57                   	push   edi
-    d192:	e8 99 ea ff ff       	call   bc30 <_Z6printfPKc>
-    d197:	83 c4 10             	add    esp,0x10
-    d19a:	e9 c2 fe ff ff       	jmp    d061 <_Z6printfItEvPKcT_+0xb1>
+    d093:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    d097:	ff 30                	push   DWORD PTR [eax]
+    d099:	e8 42 ec ff ff       	call   bce0 <_Z6putdeci>
+    d09e:	83 c4 10             	add    esp,0x10
+    d0a1:	b8 01 00 00 00       	mov    eax,0x1
+    d0a6:	83 c4 0c             	add    esp,0xc
+    d0a9:	c3                   	ret    
+    d0aa:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    d0b0:	83 ec 0c             	sub    esp,0xc
+    d0b3:	68 64 01 01 00       	push   0x10164
+    d0b8:	e8 13 ed ff ff       	call   bdd0 <_Z6printfPKc>
+    d0bd:	58                   	pop    eax
+    d0be:	eb 93                	jmp    d053 <_Z14_manage_escapeIiEiPKcPT_+0x83>
+    d0c0:	31 c0                	xor    eax,eax
+    d0c2:	e9 3f ff ff ff       	jmp    d006 <_Z14_manage_escapeIiEiPKcPT_+0x36>
 
-Disassembly of section .text._Z14_manage_escapeIhEiPKcPT_:
+Disassembly of section .text._Z6printfIPKcJiS1_EEvS1_T_DpT0_:
 
-0000d1a0 <_Z14_manage_escapeIhEiPKcPT_>:
-    d1a0:	83 ec 0c             	sub    esp,0xc
-    d1a3:	8b 44 24 10          	mov    eax,DWORD PTR [esp+0x10]
-    d1a7:	0f b6 00             	movzx  eax,BYTE PTR [eax]
-    d1aa:	83 e8 42             	sub    eax,0x42
-    d1ad:	3c 36                	cmp    al,0x36
-    d1af:	0f 87 f3 00 00 00    	ja     d2a8 <_Z14_manage_escapeIhEiPKcPT_+0x108>
-    d1b5:	0f b6 c0             	movzx  eax,al
-    d1b8:	ff 24 85 fc ff 00 00 	jmp    DWORD PTR [eax*4+0xfffc]
-    d1bf:	90                   	nop
-    d1c0:	83 ec 0c             	sub    esp,0xc
-    d1c3:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    d1c7:	ff 30                	push   DWORD PTR [eax]
-    d1c9:	e8 42 ea ff ff       	call   bc10 <_Z6putstrPc>
-    d1ce:	83 c4 10             	add    esp,0x10
-    d1d1:	b8 01 00 00 00       	mov    eax,0x1
-    d1d6:	83 c4 0c             	add    esp,0xc
-    d1d9:	c3                   	ret    
-    d1da:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    d1e0:	83 ec 0c             	sub    esp,0xc
-    d1e3:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    d1e7:	0f b6 00             	movzx  eax,BYTE PTR [eax]
-    d1ea:	50                   	push   eax
-    d1eb:	e8 10 ea ff ff       	call   bc00 <_Z6putbini>
-    d1f0:	83 c4 10             	add    esp,0x10
-    d1f3:	b8 01 00 00 00       	mov    eax,0x1
-    d1f8:	83 c4 0c             	add    esp,0xc
-    d1fb:	c3                   	ret    
-    d1fc:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    d200:	83 ec 0c             	sub    esp,0xc
-    d203:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    d207:	0f b6 00             	movzx  eax,BYTE PTR [eax]
-    d20a:	50                   	push   eax
-    d20b:	e8 e0 e9 ff ff       	call   bbf0 <_Z6putocti>
-    d210:	83 c4 10             	add    esp,0x10
-    d213:	b8 01 00 00 00       	mov    eax,0x1
-    d218:	83 c4 0c             	add    esp,0xc
-    d21b:	c3                   	ret    
-    d21c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    d220:	83 ec 0c             	sub    esp,0xc
-    d223:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    d227:	0f b6 00             	movzx  eax,BYTE PTR [eax]
-    d22a:	50                   	push   eax
-    d22b:	e8 b0 e9 ff ff       	call   bbe0 <_Z6puthexi>
-    d230:	83 c4 10             	add    esp,0x10
-    d233:	b8 01 00 00 00       	mov    eax,0x1
-    d238:	83 c4 0c             	add    esp,0xc
-    d23b:	c3                   	ret    
-    d23c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+0000d0d0 <_Z6printfIPKcJiS1_EEvS1_T_DpT0_>:
+    d0d0:	55                   	push   ebp
+    d0d1:	57                   	push   edi
+    d0d2:	56                   	push   esi
+    d0d3:	53                   	push   ebx
+    d0d4:	31 f6                	xor    esi,esi
+    d0d6:	83 ec 1c             	sub    esp,0x1c
+    d0d9:	8b 6c 24 30          	mov    ebp,DWORD PTR [esp+0x30]
+    d0dd:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    d0e1:	84 c0                	test   al,al
+    d0e3:	74 46                	je     d12b <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0x5b>
+    d0e5:	8d 5e 01             	lea    ebx,[esi+0x1]
+    d0e8:	3c 25                	cmp    al,0x25
+    d0ea:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    d0ee:	75 28                	jne    d118 <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0x48>
+    d0f0:	0f b6 07             	movzx  eax,BYTE PTR [edi]
+    d0f3:	3c 25                	cmp    al,0x25
+    d0f5:	0f 84 45 01 00 00    	je     d240 <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0x170>
+    d0fb:	84 c0                	test   al,al
+    d0fd:	75 39                	jne    d138 <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0x68>
+    d0ff:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    d104:	8d 5e 02             	lea    ebx,[esi+0x2]
+    d107:	84 c0                	test   al,al
+    d109:	74 20                	je     d12b <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0x5b>
+    d10b:	89 de                	mov    esi,ebx
+    d10d:	8d 5e 01             	lea    ebx,[esi+0x1]
+    d110:	3c 25                	cmp    al,0x25
+    d112:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    d116:	74 d8                	je     d0f0 <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0x20>
+    d118:	83 ec 0c             	sub    esp,0xc
+    d11b:	50                   	push   eax
+    d11c:	e8 af eb ff ff       	call   bcd0 <_Z7putcharc>
+    d121:	0f be 07             	movsx  eax,BYTE PTR [edi]
+    d124:	83 c4 10             	add    esp,0x10
+    d127:	84 c0                	test   al,al
+    d129:	75 e0                	jne    d10b <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0x3b>
+    d12b:	83 c4 1c             	add    esp,0x1c
+    d12e:	5b                   	pop    ebx
+    d12f:	5e                   	pop    esi
+    d130:	5f                   	pop    edi
+    d131:	5d                   	pop    ebp
+    d132:	c3                   	ret    
+    d133:	90                   	nop
+    d134:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    d138:	83 ec 08             	sub    esp,0x8
+    d13b:	8d 44 24 3c          	lea    eax,[esp+0x3c]
+    d13f:	50                   	push   eax
+    d140:	57                   	push   edi
+    d141:	31 ff                	xor    edi,edi
+    d143:	e8 88 fd ff ff       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    d148:	01 c3                	add    ebx,eax
+    d14a:	8b 44 24 48          	mov    eax,DWORD PTR [esp+0x48]
+    d14e:	01 eb                	add    ebx,ebp
+    d150:	89 44 24 18          	mov    DWORD PTR [esp+0x18],eax
+    d154:	0f be 03             	movsx  eax,BYTE PTR [ebx]
+    d157:	83 c4 10             	add    esp,0x10
+    d15a:	84 c0                	test   al,al
+    d15c:	74 cd                	je     d12b <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0x5b>
+    d15e:	8d 77 01             	lea    esi,[edi+0x1]
+    d161:	3c 25                	cmp    al,0x25
+    d163:	8d 2c 33             	lea    ebp,[ebx+esi*1]
+    d166:	75 30                	jne    d198 <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0xc8>
+    d168:	90                   	nop
+    d169:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    d170:	0f b6 45 00          	movzx  eax,BYTE PTR [ebp+0x0]
+    d174:	3c 25                	cmp    al,0x25
+    d176:	0f 84 14 01 00 00    	je     d290 <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0x1c0>
+    d17c:	84 c0                	test   al,al
+    d17e:	75 38                	jne    d1b8 <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0xe8>
+    d180:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
+    d185:	8d 77 02             	lea    esi,[edi+0x2]
+    d188:	84 c0                	test   al,al
+    d18a:	74 9f                	je     d12b <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0x5b>
+    d18c:	89 f7                	mov    edi,esi
+    d18e:	8d 77 01             	lea    esi,[edi+0x1]
+    d191:	3c 25                	cmp    al,0x25
+    d193:	8d 2c 33             	lea    ebp,[ebx+esi*1]
+    d196:	74 d8                	je     d170 <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0xa0>
+    d198:	83 ec 0c             	sub    esp,0xc
+    d19b:	50                   	push   eax
+    d19c:	e8 2f eb ff ff       	call   bcd0 <_Z7putcharc>
+    d1a1:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    d1a5:	83 c4 10             	add    esp,0x10
+    d1a8:	84 c0                	test   al,al
+    d1aa:	0f 84 7b ff ff ff    	je     d12b <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0x5b>
+    d1b0:	89 f7                	mov    edi,esi
+    d1b2:	eb da                	jmp    d18e <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0xbe>
+    d1b4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    d1b8:	83 ec 08             	sub    esp,0x8
+    d1bb:	8d 44 24 10          	lea    eax,[esp+0x10]
+    d1bf:	50                   	push   eax
+    d1c0:	55                   	push   ebp
+    d1c1:	e8 0a fe ff ff       	call   cfd0 <_Z14_manage_escapeIiEiPKcPT_>
+    d1c6:	01 c6                	add    esi,eax
+    d1c8:	8b 44 24 4c          	mov    eax,DWORD PTR [esp+0x4c]
+    d1cc:	01 de                	add    esi,ebx
+    d1ce:	89 44 24 1c          	mov    DWORD PTR [esp+0x1c],eax
+    d1d2:	0f be 06             	movsx  eax,BYTE PTR [esi]
+    d1d5:	83 c4 10             	add    esp,0x10
+    d1d8:	84 c0                	test   al,al
+    d1da:	0f 84 4b ff ff ff    	je     d12b <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0x5b>
+    d1e0:	31 ff                	xor    edi,edi
+    d1e2:	3c 25                	cmp    al,0x25
+    d1e4:	8d 5f 01             	lea    ebx,[edi+0x1]
+    d1e7:	8d 2c 1e             	lea    ebp,[esi+ebx*1]
+    d1ea:	75 30                	jne    d21c <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0x14c>
+    d1ec:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    d1f0:	0f b6 45 00          	movzx  eax,BYTE PTR [ebp+0x0]
+    d1f4:	3c 25                	cmp    al,0x25
+    d1f6:	0f 84 bc 00 00 00    	je     d2b8 <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0x1e8>
+    d1fc:	84 c0                	test   al,al
+    d1fe:	75 68                	jne    d268 <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0x198>
+    d200:	0f be 44 3e 02       	movsx  eax,BYTE PTR [esi+edi*1+0x2]
+    d205:	8d 5f 02             	lea    ebx,[edi+0x2]
+    d208:	84 c0                	test   al,al
+    d20a:	0f 84 1b ff ff ff    	je     d12b <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0x5b>
+    d210:	89 df                	mov    edi,ebx
+    d212:	8d 5f 01             	lea    ebx,[edi+0x1]
+    d215:	3c 25                	cmp    al,0x25
+    d217:	8d 2c 1e             	lea    ebp,[esi+ebx*1]
+    d21a:	74 d4                	je     d1f0 <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0x120>
+    d21c:	83 ec 0c             	sub    esp,0xc
+    d21f:	50                   	push   eax
+    d220:	e8 ab ea ff ff       	call   bcd0 <_Z7putcharc>
+    d225:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    d229:	83 c4 10             	add    esp,0x10
+    d22c:	84 c0                	test   al,al
+    d22e:	0f 84 f7 fe ff ff    	je     d12b <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0x5b>
+    d234:	89 df                	mov    edi,ebx
+    d236:	eb da                	jmp    d212 <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0x142>
+    d238:	90                   	nop
+    d239:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
     d240:	83 ec 0c             	sub    esp,0xc
-    d243:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    d247:	0f be 00             	movsx  eax,BYTE PTR [eax]
-    d24a:	50                   	push   eax
-    d24b:	e8 60 e9 ff ff       	call   bbb0 <_Z7putcharc>
-    d250:	83 c4 10             	add    esp,0x10
-    d253:	b8 01 00 00 00       	mov    eax,0x1
-    d258:	83 c4 0c             	add    esp,0xc
-    d25b:	c3                   	ret    
-    d25c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    d260:	83 ec 0c             	sub    esp,0xc
-    d263:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    d267:	0f b6 00             	movzx  eax,BYTE PTR [eax]
-    d26a:	50                   	push   eax
-    d26b:	e8 60 e9 ff ff       	call   bbd0 <_Z6putdeci>
-    d270:	83 c4 10             	add    esp,0x10
-    d273:	b8 01 00 00 00       	mov    eax,0x1
-    d278:	83 c4 0c             	add    esp,0xc
-    d27b:	c3                   	ret    
-    d27c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    d280:	83 ec 0c             	sub    esp,0xc
-    d283:	68 1c ff 00 00       	push   0xff1c
-    d288:	e8 a3 e9 ff ff       	call   bc30 <_Z6printfPKc>
-    d28d:	58                   	pop    eax
-    d28e:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    d292:	ff 30                	push   DWORD PTR [eax]
-    d294:	e8 47 e9 ff ff       	call   bbe0 <_Z6puthexi>
-    d299:	83 c4 10             	add    esp,0x10
-    d29c:	b8 01 00 00 00       	mov    eax,0x1
-    d2a1:	83 c4 0c             	add    esp,0xc
-    d2a4:	c3                   	ret    
-    d2a5:	8d 76 00             	lea    esi,[esi+0x0]
-    d2a8:	31 c0                	xor    eax,eax
-    d2aa:	e9 27 ff ff ff       	jmp    d1d6 <_Z14_manage_escapeIhEiPKcPT_+0x36>
+    d243:	8d 5e 02             	lea    ebx,[esi+0x2]
+    d246:	6a 25                	push   0x25
+    d248:	e8 83 ea ff ff       	call   bcd0 <_Z7putcharc>
+    d24d:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    d252:	83 c4 10             	add    esp,0x10
+    d255:	84 c0                	test   al,al
+    d257:	0f 84 ce fe ff ff    	je     d12b <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0x5b>
+    d25d:	89 de                	mov    esi,ebx
+    d25f:	e9 a9 fe ff ff       	jmp    d10d <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0x3d>
+    d264:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    d268:	83 ec 08             	sub    esp,0x8
+    d26b:	8d 44 24 14          	lea    eax,[esp+0x14]
+    d26f:	50                   	push   eax
+    d270:	55                   	push   ebp
+    d271:	e8 5a fc ff ff       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    d276:	01 c3                	add    ebx,eax
+    d278:	01 f3                	add    ebx,esi
+    d27a:	89 1c 24             	mov    DWORD PTR [esp],ebx
+    d27d:	e8 4e eb ff ff       	call   bdd0 <_Z6printfPKc>
+    d282:	83 c4 10             	add    esp,0x10
+    d285:	83 c4 1c             	add    esp,0x1c
+    d288:	5b                   	pop    ebx
+    d289:	5e                   	pop    esi
+    d28a:	5f                   	pop    edi
+    d28b:	5d                   	pop    ebp
+    d28c:	c3                   	ret    
+    d28d:	8d 76 00             	lea    esi,[esi+0x0]
+    d290:	83 ec 0c             	sub    esp,0xc
+    d293:	8d 77 02             	lea    esi,[edi+0x2]
+    d296:	6a 25                	push   0x25
+    d298:	e8 33 ea ff ff       	call   bcd0 <_Z7putcharc>
+    d29d:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
+    d2a2:	83 c4 10             	add    esp,0x10
+    d2a5:	84 c0                	test   al,al
+    d2a7:	0f 84 7e fe ff ff    	je     d12b <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0x5b>
+    d2ad:	89 f7                	mov    edi,esi
+    d2af:	e9 da fe ff ff       	jmp    d18e <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0xbe>
+    d2b4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    d2b8:	83 ec 0c             	sub    esp,0xc
+    d2bb:	8d 5f 02             	lea    ebx,[edi+0x2]
+    d2be:	6a 25                	push   0x25
+    d2c0:	e8 0b ea ff ff       	call   bcd0 <_Z7putcharc>
+    d2c5:	0f be 44 3e 02       	movsx  eax,BYTE PTR [esi+edi*1+0x2]
+    d2ca:	83 c4 10             	add    esp,0x10
+    d2cd:	84 c0                	test   al,al
+    d2cf:	0f 84 56 fe ff ff    	je     d12b <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0x5b>
+    d2d5:	89 df                	mov    edi,ebx
+    d2d7:	e9 36 ff ff ff       	jmp    d212 <_Z6printfIPKcJiS1_EEvS1_T_DpT0_+0x142>
 
-Disassembly of section .text._Z14_manage_escapeIjEiPKcPT_:
+Disassembly of section .text._Z6printfIPKcJPcEEvS1_T_DpT0_:
 
-0000d2b0 <_Z14_manage_escapeIjEiPKcPT_>:
-    d2b0:	83 ec 0c             	sub    esp,0xc
-    d2b3:	8b 44 24 10          	mov    eax,DWORD PTR [esp+0x10]
-    d2b7:	0f b6 00             	movzx  eax,BYTE PTR [eax]
-    d2ba:	83 e8 42             	sub    eax,0x42
-    d2bd:	3c 36                	cmp    al,0x36
-    d2bf:	0f 87 db 00 00 00    	ja     d3a0 <_Z14_manage_escapeIjEiPKcPT_+0xf0>
-    d2c5:	0f b6 c0             	movzx  eax,al
-    d2c8:	ff 24 85 d8 00 01 00 	jmp    DWORD PTR [eax*4+0x100d8]
-    d2cf:	90                   	nop
-    d2d0:	83 ec 0c             	sub    esp,0xc
-    d2d3:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    d2d7:	ff 30                	push   DWORD PTR [eax]
-    d2d9:	e8 32 e9 ff ff       	call   bc10 <_Z6putstrPc>
-    d2de:	83 c4 10             	add    esp,0x10
-    d2e1:	b8 01 00 00 00       	mov    eax,0x1
-    d2e6:	83 c4 0c             	add    esp,0xc
-    d2e9:	c3                   	ret    
-    d2ea:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    d2f0:	83 ec 0c             	sub    esp,0xc
-    d2f3:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    d2f7:	ff 30                	push   DWORD PTR [eax]
-    d2f9:	e8 02 e9 ff ff       	call   bc00 <_Z6putbini>
-    d2fe:	83 c4 10             	add    esp,0x10
-    d301:	b8 01 00 00 00       	mov    eax,0x1
-    d306:	83 c4 0c             	add    esp,0xc
-    d309:	c3                   	ret    
-    d30a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    d310:	83 ec 0c             	sub    esp,0xc
-    d313:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    d317:	ff 30                	push   DWORD PTR [eax]
-    d319:	e8 d2 e8 ff ff       	call   bbf0 <_Z6putocti>
-    d31e:	83 c4 10             	add    esp,0x10
-    d321:	b8 01 00 00 00       	mov    eax,0x1
-    d326:	83 c4 0c             	add    esp,0xc
-    d329:	c3                   	ret    
-    d32a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    d330:	83 ec 0c             	sub    esp,0xc
-    d333:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    d337:	ff 30                	push   DWORD PTR [eax]
-    d339:	e8 a2 e8 ff ff       	call   bbe0 <_Z6puthexi>
-    d33e:	83 c4 10             	add    esp,0x10
-    d341:	b8 01 00 00 00       	mov    eax,0x1
-    d346:	83 c4 0c             	add    esp,0xc
-    d349:	c3                   	ret    
-    d34a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    d350:	83 ec 0c             	sub    esp,0xc
-    d353:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    d357:	0f be 00             	movsx  eax,BYTE PTR [eax]
-    d35a:	50                   	push   eax
-    d35b:	e8 50 e8 ff ff       	call   bbb0 <_Z7putcharc>
-    d360:	83 c4 10             	add    esp,0x10
-    d363:	b8 01 00 00 00       	mov    eax,0x1
-    d368:	83 c4 0c             	add    esp,0xc
-    d36b:	c3                   	ret    
-    d36c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    d370:	83 ec 0c             	sub    esp,0xc
-    d373:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    d377:	ff 30                	push   DWORD PTR [eax]
-    d379:	e8 52 e8 ff ff       	call   bbd0 <_Z6putdeci>
-    d37e:	83 c4 10             	add    esp,0x10
-    d381:	b8 01 00 00 00       	mov    eax,0x1
-    d386:	83 c4 0c             	add    esp,0xc
-    d389:	c3                   	ret    
-    d38a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    d390:	83 ec 0c             	sub    esp,0xc
-    d393:	68 1c ff 00 00       	push   0xff1c
-    d398:	e8 93 e8 ff ff       	call   bc30 <_Z6printfPKc>
-    d39d:	58                   	pop    eax
-    d39e:	eb 93                	jmp    d333 <_Z14_manage_escapeIjEiPKcPT_+0x83>
-    d3a0:	31 c0                	xor    eax,eax
-    d3a2:	e9 3f ff ff ff       	jmp    d2e6 <_Z14_manage_escapeIjEiPKcPT_+0x36>
+0000d2e0 <_Z6printfIPKcJPcEEvS1_T_DpT0_>:
+    d2e0:	55                   	push   ebp
+    d2e1:	57                   	push   edi
+    d2e2:	56                   	push   esi
+    d2e3:	53                   	push   ebx
+    d2e4:	31 f6                	xor    esi,esi
+    d2e6:	83 ec 0c             	sub    esp,0xc
+    d2e9:	8b 6c 24 20          	mov    ebp,DWORD PTR [esp+0x20]
+    d2ed:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    d2f1:	84 c0                	test   al,al
+    d2f3:	74 46                	je     d33b <_Z6printfIPKcJPcEEvS1_T_DpT0_+0x5b>
+    d2f5:	8d 5e 01             	lea    ebx,[esi+0x1]
+    d2f8:	3c 25                	cmp    al,0x25
+    d2fa:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    d2fe:	75 28                	jne    d328 <_Z6printfIPKcJPcEEvS1_T_DpT0_+0x48>
+    d300:	0f b6 07             	movzx  eax,BYTE PTR [edi]
+    d303:	3c 25                	cmp    al,0x25
+    d305:	0f 84 fd 00 00 00    	je     d408 <_Z6printfIPKcJPcEEvS1_T_DpT0_+0x128>
+    d30b:	84 c0                	test   al,al
+    d30d:	75 39                	jne    d348 <_Z6printfIPKcJPcEEvS1_T_DpT0_+0x68>
+    d30f:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    d314:	8d 5e 02             	lea    ebx,[esi+0x2]
+    d317:	84 c0                	test   al,al
+    d319:	74 20                	je     d33b <_Z6printfIPKcJPcEEvS1_T_DpT0_+0x5b>
+    d31b:	89 de                	mov    esi,ebx
+    d31d:	8d 5e 01             	lea    ebx,[esi+0x1]
+    d320:	3c 25                	cmp    al,0x25
+    d322:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    d326:	74 d8                	je     d300 <_Z6printfIPKcJPcEEvS1_T_DpT0_+0x20>
+    d328:	83 ec 0c             	sub    esp,0xc
+    d32b:	50                   	push   eax
+    d32c:	e8 9f e9 ff ff       	call   bcd0 <_Z7putcharc>
+    d331:	0f be 07             	movsx  eax,BYTE PTR [edi]
+    d334:	83 c4 10             	add    esp,0x10
+    d337:	84 c0                	test   al,al
+    d339:	75 e0                	jne    d31b <_Z6printfIPKcJPcEEvS1_T_DpT0_+0x3b>
+    d33b:	83 c4 0c             	add    esp,0xc
+    d33e:	5b                   	pop    ebx
+    d33f:	5e                   	pop    esi
+    d340:	5f                   	pop    edi
+    d341:	5d                   	pop    ebp
+    d342:	c3                   	ret    
+    d343:	90                   	nop
+    d344:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    d348:	83 ec 08             	sub    esp,0x8
+    d34b:	8d 44 24 2c          	lea    eax,[esp+0x2c]
+    d34f:	50                   	push   eax
+    d350:	57                   	push   edi
+    d351:	e8 7a fb ff ff       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    d356:	01 c3                	add    ebx,eax
+    d358:	83 c4 10             	add    esp,0x10
+    d35b:	01 dd                	add    ebp,ebx
+    d35d:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    d361:	84 c0                	test   al,al
+    d363:	74 d6                	je     d33b <_Z6printfIPKcJPcEEvS1_T_DpT0_+0x5b>
+    d365:	31 db                	xor    ebx,ebx
+    d367:	3c 25                	cmp    al,0x25
+    d369:	8d 73 01             	lea    esi,[ebx+0x1]
+    d36c:	8d 7c 35 00          	lea    edi,[ebp+esi*1+0x0]
+    d370:	75 2e                	jne    d3a0 <_Z6printfIPKcJPcEEvS1_T_DpT0_+0xc0>
+    d372:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    d378:	0f b6 07             	movzx  eax,BYTE PTR [edi]
+    d37b:	3c 25                	cmp    al,0x25
+    d37d:	0f 84 ad 00 00 00    	je     d430 <_Z6printfIPKcJPcEEvS1_T_DpT0_+0x150>
+    d383:	84 c0                	test   al,al
+    d385:	75 39                	jne    d3c0 <_Z6printfIPKcJPcEEvS1_T_DpT0_+0xe0>
+    d387:	0f be 44 1d 02       	movsx  eax,BYTE PTR [ebp+ebx*1+0x2]
+    d38c:	8d 73 02             	lea    esi,[ebx+0x2]
+    d38f:	84 c0                	test   al,al
+    d391:	74 a8                	je     d33b <_Z6printfIPKcJPcEEvS1_T_DpT0_+0x5b>
+    d393:	89 f3                	mov    ebx,esi
+    d395:	8d 73 01             	lea    esi,[ebx+0x1]
+    d398:	3c 25                	cmp    al,0x25
+    d39a:	8d 7c 35 00          	lea    edi,[ebp+esi*1+0x0]
+    d39e:	74 d8                	je     d378 <_Z6printfIPKcJPcEEvS1_T_DpT0_+0x98>
+    d3a0:	83 ec 0c             	sub    esp,0xc
+    d3a3:	50                   	push   eax
+    d3a4:	e8 27 e9 ff ff       	call   bcd0 <_Z7putcharc>
+    d3a9:	0f be 07             	movsx  eax,BYTE PTR [edi]
+    d3ac:	83 c4 10             	add    esp,0x10
+    d3af:	84 c0                	test   al,al
+    d3b1:	74 88                	je     d33b <_Z6printfIPKcJPcEEvS1_T_DpT0_+0x5b>
+    d3b3:	89 f3                	mov    ebx,esi
+    d3b5:	eb de                	jmp    d395 <_Z6printfIPKcJPcEEvS1_T_DpT0_+0xb5>
+    d3b7:	89 f6                	mov    esi,esi
+    d3b9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    d3c0:	83 e8 42             	sub    eax,0x42
+    d3c3:	3c 36                	cmp    al,0x36
+    d3c5:	77 26                	ja     d3ed <_Z6printfIPKcJPcEEvS1_T_DpT0_+0x10d>
+    d3c7:	0f b6 c0             	movzx  eax,al
+    d3ca:	ff 24 85 18 0a 01 00 	jmp    DWORD PTR [eax*4+0x10a18]
+    d3d1:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    d3d8:	83 ec 0c             	sub    esp,0xc
+    d3db:	8d 7c 1d 02          	lea    edi,[ebp+ebx*1+0x2]
+    d3df:	0f be 44 24 34       	movsx  eax,BYTE PTR [esp+0x34]
+    d3e4:	50                   	push   eax
+    d3e5:	e8 e6 e8 ff ff       	call   bcd0 <_Z7putcharc>
+    d3ea:	83 c4 10             	add    esp,0x10
+    d3ed:	83 ec 0c             	sub    esp,0xc
+    d3f0:	57                   	push   edi
+    d3f1:	e8 da e9 ff ff       	call   bdd0 <_Z6printfPKc>
+    d3f6:	83 c4 10             	add    esp,0x10
+    d3f9:	83 c4 0c             	add    esp,0xc
+    d3fc:	5b                   	pop    ebx
+    d3fd:	5e                   	pop    esi
+    d3fe:	5f                   	pop    edi
+    d3ff:	5d                   	pop    ebp
+    d400:	c3                   	ret    
+    d401:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    d408:	83 ec 0c             	sub    esp,0xc
+    d40b:	8d 5e 02             	lea    ebx,[esi+0x2]
+    d40e:	6a 25                	push   0x25
+    d410:	e8 bb e8 ff ff       	call   bcd0 <_Z7putcharc>
+    d415:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    d41a:	83 c4 10             	add    esp,0x10
+    d41d:	84 c0                	test   al,al
+    d41f:	0f 84 16 ff ff ff    	je     d33b <_Z6printfIPKcJPcEEvS1_T_DpT0_+0x5b>
+    d425:	89 de                	mov    esi,ebx
+    d427:	e9 f1 fe ff ff       	jmp    d31d <_Z6printfIPKcJPcEEvS1_T_DpT0_+0x3d>
+    d42c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    d430:	83 ec 0c             	sub    esp,0xc
+    d433:	8d 73 02             	lea    esi,[ebx+0x2]
+    d436:	6a 25                	push   0x25
+    d438:	e8 93 e8 ff ff       	call   bcd0 <_Z7putcharc>
+    d43d:	0f be 44 1d 02       	movsx  eax,BYTE PTR [ebp+ebx*1+0x2]
+    d442:	83 c4 10             	add    esp,0x10
+    d445:	84 c0                	test   al,al
+    d447:	0f 84 ee fe ff ff    	je     d33b <_Z6printfIPKcJPcEEvS1_T_DpT0_+0x5b>
+    d44d:	89 f3                	mov    ebx,esi
+    d44f:	e9 41 ff ff ff       	jmp    d395 <_Z6printfIPKcJPcEEvS1_T_DpT0_+0xb5>
+    d454:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    d458:	83 ec 0c             	sub    esp,0xc
+    d45b:	8d 7c 1d 02          	lea    edi,[ebp+ebx*1+0x2]
+    d45f:	ff 74 24 34          	push   DWORD PTR [esp+0x34]
+    d463:	e8 28 e9 ff ff       	call   bd90 <_Z6putstrPc>
+    d468:	83 c4 10             	add    esp,0x10
+    d46b:	eb 80                	jmp    d3ed <_Z6printfIPKcJPcEEvS1_T_DpT0_+0x10d>
+    d46d:	8d 76 00             	lea    esi,[esi+0x0]
+    d470:	83 ec 0c             	sub    esp,0xc
+    d473:	8d 7c 1d 02          	lea    edi,[ebp+ebx*1+0x2]
+    d477:	ff 74 24 34          	push   DWORD PTR [esp+0x34]
+    d47b:	e8 a0 e8 ff ff       	call   bd20 <_Z6putbini>
+    d480:	83 c4 10             	add    esp,0x10
+    d483:	e9 65 ff ff ff       	jmp    d3ed <_Z6printfIPKcJPcEEvS1_T_DpT0_+0x10d>
+    d488:	90                   	nop
+    d489:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    d490:	83 ec 0c             	sub    esp,0xc
+    d493:	8d 7c 1d 02          	lea    edi,[ebp+ebx*1+0x2]
+    d497:	ff 74 24 34          	push   DWORD PTR [esp+0x34]
+    d49b:	e8 70 e8 ff ff       	call   bd10 <_Z6putocti>
+    d4a0:	83 c4 10             	add    esp,0x10
+    d4a3:	e9 45 ff ff ff       	jmp    d3ed <_Z6printfIPKcJPcEEvS1_T_DpT0_+0x10d>
+    d4a8:	90                   	nop
+    d4a9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    d4b0:	83 ec 0c             	sub    esp,0xc
+    d4b3:	8d 7c 1d 02          	lea    edi,[ebp+ebx*1+0x2]
+    d4b7:	ff 74 24 34          	push   DWORD PTR [esp+0x34]
+    d4bb:	e8 30 e8 ff ff       	call   bcf0 <_Z6puthexi>
+    d4c0:	83 c4 10             	add    esp,0x10
+    d4c3:	e9 25 ff ff ff       	jmp    d3ed <_Z6printfIPKcJPcEEvS1_T_DpT0_+0x10d>
+    d4c8:	90                   	nop
+    d4c9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    d4d0:	83 ec 0c             	sub    esp,0xc
+    d4d3:	8d 7c 1d 02          	lea    edi,[ebp+ebx*1+0x2]
+    d4d7:	ff 74 24 34          	push   DWORD PTR [esp+0x34]
+    d4db:	e8 00 e8 ff ff       	call   bce0 <_Z6putdeci>
+    d4e0:	83 c4 10             	add    esp,0x10
+    d4e3:	e9 05 ff ff ff       	jmp    d3ed <_Z6printfIPKcJPcEEvS1_T_DpT0_+0x10d>
+    d4e8:	90                   	nop
+    d4e9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    d4f0:	83 ec 0c             	sub    esp,0xc
+    d4f3:	8d 7c 1d 02          	lea    edi,[ebp+ebx*1+0x2]
+    d4f7:	68 64 01 01 00       	push   0x10164
+    d4fc:	e8 cf e8 ff ff       	call   bdd0 <_Z6printfPKc>
+    d501:	58                   	pop    eax
+    d502:	ff 74 24 34          	push   DWORD PTR [esp+0x34]
+    d506:	e8 e5 e7 ff ff       	call   bcf0 <_Z6puthexi>
+    d50b:	83 c4 10             	add    esp,0x10
+    d50e:	e9 da fe ff ff       	jmp    d3ed <_Z6printfIPKcJPcEEvS1_T_DpT0_+0x10d>
 
-Disassembly of section .text._Z6printfIjJjEEvPKcT_DpT0_:
+Disassembly of section .text._Z6printfIPKcJiS1_PcEEvS1_T_DpT0_:
 
-0000d3b0 <_Z6printfIjJjEEvPKcT_DpT0_>:
-    d3b0:	55                   	push   ebp
-    d3b1:	57                   	push   edi
-    d3b2:	56                   	push   esi
-    d3b3:	53                   	push   ebx
-    d3b4:	31 f6                	xor    esi,esi
-    d3b6:	83 ec 1c             	sub    esp,0x1c
-    d3b9:	8b 6c 24 30          	mov    ebp,DWORD PTR [esp+0x30]
-    d3bd:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
-    d3c1:	84 c0                	test   al,al
-    d3c3:	74 46                	je     d40b <_Z6printfIjJjEEvPKcT_DpT0_+0x5b>
-    d3c5:	8d 5e 01             	lea    ebx,[esi+0x1]
-    d3c8:	3c 25                	cmp    al,0x25
-    d3ca:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
-    d3ce:	75 28                	jne    d3f8 <_Z6printfIjJjEEvPKcT_DpT0_+0x48>
-    d3d0:	0f b6 07             	movzx  eax,BYTE PTR [edi]
-    d3d3:	3c 25                	cmp    al,0x25
-    d3d5:	0f 84 e5 00 00 00    	je     d4c0 <_Z6printfIjJjEEvPKcT_DpT0_+0x110>
-    d3db:	84 c0                	test   al,al
-    d3dd:	75 39                	jne    d418 <_Z6printfIjJjEEvPKcT_DpT0_+0x68>
-    d3df:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
-    d3e4:	8d 5e 02             	lea    ebx,[esi+0x2]
-    d3e7:	84 c0                	test   al,al
-    d3e9:	74 20                	je     d40b <_Z6printfIjJjEEvPKcT_DpT0_+0x5b>
-    d3eb:	89 de                	mov    esi,ebx
-    d3ed:	8d 5e 01             	lea    ebx,[esi+0x1]
-    d3f0:	3c 25                	cmp    al,0x25
-    d3f2:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
-    d3f6:	74 d8                	je     d3d0 <_Z6printfIjJjEEvPKcT_DpT0_+0x20>
-    d3f8:	83 ec 0c             	sub    esp,0xc
-    d3fb:	50                   	push   eax
-    d3fc:	e8 af e7 ff ff       	call   bbb0 <_Z7putcharc>
-    d401:	0f be 07             	movsx  eax,BYTE PTR [edi]
-    d404:	83 c4 10             	add    esp,0x10
-    d407:	84 c0                	test   al,al
-    d409:	75 e0                	jne    d3eb <_Z6printfIjJjEEvPKcT_DpT0_+0x3b>
-    d40b:	83 c4 1c             	add    esp,0x1c
-    d40e:	5b                   	pop    ebx
-    d40f:	5e                   	pop    esi
-    d410:	5f                   	pop    edi
-    d411:	5d                   	pop    ebp
-    d412:	c3                   	ret    
-    d413:	90                   	nop
-    d414:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    d418:	83 ec 08             	sub    esp,0x8
-    d41b:	8d 44 24 3c          	lea    eax,[esp+0x3c]
-    d41f:	50                   	push   eax
-    d420:	57                   	push   edi
-    d421:	e8 8a fe ff ff       	call   d2b0 <_Z14_manage_escapeIjEiPKcPT_>
-    d426:	01 c3                	add    ebx,eax
-    d428:	8b 44 24 48          	mov    eax,DWORD PTR [esp+0x48]
-    d42c:	01 eb                	add    ebx,ebp
-    d42e:	89 44 24 1c          	mov    DWORD PTR [esp+0x1c],eax
-    d432:	0f be 03             	movsx  eax,BYTE PTR [ebx]
-    d435:	83 c4 10             	add    esp,0x10
-    d438:	84 c0                	test   al,al
-    d43a:	74 cf                	je     d40b <_Z6printfIjJjEEvPKcT_DpT0_+0x5b>
-    d43c:	31 ff                	xor    edi,edi
-    d43e:	3c 25                	cmp    al,0x25
-    d440:	8d 77 01             	lea    esi,[edi+0x1]
-    d443:	8d 2c 33             	lea    ebp,[ebx+esi*1]
-    d446:	75 30                	jne    d478 <_Z6printfIjJjEEvPKcT_DpT0_+0xc8>
-    d448:	90                   	nop
-    d449:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
-    d450:	0f b6 45 00          	movzx  eax,BYTE PTR [ebp+0x0]
-    d454:	3c 25                	cmp    al,0x25
-    d456:	0f 84 8c 00 00 00    	je     d4e8 <_Z6printfIjJjEEvPKcT_DpT0_+0x138>
-    d45c:	84 c0                	test   al,al
-    d45e:	75 38                	jne    d498 <_Z6printfIjJjEEvPKcT_DpT0_+0xe8>
-    d460:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
-    d465:	8d 77 02             	lea    esi,[edi+0x2]
-    d468:	84 c0                	test   al,al
-    d46a:	74 9f                	je     d40b <_Z6printfIjJjEEvPKcT_DpT0_+0x5b>
-    d46c:	89 f7                	mov    edi,esi
-    d46e:	8d 77 01             	lea    esi,[edi+0x1]
-    d471:	3c 25                	cmp    al,0x25
-    d473:	8d 2c 33             	lea    ebp,[ebx+esi*1]
-    d476:	74 d8                	je     d450 <_Z6printfIjJjEEvPKcT_DpT0_+0xa0>
-    d478:	83 ec 0c             	sub    esp,0xc
-    d47b:	50                   	push   eax
-    d47c:	e8 2f e7 ff ff       	call   bbb0 <_Z7putcharc>
-    d481:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
-    d485:	83 c4 10             	add    esp,0x10
-    d488:	84 c0                	test   al,al
-    d48a:	0f 84 7b ff ff ff    	je     d40b <_Z6printfIjJjEEvPKcT_DpT0_+0x5b>
-    d490:	89 f7                	mov    edi,esi
-    d492:	eb da                	jmp    d46e <_Z6printfIjJjEEvPKcT_DpT0_+0xbe>
-    d494:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    d498:	83 ec 08             	sub    esp,0x8
-    d49b:	8d 44 24 14          	lea    eax,[esp+0x14]
-    d49f:	50                   	push   eax
-    d4a0:	55                   	push   ebp
-    d4a1:	e8 0a fe ff ff       	call   d2b0 <_Z14_manage_escapeIjEiPKcPT_>
-    d4a6:	01 c6                	add    esi,eax
-    d4a8:	01 f3                	add    ebx,esi
-    d4aa:	89 1c 24             	mov    DWORD PTR [esp],ebx
-    d4ad:	e8 7e e7 ff ff       	call   bc30 <_Z6printfPKc>
-    d4b2:	83 c4 10             	add    esp,0x10
-    d4b5:	83 c4 1c             	add    esp,0x1c
-    d4b8:	5b                   	pop    ebx
-    d4b9:	5e                   	pop    esi
-    d4ba:	5f                   	pop    edi
-    d4bb:	5d                   	pop    ebp
-    d4bc:	c3                   	ret    
-    d4bd:	8d 76 00             	lea    esi,[esi+0x0]
-    d4c0:	83 ec 0c             	sub    esp,0xc
-    d4c3:	8d 5e 02             	lea    ebx,[esi+0x2]
-    d4c6:	6a 25                	push   0x25
-    d4c8:	e8 e3 e6 ff ff       	call   bbb0 <_Z7putcharc>
-    d4cd:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
-    d4d2:	83 c4 10             	add    esp,0x10
-    d4d5:	84 c0                	test   al,al
-    d4d7:	0f 84 2e ff ff ff    	je     d40b <_Z6printfIjJjEEvPKcT_DpT0_+0x5b>
-    d4dd:	89 de                	mov    esi,ebx
-    d4df:	e9 09 ff ff ff       	jmp    d3ed <_Z6printfIjJjEEvPKcT_DpT0_+0x3d>
-    d4e4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    d4e8:	83 ec 0c             	sub    esp,0xc
-    d4eb:	8d 77 02             	lea    esi,[edi+0x2]
-    d4ee:	6a 25                	push   0x25
-    d4f0:	e8 bb e6 ff ff       	call   bbb0 <_Z7putcharc>
-    d4f5:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
-    d4fa:	83 c4 10             	add    esp,0x10
-    d4fd:	84 c0                	test   al,al
-    d4ff:	0f 84 06 ff ff ff    	je     d40b <_Z6printfIjJjEEvPKcT_DpT0_+0x5b>
-    d505:	89 f7                	mov    edi,esi
-    d507:	e9 62 ff ff ff       	jmp    d46e <_Z6printfIjJjEEvPKcT_DpT0_+0xbe>
-
-Disassembly of section .text._Z6printfIhJhEEvPKcT_DpT0_:
-
-0000d510 <_Z6printfIhJhEEvPKcT_DpT0_>:
-    d510:	55                   	push   ebp
-    d511:	57                   	push   edi
-    d512:	31 ff                	xor    edi,edi
-    d514:	56                   	push   esi
-    d515:	53                   	push   ebx
-    d516:	83 ec 2c             	sub    esp,0x2c
-    d519:	8b 44 24 48          	mov    eax,DWORD PTR [esp+0x48]
-    d51d:	8b 6c 24 40          	mov    ebp,DWORD PTR [esp+0x40]
-    d521:	89 44 24 08          	mov    DWORD PTR [esp+0x8],eax
-    d525:	8b 44 24 44          	mov    eax,DWORD PTR [esp+0x44]
-    d529:	88 44 24 0c          	mov    BYTE PTR [esp+0xc],al
+0000d520 <_Z6printfIPKcJiS1_PcEEvS1_T_DpT0_>:
+    d520:	55                   	push   ebp
+    d521:	57                   	push   edi
+    d522:	56                   	push   esi
+    d523:	53                   	push   ebx
+    d524:	31 f6                	xor    esi,esi
+    d526:	83 ec 1c             	sub    esp,0x1c
+    d529:	8b 6c 24 30          	mov    ebp,DWORD PTR [esp+0x30]
     d52d:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
     d531:	84 c0                	test   al,al
-    d533:	74 46                	je     d57b <_Z6printfIhJhEEvPKcT_DpT0_+0x6b>
-    d535:	8d 5f 01             	lea    ebx,[edi+0x1]
+    d533:	74 46                	je     d57b <_Z6printfIPKcJiS1_PcEEvS1_T_DpT0_+0x5b>
+    d535:	8d 5e 01             	lea    ebx,[esi+0x1]
     d538:	3c 25                	cmp    al,0x25
-    d53a:	8d 74 1d 00          	lea    esi,[ebp+ebx*1+0x0]
-    d53e:	75 28                	jne    d568 <_Z6printfIhJhEEvPKcT_DpT0_+0x58>
-    d540:	0f b6 06             	movzx  eax,BYTE PTR [esi]
+    d53a:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    d53e:	75 28                	jne    d568 <_Z6printfIPKcJiS1_PcEEvS1_T_DpT0_+0x48>
+    d540:	0f b6 07             	movzx  eax,BYTE PTR [edi]
     d543:	3c 25                	cmp    al,0x25
-    d545:	0f 84 e5 00 00 00    	je     d630 <_Z6printfIhJhEEvPKcT_DpT0_+0x120>
+    d545:	0f 84 f5 00 00 00    	je     d640 <_Z6printfIPKcJiS1_PcEEvS1_T_DpT0_+0x120>
     d54b:	84 c0                	test   al,al
-    d54d:	75 39                	jne    d588 <_Z6printfIhJhEEvPKcT_DpT0_+0x78>
-    d54f:	0f be 44 3d 02       	movsx  eax,BYTE PTR [ebp+edi*1+0x2]
-    d554:	8d 5f 02             	lea    ebx,[edi+0x2]
+    d54d:	75 39                	jne    d588 <_Z6printfIPKcJiS1_PcEEvS1_T_DpT0_+0x68>
+    d54f:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    d554:	8d 5e 02             	lea    ebx,[esi+0x2]
     d557:	84 c0                	test   al,al
-    d559:	74 20                	je     d57b <_Z6printfIhJhEEvPKcT_DpT0_+0x6b>
-    d55b:	89 df                	mov    edi,ebx
-    d55d:	8d 5f 01             	lea    ebx,[edi+0x1]
+    d559:	74 20                	je     d57b <_Z6printfIPKcJiS1_PcEEvS1_T_DpT0_+0x5b>
+    d55b:	89 de                	mov    esi,ebx
+    d55d:	8d 5e 01             	lea    ebx,[esi+0x1]
     d560:	3c 25                	cmp    al,0x25
-    d562:	8d 74 1d 00          	lea    esi,[ebp+ebx*1+0x0]
-    d566:	74 d8                	je     d540 <_Z6printfIhJhEEvPKcT_DpT0_+0x30>
+    d562:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    d566:	74 d8                	je     d540 <_Z6printfIPKcJiS1_PcEEvS1_T_DpT0_+0x20>
     d568:	83 ec 0c             	sub    esp,0xc
     d56b:	50                   	push   eax
-    d56c:	e8 3f e6 ff ff       	call   bbb0 <_Z7putcharc>
-    d571:	0f be 06             	movsx  eax,BYTE PTR [esi]
+    d56c:	e8 5f e7 ff ff       	call   bcd0 <_Z7putcharc>
+    d571:	0f be 07             	movsx  eax,BYTE PTR [edi]
     d574:	83 c4 10             	add    esp,0x10
     d577:	84 c0                	test   al,al
-    d579:	75 e0                	jne    d55b <_Z6printfIhJhEEvPKcT_DpT0_+0x4b>
-    d57b:	83 c4 2c             	add    esp,0x2c
+    d579:	75 e0                	jne    d55b <_Z6printfIPKcJiS1_PcEEvS1_T_DpT0_+0x3b>
+    d57b:	83 c4 1c             	add    esp,0x1c
     d57e:	5b                   	pop    ebx
     d57f:	5e                   	pop    esi
     d580:	5f                   	pop    edi
@@ -4472,307 +4329,3334 @@ Disassembly of section .text._Z6printfIhJhEEvPKcT_DpT0_:
     d583:	90                   	nop
     d584:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
     d588:	83 ec 08             	sub    esp,0x8
-    d58b:	8d 44 24 14          	lea    eax,[esp+0x14]
+    d58b:	8d 44 24 3c          	lea    eax,[esp+0x3c]
     d58f:	50                   	push   eax
-    d590:	56                   	push   esi
-    d591:	e8 0a fc ff ff       	call   d1a0 <_Z14_manage_escapeIhEiPKcPT_>
+    d590:	57                   	push   edi
+    d591:	e8 3a f9 ff ff       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
     d596:	01 c3                	add    ebx,eax
-    d598:	0f b6 44 24 18       	movzx  eax,BYTE PTR [esp+0x18]
-    d59d:	01 eb                	add    ebx,ebp
-    d59f:	88 44 24 2f          	mov    BYTE PTR [esp+0x2f],al
-    d5a3:	0f be 03             	movsx  eax,BYTE PTR [ebx]
-    d5a6:	83 c4 10             	add    esp,0x10
-    d5a9:	84 c0                	test   al,al
-    d5ab:	74 ce                	je     d57b <_Z6printfIhJhEEvPKcT_DpT0_+0x6b>
-    d5ad:	31 ff                	xor    edi,edi
-    d5af:	3c 25                	cmp    al,0x25
-    d5b1:	8d 77 01             	lea    esi,[edi+0x1]
-    d5b4:	8d 2c 33             	lea    ebp,[ebx+esi*1]
-    d5b7:	75 2f                	jne    d5e8 <_Z6printfIhJhEEvPKcT_DpT0_+0xd8>
+    d598:	8b 44 24 48          	mov    eax,DWORD PTR [esp+0x48]
+    d59c:	01 eb                	add    ebx,ebp
+    d59e:	89 44 24 1c          	mov    DWORD PTR [esp+0x1c],eax
+    d5a2:	0f be 03             	movsx  eax,BYTE PTR [ebx]
+    d5a5:	83 c4 10             	add    esp,0x10
+    d5a8:	84 c0                	test   al,al
+    d5aa:	74 cf                	je     d57b <_Z6printfIPKcJiS1_PcEEvS1_T_DpT0_+0x5b>
+    d5ac:	31 ff                	xor    edi,edi
+    d5ae:	3c 25                	cmp    al,0x25
+    d5b0:	8d 77 01             	lea    esi,[edi+0x1]
+    d5b3:	8d 2c 33             	lea    ebp,[ebx+esi*1]
+    d5b6:	75 30                	jne    d5e8 <_Z6printfIPKcJiS1_PcEEvS1_T_DpT0_+0xc8>
+    d5b8:	90                   	nop
     d5b9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
     d5c0:	0f b6 45 00          	movzx  eax,BYTE PTR [ebp+0x0]
     d5c4:	3c 25                	cmp    al,0x25
-    d5c6:	0f 84 8c 00 00 00    	je     d658 <_Z6printfIhJhEEvPKcT_DpT0_+0x148>
+    d5c6:	0f 84 9c 00 00 00    	je     d668 <_Z6printfIPKcJiS1_PcEEvS1_T_DpT0_+0x148>
     d5cc:	84 c0                	test   al,al
-    d5ce:	75 38                	jne    d608 <_Z6printfIhJhEEvPKcT_DpT0_+0xf8>
+    d5ce:	75 38                	jne    d608 <_Z6printfIPKcJiS1_PcEEvS1_T_DpT0_+0xe8>
     d5d0:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
     d5d5:	8d 77 02             	lea    esi,[edi+0x2]
     d5d8:	84 c0                	test   al,al
-    d5da:	74 9f                	je     d57b <_Z6printfIhJhEEvPKcT_DpT0_+0x6b>
+    d5da:	74 9f                	je     d57b <_Z6printfIPKcJiS1_PcEEvS1_T_DpT0_+0x5b>
     d5dc:	89 f7                	mov    edi,esi
     d5de:	8d 77 01             	lea    esi,[edi+0x1]
     d5e1:	3c 25                	cmp    al,0x25
     d5e3:	8d 2c 33             	lea    ebp,[ebx+esi*1]
-    d5e6:	74 d8                	je     d5c0 <_Z6printfIhJhEEvPKcT_DpT0_+0xb0>
+    d5e6:	74 d8                	je     d5c0 <_Z6printfIPKcJiS1_PcEEvS1_T_DpT0_+0xa0>
     d5e8:	83 ec 0c             	sub    esp,0xc
     d5eb:	50                   	push   eax
-    d5ec:	e8 bf e5 ff ff       	call   bbb0 <_Z7putcharc>
+    d5ec:	e8 df e6 ff ff       	call   bcd0 <_Z7putcharc>
     d5f1:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
     d5f5:	83 c4 10             	add    esp,0x10
     d5f8:	84 c0                	test   al,al
-    d5fa:	0f 84 7b ff ff ff    	je     d57b <_Z6printfIhJhEEvPKcT_DpT0_+0x6b>
+    d5fa:	0f 84 7b ff ff ff    	je     d57b <_Z6printfIPKcJiS1_PcEEvS1_T_DpT0_+0x5b>
     d600:	89 f7                	mov    edi,esi
-    d602:	eb da                	jmp    d5de <_Z6printfIhJhEEvPKcT_DpT0_+0xce>
+    d602:	eb da                	jmp    d5de <_Z6printfIPKcJiS1_PcEEvS1_T_DpT0_+0xbe>
     d604:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
     d608:	83 ec 08             	sub    esp,0x8
-    d60b:	8d 44 24 27          	lea    eax,[esp+0x27]
+    d60b:	8d 44 24 14          	lea    eax,[esp+0x14]
     d60f:	50                   	push   eax
     d610:	55                   	push   ebp
-    d611:	e8 8a fb ff ff       	call   d1a0 <_Z14_manage_escapeIhEiPKcPT_>
+    d611:	e8 ba f9 ff ff       	call   cfd0 <_Z14_manage_escapeIiEiPKcPT_>
     d616:	01 c6                	add    esi,eax
-    d618:	01 f3                	add    ebx,esi
-    d61a:	89 1c 24             	mov    DWORD PTR [esp],ebx
-    d61d:	e8 0e e6 ff ff       	call   bc30 <_Z6printfPKc>
-    d622:	83 c4 10             	add    esp,0x10
-    d625:	83 c4 2c             	add    esp,0x2c
-    d628:	5b                   	pop    ebx
-    d629:	5e                   	pop    esi
-    d62a:	5f                   	pop    edi
-    d62b:	5d                   	pop    ebp
-    d62c:	c3                   	ret    
-    d62d:	8d 76 00             	lea    esi,[esi+0x0]
-    d630:	83 ec 0c             	sub    esp,0xc
-    d633:	8d 5f 02             	lea    ebx,[edi+0x2]
-    d636:	6a 25                	push   0x25
-    d638:	e8 73 e5 ff ff       	call   bbb0 <_Z7putcharc>
-    d63d:	0f be 44 3d 02       	movsx  eax,BYTE PTR [ebp+edi*1+0x2]
-    d642:	83 c4 10             	add    esp,0x10
-    d645:	84 c0                	test   al,al
-    d647:	0f 84 2e ff ff ff    	je     d57b <_Z6printfIhJhEEvPKcT_DpT0_+0x6b>
-    d64d:	89 df                	mov    edi,ebx
-    d64f:	e9 09 ff ff ff       	jmp    d55d <_Z6printfIhJhEEvPKcT_DpT0_+0x4d>
-    d654:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    d658:	83 ec 0c             	sub    esp,0xc
-    d65b:	8d 77 02             	lea    esi,[edi+0x2]
-    d65e:	6a 25                	push   0x25
-    d660:	e8 4b e5 ff ff       	call   bbb0 <_Z7putcharc>
-    d665:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
-    d66a:	83 c4 10             	add    esp,0x10
-    d66d:	84 c0                	test   al,al
-    d66f:	0f 84 06 ff ff ff    	je     d57b <_Z6printfIhJhEEvPKcT_DpT0_+0x6b>
-    d675:	89 f7                	mov    edi,esi
-    d677:	e9 62 ff ff ff       	jmp    d5de <_Z6printfIhJhEEvPKcT_DpT0_+0xce>
+    d618:	83 c4 0c             	add    esp,0xc
+    d61b:	01 f3                	add    ebx,esi
+    d61d:	ff 74 24 44          	push   DWORD PTR [esp+0x44]
+    d621:	ff 74 24 44          	push   DWORD PTR [esp+0x44]
+    d625:	53                   	push   ebx
+    d626:	e8 b5 fc ff ff       	call   d2e0 <_Z6printfIPKcJPcEEvS1_T_DpT0_>
+    d62b:	83 c4 10             	add    esp,0x10
+    d62e:	83 c4 1c             	add    esp,0x1c
+    d631:	5b                   	pop    ebx
+    d632:	5e                   	pop    esi
+    d633:	5f                   	pop    edi
+    d634:	5d                   	pop    ebp
+    d635:	c3                   	ret    
+    d636:	8d 76 00             	lea    esi,[esi+0x0]
+    d639:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    d640:	83 ec 0c             	sub    esp,0xc
+    d643:	8d 5e 02             	lea    ebx,[esi+0x2]
+    d646:	6a 25                	push   0x25
+    d648:	e8 83 e6 ff ff       	call   bcd0 <_Z7putcharc>
+    d64d:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    d652:	83 c4 10             	add    esp,0x10
+    d655:	84 c0                	test   al,al
+    d657:	0f 84 1e ff ff ff    	je     d57b <_Z6printfIPKcJiS1_PcEEvS1_T_DpT0_+0x5b>
+    d65d:	89 de                	mov    esi,ebx
+    d65f:	e9 f9 fe ff ff       	jmp    d55d <_Z6printfIPKcJiS1_PcEEvS1_T_DpT0_+0x3d>
+    d664:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    d668:	83 ec 0c             	sub    esp,0xc
+    d66b:	8d 77 02             	lea    esi,[edi+0x2]
+    d66e:	6a 25                	push   0x25
+    d670:	e8 5b e6 ff ff       	call   bcd0 <_Z7putcharc>
+    d675:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
+    d67a:	83 c4 10             	add    esp,0x10
+    d67d:	84 c0                	test   al,al
+    d67f:	0f 84 f6 fe ff ff    	je     d57b <_Z6printfIPKcJiS1_PcEEvS1_T_DpT0_+0x5b>
+    d685:	89 f7                	mov    edi,esi
+    d687:	e9 52 ff ff ff       	jmp    d5de <_Z6printfIPKcJiS1_PcEEvS1_T_DpT0_+0xbe>
 
-Disassembly of section .text._Z6printfIhJhhhEEvPKcT_DpT0_:
+Disassembly of section .text._Z14_manage_escapeIjEiPKcPT_:
 
-0000d680 <_Z6printfIhJhhhEEvPKcT_DpT0_>:
-    d680:	55                   	push   ebp
-    d681:	57                   	push   edi
-    d682:	31 ed                	xor    ebp,ebp
-    d684:	56                   	push   esi
-    d685:	53                   	push   ebx
-    d686:	83 ec 2c             	sub    esp,0x2c
-    d689:	8b 44 24 48          	mov    eax,DWORD PTR [esp+0x48]
-    d68d:	8b 7c 24 40          	mov    edi,DWORD PTR [esp+0x40]
-    d691:	89 04 24             	mov    DWORD PTR [esp],eax
-    d694:	8b 44 24 4c          	mov    eax,DWORD PTR [esp+0x4c]
-    d698:	89 44 24 04          	mov    DWORD PTR [esp+0x4],eax
-    d69c:	8b 44 24 50          	mov    eax,DWORD PTR [esp+0x50]
-    d6a0:	89 44 24 08          	mov    DWORD PTR [esp+0x8],eax
-    d6a4:	8b 44 24 44          	mov    eax,DWORD PTR [esp+0x44]
-    d6a8:	88 44 24 0c          	mov    BYTE PTR [esp+0xc],al
-    d6ac:	0f be 07             	movsx  eax,BYTE PTR [edi]
-    d6af:	84 c0                	test   al,al
-    d6b1:	74 47                	je     d6fa <_Z6printfIhJhhhEEvPKcT_DpT0_+0x7a>
-    d6b3:	8d 5d 01             	lea    ebx,[ebp+0x1]
-    d6b6:	3c 25                	cmp    al,0x25
-    d6b8:	8d 34 1f             	lea    esi,[edi+ebx*1]
-    d6bb:	75 2a                	jne    d6e7 <_Z6printfIhJhhhEEvPKcT_DpT0_+0x67>
-    d6bd:	8d 76 00             	lea    esi,[esi+0x0]
-    d6c0:	0f b6 06             	movzx  eax,BYTE PTR [esi]
-    d6c3:	3c 25                	cmp    al,0x25
-    d6c5:	0f 84 05 01 00 00    	je     d7d0 <_Z6printfIhJhhhEEvPKcT_DpT0_+0x150>
-    d6cb:	84 c0                	test   al,al
-    d6cd:	75 39                	jne    d708 <_Z6printfIhJhhhEEvPKcT_DpT0_+0x88>
-    d6cf:	0f be 44 2f 02       	movsx  eax,BYTE PTR [edi+ebp*1+0x2]
-    d6d4:	8d 5d 02             	lea    ebx,[ebp+0x2]
-    d6d7:	84 c0                	test   al,al
-    d6d9:	74 1f                	je     d6fa <_Z6printfIhJhhhEEvPKcT_DpT0_+0x7a>
-    d6db:	89 dd                	mov    ebp,ebx
-    d6dd:	8d 5d 01             	lea    ebx,[ebp+0x1]
-    d6e0:	3c 25                	cmp    al,0x25
-    d6e2:	8d 34 1f             	lea    esi,[edi+ebx*1]
-    d6e5:	74 d9                	je     d6c0 <_Z6printfIhJhhhEEvPKcT_DpT0_+0x40>
-    d6e7:	83 ec 0c             	sub    esp,0xc
-    d6ea:	50                   	push   eax
-    d6eb:	e8 c0 e4 ff ff       	call   bbb0 <_Z7putcharc>
-    d6f0:	0f be 06             	movsx  eax,BYTE PTR [esi]
-    d6f3:	83 c4 10             	add    esp,0x10
-    d6f6:	84 c0                	test   al,al
-    d6f8:	75 e1                	jne    d6db <_Z6printfIhJhhhEEvPKcT_DpT0_+0x5b>
-    d6fa:	83 c4 2c             	add    esp,0x2c
-    d6fd:	5b                   	pop    ebx
-    d6fe:	5e                   	pop    esi
-    d6ff:	5f                   	pop    edi
-    d700:	5d                   	pop    ebp
-    d701:	c3                   	ret    
-    d702:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    d708:	83 ec 08             	sub    esp,0x8
-    d70b:	8d 44 24 14          	lea    eax,[esp+0x14]
-    d70f:	50                   	push   eax
-    d710:	56                   	push   esi
-    d711:	e8 8a fa ff ff       	call   d1a0 <_Z14_manage_escapeIhEiPKcPT_>
-    d716:	01 c3                	add    ebx,eax
-    d718:	0f b6 44 24 10       	movzx  eax,BYTE PTR [esp+0x10]
-    d71d:	0f b6 54 24 14       	movzx  edx,BYTE PTR [esp+0x14]
-    d722:	01 fb                	add    ebx,edi
-    d724:	0f b6 74 24 18       	movzx  esi,BYTE PTR [esp+0x18]
-    d729:	88 44 24 2f          	mov    BYTE PTR [esp+0x2f],al
-    d72d:	0f be 03             	movsx  eax,BYTE PTR [ebx]
-    d730:	89 54 24 14          	mov    DWORD PTR [esp+0x14],edx
-    d734:	83 c4 10             	add    esp,0x10
-    d737:	84 c0                	test   al,al
-    d739:	74 bf                	je     d6fa <_Z6printfIhJhhhEEvPKcT_DpT0_+0x7a>
-    d73b:	31 c9                	xor    ecx,ecx
-    d73d:	89 34 24             	mov    DWORD PTR [esp],esi
-    d740:	3c 25                	cmp    al,0x25
-    d742:	89 cd                	mov    ebp,ecx
-    d744:	89 de                	mov    esi,ebx
-    d746:	8d 7d 01             	lea    edi,[ebp+0x1]
-    d749:	8d 1c 3e             	lea    ebx,[esi+edi*1]
-    d74c:	75 29                	jne    d777 <_Z6printfIhJhhhEEvPKcT_DpT0_+0xf7>
-    d74e:	66 90                	xchg   ax,ax
-    d750:	0f b6 03             	movzx  eax,BYTE PTR [ebx]
-    d753:	3c 25                	cmp    al,0x25
-    d755:	0f 84 9d 00 00 00    	je     d7f8 <_Z6printfIhJhhhEEvPKcT_DpT0_+0x178>
-    d75b:	84 c0                	test   al,al
-    d75d:	75 39                	jne    d798 <_Z6printfIhJhhhEEvPKcT_DpT0_+0x118>
-    d75f:	0f be 44 2e 02       	movsx  eax,BYTE PTR [esi+ebp*1+0x2]
-    d764:	8d 7d 02             	lea    edi,[ebp+0x2]
-    d767:	84 c0                	test   al,al
-    d769:	74 8f                	je     d6fa <_Z6printfIhJhhhEEvPKcT_DpT0_+0x7a>
-    d76b:	89 fd                	mov    ebp,edi
-    d76d:	8d 7d 01             	lea    edi,[ebp+0x1]
-    d770:	3c 25                	cmp    al,0x25
-    d772:	8d 1c 3e             	lea    ebx,[esi+edi*1]
-    d775:	74 d9                	je     d750 <_Z6printfIhJhhhEEvPKcT_DpT0_+0xd0>
-    d777:	83 ec 0c             	sub    esp,0xc
-    d77a:	50                   	push   eax
-    d77b:	e8 30 e4 ff ff       	call   bbb0 <_Z7putcharc>
-    d780:	0f be 03             	movsx  eax,BYTE PTR [ebx]
-    d783:	83 c4 10             	add    esp,0x10
-    d786:	84 c0                	test   al,al
-    d788:	0f 84 6c ff ff ff    	je     d6fa <_Z6printfIhJhhhEEvPKcT_DpT0_+0x7a>
-    d78e:	89 fd                	mov    ebp,edi
-    d790:	eb db                	jmp    d76d <_Z6printfIhJhhhEEvPKcT_DpT0_+0xed>
-    d792:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    d798:	83 ec 08             	sub    esp,0x8
-    d79b:	89 dd                	mov    ebp,ebx
-    d79d:	89 f3                	mov    ebx,esi
-    d79f:	8b 74 24 08          	mov    esi,DWORD PTR [esp+0x8]
-    d7a3:	8d 44 24 27          	lea    eax,[esp+0x27]
-    d7a7:	50                   	push   eax
-    d7a8:	55                   	push   ebp
-    d7a9:	e8 f2 f9 ff ff       	call   d1a0 <_Z14_manage_escapeIhEiPKcPT_>
-    d7ae:	01 c7                	add    edi,eax
-    d7b0:	83 c4 0c             	add    esp,0xc
-    d7b3:	01 fb                	add    ebx,edi
-    d7b5:	56                   	push   esi
-    d7b6:	ff 74 24 0c          	push   DWORD PTR [esp+0xc]
-    d7ba:	53                   	push   ebx
-    d7bb:	e8 50 fd ff ff       	call   d510 <_Z6printfIhJhEEvPKcT_DpT0_>
-    d7c0:	83 c4 10             	add    esp,0x10
-    d7c3:	83 c4 2c             	add    esp,0x2c
-    d7c6:	5b                   	pop    ebx
-    d7c7:	5e                   	pop    esi
-    d7c8:	5f                   	pop    edi
-    d7c9:	5d                   	pop    ebp
-    d7ca:	c3                   	ret    
-    d7cb:	90                   	nop
-    d7cc:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    d7d0:	83 ec 0c             	sub    esp,0xc
-    d7d3:	8d 5d 02             	lea    ebx,[ebp+0x2]
-    d7d6:	6a 25                	push   0x25
-    d7d8:	e8 d3 e3 ff ff       	call   bbb0 <_Z7putcharc>
-    d7dd:	0f be 44 2f 02       	movsx  eax,BYTE PTR [edi+ebp*1+0x2]
-    d7e2:	83 c4 10             	add    esp,0x10
-    d7e5:	84 c0                	test   al,al
-    d7e7:	0f 84 0d ff ff ff    	je     d6fa <_Z6printfIhJhhhEEvPKcT_DpT0_+0x7a>
-    d7ed:	89 dd                	mov    ebp,ebx
-    d7ef:	e9 e9 fe ff ff       	jmp    d6dd <_Z6printfIhJhhhEEvPKcT_DpT0_+0x5d>
-    d7f4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    d7f8:	83 ec 0c             	sub    esp,0xc
-    d7fb:	8d 7d 02             	lea    edi,[ebp+0x2]
-    d7fe:	6a 25                	push   0x25
-    d800:	e8 ab e3 ff ff       	call   bbb0 <_Z7putcharc>
-    d805:	0f be 44 2e 02       	movsx  eax,BYTE PTR [esi+ebp*1+0x2]
+0000d690 <_Z14_manage_escapeIjEiPKcPT_>:
+    d690:	83 ec 0c             	sub    esp,0xc
+    d693:	8b 44 24 10          	mov    eax,DWORD PTR [esp+0x10]
+    d697:	0f b6 00             	movzx  eax,BYTE PTR [eax]
+    d69a:	83 e8 42             	sub    eax,0x42
+    d69d:	3c 36                	cmp    al,0x36
+    d69f:	0f 87 db 00 00 00    	ja     d780 <_Z14_manage_escapeIjEiPKcPT_+0xf0>
+    d6a5:	0f b6 c0             	movzx  eax,al
+    d6a8:	ff 24 85 f4 0a 01 00 	jmp    DWORD PTR [eax*4+0x10af4]
+    d6af:	90                   	nop
+    d6b0:	83 ec 0c             	sub    esp,0xc
+    d6b3:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    d6b7:	ff 30                	push   DWORD PTR [eax]
+    d6b9:	e8 d2 e6 ff ff       	call   bd90 <_Z6putstrPc>
+    d6be:	83 c4 10             	add    esp,0x10
+    d6c1:	b8 01 00 00 00       	mov    eax,0x1
+    d6c6:	83 c4 0c             	add    esp,0xc
+    d6c9:	c3                   	ret    
+    d6ca:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    d6d0:	83 ec 0c             	sub    esp,0xc
+    d6d3:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    d6d7:	ff 30                	push   DWORD PTR [eax]
+    d6d9:	e8 42 e6 ff ff       	call   bd20 <_Z6putbini>
+    d6de:	83 c4 10             	add    esp,0x10
+    d6e1:	b8 01 00 00 00       	mov    eax,0x1
+    d6e6:	83 c4 0c             	add    esp,0xc
+    d6e9:	c3                   	ret    
+    d6ea:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    d6f0:	83 ec 0c             	sub    esp,0xc
+    d6f3:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    d6f7:	ff 30                	push   DWORD PTR [eax]
+    d6f9:	e8 12 e6 ff ff       	call   bd10 <_Z6putocti>
+    d6fe:	83 c4 10             	add    esp,0x10
+    d701:	b8 01 00 00 00       	mov    eax,0x1
+    d706:	83 c4 0c             	add    esp,0xc
+    d709:	c3                   	ret    
+    d70a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    d710:	83 ec 0c             	sub    esp,0xc
+    d713:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    d717:	ff 30                	push   DWORD PTR [eax]
+    d719:	e8 d2 e5 ff ff       	call   bcf0 <_Z6puthexi>
+    d71e:	83 c4 10             	add    esp,0x10
+    d721:	b8 01 00 00 00       	mov    eax,0x1
+    d726:	83 c4 0c             	add    esp,0xc
+    d729:	c3                   	ret    
+    d72a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    d730:	83 ec 0c             	sub    esp,0xc
+    d733:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    d737:	0f be 00             	movsx  eax,BYTE PTR [eax]
+    d73a:	50                   	push   eax
+    d73b:	e8 90 e5 ff ff       	call   bcd0 <_Z7putcharc>
+    d740:	83 c4 10             	add    esp,0x10
+    d743:	b8 01 00 00 00       	mov    eax,0x1
+    d748:	83 c4 0c             	add    esp,0xc
+    d74b:	c3                   	ret    
+    d74c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    d750:	83 ec 0c             	sub    esp,0xc
+    d753:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    d757:	ff 30                	push   DWORD PTR [eax]
+    d759:	e8 82 e5 ff ff       	call   bce0 <_Z6putdeci>
+    d75e:	83 c4 10             	add    esp,0x10
+    d761:	b8 01 00 00 00       	mov    eax,0x1
+    d766:	83 c4 0c             	add    esp,0xc
+    d769:	c3                   	ret    
+    d76a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    d770:	83 ec 0c             	sub    esp,0xc
+    d773:	68 64 01 01 00       	push   0x10164
+    d778:	e8 53 e6 ff ff       	call   bdd0 <_Z6printfPKc>
+    d77d:	58                   	pop    eax
+    d77e:	eb 93                	jmp    d713 <_Z14_manage_escapeIjEiPKcPT_+0x83>
+    d780:	31 c0                	xor    eax,eax
+    d782:	e9 3f ff ff ff       	jmp    d6c6 <_Z14_manage_escapeIjEiPKcPT_+0x36>
+
+Disassembly of section .text._Z6printfIjJEEvPKcT_DpT0_:
+
+0000d790 <_Z6printfIjJEEvPKcT_DpT0_>:
+    d790:	55                   	push   ebp
+    d791:	57                   	push   edi
+    d792:	56                   	push   esi
+    d793:	53                   	push   ebx
+    d794:	31 f6                	xor    esi,esi
+    d796:	83 ec 0c             	sub    esp,0xc
+    d799:	8b 6c 24 20          	mov    ebp,DWORD PTR [esp+0x20]
+    d79d:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    d7a1:	84 c0                	test   al,al
+    d7a3:	74 42                	je     d7e7 <_Z6printfIjJEEvPKcT_DpT0_+0x57>
+    d7a5:	8d 5e 01             	lea    ebx,[esi+0x1]
+    d7a8:	3c 25                	cmp    al,0x25
+    d7aa:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    d7ae:	75 24                	jne    d7d4 <_Z6printfIjJEEvPKcT_DpT0_+0x44>
+    d7b0:	0f b6 07             	movzx  eax,BYTE PTR [edi]
+    d7b3:	3c 25                	cmp    al,0x25
+    d7b5:	74 61                	je     d818 <_Z6printfIjJEEvPKcT_DpT0_+0x88>
+    d7b7:	84 c0                	test   al,al
+    d7b9:	75 35                	jne    d7f0 <_Z6printfIjJEEvPKcT_DpT0_+0x60>
+    d7bb:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    d7c0:	8d 5e 02             	lea    ebx,[esi+0x2]
+    d7c3:	84 c0                	test   al,al
+    d7c5:	74 20                	je     d7e7 <_Z6printfIjJEEvPKcT_DpT0_+0x57>
+    d7c7:	89 de                	mov    esi,ebx
+    d7c9:	8d 5e 01             	lea    ebx,[esi+0x1]
+    d7cc:	3c 25                	cmp    al,0x25
+    d7ce:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    d7d2:	74 dc                	je     d7b0 <_Z6printfIjJEEvPKcT_DpT0_+0x20>
+    d7d4:	83 ec 0c             	sub    esp,0xc
+    d7d7:	50                   	push   eax
+    d7d8:	e8 f3 e4 ff ff       	call   bcd0 <_Z7putcharc>
+    d7dd:	0f be 07             	movsx  eax,BYTE PTR [edi]
+    d7e0:	83 c4 10             	add    esp,0x10
+    d7e3:	84 c0                	test   al,al
+    d7e5:	75 e0                	jne    d7c7 <_Z6printfIjJEEvPKcT_DpT0_+0x37>
+    d7e7:	83 c4 0c             	add    esp,0xc
+    d7ea:	5b                   	pop    ebx
+    d7eb:	5e                   	pop    esi
+    d7ec:	5f                   	pop    edi
+    d7ed:	5d                   	pop    ebp
+    d7ee:	c3                   	ret    
+    d7ef:	90                   	nop
+    d7f0:	83 ec 08             	sub    esp,0x8
+    d7f3:	8d 44 24 2c          	lea    eax,[esp+0x2c]
+    d7f7:	50                   	push   eax
+    d7f8:	57                   	push   edi
+    d7f9:	e8 92 fe ff ff       	call   d690 <_Z14_manage_escapeIjEiPKcPT_>
+    d7fe:	01 c3                	add    ebx,eax
+    d800:	01 dd                	add    ebp,ebx
+    d802:	89 2c 24             	mov    DWORD PTR [esp],ebp
+    d805:	e8 c6 e5 ff ff       	call   bdd0 <_Z6printfPKc>
     d80a:	83 c4 10             	add    esp,0x10
-    d80d:	84 c0                	test   al,al
-    d80f:	0f 84 e5 fe ff ff    	je     d6fa <_Z6printfIhJhhhEEvPKcT_DpT0_+0x7a>
-    d815:	89 fd                	mov    ebp,edi
-    d817:	e9 51 ff ff ff       	jmp    d76d <_Z6printfIhJhhhEEvPKcT_DpT0_+0xed>
+    d80d:	83 c4 0c             	add    esp,0xc
+    d810:	5b                   	pop    ebx
+    d811:	5e                   	pop    esi
+    d812:	5f                   	pop    edi
+    d813:	5d                   	pop    ebp
+    d814:	c3                   	ret    
+    d815:	8d 76 00             	lea    esi,[esi+0x0]
+    d818:	83 ec 0c             	sub    esp,0xc
+    d81b:	8d 5e 02             	lea    ebx,[esi+0x2]
+    d81e:	6a 25                	push   0x25
+    d820:	e8 ab e4 ff ff       	call   bcd0 <_Z7putcharc>
+    d825:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    d82a:	83 c4 10             	add    esp,0x10
+    d82d:	84 c0                	test   al,al
+    d82f:	74 b6                	je     d7e7 <_Z6printfIjJEEvPKcT_DpT0_+0x57>
+    d831:	89 de                	mov    esi,ebx
+    d833:	eb 94                	jmp    d7c9 <_Z6printfIjJEEvPKcT_DpT0_+0x39>
 
-Disassembly of section .text._Z14_manage_escapeIiEiPKcPT_:
+Disassembly of section .text._Z6printfIPKcJiS1_jEEvS1_T_DpT0_:
 
-0000d820 <_Z14_manage_escapeIiEiPKcPT_>:
-    d820:	83 ec 0c             	sub    esp,0xc
-    d823:	8b 44 24 10          	mov    eax,DWORD PTR [esp+0x10]
-    d827:	0f b6 00             	movzx  eax,BYTE PTR [eax]
-    d82a:	83 e8 42             	sub    eax,0x42
-    d82d:	3c 36                	cmp    al,0x36
-    d82f:	0f 87 db 00 00 00    	ja     d910 <_Z14_manage_escapeIiEiPKcPT_+0xf0>
-    d835:	0f b6 c0             	movzx  eax,al
-    d838:	ff 24 85 b8 01 01 00 	jmp    DWORD PTR [eax*4+0x101b8]
-    d83f:	90                   	nop
-    d840:	83 ec 0c             	sub    esp,0xc
-    d843:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    d847:	ff 30                	push   DWORD PTR [eax]
-    d849:	e8 c2 e3 ff ff       	call   bc10 <_Z6putstrPc>
-    d84e:	83 c4 10             	add    esp,0x10
-    d851:	b8 01 00 00 00       	mov    eax,0x1
-    d856:	83 c4 0c             	add    esp,0xc
-    d859:	c3                   	ret    
-    d85a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    d860:	83 ec 0c             	sub    esp,0xc
-    d863:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    d867:	ff 30                	push   DWORD PTR [eax]
-    d869:	e8 92 e3 ff ff       	call   bc00 <_Z6putbini>
-    d86e:	83 c4 10             	add    esp,0x10
-    d871:	b8 01 00 00 00       	mov    eax,0x1
-    d876:	83 c4 0c             	add    esp,0xc
-    d879:	c3                   	ret    
-    d87a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    d880:	83 ec 0c             	sub    esp,0xc
-    d883:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    d887:	ff 30                	push   DWORD PTR [eax]
-    d889:	e8 62 e3 ff ff       	call   bbf0 <_Z6putocti>
-    d88e:	83 c4 10             	add    esp,0x10
-    d891:	b8 01 00 00 00       	mov    eax,0x1
-    d896:	83 c4 0c             	add    esp,0xc
-    d899:	c3                   	ret    
-    d89a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    d8a0:	83 ec 0c             	sub    esp,0xc
-    d8a3:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    d8a7:	ff 30                	push   DWORD PTR [eax]
-    d8a9:	e8 32 e3 ff ff       	call   bbe0 <_Z6puthexi>
-    d8ae:	83 c4 10             	add    esp,0x10
-    d8b1:	b8 01 00 00 00       	mov    eax,0x1
-    d8b6:	83 c4 0c             	add    esp,0xc
-    d8b9:	c3                   	ret    
-    d8ba:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    d8c0:	83 ec 0c             	sub    esp,0xc
-    d8c3:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    d8c7:	0f be 00             	movsx  eax,BYTE PTR [eax]
-    d8ca:	50                   	push   eax
-    d8cb:	e8 e0 e2 ff ff       	call   bbb0 <_Z7putcharc>
-    d8d0:	83 c4 10             	add    esp,0x10
-    d8d3:	b8 01 00 00 00       	mov    eax,0x1
-    d8d8:	83 c4 0c             	add    esp,0xc
-    d8db:	c3                   	ret    
-    d8dc:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
-    d8e0:	83 ec 0c             	sub    esp,0xc
-    d8e3:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
-    d8e7:	ff 30                	push   DWORD PTR [eax]
-    d8e9:	e8 e2 e2 ff ff       	call   bbd0 <_Z6putdeci>
-    d8ee:	83 c4 10             	add    esp,0x10
-    d8f1:	b8 01 00 00 00       	mov    eax,0x1
-    d8f6:	83 c4 0c             	add    esp,0xc
-    d8f9:	c3                   	ret    
-    d8fa:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
-    d900:	83 ec 0c             	sub    esp,0xc
-    d903:	68 b4 01 01 00       	push   0x101b4
-    d908:	e8 23 e3 ff ff       	call   bc30 <_Z6printfPKc>
-    d90d:	58                   	pop    eax
-    d90e:	eb 93                	jmp    d8a3 <_Z14_manage_escapeIiEiPKcPT_+0x83>
-    d910:	31 c0                	xor    eax,eax
-    d912:	e9 3f ff ff ff       	jmp    d856 <_Z14_manage_escapeIiEiPKcPT_+0x36>
+0000d840 <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_>:
+    d840:	55                   	push   ebp
+    d841:	57                   	push   edi
+    d842:	56                   	push   esi
+    d843:	53                   	push   ebx
+    d844:	31 f6                	xor    esi,esi
+    d846:	83 ec 1c             	sub    esp,0x1c
+    d849:	8b 6c 24 30          	mov    ebp,DWORD PTR [esp+0x30]
+    d84d:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    d851:	84 c0                	test   al,al
+    d853:	74 46                	je     d89b <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0x5b>
+    d855:	8d 5e 01             	lea    ebx,[esi+0x1]
+    d858:	3c 25                	cmp    al,0x25
+    d85a:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    d85e:	75 28                	jne    d888 <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0x48>
+    d860:	0f b6 07             	movzx  eax,BYTE PTR [edi]
+    d863:	3c 25                	cmp    al,0x25
+    d865:	0f 84 45 01 00 00    	je     d9b0 <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0x170>
+    d86b:	84 c0                	test   al,al
+    d86d:	75 39                	jne    d8a8 <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0x68>
+    d86f:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    d874:	8d 5e 02             	lea    ebx,[esi+0x2]
+    d877:	84 c0                	test   al,al
+    d879:	74 20                	je     d89b <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0x5b>
+    d87b:	89 de                	mov    esi,ebx
+    d87d:	8d 5e 01             	lea    ebx,[esi+0x1]
+    d880:	3c 25                	cmp    al,0x25
+    d882:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    d886:	74 d8                	je     d860 <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0x20>
+    d888:	83 ec 0c             	sub    esp,0xc
+    d88b:	50                   	push   eax
+    d88c:	e8 3f e4 ff ff       	call   bcd0 <_Z7putcharc>
+    d891:	0f be 07             	movsx  eax,BYTE PTR [edi]
+    d894:	83 c4 10             	add    esp,0x10
+    d897:	84 c0                	test   al,al
+    d899:	75 e0                	jne    d87b <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0x3b>
+    d89b:	83 c4 1c             	add    esp,0x1c
+    d89e:	5b                   	pop    ebx
+    d89f:	5e                   	pop    esi
+    d8a0:	5f                   	pop    edi
+    d8a1:	5d                   	pop    ebp
+    d8a2:	c3                   	ret    
+    d8a3:	90                   	nop
+    d8a4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    d8a8:	83 ec 08             	sub    esp,0x8
+    d8ab:	8d 44 24 3c          	lea    eax,[esp+0x3c]
+    d8af:	50                   	push   eax
+    d8b0:	57                   	push   edi
+    d8b1:	31 ff                	xor    edi,edi
+    d8b3:	e8 18 f6 ff ff       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    d8b8:	01 c3                	add    ebx,eax
+    d8ba:	8b 44 24 48          	mov    eax,DWORD PTR [esp+0x48]
+    d8be:	01 eb                	add    ebx,ebp
+    d8c0:	89 44 24 18          	mov    DWORD PTR [esp+0x18],eax
+    d8c4:	0f be 03             	movsx  eax,BYTE PTR [ebx]
+    d8c7:	83 c4 10             	add    esp,0x10
+    d8ca:	84 c0                	test   al,al
+    d8cc:	74 cd                	je     d89b <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0x5b>
+    d8ce:	8d 77 01             	lea    esi,[edi+0x1]
+    d8d1:	3c 25                	cmp    al,0x25
+    d8d3:	8d 2c 33             	lea    ebp,[ebx+esi*1]
+    d8d6:	75 30                	jne    d908 <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0xc8>
+    d8d8:	90                   	nop
+    d8d9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    d8e0:	0f b6 45 00          	movzx  eax,BYTE PTR [ebp+0x0]
+    d8e4:	3c 25                	cmp    al,0x25
+    d8e6:	0f 84 1c 01 00 00    	je     da08 <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0x1c8>
+    d8ec:	84 c0                	test   al,al
+    d8ee:	75 38                	jne    d928 <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0xe8>
+    d8f0:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
+    d8f5:	8d 77 02             	lea    esi,[edi+0x2]
+    d8f8:	84 c0                	test   al,al
+    d8fa:	74 9f                	je     d89b <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0x5b>
+    d8fc:	89 f7                	mov    edi,esi
+    d8fe:	8d 77 01             	lea    esi,[edi+0x1]
+    d901:	3c 25                	cmp    al,0x25
+    d903:	8d 2c 33             	lea    ebp,[ebx+esi*1]
+    d906:	74 d8                	je     d8e0 <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0xa0>
+    d908:	83 ec 0c             	sub    esp,0xc
+    d90b:	50                   	push   eax
+    d90c:	e8 bf e3 ff ff       	call   bcd0 <_Z7putcharc>
+    d911:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    d915:	83 c4 10             	add    esp,0x10
+    d918:	84 c0                	test   al,al
+    d91a:	0f 84 7b ff ff ff    	je     d89b <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0x5b>
+    d920:	89 f7                	mov    edi,esi
+    d922:	eb da                	jmp    d8fe <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0xbe>
+    d924:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    d928:	83 ec 08             	sub    esp,0x8
+    d92b:	8d 44 24 10          	lea    eax,[esp+0x10]
+    d92f:	50                   	push   eax
+    d930:	55                   	push   ebp
+    d931:	e8 9a f6 ff ff       	call   cfd0 <_Z14_manage_escapeIiEiPKcPT_>
+    d936:	01 c6                	add    esi,eax
+    d938:	8b 44 24 4c          	mov    eax,DWORD PTR [esp+0x4c]
+    d93c:	01 de                	add    esi,ebx
+    d93e:	89 44 24 1c          	mov    DWORD PTR [esp+0x1c],eax
+    d942:	0f be 06             	movsx  eax,BYTE PTR [esi]
+    d945:	83 c4 10             	add    esp,0x10
+    d948:	84 c0                	test   al,al
+    d94a:	0f 84 4b ff ff ff    	je     d89b <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0x5b>
+    d950:	31 ff                	xor    edi,edi
+    d952:	3c 25                	cmp    al,0x25
+    d954:	8d 5f 01             	lea    ebx,[edi+0x1]
+    d957:	8d 2c 1e             	lea    ebp,[esi+ebx*1]
+    d95a:	75 30                	jne    d98c <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0x14c>
+    d95c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    d960:	0f b6 45 00          	movzx  eax,BYTE PTR [ebp+0x0]
+    d964:	3c 25                	cmp    al,0x25
+    d966:	0f 84 c4 00 00 00    	je     da30 <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0x1f0>
+    d96c:	84 c0                	test   al,al
+    d96e:	75 68                	jne    d9d8 <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0x198>
+    d970:	0f be 44 3e 02       	movsx  eax,BYTE PTR [esi+edi*1+0x2]
+    d975:	8d 5f 02             	lea    ebx,[edi+0x2]
+    d978:	84 c0                	test   al,al
+    d97a:	0f 84 1b ff ff ff    	je     d89b <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0x5b>
+    d980:	89 df                	mov    edi,ebx
+    d982:	8d 5f 01             	lea    ebx,[edi+0x1]
+    d985:	3c 25                	cmp    al,0x25
+    d987:	8d 2c 1e             	lea    ebp,[esi+ebx*1]
+    d98a:	74 d4                	je     d960 <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0x120>
+    d98c:	83 ec 0c             	sub    esp,0xc
+    d98f:	50                   	push   eax
+    d990:	e8 3b e3 ff ff       	call   bcd0 <_Z7putcharc>
+    d995:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    d999:	83 c4 10             	add    esp,0x10
+    d99c:	84 c0                	test   al,al
+    d99e:	0f 84 f7 fe ff ff    	je     d89b <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0x5b>
+    d9a4:	89 df                	mov    edi,ebx
+    d9a6:	eb da                	jmp    d982 <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0x142>
+    d9a8:	90                   	nop
+    d9a9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    d9b0:	83 ec 0c             	sub    esp,0xc
+    d9b3:	8d 5e 02             	lea    ebx,[esi+0x2]
+    d9b6:	6a 25                	push   0x25
+    d9b8:	e8 13 e3 ff ff       	call   bcd0 <_Z7putcharc>
+    d9bd:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    d9c2:	83 c4 10             	add    esp,0x10
+    d9c5:	84 c0                	test   al,al
+    d9c7:	0f 84 ce fe ff ff    	je     d89b <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0x5b>
+    d9cd:	89 de                	mov    esi,ebx
+    d9cf:	e9 a9 fe ff ff       	jmp    d87d <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0x3d>
+    d9d4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    d9d8:	83 ec 08             	sub    esp,0x8
+    d9db:	8d 44 24 14          	lea    eax,[esp+0x14]
+    d9df:	50                   	push   eax
+    d9e0:	55                   	push   ebp
+    d9e1:	e8 ea f4 ff ff       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    d9e6:	5a                   	pop    edx
+    d9e7:	01 c3                	add    ebx,eax
+    d9e9:	59                   	pop    ecx
+    d9ea:	01 f3                	add    ebx,esi
+    d9ec:	ff 74 24 48          	push   DWORD PTR [esp+0x48]
+    d9f0:	53                   	push   ebx
+    d9f1:	e8 9a fd ff ff       	call   d790 <_Z6printfIjJEEvPKcT_DpT0_>
+    d9f6:	83 c4 10             	add    esp,0x10
+    d9f9:	83 c4 1c             	add    esp,0x1c
+    d9fc:	5b                   	pop    ebx
+    d9fd:	5e                   	pop    esi
+    d9fe:	5f                   	pop    edi
+    d9ff:	5d                   	pop    ebp
+    da00:	c3                   	ret    
+    da01:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    da08:	83 ec 0c             	sub    esp,0xc
+    da0b:	8d 77 02             	lea    esi,[edi+0x2]
+    da0e:	6a 25                	push   0x25
+    da10:	e8 bb e2 ff ff       	call   bcd0 <_Z7putcharc>
+    da15:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
+    da1a:	83 c4 10             	add    esp,0x10
+    da1d:	84 c0                	test   al,al
+    da1f:	0f 84 76 fe ff ff    	je     d89b <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0x5b>
+    da25:	89 f7                	mov    edi,esi
+    da27:	e9 d2 fe ff ff       	jmp    d8fe <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0xbe>
+    da2c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    da30:	83 ec 0c             	sub    esp,0xc
+    da33:	8d 5f 02             	lea    ebx,[edi+0x2]
+    da36:	6a 25                	push   0x25
+    da38:	e8 93 e2 ff ff       	call   bcd0 <_Z7putcharc>
+    da3d:	0f be 44 3e 02       	movsx  eax,BYTE PTR [esi+edi*1+0x2]
+    da42:	83 c4 10             	add    esp,0x10
+    da45:	84 c0                	test   al,al
+    da47:	0f 84 4e fe ff ff    	je     d89b <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0x5b>
+    da4d:	89 df                	mov    edi,ebx
+    da4f:	e9 2e ff ff ff       	jmp    d982 <_Z6printfIPKcJiS1_jEEvS1_T_DpT0_+0x142>
+
+Disassembly of section .text._Z6printfIjJjEEvPKcT_DpT0_:
+
+0000da60 <_Z6printfIjJjEEvPKcT_DpT0_>:
+    da60:	55                   	push   ebp
+    da61:	57                   	push   edi
+    da62:	56                   	push   esi
+    da63:	53                   	push   ebx
+    da64:	31 f6                	xor    esi,esi
+    da66:	83 ec 0c             	sub    esp,0xc
+    da69:	8b 6c 24 20          	mov    ebp,DWORD PTR [esp+0x20]
+    da6d:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    da71:	84 c0                	test   al,al
+    da73:	74 42                	je     dab7 <_Z6printfIjJjEEvPKcT_DpT0_+0x57>
+    da75:	8d 5e 01             	lea    ebx,[esi+0x1]
+    da78:	3c 25                	cmp    al,0x25
+    da7a:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    da7e:	75 24                	jne    daa4 <_Z6printfIjJjEEvPKcT_DpT0_+0x44>
+    da80:	0f b6 07             	movzx  eax,BYTE PTR [edi]
+    da83:	3c 25                	cmp    al,0x25
+    da85:	74 69                	je     daf0 <_Z6printfIjJjEEvPKcT_DpT0_+0x90>
+    da87:	84 c0                	test   al,al
+    da89:	75 35                	jne    dac0 <_Z6printfIjJjEEvPKcT_DpT0_+0x60>
+    da8b:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    da90:	8d 5e 02             	lea    ebx,[esi+0x2]
+    da93:	84 c0                	test   al,al
+    da95:	74 20                	je     dab7 <_Z6printfIjJjEEvPKcT_DpT0_+0x57>
+    da97:	89 de                	mov    esi,ebx
+    da99:	8d 5e 01             	lea    ebx,[esi+0x1]
+    da9c:	3c 25                	cmp    al,0x25
+    da9e:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    daa2:	74 dc                	je     da80 <_Z6printfIjJjEEvPKcT_DpT0_+0x20>
+    daa4:	83 ec 0c             	sub    esp,0xc
+    daa7:	50                   	push   eax
+    daa8:	e8 23 e2 ff ff       	call   bcd0 <_Z7putcharc>
+    daad:	0f be 07             	movsx  eax,BYTE PTR [edi]
+    dab0:	83 c4 10             	add    esp,0x10
+    dab3:	84 c0                	test   al,al
+    dab5:	75 e0                	jne    da97 <_Z6printfIjJjEEvPKcT_DpT0_+0x37>
+    dab7:	83 c4 0c             	add    esp,0xc
+    daba:	5b                   	pop    ebx
+    dabb:	5e                   	pop    esi
+    dabc:	5f                   	pop    edi
+    dabd:	5d                   	pop    ebp
+    dabe:	c3                   	ret    
+    dabf:	90                   	nop
+    dac0:	83 ec 08             	sub    esp,0x8
+    dac3:	8d 44 24 2c          	lea    eax,[esp+0x2c]
+    dac7:	50                   	push   eax
+    dac8:	57                   	push   edi
+    dac9:	e8 c2 fb ff ff       	call   d690 <_Z14_manage_escapeIjEiPKcPT_>
+    dace:	5a                   	pop    edx
+    dacf:	01 c3                	add    ebx,eax
+    dad1:	59                   	pop    ecx
+    dad2:	01 dd                	add    ebp,ebx
+    dad4:	ff 74 24 30          	push   DWORD PTR [esp+0x30]
+    dad8:	55                   	push   ebp
+    dad9:	e8 b2 fc ff ff       	call   d790 <_Z6printfIjJEEvPKcT_DpT0_>
+    dade:	83 c4 10             	add    esp,0x10
+    dae1:	83 c4 0c             	add    esp,0xc
+    dae4:	5b                   	pop    ebx
+    dae5:	5e                   	pop    esi
+    dae6:	5f                   	pop    edi
+    dae7:	5d                   	pop    ebp
+    dae8:	c3                   	ret    
+    dae9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    daf0:	83 ec 0c             	sub    esp,0xc
+    daf3:	8d 5e 02             	lea    ebx,[esi+0x2]
+    daf6:	6a 25                	push   0x25
+    daf8:	e8 d3 e1 ff ff       	call   bcd0 <_Z7putcharc>
+    dafd:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    db02:	83 c4 10             	add    esp,0x10
+    db05:	84 c0                	test   al,al
+    db07:	74 ae                	je     dab7 <_Z6printfIjJjEEvPKcT_DpT0_+0x57>
+    db09:	89 de                	mov    esi,ebx
+    db0b:	eb 8c                	jmp    da99 <_Z6printfIjJjEEvPKcT_DpT0_+0x39>
+
+Disassembly of section .text._Z6printfIPKcJiS1_jjEEvS1_T_DpT0_:
+
+0000db10 <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_>:
+    db10:	55                   	push   ebp
+    db11:	57                   	push   edi
+    db12:	56                   	push   esi
+    db13:	53                   	push   ebx
+    db14:	31 f6                	xor    esi,esi
+    db16:	83 ec 1c             	sub    esp,0x1c
+    db19:	8b 6c 24 30          	mov    ebp,DWORD PTR [esp+0x30]
+    db1d:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    db21:	84 c0                	test   al,al
+    db23:	74 46                	je     db6b <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0x5b>
+    db25:	8d 5e 01             	lea    ebx,[esi+0x1]
+    db28:	3c 25                	cmp    al,0x25
+    db2a:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    db2e:	75 28                	jne    db58 <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0x48>
+    db30:	0f b6 07             	movzx  eax,BYTE PTR [edi]
+    db33:	3c 25                	cmp    al,0x25
+    db35:	0f 84 45 01 00 00    	je     dc80 <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0x170>
+    db3b:	84 c0                	test   al,al
+    db3d:	75 39                	jne    db78 <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0x68>
+    db3f:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    db44:	8d 5e 02             	lea    ebx,[esi+0x2]
+    db47:	84 c0                	test   al,al
+    db49:	74 20                	je     db6b <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0x5b>
+    db4b:	89 de                	mov    esi,ebx
+    db4d:	8d 5e 01             	lea    ebx,[esi+0x1]
+    db50:	3c 25                	cmp    al,0x25
+    db52:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    db56:	74 d8                	je     db30 <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0x20>
+    db58:	83 ec 0c             	sub    esp,0xc
+    db5b:	50                   	push   eax
+    db5c:	e8 6f e1 ff ff       	call   bcd0 <_Z7putcharc>
+    db61:	0f be 07             	movsx  eax,BYTE PTR [edi]
+    db64:	83 c4 10             	add    esp,0x10
+    db67:	84 c0                	test   al,al
+    db69:	75 e0                	jne    db4b <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0x3b>
+    db6b:	83 c4 1c             	add    esp,0x1c
+    db6e:	5b                   	pop    ebx
+    db6f:	5e                   	pop    esi
+    db70:	5f                   	pop    edi
+    db71:	5d                   	pop    ebp
+    db72:	c3                   	ret    
+    db73:	90                   	nop
+    db74:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    db78:	83 ec 08             	sub    esp,0x8
+    db7b:	8d 44 24 3c          	lea    eax,[esp+0x3c]
+    db7f:	50                   	push   eax
+    db80:	57                   	push   edi
+    db81:	31 ff                	xor    edi,edi
+    db83:	e8 48 f3 ff ff       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    db88:	01 c3                	add    ebx,eax
+    db8a:	8b 44 24 48          	mov    eax,DWORD PTR [esp+0x48]
+    db8e:	01 eb                	add    ebx,ebp
+    db90:	89 44 24 18          	mov    DWORD PTR [esp+0x18],eax
+    db94:	0f be 03             	movsx  eax,BYTE PTR [ebx]
+    db97:	83 c4 10             	add    esp,0x10
+    db9a:	84 c0                	test   al,al
+    db9c:	74 cd                	je     db6b <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0x5b>
+    db9e:	8d 77 01             	lea    esi,[edi+0x1]
+    dba1:	3c 25                	cmp    al,0x25
+    dba3:	8d 2c 33             	lea    ebp,[ebx+esi*1]
+    dba6:	75 30                	jne    dbd8 <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0xc8>
+    dba8:	90                   	nop
+    dba9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    dbb0:	0f b6 45 00          	movzx  eax,BYTE PTR [ebp+0x0]
+    dbb4:	3c 25                	cmp    al,0x25
+    dbb6:	0f 84 24 01 00 00    	je     dce0 <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0x1d0>
+    dbbc:	84 c0                	test   al,al
+    dbbe:	75 38                	jne    dbf8 <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0xe8>
+    dbc0:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
+    dbc5:	8d 77 02             	lea    esi,[edi+0x2]
+    dbc8:	84 c0                	test   al,al
+    dbca:	74 9f                	je     db6b <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0x5b>
+    dbcc:	89 f7                	mov    edi,esi
+    dbce:	8d 77 01             	lea    esi,[edi+0x1]
+    dbd1:	3c 25                	cmp    al,0x25
+    dbd3:	8d 2c 33             	lea    ebp,[ebx+esi*1]
+    dbd6:	74 d8                	je     dbb0 <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0xa0>
+    dbd8:	83 ec 0c             	sub    esp,0xc
+    dbdb:	50                   	push   eax
+    dbdc:	e8 ef e0 ff ff       	call   bcd0 <_Z7putcharc>
+    dbe1:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    dbe5:	83 c4 10             	add    esp,0x10
+    dbe8:	84 c0                	test   al,al
+    dbea:	0f 84 7b ff ff ff    	je     db6b <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0x5b>
+    dbf0:	89 f7                	mov    edi,esi
+    dbf2:	eb da                	jmp    dbce <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0xbe>
+    dbf4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    dbf8:	83 ec 08             	sub    esp,0x8
+    dbfb:	8d 44 24 10          	lea    eax,[esp+0x10]
+    dbff:	50                   	push   eax
+    dc00:	55                   	push   ebp
+    dc01:	e8 ca f3 ff ff       	call   cfd0 <_Z14_manage_escapeIiEiPKcPT_>
+    dc06:	01 c6                	add    esi,eax
+    dc08:	8b 44 24 4c          	mov    eax,DWORD PTR [esp+0x4c]
+    dc0c:	01 de                	add    esi,ebx
+    dc0e:	89 44 24 1c          	mov    DWORD PTR [esp+0x1c],eax
+    dc12:	0f be 06             	movsx  eax,BYTE PTR [esi]
+    dc15:	83 c4 10             	add    esp,0x10
+    dc18:	84 c0                	test   al,al
+    dc1a:	0f 84 4b ff ff ff    	je     db6b <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0x5b>
+    dc20:	31 ff                	xor    edi,edi
+    dc22:	3c 25                	cmp    al,0x25
+    dc24:	8d 5f 01             	lea    ebx,[edi+0x1]
+    dc27:	8d 2c 1e             	lea    ebp,[esi+ebx*1]
+    dc2a:	75 30                	jne    dc5c <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0x14c>
+    dc2c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    dc30:	0f b6 45 00          	movzx  eax,BYTE PTR [ebp+0x0]
+    dc34:	3c 25                	cmp    al,0x25
+    dc36:	0f 84 cc 00 00 00    	je     dd08 <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0x1f8>
+    dc3c:	84 c0                	test   al,al
+    dc3e:	75 68                	jne    dca8 <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0x198>
+    dc40:	0f be 44 3e 02       	movsx  eax,BYTE PTR [esi+edi*1+0x2]
+    dc45:	8d 5f 02             	lea    ebx,[edi+0x2]
+    dc48:	84 c0                	test   al,al
+    dc4a:	0f 84 1b ff ff ff    	je     db6b <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0x5b>
+    dc50:	89 df                	mov    edi,ebx
+    dc52:	8d 5f 01             	lea    ebx,[edi+0x1]
+    dc55:	3c 25                	cmp    al,0x25
+    dc57:	8d 2c 1e             	lea    ebp,[esi+ebx*1]
+    dc5a:	74 d4                	je     dc30 <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0x120>
+    dc5c:	83 ec 0c             	sub    esp,0xc
+    dc5f:	50                   	push   eax
+    dc60:	e8 6b e0 ff ff       	call   bcd0 <_Z7putcharc>
+    dc65:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    dc69:	83 c4 10             	add    esp,0x10
+    dc6c:	84 c0                	test   al,al
+    dc6e:	0f 84 f7 fe ff ff    	je     db6b <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0x5b>
+    dc74:	89 df                	mov    edi,ebx
+    dc76:	eb da                	jmp    dc52 <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0x142>
+    dc78:	90                   	nop
+    dc79:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    dc80:	83 ec 0c             	sub    esp,0xc
+    dc83:	8d 5e 02             	lea    ebx,[esi+0x2]
+    dc86:	6a 25                	push   0x25
+    dc88:	e8 43 e0 ff ff       	call   bcd0 <_Z7putcharc>
+    dc8d:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    dc92:	83 c4 10             	add    esp,0x10
+    dc95:	84 c0                	test   al,al
+    dc97:	0f 84 ce fe ff ff    	je     db6b <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0x5b>
+    dc9d:	89 de                	mov    esi,ebx
+    dc9f:	e9 a9 fe ff ff       	jmp    db4d <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0x3d>
+    dca4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    dca8:	83 ec 08             	sub    esp,0x8
+    dcab:	8d 44 24 14          	lea    eax,[esp+0x14]
+    dcaf:	50                   	push   eax
+    dcb0:	55                   	push   ebp
+    dcb1:	e8 1a f2 ff ff       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    dcb6:	01 c3                	add    ebx,eax
+    dcb8:	83 c4 0c             	add    esp,0xc
+    dcbb:	01 f3                	add    ebx,esi
+    dcbd:	ff 74 24 48          	push   DWORD PTR [esp+0x48]
+    dcc1:	ff 74 24 48          	push   DWORD PTR [esp+0x48]
+    dcc5:	53                   	push   ebx
+    dcc6:	e8 95 fd ff ff       	call   da60 <_Z6printfIjJjEEvPKcT_DpT0_>
+    dccb:	83 c4 10             	add    esp,0x10
+    dcce:	83 c4 1c             	add    esp,0x1c
+    dcd1:	5b                   	pop    ebx
+    dcd2:	5e                   	pop    esi
+    dcd3:	5f                   	pop    edi
+    dcd4:	5d                   	pop    ebp
+    dcd5:	c3                   	ret    
+    dcd6:	8d 76 00             	lea    esi,[esi+0x0]
+    dcd9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    dce0:	83 ec 0c             	sub    esp,0xc
+    dce3:	8d 77 02             	lea    esi,[edi+0x2]
+    dce6:	6a 25                	push   0x25
+    dce8:	e8 e3 df ff ff       	call   bcd0 <_Z7putcharc>
+    dced:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
+    dcf2:	83 c4 10             	add    esp,0x10
+    dcf5:	84 c0                	test   al,al
+    dcf7:	0f 84 6e fe ff ff    	je     db6b <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0x5b>
+    dcfd:	89 f7                	mov    edi,esi
+    dcff:	e9 ca fe ff ff       	jmp    dbce <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0xbe>
+    dd04:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    dd08:	83 ec 0c             	sub    esp,0xc
+    dd0b:	8d 5f 02             	lea    ebx,[edi+0x2]
+    dd0e:	6a 25                	push   0x25
+    dd10:	e8 bb df ff ff       	call   bcd0 <_Z7putcharc>
+    dd15:	0f be 44 3e 02       	movsx  eax,BYTE PTR [esi+edi*1+0x2]
+    dd1a:	83 c4 10             	add    esp,0x10
+    dd1d:	84 c0                	test   al,al
+    dd1f:	0f 84 46 fe ff ff    	je     db6b <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0x5b>
+    dd25:	89 df                	mov    edi,ebx
+    dd27:	e9 26 ff ff ff       	jmp    dc52 <_Z6printfIPKcJiS1_jjEEvS1_T_DpT0_+0x142>
+
+Disassembly of section .text._Z6printfIPKcJjjjEEvS1_T_DpT0_:
+
+0000dd30 <_Z6printfIPKcJjjjEEvS1_T_DpT0_>:
+    dd30:	55                   	push   ebp
+    dd31:	57                   	push   edi
+    dd32:	56                   	push   esi
+    dd33:	53                   	push   ebx
+    dd34:	31 f6                	xor    esi,esi
+    dd36:	83 ec 1c             	sub    esp,0x1c
+    dd39:	8b 6c 24 30          	mov    ebp,DWORD PTR [esp+0x30]
+    dd3d:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    dd41:	84 c0                	test   al,al
+    dd43:	74 46                	je     dd8b <_Z6printfIPKcJjjjEEvS1_T_DpT0_+0x5b>
+    dd45:	8d 5e 01             	lea    ebx,[esi+0x1]
+    dd48:	3c 25                	cmp    al,0x25
+    dd4a:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    dd4e:	75 28                	jne    dd78 <_Z6printfIPKcJjjjEEvS1_T_DpT0_+0x48>
+    dd50:	0f b6 07             	movzx  eax,BYTE PTR [edi]
+    dd53:	3c 25                	cmp    al,0x25
+    dd55:	0f 84 f5 00 00 00    	je     de50 <_Z6printfIPKcJjjjEEvS1_T_DpT0_+0x120>
+    dd5b:	84 c0                	test   al,al
+    dd5d:	75 39                	jne    dd98 <_Z6printfIPKcJjjjEEvS1_T_DpT0_+0x68>
+    dd5f:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    dd64:	8d 5e 02             	lea    ebx,[esi+0x2]
+    dd67:	84 c0                	test   al,al
+    dd69:	74 20                	je     dd8b <_Z6printfIPKcJjjjEEvS1_T_DpT0_+0x5b>
+    dd6b:	89 de                	mov    esi,ebx
+    dd6d:	8d 5e 01             	lea    ebx,[esi+0x1]
+    dd70:	3c 25                	cmp    al,0x25
+    dd72:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    dd76:	74 d8                	je     dd50 <_Z6printfIPKcJjjjEEvS1_T_DpT0_+0x20>
+    dd78:	83 ec 0c             	sub    esp,0xc
+    dd7b:	50                   	push   eax
+    dd7c:	e8 4f df ff ff       	call   bcd0 <_Z7putcharc>
+    dd81:	0f be 07             	movsx  eax,BYTE PTR [edi]
+    dd84:	83 c4 10             	add    esp,0x10
+    dd87:	84 c0                	test   al,al
+    dd89:	75 e0                	jne    dd6b <_Z6printfIPKcJjjjEEvS1_T_DpT0_+0x3b>
+    dd8b:	83 c4 1c             	add    esp,0x1c
+    dd8e:	5b                   	pop    ebx
+    dd8f:	5e                   	pop    esi
+    dd90:	5f                   	pop    edi
+    dd91:	5d                   	pop    ebp
+    dd92:	c3                   	ret    
+    dd93:	90                   	nop
+    dd94:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    dd98:	83 ec 08             	sub    esp,0x8
+    dd9b:	8d 44 24 3c          	lea    eax,[esp+0x3c]
+    dd9f:	50                   	push   eax
+    dda0:	57                   	push   edi
+    dda1:	e8 2a f1 ff ff       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    dda6:	01 c3                	add    ebx,eax
+    dda8:	8b 44 24 48          	mov    eax,DWORD PTR [esp+0x48]
+    ddac:	01 eb                	add    ebx,ebp
+    ddae:	89 44 24 1c          	mov    DWORD PTR [esp+0x1c],eax
+    ddb2:	0f be 03             	movsx  eax,BYTE PTR [ebx]
+    ddb5:	83 c4 10             	add    esp,0x10
+    ddb8:	84 c0                	test   al,al
+    ddba:	74 cf                	je     dd8b <_Z6printfIPKcJjjjEEvS1_T_DpT0_+0x5b>
+    ddbc:	31 ff                	xor    edi,edi
+    ddbe:	3c 25                	cmp    al,0x25
+    ddc0:	8d 77 01             	lea    esi,[edi+0x1]
+    ddc3:	8d 2c 33             	lea    ebp,[ebx+esi*1]
+    ddc6:	75 30                	jne    ddf8 <_Z6printfIPKcJjjjEEvS1_T_DpT0_+0xc8>
+    ddc8:	90                   	nop
+    ddc9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    ddd0:	0f b6 45 00          	movzx  eax,BYTE PTR [ebp+0x0]
+    ddd4:	3c 25                	cmp    al,0x25
+    ddd6:	0f 84 9c 00 00 00    	je     de78 <_Z6printfIPKcJjjjEEvS1_T_DpT0_+0x148>
+    dddc:	84 c0                	test   al,al
+    ddde:	75 38                	jne    de18 <_Z6printfIPKcJjjjEEvS1_T_DpT0_+0xe8>
+    dde0:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
+    dde5:	8d 77 02             	lea    esi,[edi+0x2]
+    dde8:	84 c0                	test   al,al
+    ddea:	74 9f                	je     dd8b <_Z6printfIPKcJjjjEEvS1_T_DpT0_+0x5b>
+    ddec:	89 f7                	mov    edi,esi
+    ddee:	8d 77 01             	lea    esi,[edi+0x1]
+    ddf1:	3c 25                	cmp    al,0x25
+    ddf3:	8d 2c 33             	lea    ebp,[ebx+esi*1]
+    ddf6:	74 d8                	je     ddd0 <_Z6printfIPKcJjjjEEvS1_T_DpT0_+0xa0>
+    ddf8:	83 ec 0c             	sub    esp,0xc
+    ddfb:	50                   	push   eax
+    ddfc:	e8 cf de ff ff       	call   bcd0 <_Z7putcharc>
+    de01:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    de05:	83 c4 10             	add    esp,0x10
+    de08:	84 c0                	test   al,al
+    de0a:	0f 84 7b ff ff ff    	je     dd8b <_Z6printfIPKcJjjjEEvS1_T_DpT0_+0x5b>
+    de10:	89 f7                	mov    edi,esi
+    de12:	eb da                	jmp    ddee <_Z6printfIPKcJjjjEEvS1_T_DpT0_+0xbe>
+    de14:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    de18:	83 ec 08             	sub    esp,0x8
+    de1b:	8d 44 24 14          	lea    eax,[esp+0x14]
+    de1f:	50                   	push   eax
+    de20:	55                   	push   ebp
+    de21:	e8 6a f8 ff ff       	call   d690 <_Z14_manage_escapeIjEiPKcPT_>
+    de26:	01 c6                	add    esi,eax
+    de28:	83 c4 0c             	add    esp,0xc
+    de2b:	01 f3                	add    ebx,esi
+    de2d:	ff 74 24 44          	push   DWORD PTR [esp+0x44]
+    de31:	ff 74 24 44          	push   DWORD PTR [esp+0x44]
+    de35:	53                   	push   ebx
+    de36:	e8 25 fc ff ff       	call   da60 <_Z6printfIjJjEEvPKcT_DpT0_>
+    de3b:	83 c4 10             	add    esp,0x10
+    de3e:	83 c4 1c             	add    esp,0x1c
+    de41:	5b                   	pop    ebx
+    de42:	5e                   	pop    esi
+    de43:	5f                   	pop    edi
+    de44:	5d                   	pop    ebp
+    de45:	c3                   	ret    
+    de46:	8d 76 00             	lea    esi,[esi+0x0]
+    de49:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    de50:	83 ec 0c             	sub    esp,0xc
+    de53:	8d 5e 02             	lea    ebx,[esi+0x2]
+    de56:	6a 25                	push   0x25
+    de58:	e8 73 de ff ff       	call   bcd0 <_Z7putcharc>
+    de5d:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    de62:	83 c4 10             	add    esp,0x10
+    de65:	84 c0                	test   al,al
+    de67:	0f 84 1e ff ff ff    	je     dd8b <_Z6printfIPKcJjjjEEvS1_T_DpT0_+0x5b>
+    de6d:	89 de                	mov    esi,ebx
+    de6f:	e9 f9 fe ff ff       	jmp    dd6d <_Z6printfIPKcJjjjEEvS1_T_DpT0_+0x3d>
+    de74:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    de78:	83 ec 0c             	sub    esp,0xc
+    de7b:	8d 77 02             	lea    esi,[edi+0x2]
+    de7e:	6a 25                	push   0x25
+    de80:	e8 4b de ff ff       	call   bcd0 <_Z7putcharc>
+    de85:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
+    de8a:	83 c4 10             	add    esp,0x10
+    de8d:	84 c0                	test   al,al
+    de8f:	0f 84 f6 fe ff ff    	je     dd8b <_Z6printfIPKcJjjjEEvS1_T_DpT0_+0x5b>
+    de95:	89 f7                	mov    edi,esi
+    de97:	e9 52 ff ff ff       	jmp    ddee <_Z6printfIPKcJjjjEEvS1_T_DpT0_+0xbe>
+
+Disassembly of section .text._Z6printfIPKcJiS1_jjjEEvS1_T_DpT0_:
+
+0000dea0 <_Z6printfIPKcJiS1_jjjEEvS1_T_DpT0_>:
+    dea0:	55                   	push   ebp
+    dea1:	57                   	push   edi
+    dea2:	56                   	push   esi
+    dea3:	53                   	push   ebx
+    dea4:	31 f6                	xor    esi,esi
+    dea6:	83 ec 1c             	sub    esp,0x1c
+    dea9:	8b 6c 24 30          	mov    ebp,DWORD PTR [esp+0x30]
+    dead:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    deb1:	84 c0                	test   al,al
+    deb3:	74 46                	je     defb <_Z6printfIPKcJiS1_jjjEEvS1_T_DpT0_+0x5b>
+    deb5:	8d 5e 01             	lea    ebx,[esi+0x1]
+    deb8:	3c 25                	cmp    al,0x25
+    deba:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    debe:	75 28                	jne    dee8 <_Z6printfIPKcJiS1_jjjEEvS1_T_DpT0_+0x48>
+    dec0:	0f b6 07             	movzx  eax,BYTE PTR [edi]
+    dec3:	3c 25                	cmp    al,0x25
+    dec5:	0f 84 f5 00 00 00    	je     dfc0 <_Z6printfIPKcJiS1_jjjEEvS1_T_DpT0_+0x120>
+    decb:	84 c0                	test   al,al
+    decd:	75 39                	jne    df08 <_Z6printfIPKcJiS1_jjjEEvS1_T_DpT0_+0x68>
+    decf:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    ded4:	8d 5e 02             	lea    ebx,[esi+0x2]
+    ded7:	84 c0                	test   al,al
+    ded9:	74 20                	je     defb <_Z6printfIPKcJiS1_jjjEEvS1_T_DpT0_+0x5b>
+    dedb:	89 de                	mov    esi,ebx
+    dedd:	8d 5e 01             	lea    ebx,[esi+0x1]
+    dee0:	3c 25                	cmp    al,0x25
+    dee2:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    dee6:	74 d8                	je     dec0 <_Z6printfIPKcJiS1_jjjEEvS1_T_DpT0_+0x20>
+    dee8:	83 ec 0c             	sub    esp,0xc
+    deeb:	50                   	push   eax
+    deec:	e8 df dd ff ff       	call   bcd0 <_Z7putcharc>
+    def1:	0f be 07             	movsx  eax,BYTE PTR [edi]
+    def4:	83 c4 10             	add    esp,0x10
+    def7:	84 c0                	test   al,al
+    def9:	75 e0                	jne    dedb <_Z6printfIPKcJiS1_jjjEEvS1_T_DpT0_+0x3b>
+    defb:	83 c4 1c             	add    esp,0x1c
+    defe:	5b                   	pop    ebx
+    deff:	5e                   	pop    esi
+    df00:	5f                   	pop    edi
+    df01:	5d                   	pop    ebp
+    df02:	c3                   	ret    
+    df03:	90                   	nop
+    df04:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    df08:	83 ec 08             	sub    esp,0x8
+    df0b:	8d 44 24 3c          	lea    eax,[esp+0x3c]
+    df0f:	50                   	push   eax
+    df10:	57                   	push   edi
+    df11:	e8 ba ef ff ff       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    df16:	01 c3                	add    ebx,eax
+    df18:	8b 44 24 48          	mov    eax,DWORD PTR [esp+0x48]
+    df1c:	01 eb                	add    ebx,ebp
+    df1e:	89 44 24 1c          	mov    DWORD PTR [esp+0x1c],eax
+    df22:	0f be 03             	movsx  eax,BYTE PTR [ebx]
+    df25:	83 c4 10             	add    esp,0x10
+    df28:	84 c0                	test   al,al
+    df2a:	74 cf                	je     defb <_Z6printfIPKcJiS1_jjjEEvS1_T_DpT0_+0x5b>
+    df2c:	31 ff                	xor    edi,edi
+    df2e:	3c 25                	cmp    al,0x25
+    df30:	8d 77 01             	lea    esi,[edi+0x1]
+    df33:	8d 2c 33             	lea    ebp,[ebx+esi*1]
+    df36:	75 30                	jne    df68 <_Z6printfIPKcJiS1_jjjEEvS1_T_DpT0_+0xc8>
+    df38:	90                   	nop
+    df39:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    df40:	0f b6 45 00          	movzx  eax,BYTE PTR [ebp+0x0]
+    df44:	3c 25                	cmp    al,0x25
+    df46:	0f 84 9c 00 00 00    	je     dfe8 <_Z6printfIPKcJiS1_jjjEEvS1_T_DpT0_+0x148>
+    df4c:	84 c0                	test   al,al
+    df4e:	75 38                	jne    df88 <_Z6printfIPKcJiS1_jjjEEvS1_T_DpT0_+0xe8>
+    df50:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
+    df55:	8d 77 02             	lea    esi,[edi+0x2]
+    df58:	84 c0                	test   al,al
+    df5a:	74 9f                	je     defb <_Z6printfIPKcJiS1_jjjEEvS1_T_DpT0_+0x5b>
+    df5c:	89 f7                	mov    edi,esi
+    df5e:	8d 77 01             	lea    esi,[edi+0x1]
+    df61:	3c 25                	cmp    al,0x25
+    df63:	8d 2c 33             	lea    ebp,[ebx+esi*1]
+    df66:	74 d8                	je     df40 <_Z6printfIPKcJiS1_jjjEEvS1_T_DpT0_+0xa0>
+    df68:	83 ec 0c             	sub    esp,0xc
+    df6b:	50                   	push   eax
+    df6c:	e8 5f dd ff ff       	call   bcd0 <_Z7putcharc>
+    df71:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    df75:	83 c4 10             	add    esp,0x10
+    df78:	84 c0                	test   al,al
+    df7a:	0f 84 7b ff ff ff    	je     defb <_Z6printfIPKcJiS1_jjjEEvS1_T_DpT0_+0x5b>
+    df80:	89 f7                	mov    edi,esi
+    df82:	eb da                	jmp    df5e <_Z6printfIPKcJiS1_jjjEEvS1_T_DpT0_+0xbe>
+    df84:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    df88:	83 ec 08             	sub    esp,0x8
+    df8b:	8d 44 24 14          	lea    eax,[esp+0x14]
+    df8f:	50                   	push   eax
+    df90:	55                   	push   ebp
+    df91:	e8 3a f0 ff ff       	call   cfd0 <_Z14_manage_escapeIiEiPKcPT_>
+    df96:	5a                   	pop    edx
+    df97:	01 c6                	add    esi,eax
+    df99:	ff 74 24 54          	push   DWORD PTR [esp+0x54]
+    df9d:	ff 74 24 54          	push   DWORD PTR [esp+0x54]
+    dfa1:	01 f3                	add    ebx,esi
+    dfa3:	ff 74 24 54          	push   DWORD PTR [esp+0x54]
+    dfa7:	ff 74 24 54          	push   DWORD PTR [esp+0x54]
+    dfab:	53                   	push   ebx
+    dfac:	e8 7f fd ff ff       	call   dd30 <_Z6printfIPKcJjjjEEvS1_T_DpT0_>
+    dfb1:	83 c4 20             	add    esp,0x20
+    dfb4:	83 c4 1c             	add    esp,0x1c
+    dfb7:	5b                   	pop    ebx
+    dfb8:	5e                   	pop    esi
+    dfb9:	5f                   	pop    edi
+    dfba:	5d                   	pop    ebp
+    dfbb:	c3                   	ret    
+    dfbc:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    dfc0:	83 ec 0c             	sub    esp,0xc
+    dfc3:	8d 5e 02             	lea    ebx,[esi+0x2]
+    dfc6:	6a 25                	push   0x25
+    dfc8:	e8 03 dd ff ff       	call   bcd0 <_Z7putcharc>
+    dfcd:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    dfd2:	83 c4 10             	add    esp,0x10
+    dfd5:	84 c0                	test   al,al
+    dfd7:	0f 84 1e ff ff ff    	je     defb <_Z6printfIPKcJiS1_jjjEEvS1_T_DpT0_+0x5b>
+    dfdd:	89 de                	mov    esi,ebx
+    dfdf:	e9 f9 fe ff ff       	jmp    dedd <_Z6printfIPKcJiS1_jjjEEvS1_T_DpT0_+0x3d>
+    dfe4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    dfe8:	83 ec 0c             	sub    esp,0xc
+    dfeb:	8d 77 02             	lea    esi,[edi+0x2]
+    dfee:	6a 25                	push   0x25
+    dff0:	e8 db dc ff ff       	call   bcd0 <_Z7putcharc>
+    dff5:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
+    dffa:	83 c4 10             	add    esp,0x10
+    dffd:	84 c0                	test   al,al
+    dfff:	0f 84 f6 fe ff ff    	je     defb <_Z6printfIPKcJiS1_jjjEEvS1_T_DpT0_+0x5b>
+    e005:	89 f7                	mov    edi,esi
+    e007:	e9 52 ff ff ff       	jmp    df5e <_Z6printfIPKcJiS1_jjjEEvS1_T_DpT0_+0xbe>
+
+Disassembly of section .text._Z6printfIPKcJiEEvS1_T_DpT0_:
+
+0000e010 <_Z6printfIPKcJiEEvS1_T_DpT0_>:
+    e010:	55                   	push   ebp
+    e011:	57                   	push   edi
+    e012:	56                   	push   esi
+    e013:	53                   	push   ebx
+    e014:	31 f6                	xor    esi,esi
+    e016:	83 ec 1c             	sub    esp,0x1c
+    e019:	8b 6c 24 30          	mov    ebp,DWORD PTR [esp+0x30]
+    e01d:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    e021:	84 c0                	test   al,al
+    e023:	74 46                	je     e06b <_Z6printfIPKcJiEEvS1_T_DpT0_+0x5b>
+    e025:	8d 5e 01             	lea    ebx,[esi+0x1]
+    e028:	3c 25                	cmp    al,0x25
+    e02a:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    e02e:	75 28                	jne    e058 <_Z6printfIPKcJiEEvS1_T_DpT0_+0x48>
+    e030:	0f b6 07             	movzx  eax,BYTE PTR [edi]
+    e033:	3c 25                	cmp    al,0x25
+    e035:	0f 84 e5 00 00 00    	je     e120 <_Z6printfIPKcJiEEvS1_T_DpT0_+0x110>
+    e03b:	84 c0                	test   al,al
+    e03d:	75 39                	jne    e078 <_Z6printfIPKcJiEEvS1_T_DpT0_+0x68>
+    e03f:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    e044:	8d 5e 02             	lea    ebx,[esi+0x2]
+    e047:	84 c0                	test   al,al
+    e049:	74 20                	je     e06b <_Z6printfIPKcJiEEvS1_T_DpT0_+0x5b>
+    e04b:	89 de                	mov    esi,ebx
+    e04d:	8d 5e 01             	lea    ebx,[esi+0x1]
+    e050:	3c 25                	cmp    al,0x25
+    e052:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    e056:	74 d8                	je     e030 <_Z6printfIPKcJiEEvS1_T_DpT0_+0x20>
+    e058:	83 ec 0c             	sub    esp,0xc
+    e05b:	50                   	push   eax
+    e05c:	e8 6f dc ff ff       	call   bcd0 <_Z7putcharc>
+    e061:	0f be 07             	movsx  eax,BYTE PTR [edi]
+    e064:	83 c4 10             	add    esp,0x10
+    e067:	84 c0                	test   al,al
+    e069:	75 e0                	jne    e04b <_Z6printfIPKcJiEEvS1_T_DpT0_+0x3b>
+    e06b:	83 c4 1c             	add    esp,0x1c
+    e06e:	5b                   	pop    ebx
+    e06f:	5e                   	pop    esi
+    e070:	5f                   	pop    edi
+    e071:	5d                   	pop    ebp
+    e072:	c3                   	ret    
+    e073:	90                   	nop
+    e074:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    e078:	83 ec 08             	sub    esp,0x8
+    e07b:	8d 44 24 3c          	lea    eax,[esp+0x3c]
+    e07f:	50                   	push   eax
+    e080:	57                   	push   edi
+    e081:	e8 4a ee ff ff       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    e086:	01 c3                	add    ebx,eax
+    e088:	8b 44 24 48          	mov    eax,DWORD PTR [esp+0x48]
+    e08c:	01 eb                	add    ebx,ebp
+    e08e:	89 44 24 1c          	mov    DWORD PTR [esp+0x1c],eax
+    e092:	0f be 03             	movsx  eax,BYTE PTR [ebx]
+    e095:	83 c4 10             	add    esp,0x10
+    e098:	84 c0                	test   al,al
+    e09a:	74 cf                	je     e06b <_Z6printfIPKcJiEEvS1_T_DpT0_+0x5b>
+    e09c:	31 ff                	xor    edi,edi
+    e09e:	3c 25                	cmp    al,0x25
+    e0a0:	8d 77 01             	lea    esi,[edi+0x1]
+    e0a3:	8d 2c 33             	lea    ebp,[ebx+esi*1]
+    e0a6:	75 30                	jne    e0d8 <_Z6printfIPKcJiEEvS1_T_DpT0_+0xc8>
+    e0a8:	90                   	nop
+    e0a9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    e0b0:	0f b6 45 00          	movzx  eax,BYTE PTR [ebp+0x0]
+    e0b4:	3c 25                	cmp    al,0x25
+    e0b6:	0f 84 8c 00 00 00    	je     e148 <_Z6printfIPKcJiEEvS1_T_DpT0_+0x138>
+    e0bc:	84 c0                	test   al,al
+    e0be:	75 38                	jne    e0f8 <_Z6printfIPKcJiEEvS1_T_DpT0_+0xe8>
+    e0c0:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
+    e0c5:	8d 77 02             	lea    esi,[edi+0x2]
+    e0c8:	84 c0                	test   al,al
+    e0ca:	74 9f                	je     e06b <_Z6printfIPKcJiEEvS1_T_DpT0_+0x5b>
+    e0cc:	89 f7                	mov    edi,esi
+    e0ce:	8d 77 01             	lea    esi,[edi+0x1]
+    e0d1:	3c 25                	cmp    al,0x25
+    e0d3:	8d 2c 33             	lea    ebp,[ebx+esi*1]
+    e0d6:	74 d8                	je     e0b0 <_Z6printfIPKcJiEEvS1_T_DpT0_+0xa0>
+    e0d8:	83 ec 0c             	sub    esp,0xc
+    e0db:	50                   	push   eax
+    e0dc:	e8 ef db ff ff       	call   bcd0 <_Z7putcharc>
+    e0e1:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    e0e5:	83 c4 10             	add    esp,0x10
+    e0e8:	84 c0                	test   al,al
+    e0ea:	0f 84 7b ff ff ff    	je     e06b <_Z6printfIPKcJiEEvS1_T_DpT0_+0x5b>
+    e0f0:	89 f7                	mov    edi,esi
+    e0f2:	eb da                	jmp    e0ce <_Z6printfIPKcJiEEvS1_T_DpT0_+0xbe>
+    e0f4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    e0f8:	83 ec 08             	sub    esp,0x8
+    e0fb:	8d 44 24 14          	lea    eax,[esp+0x14]
+    e0ff:	50                   	push   eax
+    e100:	55                   	push   ebp
+    e101:	e8 ca ee ff ff       	call   cfd0 <_Z14_manage_escapeIiEiPKcPT_>
+    e106:	01 c6                	add    esi,eax
+    e108:	01 f3                	add    ebx,esi
+    e10a:	89 1c 24             	mov    DWORD PTR [esp],ebx
+    e10d:	e8 be dc ff ff       	call   bdd0 <_Z6printfPKc>
+    e112:	83 c4 10             	add    esp,0x10
+    e115:	83 c4 1c             	add    esp,0x1c
+    e118:	5b                   	pop    ebx
+    e119:	5e                   	pop    esi
+    e11a:	5f                   	pop    edi
+    e11b:	5d                   	pop    ebp
+    e11c:	c3                   	ret    
+    e11d:	8d 76 00             	lea    esi,[esi+0x0]
+    e120:	83 ec 0c             	sub    esp,0xc
+    e123:	8d 5e 02             	lea    ebx,[esi+0x2]
+    e126:	6a 25                	push   0x25
+    e128:	e8 a3 db ff ff       	call   bcd0 <_Z7putcharc>
+    e12d:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    e132:	83 c4 10             	add    esp,0x10
+    e135:	84 c0                	test   al,al
+    e137:	0f 84 2e ff ff ff    	je     e06b <_Z6printfIPKcJiEEvS1_T_DpT0_+0x5b>
+    e13d:	89 de                	mov    esi,ebx
+    e13f:	e9 09 ff ff ff       	jmp    e04d <_Z6printfIPKcJiEEvS1_T_DpT0_+0x3d>
+    e144:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    e148:	83 ec 0c             	sub    esp,0xc
+    e14b:	8d 77 02             	lea    esi,[edi+0x2]
+    e14e:	6a 25                	push   0x25
+    e150:	e8 7b db ff ff       	call   bcd0 <_Z7putcharc>
+    e155:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
+    e15a:	83 c4 10             	add    esp,0x10
+    e15d:	84 c0                	test   al,al
+    e15f:	0f 84 06 ff ff ff    	je     e06b <_Z6printfIPKcJiEEvS1_T_DpT0_+0x5b>
+    e165:	89 f7                	mov    edi,esi
+    e167:	e9 62 ff ff ff       	jmp    e0ce <_Z6printfIPKcJiEEvS1_T_DpT0_+0xbe>
+
+Disassembly of section .text._Z6printfIPKcJiS1_iEEvS1_T_DpT0_:
+
+0000e170 <_Z6printfIPKcJiS1_iEEvS1_T_DpT0_>:
+    e170:	55                   	push   ebp
+    e171:	57                   	push   edi
+    e172:	56                   	push   esi
+    e173:	53                   	push   ebx
+    e174:	31 f6                	xor    esi,esi
+    e176:	83 ec 1c             	sub    esp,0x1c
+    e179:	8b 6c 24 30          	mov    ebp,DWORD PTR [esp+0x30]
+    e17d:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    e181:	84 c0                	test   al,al
+    e183:	74 46                	je     e1cb <_Z6printfIPKcJiS1_iEEvS1_T_DpT0_+0x5b>
+    e185:	8d 5e 01             	lea    ebx,[esi+0x1]
+    e188:	3c 25                	cmp    al,0x25
+    e18a:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    e18e:	75 28                	jne    e1b8 <_Z6printfIPKcJiS1_iEEvS1_T_DpT0_+0x48>
+    e190:	0f b6 07             	movzx  eax,BYTE PTR [edi]
+    e193:	3c 25                	cmp    al,0x25
+    e195:	0f 84 f5 00 00 00    	je     e290 <_Z6printfIPKcJiS1_iEEvS1_T_DpT0_+0x120>
+    e19b:	84 c0                	test   al,al
+    e19d:	75 39                	jne    e1d8 <_Z6printfIPKcJiS1_iEEvS1_T_DpT0_+0x68>
+    e19f:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    e1a4:	8d 5e 02             	lea    ebx,[esi+0x2]
+    e1a7:	84 c0                	test   al,al
+    e1a9:	74 20                	je     e1cb <_Z6printfIPKcJiS1_iEEvS1_T_DpT0_+0x5b>
+    e1ab:	89 de                	mov    esi,ebx
+    e1ad:	8d 5e 01             	lea    ebx,[esi+0x1]
+    e1b0:	3c 25                	cmp    al,0x25
+    e1b2:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    e1b6:	74 d8                	je     e190 <_Z6printfIPKcJiS1_iEEvS1_T_DpT0_+0x20>
+    e1b8:	83 ec 0c             	sub    esp,0xc
+    e1bb:	50                   	push   eax
+    e1bc:	e8 0f db ff ff       	call   bcd0 <_Z7putcharc>
+    e1c1:	0f be 07             	movsx  eax,BYTE PTR [edi]
+    e1c4:	83 c4 10             	add    esp,0x10
+    e1c7:	84 c0                	test   al,al
+    e1c9:	75 e0                	jne    e1ab <_Z6printfIPKcJiS1_iEEvS1_T_DpT0_+0x3b>
+    e1cb:	83 c4 1c             	add    esp,0x1c
+    e1ce:	5b                   	pop    ebx
+    e1cf:	5e                   	pop    esi
+    e1d0:	5f                   	pop    edi
+    e1d1:	5d                   	pop    ebp
+    e1d2:	c3                   	ret    
+    e1d3:	90                   	nop
+    e1d4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    e1d8:	83 ec 08             	sub    esp,0x8
+    e1db:	8d 44 24 3c          	lea    eax,[esp+0x3c]
+    e1df:	50                   	push   eax
+    e1e0:	57                   	push   edi
+    e1e1:	e8 ea ec ff ff       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    e1e6:	01 c3                	add    ebx,eax
+    e1e8:	8b 44 24 48          	mov    eax,DWORD PTR [esp+0x48]
+    e1ec:	01 eb                	add    ebx,ebp
+    e1ee:	89 44 24 1c          	mov    DWORD PTR [esp+0x1c],eax
+    e1f2:	0f be 03             	movsx  eax,BYTE PTR [ebx]
+    e1f5:	83 c4 10             	add    esp,0x10
+    e1f8:	84 c0                	test   al,al
+    e1fa:	74 cf                	je     e1cb <_Z6printfIPKcJiS1_iEEvS1_T_DpT0_+0x5b>
+    e1fc:	31 ff                	xor    edi,edi
+    e1fe:	3c 25                	cmp    al,0x25
+    e200:	8d 77 01             	lea    esi,[edi+0x1]
+    e203:	8d 2c 33             	lea    ebp,[ebx+esi*1]
+    e206:	75 30                	jne    e238 <_Z6printfIPKcJiS1_iEEvS1_T_DpT0_+0xc8>
+    e208:	90                   	nop
+    e209:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    e210:	0f b6 45 00          	movzx  eax,BYTE PTR [ebp+0x0]
+    e214:	3c 25                	cmp    al,0x25
+    e216:	0f 84 9c 00 00 00    	je     e2b8 <_Z6printfIPKcJiS1_iEEvS1_T_DpT0_+0x148>
+    e21c:	84 c0                	test   al,al
+    e21e:	75 38                	jne    e258 <_Z6printfIPKcJiS1_iEEvS1_T_DpT0_+0xe8>
+    e220:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
+    e225:	8d 77 02             	lea    esi,[edi+0x2]
+    e228:	84 c0                	test   al,al
+    e22a:	74 9f                	je     e1cb <_Z6printfIPKcJiS1_iEEvS1_T_DpT0_+0x5b>
+    e22c:	89 f7                	mov    edi,esi
+    e22e:	8d 77 01             	lea    esi,[edi+0x1]
+    e231:	3c 25                	cmp    al,0x25
+    e233:	8d 2c 33             	lea    ebp,[ebx+esi*1]
+    e236:	74 d8                	je     e210 <_Z6printfIPKcJiS1_iEEvS1_T_DpT0_+0xa0>
+    e238:	83 ec 0c             	sub    esp,0xc
+    e23b:	50                   	push   eax
+    e23c:	e8 8f da ff ff       	call   bcd0 <_Z7putcharc>
+    e241:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    e245:	83 c4 10             	add    esp,0x10
+    e248:	84 c0                	test   al,al
+    e24a:	0f 84 7b ff ff ff    	je     e1cb <_Z6printfIPKcJiS1_iEEvS1_T_DpT0_+0x5b>
+    e250:	89 f7                	mov    edi,esi
+    e252:	eb da                	jmp    e22e <_Z6printfIPKcJiS1_iEEvS1_T_DpT0_+0xbe>
+    e254:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    e258:	83 ec 08             	sub    esp,0x8
+    e25b:	8d 44 24 14          	lea    eax,[esp+0x14]
+    e25f:	50                   	push   eax
+    e260:	55                   	push   ebp
+    e261:	e8 6a ed ff ff       	call   cfd0 <_Z14_manage_escapeIiEiPKcPT_>
+    e266:	01 c6                	add    esi,eax
+    e268:	83 c4 0c             	add    esp,0xc
+    e26b:	01 f3                	add    ebx,esi
+    e26d:	ff 74 24 44          	push   DWORD PTR [esp+0x44]
+    e271:	ff 74 24 44          	push   DWORD PTR [esp+0x44]
+    e275:	53                   	push   ebx
+    e276:	e8 95 fd ff ff       	call   e010 <_Z6printfIPKcJiEEvS1_T_DpT0_>
+    e27b:	83 c4 10             	add    esp,0x10
+    e27e:	83 c4 1c             	add    esp,0x1c
+    e281:	5b                   	pop    ebx
+    e282:	5e                   	pop    esi
+    e283:	5f                   	pop    edi
+    e284:	5d                   	pop    ebp
+    e285:	c3                   	ret    
+    e286:	8d 76 00             	lea    esi,[esi+0x0]
+    e289:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    e290:	83 ec 0c             	sub    esp,0xc
+    e293:	8d 5e 02             	lea    ebx,[esi+0x2]
+    e296:	6a 25                	push   0x25
+    e298:	e8 33 da ff ff       	call   bcd0 <_Z7putcharc>
+    e29d:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    e2a2:	83 c4 10             	add    esp,0x10
+    e2a5:	84 c0                	test   al,al
+    e2a7:	0f 84 1e ff ff ff    	je     e1cb <_Z6printfIPKcJiS1_iEEvS1_T_DpT0_+0x5b>
+    e2ad:	89 de                	mov    esi,ebx
+    e2af:	e9 f9 fe ff ff       	jmp    e1ad <_Z6printfIPKcJiS1_iEEvS1_T_DpT0_+0x3d>
+    e2b4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    e2b8:	83 ec 0c             	sub    esp,0xc
+    e2bb:	8d 77 02             	lea    esi,[edi+0x2]
+    e2be:	6a 25                	push   0x25
+    e2c0:	e8 0b da ff ff       	call   bcd0 <_Z7putcharc>
+    e2c5:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
+    e2ca:	83 c4 10             	add    esp,0x10
+    e2cd:	84 c0                	test   al,al
+    e2cf:	0f 84 f6 fe ff ff    	je     e1cb <_Z6printfIPKcJiS1_iEEvS1_T_DpT0_+0x5b>
+    e2d5:	89 f7                	mov    edi,esi
+    e2d7:	e9 52 ff ff ff       	jmp    e22e <_Z6printfIPKcJiS1_iEEvS1_T_DpT0_+0xbe>
+
+Disassembly of section .text._Z6printfIPKcJcEEvS1_T_DpT0_:
+
+0000e2e0 <_Z6printfIPKcJcEEvS1_T_DpT0_>:
+    e2e0:	55                   	push   ebp
+    e2e1:	57                   	push   edi
+    e2e2:	56                   	push   esi
+    e2e3:	53                   	push   ebx
+    e2e4:	31 f6                	xor    esi,esi
+    e2e6:	83 ec 2c             	sub    esp,0x2c
+    e2e9:	8b 44 24 48          	mov    eax,DWORD PTR [esp+0x48]
+    e2ed:	8b 6c 24 40          	mov    ebp,DWORD PTR [esp+0x40]
+    e2f1:	89 44 24 0c          	mov    DWORD PTR [esp+0xc],eax
+    e2f5:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    e2f9:	84 c0                	test   al,al
+    e2fb:	74 4e                	je     e34b <_Z6printfIPKcJcEEvS1_T_DpT0_+0x6b>
+    e2fd:	8d 7e 01             	lea    edi,[esi+0x1]
+    e300:	3c 25                	cmp    al,0x25
+    e302:	8d 5c 3d 00          	lea    ebx,[ebp+edi*1+0x0]
+    e306:	75 30                	jne    e338 <_Z6printfIPKcJcEEvS1_T_DpT0_+0x58>
+    e308:	90                   	nop
+    e309:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    e310:	0f b6 03             	movzx  eax,BYTE PTR [ebx]
+    e313:	3c 25                	cmp    al,0x25
+    e315:	0f 84 05 01 00 00    	je     e420 <_Z6printfIPKcJcEEvS1_T_DpT0_+0x140>
+    e31b:	84 c0                	test   al,al
+    e31d:	75 39                	jne    e358 <_Z6printfIPKcJcEEvS1_T_DpT0_+0x78>
+    e31f:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    e324:	8d 7e 02             	lea    edi,[esi+0x2]
+    e327:	84 c0                	test   al,al
+    e329:	74 20                	je     e34b <_Z6printfIPKcJcEEvS1_T_DpT0_+0x6b>
+    e32b:	89 fe                	mov    esi,edi
+    e32d:	8d 7e 01             	lea    edi,[esi+0x1]
+    e330:	3c 25                	cmp    al,0x25
+    e332:	8d 5c 3d 00          	lea    ebx,[ebp+edi*1+0x0]
+    e336:	74 d8                	je     e310 <_Z6printfIPKcJcEEvS1_T_DpT0_+0x30>
+    e338:	83 ec 0c             	sub    esp,0xc
+    e33b:	50                   	push   eax
+    e33c:	e8 8f d9 ff ff       	call   bcd0 <_Z7putcharc>
+    e341:	0f be 03             	movsx  eax,BYTE PTR [ebx]
+    e344:	83 c4 10             	add    esp,0x10
+    e347:	84 c0                	test   al,al
+    e349:	75 e0                	jne    e32b <_Z6printfIPKcJcEEvS1_T_DpT0_+0x4b>
+    e34b:	83 c4 2c             	add    esp,0x2c
+    e34e:	5b                   	pop    ebx
+    e34f:	5e                   	pop    esi
+    e350:	5f                   	pop    edi
+    e351:	5d                   	pop    ebp
+    e352:	c3                   	ret    
+    e353:	90                   	nop
+    e354:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    e358:	83 ec 08             	sub    esp,0x8
+    e35b:	8d 44 24 4c          	lea    eax,[esp+0x4c]
+    e35f:	50                   	push   eax
+    e360:	53                   	push   ebx
+    e361:	e8 6a eb ff ff       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    e366:	01 c7                	add    edi,eax
+    e368:	8b 54 24 1c          	mov    edx,DWORD PTR [esp+0x1c]
+    e36c:	01 fd                	add    ebp,edi
+    e36e:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    e372:	0f be ca             	movsx  ecx,dl
+    e375:	88 54 24 2f          	mov    BYTE PTR [esp+0x2f],dl
+    e379:	89 4c 24 1c          	mov    DWORD PTR [esp+0x1c],ecx
+    e37d:	83 c4 10             	add    esp,0x10
+    e380:	84 c0                	test   al,al
+    e382:	74 c7                	je     e34b <_Z6printfIPKcJcEEvS1_T_DpT0_+0x6b>
+    e384:	31 ff                	xor    edi,edi
+    e386:	3c 25                	cmp    al,0x25
+    e388:	8d 5f 01             	lea    ebx,[edi+0x1]
+    e38b:	8d 74 1d 00          	lea    esi,[ebp+ebx*1+0x0]
+    e38f:	75 2f                	jne    e3c0 <_Z6printfIPKcJcEEvS1_T_DpT0_+0xe0>
+    e391:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    e398:	0f b6 06             	movzx  eax,BYTE PTR [esi]
+    e39b:	3c 25                	cmp    al,0x25
+    e39d:	0f 84 a5 00 00 00    	je     e448 <_Z6printfIPKcJcEEvS1_T_DpT0_+0x168>
+    e3a3:	84 c0                	test   al,al
+    e3a5:	75 39                	jne    e3e0 <_Z6printfIPKcJcEEvS1_T_DpT0_+0x100>
+    e3a7:	0f be 44 3d 02       	movsx  eax,BYTE PTR [ebp+edi*1+0x2]
+    e3ac:	8d 5f 02             	lea    ebx,[edi+0x2]
+    e3af:	84 c0                	test   al,al
+    e3b1:	74 98                	je     e34b <_Z6printfIPKcJcEEvS1_T_DpT0_+0x6b>
+    e3b3:	89 df                	mov    edi,ebx
+    e3b5:	8d 5f 01             	lea    ebx,[edi+0x1]
+    e3b8:	3c 25                	cmp    al,0x25
+    e3ba:	8d 74 1d 00          	lea    esi,[ebp+ebx*1+0x0]
+    e3be:	74 d8                	je     e398 <_Z6printfIPKcJcEEvS1_T_DpT0_+0xb8>
+    e3c0:	83 ec 0c             	sub    esp,0xc
+    e3c3:	50                   	push   eax
+    e3c4:	e8 07 d9 ff ff       	call   bcd0 <_Z7putcharc>
+    e3c9:	0f be 06             	movsx  eax,BYTE PTR [esi]
+    e3cc:	83 c4 10             	add    esp,0x10
+    e3cf:	84 c0                	test   al,al
+    e3d1:	0f 84 74 ff ff ff    	je     e34b <_Z6printfIPKcJcEEvS1_T_DpT0_+0x6b>
+    e3d7:	89 df                	mov    edi,ebx
+    e3d9:	eb da                	jmp    e3b5 <_Z6printfIPKcJcEEvS1_T_DpT0_+0xd5>
+    e3db:	90                   	nop
+    e3dc:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    e3e0:	83 e8 42             	sub    eax,0x42
+    e3e3:	3c 36                	cmp    al,0x36
+    e3e5:	77 24                	ja     e40b <_Z6printfIPKcJcEEvS1_T_DpT0_+0x12b>
+    e3e7:	0f b6 c0             	movzx  eax,al
+    e3ea:	ff 24 85 a8 2d 01 00 	jmp    DWORD PTR [eax*4+0x12da8]
+    e3f1:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    e3f8:	83 ec 0c             	sub    esp,0xc
+    e3fb:	8d 74 3d 02          	lea    esi,[ebp+edi*1+0x2]
+    e3ff:	ff 74 24 18          	push   DWORD PTR [esp+0x18]
+    e403:	e8 c8 d8 ff ff       	call   bcd0 <_Z7putcharc>
+    e408:	83 c4 10             	add    esp,0x10
+    e40b:	83 ec 0c             	sub    esp,0xc
+    e40e:	56                   	push   esi
+    e40f:	e8 bc d9 ff ff       	call   bdd0 <_Z6printfPKc>
+    e414:	83 c4 10             	add    esp,0x10
+    e417:	83 c4 2c             	add    esp,0x2c
+    e41a:	5b                   	pop    ebx
+    e41b:	5e                   	pop    esi
+    e41c:	5f                   	pop    edi
+    e41d:	5d                   	pop    ebp
+    e41e:	c3                   	ret    
+    e41f:	90                   	nop
+    e420:	83 ec 0c             	sub    esp,0xc
+    e423:	8d 7e 02             	lea    edi,[esi+0x2]
+    e426:	6a 25                	push   0x25
+    e428:	e8 a3 d8 ff ff       	call   bcd0 <_Z7putcharc>
+    e42d:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    e432:	83 c4 10             	add    esp,0x10
+    e435:	84 c0                	test   al,al
+    e437:	0f 84 0e ff ff ff    	je     e34b <_Z6printfIPKcJcEEvS1_T_DpT0_+0x6b>
+    e43d:	89 fe                	mov    esi,edi
+    e43f:	e9 e9 fe ff ff       	jmp    e32d <_Z6printfIPKcJcEEvS1_T_DpT0_+0x4d>
+    e444:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    e448:	83 ec 0c             	sub    esp,0xc
+    e44b:	8d 5f 02             	lea    ebx,[edi+0x2]
+    e44e:	6a 25                	push   0x25
+    e450:	e8 7b d8 ff ff       	call   bcd0 <_Z7putcharc>
+    e455:	0f be 44 3d 02       	movsx  eax,BYTE PTR [ebp+edi*1+0x2]
+    e45a:	83 c4 10             	add    esp,0x10
+    e45d:	84 c0                	test   al,al
+    e45f:	0f 84 e6 fe ff ff    	je     e34b <_Z6printfIPKcJcEEvS1_T_DpT0_+0x6b>
+    e465:	89 df                	mov    edi,ebx
+    e467:	e9 49 ff ff ff       	jmp    e3b5 <_Z6printfIPKcJcEEvS1_T_DpT0_+0xd5>
+    e46c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    e470:	83 ec 0c             	sub    esp,0xc
+    e473:	8d 74 3d 02          	lea    esi,[ebp+edi*1+0x2]
+    e477:	ff 74 24 2b          	push   DWORD PTR [esp+0x2b]
+    e47b:	e8 10 d9 ff ff       	call   bd90 <_Z6putstrPc>
+    e480:	83 c4 10             	add    esp,0x10
+    e483:	eb 86                	jmp    e40b <_Z6printfIPKcJcEEvS1_T_DpT0_+0x12b>
+    e485:	8d 76 00             	lea    esi,[esi+0x0]
+    e488:	83 ec 0c             	sub    esp,0xc
+    e48b:	8d 74 3d 02          	lea    esi,[ebp+edi*1+0x2]
+    e48f:	ff 74 24 18          	push   DWORD PTR [esp+0x18]
+    e493:	e8 88 d8 ff ff       	call   bd20 <_Z6putbini>
+    e498:	83 c4 10             	add    esp,0x10
+    e49b:	e9 6b ff ff ff       	jmp    e40b <_Z6printfIPKcJcEEvS1_T_DpT0_+0x12b>
+    e4a0:	83 ec 0c             	sub    esp,0xc
+    e4a3:	8d 74 3d 02          	lea    esi,[ebp+edi*1+0x2]
+    e4a7:	ff 74 24 18          	push   DWORD PTR [esp+0x18]
+    e4ab:	e8 60 d8 ff ff       	call   bd10 <_Z6putocti>
+    e4b0:	83 c4 10             	add    esp,0x10
+    e4b3:	e9 53 ff ff ff       	jmp    e40b <_Z6printfIPKcJcEEvS1_T_DpT0_+0x12b>
+    e4b8:	90                   	nop
+    e4b9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    e4c0:	83 ec 0c             	sub    esp,0xc
+    e4c3:	8d 74 3d 02          	lea    esi,[ebp+edi*1+0x2]
+    e4c7:	ff 74 24 18          	push   DWORD PTR [esp+0x18]
+    e4cb:	e8 20 d8 ff ff       	call   bcf0 <_Z6puthexi>
+    e4d0:	83 c4 10             	add    esp,0x10
+    e4d3:	e9 33 ff ff ff       	jmp    e40b <_Z6printfIPKcJcEEvS1_T_DpT0_+0x12b>
+    e4d8:	90                   	nop
+    e4d9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    e4e0:	83 ec 0c             	sub    esp,0xc
+    e4e3:	8d 74 3d 02          	lea    esi,[ebp+edi*1+0x2]
+    e4e7:	ff 74 24 18          	push   DWORD PTR [esp+0x18]
+    e4eb:	e8 f0 d7 ff ff       	call   bce0 <_Z6putdeci>
+    e4f0:	83 c4 10             	add    esp,0x10
+    e4f3:	e9 13 ff ff ff       	jmp    e40b <_Z6printfIPKcJcEEvS1_T_DpT0_+0x12b>
+    e4f8:	90                   	nop
+    e4f9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    e500:	83 ec 0c             	sub    esp,0xc
+    e503:	8d 74 3d 02          	lea    esi,[ebp+edi*1+0x2]
+    e507:	68 64 01 01 00       	push   0x10164
+    e50c:	e8 bf d8 ff ff       	call   bdd0 <_Z6printfPKc>
+    e511:	58                   	pop    eax
+    e512:	ff 74 24 2b          	push   DWORD PTR [esp+0x2b]
+    e516:	e8 d5 d7 ff ff       	call   bcf0 <_Z6puthexi>
+    e51b:	83 c4 10             	add    esp,0x10
+    e51e:	e9 e8 fe ff ff       	jmp    e40b <_Z6printfIPKcJcEEvS1_T_DpT0_+0x12b>
+
+Disassembly of section .text._Z6printfIPKcJiS1_cEEvS1_T_DpT0_:
+
+0000e530 <_Z6printfIPKcJiS1_cEEvS1_T_DpT0_>:
+    e530:	55                   	push   ebp
+    e531:	57                   	push   edi
+    e532:	31 ed                	xor    ebp,ebp
+    e534:	56                   	push   esi
+    e535:	53                   	push   ebx
+    e536:	83 ec 2c             	sub    esp,0x2c
+    e539:	8b 44 24 50          	mov    eax,DWORD PTR [esp+0x50]
+    e53d:	8b 7c 24 40          	mov    edi,DWORD PTR [esp+0x40]
+    e541:	89 44 24 0c          	mov    DWORD PTR [esp+0xc],eax
+    e545:	0f be 07             	movsx  eax,BYTE PTR [edi]
+    e548:	84 c0                	test   al,al
+    e54a:	74 4e                	je     e59a <_Z6printfIPKcJiS1_cEEvS1_T_DpT0_+0x6a>
+    e54c:	8d 5d 01             	lea    ebx,[ebp+0x1]
+    e54f:	3c 25                	cmp    al,0x25
+    e551:	8d 34 1f             	lea    esi,[edi+ebx*1]
+    e554:	75 31                	jne    e587 <_Z6printfIPKcJiS1_cEEvS1_T_DpT0_+0x57>
+    e556:	8d 76 00             	lea    esi,[esi+0x0]
+    e559:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    e560:	0f b6 06             	movzx  eax,BYTE PTR [esi]
+    e563:	3c 25                	cmp    al,0x25
+    e565:	0f 84 f5 00 00 00    	je     e660 <_Z6printfIPKcJiS1_cEEvS1_T_DpT0_+0x130>
+    e56b:	84 c0                	test   al,al
+    e56d:	75 39                	jne    e5a8 <_Z6printfIPKcJiS1_cEEvS1_T_DpT0_+0x78>
+    e56f:	0f be 44 2f 02       	movsx  eax,BYTE PTR [edi+ebp*1+0x2]
+    e574:	8d 5d 02             	lea    ebx,[ebp+0x2]
+    e577:	84 c0                	test   al,al
+    e579:	74 1f                	je     e59a <_Z6printfIPKcJiS1_cEEvS1_T_DpT0_+0x6a>
+    e57b:	89 dd                	mov    ebp,ebx
+    e57d:	8d 5d 01             	lea    ebx,[ebp+0x1]
+    e580:	3c 25                	cmp    al,0x25
+    e582:	8d 34 1f             	lea    esi,[edi+ebx*1]
+    e585:	74 d9                	je     e560 <_Z6printfIPKcJiS1_cEEvS1_T_DpT0_+0x30>
+    e587:	83 ec 0c             	sub    esp,0xc
+    e58a:	50                   	push   eax
+    e58b:	e8 40 d7 ff ff       	call   bcd0 <_Z7putcharc>
+    e590:	0f be 06             	movsx  eax,BYTE PTR [esi]
+    e593:	83 c4 10             	add    esp,0x10
+    e596:	84 c0                	test   al,al
+    e598:	75 e1                	jne    e57b <_Z6printfIPKcJiS1_cEEvS1_T_DpT0_+0x4b>
+    e59a:	83 c4 2c             	add    esp,0x2c
+    e59d:	5b                   	pop    ebx
+    e59e:	5e                   	pop    esi
+    e59f:	5f                   	pop    edi
+    e5a0:	5d                   	pop    ebp
+    e5a1:	c3                   	ret    
+    e5a2:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    e5a8:	83 ec 08             	sub    esp,0x8
+    e5ab:	8d 44 24 4c          	lea    eax,[esp+0x4c]
+    e5af:	50                   	push   eax
+    e5b0:	56                   	push   esi
+    e5b1:	e8 1a e9 ff ff       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    e5b6:	01 c3                	add    ebx,eax
+    e5b8:	8b 44 24 58          	mov    eax,DWORD PTR [esp+0x58]
+    e5bc:	0f be 54 24 1c       	movsx  edx,BYTE PTR [esp+0x1c]
+    e5c1:	01 df                	add    edi,ebx
+    e5c3:	89 44 24 2c          	mov    DWORD PTR [esp+0x2c],eax
+    e5c7:	0f be 07             	movsx  eax,BYTE PTR [edi]
+    e5ca:	89 54 24 1c          	mov    DWORD PTR [esp+0x1c],edx
+    e5ce:	83 c4 10             	add    esp,0x10
+    e5d1:	84 c0                	test   al,al
+    e5d3:	74 c5                	je     e59a <_Z6printfIPKcJiS1_cEEvS1_T_DpT0_+0x6a>
+    e5d5:	31 db                	xor    ebx,ebx
+    e5d7:	3c 25                	cmp    al,0x25
+    e5d9:	8d 6b 01             	lea    ebp,[ebx+0x1]
+    e5dc:	8d 34 2f             	lea    esi,[edi+ebp*1]
+    e5df:	75 2e                	jne    e60f <_Z6printfIPKcJiS1_cEEvS1_T_DpT0_+0xdf>
+    e5e1:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    e5e8:	0f b6 06             	movzx  eax,BYTE PTR [esi]
+    e5eb:	3c 25                	cmp    al,0x25
+    e5ed:	0f 84 95 00 00 00    	je     e688 <_Z6printfIPKcJiS1_cEEvS1_T_DpT0_+0x158>
+    e5f3:	84 c0                	test   al,al
+    e5f5:	75 39                	jne    e630 <_Z6printfIPKcJiS1_cEEvS1_T_DpT0_+0x100>
+    e5f7:	0f be 44 1f 02       	movsx  eax,BYTE PTR [edi+ebx*1+0x2]
+    e5fc:	8d 6b 02             	lea    ebp,[ebx+0x2]
+    e5ff:	84 c0                	test   al,al
+    e601:	74 97                	je     e59a <_Z6printfIPKcJiS1_cEEvS1_T_DpT0_+0x6a>
+    e603:	89 eb                	mov    ebx,ebp
+    e605:	8d 6b 01             	lea    ebp,[ebx+0x1]
+    e608:	3c 25                	cmp    al,0x25
+    e60a:	8d 34 2f             	lea    esi,[edi+ebp*1]
+    e60d:	74 d9                	je     e5e8 <_Z6printfIPKcJiS1_cEEvS1_T_DpT0_+0xb8>
+    e60f:	83 ec 0c             	sub    esp,0xc
+    e612:	50                   	push   eax
+    e613:	e8 b8 d6 ff ff       	call   bcd0 <_Z7putcharc>
+    e618:	0f be 06             	movsx  eax,BYTE PTR [esi]
+    e61b:	83 c4 10             	add    esp,0x10
+    e61e:	84 c0                	test   al,al
+    e620:	0f 84 74 ff ff ff    	je     e59a <_Z6printfIPKcJiS1_cEEvS1_T_DpT0_+0x6a>
+    e626:	89 eb                	mov    ebx,ebp
+    e628:	eb db                	jmp    e605 <_Z6printfIPKcJiS1_cEEvS1_T_DpT0_+0xd5>
+    e62a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    e630:	83 ec 08             	sub    esp,0x8
+    e633:	8d 44 24 24          	lea    eax,[esp+0x24]
+    e637:	50                   	push   eax
+    e638:	56                   	push   esi
+    e639:	e8 92 e9 ff ff       	call   cfd0 <_Z14_manage_escapeIiEiPKcPT_>
+    e63e:	01 c5                	add    ebp,eax
+    e640:	83 c4 0c             	add    esp,0xc
+    e643:	01 ef                	add    edi,ebp
+    e645:	ff 74 24 10          	push   DWORD PTR [esp+0x10]
+    e649:	ff 74 24 54          	push   DWORD PTR [esp+0x54]
+    e64d:	57                   	push   edi
+    e64e:	e8 8d fc ff ff       	call   e2e0 <_Z6printfIPKcJcEEvS1_T_DpT0_>
+    e653:	83 c4 10             	add    esp,0x10
+    e656:	83 c4 2c             	add    esp,0x2c
+    e659:	5b                   	pop    ebx
+    e65a:	5e                   	pop    esi
+    e65b:	5f                   	pop    edi
+    e65c:	5d                   	pop    ebp
+    e65d:	c3                   	ret    
+    e65e:	66 90                	xchg   ax,ax
+    e660:	83 ec 0c             	sub    esp,0xc
+    e663:	8d 5d 02             	lea    ebx,[ebp+0x2]
+    e666:	6a 25                	push   0x25
+    e668:	e8 63 d6 ff ff       	call   bcd0 <_Z7putcharc>
+    e66d:	0f be 44 2f 02       	movsx  eax,BYTE PTR [edi+ebp*1+0x2]
+    e672:	83 c4 10             	add    esp,0x10
+    e675:	84 c0                	test   al,al
+    e677:	0f 84 1d ff ff ff    	je     e59a <_Z6printfIPKcJiS1_cEEvS1_T_DpT0_+0x6a>
+    e67d:	89 dd                	mov    ebp,ebx
+    e67f:	e9 f9 fe ff ff       	jmp    e57d <_Z6printfIPKcJiS1_cEEvS1_T_DpT0_+0x4d>
+    e684:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    e688:	83 ec 0c             	sub    esp,0xc
+    e68b:	8d 6b 02             	lea    ebp,[ebx+0x2]
+    e68e:	6a 25                	push   0x25
+    e690:	e8 3b d6 ff ff       	call   bcd0 <_Z7putcharc>
+    e695:	0f be 44 1f 02       	movsx  eax,BYTE PTR [edi+ebx*1+0x2]
+    e69a:	83 c4 10             	add    esp,0x10
+    e69d:	84 c0                	test   al,al
+    e69f:	0f 84 f5 fe ff ff    	je     e59a <_Z6printfIPKcJiS1_cEEvS1_T_DpT0_+0x6a>
+    e6a5:	89 eb                	mov    ebx,ebp
+    e6a7:	e9 59 ff ff ff       	jmp    e605 <_Z6printfIPKcJiS1_cEEvS1_T_DpT0_+0xd5>
+
+Disassembly of section .text._Z14_manage_escapeItEiPKcPT_:
+
+0000e6b0 <_Z14_manage_escapeItEiPKcPT_>:
+    e6b0:	83 ec 0c             	sub    esp,0xc
+    e6b3:	8b 44 24 10          	mov    eax,DWORD PTR [esp+0x10]
+    e6b7:	0f b6 00             	movzx  eax,BYTE PTR [eax]
+    e6ba:	83 e8 42             	sub    eax,0x42
+    e6bd:	3c 36                	cmp    al,0x36
+    e6bf:	0f 87 f3 00 00 00    	ja     e7b8 <_Z14_manage_escapeItEiPKcPT_+0x108>
+    e6c5:	0f b6 c0             	movzx  eax,al
+    e6c8:	ff 24 85 84 2e 01 00 	jmp    DWORD PTR [eax*4+0x12e84]
+    e6cf:	90                   	nop
+    e6d0:	83 ec 0c             	sub    esp,0xc
+    e6d3:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    e6d7:	ff 30                	push   DWORD PTR [eax]
+    e6d9:	e8 b2 d6 ff ff       	call   bd90 <_Z6putstrPc>
+    e6de:	83 c4 10             	add    esp,0x10
+    e6e1:	b8 01 00 00 00       	mov    eax,0x1
+    e6e6:	83 c4 0c             	add    esp,0xc
+    e6e9:	c3                   	ret    
+    e6ea:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    e6f0:	83 ec 0c             	sub    esp,0xc
+    e6f3:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    e6f7:	0f b7 00             	movzx  eax,WORD PTR [eax]
+    e6fa:	50                   	push   eax
+    e6fb:	e8 20 d6 ff ff       	call   bd20 <_Z6putbini>
+    e700:	83 c4 10             	add    esp,0x10
+    e703:	b8 01 00 00 00       	mov    eax,0x1
+    e708:	83 c4 0c             	add    esp,0xc
+    e70b:	c3                   	ret    
+    e70c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    e710:	83 ec 0c             	sub    esp,0xc
+    e713:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    e717:	0f b7 00             	movzx  eax,WORD PTR [eax]
+    e71a:	50                   	push   eax
+    e71b:	e8 f0 d5 ff ff       	call   bd10 <_Z6putocti>
+    e720:	83 c4 10             	add    esp,0x10
+    e723:	b8 01 00 00 00       	mov    eax,0x1
+    e728:	83 c4 0c             	add    esp,0xc
+    e72b:	c3                   	ret    
+    e72c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    e730:	83 ec 0c             	sub    esp,0xc
+    e733:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    e737:	0f b7 00             	movzx  eax,WORD PTR [eax]
+    e73a:	50                   	push   eax
+    e73b:	e8 b0 d5 ff ff       	call   bcf0 <_Z6puthexi>
+    e740:	83 c4 10             	add    esp,0x10
+    e743:	b8 01 00 00 00       	mov    eax,0x1
+    e748:	83 c4 0c             	add    esp,0xc
+    e74b:	c3                   	ret    
+    e74c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    e750:	83 ec 0c             	sub    esp,0xc
+    e753:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    e757:	0f be 00             	movsx  eax,BYTE PTR [eax]
+    e75a:	50                   	push   eax
+    e75b:	e8 70 d5 ff ff       	call   bcd0 <_Z7putcharc>
+    e760:	83 c4 10             	add    esp,0x10
+    e763:	b8 01 00 00 00       	mov    eax,0x1
+    e768:	83 c4 0c             	add    esp,0xc
+    e76b:	c3                   	ret    
+    e76c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    e770:	83 ec 0c             	sub    esp,0xc
+    e773:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    e777:	0f b7 00             	movzx  eax,WORD PTR [eax]
+    e77a:	50                   	push   eax
+    e77b:	e8 60 d5 ff ff       	call   bce0 <_Z6putdeci>
+    e780:	83 c4 10             	add    esp,0x10
+    e783:	b8 01 00 00 00       	mov    eax,0x1
+    e788:	83 c4 0c             	add    esp,0xc
+    e78b:	c3                   	ret    
+    e78c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    e790:	83 ec 0c             	sub    esp,0xc
+    e793:	68 64 01 01 00       	push   0x10164
+    e798:	e8 33 d6 ff ff       	call   bdd0 <_Z6printfPKc>
+    e79d:	58                   	pop    eax
+    e79e:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    e7a2:	ff 30                	push   DWORD PTR [eax]
+    e7a4:	e8 47 d5 ff ff       	call   bcf0 <_Z6puthexi>
+    e7a9:	83 c4 10             	add    esp,0x10
+    e7ac:	b8 01 00 00 00       	mov    eax,0x1
+    e7b1:	83 c4 0c             	add    esp,0xc
+    e7b4:	c3                   	ret    
+    e7b5:	8d 76 00             	lea    esi,[esi+0x0]
+    e7b8:	31 c0                	xor    eax,eax
+    e7ba:	e9 27 ff ff ff       	jmp    e6e6 <_Z14_manage_escapeItEiPKcPT_+0x36>
+
+Disassembly of section .text._Z6printfItJttEEvPKcT_DpT0_:
+
+0000e7c0 <_Z6printfItJttEEvPKcT_DpT0_>:
+    e7c0:	55                   	push   ebp
+    e7c1:	57                   	push   edi
+    e7c2:	31 c9                	xor    ecx,ecx
+    e7c4:	56                   	push   esi
+    e7c5:	53                   	push   ebx
+    e7c6:	83 ec 2c             	sub    esp,0x2c
+    e7c9:	8b 44 24 4c          	mov    eax,DWORD PTR [esp+0x4c]
+    e7cd:	8b 6c 24 40          	mov    ebp,DWORD PTR [esp+0x40]
+    e7d1:	8b 74 24 48          	mov    esi,DWORD PTR [esp+0x48]
+    e7d5:	89 44 24 04          	mov    DWORD PTR [esp+0x4],eax
+    e7d9:	8b 44 24 44          	mov    eax,DWORD PTR [esp+0x44]
+    e7dd:	66 89 44 24 0c       	mov    WORD PTR [esp+0xc],ax
+    e7e2:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    e7e6:	84 c0                	test   al,al
+    e7e8:	74 49                	je     e833 <_Z6printfItJttEEvPKcT_DpT0_+0x73>
+    e7ea:	8d 79 01             	lea    edi,[ecx+0x1]
+    e7ed:	3c 25                	cmp    al,0x25
+    e7ef:	8d 5c 3d 00          	lea    ebx,[ebp+edi*1+0x0]
+    e7f3:	75 2b                	jne    e820 <_Z6printfItJttEEvPKcT_DpT0_+0x60>
+    e7f5:	8d 76 00             	lea    esi,[esi+0x0]
+    e7f8:	0f b6 03             	movzx  eax,BYTE PTR [ebx]
+    e7fb:	3c 25                	cmp    al,0x25
+    e7fd:	0f 84 3d 01 00 00    	je     e940 <_Z6printfItJttEEvPKcT_DpT0_+0x180>
+    e803:	84 c0                	test   al,al
+    e805:	75 39                	jne    e840 <_Z6printfItJttEEvPKcT_DpT0_+0x80>
+    e807:	0f be 44 0d 02       	movsx  eax,BYTE PTR [ebp+ecx*1+0x2]
+    e80c:	8d 79 02             	lea    edi,[ecx+0x2]
+    e80f:	84 c0                	test   al,al
+    e811:	74 20                	je     e833 <_Z6printfItJttEEvPKcT_DpT0_+0x73>
+    e813:	89 f9                	mov    ecx,edi
+    e815:	8d 79 01             	lea    edi,[ecx+0x1]
+    e818:	3c 25                	cmp    al,0x25
+    e81a:	8d 5c 3d 00          	lea    ebx,[ebp+edi*1+0x0]
+    e81e:	74 d8                	je     e7f8 <_Z6printfItJttEEvPKcT_DpT0_+0x38>
+    e820:	83 ec 0c             	sub    esp,0xc
+    e823:	50                   	push   eax
+    e824:	e8 a7 d4 ff ff       	call   bcd0 <_Z7putcharc>
+    e829:	0f be 03             	movsx  eax,BYTE PTR [ebx]
+    e82c:	83 c4 10             	add    esp,0x10
+    e82f:	84 c0                	test   al,al
+    e831:	75 e0                	jne    e813 <_Z6printfItJttEEvPKcT_DpT0_+0x53>
+    e833:	83 c4 2c             	add    esp,0x2c
+    e836:	5b                   	pop    ebx
+    e837:	5e                   	pop    esi
+    e838:	5f                   	pop    edi
+    e839:	5d                   	pop    ebp
+    e83a:	c3                   	ret    
+    e83b:	90                   	nop
+    e83c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    e840:	83 ec 08             	sub    esp,0x8
+    e843:	8d 44 24 14          	lea    eax,[esp+0x14]
+    e847:	50                   	push   eax
+    e848:	53                   	push   ebx
+    e849:	e8 62 fe ff ff       	call   e6b0 <_Z14_manage_escapeItEiPKcPT_>
+    e84e:	01 c7                	add    edi,eax
+    e850:	66 89 74 24 2c       	mov    WORD PTR [esp+0x2c],si
+    e855:	83 c4 10             	add    esp,0x10
+    e858:	01 fd                	add    ebp,edi
+    e85a:	31 ff                	xor    edi,edi
+    e85c:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    e860:	84 c0                	test   al,al
+    e862:	74 cf                	je     e833 <_Z6printfItJttEEvPKcT_DpT0_+0x73>
+    e864:	8d 77 01             	lea    esi,[edi+0x1]
+    e867:	3c 25                	cmp    al,0x25
+    e869:	8d 5c 35 00          	lea    ebx,[ebp+esi*1+0x0]
+    e86d:	75 29                	jne    e898 <_Z6printfItJttEEvPKcT_DpT0_+0xd8>
+    e86f:	90                   	nop
+    e870:	0f b6 03             	movzx  eax,BYTE PTR [ebx]
+    e873:	3c 25                	cmp    al,0x25
+    e875:	0f 84 1d 01 00 00    	je     e998 <_Z6printfItJttEEvPKcT_DpT0_+0x1d8>
+    e87b:	84 c0                	test   al,al
+    e87d:	75 31                	jne    e8b0 <_Z6printfItJttEEvPKcT_DpT0_+0xf0>
+    e87f:	0f be 44 3d 02       	movsx  eax,BYTE PTR [ebp+edi*1+0x2]
+    e884:	8d 77 02             	lea    esi,[edi+0x2]
+    e887:	84 c0                	test   al,al
+    e889:	74 a8                	je     e833 <_Z6printfItJttEEvPKcT_DpT0_+0x73>
+    e88b:	89 f7                	mov    edi,esi
+    e88d:	8d 77 01             	lea    esi,[edi+0x1]
+    e890:	3c 25                	cmp    al,0x25
+    e892:	8d 5c 35 00          	lea    ebx,[ebp+esi*1+0x0]
+    e896:	74 d8                	je     e870 <_Z6printfItJttEEvPKcT_DpT0_+0xb0>
+    e898:	83 ec 0c             	sub    esp,0xc
+    e89b:	50                   	push   eax
+    e89c:	e8 2f d4 ff ff       	call   bcd0 <_Z7putcharc>
+    e8a1:	0f be 03             	movsx  eax,BYTE PTR [ebx]
+    e8a4:	83 c4 10             	add    esp,0x10
+    e8a7:	84 c0                	test   al,al
+    e8a9:	74 88                	je     e833 <_Z6printfItJttEEvPKcT_DpT0_+0x73>
+    e8ab:	89 f7                	mov    edi,esi
+    e8ad:	eb de                	jmp    e88d <_Z6printfItJttEEvPKcT_DpT0_+0xcd>
+    e8af:	90                   	nop
+    e8b0:	83 ec 08             	sub    esp,0x8
+    e8b3:	8d 44 24 24          	lea    eax,[esp+0x24]
+    e8b7:	50                   	push   eax
+    e8b8:	53                   	push   ebx
+    e8b9:	e8 f2 fd ff ff       	call   e6b0 <_Z14_manage_escapeItEiPKcPT_>
+    e8be:	01 c6                	add    esi,eax
+    e8c0:	0f b7 44 24 14       	movzx  eax,WORD PTR [esp+0x14]
+    e8c5:	01 f5                	add    ebp,esi
+    e8c7:	66 89 44 24 2e       	mov    WORD PTR [esp+0x2e],ax
+    e8cc:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    e8d0:	83 c4 10             	add    esp,0x10
+    e8d3:	84 c0                	test   al,al
+    e8d5:	0f 84 58 ff ff ff    	je     e833 <_Z6printfItJttEEvPKcT_DpT0_+0x73>
+    e8db:	31 f6                	xor    esi,esi
+    e8dd:	3c 25                	cmp    al,0x25
+    e8df:	8d 5e 01             	lea    ebx,[esi+0x1]
+    e8e2:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    e8e6:	75 34                	jne    e91c <_Z6printfItJttEEvPKcT_DpT0_+0x15c>
+    e8e8:	90                   	nop
+    e8e9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    e8f0:	0f b6 07             	movzx  eax,BYTE PTR [edi]
+    e8f3:	3c 25                	cmp    al,0x25
+    e8f5:	0f 84 c5 00 00 00    	je     e9c0 <_Z6printfItJttEEvPKcT_DpT0_+0x200>
+    e8fb:	84 c0                	test   al,al
+    e8fd:	75 71                	jne    e970 <_Z6printfItJttEEvPKcT_DpT0_+0x1b0>
+    e8ff:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    e904:	8d 5e 02             	lea    ebx,[esi+0x2]
+    e907:	84 c0                	test   al,al
+    e909:	0f 84 24 ff ff ff    	je     e833 <_Z6printfItJttEEvPKcT_DpT0_+0x73>
+    e90f:	89 de                	mov    esi,ebx
+    e911:	8d 5e 01             	lea    ebx,[esi+0x1]
+    e914:	3c 25                	cmp    al,0x25
+    e916:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    e91a:	74 d4                	je     e8f0 <_Z6printfItJttEEvPKcT_DpT0_+0x130>
+    e91c:	83 ec 0c             	sub    esp,0xc
+    e91f:	50                   	push   eax
+    e920:	e8 ab d3 ff ff       	call   bcd0 <_Z7putcharc>
+    e925:	0f be 07             	movsx  eax,BYTE PTR [edi]
+    e928:	83 c4 10             	add    esp,0x10
+    e92b:	84 c0                	test   al,al
+    e92d:	0f 84 00 ff ff ff    	je     e833 <_Z6printfItJttEEvPKcT_DpT0_+0x73>
+    e933:	89 de                	mov    esi,ebx
+    e935:	eb da                	jmp    e911 <_Z6printfItJttEEvPKcT_DpT0_+0x151>
+    e937:	89 f6                	mov    esi,esi
+    e939:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    e940:	89 4c 24 08          	mov    DWORD PTR [esp+0x8],ecx
+    e944:	83 ec 0c             	sub    esp,0xc
+    e947:	6a 25                	push   0x25
+    e949:	e8 82 d3 ff ff       	call   bcd0 <_Z7putcharc>
+    e94e:	8b 4c 24 18          	mov    ecx,DWORD PTR [esp+0x18]
+    e952:	83 c4 10             	add    esp,0x10
+    e955:	0f be 44 0d 02       	movsx  eax,BYTE PTR [ebp+ecx*1+0x2]
+    e95a:	8d 79 02             	lea    edi,[ecx+0x2]
+    e95d:	84 c0                	test   al,al
+    e95f:	0f 84 ce fe ff ff    	je     e833 <_Z6printfItJttEEvPKcT_DpT0_+0x73>
+    e965:	89 f9                	mov    ecx,edi
+    e967:	e9 a9 fe ff ff       	jmp    e815 <_Z6printfItJttEEvPKcT_DpT0_+0x55>
+    e96c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    e970:	83 ec 08             	sub    esp,0x8
+    e973:	8d 44 24 26          	lea    eax,[esp+0x26]
+    e977:	50                   	push   eax
+    e978:	57                   	push   edi
+    e979:	e8 32 fd ff ff       	call   e6b0 <_Z14_manage_escapeItEiPKcPT_>
+    e97e:	01 c3                	add    ebx,eax
+    e980:	01 dd                	add    ebp,ebx
+    e982:	89 2c 24             	mov    DWORD PTR [esp],ebp
+    e985:	e8 46 d4 ff ff       	call   bdd0 <_Z6printfPKc>
+    e98a:	83 c4 10             	add    esp,0x10
+    e98d:	83 c4 2c             	add    esp,0x2c
+    e990:	5b                   	pop    ebx
+    e991:	5e                   	pop    esi
+    e992:	5f                   	pop    edi
+    e993:	5d                   	pop    ebp
+    e994:	c3                   	ret    
+    e995:	8d 76 00             	lea    esi,[esi+0x0]
+    e998:	83 ec 0c             	sub    esp,0xc
+    e99b:	8d 77 02             	lea    esi,[edi+0x2]
+    e99e:	6a 25                	push   0x25
+    e9a0:	e8 2b d3 ff ff       	call   bcd0 <_Z7putcharc>
+    e9a5:	0f be 44 3d 02       	movsx  eax,BYTE PTR [ebp+edi*1+0x2]
+    e9aa:	83 c4 10             	add    esp,0x10
+    e9ad:	84 c0                	test   al,al
+    e9af:	0f 84 7e fe ff ff    	je     e833 <_Z6printfItJttEEvPKcT_DpT0_+0x73>
+    e9b5:	89 f7                	mov    edi,esi
+    e9b7:	e9 d1 fe ff ff       	jmp    e88d <_Z6printfItJttEEvPKcT_DpT0_+0xcd>
+    e9bc:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    e9c0:	83 ec 0c             	sub    esp,0xc
+    e9c3:	8d 5e 02             	lea    ebx,[esi+0x2]
+    e9c6:	6a 25                	push   0x25
+    e9c8:	e8 03 d3 ff ff       	call   bcd0 <_Z7putcharc>
+    e9cd:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    e9d2:	83 c4 10             	add    esp,0x10
+    e9d5:	84 c0                	test   al,al
+    e9d7:	0f 84 56 fe ff ff    	je     e833 <_Z6printfItJttEEvPKcT_DpT0_+0x73>
+    e9dd:	89 de                	mov    esi,ebx
+    e9df:	e9 2d ff ff ff       	jmp    e911 <_Z6printfItJttEEvPKcT_DpT0_+0x151>
+
+Disassembly of section .text._Z6printfIPKcJiS1_tttEEvS1_T_DpT0_:
+
+0000e9f0 <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_>:
+    e9f0:	55                   	push   ebp
+    e9f1:	57                   	push   edi
+    e9f2:	31 ed                	xor    ebp,ebp
+    e9f4:	56                   	push   esi
+    e9f5:	53                   	push   ebx
+    e9f6:	83 ec 2c             	sub    esp,0x2c
+    e9f9:	8b 44 24 50          	mov    eax,DWORD PTR [esp+0x50]
+    e9fd:	8b 5c 24 40          	mov    ebx,DWORD PTR [esp+0x40]
+    ea01:	89 44 24 04          	mov    DWORD PTR [esp+0x4],eax
+    ea05:	8b 44 24 54          	mov    eax,DWORD PTR [esp+0x54]
+    ea09:	89 44 24 08          	mov    DWORD PTR [esp+0x8],eax
+    ea0d:	8b 44 24 58          	mov    eax,DWORD PTR [esp+0x58]
+    ea11:	89 44 24 0c          	mov    DWORD PTR [esp+0xc],eax
+    ea15:	0f be 03             	movsx  eax,BYTE PTR [ebx]
+    ea18:	84 c0                	test   al,al
+    ea1a:	74 4e                	je     ea6a <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0x7a>
+    ea1c:	8d 7d 01             	lea    edi,[ebp+0x1]
+    ea1f:	3c 25                	cmp    al,0x25
+    ea21:	8d 34 3b             	lea    esi,[ebx+edi*1]
+    ea24:	75 31                	jne    ea57 <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0x67>
+    ea26:	8d 76 00             	lea    esi,[esi+0x0]
+    ea29:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    ea30:	0f b6 06             	movzx  eax,BYTE PTR [esi]
+    ea33:	3c 25                	cmp    al,0x25
+    ea35:	0f 84 45 01 00 00    	je     eb80 <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0x190>
+    ea3b:	84 c0                	test   al,al
+    ea3d:	75 39                	jne    ea78 <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0x88>
+    ea3f:	0f be 44 2b 02       	movsx  eax,BYTE PTR [ebx+ebp*1+0x2]
+    ea44:	8d 7d 02             	lea    edi,[ebp+0x2]
+    ea47:	84 c0                	test   al,al
+    ea49:	74 1f                	je     ea6a <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0x7a>
+    ea4b:	89 fd                	mov    ebp,edi
+    ea4d:	8d 7d 01             	lea    edi,[ebp+0x1]
+    ea50:	3c 25                	cmp    al,0x25
+    ea52:	8d 34 3b             	lea    esi,[ebx+edi*1]
+    ea55:	74 d9                	je     ea30 <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0x40>
+    ea57:	83 ec 0c             	sub    esp,0xc
+    ea5a:	50                   	push   eax
+    ea5b:	e8 70 d2 ff ff       	call   bcd0 <_Z7putcharc>
+    ea60:	0f be 06             	movsx  eax,BYTE PTR [esi]
+    ea63:	83 c4 10             	add    esp,0x10
+    ea66:	84 c0                	test   al,al
+    ea68:	75 e1                	jne    ea4b <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0x5b>
+    ea6a:	83 c4 2c             	add    esp,0x2c
+    ea6d:	5b                   	pop    ebx
+    ea6e:	5e                   	pop    esi
+    ea6f:	5f                   	pop    edi
+    ea70:	5d                   	pop    ebp
+    ea71:	c3                   	ret    
+    ea72:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    ea78:	83 ec 08             	sub    esp,0x8
+    ea7b:	8d 44 24 4c          	lea    eax,[esp+0x4c]
+    ea7f:	50                   	push   eax
+    ea80:	56                   	push   esi
+    ea81:	e8 4a e4 ff ff       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    ea86:	01 c7                	add    edi,eax
+    ea88:	8b 44 24 58          	mov    eax,DWORD PTR [esp+0x58]
+    ea8c:	01 fb                	add    ebx,edi
+    ea8e:	31 ff                	xor    edi,edi
+    ea90:	89 44 24 28          	mov    DWORD PTR [esp+0x28],eax
+    ea94:	0f be 03             	movsx  eax,BYTE PTR [ebx]
+    ea97:	83 c4 10             	add    esp,0x10
+    ea9a:	84 c0                	test   al,al
+    ea9c:	74 cc                	je     ea6a <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0x7a>
+    ea9e:	8d 6f 01             	lea    ebp,[edi+0x1]
+    eaa1:	3c 25                	cmp    al,0x25
+    eaa3:	8d 34 2b             	lea    esi,[ebx+ebp*1]
+    eaa6:	75 2f                	jne    ead7 <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0xe7>
+    eaa8:	90                   	nop
+    eaa9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    eab0:	0f b6 06             	movzx  eax,BYTE PTR [esi]
+    eab3:	3c 25                	cmp    al,0x25
+    eab5:	0f 84 25 01 00 00    	je     ebe0 <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0x1f0>
+    eabb:	84 c0                	test   al,al
+    eabd:	75 31                	jne    eaf0 <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0x100>
+    eabf:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
+    eac4:	8d 6f 02             	lea    ebp,[edi+0x2]
+    eac7:	84 c0                	test   al,al
+    eac9:	74 9f                	je     ea6a <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0x7a>
+    eacb:	89 ef                	mov    edi,ebp
+    eacd:	8d 6f 01             	lea    ebp,[edi+0x1]
+    ead0:	3c 25                	cmp    al,0x25
+    ead2:	8d 34 2b             	lea    esi,[ebx+ebp*1]
+    ead5:	74 d9                	je     eab0 <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0xc0>
+    ead7:	83 ec 0c             	sub    esp,0xc
+    eada:	50                   	push   eax
+    eadb:	e8 f0 d1 ff ff       	call   bcd0 <_Z7putcharc>
+    eae0:	0f be 06             	movsx  eax,BYTE PTR [esi]
+    eae3:	83 c4 10             	add    esp,0x10
+    eae6:	84 c0                	test   al,al
+    eae8:	74 80                	je     ea6a <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0x7a>
+    eaea:	89 ef                	mov    edi,ebp
+    eaec:	eb df                	jmp    eacd <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0xdd>
+    eaee:	66 90                	xchg   ax,ax
+    eaf0:	83 ec 08             	sub    esp,0x8
+    eaf3:	8d 44 24 20          	lea    eax,[esp+0x20]
+    eaf7:	50                   	push   eax
+    eaf8:	56                   	push   esi
+    eaf9:	e8 d2 e4 ff ff       	call   cfd0 <_Z14_manage_escapeIiEiPKcPT_>
+    eafe:	01 c5                	add    ebp,eax
+    eb00:	8b 44 24 5c          	mov    eax,DWORD PTR [esp+0x5c]
+    eb04:	01 dd                	add    ebp,ebx
+    eb06:	89 44 24 2c          	mov    DWORD PTR [esp+0x2c],eax
+    eb0a:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    eb0e:	83 c4 10             	add    esp,0x10
+    eb11:	84 c0                	test   al,al
+    eb13:	0f 84 51 ff ff ff    	je     ea6a <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0x7a>
+    eb19:	31 d2                	xor    edx,edx
+    eb1b:	3c 25                	cmp    al,0x25
+    eb1d:	89 d6                	mov    esi,edx
+    eb1f:	8d 7e 01             	lea    edi,[esi+0x1]
+    eb22:	8d 5c 3d 00          	lea    ebx,[ebp+edi*1+0x0]
+    eb26:	75 34                	jne    eb5c <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0x16c>
+    eb28:	90                   	nop
+    eb29:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    eb30:	0f b6 03             	movzx  eax,BYTE PTR [ebx]
+    eb33:	3c 25                	cmp    al,0x25
+    eb35:	0f 84 cd 00 00 00    	je     ec08 <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0x218>
+    eb3b:	84 c0                	test   al,al
+    eb3d:	75 69                	jne    eba8 <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0x1b8>
+    eb3f:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    eb44:	8d 7e 02             	lea    edi,[esi+0x2]
+    eb47:	84 c0                	test   al,al
+    eb49:	0f 84 1b ff ff ff    	je     ea6a <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0x7a>
+    eb4f:	89 fe                	mov    esi,edi
+    eb51:	8d 7e 01             	lea    edi,[esi+0x1]
+    eb54:	3c 25                	cmp    al,0x25
+    eb56:	8d 5c 3d 00          	lea    ebx,[ebp+edi*1+0x0]
+    eb5a:	74 d4                	je     eb30 <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0x140>
+    eb5c:	83 ec 0c             	sub    esp,0xc
+    eb5f:	50                   	push   eax
+    eb60:	e8 6b d1 ff ff       	call   bcd0 <_Z7putcharc>
+    eb65:	0f be 03             	movsx  eax,BYTE PTR [ebx]
+    eb68:	83 c4 10             	add    esp,0x10
+    eb6b:	84 c0                	test   al,al
+    eb6d:	0f 84 f7 fe ff ff    	je     ea6a <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0x7a>
+    eb73:	89 fe                	mov    esi,edi
+    eb75:	eb da                	jmp    eb51 <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0x161>
+    eb77:	89 f6                	mov    esi,esi
+    eb79:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    eb80:	83 ec 0c             	sub    esp,0xc
+    eb83:	8d 7d 02             	lea    edi,[ebp+0x2]
+    eb86:	6a 25                	push   0x25
+    eb88:	e8 43 d1 ff ff       	call   bcd0 <_Z7putcharc>
+    eb8d:	0f be 44 2b 02       	movsx  eax,BYTE PTR [ebx+ebp*1+0x2]
+    eb92:	83 c4 10             	add    esp,0x10
+    eb95:	84 c0                	test   al,al
+    eb97:	0f 84 cd fe ff ff    	je     ea6a <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0x7a>
+    eb9d:	89 fd                	mov    ebp,edi
+    eb9f:	e9 a9 fe ff ff       	jmp    ea4d <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0x5d>
+    eba4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    eba8:	83 ec 08             	sub    esp,0x8
+    ebab:	8d 44 24 24          	lea    eax,[esp+0x24]
+    ebaf:	50                   	push   eax
+    ebb0:	53                   	push   ebx
+    ebb1:	e8 1a e3 ff ff       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    ebb6:	0f b7 74 24 1c       	movzx  esi,WORD PTR [esp+0x1c]
+    ebbb:	8d 14 38             	lea    edx,[eax+edi*1]
+    ebbe:	01 ea                	add    edx,ebp
+    ebc0:	56                   	push   esi
+    ebc1:	0f b7 5c 24 1c       	movzx  ebx,WORD PTR [esp+0x1c]
+    ebc6:	53                   	push   ebx
+    ebc7:	0f b7 4c 24 1c       	movzx  ecx,WORD PTR [esp+0x1c]
+    ebcc:	51                   	push   ecx
+    ebcd:	52                   	push   edx
+    ebce:	e8 ed fb ff ff       	call   e7c0 <_Z6printfItJttEEvPKcT_DpT0_>
+    ebd3:	83 c4 20             	add    esp,0x20
+    ebd6:	83 c4 2c             	add    esp,0x2c
+    ebd9:	5b                   	pop    ebx
+    ebda:	5e                   	pop    esi
+    ebdb:	5f                   	pop    edi
+    ebdc:	5d                   	pop    ebp
+    ebdd:	c3                   	ret    
+    ebde:	66 90                	xchg   ax,ax
+    ebe0:	83 ec 0c             	sub    esp,0xc
+    ebe3:	8d 6f 02             	lea    ebp,[edi+0x2]
+    ebe6:	6a 25                	push   0x25
+    ebe8:	e8 e3 d0 ff ff       	call   bcd0 <_Z7putcharc>
+    ebed:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
+    ebf2:	83 c4 10             	add    esp,0x10
+    ebf5:	84 c0                	test   al,al
+    ebf7:	0f 84 6d fe ff ff    	je     ea6a <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0x7a>
+    ebfd:	89 ef                	mov    edi,ebp
+    ebff:	e9 c9 fe ff ff       	jmp    eacd <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0xdd>
+    ec04:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    ec08:	83 ec 0c             	sub    esp,0xc
+    ec0b:	8d 7e 02             	lea    edi,[esi+0x2]
+    ec0e:	6a 25                	push   0x25
+    ec10:	e8 bb d0 ff ff       	call   bcd0 <_Z7putcharc>
+    ec15:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    ec1a:	83 c4 10             	add    esp,0x10
+    ec1d:	84 c0                	test   al,al
+    ec1f:	0f 84 45 fe ff ff    	je     ea6a <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0x7a>
+    ec25:	89 fe                	mov    esi,edi
+    ec27:	e9 25 ff ff ff       	jmp    eb51 <_Z6printfIPKcJiS1_tttEEvS1_T_DpT0_+0x161>
+
+Disassembly of section .text._Z6printfIPKcJttttEEvS1_T_DpT0_:
+
+0000ec30 <_Z6printfIPKcJttttEEvS1_T_DpT0_>:
+    ec30:	55                   	push   ebp
+    ec31:	57                   	push   edi
+    ec32:	31 ff                	xor    edi,edi
+    ec34:	56                   	push   esi
+    ec35:	53                   	push   ebx
+    ec36:	83 ec 2c             	sub    esp,0x2c
+    ec39:	8b 44 24 48          	mov    eax,DWORD PTR [esp+0x48]
+    ec3d:	8b 6c 24 40          	mov    ebp,DWORD PTR [esp+0x40]
+    ec41:	89 04 24             	mov    DWORD PTR [esp],eax
+    ec44:	8b 44 24 4c          	mov    eax,DWORD PTR [esp+0x4c]
+    ec48:	89 44 24 04          	mov    DWORD PTR [esp+0x4],eax
+    ec4c:	8b 44 24 50          	mov    eax,DWORD PTR [esp+0x50]
+    ec50:	89 44 24 08          	mov    DWORD PTR [esp+0x8],eax
+    ec54:	8b 44 24 54          	mov    eax,DWORD PTR [esp+0x54]
+    ec58:	89 44 24 0c          	mov    DWORD PTR [esp+0xc],eax
+    ec5c:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    ec60:	84 c0                	test   al,al
+    ec62:	74 47                	je     ecab <_Z6printfIPKcJttttEEvS1_T_DpT0_+0x7b>
+    ec64:	8d 5f 01             	lea    ebx,[edi+0x1]
+    ec67:	3c 25                	cmp    al,0x25
+    ec69:	8d 74 1d 00          	lea    esi,[ebp+ebx*1+0x0]
+    ec6d:	75 29                	jne    ec98 <_Z6printfIPKcJttttEEvS1_T_DpT0_+0x68>
+    ec6f:	90                   	nop
+    ec70:	0f b6 06             	movzx  eax,BYTE PTR [esi]
+    ec73:	3c 25                	cmp    al,0x25
+    ec75:	0f 84 15 01 00 00    	je     ed90 <_Z6printfIPKcJttttEEvS1_T_DpT0_+0x160>
+    ec7b:	84 c0                	test   al,al
+    ec7d:	75 39                	jne    ecb8 <_Z6printfIPKcJttttEEvS1_T_DpT0_+0x88>
+    ec7f:	0f be 44 3d 02       	movsx  eax,BYTE PTR [ebp+edi*1+0x2]
+    ec84:	8d 5f 02             	lea    ebx,[edi+0x2]
+    ec87:	84 c0                	test   al,al
+    ec89:	74 20                	je     ecab <_Z6printfIPKcJttttEEvS1_T_DpT0_+0x7b>
+    ec8b:	89 df                	mov    edi,ebx
+    ec8d:	8d 5f 01             	lea    ebx,[edi+0x1]
+    ec90:	3c 25                	cmp    al,0x25
+    ec92:	8d 74 1d 00          	lea    esi,[ebp+ebx*1+0x0]
+    ec96:	74 d8                	je     ec70 <_Z6printfIPKcJttttEEvS1_T_DpT0_+0x40>
+    ec98:	83 ec 0c             	sub    esp,0xc
+    ec9b:	50                   	push   eax
+    ec9c:	e8 2f d0 ff ff       	call   bcd0 <_Z7putcharc>
+    eca1:	0f be 06             	movsx  eax,BYTE PTR [esi]
+    eca4:	83 c4 10             	add    esp,0x10
+    eca7:	84 c0                	test   al,al
+    eca9:	75 e0                	jne    ec8b <_Z6printfIPKcJttttEEvS1_T_DpT0_+0x5b>
+    ecab:	83 c4 2c             	add    esp,0x2c
+    ecae:	5b                   	pop    ebx
+    ecaf:	5e                   	pop    esi
+    ecb0:	5f                   	pop    edi
+    ecb1:	5d                   	pop    ebp
+    ecb2:	c3                   	ret    
+    ecb3:	90                   	nop
+    ecb4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    ecb8:	83 ec 08             	sub    esp,0x8
+    ecbb:	8d 44 24 4c          	lea    eax,[esp+0x4c]
+    ecbf:	50                   	push   eax
+    ecc0:	56                   	push   esi
+    ecc1:	e8 0a e2 ff ff       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    ecc6:	01 c3                	add    ebx,eax
+    ecc8:	0f b7 44 24 10       	movzx  eax,WORD PTR [esp+0x10]
+    eccd:	0f b7 4c 24 18       	movzx  ecx,WORD PTR [esp+0x18]
+    ecd2:	01 eb                	add    ebx,ebp
+    ecd4:	0f b7 54 24 14       	movzx  edx,WORD PTR [esp+0x14]
+    ecd9:	0f b7 74 24 1c       	movzx  esi,WORD PTR [esp+0x1c]
+    ecde:	66 89 44 24 2e       	mov    WORD PTR [esp+0x2e],ax
+    ece3:	0f be 03             	movsx  eax,BYTE PTR [ebx]
+    ece6:	89 4c 24 18          	mov    DWORD PTR [esp+0x18],ecx
+    ecea:	89 54 24 14          	mov    DWORD PTR [esp+0x14],edx
+    ecee:	83 c4 10             	add    esp,0x10
+    ecf1:	84 c0                	test   al,al
+    ecf3:	74 b6                	je     ecab <_Z6printfIPKcJttttEEvS1_T_DpT0_+0x7b>
+    ecf5:	31 d2                	xor    edx,edx
+    ecf7:	89 34 24             	mov    DWORD PTR [esp],esi
+    ecfa:	3c 25                	cmp    al,0x25
+    ecfc:	89 d7                	mov    edi,edx
+    ecfe:	89 de                	mov    esi,ebx
+    ed00:	8d 6f 01             	lea    ebp,[edi+0x1]
+    ed03:	8d 1c 2e             	lea    ebx,[esi+ebp*1]
+    ed06:	75 2f                	jne    ed37 <_Z6printfIPKcJttttEEvS1_T_DpT0_+0x107>
+    ed08:	90                   	nop
+    ed09:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    ed10:	0f b6 03             	movzx  eax,BYTE PTR [ebx]
+    ed13:	3c 25                	cmp    al,0x25
+    ed15:	0f 84 9d 00 00 00    	je     edb8 <_Z6printfIPKcJttttEEvS1_T_DpT0_+0x188>
+    ed1b:	84 c0                	test   al,al
+    ed1d:	75 39                	jne    ed58 <_Z6printfIPKcJttttEEvS1_T_DpT0_+0x128>
+    ed1f:	0f be 44 3e 02       	movsx  eax,BYTE PTR [esi+edi*1+0x2]
+    ed24:	8d 6f 02             	lea    ebp,[edi+0x2]
+    ed27:	84 c0                	test   al,al
+    ed29:	74 80                	je     ecab <_Z6printfIPKcJttttEEvS1_T_DpT0_+0x7b>
+    ed2b:	89 ef                	mov    edi,ebp
+    ed2d:	8d 6f 01             	lea    ebp,[edi+0x1]
+    ed30:	3c 25                	cmp    al,0x25
+    ed32:	8d 1c 2e             	lea    ebx,[esi+ebp*1]
+    ed35:	74 d9                	je     ed10 <_Z6printfIPKcJttttEEvS1_T_DpT0_+0xe0>
+    ed37:	83 ec 0c             	sub    esp,0xc
+    ed3a:	50                   	push   eax
+    ed3b:	e8 90 cf ff ff       	call   bcd0 <_Z7putcharc>
+    ed40:	0f be 03             	movsx  eax,BYTE PTR [ebx]
+    ed43:	83 c4 10             	add    esp,0x10
+    ed46:	84 c0                	test   al,al
+    ed48:	0f 84 5d ff ff ff    	je     ecab <_Z6printfIPKcJttttEEvS1_T_DpT0_+0x7b>
+    ed4e:	89 ef                	mov    edi,ebp
+    ed50:	eb db                	jmp    ed2d <_Z6printfIPKcJttttEEvS1_T_DpT0_+0xfd>
+    ed52:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    ed58:	83 ec 08             	sub    esp,0x8
+    ed5b:	89 df                	mov    edi,ebx
+    ed5d:	89 f3                	mov    ebx,esi
+    ed5f:	8b 74 24 08          	mov    esi,DWORD PTR [esp+0x8]
+    ed63:	8d 44 24 26          	lea    eax,[esp+0x26]
+    ed67:	50                   	push   eax
+    ed68:	57                   	push   edi
+    ed69:	e8 42 f9 ff ff       	call   e6b0 <_Z14_manage_escapeItEiPKcPT_>
+    ed6e:	01 c5                	add    ebp,eax
+    ed70:	56                   	push   esi
+    ed71:	ff 74 24 1c          	push   DWORD PTR [esp+0x1c]
+    ed75:	01 eb                	add    ebx,ebp
+    ed77:	ff 74 24 1c          	push   DWORD PTR [esp+0x1c]
+    ed7b:	53                   	push   ebx
+    ed7c:	e8 3f fa ff ff       	call   e7c0 <_Z6printfItJttEEvPKcT_DpT0_>
+    ed81:	83 c4 20             	add    esp,0x20
+    ed84:	83 c4 2c             	add    esp,0x2c
+    ed87:	5b                   	pop    ebx
+    ed88:	5e                   	pop    esi
+    ed89:	5f                   	pop    edi
+    ed8a:	5d                   	pop    ebp
+    ed8b:	c3                   	ret    
+    ed8c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    ed90:	83 ec 0c             	sub    esp,0xc
+    ed93:	8d 5f 02             	lea    ebx,[edi+0x2]
+    ed96:	6a 25                	push   0x25
+    ed98:	e8 33 cf ff ff       	call   bcd0 <_Z7putcharc>
+    ed9d:	0f be 44 3d 02       	movsx  eax,BYTE PTR [ebp+edi*1+0x2]
+    eda2:	83 c4 10             	add    esp,0x10
+    eda5:	84 c0                	test   al,al
+    eda7:	0f 84 fe fe ff ff    	je     ecab <_Z6printfIPKcJttttEEvS1_T_DpT0_+0x7b>
+    edad:	89 df                	mov    edi,ebx
+    edaf:	e9 d9 fe ff ff       	jmp    ec8d <_Z6printfIPKcJttttEEvS1_T_DpT0_+0x5d>
+    edb4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    edb8:	83 ec 0c             	sub    esp,0xc
+    edbb:	8d 6f 02             	lea    ebp,[edi+0x2]
+    edbe:	6a 25                	push   0x25
+    edc0:	e8 0b cf ff ff       	call   bcd0 <_Z7putcharc>
+    edc5:	0f be 44 3e 02       	movsx  eax,BYTE PTR [esi+edi*1+0x2]
+    edca:	83 c4 10             	add    esp,0x10
+    edcd:	84 c0                	test   al,al
+    edcf:	0f 84 d6 fe ff ff    	je     ecab <_Z6printfIPKcJttttEEvS1_T_DpT0_+0x7b>
+    edd5:	89 ef                	mov    edi,ebp
+    edd7:	e9 51 ff ff ff       	jmp    ed2d <_Z6printfIPKcJttttEEvS1_T_DpT0_+0xfd>
+
+Disassembly of section .text._Z6printfIPKcJtEEvS1_T_DpT0_:
+
+0000ede0 <_Z6printfIPKcJtEEvS1_T_DpT0_>:
+    ede0:	55                   	push   ebp
+    ede1:	57                   	push   edi
+    ede2:	56                   	push   esi
+    ede3:	53                   	push   ebx
+    ede4:	31 f6                	xor    esi,esi
+    ede6:	83 ec 2c             	sub    esp,0x2c
+    ede9:	8b 44 24 48          	mov    eax,DWORD PTR [esp+0x48]
+    eded:	8b 6c 24 40          	mov    ebp,DWORD PTR [esp+0x40]
+    edf1:	89 44 24 08          	mov    DWORD PTR [esp+0x8],eax
+    edf5:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    edf9:	84 c0                	test   al,al
+    edfb:	74 4e                	je     ee4b <_Z6printfIPKcJtEEvS1_T_DpT0_+0x6b>
+    edfd:	8d 7e 01             	lea    edi,[esi+0x1]
+    ee00:	3c 25                	cmp    al,0x25
+    ee02:	8d 5c 3d 00          	lea    ebx,[ebp+edi*1+0x0]
+    ee06:	75 30                	jne    ee38 <_Z6printfIPKcJtEEvS1_T_DpT0_+0x58>
+    ee08:	90                   	nop
+    ee09:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    ee10:	0f b6 03             	movzx  eax,BYTE PTR [ebx]
+    ee13:	3c 25                	cmp    al,0x25
+    ee15:	0f 84 05 01 00 00    	je     ef20 <_Z6printfIPKcJtEEvS1_T_DpT0_+0x140>
+    ee1b:	84 c0                	test   al,al
+    ee1d:	75 39                	jne    ee58 <_Z6printfIPKcJtEEvS1_T_DpT0_+0x78>
+    ee1f:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    ee24:	8d 7e 02             	lea    edi,[esi+0x2]
+    ee27:	84 c0                	test   al,al
+    ee29:	74 20                	je     ee4b <_Z6printfIPKcJtEEvS1_T_DpT0_+0x6b>
+    ee2b:	89 fe                	mov    esi,edi
+    ee2d:	8d 7e 01             	lea    edi,[esi+0x1]
+    ee30:	3c 25                	cmp    al,0x25
+    ee32:	8d 5c 3d 00          	lea    ebx,[ebp+edi*1+0x0]
+    ee36:	74 d8                	je     ee10 <_Z6printfIPKcJtEEvS1_T_DpT0_+0x30>
+    ee38:	83 ec 0c             	sub    esp,0xc
+    ee3b:	50                   	push   eax
+    ee3c:	e8 8f ce ff ff       	call   bcd0 <_Z7putcharc>
+    ee41:	0f be 03             	movsx  eax,BYTE PTR [ebx]
+    ee44:	83 c4 10             	add    esp,0x10
+    ee47:	84 c0                	test   al,al
+    ee49:	75 e0                	jne    ee2b <_Z6printfIPKcJtEEvS1_T_DpT0_+0x4b>
+    ee4b:	83 c4 2c             	add    esp,0x2c
+    ee4e:	5b                   	pop    ebx
+    ee4f:	5e                   	pop    esi
+    ee50:	5f                   	pop    edi
+    ee51:	5d                   	pop    ebp
+    ee52:	c3                   	ret    
+    ee53:	90                   	nop
+    ee54:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    ee58:	83 ec 08             	sub    esp,0x8
+    ee5b:	8d 44 24 4c          	lea    eax,[esp+0x4c]
+    ee5f:	50                   	push   eax
+    ee60:	53                   	push   ebx
+    ee61:	e8 6a e0 ff ff       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    ee66:	01 c7                	add    edi,eax
+    ee68:	8b 54 24 18          	mov    edx,DWORD PTR [esp+0x18]
+    ee6c:	01 fd                	add    ebp,edi
+    ee6e:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    ee72:	66 89 54 24 2e       	mov    WORD PTR [esp+0x2e],dx
+    ee77:	83 c4 10             	add    esp,0x10
+    ee7a:	0f b7 da             	movzx  ebx,dx
+    ee7d:	84 c0                	test   al,al
+    ee7f:	74 ca                	je     ee4b <_Z6printfIPKcJtEEvS1_T_DpT0_+0x6b>
+    ee81:	31 c9                	xor    ecx,ecx
+    ee83:	3c 25                	cmp    al,0x25
+    ee85:	8d 79 01             	lea    edi,[ecx+0x1]
+    ee88:	8d 74 3d 00          	lea    esi,[ebp+edi*1+0x0]
+    ee8c:	75 2a                	jne    eeb8 <_Z6printfIPKcJtEEvS1_T_DpT0_+0xd8>
+    ee8e:	66 90                	xchg   ax,ax
+    ee90:	0f b6 06             	movzx  eax,BYTE PTR [esi]
+    ee93:	3c 25                	cmp    al,0x25
+    ee95:	0f 84 ad 00 00 00    	je     ef48 <_Z6printfIPKcJtEEvS1_T_DpT0_+0x168>
+    ee9b:	84 c0                	test   al,al
+    ee9d:	75 31                	jne    eed0 <_Z6printfIPKcJtEEvS1_T_DpT0_+0xf0>
+    ee9f:	0f be 44 0d 02       	movsx  eax,BYTE PTR [ebp+ecx*1+0x2]
+    eea4:	8d 79 02             	lea    edi,[ecx+0x2]
+    eea7:	84 c0                	test   al,al
+    eea9:	74 a0                	je     ee4b <_Z6printfIPKcJtEEvS1_T_DpT0_+0x6b>
+    eeab:	89 f9                	mov    ecx,edi
+    eead:	8d 79 01             	lea    edi,[ecx+0x1]
+    eeb0:	3c 25                	cmp    al,0x25
+    eeb2:	8d 74 3d 00          	lea    esi,[ebp+edi*1+0x0]
+    eeb6:	74 d8                	je     ee90 <_Z6printfIPKcJtEEvS1_T_DpT0_+0xb0>
+    eeb8:	83 ec 0c             	sub    esp,0xc
+    eebb:	50                   	push   eax
+    eebc:	e8 0f ce ff ff       	call   bcd0 <_Z7putcharc>
+    eec1:	0f be 06             	movsx  eax,BYTE PTR [esi]
+    eec4:	83 c4 10             	add    esp,0x10
+    eec7:	84 c0                	test   al,al
+    eec9:	74 80                	je     ee4b <_Z6printfIPKcJtEEvS1_T_DpT0_+0x6b>
+    eecb:	89 f9                	mov    ecx,edi
+    eecd:	eb de                	jmp    eead <_Z6printfIPKcJtEEvS1_T_DpT0_+0xcd>
+    eecf:	90                   	nop
+    eed0:	83 e8 42             	sub    eax,0x42
+    eed3:	3c 36                	cmp    al,0x36
+    eed5:	77 2e                	ja     ef05 <_Z6printfIPKcJtEEvS1_T_DpT0_+0x125>
+    eed7:	0f b6 c0             	movzx  eax,al
+    eeda:	ff 24 85 60 2f 01 00 	jmp    DWORD PTR [eax*4+0x12f60]
+    eee1:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    eee8:	89 4c 24 0c          	mov    DWORD PTR [esp+0xc],ecx
+    eeec:	83 ec 0c             	sub    esp,0xc
+    eeef:	0f be 5c 24 14       	movsx  ebx,BYTE PTR [esp+0x14]
+    eef4:	53                   	push   ebx
+    eef5:	e8 d6 cd ff ff       	call   bcd0 <_Z7putcharc>
+    eefa:	8b 4c 24 1c          	mov    ecx,DWORD PTR [esp+0x1c]
+    eefe:	83 c4 10             	add    esp,0x10
+    ef01:	8d 74 0d 02          	lea    esi,[ebp+ecx*1+0x2]
+    ef05:	83 ec 0c             	sub    esp,0xc
+    ef08:	56                   	push   esi
+    ef09:	e8 c2 ce ff ff       	call   bdd0 <_Z6printfPKc>
+    ef0e:	83 c4 10             	add    esp,0x10
+    ef11:	83 c4 2c             	add    esp,0x2c
+    ef14:	5b                   	pop    ebx
+    ef15:	5e                   	pop    esi
+    ef16:	5f                   	pop    edi
+    ef17:	5d                   	pop    ebp
+    ef18:	c3                   	ret    
+    ef19:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    ef20:	83 ec 0c             	sub    esp,0xc
+    ef23:	8d 7e 02             	lea    edi,[esi+0x2]
+    ef26:	6a 25                	push   0x25
+    ef28:	e8 a3 cd ff ff       	call   bcd0 <_Z7putcharc>
+    ef2d:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    ef32:	83 c4 10             	add    esp,0x10
+    ef35:	84 c0                	test   al,al
+    ef37:	0f 84 0e ff ff ff    	je     ee4b <_Z6printfIPKcJtEEvS1_T_DpT0_+0x6b>
+    ef3d:	89 fe                	mov    esi,edi
+    ef3f:	e9 e9 fe ff ff       	jmp    ee2d <_Z6printfIPKcJtEEvS1_T_DpT0_+0x4d>
+    ef44:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    ef48:	89 4c 24 0c          	mov    DWORD PTR [esp+0xc],ecx
+    ef4c:	83 ec 0c             	sub    esp,0xc
+    ef4f:	6a 25                	push   0x25
+    ef51:	e8 7a cd ff ff       	call   bcd0 <_Z7putcharc>
+    ef56:	8b 4c 24 1c          	mov    ecx,DWORD PTR [esp+0x1c]
+    ef5a:	83 c4 10             	add    esp,0x10
+    ef5d:	0f be 44 0d 02       	movsx  eax,BYTE PTR [ebp+ecx*1+0x2]
+    ef62:	8d 79 02             	lea    edi,[ecx+0x2]
+    ef65:	84 c0                	test   al,al
+    ef67:	0f 84 de fe ff ff    	je     ee4b <_Z6printfIPKcJtEEvS1_T_DpT0_+0x6b>
+    ef6d:	89 f9                	mov    ecx,edi
+    ef6f:	e9 39 ff ff ff       	jmp    eead <_Z6printfIPKcJtEEvS1_T_DpT0_+0xcd>
+    ef74:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    ef78:	89 4c 24 08          	mov    DWORD PTR [esp+0x8],ecx
+    ef7c:	83 ec 0c             	sub    esp,0xc
+    ef7f:	ff 74 24 2a          	push   DWORD PTR [esp+0x2a]
+    ef83:	e8 08 ce ff ff       	call   bd90 <_Z6putstrPc>
+    ef88:	8b 4c 24 18          	mov    ecx,DWORD PTR [esp+0x18]
+    ef8c:	83 c4 10             	add    esp,0x10
+    ef8f:	8d 74 0d 02          	lea    esi,[ebp+ecx*1+0x2]
+    ef93:	e9 6d ff ff ff       	jmp    ef05 <_Z6printfIPKcJtEEvS1_T_DpT0_+0x125>
+    ef98:	90                   	nop
+    ef99:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    efa0:	89 4c 24 08          	mov    DWORD PTR [esp+0x8],ecx
+    efa4:	83 ec 0c             	sub    esp,0xc
+    efa7:	53                   	push   ebx
+    efa8:	e8 73 cd ff ff       	call   bd20 <_Z6putbini>
+    efad:	8b 4c 24 18          	mov    ecx,DWORD PTR [esp+0x18]
+    efb1:	83 c4 10             	add    esp,0x10
+    efb4:	8d 74 0d 02          	lea    esi,[ebp+ecx*1+0x2]
+    efb8:	e9 48 ff ff ff       	jmp    ef05 <_Z6printfIPKcJtEEvS1_T_DpT0_+0x125>
+    efbd:	8d 76 00             	lea    esi,[esi+0x0]
+    efc0:	89 4c 24 08          	mov    DWORD PTR [esp+0x8],ecx
+    efc4:	83 ec 0c             	sub    esp,0xc
+    efc7:	53                   	push   ebx
+    efc8:	e8 43 cd ff ff       	call   bd10 <_Z6putocti>
+    efcd:	8b 4c 24 18          	mov    ecx,DWORD PTR [esp+0x18]
+    efd1:	83 c4 10             	add    esp,0x10
+    efd4:	8d 74 0d 02          	lea    esi,[ebp+ecx*1+0x2]
+    efd8:	e9 28 ff ff ff       	jmp    ef05 <_Z6printfIPKcJtEEvS1_T_DpT0_+0x125>
+    efdd:	8d 76 00             	lea    esi,[esi+0x0]
+    efe0:	89 4c 24 08          	mov    DWORD PTR [esp+0x8],ecx
+    efe4:	83 ec 0c             	sub    esp,0xc
+    efe7:	53                   	push   ebx
+    efe8:	e8 03 cd ff ff       	call   bcf0 <_Z6puthexi>
+    efed:	8b 4c 24 18          	mov    ecx,DWORD PTR [esp+0x18]
+    eff1:	83 c4 10             	add    esp,0x10
+    eff4:	8d 74 0d 02          	lea    esi,[ebp+ecx*1+0x2]
+    eff8:	e9 08 ff ff ff       	jmp    ef05 <_Z6printfIPKcJtEEvS1_T_DpT0_+0x125>
+    effd:	8d 76 00             	lea    esi,[esi+0x0]
+    f000:	89 4c 24 08          	mov    DWORD PTR [esp+0x8],ecx
+    f004:	83 ec 0c             	sub    esp,0xc
+    f007:	53                   	push   ebx
+    f008:	e8 d3 cc ff ff       	call   bce0 <_Z6putdeci>
+    f00d:	8b 4c 24 18          	mov    ecx,DWORD PTR [esp+0x18]
+    f011:	83 c4 10             	add    esp,0x10
+    f014:	8d 74 0d 02          	lea    esi,[ebp+ecx*1+0x2]
+    f018:	e9 e8 fe ff ff       	jmp    ef05 <_Z6printfIPKcJtEEvS1_T_DpT0_+0x125>
+    f01d:	8d 76 00             	lea    esi,[esi+0x0]
+    f020:	89 4c 24 08          	mov    DWORD PTR [esp+0x8],ecx
+    f024:	83 ec 0c             	sub    esp,0xc
+    f027:	68 64 01 01 00       	push   0x10164
+    f02c:	e8 9f cd ff ff       	call   bdd0 <_Z6printfPKc>
+    f031:	58                   	pop    eax
+    f032:	ff 74 24 2a          	push   DWORD PTR [esp+0x2a]
+    f036:	e8 b5 cc ff ff       	call   bcf0 <_Z6puthexi>
+    f03b:	8b 4c 24 18          	mov    ecx,DWORD PTR [esp+0x18]
+    f03f:	83 c4 10             	add    esp,0x10
+    f042:	8d 74 0d 02          	lea    esi,[ebp+ecx*1+0x2]
+    f046:	e9 ba fe ff ff       	jmp    ef05 <_Z6printfIPKcJtEEvS1_T_DpT0_+0x125>
+
+Disassembly of section .text._Z6printfIPKcJiS1_tEEvS1_T_DpT0_:
+
+0000f050 <_Z6printfIPKcJiS1_tEEvS1_T_DpT0_>:
+    f050:	55                   	push   ebp
+    f051:	57                   	push   edi
+    f052:	31 ed                	xor    ebp,ebp
+    f054:	56                   	push   esi
+    f055:	53                   	push   ebx
+    f056:	83 ec 2c             	sub    esp,0x2c
+    f059:	8b 44 24 50          	mov    eax,DWORD PTR [esp+0x50]
+    f05d:	8b 7c 24 40          	mov    edi,DWORD PTR [esp+0x40]
+    f061:	89 44 24 0c          	mov    DWORD PTR [esp+0xc],eax
+    f065:	0f be 07             	movsx  eax,BYTE PTR [edi]
+    f068:	84 c0                	test   al,al
+    f06a:	74 4e                	je     f0ba <_Z6printfIPKcJiS1_tEEvS1_T_DpT0_+0x6a>
+    f06c:	8d 5d 01             	lea    ebx,[ebp+0x1]
+    f06f:	3c 25                	cmp    al,0x25
+    f071:	8d 34 1f             	lea    esi,[edi+ebx*1]
+    f074:	75 31                	jne    f0a7 <_Z6printfIPKcJiS1_tEEvS1_T_DpT0_+0x57>
+    f076:	8d 76 00             	lea    esi,[esi+0x0]
+    f079:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    f080:	0f b6 06             	movzx  eax,BYTE PTR [esi]
+    f083:	3c 25                	cmp    al,0x25
+    f085:	0f 84 f5 00 00 00    	je     f180 <_Z6printfIPKcJiS1_tEEvS1_T_DpT0_+0x130>
+    f08b:	84 c0                	test   al,al
+    f08d:	75 39                	jne    f0c8 <_Z6printfIPKcJiS1_tEEvS1_T_DpT0_+0x78>
+    f08f:	0f be 44 2f 02       	movsx  eax,BYTE PTR [edi+ebp*1+0x2]
+    f094:	8d 5d 02             	lea    ebx,[ebp+0x2]
+    f097:	84 c0                	test   al,al
+    f099:	74 1f                	je     f0ba <_Z6printfIPKcJiS1_tEEvS1_T_DpT0_+0x6a>
+    f09b:	89 dd                	mov    ebp,ebx
+    f09d:	8d 5d 01             	lea    ebx,[ebp+0x1]
+    f0a0:	3c 25                	cmp    al,0x25
+    f0a2:	8d 34 1f             	lea    esi,[edi+ebx*1]
+    f0a5:	74 d9                	je     f080 <_Z6printfIPKcJiS1_tEEvS1_T_DpT0_+0x30>
+    f0a7:	83 ec 0c             	sub    esp,0xc
+    f0aa:	50                   	push   eax
+    f0ab:	e8 20 cc ff ff       	call   bcd0 <_Z7putcharc>
+    f0b0:	0f be 06             	movsx  eax,BYTE PTR [esi]
+    f0b3:	83 c4 10             	add    esp,0x10
+    f0b6:	84 c0                	test   al,al
+    f0b8:	75 e1                	jne    f09b <_Z6printfIPKcJiS1_tEEvS1_T_DpT0_+0x4b>
+    f0ba:	83 c4 2c             	add    esp,0x2c
+    f0bd:	5b                   	pop    ebx
+    f0be:	5e                   	pop    esi
+    f0bf:	5f                   	pop    edi
+    f0c0:	5d                   	pop    ebp
+    f0c1:	c3                   	ret    
+    f0c2:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    f0c8:	83 ec 08             	sub    esp,0x8
+    f0cb:	8d 44 24 4c          	lea    eax,[esp+0x4c]
+    f0cf:	50                   	push   eax
+    f0d0:	56                   	push   esi
+    f0d1:	e8 fa dd ff ff       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    f0d6:	01 c3                	add    ebx,eax
+    f0d8:	8b 44 24 58          	mov    eax,DWORD PTR [esp+0x58]
+    f0dc:	0f b7 54 24 1c       	movzx  edx,WORD PTR [esp+0x1c]
+    f0e1:	01 df                	add    edi,ebx
+    f0e3:	89 44 24 2c          	mov    DWORD PTR [esp+0x2c],eax
+    f0e7:	0f be 07             	movsx  eax,BYTE PTR [edi]
+    f0ea:	89 54 24 1c          	mov    DWORD PTR [esp+0x1c],edx
+    f0ee:	83 c4 10             	add    esp,0x10
+    f0f1:	84 c0                	test   al,al
+    f0f3:	74 c5                	je     f0ba <_Z6printfIPKcJiS1_tEEvS1_T_DpT0_+0x6a>
+    f0f5:	31 db                	xor    ebx,ebx
+    f0f7:	3c 25                	cmp    al,0x25
+    f0f9:	8d 6b 01             	lea    ebp,[ebx+0x1]
+    f0fc:	8d 34 2f             	lea    esi,[edi+ebp*1]
+    f0ff:	75 2e                	jne    f12f <_Z6printfIPKcJiS1_tEEvS1_T_DpT0_+0xdf>
+    f101:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    f108:	0f b6 06             	movzx  eax,BYTE PTR [esi]
+    f10b:	3c 25                	cmp    al,0x25
+    f10d:	0f 84 95 00 00 00    	je     f1a8 <_Z6printfIPKcJiS1_tEEvS1_T_DpT0_+0x158>
+    f113:	84 c0                	test   al,al
+    f115:	75 39                	jne    f150 <_Z6printfIPKcJiS1_tEEvS1_T_DpT0_+0x100>
+    f117:	0f be 44 1f 02       	movsx  eax,BYTE PTR [edi+ebx*1+0x2]
+    f11c:	8d 6b 02             	lea    ebp,[ebx+0x2]
+    f11f:	84 c0                	test   al,al
+    f121:	74 97                	je     f0ba <_Z6printfIPKcJiS1_tEEvS1_T_DpT0_+0x6a>
+    f123:	89 eb                	mov    ebx,ebp
+    f125:	8d 6b 01             	lea    ebp,[ebx+0x1]
+    f128:	3c 25                	cmp    al,0x25
+    f12a:	8d 34 2f             	lea    esi,[edi+ebp*1]
+    f12d:	74 d9                	je     f108 <_Z6printfIPKcJiS1_tEEvS1_T_DpT0_+0xb8>
+    f12f:	83 ec 0c             	sub    esp,0xc
+    f132:	50                   	push   eax
+    f133:	e8 98 cb ff ff       	call   bcd0 <_Z7putcharc>
+    f138:	0f be 06             	movsx  eax,BYTE PTR [esi]
+    f13b:	83 c4 10             	add    esp,0x10
+    f13e:	84 c0                	test   al,al
+    f140:	0f 84 74 ff ff ff    	je     f0ba <_Z6printfIPKcJiS1_tEEvS1_T_DpT0_+0x6a>
+    f146:	89 eb                	mov    ebx,ebp
+    f148:	eb db                	jmp    f125 <_Z6printfIPKcJiS1_tEEvS1_T_DpT0_+0xd5>
+    f14a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    f150:	83 ec 08             	sub    esp,0x8
+    f153:	8d 44 24 24          	lea    eax,[esp+0x24]
+    f157:	50                   	push   eax
+    f158:	56                   	push   esi
+    f159:	e8 72 de ff ff       	call   cfd0 <_Z14_manage_escapeIiEiPKcPT_>
+    f15e:	01 c5                	add    ebp,eax
+    f160:	83 c4 0c             	add    esp,0xc
+    f163:	01 ef                	add    edi,ebp
+    f165:	ff 74 24 10          	push   DWORD PTR [esp+0x10]
+    f169:	ff 74 24 54          	push   DWORD PTR [esp+0x54]
+    f16d:	57                   	push   edi
+    f16e:	e8 6d fc ff ff       	call   ede0 <_Z6printfIPKcJtEEvS1_T_DpT0_>
+    f173:	83 c4 10             	add    esp,0x10
+    f176:	83 c4 2c             	add    esp,0x2c
+    f179:	5b                   	pop    ebx
+    f17a:	5e                   	pop    esi
+    f17b:	5f                   	pop    edi
+    f17c:	5d                   	pop    ebp
+    f17d:	c3                   	ret    
+    f17e:	66 90                	xchg   ax,ax
+    f180:	83 ec 0c             	sub    esp,0xc
+    f183:	8d 5d 02             	lea    ebx,[ebp+0x2]
+    f186:	6a 25                	push   0x25
+    f188:	e8 43 cb ff ff       	call   bcd0 <_Z7putcharc>
+    f18d:	0f be 44 2f 02       	movsx  eax,BYTE PTR [edi+ebp*1+0x2]
+    f192:	83 c4 10             	add    esp,0x10
+    f195:	84 c0                	test   al,al
+    f197:	0f 84 1d ff ff ff    	je     f0ba <_Z6printfIPKcJiS1_tEEvS1_T_DpT0_+0x6a>
+    f19d:	89 dd                	mov    ebp,ebx
+    f19f:	e9 f9 fe ff ff       	jmp    f09d <_Z6printfIPKcJiS1_tEEvS1_T_DpT0_+0x4d>
+    f1a4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    f1a8:	83 ec 0c             	sub    esp,0xc
+    f1ab:	8d 6b 02             	lea    ebp,[ebx+0x2]
+    f1ae:	6a 25                	push   0x25
+    f1b0:	e8 1b cb ff ff       	call   bcd0 <_Z7putcharc>
+    f1b5:	0f be 44 1f 02       	movsx  eax,BYTE PTR [edi+ebx*1+0x2]
+    f1ba:	83 c4 10             	add    esp,0x10
+    f1bd:	84 c0                	test   al,al
+    f1bf:	0f 84 f5 fe ff ff    	je     f0ba <_Z6printfIPKcJiS1_tEEvS1_T_DpT0_+0x6a>
+    f1c5:	89 eb                	mov    ebx,ebp
+    f1c7:	e9 59 ff ff ff       	jmp    f125 <_Z6printfIPKcJiS1_tEEvS1_T_DpT0_+0xd5>
+
+Disassembly of section .text._Z6printfIjJjjEEvPKcT_DpT0_:
+
+0000f1d0 <_Z6printfIjJjjEEvPKcT_DpT0_>:
+    f1d0:	55                   	push   ebp
+    f1d1:	57                   	push   edi
+    f1d2:	56                   	push   esi
+    f1d3:	53                   	push   ebx
+    f1d4:	31 f6                	xor    esi,esi
+    f1d6:	83 ec 1c             	sub    esp,0x1c
+    f1d9:	8b 6c 24 30          	mov    ebp,DWORD PTR [esp+0x30]
+    f1dd:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    f1e1:	84 c0                	test   al,al
+    f1e3:	74 46                	je     f22b <_Z6printfIjJjjEEvPKcT_DpT0_+0x5b>
+    f1e5:	8d 5e 01             	lea    ebx,[esi+0x1]
+    f1e8:	3c 25                	cmp    al,0x25
+    f1ea:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    f1ee:	75 28                	jne    f218 <_Z6printfIjJjjEEvPKcT_DpT0_+0x48>
+    f1f0:	0f b6 07             	movzx  eax,BYTE PTR [edi]
+    f1f3:	3c 25                	cmp    al,0x25
+    f1f5:	0f 84 ed 00 00 00    	je     f2e8 <_Z6printfIjJjjEEvPKcT_DpT0_+0x118>
+    f1fb:	84 c0                	test   al,al
+    f1fd:	75 39                	jne    f238 <_Z6printfIjJjjEEvPKcT_DpT0_+0x68>
+    f1ff:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    f204:	8d 5e 02             	lea    ebx,[esi+0x2]
+    f207:	84 c0                	test   al,al
+    f209:	74 20                	je     f22b <_Z6printfIjJjjEEvPKcT_DpT0_+0x5b>
+    f20b:	89 de                	mov    esi,ebx
+    f20d:	8d 5e 01             	lea    ebx,[esi+0x1]
+    f210:	3c 25                	cmp    al,0x25
+    f212:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    f216:	74 d8                	je     f1f0 <_Z6printfIjJjjEEvPKcT_DpT0_+0x20>
+    f218:	83 ec 0c             	sub    esp,0xc
+    f21b:	50                   	push   eax
+    f21c:	e8 af ca ff ff       	call   bcd0 <_Z7putcharc>
+    f221:	0f be 07             	movsx  eax,BYTE PTR [edi]
+    f224:	83 c4 10             	add    esp,0x10
+    f227:	84 c0                	test   al,al
+    f229:	75 e0                	jne    f20b <_Z6printfIjJjjEEvPKcT_DpT0_+0x3b>
+    f22b:	83 c4 1c             	add    esp,0x1c
+    f22e:	5b                   	pop    ebx
+    f22f:	5e                   	pop    esi
+    f230:	5f                   	pop    edi
+    f231:	5d                   	pop    ebp
+    f232:	c3                   	ret    
+    f233:	90                   	nop
+    f234:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    f238:	83 ec 08             	sub    esp,0x8
+    f23b:	8d 44 24 3c          	lea    eax,[esp+0x3c]
+    f23f:	50                   	push   eax
+    f240:	57                   	push   edi
+    f241:	e8 4a e4 ff ff       	call   d690 <_Z14_manage_escapeIjEiPKcPT_>
+    f246:	01 c3                	add    ebx,eax
+    f248:	8b 44 24 48          	mov    eax,DWORD PTR [esp+0x48]
+    f24c:	01 eb                	add    ebx,ebp
+    f24e:	89 44 24 1c          	mov    DWORD PTR [esp+0x1c],eax
+    f252:	0f be 03             	movsx  eax,BYTE PTR [ebx]
+    f255:	83 c4 10             	add    esp,0x10
+    f258:	84 c0                	test   al,al
+    f25a:	74 cf                	je     f22b <_Z6printfIjJjjEEvPKcT_DpT0_+0x5b>
+    f25c:	31 ff                	xor    edi,edi
+    f25e:	3c 25                	cmp    al,0x25
+    f260:	8d 77 01             	lea    esi,[edi+0x1]
+    f263:	8d 2c 33             	lea    ebp,[ebx+esi*1]
+    f266:	75 30                	jne    f298 <_Z6printfIjJjjEEvPKcT_DpT0_+0xc8>
+    f268:	90                   	nop
+    f269:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    f270:	0f b6 45 00          	movzx  eax,BYTE PTR [ebp+0x0]
+    f274:	3c 25                	cmp    al,0x25
+    f276:	0f 84 94 00 00 00    	je     f310 <_Z6printfIjJjjEEvPKcT_DpT0_+0x140>
+    f27c:	84 c0                	test   al,al
+    f27e:	75 38                	jne    f2b8 <_Z6printfIjJjjEEvPKcT_DpT0_+0xe8>
+    f280:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
+    f285:	8d 77 02             	lea    esi,[edi+0x2]
+    f288:	84 c0                	test   al,al
+    f28a:	74 9f                	je     f22b <_Z6printfIjJjjEEvPKcT_DpT0_+0x5b>
+    f28c:	89 f7                	mov    edi,esi
+    f28e:	8d 77 01             	lea    esi,[edi+0x1]
+    f291:	3c 25                	cmp    al,0x25
+    f293:	8d 2c 33             	lea    ebp,[ebx+esi*1]
+    f296:	74 d8                	je     f270 <_Z6printfIjJjjEEvPKcT_DpT0_+0xa0>
+    f298:	83 ec 0c             	sub    esp,0xc
+    f29b:	50                   	push   eax
+    f29c:	e8 2f ca ff ff       	call   bcd0 <_Z7putcharc>
+    f2a1:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    f2a5:	83 c4 10             	add    esp,0x10
+    f2a8:	84 c0                	test   al,al
+    f2aa:	0f 84 7b ff ff ff    	je     f22b <_Z6printfIjJjjEEvPKcT_DpT0_+0x5b>
+    f2b0:	89 f7                	mov    edi,esi
+    f2b2:	eb da                	jmp    f28e <_Z6printfIjJjjEEvPKcT_DpT0_+0xbe>
+    f2b4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    f2b8:	83 ec 08             	sub    esp,0x8
+    f2bb:	8d 44 24 14          	lea    eax,[esp+0x14]
+    f2bf:	50                   	push   eax
+    f2c0:	55                   	push   ebp
+    f2c1:	e8 ca e3 ff ff       	call   d690 <_Z14_manage_escapeIjEiPKcPT_>
+    f2c6:	5a                   	pop    edx
+    f2c7:	01 c6                	add    esi,eax
+    f2c9:	59                   	pop    ecx
+    f2ca:	01 f3                	add    ebx,esi
+    f2cc:	ff 74 24 44          	push   DWORD PTR [esp+0x44]
+    f2d0:	53                   	push   ebx
+    f2d1:	e8 ba e4 ff ff       	call   d790 <_Z6printfIjJEEvPKcT_DpT0_>
+    f2d6:	83 c4 10             	add    esp,0x10
+    f2d9:	83 c4 1c             	add    esp,0x1c
+    f2dc:	5b                   	pop    ebx
+    f2dd:	5e                   	pop    esi
+    f2de:	5f                   	pop    edi
+    f2df:	5d                   	pop    ebp
+    f2e0:	c3                   	ret    
+    f2e1:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    f2e8:	83 ec 0c             	sub    esp,0xc
+    f2eb:	8d 5e 02             	lea    ebx,[esi+0x2]
+    f2ee:	6a 25                	push   0x25
+    f2f0:	e8 db c9 ff ff       	call   bcd0 <_Z7putcharc>
+    f2f5:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    f2fa:	83 c4 10             	add    esp,0x10
+    f2fd:	84 c0                	test   al,al
+    f2ff:	0f 84 26 ff ff ff    	je     f22b <_Z6printfIjJjjEEvPKcT_DpT0_+0x5b>
+    f305:	89 de                	mov    esi,ebx
+    f307:	e9 01 ff ff ff       	jmp    f20d <_Z6printfIjJjjEEvPKcT_DpT0_+0x3d>
+    f30c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    f310:	83 ec 0c             	sub    esp,0xc
+    f313:	8d 77 02             	lea    esi,[edi+0x2]
+    f316:	6a 25                	push   0x25
+    f318:	e8 b3 c9 ff ff       	call   bcd0 <_Z7putcharc>
+    f31d:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
+    f322:	83 c4 10             	add    esp,0x10
+    f325:	84 c0                	test   al,al
+    f327:	0f 84 fe fe ff ff    	je     f22b <_Z6printfIjJjjEEvPKcT_DpT0_+0x5b>
+    f32d:	89 f7                	mov    edi,esi
+    f32f:	e9 5a ff ff ff       	jmp    f28e <_Z6printfIjJjjEEvPKcT_DpT0_+0xbe>
+
+Disassembly of section .text._Z6printfIPKcJjjjjEEvS1_T_DpT0_:
+
+0000f340 <_Z6printfIPKcJjjjjEEvS1_T_DpT0_>:
+    f340:	55                   	push   ebp
+    f341:	57                   	push   edi
+    f342:	56                   	push   esi
+    f343:	53                   	push   ebx
+    f344:	31 f6                	xor    esi,esi
+    f346:	83 ec 1c             	sub    esp,0x1c
+    f349:	8b 6c 24 30          	mov    ebp,DWORD PTR [esp+0x30]
+    f34d:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    f351:	84 c0                	test   al,al
+    f353:	74 46                	je     f39b <_Z6printfIPKcJjjjjEEvS1_T_DpT0_+0x5b>
+    f355:	8d 5e 01             	lea    ebx,[esi+0x1]
+    f358:	3c 25                	cmp    al,0x25
+    f35a:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    f35e:	75 28                	jne    f388 <_Z6printfIPKcJjjjjEEvS1_T_DpT0_+0x48>
+    f360:	0f b6 07             	movzx  eax,BYTE PTR [edi]
+    f363:	3c 25                	cmp    al,0x25
+    f365:	0f 84 f5 00 00 00    	je     f460 <_Z6printfIPKcJjjjjEEvS1_T_DpT0_+0x120>
+    f36b:	84 c0                	test   al,al
+    f36d:	75 39                	jne    f3a8 <_Z6printfIPKcJjjjjEEvS1_T_DpT0_+0x68>
+    f36f:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    f374:	8d 5e 02             	lea    ebx,[esi+0x2]
+    f377:	84 c0                	test   al,al
+    f379:	74 20                	je     f39b <_Z6printfIPKcJjjjjEEvS1_T_DpT0_+0x5b>
+    f37b:	89 de                	mov    esi,ebx
+    f37d:	8d 5e 01             	lea    ebx,[esi+0x1]
+    f380:	3c 25                	cmp    al,0x25
+    f382:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    f386:	74 d8                	je     f360 <_Z6printfIPKcJjjjjEEvS1_T_DpT0_+0x20>
+    f388:	83 ec 0c             	sub    esp,0xc
+    f38b:	50                   	push   eax
+    f38c:	e8 3f c9 ff ff       	call   bcd0 <_Z7putcharc>
+    f391:	0f be 07             	movsx  eax,BYTE PTR [edi]
+    f394:	83 c4 10             	add    esp,0x10
+    f397:	84 c0                	test   al,al
+    f399:	75 e0                	jne    f37b <_Z6printfIPKcJjjjjEEvS1_T_DpT0_+0x3b>
+    f39b:	83 c4 1c             	add    esp,0x1c
+    f39e:	5b                   	pop    ebx
+    f39f:	5e                   	pop    esi
+    f3a0:	5f                   	pop    edi
+    f3a1:	5d                   	pop    ebp
+    f3a2:	c3                   	ret    
+    f3a3:	90                   	nop
+    f3a4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    f3a8:	83 ec 08             	sub    esp,0x8
+    f3ab:	8d 44 24 3c          	lea    eax,[esp+0x3c]
+    f3af:	50                   	push   eax
+    f3b0:	57                   	push   edi
+    f3b1:	e8 1a db ff ff       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    f3b6:	01 c3                	add    ebx,eax
+    f3b8:	8b 44 24 48          	mov    eax,DWORD PTR [esp+0x48]
+    f3bc:	01 eb                	add    ebx,ebp
+    f3be:	89 44 24 1c          	mov    DWORD PTR [esp+0x1c],eax
+    f3c2:	0f be 03             	movsx  eax,BYTE PTR [ebx]
+    f3c5:	83 c4 10             	add    esp,0x10
+    f3c8:	84 c0                	test   al,al
+    f3ca:	74 cf                	je     f39b <_Z6printfIPKcJjjjjEEvS1_T_DpT0_+0x5b>
+    f3cc:	31 ff                	xor    edi,edi
+    f3ce:	3c 25                	cmp    al,0x25
+    f3d0:	8d 77 01             	lea    esi,[edi+0x1]
+    f3d3:	8d 2c 33             	lea    ebp,[ebx+esi*1]
+    f3d6:	75 30                	jne    f408 <_Z6printfIPKcJjjjjEEvS1_T_DpT0_+0xc8>
+    f3d8:	90                   	nop
+    f3d9:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    f3e0:	0f b6 45 00          	movzx  eax,BYTE PTR [ebp+0x0]
+    f3e4:	3c 25                	cmp    al,0x25
+    f3e6:	0f 84 9c 00 00 00    	je     f488 <_Z6printfIPKcJjjjjEEvS1_T_DpT0_+0x148>
+    f3ec:	84 c0                	test   al,al
+    f3ee:	75 38                	jne    f428 <_Z6printfIPKcJjjjjEEvS1_T_DpT0_+0xe8>
+    f3f0:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
+    f3f5:	8d 77 02             	lea    esi,[edi+0x2]
+    f3f8:	84 c0                	test   al,al
+    f3fa:	74 9f                	je     f39b <_Z6printfIPKcJjjjjEEvS1_T_DpT0_+0x5b>
+    f3fc:	89 f7                	mov    edi,esi
+    f3fe:	8d 77 01             	lea    esi,[edi+0x1]
+    f401:	3c 25                	cmp    al,0x25
+    f403:	8d 2c 33             	lea    ebp,[ebx+esi*1]
+    f406:	74 d8                	je     f3e0 <_Z6printfIPKcJjjjjEEvS1_T_DpT0_+0xa0>
+    f408:	83 ec 0c             	sub    esp,0xc
+    f40b:	50                   	push   eax
+    f40c:	e8 bf c8 ff ff       	call   bcd0 <_Z7putcharc>
+    f411:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    f415:	83 c4 10             	add    esp,0x10
+    f418:	84 c0                	test   al,al
+    f41a:	0f 84 7b ff ff ff    	je     f39b <_Z6printfIPKcJjjjjEEvS1_T_DpT0_+0x5b>
+    f420:	89 f7                	mov    edi,esi
+    f422:	eb da                	jmp    f3fe <_Z6printfIPKcJjjjjEEvS1_T_DpT0_+0xbe>
+    f424:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    f428:	83 ec 08             	sub    esp,0x8
+    f42b:	8d 44 24 14          	lea    eax,[esp+0x14]
+    f42f:	50                   	push   eax
+    f430:	55                   	push   ebp
+    f431:	e8 5a e2 ff ff       	call   d690 <_Z14_manage_escapeIjEiPKcPT_>
+    f436:	01 c6                	add    esi,eax
+    f438:	ff 74 24 54          	push   DWORD PTR [esp+0x54]
+    f43c:	ff 74 24 54          	push   DWORD PTR [esp+0x54]
+    f440:	01 f3                	add    ebx,esi
+    f442:	ff 74 24 54          	push   DWORD PTR [esp+0x54]
+    f446:	53                   	push   ebx
+    f447:	e8 84 fd ff ff       	call   f1d0 <_Z6printfIjJjjEEvPKcT_DpT0_>
+    f44c:	83 c4 20             	add    esp,0x20
+    f44f:	83 c4 1c             	add    esp,0x1c
+    f452:	5b                   	pop    ebx
+    f453:	5e                   	pop    esi
+    f454:	5f                   	pop    edi
+    f455:	5d                   	pop    ebp
+    f456:	c3                   	ret    
+    f457:	89 f6                	mov    esi,esi
+    f459:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    f460:	83 ec 0c             	sub    esp,0xc
+    f463:	8d 5e 02             	lea    ebx,[esi+0x2]
+    f466:	6a 25                	push   0x25
+    f468:	e8 63 c8 ff ff       	call   bcd0 <_Z7putcharc>
+    f46d:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    f472:	83 c4 10             	add    esp,0x10
+    f475:	84 c0                	test   al,al
+    f477:	0f 84 1e ff ff ff    	je     f39b <_Z6printfIPKcJjjjjEEvS1_T_DpT0_+0x5b>
+    f47d:	89 de                	mov    esi,ebx
+    f47f:	e9 f9 fe ff ff       	jmp    f37d <_Z6printfIPKcJjjjjEEvS1_T_DpT0_+0x3d>
+    f484:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    f488:	83 ec 0c             	sub    esp,0xc
+    f48b:	8d 77 02             	lea    esi,[edi+0x2]
+    f48e:	6a 25                	push   0x25
+    f490:	e8 3b c8 ff ff       	call   bcd0 <_Z7putcharc>
+    f495:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
+    f49a:	83 c4 10             	add    esp,0x10
+    f49d:	84 c0                	test   al,al
+    f49f:	0f 84 f6 fe ff ff    	je     f39b <_Z6printfIPKcJjjjjEEvS1_T_DpT0_+0x5b>
+    f4a5:	89 f7                	mov    edi,esi
+    f4a7:	e9 52 ff ff ff       	jmp    f3fe <_Z6printfIPKcJjjjjEEvS1_T_DpT0_+0xbe>
+
+Disassembly of section .text._Z6printfIPKcJiS1_jjjjEEvS1_T_DpT0_:
+
+0000f4b0 <_Z6printfIPKcJiS1_jjjjEEvS1_T_DpT0_>:
+    f4b0:	55                   	push   ebp
+    f4b1:	57                   	push   edi
+    f4b2:	56                   	push   esi
+    f4b3:	53                   	push   ebx
+    f4b4:	31 f6                	xor    esi,esi
+    f4b6:	83 ec 1c             	sub    esp,0x1c
+    f4b9:	8b 6c 24 30          	mov    ebp,DWORD PTR [esp+0x30]
+    f4bd:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    f4c1:	84 c0                	test   al,al
+    f4c3:	74 46                	je     f50b <_Z6printfIPKcJiS1_jjjjEEvS1_T_DpT0_+0x5b>
+    f4c5:	8d 5e 01             	lea    ebx,[esi+0x1]
+    f4c8:	3c 25                	cmp    al,0x25
+    f4ca:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    f4ce:	75 28                	jne    f4f8 <_Z6printfIPKcJiS1_jjjjEEvS1_T_DpT0_+0x48>
+    f4d0:	0f b6 07             	movzx  eax,BYTE PTR [edi]
+    f4d3:	3c 25                	cmp    al,0x25
+    f4d5:	0f 84 fd 00 00 00    	je     f5d8 <_Z6printfIPKcJiS1_jjjjEEvS1_T_DpT0_+0x128>
+    f4db:	84 c0                	test   al,al
+    f4dd:	75 39                	jne    f518 <_Z6printfIPKcJiS1_jjjjEEvS1_T_DpT0_+0x68>
+    f4df:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    f4e4:	8d 5e 02             	lea    ebx,[esi+0x2]
+    f4e7:	84 c0                	test   al,al
+    f4e9:	74 20                	je     f50b <_Z6printfIPKcJiS1_jjjjEEvS1_T_DpT0_+0x5b>
+    f4eb:	89 de                	mov    esi,ebx
+    f4ed:	8d 5e 01             	lea    ebx,[esi+0x1]
+    f4f0:	3c 25                	cmp    al,0x25
+    f4f2:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    f4f6:	74 d8                	je     f4d0 <_Z6printfIPKcJiS1_jjjjEEvS1_T_DpT0_+0x20>
+    f4f8:	83 ec 0c             	sub    esp,0xc
+    f4fb:	50                   	push   eax
+    f4fc:	e8 cf c7 ff ff       	call   bcd0 <_Z7putcharc>
+    f501:	0f be 07             	movsx  eax,BYTE PTR [edi]
+    f504:	83 c4 10             	add    esp,0x10
+    f507:	84 c0                	test   al,al
+    f509:	75 e0                	jne    f4eb <_Z6printfIPKcJiS1_jjjjEEvS1_T_DpT0_+0x3b>
+    f50b:	83 c4 1c             	add    esp,0x1c
+    f50e:	5b                   	pop    ebx
+    f50f:	5e                   	pop    esi
+    f510:	5f                   	pop    edi
+    f511:	5d                   	pop    ebp
+    f512:	c3                   	ret    
+    f513:	90                   	nop
+    f514:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    f518:	83 ec 08             	sub    esp,0x8
+    f51b:	8d 44 24 3c          	lea    eax,[esp+0x3c]
+    f51f:	50                   	push   eax
+    f520:	57                   	push   edi
+    f521:	e8 aa d9 ff ff       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    f526:	01 c3                	add    ebx,eax
+    f528:	8b 44 24 48          	mov    eax,DWORD PTR [esp+0x48]
+    f52c:	01 eb                	add    ebx,ebp
+    f52e:	89 44 24 1c          	mov    DWORD PTR [esp+0x1c],eax
+    f532:	0f be 03             	movsx  eax,BYTE PTR [ebx]
+    f535:	83 c4 10             	add    esp,0x10
+    f538:	84 c0                	test   al,al
+    f53a:	74 cf                	je     f50b <_Z6printfIPKcJiS1_jjjjEEvS1_T_DpT0_+0x5b>
+    f53c:	31 ff                	xor    edi,edi
+    f53e:	3c 25                	cmp    al,0x25
+    f540:	8d 77 01             	lea    esi,[edi+0x1]
+    f543:	8d 2c 33             	lea    ebp,[ebx+esi*1]
+    f546:	75 30                	jne    f578 <_Z6printfIPKcJiS1_jjjjEEvS1_T_DpT0_+0xc8>
+    f548:	90                   	nop
+    f549:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    f550:	0f b6 45 00          	movzx  eax,BYTE PTR [ebp+0x0]
+    f554:	3c 25                	cmp    al,0x25
+    f556:	0f 84 a4 00 00 00    	je     f600 <_Z6printfIPKcJiS1_jjjjEEvS1_T_DpT0_+0x150>
+    f55c:	84 c0                	test   al,al
+    f55e:	75 38                	jne    f598 <_Z6printfIPKcJiS1_jjjjEEvS1_T_DpT0_+0xe8>
+    f560:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
+    f565:	8d 77 02             	lea    esi,[edi+0x2]
+    f568:	84 c0                	test   al,al
+    f56a:	74 9f                	je     f50b <_Z6printfIPKcJiS1_jjjjEEvS1_T_DpT0_+0x5b>
+    f56c:	89 f7                	mov    edi,esi
+    f56e:	8d 77 01             	lea    esi,[edi+0x1]
+    f571:	3c 25                	cmp    al,0x25
+    f573:	8d 2c 33             	lea    ebp,[ebx+esi*1]
+    f576:	74 d8                	je     f550 <_Z6printfIPKcJiS1_jjjjEEvS1_T_DpT0_+0xa0>
+    f578:	83 ec 0c             	sub    esp,0xc
+    f57b:	50                   	push   eax
+    f57c:	e8 4f c7 ff ff       	call   bcd0 <_Z7putcharc>
+    f581:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    f585:	83 c4 10             	add    esp,0x10
+    f588:	84 c0                	test   al,al
+    f58a:	0f 84 7b ff ff ff    	je     f50b <_Z6printfIPKcJiS1_jjjjEEvS1_T_DpT0_+0x5b>
+    f590:	89 f7                	mov    edi,esi
+    f592:	eb da                	jmp    f56e <_Z6printfIPKcJiS1_jjjjEEvS1_T_DpT0_+0xbe>
+    f594:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    f598:	83 ec 08             	sub    esp,0x8
+    f59b:	8d 44 24 14          	lea    eax,[esp+0x14]
+    f59f:	50                   	push   eax
+    f5a0:	55                   	push   ebp
+    f5a1:	e8 2a da ff ff       	call   cfd0 <_Z14_manage_escapeIiEiPKcPT_>
+    f5a6:	5a                   	pop    edx
+    f5a7:	01 c6                	add    esi,eax
+    f5a9:	59                   	pop    ecx
+    f5aa:	01 f3                	add    ebx,esi
+    f5ac:	ff 74 24 54          	push   DWORD PTR [esp+0x54]
+    f5b0:	ff 74 24 54          	push   DWORD PTR [esp+0x54]
+    f5b4:	ff 74 24 54          	push   DWORD PTR [esp+0x54]
+    f5b8:	ff 74 24 54          	push   DWORD PTR [esp+0x54]
+    f5bc:	ff 74 24 54          	push   DWORD PTR [esp+0x54]
+    f5c0:	53                   	push   ebx
+    f5c1:	e8 7a fd ff ff       	call   f340 <_Z6printfIPKcJjjjjEEvS1_T_DpT0_>
+    f5c6:	83 c4 20             	add    esp,0x20
+    f5c9:	83 c4 1c             	add    esp,0x1c
+    f5cc:	5b                   	pop    ebx
+    f5cd:	5e                   	pop    esi
+    f5ce:	5f                   	pop    edi
+    f5cf:	5d                   	pop    ebp
+    f5d0:	c3                   	ret    
+    f5d1:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+    f5d8:	83 ec 0c             	sub    esp,0xc
+    f5db:	8d 5e 02             	lea    ebx,[esi+0x2]
+    f5de:	6a 25                	push   0x25
+    f5e0:	e8 eb c6 ff ff       	call   bcd0 <_Z7putcharc>
+    f5e5:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    f5ea:	83 c4 10             	add    esp,0x10
+    f5ed:	84 c0                	test   al,al
+    f5ef:	0f 84 16 ff ff ff    	je     f50b <_Z6printfIPKcJiS1_jjjjEEvS1_T_DpT0_+0x5b>
+    f5f5:	89 de                	mov    esi,ebx
+    f5f7:	e9 f1 fe ff ff       	jmp    f4ed <_Z6printfIPKcJiS1_jjjjEEvS1_T_DpT0_+0x3d>
+    f5fc:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    f600:	83 ec 0c             	sub    esp,0xc
+    f603:	8d 77 02             	lea    esi,[edi+0x2]
+    f606:	6a 25                	push   0x25
+    f608:	e8 c3 c6 ff ff       	call   bcd0 <_Z7putcharc>
+    f60d:	0f be 44 3b 02       	movsx  eax,BYTE PTR [ebx+edi*1+0x2]
+    f612:	83 c4 10             	add    esp,0x10
+    f615:	84 c0                	test   al,al
+    f617:	0f 84 ee fe ff ff    	je     f50b <_Z6printfIPKcJiS1_jjjjEEvS1_T_DpT0_+0x5b>
+    f61d:	89 f7                	mov    edi,esi
+    f61f:	e9 4a ff ff ff       	jmp    f56e <_Z6printfIPKcJiS1_jjjjEEvS1_T_DpT0_+0xbe>
+
+Disassembly of section .text._Z14_manage_escapeIhEiPKcPT_:
+
+0000f630 <_Z14_manage_escapeIhEiPKcPT_>:
+    f630:	83 ec 0c             	sub    esp,0xc
+    f633:	8b 44 24 10          	mov    eax,DWORD PTR [esp+0x10]
+    f637:	0f b6 00             	movzx  eax,BYTE PTR [eax]
+    f63a:	83 e8 42             	sub    eax,0x42
+    f63d:	3c 36                	cmp    al,0x36
+    f63f:	0f 87 f3 00 00 00    	ja     f738 <_Z14_manage_escapeIhEiPKcPT_+0x108>
+    f645:	0f b6 c0             	movzx  eax,al
+    f648:	ff 24 85 3c 30 01 00 	jmp    DWORD PTR [eax*4+0x1303c]
+    f64f:	90                   	nop
+    f650:	83 ec 0c             	sub    esp,0xc
+    f653:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    f657:	ff 30                	push   DWORD PTR [eax]
+    f659:	e8 32 c7 ff ff       	call   bd90 <_Z6putstrPc>
+    f65e:	83 c4 10             	add    esp,0x10
+    f661:	b8 01 00 00 00       	mov    eax,0x1
+    f666:	83 c4 0c             	add    esp,0xc
+    f669:	c3                   	ret    
+    f66a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    f670:	83 ec 0c             	sub    esp,0xc
+    f673:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    f677:	0f b6 00             	movzx  eax,BYTE PTR [eax]
+    f67a:	50                   	push   eax
+    f67b:	e8 a0 c6 ff ff       	call   bd20 <_Z6putbini>
+    f680:	83 c4 10             	add    esp,0x10
+    f683:	b8 01 00 00 00       	mov    eax,0x1
+    f688:	83 c4 0c             	add    esp,0xc
+    f68b:	c3                   	ret    
+    f68c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    f690:	83 ec 0c             	sub    esp,0xc
+    f693:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    f697:	0f b6 00             	movzx  eax,BYTE PTR [eax]
+    f69a:	50                   	push   eax
+    f69b:	e8 70 c6 ff ff       	call   bd10 <_Z6putocti>
+    f6a0:	83 c4 10             	add    esp,0x10
+    f6a3:	b8 01 00 00 00       	mov    eax,0x1
+    f6a8:	83 c4 0c             	add    esp,0xc
+    f6ab:	c3                   	ret    
+    f6ac:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    f6b0:	83 ec 0c             	sub    esp,0xc
+    f6b3:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    f6b7:	0f b6 00             	movzx  eax,BYTE PTR [eax]
+    f6ba:	50                   	push   eax
+    f6bb:	e8 30 c6 ff ff       	call   bcf0 <_Z6puthexi>
+    f6c0:	83 c4 10             	add    esp,0x10
+    f6c3:	b8 01 00 00 00       	mov    eax,0x1
+    f6c8:	83 c4 0c             	add    esp,0xc
+    f6cb:	c3                   	ret    
+    f6cc:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    f6d0:	83 ec 0c             	sub    esp,0xc
+    f6d3:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    f6d7:	0f be 00             	movsx  eax,BYTE PTR [eax]
+    f6da:	50                   	push   eax
+    f6db:	e8 f0 c5 ff ff       	call   bcd0 <_Z7putcharc>
+    f6e0:	83 c4 10             	add    esp,0x10
+    f6e3:	b8 01 00 00 00       	mov    eax,0x1
+    f6e8:	83 c4 0c             	add    esp,0xc
+    f6eb:	c3                   	ret    
+    f6ec:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    f6f0:	83 ec 0c             	sub    esp,0xc
+    f6f3:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    f6f7:	0f b6 00             	movzx  eax,BYTE PTR [eax]
+    f6fa:	50                   	push   eax
+    f6fb:	e8 e0 c5 ff ff       	call   bce0 <_Z6putdeci>
+    f700:	83 c4 10             	add    esp,0x10
+    f703:	b8 01 00 00 00       	mov    eax,0x1
+    f708:	83 c4 0c             	add    esp,0xc
+    f70b:	c3                   	ret    
+    f70c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    f710:	83 ec 0c             	sub    esp,0xc
+    f713:	68 64 01 01 00       	push   0x10164
+    f718:	e8 b3 c6 ff ff       	call   bdd0 <_Z6printfPKc>
+    f71d:	58                   	pop    eax
+    f71e:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+    f722:	ff 30                	push   DWORD PTR [eax]
+    f724:	e8 c7 c5 ff ff       	call   bcf0 <_Z6puthexi>
+    f729:	83 c4 10             	add    esp,0x10
+    f72c:	b8 01 00 00 00       	mov    eax,0x1
+    f731:	83 c4 0c             	add    esp,0xc
+    f734:	c3                   	ret    
+    f735:	8d 76 00             	lea    esi,[esi+0x0]
+    f738:	31 c0                	xor    eax,eax
+    f73a:	e9 27 ff ff ff       	jmp    f666 <_Z14_manage_escapeIhEiPKcPT_+0x36>
+
+Disassembly of section .text._Z6printfIhJhhEEvPKcT_DpT0_:
+
+0000f740 <_Z6printfIhJhhEEvPKcT_DpT0_>:
+    f740:	55                   	push   ebp
+    f741:	57                   	push   edi
+    f742:	31 c9                	xor    ecx,ecx
+    f744:	56                   	push   esi
+    f745:	53                   	push   ebx
+    f746:	83 ec 2c             	sub    esp,0x2c
+    f749:	8b 44 24 4c          	mov    eax,DWORD PTR [esp+0x4c]
+    f74d:	8b 6c 24 40          	mov    ebp,DWORD PTR [esp+0x40]
+    f751:	8b 5c 24 48          	mov    ebx,DWORD PTR [esp+0x48]
+    f755:	89 44 24 04          	mov    DWORD PTR [esp+0x4],eax
+    f759:	8b 44 24 44          	mov    eax,DWORD PTR [esp+0x44]
+    f75d:	88 44 24 0c          	mov    BYTE PTR [esp+0xc],al
+    f761:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    f765:	84 c0                	test   al,al
+    f767:	74 4a                	je     f7b3 <_Z6printfIhJhhEEvPKcT_DpT0_+0x73>
+    f769:	8d 79 01             	lea    edi,[ecx+0x1]
+    f76c:	3c 25                	cmp    al,0x25
+    f76e:	8d 74 3d 00          	lea    esi,[ebp+edi*1+0x0]
+    f772:	75 2c                	jne    f7a0 <_Z6printfIhJhhEEvPKcT_DpT0_+0x60>
+    f774:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    f778:	0f b6 06             	movzx  eax,BYTE PTR [esi]
+    f77b:	3c 25                	cmp    al,0x25
+    f77d:	0f 84 3d 01 00 00    	je     f8c0 <_Z6printfIhJhhEEvPKcT_DpT0_+0x180>
+    f783:	84 c0                	test   al,al
+    f785:	75 39                	jne    f7c0 <_Z6printfIhJhhEEvPKcT_DpT0_+0x80>
+    f787:	0f be 44 0d 02       	movsx  eax,BYTE PTR [ebp+ecx*1+0x2]
+    f78c:	8d 79 02             	lea    edi,[ecx+0x2]
+    f78f:	84 c0                	test   al,al
+    f791:	74 20                	je     f7b3 <_Z6printfIhJhhEEvPKcT_DpT0_+0x73>
+    f793:	89 f9                	mov    ecx,edi
+    f795:	8d 79 01             	lea    edi,[ecx+0x1]
+    f798:	3c 25                	cmp    al,0x25
+    f79a:	8d 74 3d 00          	lea    esi,[ebp+edi*1+0x0]
+    f79e:	74 d8                	je     f778 <_Z6printfIhJhhEEvPKcT_DpT0_+0x38>
+    f7a0:	83 ec 0c             	sub    esp,0xc
+    f7a3:	50                   	push   eax
+    f7a4:	e8 27 c5 ff ff       	call   bcd0 <_Z7putcharc>
+    f7a9:	0f be 06             	movsx  eax,BYTE PTR [esi]
+    f7ac:	83 c4 10             	add    esp,0x10
+    f7af:	84 c0                	test   al,al
+    f7b1:	75 e0                	jne    f793 <_Z6printfIhJhhEEvPKcT_DpT0_+0x53>
+    f7b3:	83 c4 2c             	add    esp,0x2c
+    f7b6:	5b                   	pop    ebx
+    f7b7:	5e                   	pop    esi
+    f7b8:	5f                   	pop    edi
+    f7b9:	5d                   	pop    ebp
+    f7ba:	c3                   	ret    
+    f7bb:	90                   	nop
+    f7bc:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    f7c0:	83 ec 08             	sub    esp,0x8
+    f7c3:	8d 44 24 14          	lea    eax,[esp+0x14]
+    f7c7:	50                   	push   eax
+    f7c8:	56                   	push   esi
+    f7c9:	e8 62 fe ff ff       	call   f630 <_Z14_manage_escapeIhEiPKcPT_>
+    f7ce:	01 c7                	add    edi,eax
+    f7d0:	88 5c 24 2e          	mov    BYTE PTR [esp+0x2e],bl
+    f7d4:	83 c4 10             	add    esp,0x10
+    f7d7:	01 fd                	add    ebp,edi
+    f7d9:	31 ff                	xor    edi,edi
+    f7db:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    f7df:	84 c0                	test   al,al
+    f7e1:	74 d0                	je     f7b3 <_Z6printfIhJhhEEvPKcT_DpT0_+0x73>
+    f7e3:	8d 77 01             	lea    esi,[edi+0x1]
+    f7e6:	3c 25                	cmp    al,0x25
+    f7e8:	8d 5c 35 00          	lea    ebx,[ebp+esi*1+0x0]
+    f7ec:	75 2a                	jne    f818 <_Z6printfIhJhhEEvPKcT_DpT0_+0xd8>
+    f7ee:	66 90                	xchg   ax,ax
+    f7f0:	0f b6 03             	movzx  eax,BYTE PTR [ebx]
+    f7f3:	3c 25                	cmp    al,0x25
+    f7f5:	0f 84 1d 01 00 00    	je     f918 <_Z6printfIhJhhEEvPKcT_DpT0_+0x1d8>
+    f7fb:	84 c0                	test   al,al
+    f7fd:	75 31                	jne    f830 <_Z6printfIhJhhEEvPKcT_DpT0_+0xf0>
+    f7ff:	0f be 44 3d 02       	movsx  eax,BYTE PTR [ebp+edi*1+0x2]
+    f804:	8d 77 02             	lea    esi,[edi+0x2]
+    f807:	84 c0                	test   al,al
+    f809:	74 a8                	je     f7b3 <_Z6printfIhJhhEEvPKcT_DpT0_+0x73>
+    f80b:	89 f7                	mov    edi,esi
+    f80d:	8d 77 01             	lea    esi,[edi+0x1]
+    f810:	3c 25                	cmp    al,0x25
+    f812:	8d 5c 35 00          	lea    ebx,[ebp+esi*1+0x0]
+    f816:	74 d8                	je     f7f0 <_Z6printfIhJhhEEvPKcT_DpT0_+0xb0>
+    f818:	83 ec 0c             	sub    esp,0xc
+    f81b:	50                   	push   eax
+    f81c:	e8 af c4 ff ff       	call   bcd0 <_Z7putcharc>
+    f821:	0f be 03             	movsx  eax,BYTE PTR [ebx]
+    f824:	83 c4 10             	add    esp,0x10
+    f827:	84 c0                	test   al,al
+    f829:	74 88                	je     f7b3 <_Z6printfIhJhhEEvPKcT_DpT0_+0x73>
+    f82b:	89 f7                	mov    edi,esi
+    f82d:	eb de                	jmp    f80d <_Z6printfIhJhhEEvPKcT_DpT0_+0xcd>
+    f82f:	90                   	nop
+    f830:	83 ec 08             	sub    esp,0x8
+    f833:	8d 44 24 26          	lea    eax,[esp+0x26]
+    f837:	50                   	push   eax
+    f838:	53                   	push   ebx
+    f839:	e8 f2 fd ff ff       	call   f630 <_Z14_manage_escapeIhEiPKcPT_>
+    f83e:	01 c6                	add    esi,eax
+    f840:	0f b6 44 24 14       	movzx  eax,BYTE PTR [esp+0x14]
+    f845:	01 f5                	add    ebp,esi
+    f847:	88 44 24 2f          	mov    BYTE PTR [esp+0x2f],al
+    f84b:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    f84f:	83 c4 10             	add    esp,0x10
+    f852:	84 c0                	test   al,al
+    f854:	0f 84 59 ff ff ff    	je     f7b3 <_Z6printfIhJhhEEvPKcT_DpT0_+0x73>
+    f85a:	31 f6                	xor    esi,esi
+    f85c:	3c 25                	cmp    al,0x25
+    f85e:	8d 5e 01             	lea    ebx,[esi+0x1]
+    f861:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    f865:	75 35                	jne    f89c <_Z6printfIhJhhEEvPKcT_DpT0_+0x15c>
+    f867:	89 f6                	mov    esi,esi
+    f869:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    f870:	0f b6 07             	movzx  eax,BYTE PTR [edi]
+    f873:	3c 25                	cmp    al,0x25
+    f875:	0f 84 c5 00 00 00    	je     f940 <_Z6printfIhJhhEEvPKcT_DpT0_+0x200>
+    f87b:	84 c0                	test   al,al
+    f87d:	75 71                	jne    f8f0 <_Z6printfIhJhhEEvPKcT_DpT0_+0x1b0>
+    f87f:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    f884:	8d 5e 02             	lea    ebx,[esi+0x2]
+    f887:	84 c0                	test   al,al
+    f889:	0f 84 24 ff ff ff    	je     f7b3 <_Z6printfIhJhhEEvPKcT_DpT0_+0x73>
+    f88f:	89 de                	mov    esi,ebx
+    f891:	8d 5e 01             	lea    ebx,[esi+0x1]
+    f894:	3c 25                	cmp    al,0x25
+    f896:	8d 7c 1d 00          	lea    edi,[ebp+ebx*1+0x0]
+    f89a:	74 d4                	je     f870 <_Z6printfIhJhhEEvPKcT_DpT0_+0x130>
+    f89c:	83 ec 0c             	sub    esp,0xc
+    f89f:	50                   	push   eax
+    f8a0:	e8 2b c4 ff ff       	call   bcd0 <_Z7putcharc>
+    f8a5:	0f be 07             	movsx  eax,BYTE PTR [edi]
+    f8a8:	83 c4 10             	add    esp,0x10
+    f8ab:	84 c0                	test   al,al
+    f8ad:	0f 84 00 ff ff ff    	je     f7b3 <_Z6printfIhJhhEEvPKcT_DpT0_+0x73>
+    f8b3:	89 de                	mov    esi,ebx
+    f8b5:	eb da                	jmp    f891 <_Z6printfIhJhhEEvPKcT_DpT0_+0x151>
+    f8b7:	89 f6                	mov    esi,esi
+    f8b9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    f8c0:	89 4c 24 08          	mov    DWORD PTR [esp+0x8],ecx
+    f8c4:	83 ec 0c             	sub    esp,0xc
+    f8c7:	6a 25                	push   0x25
+    f8c9:	e8 02 c4 ff ff       	call   bcd0 <_Z7putcharc>
+    f8ce:	8b 4c 24 18          	mov    ecx,DWORD PTR [esp+0x18]
+    f8d2:	83 c4 10             	add    esp,0x10
+    f8d5:	0f be 44 0d 02       	movsx  eax,BYTE PTR [ebp+ecx*1+0x2]
+    f8da:	8d 79 02             	lea    edi,[ecx+0x2]
+    f8dd:	84 c0                	test   al,al
+    f8df:	0f 84 ce fe ff ff    	je     f7b3 <_Z6printfIhJhhEEvPKcT_DpT0_+0x73>
+    f8e5:	89 f9                	mov    ecx,edi
+    f8e7:	e9 a9 fe ff ff       	jmp    f795 <_Z6printfIhJhhEEvPKcT_DpT0_+0x55>
+    f8ec:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    f8f0:	83 ec 08             	sub    esp,0x8
+    f8f3:	8d 44 24 27          	lea    eax,[esp+0x27]
+    f8f7:	50                   	push   eax
+    f8f8:	57                   	push   edi
+    f8f9:	e8 32 fd ff ff       	call   f630 <_Z14_manage_escapeIhEiPKcPT_>
+    f8fe:	01 c3                	add    ebx,eax
+    f900:	01 dd                	add    ebp,ebx
+    f902:	89 2c 24             	mov    DWORD PTR [esp],ebp
+    f905:	e8 c6 c4 ff ff       	call   bdd0 <_Z6printfPKc>
+    f90a:	83 c4 10             	add    esp,0x10
+    f90d:	83 c4 2c             	add    esp,0x2c
+    f910:	5b                   	pop    ebx
+    f911:	5e                   	pop    esi
+    f912:	5f                   	pop    edi
+    f913:	5d                   	pop    ebp
+    f914:	c3                   	ret    
+    f915:	8d 76 00             	lea    esi,[esi+0x0]
+    f918:	83 ec 0c             	sub    esp,0xc
+    f91b:	8d 77 02             	lea    esi,[edi+0x2]
+    f91e:	6a 25                	push   0x25
+    f920:	e8 ab c3 ff ff       	call   bcd0 <_Z7putcharc>
+    f925:	0f be 44 3d 02       	movsx  eax,BYTE PTR [ebp+edi*1+0x2]
+    f92a:	83 c4 10             	add    esp,0x10
+    f92d:	84 c0                	test   al,al
+    f92f:	0f 84 7e fe ff ff    	je     f7b3 <_Z6printfIhJhhEEvPKcT_DpT0_+0x73>
+    f935:	89 f7                	mov    edi,esi
+    f937:	e9 d1 fe ff ff       	jmp    f80d <_Z6printfIhJhhEEvPKcT_DpT0_+0xcd>
+    f93c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    f940:	83 ec 0c             	sub    esp,0xc
+    f943:	8d 5e 02             	lea    ebx,[esi+0x2]
+    f946:	6a 25                	push   0x25
+    f948:	e8 83 c3 ff ff       	call   bcd0 <_Z7putcharc>
+    f94d:	0f be 44 35 02       	movsx  eax,BYTE PTR [ebp+esi*1+0x2]
+    f952:	83 c4 10             	add    esp,0x10
+    f955:	84 c0                	test   al,al
+    f957:	0f 84 56 fe ff ff    	je     f7b3 <_Z6printfIhJhhEEvPKcT_DpT0_+0x73>
+    f95d:	89 de                	mov    esi,ebx
+    f95f:	e9 2d ff ff ff       	jmp    f891 <_Z6printfIhJhhEEvPKcT_DpT0_+0x151>
+
+Disassembly of section .text._Z6printfIPKcJhhhhEEvS1_T_DpT0_:
+
+0000f970 <_Z6printfIPKcJhhhhEEvS1_T_DpT0_>:
+    f970:	55                   	push   ebp
+    f971:	57                   	push   edi
+    f972:	31 ff                	xor    edi,edi
+    f974:	56                   	push   esi
+    f975:	53                   	push   ebx
+    f976:	83 ec 2c             	sub    esp,0x2c
+    f979:	8b 44 24 48          	mov    eax,DWORD PTR [esp+0x48]
+    f97d:	8b 6c 24 40          	mov    ebp,DWORD PTR [esp+0x40]
+    f981:	89 04 24             	mov    DWORD PTR [esp],eax
+    f984:	8b 44 24 4c          	mov    eax,DWORD PTR [esp+0x4c]
+    f988:	89 44 24 04          	mov    DWORD PTR [esp+0x4],eax
+    f98c:	8b 44 24 50          	mov    eax,DWORD PTR [esp+0x50]
+    f990:	89 44 24 08          	mov    DWORD PTR [esp+0x8],eax
+    f994:	8b 44 24 54          	mov    eax,DWORD PTR [esp+0x54]
+    f998:	89 44 24 0c          	mov    DWORD PTR [esp+0xc],eax
+    f99c:	0f be 45 00          	movsx  eax,BYTE PTR [ebp+0x0]
+    f9a0:	84 c0                	test   al,al
+    f9a2:	74 47                	je     f9eb <_Z6printfIPKcJhhhhEEvS1_T_DpT0_+0x7b>
+    f9a4:	8d 5f 01             	lea    ebx,[edi+0x1]
+    f9a7:	3c 25                	cmp    al,0x25
+    f9a9:	8d 74 1d 00          	lea    esi,[ebp+ebx*1+0x0]
+    f9ad:	75 29                	jne    f9d8 <_Z6printfIPKcJhhhhEEvS1_T_DpT0_+0x68>
+    f9af:	90                   	nop
+    f9b0:	0f b6 06             	movzx  eax,BYTE PTR [esi]
+    f9b3:	3c 25                	cmp    al,0x25
+    f9b5:	0f 84 15 01 00 00    	je     fad0 <_Z6printfIPKcJhhhhEEvS1_T_DpT0_+0x160>
+    f9bb:	84 c0                	test   al,al
+    f9bd:	75 39                	jne    f9f8 <_Z6printfIPKcJhhhhEEvS1_T_DpT0_+0x88>
+    f9bf:	0f be 44 3d 02       	movsx  eax,BYTE PTR [ebp+edi*1+0x2]
+    f9c4:	8d 5f 02             	lea    ebx,[edi+0x2]
+    f9c7:	84 c0                	test   al,al
+    f9c9:	74 20                	je     f9eb <_Z6printfIPKcJhhhhEEvS1_T_DpT0_+0x7b>
+    f9cb:	89 df                	mov    edi,ebx
+    f9cd:	8d 5f 01             	lea    ebx,[edi+0x1]
+    f9d0:	3c 25                	cmp    al,0x25
+    f9d2:	8d 74 1d 00          	lea    esi,[ebp+ebx*1+0x0]
+    f9d6:	74 d8                	je     f9b0 <_Z6printfIPKcJhhhhEEvS1_T_DpT0_+0x40>
+    f9d8:	83 ec 0c             	sub    esp,0xc
+    f9db:	50                   	push   eax
+    f9dc:	e8 ef c2 ff ff       	call   bcd0 <_Z7putcharc>
+    f9e1:	0f be 06             	movsx  eax,BYTE PTR [esi]
+    f9e4:	83 c4 10             	add    esp,0x10
+    f9e7:	84 c0                	test   al,al
+    f9e9:	75 e0                	jne    f9cb <_Z6printfIPKcJhhhhEEvS1_T_DpT0_+0x5b>
+    f9eb:	83 c4 2c             	add    esp,0x2c
+    f9ee:	5b                   	pop    ebx
+    f9ef:	5e                   	pop    esi
+    f9f0:	5f                   	pop    edi
+    f9f1:	5d                   	pop    ebp
+    f9f2:	c3                   	ret    
+    f9f3:	90                   	nop
+    f9f4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    f9f8:	83 ec 08             	sub    esp,0x8
+    f9fb:	8d 44 24 4c          	lea    eax,[esp+0x4c]
+    f9ff:	50                   	push   eax
+    fa00:	56                   	push   esi
+    fa01:	e8 ca d4 ff ff       	call   ced0 <_Z14_manage_escapeIPKcEiS1_PT_>
+    fa06:	01 c3                	add    ebx,eax
+    fa08:	0f b6 44 24 10       	movzx  eax,BYTE PTR [esp+0x10]
+    fa0d:	0f b6 4c 24 18       	movzx  ecx,BYTE PTR [esp+0x18]
+    fa12:	01 eb                	add    ebx,ebp
+    fa14:	0f b6 54 24 14       	movzx  edx,BYTE PTR [esp+0x14]
+    fa19:	0f b6 74 24 1c       	movzx  esi,BYTE PTR [esp+0x1c]
+    fa1e:	88 44 24 2f          	mov    BYTE PTR [esp+0x2f],al
+    fa22:	0f be 03             	movsx  eax,BYTE PTR [ebx]
+    fa25:	89 4c 24 18          	mov    DWORD PTR [esp+0x18],ecx
+    fa29:	89 54 24 14          	mov    DWORD PTR [esp+0x14],edx
+    fa2d:	83 c4 10             	add    esp,0x10
+    fa30:	84 c0                	test   al,al
+    fa32:	74 b7                	je     f9eb <_Z6printfIPKcJhhhhEEvS1_T_DpT0_+0x7b>
+    fa34:	31 d2                	xor    edx,edx
+    fa36:	89 34 24             	mov    DWORD PTR [esp],esi
+    fa39:	3c 25                	cmp    al,0x25
+    fa3b:	89 d7                	mov    edi,edx
+    fa3d:	89 de                	mov    esi,ebx
+    fa3f:	8d 6f 01             	lea    ebp,[edi+0x1]
+    fa42:	8d 1c 2e             	lea    ebx,[esi+ebp*1]
+    fa45:	75 30                	jne    fa77 <_Z6printfIPKcJhhhhEEvS1_T_DpT0_+0x107>
+    fa47:	89 f6                	mov    esi,esi
+    fa49:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+    fa50:	0f b6 03             	movzx  eax,BYTE PTR [ebx]
+    fa53:	3c 25                	cmp    al,0x25
+    fa55:	0f 84 9d 00 00 00    	je     faf8 <_Z6printfIPKcJhhhhEEvS1_T_DpT0_+0x188>
+    fa5b:	84 c0                	test   al,al
+    fa5d:	75 39                	jne    fa98 <_Z6printfIPKcJhhhhEEvS1_T_DpT0_+0x128>
+    fa5f:	0f be 44 3e 02       	movsx  eax,BYTE PTR [esi+edi*1+0x2]
+    fa64:	8d 6f 02             	lea    ebp,[edi+0x2]
+    fa67:	84 c0                	test   al,al
+    fa69:	74 80                	je     f9eb <_Z6printfIPKcJhhhhEEvS1_T_DpT0_+0x7b>
+    fa6b:	89 ef                	mov    edi,ebp
+    fa6d:	8d 6f 01             	lea    ebp,[edi+0x1]
+    fa70:	3c 25                	cmp    al,0x25
+    fa72:	8d 1c 2e             	lea    ebx,[esi+ebp*1]
+    fa75:	74 d9                	je     fa50 <_Z6printfIPKcJhhhhEEvS1_T_DpT0_+0xe0>
+    fa77:	83 ec 0c             	sub    esp,0xc
+    fa7a:	50                   	push   eax
+    fa7b:	e8 50 c2 ff ff       	call   bcd0 <_Z7putcharc>
+    fa80:	0f be 03             	movsx  eax,BYTE PTR [ebx]
+    fa83:	83 c4 10             	add    esp,0x10
+    fa86:	84 c0                	test   al,al
+    fa88:	0f 84 5d ff ff ff    	je     f9eb <_Z6printfIPKcJhhhhEEvS1_T_DpT0_+0x7b>
+    fa8e:	89 ef                	mov    edi,ebp
+    fa90:	eb db                	jmp    fa6d <_Z6printfIPKcJhhhhEEvS1_T_DpT0_+0xfd>
+    fa92:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+    fa98:	83 ec 08             	sub    esp,0x8
+    fa9b:	89 df                	mov    edi,ebx
+    fa9d:	89 f3                	mov    ebx,esi
+    fa9f:	8b 74 24 08          	mov    esi,DWORD PTR [esp+0x8]
+    faa3:	8d 44 24 27          	lea    eax,[esp+0x27]
+    faa7:	50                   	push   eax
+    faa8:	57                   	push   edi
+    faa9:	e8 82 fb ff ff       	call   f630 <_Z14_manage_escapeIhEiPKcPT_>
+    faae:	01 c5                	add    ebp,eax
+    fab0:	56                   	push   esi
+    fab1:	ff 74 24 1c          	push   DWORD PTR [esp+0x1c]
+    fab5:	01 eb                	add    ebx,ebp
+    fab7:	ff 74 24 1c          	push   DWORD PTR [esp+0x1c]
+    fabb:	53                   	push   ebx
+    fabc:	e8 7f fc ff ff       	call   f740 <_Z6printfIhJhhEEvPKcT_DpT0_>
+    fac1:	83 c4 20             	add    esp,0x20
+    fac4:	83 c4 2c             	add    esp,0x2c
+    fac7:	5b                   	pop    ebx
+    fac8:	5e                   	pop    esi
+    fac9:	5f                   	pop    edi
+    faca:	5d                   	pop    ebp
+    facb:	c3                   	ret    
+    facc:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    fad0:	83 ec 0c             	sub    esp,0xc
+    fad3:	8d 5f 02             	lea    ebx,[edi+0x2]
+    fad6:	6a 25                	push   0x25
+    fad8:	e8 f3 c1 ff ff       	call   bcd0 <_Z7putcharc>
+    fadd:	0f be 44 3d 02       	movsx  eax,BYTE PTR [ebp+edi*1+0x2]
+    fae2:	83 c4 10             	add    esp,0x10
+    fae5:	84 c0                	test   al,al
+    fae7:	0f 84 fe fe ff ff    	je     f9eb <_Z6printfIPKcJhhhhEEvS1_T_DpT0_+0x7b>
+    faed:	89 df                	mov    edi,ebx
+    faef:	e9 d9 fe ff ff       	jmp    f9cd <_Z6printfIPKcJhhhhEEvS1_T_DpT0_+0x5d>
+    faf4:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+    faf8:	83 ec 0c             	sub    esp,0xc
+    fafb:	8d 6f 02             	lea    ebp,[edi+0x2]
+    fafe:	6a 25                	push   0x25
+    fb00:	e8 cb c1 ff ff       	call   bcd0 <_Z7putcharc>
+    fb05:	0f be 44 3e 02       	movsx  eax,BYTE PTR [esi+edi*1+0x2]
+    fb0a:	83 c4 10             	add    esp,0x10
+    fb0d:	84 c0                	test   al,al
+    fb0f:	0f 84 d6 fe ff ff    	je     f9eb <_Z6printfIPKcJhhhhEEvS1_T_DpT0_+0x7b>
+    fb15:	89 ef                	mov    edi,ebp
+    fb17:	e9 51 ff ff ff       	jmp    fa6d <_Z6printfIPKcJhhhhEEvS1_T_DpT0_+0xfd>

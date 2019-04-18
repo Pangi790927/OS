@@ -18,12 +18,14 @@ extern void enable_A20() asm("enable_A20");
 using lba_read_t = decltype(&ata::lba48Read);
 using stage3_entry_t = int (*)(void);
 
+int self_check_test_ata (bool is_lba_28);
+
 int kernel_2()
 {
 	serial::init();
-	serial::sendstr((char *)"first serial comm from os\n");
 
-	clear_screen();
+	printf("###################################################"
+			"#############################\n");
 	printf("Stage 2!\n");
 
 	if (check_A20_on())
@@ -35,28 +37,29 @@ int kernel_2()
 
 	bool isLba28 = false;
 	if (!ata::sendIdentify(0, isLba28, false))
-		printf("Identify Failed\n");
+		LOG("Identify Failed");
 
 	if (isLba28)
-		printf("Mode might be unsuported (if CHS)\n");
+		LOG("Mode might be unsuported (if CHS)");
 
-	// int res = elf::load_elf_in_mem(KERNEL_ON_HDD,
-	// 	[](void *addr, uint32 hdd_addr, uint32 size, void *ctx) {
-	// 		if (!ata::read(addr, hdd_addr, size, 0, *(bool *)ctx))
-	// 			return -1;
+#ifdef DBG_DRIVERS
+	if (self_check_test_ata(isLba28)) {
+		LOG("ATA test failed");
+		while (true) {} // panic
+	}
+#endif // DBG_DRIVERS
 
-	// 		return 0;
-	// 	},
-	// 	&isLba28);
+	int res = elf::load_elf_in_mem(KERNEL_ON_HDD,
+		[](void *addr, uint32 hdd_addr, uint32 size, void *ctx) {
+			if (!ata::read(addr, hdd_addr, size, 0, *(bool *)ctx))
+				return -1;
 
-	// if (res) {
-	// 	printf("Loading kernel in memory failed!\n");
-	// 	while (true) {}
-	// }
+			return 0;
+		},
+		&isLba28);
 
-	if (!ata::read((uint8 *)V_KERNEL_START, KERNEL_ON_HDD, KERN_SIZE, 0, isLba28))
-	{
-		printf("Loading kernel in memory failed!\n");
+	if (res) {
+		LOG("Loading kernel in memory failed!");
 		while (true) {}
 	}
 
@@ -102,5 +105,44 @@ int kernel_2()
 	// printf("Data: %s\n", (void *)V_KERNEL_IN_RAM);
 	// while (  true);
 
+	return 0;
+}
+
+int self_check_test_ata (bool is_lba_28) {
+	uint8 data[512 * 5];
+	auto clear_data = [&]() {
+		for (uint32 i = 0; i < sizeof(data); i++)
+			data[i] = 0;
+	};
+
+	clear_data();
+	for (uint32 voff = 0; voff < 512; voff++) {
+		LOG("Testing at voff: %d", voff);
+		for (uint32 start = 0; start < 1024; start += 64) {
+			LOG("Start: %d", start);
+			for (uint32 end = start; end < 1024; end += 64) {
+				uint32 size = end - start;
+				if (!ata::read(data + voff, 512 + start, size, 0, is_lba_28))
+				{
+					LOG("Failed to read from hdd");
+					return -1;
+				}
+
+				uint32 non_zero = 0;
+				for (uint32 i = 0; i < sizeof(data); i++) {
+					if (data[i])
+						non_zero++;
+				}
+				if (non_zero != size) {
+					LOG("Tested with: voff %d, start %d, end %d",
+						voff, start, end);
+					LOG("Expected %d non_zero, got %d", size, non_zero);
+					LOG("String in data: %s", (char *)(data + voff));
+					return -1;
+				}
+				clear_data();
+			}
+		}
+	}
 	return 0;
 }

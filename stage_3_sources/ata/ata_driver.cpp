@@ -193,50 +193,60 @@ bool ata::read (void *dst, uint64 hdd_addr, uint32 size, uint8 dev)
 	using lba_read_t = decltype(&ata::lba48Read);
 	lba_read_t lba_read = is_lba_32 ? &ata::lba28Read : &ata::lba48Read;
 
-	uint64 end_addr = hdd_addr + size;
+	if (size == 0)
+		return true;
+
+	uint8 *dst_buff = (uint8 *)dst; 
+	uint64 end_addr = hdd_addr + size - 1;
 	uint64 start_sector = hdd_addr / SECTOR_SIZE;
 	uint64 end_sector = end_addr / SECTOR_SIZE;
 
-	if (end_addr == hdd_addr)
-		return true;
+	// LOG("read from: hdd_s: %x, hdd_e: %x, dst: %x, ss: %d, es: %d",
+	// 		hdd_addr, end_addr, dst, start_sector, end_sector);
 
 	if (end_addr < hdd_addr)
 		return false;
 
+	uint32 start_rel = hdd_addr % SECTOR_SIZE;
+	uint32 end_rel = end_addr % SECTOR_SIZE;
+
 	if (start_sector == end_sector) {
 		uint8 sector[SECTOR_SIZE];
+		
 		if (!lba_read(sector, start_sector, 1, dev))
 			return false;
-		for (uint32 i = hdd_addr % SECTOR_SIZE; i < end_addr % SECTOR_SIZE; i++)
-			((char *)dst)[i - hdd_addr % SECTOR_SIZE] = sector[i];
+		
+		uint32 start_rel = hdd_addr % SECTOR_SIZE;
+		uint32 end_rel = end_addr % SECTOR_SIZE;
+		for (uint32 i = start_rel; i <= end_rel; i++)
+			dst_buff[i - start_rel] = sector[i];
 		return true;
 	}
 
-	if (hdd_addr % SECTOR_SIZE != 0) {
-		uint8 sector[SECTOR_SIZE];
-		if (!lba_read(sector, start_sector, 1, dev))
+	uint8 sector_start_buff[SECTOR_SIZE] = {0};
+	uint8 sector_end_buff[SECTOR_SIZE] = {0};
+	
+	if (!lba_read(sector_start_buff, start_sector, 1, dev))
+		return false;
+
+	if (!lba_read(sector_end_buff, end_sector, 1, dev))
+		return false;
+	
+	for (uint32 i = start_rel; i < SECTOR_SIZE; i++)
+		dst_buff[i - start_rel] = sector_start_buff[i];
+
+	for (uint32 i = 0; i <= end_rel; i++)
+		dst_buff[size - end_rel - 1 + i] = sector_end_buff[i];
+
+	uint32 offset_vaddr = SECTOR_SIZE - start_rel;
+	// LOG("offset_vaddr: %x", offset_vaddr);
+
+	if (start_sector + 1 <= end_sector - 1) {
+		if (!lba_read(dst_buff + offset_vaddr,
+				start_sector + 1, end_sector - 1 - start_sector, dev))
+		{
 			return false;
-		for (uint32 i = hdd_addr % SECTOR_SIZE; i < SECTOR_SIZE; i++)
-			((char *)dst)[i - hdd_addr % SECTOR_SIZE] = sector[i];
-		start_sector++;
+		}
 	}
-
-	if (end_addr % SECTOR_SIZE != 0) {
-		uint8 sector[SECTOR_SIZE];
-		if (!lba_read(sector, end_sector + 1, 1, dev))
-			return false;
-		for (uint32 i = 0; i < end_addr % SECTOR_SIZE; i++)
-			((char *)dst)[i + size - end_addr % SECTOR_SIZE] = sector[i];
-		end_sector--;
-	}
-
-	uint32 offset_vaddr = hdd_addr % SECTOR_SIZE != 0 ? 
-			SECTOR_SIZE - hdd_addr % SECTOR_SIZE
-			: 0;
-
-	if (end_sector - start_sector > 0)
-		if (!lba_read((uint8 *)dst + offset_vaddr,
-				start_sector, end_sector - start_sector, dev))
-			return false;
 	return true;
 }

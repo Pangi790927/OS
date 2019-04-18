@@ -103,8 +103,8 @@ stage2.bin: stage2 $(STAGE_2_OBJS)
 stage3.bin: stage3 $(STAGE_3_OBJS)
 	$(LD) -T stage_3.ld -m elf_i386 -o stage3.elf kernel_stage_3_start.o $(STAGE_3_OBJS)
 	objdump -d stage3.elf -M intel > stage3.o.asm
-	objcopy -O binary stage3.elf stage3.bin
-# 	cp stage3.elf stage3.bin
+# 	objcopy -O binary stage3.elf stage3.bin
+	cp stage3.elf stage3.bin
 
 superblock.ext2:
 	dd if=/dev/zero of=superblock.ext2  bs=1K  count=1

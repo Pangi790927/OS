@@ -37,7 +37,7 @@ void pci::printBusses () {
 					// uint16 hi = pci::configReadWord(bus, device, func, 2, 1);
 					// uint16 lo = pci::configReadWord(bus, device, func, 2, 0);
 
-					printf("Class code %x, Subclass %x, Prog IF %x, Rev ID %x, bus: %x, dev %x\n",
+					LOG("Class code %x, Subclass %x, Prog IF %x, Rev ID %x, bus: %x, dev %x\n",
 						pci::configReadByte(bus, device, func, 2, 3),
 						pci::configReadByte(bus, device, func, 2, 2),
 						pci::configReadByte(bus, device, func, 2, 1),
@@ -45,7 +45,7 @@ void pci::printBusses () {
 						bus,
 						device
 					);
-					printf("Vendor id: %x, Device id: %x, Header Type: %x, BAR0: %x\n", 
+					LOG("Vendor id: %x, Device id: %x, Header Type: %x, BAR0: %x\n", 
 						pci::configReadWord(bus, device, func, 0, 0),
 						pci::configReadWord(bus, device, func, 0, 1), 
 						pci::configReadByte(bus, device, func, 3, 3),
@@ -55,5 +55,5 @@ void pci::printBusses () {
 			}
 		}
 	}
-	printf("done printing busses ... \n");
+	LOG("done printing busses ... \n");
 }

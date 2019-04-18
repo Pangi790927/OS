@@ -153,6 +153,26 @@ namespace net
 		extern uint32 vendorDevice[];
 		extern const uint32 deviceTypeCount;
 
+		namespace RX_ERR { enum {
+			RXE =		0b1000'0000,
+			IPE =		0b0100'0000,
+			TCPE =		0b0010'0000,
+			CXE =		0b0001'0000,
+			SEQ =		0b0000'0100,
+			SE =		0b0000'0010,
+			CE =		0b0000'0001,
+		};}
+
+		namespace RX_STAT { enum {
+			PIF =		0b1000'0000,
+			IPCS =		0b0100'0000,
+			TCPCS =		0b0010'0000,
+			VP =		0b0000'1000,
+			IXSM =		0b0000'0100,
+			EOP =		0b0000'0010,
+			DD =		0b0000'0001,
+		};}
+
 		struct __attribute__((__packed__)) RxDesc {
 			uint64 addr			: 64;
 			uint32 len			: 16;
@@ -162,6 +182,24 @@ namespace net
 			uint32 special		: 16;
 		};
 		static_assert(sizeof(RxDesc) == RX_DESC_SIZE, "Wrong rx desc size");
+
+		namespace TX_STAT { enum {
+			TU =		0b1000,
+			LC =		0b0100,
+			EC =		0b0010,
+			DD =		0b0001,
+		};}
+
+		namespace TX_COMM { enum {
+			IDE =		0b1000'0000,
+			VLE =		0b0100'0000,
+			DEXT =		0b0010'0000,
+			RPS =		0b0001'0000,
+			RS =		0b0000'1000,
+			IC =		0b0000'0100,
+			IFCS =		0b0000'0010,
+			EOP =		0b0000'0001,
+		};}
 
 		struct __attribute__((__packed__)) TxDesc {
 			uint64 addr				: 64;	// addr
@@ -208,6 +246,8 @@ namespace net
 			kthread::Lock rx_lock;
 			kthread::Lock tx_lock;
 
+			CallbackVector<void(void *), 64> recv_cbk;
+
 			NetDriver();
 			~NetDriver();
 			void enable();
@@ -216,7 +256,8 @@ namespace net
 			int tx_free();
 			int rx_pending();
 			int send (uint8 *packet, uint32 len);
-			int recv (uint8 *buff1, uint8 *buff2, uint32 max_len) ;
+			int recv (uint8 *buff1, uint8 *buff2, uint32 max_len);
+			int add_cbk (const Callback<void(void *)>& cbk);
 
 		private:
 			uint16 read_eeprom(uint8 addr);

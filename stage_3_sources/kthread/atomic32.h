@@ -37,6 +37,9 @@ namespace kthread
 		uint32 operator |= (uint32 desired);
 		uint32 operator &= (uint32 desired);
 		uint32 operator ^= (uint32 desired);
+
+		uint32 dec_if_pos();
+		uint32 inc_if_pos();
 	};
 }
 

@@ -21,6 +21,10 @@ namespace net
 	inline auto &driver() {
 		return net::i8254x::driver();
 	}
+
+	inline uint32 max_driver_tx_len() {
+		return net::i8254x::TX_BUFF_SIZE;
+	}
 }
 
 #endif

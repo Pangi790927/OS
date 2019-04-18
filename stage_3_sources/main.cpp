@@ -39,6 +39,7 @@
 		* Network Driver
 		* MAKE MALLOC(done), PRINTF and other functions THREAD SAFE !!!!!!
 	Posible tasks:
+		* Make debbuger with elf help
 		* File system
 		* Read/Write with DMA from HDD
 		* Shell
@@ -143,6 +144,37 @@ bool commandExecute (std::vector<std::string> &args) {
 	else if (args[0] == "netshow") {
 		std::cout << net::netinfo() << std::endl;
 	}
+	else if (args[0] == "ps") {
+		auto pids = scheduler::active_pids();
+		std::cout << "pids: ";
+		for (auto pid : pids)
+			std::cout << pid << ", ";
+		std::cout << std::endl;
+	}
+	else if (args[0] == "blk") {
+		if (args.size() == 2) {
+			uint32 pid = atoi(args[1].c_str());
+			scheduler::block(pid, scheduler::ANY);
+		}
+		else
+			std::cout << "usage: blk pid" << std::endl;
+	}
+	else if (args[0] == "ublk") {
+		if (args.size() == 2) {
+			uint32 pid = atoi(args[1].c_str());
+			scheduler::unblock(pid, scheduler::ANY);
+		}
+		else
+			std::cout << "usage: ublk pid" << std::endl;
+	}
+	else if (args[0] == "kill") {
+		if (args.size() == 2) {
+			uint32 pid = atoi(args[1].c_str());
+			scheduler::kill(pid);
+		}
+		else
+			std::cout << "usage: kill pid" << std::endl;
+	}
 	else if (args[0] == "send") {
 		struct __attribute__((__packed__)) eth_hdr_t {
 				uint8 dest[6]; uint8 src[6]; uint16 type; };
@@ -175,6 +207,10 @@ bool commandExecute (std::vector<std::string> &args) {
 		std::cout << " * printpt        - prints paging table at index"
 				<< std::endl;
 		std::cout << " * netshow        - prints network info" << std::endl;
+		std::cout << " * ps             - proc info" << std::endl;
+		std::cout << " * blk            - block pid" << std::endl;
+		std::cout << " * ublk           - unblock pid" << std::endl;
+		std::cout << " * kill           - kill pid" << std::endl;
 	}
 	else
 		std::cout << "command not found: " << args[0] << std::endl;
@@ -189,6 +225,7 @@ void printUserMode() {
 	/* drivers that are not using port io can be initialized here */
 	/* putting them here enables us to use interrupts in iinitialization */
 	/* because in main interrupts are mainly disabled */
+
 	net::init();
 
 	keyboard::KeyState keyState;
@@ -199,8 +236,7 @@ void printUserMode() {
 	std::cout << "os$ ";
 	std::cout.flush();
 
-	KLOG("here I am\n");
-	kprintf("elf to str: %s\n", elf::kto_str().c_str());
+	// kprintf("elf to str: %s\n", elf::kto_str().c_str());
 
 	bool kernel_alive = true;
 	while (kernel_alive) {

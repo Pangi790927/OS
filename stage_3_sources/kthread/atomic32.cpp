@@ -106,4 +106,23 @@ namespace kthread
 			asm volatile ("pause");
 		return expected ^ desired;
 	}
+
+	/* not sure about those two, I better check them out */
+	uint32 Atomic32::dec_if_pos() {
+		uint32 expected = load();
+		uint32 dec = expected - 1;
+		while ((int)dec > 0 && !compare_exchange32(&container, &expected, dec)) {
+			dec = expected - 1;
+		}
+		return dec;
+	}
+
+	uint32 Atomic32::inc_if_pos() {
+		uint32 expected = load();
+		uint32 inc = expected + 1;
+		while ((int)inc >= 0 && !compare_exchange32(&container, &expected, inc)) {
+			inc = expected + 1;
+		}
+		return inc;
+	}
 }
