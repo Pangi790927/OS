@@ -5,24 +5,24 @@ Stage 2!
 [stage_2_sources/elf/elf.cpp][line:56][load_elf_in_mem] prog_off 34
 [stage_2_sources/elf/elf.cpp][line:57][load_elf_in_mem] prog_hdr_size 32
 [stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: 0
-[stage_2_sources/elf/elf.cpp][line:79][load_elf_in_mem] str table:  .symtab .strtab .shstrtab .text .text._Z7kprintfIiEvPKcT_ .text._Z7kprintfIcEvPKcT_ .text._Z14_manage_escapeItEiPKcPT_ .text._Z7kprintfItJttEEvPKcT_DpT0_ .text._Z14_manage_escapeIjEiPKcPT_ .text._ZNSt9streambufIcE5flushEv .text._ZNSt9streambufIcE4peekEv .text._ZNSt9streambufIcE8writeOutEv .text._ZNSt6kiobufIcE8writeOutEv .text._ZNSt9streambufIcE3putEc .text._ZNSt6stringC2EPKc .text._ZStlsRSt7ostreamPKc .text._ZStlsRSt7ostreamRKSt6string .text._Z7kprintfIjEvPKcT_ .text._ZNSt10shared_ptrIN8keyboard5StateESt15default_deleterIS1_EE3decEv .text._ZNSt10shared_ptrISt11__dequeNodeIjESt15default_deleterIS1_EE3decEv .text._ZNSt6vectorIcE5clearEv .text._ZNSt10shared_ptrISt11__dequeNodeIcESt15default_deleterIS1_EE3decEv .text._ZNSt9streambufIcE3getEv .text._ZNSt9streambufIcE6readInEc .text._ZNSt6vectorIcE7reserveEj .text.startup .text._Z14_manage_escapeIPvEiPKcPT_ .text._Z7kprintfIPvJS0_EEvPKcT_DpT0_ .text._Z7kprintfIPvJjEEvPKcT_DpT0_ .text._Z7kprintfIPcEvPKcT_ .text._Z7kprintfItEvPKcT_ .text._Z14_manage_escapeIhEiPKcPT_ .text._Z7kprintfIjJjEEvPKcT_DpT0_ .text._Z7kprintfIhJhEEvPKcT_DpT0_ .text._Z7kprintfIhJhhhEEvPKcT_DpT0_ .text._ZNSt6vectorISt6stringE6resizeEjRKS0_ .text._ZNSt6vectorISt6stringE9push_backERKS0_ .text._Z7kprintfIhEvPKcT_ .text._ZN8keyboard8KeyState7doEventEh .text._ZN8keyboard8KeyState13registerEventEhj .text._Z14_manage_escapeIiEiPKcPT_ .rodata .eh_frame .rodata._Z7kprintfIiEvPKcT_.str1.1 .rodata._Z7kprintfIiEvPKcT_ .rodata._Z7kprintfIcEvPKcT_ .rodata._Z14_manage_escapeItEiPKcPT_ .rodata.str1.1 .rodata._Z14_manage_escapeIjEiPKcPT_.str1.1 .rodata._Z14_manage_escapeIjEiPKcPT_ .rodata._Z7kprintfIjEvPKcT_.str1.1 .rodata._Z7kprintfIjEvPKcT_ .rodata.str1.4 .rodata._ZTVSt9streambufIcE .rodata._ZTVSt6kiobufIcE .rodata._Z14_manage_escapeIPvEiPKcPT_.str1.1 .rodata._Z14_manage_escapeIPvEiPKcPT_ .rodata._Z7kprintfIPcEvPKcT_.str1.1 .rodata._Z7kprintfIPcEvPKcT_ .rodata._Z7kprintfItEvPKcT_.str1.1 .rodata._Z7kprintfItEvPKcT_ .rodata._Z14_manage_escapeIhEiPKcPT_ .rodata._Z7kprintfIhEvPKcT_.str1.1 .rodata._Z7kprintfIhEvPKcT_ .rodata._Z14_manage_escapeIhEiPKcPT_.str1.1 .rodata._Z14_manage_escapeIiEiPKcPT_ .data .bss .init_array .fini_array .stab .comment .stabstr .debug_info .debug_abbrev .debug_aranges .debug_line .debug_str .debug_loc .debug_ranges
+[stage_2_sources/elf/elf.cpp][line:79][load_elf_in_mem] str table:  .symtab .strtab .shstrtab .text .text._Z7kprintfIiEvPKcT_ .text._Z7kprintfIcEvPKcT_ .text._Z14_manage_escapeItEiPKcPT_ .text._Z7kprintfItJttEEvPKcT_DpT0_ .text._Z14_manage_escapeIjEiPKcPT_ .text._ZNSt9streambufIcE5flushEv .text._ZNSt9streambufIcE4peekEv .text._ZNSt9streambufIcE8writeOutEv .text._ZNSt6kiobufIcE8writeOutEv .text._ZNSt9streambufIcE3putEc .text._ZNSt6stringC2EPKc .text._ZStlsRSt7ostreamPKc .text._ZStlsRSt7ostreamRKSt6string .text._ZN3net9str_to_ipERKSt6string .text._Z7kprintfIjEvPKcT_ .text._Z7kprintfIiJSt6stringEEvPKcT_DpT0_ .text._ZNSt10shared_ptrIN8keyboard5StateESt15default_deleterIS1_EE3decEv .text._ZNSt10shared_ptrISt11__dequeNodeIjESt15default_deleterIS1_EE3decEv .text._ZNSt6vectorIcE5clearEv .text._ZNSt10shared_ptrISt11__dequeNodeIcESt15default_deleterIS1_EE3decEv .text._ZNSt9streambufIcE3getEv .text._ZNSt9streambufIcE6readInEc .text._ZNSt6vectorIcE7reserveEj .text.startup .text._Z14_manage_escapeIPvEiPKcPT_ .text._Z7kprintfIPvJS0_EEvPKcT_DpT0_ .text._Z7kprintfIPvJjEEvPKcT_DpT0_ .text._Z7kprintfIPcEvPKcT_ .text._Z7kprintfItEvPKcT_ .text._Z14_manage_escapeIhEiPKcPT_ .text._Z7kprintfIjJjEEvPKcT_DpT0_ .text._Z7kprintfIhJhEEvPKcT_DpT0_ .text._Z7kprintfIhJhhhEEvPKcT_DpT0_ .text._ZNSt6vectorISt6stringE6resizeEjRKS0_ .text._ZNSt6vectorISt6stringE9push_backERKS0_ .text._Z7kprintfIhEvPKcT_ .text._ZN8keyboard8KeyState7doEventEh .text._ZN8keyboard8KeyState13registerEventEhj .text._ZN3net9ip_to_strEj .text._ZN4util10avl_tree_tIN9scheduler10time_pid_tEbNS_14static_alloc_tILj20ELj1024EEENS3_ILj16ELj1024EEEE10rec_insertEPNS_10avl_node_tIS2_bEES9_RKS2_ .text._ZN4util10avl_tree_tIN9scheduler10time_pid_tEbNS_14static_alloc_tILj20ELj1024EEENS3_ILj16ELj1024EEEE10rec_removeEPNS_10avl_node_tIS2_bEERKS2_ .text._Z14_manage_escapeIiEiPKcPT_ .rodata .eh_frame .rodata._Z7kprintfIiEvPKcT_.str1.1 .rodata._Z7kprintfIiEvPKcT_ .rodata._Z7kprintfIcEvPKcT_ .rodata._Z14_manage_escapeItEiPKcPT_ .rodata.str1.1 .rodata._Z14_manage_escapeIjEiPKcPT_.str1.1 .rodata._Z14_manage_escapeIjEiPKcPT_ .rodata._Z7kprintfIjEvPKcT_.str1.1 .rodata._Z7kprintfIjEvPKcT_ .rodata._Z7kprintfIiJSt6stringEEvPKcT_DpT0_ .rodata.str1.4 .rodata._ZTVSt9streambufIcE .rodata._ZTVSt6kiobufIcE .rodata._Z14_manage_escapeIPvEiPKcPT_.str1.1 .rodata._Z14_manage_escapeIPvEiPKcPT_ .rodata._Z7kprintfIPcEvPKcT_.str1.1 .rodata._Z7kprintfIPcEvPKcT_ .rodata._Z7kprintfItEvPKcT_.str1.1 .rodata._Z7kprintfItEvPKcT_ .rodata._Z14_manage_escapeIhEiPKcPT_ .rodata._Z7kprintfIhEvPKcT_.str1.1 .rodata._Z7kprintfIhEvPKcT_ .rodata._ZN3net9ip_to_strEj.str1.1 .rodata._Z14_manage_escapeIhEiPKcPT_.str1.1 .rodata._Z14_manage_escapeIiEiPKcPT_ .data .bss .init_array .fini_array .stab .comment .stabstr .debug_info .debug_abbrev .debug_aranges .debug_line .debug_str .debug_loc .debug_ranges
 [stage_2_sources/elf/elf.cpp][line:93][load_elf_in_mem] -> prog: 0 <-
-[stage_2_sources/elf/elf.cpp][line:96][load_elf_in_mem] vaddr c1000000, paddr c1000000, align 4096 filesz 31fe4
-[stage_2_sources/elf/elf.cpp][line:98][load_elf_in_mem] memsz 31fe4, type: 1, off 1000
+[stage_2_sources/elf/elf.cpp][line:96][load_elf_in_mem] vaddr c1000000, paddr c1000000, align 4096 filesz 3e4e4
+[stage_2_sources/elf/elf.cpp][line:98][load_elf_in_mem] memsz 3e4e4, type: 1, off 1000
 [stage_2_sources/elf/elf.cpp][line:101][load_elf_in_mem] prog in usefull
 [stage_2_sources/elf/elf.cpp][line:93][load_elf_in_mem] -> prog: 1 <-
-[stage_2_sources/elf/elf.cpp][line:96][load_elf_in_mem] vaddr c1032000, paddr c1032000, align 4096 filesz e0
-[stage_2_sources/elf/elf.cpp][line:98][load_elf_in_mem] memsz 134908, type: 1, off 42000
+[stage_2_sources/elf/elf.cpp][line:96][load_elf_in_mem] vaddr c103f000, paddr c103f000, align 4096 filesz e0
+[stage_2_sources/elf/elf.cpp][line:98][load_elf_in_mem] memsz 172328, type: 1, off 4f000
 [stage_2_sources/elf/elf.cpp][line:101][load_elf_in_mem] prog in usefull
 [stage_2_sources/elf/elf.cpp][line:93][load_elf_in_mem] -> prog: 2 <-
-[stage_2_sources/elf/elf.cpp][line:96][load_elf_in_mem] vaddr c1167000, paddr c1167000, align 4096 filesz 100c
-[stage_2_sources/elf/elf.cpp][line:98][load_elf_in_mem] memsz 100c, type: 1, off 43000
+[stage_2_sources/elf/elf.cpp][line:96][load_elf_in_mem] vaddr c11b2000, paddr c11b2000, align 4096 filesz 100c
+[stage_2_sources/elf/elf.cpp][line:98][load_elf_in_mem] memsz 100c, type: 1, off 50000
 [stage_2_sources/elf/elf.cpp][line:101][load_elf_in_mem] prog in usefull
 [stage_2_sources/elf/elf.cpp][line:93][load_elf_in_mem] -> prog: 3 <-
 [stage_2_sources/elf/elf.cpp][line:96][load_elf_in_mem] vaddr 0, paddr 0, align 16 filesz 0
 [stage_2_sources/elf/elf.cpp][line:98][load_elf_in_mem] memsz 0, type: 6474e551, off 0
-[stage_2_sources/elf/elf.cpp][line:110][load_elf_in_mem] sect_cnt 81
-[stage_2_sources/elf/elf.cpp][line:111][load_elf_in_mem] sect_off 10d8fc
+[stage_2_sources/elf/elf.cpp][line:110][load_elf_in_mem] sect_cnt 88
+[stage_2_sources/elf/elf.cpp][line:111][load_elf_in_mem] sect_off 159a98
 [stage_2_sources/elf/elf.cpp][line:112][load_elf_in_mem] sect_hdr_size 40
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 0 <-
 [stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: 0
@@ -30,401 +30,436 @@ Stage 2!
 [stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1000000
 [stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text
 [stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1000000, align 4096 namei 1b
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 1d74a, type: 1, off 1000
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 269da, type: 1, off 1000
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 2 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c101d750
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c10269e0
 [stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z7kprintfIiEvPKcT_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c101d750, align 16 namei 21
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 1c6, type: 1, off 1e750
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c10269e0, align 16 namei 21
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 1c6, type: 1, off 279e0
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 3 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c101d920
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1026bb0
 [stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z7kprintfIcEvPKcT_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c101d920, align 16 namei 3b
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 1ef, type: 1, off 1e920
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1026bb0, align 16 namei 3b
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 1ef, type: 1, off 27bb0
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 4 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c101db10
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1026da0
 [stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z14_manage_escapeItEiPKcPT_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c101db10, align 16 namei 55
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 10f, type: 1, off 1eb10
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1026da0, align 16 namei 55
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 10f, type: 1, off 27da0
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 5 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c101dc20
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1026eb0
 [stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z7kprintfItJttEEvPKcT_DpT0_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c101dc20, align 16 namei 78
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 224, type: 1, off 1ec20
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1026eb0, align 16 namei 78
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 224, type: 1, off 27eb0
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 6 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c101de50
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c10270e0
 [stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z14_manage_escapeIjEiPKcPT_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c101de50, align 16 namei 9b
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size f7, type: 1, off 1ee50
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c10270e0, align 16 namei 9b
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size f7, type: 1, off 280e0
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 7 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c101df50
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c10271e0
 [stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZNSt9streambufIcE5flushEv
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c101df50, align 16 namei be
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 40, type: 1, off 1ef50
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c10271e0, align 16 namei be
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 40, type: 1, off 281e0
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 8 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c101df90
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1027220
 [stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZNSt9streambufIcE4peekEv
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c101df90, align 16 namei df
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 33, type: 1, off 1ef90
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1027220, align 16 namei df
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 33, type: 1, off 28220
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 9 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c101dfd0
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1027260
 [stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZNSt9streambufIcE8writeOutEv
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c101dfd0, align 16 namei ff
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size e, type: 1, off 1efd0
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1027260, align 16 namei ff
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size e, type: 1, off 28260
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 10 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c101dfe0
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1027270
 [stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZNSt6kiobufIcE8writeOutEv
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c101dfe0, align 16 namei 123
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 33, type: 1, off 1efe0
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1027270, align 16 namei 123
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 33, type: 1, off 28270
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 11 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c101e020
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c10272b0
 [stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZNSt9streambufIcE3putEc
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c101e020, align 16 namei 144
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 77, type: 1, off 1f020
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c10272b0, align 16 namei 144
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 77, type: 1, off 282b0
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 12 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c101e0a0
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1027330
 [stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZNSt6stringC2EPKc
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c101e0a0, align 16 namei 163
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 40, type: 1, off 1f0a0
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1027330, align 16 namei 163
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 40, type: 1, off 28330
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 13 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c101e0e0
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1027370
 [stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZStlsRSt7ostreamPKc
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c101e0e0, align 16 namei 17c
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 10e, type: 1, off 1f0e0
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1027370, align 16 namei 17c
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 10e, type: 1, off 28370
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 14 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c101e1f0
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1027480
 [stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZStlsRSt7ostreamRKSt6string
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c101e1f0, align 16 namei 197
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size fe, type: 1, off 1f1f0
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1027480, align 16 namei 197
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size fe, type: 1, off 28480
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 15 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c101e2f0
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z7kprintfIjEvPKcT_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c101e2f0, align 16 namei 1ba
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 1c6, type: 1, off 1f2f0
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1027580
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZN3net9str_to_ipERKSt6string
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1027580, align 16 namei 1ba
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size a7, type: 1, off 28580
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 16 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c101e4c0
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZNSt10shared_ptrIN8keyboard5StateESt15default_deleterIS1_EE3decEv
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c101e4c0, align 16 namei 1d4
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 26f, type: 1, off 1f4c0
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1027630
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z7kprintfIjEvPKcT_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1027630, align 16 namei 1de
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 1c6, type: 1, off 28630
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 17 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c101e730
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZNSt10shared_ptrISt11__dequeNodeIjESt15default_deleterIS1_EE3decEv
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c101e730, align 16 namei 21d
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 88, type: 1, off 1f730
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1027800
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z7kprintfIiJSt6stringEEvPKcT_DpT0_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1027800, align 16 namei 1f8
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 338, type: 1, off 28800
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 18 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c101e7c0
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZNSt6vectorIcE5clearEv
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c101e7c0, align 16 namei 267
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 33, type: 1, off 1f7c0
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1027b40
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZNSt10shared_ptrIN8keyboard5StateESt15default_deleterIS1_EE3decEv
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1027b40, align 16 namei 222
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 26f, type: 1, off 28b40
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 19 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c101e800
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZNSt10shared_ptrISt11__dequeNodeIcESt15default_deleterIS1_EE3decEv
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c101e800, align 16 namei 285
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 88, type: 1, off 1f800
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1027db0
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZNSt10shared_ptrISt11__dequeNodeIjESt15default_deleterIS1_EE3decEv
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1027db0, align 16 namei 26b
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 88, type: 1, off 28db0
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 20 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c101e890
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZNSt9streambufIcE3getEv
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c101e890, align 16 namei 2cf
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size ccf, type: 1, off 1f890
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1027e40
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZNSt6vectorIcE5clearEv
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1027e40, align 16 namei 2b5
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 33, type: 1, off 28e40
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 21 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c101f560
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZNSt9streambufIcE6readInEc
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c101f560, align 16 namei 2ee
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 11e4, type: 1, off 20560
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1027e80
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZNSt10shared_ptrISt11__dequeNodeIcESt15default_deleterIS1_EE3decEv
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1027e80, align 16 namei 2d3
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 88, type: 1, off 28e80
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 22 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1020750
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZNSt6vectorIcE7reserveEj
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1020750, align 16 namei 310
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 4f, type: 1, off 21750
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1027f10
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZNSt9streambufIcE3getEv
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1027f10, align 16 namei 31d
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size ccf, type: 1, off 28f10
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 23 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c10207a0
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text.startup
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c10207a0, align 16 namei 330
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 289, type: 1, off 217a0
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1028be0
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZNSt9streambufIcE6readInEc
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1028be0, align 16 namei 33c
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 11e4, type: 1, off 29be0
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 24 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1020a30
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z14_manage_escapeIPvEiPKcPT_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1020a30, align 16 namei 33e
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size f7, type: 1, off 21a30
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1029dd0
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZNSt6vectorIcE7reserveEj
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1029dd0, align 16 namei 35e
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 4f, type: 1, off 2add0
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 25 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1020b30
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z7kprintfIPvJS0_EEvPKcT_DpT0_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1020b30, align 16 namei 362
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 15c, type: 1, off 21b30
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1029e20
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text.startup
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1029e20, align 16 namei 37e
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 329, type: 1, off 2ae20
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 26 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1020c90
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z7kprintfIPvJjEEvPKcT_DpT0_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1020c90, align 16 namei 387
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 15c, type: 1, off 21c90
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c102a150
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z14_manage_escapeIPvEiPKcPT_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c102a150, align 16 namei 38c
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size f7, type: 1, off 2b150
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 27 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1020df0
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z7kprintfIPcEvPKcT_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1020df0, align 16 namei 3aa
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 1c6, type: 1, off 21df0
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c102a250
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z7kprintfIPvJS0_EEvPKcT_DpT0_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c102a250, align 16 namei 3b0
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 15c, type: 1, off 2b250
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 28 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1020fc0
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z7kprintfItEvPKcT_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1020fc0, align 16 namei 3c5
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 1ef, type: 1, off 21fc0
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c102a3b0
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z7kprintfIPvJjEEvPKcT_DpT0_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c102a3b0, align 16 namei 3d5
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 15c, type: 1, off 2b3b0
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 29 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c10211b0
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z14_manage_escapeIhEiPKcPT_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c10211b0, align 16 namei 3df
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 10f, type: 1, off 221b0
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c102a510
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z7kprintfIPcEvPKcT_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c102a510, align 16 namei 3f8
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 1c6, type: 1, off 2b510
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 30 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c10212c0
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z7kprintfIjJjEEvPKcT_DpT0_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c10212c0, align 16 namei 402
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 15c, type: 1, off 222c0
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c102a6e0
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z7kprintfItEvPKcT_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c102a6e0, align 16 namei 413
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 1ef, type: 1, off 2b6e0
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 31 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1021420
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z7kprintfIhJhEEvPKcT_DpT0_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1021420, align 16 namei 424
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 16c, type: 1, off 22420
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c102a8d0
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z14_manage_escapeIhEiPKcPT_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c102a8d0, align 16 namei 42d
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 10f, type: 1, off 2b8d0
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 32 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1021590
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z7kprintfIhJhhhEEvPKcT_DpT0_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1021590, align 16 namei 446
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 19c, type: 1, off 22590
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c102a9e0
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z7kprintfIjJjEEvPKcT_DpT0_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c102a9e0, align 16 namei 450
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 15c, type: 1, off 2b9e0
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 33 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1021730
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZNSt6vectorISt6stringE6resizeEjRKS0_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1021730, align 16 namei 46a
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 147, type: 1, off 22730
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c102ab40
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z7kprintfIhJhEEvPKcT_DpT0_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c102ab40, align 16 namei 472
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 16c, type: 1, off 2bb40
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 34 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1021880
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZNSt6vectorISt6stringE9push_backERKS0_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1021880, align 16 namei 496
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 76, type: 1, off 22880
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c102acb0
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z7kprintfIhJhhhEEvPKcT_DpT0_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c102acb0, align 16 namei 494
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 19c, type: 1, off 2bcb0
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 35 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1021900
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z7kprintfIhEvPKcT_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1021900, align 16 namei 4c4
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 1ef, type: 1, off 22900
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c102ae50
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZNSt6vectorISt6stringE6resizeEjRKS0_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c102ae50, align 16 namei 4b8
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 147, type: 1, off 2be50
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 36 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1021af0
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZN8keyboard8KeyState7doEventEh
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1021af0, align 16 namei 4de
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 1082, type: 1, off 22af0
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c102afa0
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZNSt6vectorISt6stringE9push_backERKS0_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c102afa0, align 16 namei 4e4
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 76, type: 1, off 2bfa0
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 37 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1022b80
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZN8keyboard8KeyState13registerEventEhj
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1022b80, align 16 namei 504
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 5d3, type: 1, off 23b80
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c102b020
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z7kprintfIhEvPKcT_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c102b020, align 16 namei 512
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 1ef, type: 1, off 2c020
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 38 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1023160
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z14_manage_escapeIiEiPKcPT_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c1023160, align 16 namei 532
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size f7, type: 1, off 24160
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c102b210
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZN8keyboard8KeyState7doEventEh
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c102b210, align 16 namei 52c
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 1082, type: 1, off 2c210
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 39 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1024000
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c1024000, align 4096 namei 555
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 41c, type: 1, off 25000
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c102c2a0
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZN8keyboard8KeyState13registerEventEhj
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c102c2a0, align 16 namei 552
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 5d3, type: 1, off 2d2a0
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 40 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c102441c
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .eh_frame
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c102441c, align 4 namei 55d
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size c568, type: 1, off 2541c
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c102c880
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZN3net9ip_to_strEj
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c102c880, align 16 namei 580
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 54f, type: 1, off 2d880
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 41 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1030984
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z7kprintfIiEvPKcT_.str1.1
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00110010, vaddr c1030984, align 1 namei 567
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 3, type: 1, off 31984
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c102cdd0
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZN4util10avl_tree_tIN9scheduler10time_pid_tEbNS_14static_alloc_tILj20ELj1024EEENS3_ILj16ELj1024EEEE10rec_insertEPNS_10avl_node_tIS2_bEES9_RKS2_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c102cdd0, align 16 namei 59a
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 561, type: 1, off 2ddd0
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 42 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1030988
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z7kprintfIiEvPKcT_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c1030988, align 4 namei 58a
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size dc, type: 1, off 31988
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c102d340
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._ZN4util10avl_tree_tIN9scheduler10time_pid_tEbNS_14static_alloc_tILj20ELj1024EEENS3_ILj16ELj1024EEEE10rec_removeEPNS_10avl_node_tIS2_bEERKS2_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c102d340, align 16 namei 631
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 600, type: 1, off 2e340
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 43 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1030a64
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z7kprintfIcEvPKcT_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c1030a64, align 4 namei 5a6
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size dc, type: 1, off 31a64
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c102d940
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .text._Z14_manage_escapeIiEiPKcPT_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000110, vaddr c102d940, align 16 namei 6c5
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size f7, type: 1, off 2e940
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 44 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1030b40
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z14_manage_escapeItEiPKcPT_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c1030b40, align 4 namei 5c2
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size dc, type: 1, off 31b40
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c102e000
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c102e000, align 4096 namei 6e8
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 8bc, type: 1, off 2f000
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 45 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1030c1c
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata.str1.1
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00110010, vaddr c1030c1c, align 1 namei 5e7
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 794, type: 1, off 31c1c
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c102e8bc
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .eh_frame
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c102e8bc, align 4 namei 6f0
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size e318, type: 1, off 2f8bc
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 46 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c10313b0
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z14_manage_escapeIjEiPKcPT_.str1.1
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00110010, vaddr c10313b0, align 1 namei 5f6
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 3, type: 1, off 323b0
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c103cbd4
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z7kprintfIiEvPKcT_.str1.1
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00110010, vaddr c103cbd4, align 1 namei 6fa
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 3, type: 1, off 3dbd4
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 47 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c10313b4
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z14_manage_escapeIjEiPKcPT_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c10313b4, align 4 namei 622
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size dc, type: 1, off 323b4
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c103cbd8
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z7kprintfIiEvPKcT_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c103cbd8, align 4 namei 71d
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size dc, type: 1, off 3dbd8
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 48 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1031490
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z7kprintfIjEvPKcT_.str1.1
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00110010, vaddr c1031490, align 1 namei 647
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 3, type: 1, off 32490
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c103ccb4
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z7kprintfIcEvPKcT_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c103ccb4, align 4 namei 739
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size dc, type: 1, off 3dcb4
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 49 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1031494
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z7kprintfIjEvPKcT_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c1031494, align 4 namei 66a
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size dc, type: 1, off 32494
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c103cd90
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z14_manage_escapeItEiPKcPT_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c103cd90, align 4 namei 755
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size dc, type: 1, off 3dd90
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 50 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1031570
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata.str1.4
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00110010, vaddr c1031570, align 4 namei 686
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 4f8, type: 1, off 32570
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c103ce6c
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata.str1.1
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00110010, vaddr c103ce6c, align 1 namei 77a
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 868, type: 1, off 3de6c
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 51 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1031a68
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._ZTVSt9streambufIcE
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c1031a68, align 4 namei 695
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 20, type: 1, off 32a68
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c103d6d4
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z14_manage_escapeIjEiPKcPT_.str1.1
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00110010, vaddr c103d6d4, align 1 namei 789
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 3, type: 1, off 3e6d4
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 52 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1031a88
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._ZTVSt6kiobufIcE
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c1031a88, align 4 namei 6b1
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 20, type: 1, off 32a88
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c103d6d8
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z14_manage_escapeIjEiPKcPT_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c103d6d8, align 4 namei 7b5
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size dc, type: 1, off 3e6d8
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 53 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1031aa8
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z14_manage_escapeIPvEiPKcPT_.str1.1
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00110010, vaddr c1031aa8, align 1 namei 6ca
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 3, type: 1, off 32aa8
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c103d7b4
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z7kprintfIjEvPKcT_.str1.1
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00110010, vaddr c103d7b4, align 1 namei 7da
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 3, type: 1, off 3e7b4
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 54 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1031aac
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z14_manage_escapeIPvEiPKcPT_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c1031aac, align 4 namei 6f7
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size dc, type: 1, off 32aac
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c103d7b8
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z7kprintfIjEvPKcT_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c103d7b8, align 4 namei 7fd
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size dc, type: 1, off 3e7b8
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 55 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1031b88
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z7kprintfIPcEvPKcT_.str1.1
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00110010, vaddr c1031b88, align 1 namei 71d
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 3, type: 1, off 32b88
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c103d894
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z7kprintfIiJSt6stringEEvPKcT_DpT0_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c103d894, align 4 namei 819
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 1b8, type: 1, off 3e894
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 56 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1031b8c
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z7kprintfIPcEvPKcT_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c1031b8c, align 4 namei 741
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size dc, type: 1, off 32b8c
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c103da4c
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata.str1.4
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00110010, vaddr c103da4c, align 4 namei 845
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 518, type: 1, off 3ea4c
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 57 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1031c68
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z7kprintfItEvPKcT_.str1.1
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00110010, vaddr c1031c68, align 1 namei 75e
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 3, type: 1, off 32c68
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c103df64
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._ZTVSt9streambufIcE
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c103df64, align 4 namei 854
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 20, type: 1, off 3ef64
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 58 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1031c6c
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z7kprintfItEvPKcT_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c1031c6c, align 4 namei 781
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size dc, type: 1, off 32c6c
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c103df84
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._ZTVSt6kiobufIcE
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c103df84, align 4 namei 870
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 20, type: 1, off 3ef84
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 59 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1031d48
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z14_manage_escapeIhEiPKcPT_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c1031d48, align 4 namei 79d
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size dc, type: 1, off 32d48
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c103dfa4
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z14_manage_escapeIPvEiPKcPT_.str1.1
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00110010, vaddr c103dfa4, align 1 namei 889
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 3, type: 1, off 3efa4
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 60 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1031e24
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z7kprintfIhEvPKcT_.str1.1
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00110010, vaddr c1031e24, align 1 namei 7c2
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 3, type: 1, off 32e24
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c103dfa8
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z14_manage_escapeIPvEiPKcPT_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c103dfa8, align 4 namei 8b6
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size dc, type: 1, off 3efa8
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 61 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1031e28
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z7kprintfIhEvPKcT_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c1031e28, align 4 namei 7e5
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size dc, type: 1, off 32e28
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c103e084
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z7kprintfIPcEvPKcT_.str1.1
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00110010, vaddr c103e084, align 1 namei 8dc
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 3, type: 1, off 3f084
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 62 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1031f04
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z14_manage_escapeIhEiPKcPT_.str1.1
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00110010, vaddr c1031f04, align 1 namei 801
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 3, type: 1, off 32f04
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c103e088
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z7kprintfIPcEvPKcT_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c103e088, align 4 namei 900
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size dc, type: 1, off 3f088
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 63 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1031f08
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z14_manage_escapeIiEiPKcPT_
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c1031f08, align 4 namei 82d
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size dc, type: 1, off 32f08
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c103e164
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z7kprintfItEvPKcT_.str1.1
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00110010, vaddr c103e164, align 1 namei 91d
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 3, type: 1, off 3f164
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 64 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1032000
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .data
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000011, vaddr c1032000, align 4096 namei 852
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size e0, type: 1, off 42000
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c103e168
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z7kprintfItEvPKcT_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c103e168, align 4 namei 940
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size dc, type: 1, off 3f168
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 65 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1033000
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .bss
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000011, vaddr c1033000, align 65536 namei 858
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 133908, type: 8, off 420e0
-[stage_2_sources/elf/elf.cpp][line:139][load_elf_in_mem] sector is usefull 133908
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c103e244
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z14_manage_escapeIhEiPKcPT_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c103e244, align 4 namei 95c
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size dc, type: 1, off 3f244
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 66 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1167000
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .init_array
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000011, vaddr c1167000, align 4096 namei 85d
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 14, type: e, off 43000
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c103e320
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z7kprintfIhEvPKcT_.str1.1
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00110010, vaddr c103e320, align 1 namei 981
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 3, type: 1, off 3f320
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 67 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1168000
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .fini_array
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000011, vaddr c1168000, align 4096 namei 869
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size c, type: f, off 44000
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c103e324
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z7kprintfIhEvPKcT_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c103e324, align 4 namei 9a4
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size dc, type: 1, off 3f324
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 68 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: 0
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .stab
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000000, vaddr 0, align 4 namei 875
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size de0, type: 1, off 4400c
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c103e400
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._ZN3net9ip_to_strEj.str1.1
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00110010, vaddr c103e400, align 1 namei 9c0
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 2, type: 1, off 3f400
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 69 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: 0
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .comment
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00110000, vaddr 0, align 1 namei 87b
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 2e, type: 1, off 44dec
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c103e402
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z14_manage_escapeIhEiPKcPT_.str1.1
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00110010, vaddr c103e402, align 1 namei 9e3
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 3, type: 1, off 3f402
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 70 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: 0
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .stabstr
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000000, vaddr 0, align 1 namei 884
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 240, type: 3, off 44e1a
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c103e408
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .rodata._Z14_manage_escapeIiEiPKcPT_
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000010, vaddr c103e408, align 4 namei a0f
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size dc, type: 1, off 3f408
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 71 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: 0
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .debug_info
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000000, vaddr 0, align 1 namei 88d
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 5413d, type: 1, off 4505a
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c103f000
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .data
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000011, vaddr c103f000, align 4096 namei a34
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size e0, type: 1, off 4f000
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 72 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: 0
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .debug_abbrev
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000000, vaddr 0, align 1 namei 899
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size bdab, type: 1, off 99197
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c1040000
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .bss
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000011, vaddr c1040000, align 65536 namei a3a
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 171328, type: 8, off 4f0e0
+[stage_2_sources/elf/elf.cpp][line:139][load_elf_in_mem] sector is usefull 171328
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 73 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: 0
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .debug_aranges
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000000, vaddr 0, align 1 namei 8a7
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size ed8, type: 1, off a4f42
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c11b2000
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .init_array
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000011, vaddr c11b2000, align 4096 namei a3f
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 18, type: e, off 50000
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 74 <-
-[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: 0
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .debug_line
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000000, vaddr 0, align 1 namei 8b6
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size f85c, type: 1, off a5e1a
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: c11b3000
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .fini_array
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000011, vaddr c11b3000, align 4096 namei a4b
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size c, type: f, off 51000
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 75 <-
 [stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: 0
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .debug_str
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00110000, vaddr 0, align 1 namei 8c2
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size d130, type: 1, off b5676
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .stab
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000000, vaddr 0, align 4 namei a57
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size de0, type: 1, off 5100c
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 76 <-
 [stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: 0
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .debug_loc
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000000, vaddr 0, align 1 namei 8cd
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 330ec, type: 1, off c27a6
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .comment
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00110000, vaddr 0, align 1 namei a5d
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 2e, type: 1, off 51dec
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 77 <-
 [stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: 0
-[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .debug_ranges
-[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000000, vaddr 0, align 1 namei 8d8
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 10d08, type: 1, off f5892
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .stabstr
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000000, vaddr 0, align 1 namei a66
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 240, type: 3, off 51e1a
 [stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 78 <-
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: 0
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .debug_info
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000000, vaddr 0, align 1 namei a6f
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 6e7c1, type: 1, off 5205a
+[stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 79 <-
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: 0
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .debug_abbrev
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000000, vaddr 0, align 1 namei a7b
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size e39a, type: 1, off c081b
+[stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 80 <-
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: 0
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .debug_aranges
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000000, vaddr 0, align 1 namei a89
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size fb0, type: 1, off cebb5
+[stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 81 <-
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: 0
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .debug_line
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000000, vaddr 0, align 1 namei a98
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 13748, type: 1, off cfb65
+[stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 82 <-
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: 0
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .debug_str
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00110000, vaddr 0, align 1 namei aa4
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size ff46, type: 1, off e32ad
+[stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 83 <-
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: 0
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .debug_loc
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000000, vaddr 0, align 1 namei aaf
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 476bc, type: 1, off f31f3
+[stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 84 <-
+[stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: 0
+[stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .debug_ranges
+[stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000000, vaddr 0, align 1 namei aba
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 16f18, type: 1, off 13a8af
+[stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 85 <-
 [stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: 0
 [stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .shstrtab
 [stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000000, vaddr 0, align 1 namei 11
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 8e6, type: 3, off 10d014
-[stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 79 <-
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size ac8, type: 3, off 158fcd
+[stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 86 <-
 [stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: 0
 [stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .symtab
 [stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000000, vaddr 0, align 4 namei 1
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 3130, type: 2, off 10659c
-[stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 80 <-
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 3690, type: 2, off 1517c8
+[stage_2_sources/elf/elf.cpp][line:115][load_elf_in_mem] -> sector: 87 <-
 [stage_2_sources/elf/elf.cpp][line:39][load_sect_hdr] vaddr: 0
 [stage_2_sources/elf/elf.cpp][line:129][load_elf_in_mem] Name: .strtab
 [stage_2_sources/elf/elf.cpp][line:132][load_elf_in_mem] flags 00000000'00000000'00000000'00000000, vaddr 0, align 1 namei 9
-[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 3948, type: 3, off 1096cc
+[stage_2_sources/elf/elf.cpp][line:134][load_elf_in_mem] size 4175, type: 3, off 154e58
 [stage_2_sources/elf/elf.cpp][line:143][load_elf_in_mem] Load done

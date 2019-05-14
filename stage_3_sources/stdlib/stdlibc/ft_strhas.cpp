@@ -1,6 +1,6 @@
 #include "libft.h"
 
-int	strhas(const char *str, char c)
+extern "C" int	strhas(const char *str, char c)
 {
 	while (*str != '\0')
 	{

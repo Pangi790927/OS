@@ -1,7 +1,94 @@
 #ifndef NETUTILS_H
 #define NETUTILS_H
 
+#include "Types.h"
+#include "string.h"
+
 namespace net {
+
+	inline uint16 checksum (uint8 *buff, uint16 len) {
+		uint32 sum = 0;
+
+		if (len & 1) {
+			sum += buff[len - 1] << 8;
+			len--;
+		}
+		for (int i = 0; i < len; i += 2)
+			sum += (buff[i] << 8) + buff[i + 1];
+		while (sum >> 16)
+			sum = (sum & 0xFFFF) + (sum >> 16);
+
+		sum = ~sum;
+		return sum;
+	}
+
+	inline std::string ip_to_str(uint32 ip) {
+		std::string ret;
+
+		ret += std::to_string((ip & 0x000000ff) >> 0);
+		ret += ".";
+		ret += std::to_string((ip & 0x0000ff00) >> 8);
+		ret += ".";
+		ret += std::to_string((ip & 0x00ff0000) >> 16);
+		ret += ".";
+		ret += std::to_string((ip & 0xff000000) >> 24);
+
+		return ret;
+	}
+
+	inline uint32 str_to_ip (const std::string& str_ip) {
+		uint32 ip = 0;
+		uint32 i = 0;
+		
+		ip = (uint32)atoi(str_ip.c_str() + i) << 0;
+		while (str_ip.c_str()[i++] != '.' && i < str_ip.size())
+			;
+		ip |= (uint32)atoi(str_ip.c_str() + i) << 8;
+		while (str_ip.c_str()[i++] != '.' && i < str_ip.size())
+			;
+		ip |= (uint32)atoi(str_ip.c_str() + i) << 16;
+		while (str_ip.c_str()[i++] != '.' && i < str_ip.size())
+			;
+		ip |= (uint32)atoi(str_ip.c_str() + i) << 24;
+
+		return ip;
+	}
+
+	inline constexpr uint16 hton16 (uint16 val) {
+		return		((val & 0x00ff) << 8)
+				|	((val & 0xff00) >> 8);
+	}
+
+	inline constexpr uint32 hton32 (uint32 val) {
+		return		((val & 0x000000ff) << 24)
+				|	((val & 0xff000000) >> 24)
+				|	((val & 0x0000ff00) << 8)
+				|	((val & 0x00ff0000) >> 8);
+	}
+
+	inline constexpr uint64 hton64 (uint64 val) {
+		return		((val & 0x00000000000000ff) << 56)
+				|	((val & 0xff00000000000000) >> 56)
+				|	((val & 0x000000000000ff00) << 40)
+				|	((val & 0x00ff000000000000) >> 40)
+				|	((val & 0x0000000000ff0000) << 24)
+				|	((val & 0x0000ff0000000000) >> 24)
+				|	((val & 0x00000000ff000000) << 8)
+				|	((val & 0x000000ff00000000) >> 8);
+	}
+
+	inline constexpr uint16 ntoh16 (uint16 val) {
+		return hton16(val);
+	}
+
+	inline constexpr uint32 ntoh32 (uint32 val) {
+		return hton32(val);
+	}
+
+	inline constexpr uint64 ntoh64 (uint64 val) {
+		return hton64(val);
+	}
+
 	/* Computes the directional distance between left and right modulo mod.
 	If mod is 0 the number is modulo 2^32.
 	An example:

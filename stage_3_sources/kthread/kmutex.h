@@ -1,12 +1,12 @@
 #ifndef KMUTEX_H
 #define KMUTEX_H
 
-#include "klock.h"
+#include "ksem.h"
 
 namespace kthread
 {
 	struct Mutex {
-		kthread::Lock lk;
+		kthread::Sem sem;
 
 		void init();
 		void lock();

@@ -1,6 +1,6 @@
 #include "libft.h"
 
-char	*strncpy(char *dest, const char *src, size_t n)
+extern "C" char	*strncpy(char *dest, const char *src, size_t n)
 {
 	size_t	i;
 

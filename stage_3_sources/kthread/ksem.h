@@ -1,23 +1,22 @@
 #ifndef KSEM_H
 #define KSEM_H
 
+#include "klock.h"
+#include "kblock.h"
+
 namespace kthread
 {
 	struct Sem {
-		int var; // with an initial var
+		int val;
+		block_t *chain_head;
+		block_t *chain_tail;
+		Lock lk;
 
 		/* add sched block, and unblock on reason */
-		void signal() {
-			/* still atomically */
-			var++;
-		}
-
-		void wait() {
-			/* atomically */
-			while (!var)
-				{}
-			var--;
-		}
+		void init (int initial);
+		void signal();
+		void wait();
+		bool try_aquire();
 	};
 }
 

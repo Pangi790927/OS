@@ -217,6 +217,11 @@ namespace net
 		};
 		static_assert(sizeof(TxDesc) == TX_DESC_SIZE, "Wrong tx desc size");
 
+		enum errors {
+			DRIVE_ERR,
+			DRIVE_SPACE_ERR
+		};
+
 		class NetDriver {
 		public:
 			// those lengths must be a power of eight
@@ -246,7 +251,7 @@ namespace net
 			kthread::Lock rx_lock;
 			kthread::Lock tx_lock;
 
-			CallbackVector<void(void *), 64> recv_cbk;
+			cbk_vec_t<void(void *), 64> recv_cbk;
 
 			NetDriver();
 			~NetDriver();
@@ -256,8 +261,8 @@ namespace net
 			int tx_free();
 			int rx_pending();
 			int send (uint8 *packet, uint32 len);
-			int recv (uint8 *buff1, uint8 *buff2, uint32 max_len);
-			int add_cbk (const Callback<void(void *)>& cbk);
+			int recv (uint8 *buff, uint32 len);
+			int add_cbk (const cbk_t<void(void *)>& cbk);
 
 		private:
 			uint16 read_eeprom(uint8 addr);

@@ -1,6 +1,6 @@
 #include "libft.h"
 
-void	striter(char *s, void (*f)(char *))
+extern "C" void	striter(char *s, void (*f)(char *))
 {
 	size_t	index;
 

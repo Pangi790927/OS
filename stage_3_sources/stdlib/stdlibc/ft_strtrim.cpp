@@ -24,7 +24,7 @@ static char		*my_str_alloc_empty(void)
 	return (new_str);
 }
 
-char			*strtrim(char const *s)
+extern "C" char			*strtrim(char const *s)
 {
 	char	*new_str;
 	int		i;

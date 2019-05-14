@@ -25,11 +25,11 @@ extern void irq13 () asm ("irq13");
 extern void irq14 () asm ("irq14");
 extern void irq15 () asm ("irq15");
 
-CallbackVector<void(void *), irq_isr::MAX_CBK_COUNT> cbk_vec[16];
+cbk_vec_t<void(void *), irq_isr::MAX_CBK_COUNT> cbk_vec[16];
 
 volatile static uint64 irq0_count = 0; 
 
-int irq_isr::add_interupt_fn (int int_number, const Callback<fn_type>& cbk) {
+int irq_isr::add_interupt_fn (int int_number, const cbk_t<fn_type>& cbk) {
 	if (int_number < 0 || int_number > 15) {
 		kprintf("int_number must be between 0 and 15\n");
 		return -1;
@@ -37,7 +37,7 @@ int irq_isr::add_interupt_fn (int int_number, const Callback<fn_type>& cbk) {
 	return cbk_vec[int_number].insert(cbk);
 }
 
-int irq_isr::remove_interupt_fn(int int_number, const Callback<fn_type>& cbk) {
+int irq_isr::remove_interupt_fn(int int_number, const cbk_t<fn_type>& cbk) {
 	if (int_number < 0 || int_number > 15) {
 		kprintf("int_number must be between 0 and 15\n");
 		return -1;
@@ -56,7 +56,7 @@ uint64 irq_isr::get_irq0_count() {
 
 void irq_isr::init(uint8 masterOffset, uint8 slaveOffset) {
 	for (int i = 0; i < 16; i++)
-		cbk_vec[i] = CallbackVector<fn_type, MAX_CBK_COUNT>();
+		cbk_vec[i] = cbk_vec_t<fn_type, MAX_CBK_COUNT>();
 	remap(masterOffset, slaveOffset);
 }
 

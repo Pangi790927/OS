@@ -1,6 +1,6 @@
 #include "libft.h"
 
-void	*memalloc(size_t size)
+extern "C" void	*memalloc(size_t size)
 {
 	void	*ptr;
 	size_t	index;

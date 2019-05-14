@@ -1,6 +1,6 @@
 #include "libft.h"
 
-void	striteri(char *s, void (*f)(unsigned int, char *))
+extern "C" void	striteri(char *s, void (*f)(unsigned int, char *))
 {
 	unsigned int	index;
 

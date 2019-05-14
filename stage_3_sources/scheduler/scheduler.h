@@ -6,6 +6,7 @@
 #include "global_defines.h"
 #include "deque.h"
 #include "vector.h"
+#include "klock.h"
 
 namespace scheduler
 {
@@ -40,12 +41,46 @@ namespace scheduler
 		}
 	};
 
-	enum BLOCK {
-		NONE = 0,
+	enum BLOCK_ENUM {
+		NOT_BLOCKED = 0,
 		SEMAPHORE,
 		READ,
 		WRITE,
 		ANY
+	};
+
+	enum UNBLOCK_ENUM {
+		NOT_UNBLOCKED,
+		UNBLOCK,
+		TIME_UNBLOCK,
+	};
+
+	struct time_pid_t {
+		uint64 unblock_time;
+		uint32 pid;
+
+		time_pid_t (uint64 unblock_time = 0, uint32 pid = 0) 
+				: unblock_time(unblock_time), pid(pid) {}
+
+		bool operator > (const time_pid_t& other) const {
+			if (unblock_time > other.unblock_time)
+				return true;
+			else if (unblock_time == other.unblock_time)
+				return pid > other.pid;
+			return false; 	
+		}
+
+		bool operator < (const time_pid_t& other) const {
+			if (unblock_time < other.unblock_time)
+				return true;
+			else if (unblock_time == other.unblock_time)
+				return pid < other.pid;
+			return false; 	
+		}
+
+		bool operator == (const time_pid_t& other) const {
+			return unblock_time == other.unblock_time && pid == other.pid;
+		}
 	};
 
 	extern Process proc_vec[MAX_PROCESS_COUNT];
@@ -58,10 +93,12 @@ namespace scheduler
 	void kill (uint32 pid);
 	void yield();
 	uint32 getPid();
-	void block (uint32 pid, int reason);
+	uint32 block (uint32 pid, int reason, kthread::Lock *lk = NULL,
+			uint32 ticks = 0);
 	void unblock (uint32 pid, int reason);
 	void init (uint32 kernel_esp, uint32 kernel_eip);
 	uint32 update (uint32 interruptPushBase);
+	uint32 unblock_reason (uint32 pid);
 	int addProcess (uint32 esp, uint32 eip, uint32 ss, uint32 cs,
 			uint32 cr3, uint32 time);
 	std::vector<uint32> active_pids();

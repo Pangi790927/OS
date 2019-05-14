@@ -1,6 +1,6 @@
 #include "libft.h"
 
-char	*strrchr(const char *s, int c)
+extern "C" char	*strrchr(const char *s, int c)
 {
 	size_t	index;
 	char	*tmp;

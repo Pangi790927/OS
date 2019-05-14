@@ -1,6 +1,6 @@
 #include "libft.h"
 
-char	*strmap(char const *s, char (*f)(char))
+extern "C" char	*strmap(char const *s, char (*f)(char))
 {
 	size_t	size;
 	size_t	index;

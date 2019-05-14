@@ -125,6 +125,8 @@ run: $(OS_HDD)
 			-serial file:os_serial.log\
 			-net nic,model=e1000\
 			-net tap,ifname=tap0
+# 	sudo ifconfig tap0 10.0.0.1 netmask 255.255.255.0 up
+
 
 runb: $(OS_HDD)
 	bochs

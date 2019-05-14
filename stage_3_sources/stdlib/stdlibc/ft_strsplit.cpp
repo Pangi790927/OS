@@ -44,7 +44,7 @@ static void		my_strccpy(char *dest, const char *src, char c)
 	}
 }
 
-char			**strsplit(char const *s, char c)
+extern "C" char			**strsplit(char const *s, char c)
 {
 	char	**wt;
 	size_t	wc;

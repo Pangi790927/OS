@@ -2,6 +2,7 @@
 #include "gdt.h"
 #include "c_asm_func.h"
 #include "kiostream.h"
+#include "static_avl.h"
 
 namespace scheduler
 {
@@ -11,16 +12,19 @@ namespace scheduler
 	ProcessIdQue ready_que;
 	ProcessIdQue wait_que;
 	uint32 switch_cnt;
+	uint64 curr_tick = 0;
+	util::static_avl_t<time_pid_t, bool, 1024> block_time;
 
 	void init (uint32 kernel_esp, uint32 kernel_eip) {
 		new (&ready_que) ProcessIdQue ();
 		new (&wait_que) ProcessIdQue ();
+		new (&block_time) util::static_avl_t<time_pid_t, bool, 1024>();
 		switch_cnt = 0;
 		proc_cnt = 0;
 		for (int i = 0; i < MAX_PROCESS_COUNT; i++)
 			proc_vec[i].dead = true;
 		curr_pid = addProcess(kernel_esp, kernel_eip,
-				KERNEL_DATA_SEL, KERNEL_CODE_SEL, K_PAGING, 100);
+				KERNEL_DATA_SEL, KERNEL_CODE_SEL, K_PAGING, 10);
 		ready_que.pop_front(); // first process will not be in ready que
 	}
 
@@ -67,7 +71,8 @@ namespace scheduler
 		proc_vec[pid].cr3 = cr3;
 		proc_vec[pid].priv_level = cs & 3;	// first 3 should 
 
-		proc_vec[pid].block_reason = NONE;
+		proc_vec[pid].block_reason = NOT_BLOCKED;
+		proc_vec[pid].awake_reason = NOT_UNBLOCKED;
 		proc_vec[pid].in_queue = true;
 
 		ready_que.push_back(pid);
@@ -84,12 +89,11 @@ namespace scheduler
 	}
 
 	static bool is_inactive (uint32 pid) {
-		return proc_vec[pid].dead || proc_vec[pid].block_reason != NONE;
+		return proc_vec[pid].dead || proc_vec[pid].block_reason != NOT_BLOCKED;
 	}
 
 	static void push (uint32 pid) {
-		if (!is_inactive(pid))
-		{
+		if (!is_inactive(pid)) {
 			proc_vec[pid].in_queue = true;
 			ready_que.push_back(pid);
 		}
@@ -123,25 +127,35 @@ namespace scheduler
 		task switch might happen right before the execution of int 32 */
 	}
 
-	void block (uint32 pid, int reason) {
+	uint32 block (uint32 pid, int reason, kthread::Lock *lk, uint32 ticks) {
 		bool swtch_task = false;
 
 		asm volatile("cli");
 		if (!reason)
 			reason = ANY;
+		if (ticks) {
+			block_time.insert(time_pid_t(curr_tick + ticks, pid), 0);
+		}
 		proc_vec[pid].block_reason = reason;
+		proc_vec[pid].awake_reason = NOT_UNBLOCKED;
 		if (pid == curr_pid)
 			swtch_task = true;
+		if (lk) {
+			lk->unlock();
+		}
 		asm volatile("sti");
 
 		if (swtch_task)
 			asm volatile("int $32");
+
+		return proc_vec[pid].awake_reason;
 	}
 
 	void unblock (uint32 pid, int reason) {
 		(void)reason;
 		asm volatile("cli");
-		proc_vec[pid].block_reason = NONE;
+		proc_vec[pid].block_reason = NOT_BLOCKED;
+		proc_vec[pid].awake_reason = UNBLOCK;
 		if (!proc_vec[pid].in_queue)
 			push(pid);
 		asm volatile("sti");
@@ -154,11 +168,38 @@ namespace scheduler
 		return ret_pid;
 	}
 
+	uint32 unblock_reason (uint32 pid) {
+		asm volatile("sti");
+		uint32 reason = proc_vec[pid].awake_reason;
+		asm volatile("cli");
+		return reason;
+	}
+
+	void unblock_time_blocked() {
+		bool done = false;
+		while (!done) {
+			done = true;
+			if (block_time.size() > 0) {
+				time_pid_t time_pid = block_time.get_min_key();
+				if (time_pid.unblock_time < curr_tick) {
+					done = false;
+					proc_vec[time_pid.pid].block_reason = NOT_BLOCKED;
+					if (!proc_vec[time_pid.pid].in_queue)
+						push(time_pid.pid);
+					proc_vec[time_pid.pid].awake_reason = TIME_UNBLOCK;
+					block_time.remove(time_pid);
+				}
+			}
+		}
+	}
+
 	uint32 update (uint32 esp) {
 		proc_vec[curr_pid].time_left--;
+		curr_tick++;
 
 		if (proc_vec[curr_pid].time_left <= 0 || is_inactive(curr_pid))
 		{
+			unblock_time_blocked();
 			switch_cnt++;
 
 			if (proc_cnt <= 0)

@@ -9,4 +9,8 @@ inline static void sleep (uint64 ms) {
 		asm volatile (""); 
 }
 
+inline static uint64 time_ms() {
+	return irq_isr::get_irq0_count();
+}
+
 #endif

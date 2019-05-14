@@ -15,10 +15,11 @@ namespace kthread
 	public:
 		static const uint32 DEFAULT_STACK_SIZE = 65536;
 		char *stack;
-		Callback<void(void *)> cbk;
-		Atomic32 done = false; // must be replace with an atomic var
+		cbk_t<void(void *)> cbk;
+		Atomic32 done = false;
+		Atomic32 joined = false;
 
-		Thread (const Callback<void(void *)>& cbk,
+		Thread (const cbk_t<>& cbk,
 				uint32 stack_size = DEFAULT_STACK_SIZE);
 		Thread (void (*)(void *), void *ctx = NULL,
 				uint32 stack_size = DEFAULT_STACK_SIZE);

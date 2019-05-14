@@ -1,6 +1,6 @@
 #include "libft.h"
 
-char	*strsub(char const *s, unsigned int start, size_t len)
+extern "C" char	*strsub(char const *s, unsigned int start, size_t len)
 {
 	char	*str;
 	size_t	index;

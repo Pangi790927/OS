@@ -18,7 +18,7 @@ static void		set_sunu_sdoi(const char **s1, const char **s2)
 		*s2 = "";
 }
 
-char			*strjoin(char const *s1, char const *s2)
+extern "C" char			*strjoin(char const *s1, char const *s2)
 {
 	char	*str;
 	size_t	index;

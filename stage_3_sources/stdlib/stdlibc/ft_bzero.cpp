@@ -1,6 +1,6 @@
 #include "libft.h"
 
-void	bzero(void *s, size_t n)
+extern "C" void	bzero(void *s, size_t n)
 {
 	size_t	i;
 

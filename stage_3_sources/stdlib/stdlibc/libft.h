@@ -19,57 +19,57 @@ typedef struct		s_dlist
 	struct s_dlist	*prev;
 }					t_dlist;
 
-int					atoi(const char *str);
-void				bzero(void *s, size_t n);
-int					isprint(int c);
-int					isascii(int c);
-int					isalnum(int c);
-int					isdigit(int c);
-int					isalpha(int c);
-int					iswhitespace(char c);
+extern "C" int		atoi(const char *str);
+extern "C" void		bzero(void *s, size_t n);
+extern "C" int		isprint(int c);
+extern "C" int		isascii(int c);
+extern "C" int		isalnum(int c);
+extern "C" int		isdigit(int c);
+extern "C" int		isalpha(int c);
+extern "C" int		iswhitespace(char c);
 
 // unsuported __moddi3 __divd3 
 // char				*ft_itoa(int n);
 
-void				*memalloc(size_t size);
-void				*memchr(const void *s, int c, size_t n);
-int					memcmp(const void *s1, const void *s2, size_t n);
-void				*memcpy(void *dest, const void *src, size_t n);
-void				*memccpy(void *dest, const void *src, int c, size_t n);
-void				memdel(void **ap);
-void				*memmove(void *dest, const void *src, size_t n);
-void				*memset(void *s, int c, size_t n);
-char				*strcat(char *dest, const char *src);
-char				*strchr(const char *s, int c);
-void				strclr(char *s);
-int					strcmp(const char *str1, const char *str2);
-char				*strcpy(char *dest, const char *src);
-void				strdel(char **as);
-char				*strdup(const char *s);
-int					strequ(char const *s1, char const *s2);
-int					strhas(const char *str, char c);
-void				striter(char *s, void (*f)(char *));
-void				striteri(char *s, void (*f)(unsigned int, char *));
-char				*strjoin(char const *s1, char const *s2);
-size_t				strlen(const char *s);
-size_t				strlcat(char *dest, const char *src, size_t size);
-char				*strmap(char const *s, char (*f)(char));
-char				*strmapi(char const *s, char (*f)(unsigned int, char));
-char				*strncat(char *dest, const char *src, size_t n);
-int					strncmp(const char *str1, const char *str2, size_t num);
-char				*strncpy(char *dest, const char *src, size_t n);
-int					strnequ(const char *s1, const char *s2, size_t n);
-char				*strnew(size_t size);
-char				*strnstr(const char *haystack, const char *needle,
-			size_t n);
-char				*strrchr(const char *s, int c);
-char				*strstr(const char *haystack, const char *needle);
-char				*strsub(char const *s, unsigned int start, size_t len);
-char				*strtrim(const char *s);
-char				**strsplit(const char *s, char c);
-char				**strssplit(char const *s, const char *sep);
-int					tolower(int c);
-int					toupper(int c);
+extern "C" void		*memalloc(size_t size);
+extern "C" void		*memchr(const void *s, int c, size_t n);
+extern "C" int		memcmp(const void *s1, const void *s2, size_t n);
+extern "C" void		*memcpy(void *dest, const void *src, size_t n);
+extern "C" void		*memccpy(void *dest, const void *src, int c, size_t n);
+extern "C" void		memdel(void **ap);
+extern "C" void		*memmove(void *dest, const void *src, size_t n);
+extern "C" void		*memset(void *s, int c, size_t n);
+extern "C" char		*strcat(char *dest, const char *src);
+extern "C" char		*strchr(const char *s, int c);
+extern "C" void		strclr(char *s);
+extern "C" int		strcmp(const char *str1, const char *str2);
+extern "C" char		*strcpy(char *dest, const char *src);
+extern "C" void		strdel(char **as);
+extern "C" char		*strdup(const char *s);
+extern "C" int		strequ(char const *s1, char const *s2);
+extern "C" int		strhas(const char *str, char c);
+extern "C" void		striter(char *s, void (*f)(char *));
+extern "C" void		striteri(char *s, void (*f)(unsigned int, char *));
+extern "C" char		*strjoin(char const *s1, char const *s2);
+extern "C" size_t	strlen(const char *s);
+extern "C" size_t	strlcat(char *dest, const char *src, size_t size);
+extern "C" char		*strmap(char const *s, char (*f)(char));
+extern "C" char		*strmapi(char const *s, char (*f)(unsigned int, char));
+extern "C" char		*strncat(char *dest, const char *src, size_t n);
+extern "C" int		strncmp(const char *str1, const char *str2, size_t num);
+extern "C" char		*strncpy(char *dest, const char *src, size_t n);
+extern "C" int		strnequ(const char *s1, const char *s2, size_t n);
+extern "C" char		*strnew(size_t size);
+extern "C" char		*strnstr(const char *haystack, const char *needle,
+								size_t n);
+extern "C" char		*strrchr(const char *s, int c);
+extern "C" char		*strstr(const char *haystack, const char *needle);
+extern "C" char		*strsub(char const *s, unsigned int start, size_t len);
+extern "C" char		*strtrim(const char *s);
+extern "C" char		**strsplit(const char *s, char c);
+extern "C" char		**strssplit(char const *s, const char *sep);
+extern "C" int		tolower(int c);
+extern "C" int		toupper(int c);
 
 // we don't have a read / write implementation
 // 
@@ -110,7 +110,7 @@ void				ft_dlist_add_after(t_dlist *node, t_dlist *new_node);
 void				ft_dlist_add_before(t_dlist *node, t_dlist *new_node);
 void				ft_dlist_iter(t_dlist *start_node,
 			void (*f)(t_dlist *elem));
-void				ft_normal_delete(void *ptr, size_t mem_size);
+extern "C" void		ft_normal_delete(void *ptr, size_t mem_size);
 t_dlist				*ft_dlist_map(t_dlist *lst, t_dlist *(*f)(t_dlist *elem));
 void				ft_dlist_ptr_swap(t_dlist **first, t_dlist **second);
 void				ft_dlist_swap(t_dlist *first, t_dlist *second);

@@ -1,6 +1,6 @@
 #include "libft.h"
 
-int	strequ(char const *s1, char const *s2)
+extern "C" int	strequ(char const *s1, char const *s2)
 {
 	size_t	index;
 

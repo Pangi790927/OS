@@ -1,6 +1,6 @@
 #include "libft.h"
 
-void	strclr(char *s)
+extern "C" void	strclr(char *s)
 {
 	size_t	index;
 

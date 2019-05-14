@@ -1,5 +1,6 @@
 #include "kthread.h"
 #include "memmanip.h"
+#include "lock_guard.h"
 
 namespace kthread
 {
@@ -8,9 +9,9 @@ namespace kthread
 
 	Thread::Thread (void (*cbk)(void *), void *ctx,
 				uint32 stack_size) 
-				: Thread(Callback<void(void *)>(cbk, ctx), stack_size) {}
+				: Thread(cbk_t<>(cbk, ctx), stack_size) {}
 
-	Thread::Thread (const Callback<void(void *)>& cbk, 
+	Thread::Thread (const cbk_t<>& cbk, 
 			uint32 stack_size) : cbk(cbk)
 	{
 		thread_spawn_lock.lock();
@@ -18,17 +19,21 @@ namespace kthread
 		stack = new char [stack_size];
 
 		scheduler::addProcess(uint32(stack + stack_size - 1), (uint32)&caller,
-			KERNEL_DATA_SEL, KERNEL_CODE_SEL, K_PAGING, 100);
+			KERNEL_DATA_SEL, KERNEL_CODE_SEL, K_PAGING, 10);
 	}
 
 	bool Thread::joinable() {
-		return done == true; 
+		std::lock_guard<Lock> guard(thread_spawn_lock);
+		return !joined;
 	}
 
 	void Thread::join() {
+		joined = true;
 		while (done != true)
 			asm volatile ("");
-		delete [] stack; 
+
+		// what will happen with stack on detach?
+		delete [] stack;
 	}
 
 	void Thread::caller() {

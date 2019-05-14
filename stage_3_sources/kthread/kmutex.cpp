@@ -1,23 +1,20 @@
 #include "kmutex.h"
-#include "klock.h"
-#include "scheduler.h"
 
 namespace kthread
 {
 	void Mutex::init() {
-		lk.init();
+		sem.init(1);
 	}
 
 	void Mutex::lock () {
-		while (!lk.try_lock())
-			scheduler::yield();
+		sem.wait();
 	}
 
 	bool Mutex::try_lock() {
-		return lk.try_lock();
+		return sem.try_aquire();
 	}
 
 	void Mutex::unlock() {
-		lk.unlock();
+		sem.signal();
 	}
 }

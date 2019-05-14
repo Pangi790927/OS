@@ -1,6 +1,6 @@
 #include "libft.h"
 
-int	strnequ(char const *s1, char const *s2, size_t n)
+extern "C" int	strnequ(char const *s1, char const *s2, size_t n)
 {
 	size_t index;
 

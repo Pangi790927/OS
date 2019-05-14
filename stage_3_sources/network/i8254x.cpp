@@ -6,8 +6,8 @@
 #include "time.h"
 #include "callbacks.h"
 #include "netutils.h"
+#include "lock_guard.h"
 #include <utility>
-
 
 inline static int trailing_zero_count (uint32 number) {
 	int i = 0;
@@ -74,7 +74,7 @@ namespace net
 
 			if (!driver().valid) {
 				uninit();
-				return -1;
+				return DRIVE_ERR;
 			}
 			valid = true;
 
@@ -89,7 +89,7 @@ namespace net
 
 		void uninit() {
 			valid = false;
-			delete (NetDriver *)&driver_buff;
+			((NetDriver *)&driver_buff)->~NetDriver();
 		}
 
 		bool is_valid() {
@@ -165,7 +165,7 @@ namespace net
 
 			/* Enable interrupts for net driver */
 			irq_isr::add_interupt_fn(pci_device.intLine, 
-					Callback<void(void *)>(net_irq_fn, this));
+					cbk_t<void(void *)>(net_irq_fn, this));
 			mmio_write32(mmio_base + REG_IMS, 0);
 			mmio_write32(mmio_base + REG_IMC, 0);
 			mmio_write32(mmio_base + REG_IMS, interrupt_mask);
@@ -175,23 +175,6 @@ namespace net
 				return ;
 			if (initTX() != 0)
 				return ;
-
-			/* receiving thread */
-			// rx_thread = std::shared_ptr<kthread::Thread>(
-			// 	new kthread::Thread(
-			// 		[](void *self){
-			// 			NetDriver &driver = *(NetDriver *)self;
-			// 			/* here we wait to receive messages */
-			// 			while (true) {
-			// 				while (!(driver.rx_desc[driver.rx_head].stat & 15)) {
-			// 					scheduler::yield();
-			// 				}
-			// 				driver.rx_head = (driver.rx_head + 1) % RX_DESC_COUNT;
-			// 			}
-			// 		},
-			// 		this
-			// 	)
-			// );
 
 			this->valid = true;
 		}
@@ -203,7 +186,7 @@ namespace net
 						paging::addr2phy((uint32)rx_buff[i], (uint32 *)K_PAGING);
 				if (!rx_desc[i].addr) {
 					kprintf("failed to init rx buffer %d\n", i);
-					return -1;
+					return DRIVE_ERR;
 				}
 				else {
 					rx_desc[i].stat = 0;
@@ -284,7 +267,7 @@ namespace net
 		NetDriver::~NetDriver() {
 			this->valid = false;
 			irq_isr::remove_interupt_fn(pci_device.intLine, 
-					Callback<void(void *)>(net_irq_fn, this));
+					cbk_t<void(void *)>(net_irq_fn, this));
 			for (uint32 i = 0; i < RX_DESC_COUNT; i++) {
 				if (rx_desc[i].addr) {
 					delete [] rx_buff[i];
@@ -353,7 +336,7 @@ namespace net
 			if (!tx_free()) {
 				/* No more space in send queue */
 				tx_lock.unlock();
-				return -1;	
+				return -DRIVE_ERR;	
 			}
 			TxDesc &first_free = tx_desc[tx_tail];
 
@@ -374,40 +357,40 @@ namespace net
 			return 0;
 		}
 
-		int NetDriver::recv (uint8 *buff1, uint8 *buff2, uint32 max_len) {
-			(void)buff1;
-			(void)buff2;
-			(void)max_len;
-			
+		int NetDriver::recv (uint8 *buff, uint32 len) {
 			// !! must be syncronized
 			/* here we will: move pending packet buff, update rx_tail */
 
-			rx_lock.lock();
+			std::lock_guard<kthread::Lock> guard(rx_lock);
 			if (!rx_pending()) {
 				/* Can't recv if nothing is pending */
-				rx_lock.unlock();
-				return -1;
+				return DRIVE_ERR;
 			}
-			RxDesc &first_pending = rx_desc[madd(rx_tail, 1, RX_DESC_COUNT)];
-			kprintf("------------- RECVED: -------------");
-			kprintf("recv err: %b\n", first_pending.err);
-			kprintf("recv stat: %b\n", first_pending.stat);
-			kprintf("recv len: %d\n", first_pending.len);
 
-			if (first_pending.err) {
-				rx_lock.unlock();
-				return -first_pending.err;
+			RxDesc &pkt = rx_desc[madd(rx_tail, 1, RX_DESC_COUNT)];
+			// kprintf("------------- RECVED: -------------\n");
+			// kprintf("recv err: %b\n", pkt.err);
+			// kprintf("recv stat: %b\n", pkt.stat);
+			// kprintf("recv len: %d\n", pkt.len);
+
+			if (pkt.err) {
+				return -pkt.err;
 			}
-			// move into buffers by lenght
+
+			if (pkt.len <= len) {
+				memcpy(buff, rx_buff[madd(rx_tail, 1, RX_DESC_COUNT)], pkt.len);
+			}
+			else {
+				return DRIVE_SPACE_ERR;
+			}
 
 			inc_rx_tail(false);
 			update_pending_rx(false);
-			rx_lock.unlock();
 
-			return 0;
+			return pkt.len;
 		}
 
-		int NetDriver::add_cbk (const Callback<void(void *)>& cbk) {
+		int NetDriver::add_cbk (const cbk_t<void(void *)>& cbk) {
 			asm volatile ("cli");
 			int ret = recv_cbk.insert(cbk);
 			asm volatile ("sti");

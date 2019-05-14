@@ -1,6 +1,6 @@
 #include "libft.h"
 
-char	*strnew(size_t size)
+extern "C" char	*strnew(size_t size)
 {
 	char	*ptr;
 	size_t	index;

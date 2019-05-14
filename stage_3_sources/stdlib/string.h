@@ -125,7 +125,7 @@ namespace std
 			return internSize;
 		}
 
-		char *c_str() {
+		char *c_str() const {
 			return internStr;
 		}
 

@@ -1,6 +1,6 @@
 #include "libft.h"
 
-int	strncmp(const char *str1, const char *str2, size_t num)
+extern "C" int	strncmp(const char *str1, const char *str2, size_t num)
 {
 	size_t i;
 

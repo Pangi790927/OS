@@ -17,7 +17,6 @@
 #include "ostream.h"
 #include "istream.h"
 #include "key_translate.h"
-#include "mutex.h"
 #include "gdtInit.h"
 #include "pci.h"
 #include "boot_data.h"
@@ -33,6 +32,12 @@
 #include "ata_driver.h"
 #include "elf.h"
 #include "kern_elf.h"
+#include "kblock.h"
+#include "kmutex.h"
+#include "kcond_var.h"
+#include "hash.h"
+#include "avl.h"
+#include "static_avl.h"
 
 /*
 	Tasks:
@@ -43,11 +48,11 @@
 		* File system
 		* Read/Write with DMA from HDD
 		* Shell
-		* implement map
 		* support multiple media for boot
 		* VGA Graphics Mode
 		* More advanced graphics 
 		* Global constructors
+		* Repair keyboard initialization
 		# Fix bug in hexdump ??---is it fixed---??
 */
 
@@ -141,7 +146,7 @@ bool commandExecute (std::vector<std::string> &args) {
 	else if (args[0] == "printpd") {
 		paging::printPD((uint32 *)K_PAGING);
 	}
-	else if (args[0] == "netshow") {
+	else if (args[0] == "net") {
 		std::cout << net::netinfo() << std::endl;
 	}
 	else if (args[0] == "ps") {
@@ -175,13 +180,11 @@ bool commandExecute (std::vector<std::string> &args) {
 		else
 			std::cout << "usage: kill pid" << std::endl;
 	}
-	else if (args[0] == "send") {
-		struct __attribute__((__packed__)) eth_hdr_t {
-				uint8 dest[6]; uint8 src[6]; uint16 type; };
-		auto &m = net::driver().mac;
-		eth_hdr_t eth_hdr = {{0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
-				{m[0], m[1], m[2], m[3], m[4], m[5]}, 0x0608};
-		net::driver().test_send(&eth_hdr, sizeof(eth_hdr));
+	else if (args[0] == "arp") {
+		using namespace net;
+		mac_addr_t addr;
+		int res = net::arp::get_addr_v4(net::str_to_ip("10.0.0.1"), addr);
+		kprintf("res: %d haddr: %s\n", res, net::eth::to_string(addr));
 	}
 	else if (args[0] == "printpt") {
 		if (args.size() == 2) {
@@ -206,16 +209,58 @@ bool commandExecute (std::vector<std::string> &args) {
 		std::cout << " * printpd        - prints paging directory" << std::endl;
 		std::cout << " * printpt        - prints paging table at index"
 				<< std::endl;
-		std::cout << " * netshow        - prints network info" << std::endl;
+		std::cout << " * net            - prints network info" << std::endl;
 		std::cout << " * ps             - proc info" << std::endl;
 		std::cout << " * blk            - block pid" << std::endl;
 		std::cout << " * ublk           - unblock pid" << std::endl;
 		std::cout << " * kill           - kill pid" << std::endl;
+		std::cout << " * arp            - arp init" << std::endl;
 	}
 	else
 		std::cout << "command not found: " << args[0] << std::endl;
 	return true;
 }
+
+struct TestThreads {
+	kthread::Mutex mu;
+	kthread::CondVar cv;
+	bool flag = false;
+
+	TestThreads() {
+		mu.init();
+		cv.init();
+
+		kthread::Thread th1(
+			[](void *self) {
+				TestThreads *_self = (TestThreads *)self;
+				sleep(3000);
+				_self->mu.lock();
+				_self->flag = true;
+				_self->cv.notify_one();
+				_self->mu.unlock();
+			},
+			this
+		);
+
+		kthread::Thread th2(
+			[](void *self) {
+				TestThreads *_self = (TestThreads *)self;
+				_self->mu.lock();
+				while (!_self->flag) {
+					_self->cv.wait(_self->mu);
+				}
+				std::cout << "hello from 2" << std::endl;
+				_self->mu.unlock();
+			},
+			this
+		);
+
+		if (th1.joinable())
+			th1.join();
+		if (th2.joinable())
+			th2.join();
+	}
+};
 
 void printUserMode() {
 
@@ -227,6 +272,7 @@ void printUserMode() {
 	/* because in main interrupts are mainly disabled */
 
 	net::init();
+	// TestThreads();
 
 	keyboard::KeyState keyState;
 	keyboard::init2KeyState(keyState);
@@ -235,8 +281,6 @@ void printUserMode() {
 	std::deque<uint32> keyList;
 	std::cout << "os$ ";
 	std::cout.flush();
-
-	// kprintf("elf to str: %s\n", elf::kto_str().c_str());
 
 	bool kernel_alive = true;
 	while (kernel_alive) {
@@ -358,6 +402,7 @@ int main()
 		
 		pit::initDefault(1000);
 		kthread::init();
+		kthread::init_block();
 
 		keyboard::init();
 
@@ -366,7 +411,7 @@ int main()
 		
 		put_char_stack = new char[8192];
 		scheduler::addProcess((uint32)put_char_stack, (uint32)&putCharAt,
-				USER_DATA_SEL | 3, USER_CODE_SEL | 3, K_PAGING, 100);
+				USER_DATA_SEL | 3, USER_CODE_SEL | 3, K_PAGING, 10);
 
 	/// will enable interrupts:
 	__switchToProcess(KERNEL_DATA_SEL, KERNEL_CODE_SEL,

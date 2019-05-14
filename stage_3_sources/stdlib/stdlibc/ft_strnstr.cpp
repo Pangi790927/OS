@@ -24,7 +24,7 @@ static void	inc_icpy_j(size_t *icpy, size_t *j)
 	(*j)++;
 }
 
-char		*strnstr(const char *haystack, const char *needle, size_t n)
+extern "C" char		*strnstr(const char *haystack, const char *needle, size_t n)
 {
 	size_t	i;
 	size_t	j;

@@ -13,7 +13,7 @@ static int	ft_remove_the_poo(const char *str)
 	return (0);
 }
 
-int			atoi(const char *str)
+extern "C" int			atoi(const char *str)
 {
 	int negativ;
 	int my_num;

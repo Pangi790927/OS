@@ -19,7 +19,7 @@ static void	makejzerostartiicpyi(int *j, int *start, int *icpy, int i)
 	(*icpy) = i;
 }
 
-char		*strstr(const char *haystack, const char *needle)
+extern "C" char		*strstr(const char *haystack, const char *needle)
 {
 	int		i;
 	int		j;

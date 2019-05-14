@@ -1,6 +1,6 @@
 #include "libft.h"
 
-void	strdel(char **as)
+extern "C" void	strdel(char **as)
 {
 	if (as != NULL)
 	{

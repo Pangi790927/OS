@@ -38,6 +38,7 @@ public:
 	task_stack_t stack;
 
 	uint32 block_reason;
+	uint64 awake_reason;
 	uint32 in_queue;
 };
 

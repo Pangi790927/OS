@@ -1,6 +1,6 @@
 #include "libft.h"
 
-void	memdel(void **ap)
+extern "C" void	memdel(void **ap)
 {
 	if (ap != NULL)
 	{

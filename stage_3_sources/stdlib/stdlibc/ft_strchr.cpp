@@ -1,6 +1,6 @@
 #include "libft.h"
 
-char	*strchr(const char *s, int c)
+extern "C" char	*strchr(const char *s, int c)
 {
 	unsigned int	index;
 	char			*tmp;

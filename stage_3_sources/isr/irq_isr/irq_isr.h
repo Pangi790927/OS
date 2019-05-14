@@ -35,8 +35,8 @@ namespace irq_isr
 			uint8 slaveOffset = PIC_SLAVE_OFFSET);
 
 	using fn_type = void(void *);
-	int add_interupt_fn (int int_number, const Callback<fn_type>& cbk);
-	int remove_interupt_fn (int int_number, const Callback<fn_type>& cbk);
+	int add_interupt_fn (int int_number, const cbk_t<fn_type>& cbk);
+	int remove_interupt_fn (int int_number, const cbk_t<fn_type>& cbk);
 
 	uint64 get_irq0_count();
 

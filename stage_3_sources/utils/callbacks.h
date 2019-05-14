@@ -5,13 +5,13 @@
 #include "Types.h"
 #include "kstdio.h"
 
-template <typename FuncType>
-struct Callback {
+template <typename FuncType = void(void *)>
+struct cbk_t {
 	FuncType *func = NULL;
 	void *ctx = NULL;
 
-	Callback() {}
-	Callback (FuncType *func, void *ctx = NULL) : func(func), ctx(ctx) {}
+	cbk_t() {}
+	cbk_t (FuncType *func, void *ctx = NULL) : func(func), ctx(ctx) {}
 	
 	template <typename ...Args, typename RetType = 
 			std::invoke_result_t<FuncType, Args..., void *>>
@@ -48,8 +48,8 @@ struct Callback {
 	}
 
 	template <typename OthFunc>
-	operator Callback<OthFunc>() {
-		return Callback<OthFunc>((OthFunc *)func, ctx);
+	operator cbk_t<OthFunc>() {
+		return cbk_t<OthFunc>((OthFunc *)func, ctx);
 	}
 
 	void reset (FuncType *func = NULL, void *ctx= NULL) {
@@ -61,14 +61,14 @@ struct Callback {
 		return (uint32)func;
 	}
 
-	bool operator == (const Callback& other) const {
+	bool operator == (const cbk_t& other) const {
 		return other.func == func && other.ctx == ctx;
 	}
 };
 
 template <typename FuncType, int max_size, int defrag = -1>
-struct CallbackVector {
-	Callback<FuncType> cbks[max_size] = {0};
+struct cbk_vec_t {
+	cbk_t<FuncType> cbks[max_size] = {0};
 	int size = 0;
 	int count = 0;
 	int last_defrag = 0;
@@ -111,7 +111,7 @@ struct CallbackVector {
 		count = size = last_empty;
 	}
 
-	int insert (const Callback<FuncType>& cbk) {
+	int insert (const cbk_t<FuncType>& cbk) {
 		if (has_cbk(cbk))
 			return -1;
 		if (count == size) {
@@ -134,7 +134,7 @@ struct CallbackVector {
 		return -1;
 	}
 
-	void remove (const Callback<FuncType>& cbk) {
+	void remove (const cbk_t<FuncType>& cbk) {
 		for (int i = 0; i < size; i++) {
 			if (cbk == cbks[i]) {
 				cbks[i].reset(NULL);
@@ -143,7 +143,7 @@ struct CallbackVector {
 		}
 	}
 
-	bool has_cbk (const Callback<FuncType>& cbk) {
+	bool has_cbk (const cbk_t<FuncType>& cbk) {
 		for (int i = 0; i < size; i++)
 			if (cbks[i] == cbk)
 				return true;

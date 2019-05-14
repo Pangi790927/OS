@@ -1,6 +1,6 @@
 #include "libft.h"
 
-char	*strdup(const char *s)
+extern "C" char	*strdup(const char *s)
 {
 	char	*new_str;
 	int		i;
