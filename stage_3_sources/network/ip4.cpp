@@ -90,7 +90,7 @@ namespace net
 			ip_hdr_str += " src: ";
 			ip_hdr_str += ip_to_str(ip_hdr.src);
 			ip_hdr_str += " dst: ";
-			ip_hdr_str += ip_to_str(ip_hdr.src);
+			ip_hdr_str += ip_to_str(ip_hdr.dst);
 			ip_hdr_str += " proto: ";
 			ip_hdr_str += std::to_string(ip_hdr.proto);
 			ip_hdr_str += " len: ";
