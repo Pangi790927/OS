@@ -140,13 +140,13 @@ namespace std
 		unique_ptr& operator = (const unique_ptr& other) = delete;
 		
 		unique_ptr (const unique_ptr&& other) {
-			ptr = std::move(ptr);
-			deleter = std::move(deleter);
+			ptr = std::move(other.ptr);
+			deleter = std::move(other.deleter);
 		}
 
 		unique_ptr& operator = (const unique_ptr&& other) {
-			ptr = std::move(ptr);
-			deleter = std::move(deleter);
+			ptr = std::move(other.ptr);
+			deleter = std::move(other.deleter);
 			return (*this);
 		}
 

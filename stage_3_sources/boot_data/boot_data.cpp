@@ -11,4 +11,17 @@ namespace boot
 		result *= 1024;
 		return result;
 	}
+
+	uint16 get_vesa_modes_cnt() {
+		return *(uint16 *)VESA_MODES_LOC;
+	}
+	
+	uint16 get_vesa_curr_mode() {
+		return *(uint16 *)VESA_CURR_MODE;
+	}
+
+	void *get_vesa_info_ptr() {
+		return (void *)VESA_INFO_LOC;
+	}
+
 }

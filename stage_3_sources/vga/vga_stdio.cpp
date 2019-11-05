@@ -8,13 +8,13 @@ namespace VGA {
 	char *_video_memory_address = (char *) 0xb8000;
 	char _digits[] = "0123456789abcdef";
 
-	void	_actualize_cursor(void) {
+	void _actualize_cursor(void) {
 		u_int_16 cursorLocation = _row * 80 + _col;
 
-	    outb(0x3D4, 14);                  // Tell the VGA board we are setting the high cursor byte.
-	    outb(0x3D5, cursorLocation >> 8); // Send the high cursor byte.
-	    outb(0x3D4, 15);                  // Tell the VGA board we are setting the low cursor byte.
-	    outb(0x3D5, cursorLocation);      // Send the low cursor byte.
+		outb(0x3D4, 14);                  // Tell the VGA board we are setting the high cursor byte.
+		outb(0x3D5, cursorLocation >> 8); // Send the high cursor byte.
+		outb(0x3D4, 15);                  // Tell the VGA board we are setting the low cursor byte.
+		outb(0x3D5, cursorLocation);      // Send the low cursor byte.
 	}
 
 	int _pos_in_screen (int row, int col) {

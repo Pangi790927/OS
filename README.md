@@ -19,9 +19,9 @@ OS Image
 --------------------------------------------------------------------------------
 ### The OS Image will start with the kernel as such:
 	* 0 - 511 -> Stage 1, here the MBR should reside along the boot loader
-	* 512 - 2048 -> right now there is just a string
-	* 2048 - 3072 -> superblock(will be moved at 1024 latter)
-	* 3072 - 64k -> stage 2
+	* 512 - 2560 -> gpt
+	* 2560 - 3584 -> superblock of ext2
+	* 3584 - 64k -> stage 2
 	* 64k ... -> stage 3
 For testing the image is loaded in a OS.vhs file and run by virtualbox, this
 file won't be uploaded because it has 2 GB.
@@ -50,6 +50,9 @@ RAM
 ### Useful RAM locations:
 	* 0x500:0x503 - ram size as returned by mov ax, 0xE801; int 0x15;
 		ax is at 0x500 and bx at 0x502 (ax + bx * 64 is size in KB)
+	* 0x504:0x505 - vesa modes saved
+	* 0x506:0x507 - vesa current mode
+	* 0x1000:0x6000 - vesa bios info and modes info
 
 Ignore the following, those are there for me because I am unable to remember
 how to properly make a readme

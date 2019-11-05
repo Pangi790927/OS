@@ -5,8 +5,6 @@
 
 namespace elf
 {
-	static const int sector_size = 512;
-
 	file_hdr_t load_file_hdr (uint32 hdd_addr, load_fn load, void *ctx) {
 		file_hdr_t file_hdr;
 		if (load(&file_hdr, hdd_addr, sizeof(file_hdr_t), ctx)) {

@@ -129,9 +129,9 @@ namespace std
 			return count == 0;
 		}
 
-		void insert (iterator it, const Type& value) {
-			count++;
-		}
+		// void insert (iterator it, const Type& value) {
+		// 	count++;
+		// }
 
 		void erase (iterator it) {
 			if (start == it) {

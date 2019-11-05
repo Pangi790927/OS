@@ -1,0 +1,697 @@
+class node {
+public:
+	uint8 code;
+	vector nodes; 
+}
+
+int table*[COUNT] = {
+		
+};
+
+0x05 		F1 pressed 	
+keyState.registerEvent(event, F1_PRESS);
+
+0x06 		F2 pressed 	
+keyState.registerEvent(event, F2_PRESS);
+
+0x04 		F3 pressed
+keyState.registerEvent(event, F3_PRESS); 
+
+0x0C 		F4 pressed 	
+keyState.registerEvent(event, F4_PRESS);
+
+0x03 		F5 pressed
+keyState.registerEvent(event, F5_PRESS);
+
+0x0B 		F6 pressed
+keyState.registerEvent(event, F6_PRESS);
+
+0x83 		F7 pressed
+keyState.registerEvent(event, F7_PRESS);
+
+0x0A 		F8 pressed 
+keyState.registerEvent(event, F8_PRESS);
+
+0x01 		F9 pressed
+keyState.registerEvent(event, F9_PRESS);
+
+0x09 		F10 pressed
+keyState.registerEvent(event, F10_PRESS);
+
+0x00 	
+keyState.registerEvent(0x00, 0);
+keyState.doEvent(0x00);
+
+	0x78 	F11 pressed
+	keyState.registerEvent(event, F11_PRESS);
+
+keyState.doEvent(0xFF);	// return 
+
+0x07 		F12 pressed
+keyState.registerEvent(event, F12_PRESS);
+
+0xF0
+keyState.registerEvent(0xF0, 0);
+keyState.doEvent(0xF0);
+	
+	keyState.registerEvent(event, F1_RELEASE);
+	0x05 	F1 released 	
+
+	keyState.registerEvent(event, F1_RELEASE);
+	0x06 	F2 released 	
+
+	keyState.registerEvent(event, F1_RELEASE);
+	0x04 	F3 released 	
+
+	keyState.registerEvent(event, F1_RELEASE);
+	0x0C 	F4 released 	
+
+	keyState.registerEvent(event, F1_RELEASE);
+	0x03 	F5 released
+
+	keyState.registerEvent(event, F1_RELEASE);
+	0x0B 	F6 released
+
+	keyState.registerEvent(event, F1_RELEASE);
+	0x83 	F7 released
+
+	keyState.registerEvent(event, F1_RELEASE);
+	0x0A 	F8 released 	
+
+	keyState.registerEvent(event, F1_RELEASE);
+	0x01 	F9 released
+
+	keyState.registerEvent(event, F1_RELEASE);
+	0x09 	F10 released 	
+
+	keyState.registerEvent(event, F1_RELEASE);
+	0x78 	F11 released 	
+
+	keyState.registerEvent(event, F1_RELEASE);
+	0x07 	F12 released
+
+keyState.doEvent(0xFF);	// return 
+
+0x76 	escape pressed 	
+keyState.registerEvent(event, F1_RELEASE);
+
+0x11 	left alt pressed 	
+
+keyState.registerEvent(event, F1_RELEASE);
+0x12 	left shift pressed 		
+keyState.registerEvent(event, F1_RELEASE);
+0x14 	left control pressed 	
+keyState.registerEvent(event, F1_RELEASE);
+0x59 	right shift pressed 	
+
+0xE0
+keyState.registerEvent(0xE0, 0);
+keyState.doEvent(0xE0);
+
+	keyState.registerEvent(event, RIGHT_ALT_KEY_PRESS);
+	0x11 	right alt pressed 			
+	
+	keyState.registerEvent(event, RIGHT_ALT_KEY_PRESS);	
+	0x14 	right control pressed 	
+	
+	keyState.registerEvent(event, RIGHT_ALT_KEY_PRESS);
+	0x69 	end pressed 			
+	
+	keyState.registerEvent(event, RIGHT_ALT_KEY_PRESS);
+	0x6C 	home pressed 						
+	
+	keyState.registerEvent(event, RIGHT_ALT_KEY_PRESS);
+	0x71 	delete pressed 	
+	
+	keyState.registerEvent(event, RIGHT_ALT_KEY_PRESS);
+	0x70 	insert pressed 	
+	
+	keyState.registerEvent(event, RIGHT_ALT_KEY_PRESS);
+	0x6B 	cursor left pressed
+	
+	keyState.registerEvent(event, RIGHT_ALT_KEY_PRESS);
+	0x72 	cursor down pressed 		
+	
+	keyState.registerEvent(event, RIGHT_ALT_KEY_PRESS);
+	0x74 	cursor right pressed 	
+	
+	keyState.registerEvent(event, RIGHT_ALT_KEY_PRESS);
+	0x75 	cursor up pressed 				
+	
+	keyState.registerEvent(event, RIGHT_ALT_KEY_PRESS);
+	0x7A 	page down pressed 		
+	
+	keyState.registerEvent(event, RIGHT_ALT_KEY_PRESS);
+	0x7D 	page up pressed 
+	
+	keyState.registerEvent(event, RIGHT_ALT_KEY_PRESS);
+	0x1F 	left GUI pressed		// windows key?
+	
+	keyState.registerEvent(event, RIGHT_ALT_KEY_PRESS);
+	0x27 	right GUI pressed		// windows key?
+
+	keyState.registerEvent(event, RIGHT_ALT_KEY_PRESS);
+	0x2F 	apps pressed			// it's there but I've never used it
+
+keyState.doEvent(0xFF);	// return 
+
+keyState.registerEvent(event, CAPS_LOCK_PRESS);
+0x58 	CapsLock pressed 	
+
+keyState.registerEvent(event, CAPS_LOCK_PRESS);
+0x77 	NumberLock pressed
+
+keyState.registerEvent(event, CAPS_LOCK_PRESS);
+0x7E 	ScrollLock pressed 		
+		
+0xF0
+keyState.registerEvent(0xF0, 0);
+keyState.doEvent(0xF0);
+
+	keyState.registerEvent(event, LEFT_ALT_RELEASE);
+	0x11 	left alt released 	
+
+	keyState.registerEvent(event, LEFT_ALT_RELEASE);
+	0x12 	left shift released 		
+	
+	keyState.registerEvent(event, LEFT_ALT_RELEASE);
+	0x14 	left control released 	
+	
+	keyState.registerEvent(event, LEFT_ALT_RELEASE);
+	0x58 	CapsLock released 	
+	
+	keyState.registerEvent(event, LEFT_ALT_RELEASE);
+	0x59 	right shift released 	
+	
+	keyState.registerEvent(event, LEFT_ALT_RELEASE);
+	0x76 	escape released 	
+	
+	keyState.registerEvent(event, LEFT_ALT_RELEASE);
+	0x77 	NumberLock released
+
+	keyState.registerEvent(event, LEFT_ALT_RELEASE);
+	0x7E 	ScrollLock released 	
+
+keyState.doEvent(0xFF);
+
+0xE0
+keyState.registerEvent(0xE0, 0);
+keyState.doEvent(0xE0);
+	0xF0
+	keyState.registerEvent(0xF0, 0);
+	keyState.doEvent(0xF0);
+
+		0x11 	right alt released 			
+		keyState.registerEvent(event, RIGHT_ALT_RELEASE);
+		
+		0x14 	right control released 	
+		keyState.registerEvent(event, RIGHT_ALT_RELEASE);	
+		
+		0x1F 	left GUI released
+		keyState.registerEvent(event, RIGHT_ALT_RELEASE);
+		
+		0x27 	right GUI released
+		keyState.registerEvent(event, RIGHT_ALT_RELEASE);
+		
+		0x2F 	apps released
+		keyState.registerEvent(event, RIGHT_ALT_RELEASE);
+		
+		0x69 	end released 			
+		keyState.registerEvent(event, RIGHT_ALT_RELEASE);
+		
+		0x6B 	cursor left released
+		keyState.registerEvent(event, RIGHT_ALT_RELEASE);
+		
+		0x6C 	home released 				
+		keyState.registerEvent(event, RIGHT_ALT_RELEASE);
+		
+		0x70 	insert released 	
+		keyState.registerEvent(event, RIGHT_ALT_RELEASE);		
+		
+		0x71 	delete released 	
+		keyState.registerEvent(event, RIGHT_ALT_RELEASE);
+		
+		0x72 	cursor down released 		
+		keyState.registerEvent(event, RIGHT_ALT_RELEASE);
+		
+		0x74 	cursor right released 	
+		keyState.registerEvent(event, RIGHT_ALT_RELEASE);
+		
+		0x75 	cursor up released 			
+		keyState.registerEvent(event, RIGHT_ALT_RELEASE);
+		
+		0x7A 	page down released 		
+		keyState.registerEvent(event, RIGHT_ALT_RELEASE);	
+
+		0x7D 	page up released
+		keyState.registerEvent(event, RIGHT_ALT_RELEASE);
+
+	keyState.doEvent(0xFF);
+keyState.doEvent(0xFF);
+
+keyState.registerEvent(0xE0, 0);
+keyState.doEvent(0xE0);
+	keyState.registerEvent(0x12, 0);
+	keyState.doEvent(0x12);
+		keyState.registerEvent(0xE0, 0);
+		keyState.doEvent(0xE0);
+			0x7C 	print screen pressed
+			keyState.registerEvent(0x7C, PRINT_SCREEN_PRESS);
+		keyState.doEvent(0xFF);
+	keyState.doEvent(0xFF);
+keyState.doEvent(0xFF);
+
+keyState.registerEvent(0xE0, 0);
+keyState.doEvent(0xE0);
+	keyState.registerEvent(0xF0, 0);
+	keyState.doEvent(0xF0);
+		keyState.registerEvent(0x7C, 0);
+		keyState.doEvent(0x7C);
+			keyState.registerEvent(0xE0, 0);
+			keyState.doEvent(0xE0);
+				keyState.registerEvent(0xF0, 0);
+				keyState.doEvent(0xF0);
+					0x12 	print screen released 		
+					keyState.registerEvent(0x12, PRINT_SCREEN_RELEASE);
+				keyState.doEvent(0xFF);
+			keyState.doEvent(0xFF);
+		keyState.doEvent(0xFF);
+	keyState.doEvent(0xFF);
+keyState.doEvent(0xFF);
+			
+keyState.registerEvent(0xE1, 0);
+keyState.doEvent(0xE1);
+	keyState.registerEvent(0x14, 0);
+	keyState.doEvent(0x14);
+		keyState.registerEvent(0x77, 0);
+		keyState.doEvent(0x77);
+			keyState.registerEvent(0xE1, 0);
+			keyState.doEvent(0xE1);
+				keyState.registerEvent(0xF0, 0);
+				keyState.doEvent(0xF0);
+					keyState.registerEvent(0x14, 0);
+					keyState.doEvent(0x14);
+						keyState.registerEvent(0xF0, 0);
+						keyState.doEvent(0xF0);
+							0x77 	pause pressed 
+							keyState.registerEvent(0x77, PAUSE_PRESS);
+						keyState.doEvent(0xFF);
+					keyState.doEvent(0xFF);
+				keyState.doEvent(0xFF);
+			keyState.doEvent(0xFF);
+		keyState.doEvent(0xFF);
+	keyState.doEvent(0xFF);
+keyState.doEvent(0xFF);
+
+0x1C 	A pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x32 	B pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x21 	C pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x23 	D pressed
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x24 	E pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x2B 	F pressed
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x34 	G pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x33 	H pressed
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x43 	I pressed
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x3B 	J pressed
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x44 	O pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x4D 	P pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x2D 	R pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x1B 	S pressed
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x2C 	T pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x15 	Q pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x1D 	W pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x2A 	V pressed 
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x3C 	U pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x4B 	L pressed
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x42 	K pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x3A 	M pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x31 	N pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x22 	X pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x35 	Y pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x1A 	Z pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x0E 	` (back tick) pressed 		
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x41 	, pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x49 	. pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x4A 	/ pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x4C 	 ; pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x4E 	- pressed 		
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x52 	' pressed 		
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x54 	[ pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x55 	= pressed 				
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x5B 	] pressed
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x5D 	\ pressed 				
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x29 	space pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x0D 	tab pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x5A 	enter pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x66 	backspace pressed
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x45 	0 (zero) pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x16 	1 pressed 		
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x1E 	2 pressed 		
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x26 	3 pressed 		
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x25 	4 pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x2E 	5 pressed 		
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x36 	6 pressed 		
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x3D 	7 pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x3E 	8 pressed 		
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+0x46 	9 pressed 		
+keyState.registerEvent(event, (uint32)'a' | PRESS);
+
+keyState.registerEvent(0xF0, 0);
+keyState.doEvent(0xF0);
+
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x0D 	tab released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x0E 	` (back tick) released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);	
+	0x15 	Q released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x16 	1 released 		
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x1A 	Z released 
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x1B 	S released
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x1C 	A released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x1D 	W released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x1E 	2 released 		
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x21 	C released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x22 	X released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x23 	D released
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x24 	E released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x25 	4 released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x26 	3 released 		
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x29 	space released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x2A 	V released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x2B 	F released
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x2C 	T released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x2D 	R released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x2E 	5 released 		
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x31 	N released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x32 	B released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x33 	H released
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x34 	G released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x35 	Y released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x36 	6 released 		
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x3A 	M released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x3B 	J released
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x3C 	U released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x3D 	7 released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x3E 	8 released 		
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x41 	, released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x42 	K released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x43 	I released
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x44 	O released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x45 	0 (zero) released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x46 	9 released 		
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x49 	. released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x4A 	/ released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x4B 	L released
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x4C 	 ; released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x4D 	P released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x4E 	- released 		
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x52 	' released 		
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x54 	[ released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x55 	= released
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x5A 	enter released 	
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x5B 	] released
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x5D 	\ released
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+	0x66 	backspace released 		
+	keyState.registerEvent(event, (uint32)'a' | PRESS);
+
+keyState.doEvent(0xFF);
+
+keyState.registerEvent(event, (uint32)'a' | PRESS | NUMPAD);
+0x69 		(keypad) 1 pressed 			
+keyState.registerEvent(event, (uint32)'a' | PRESS | NUMPAD);
+0x6B 		(keypad) 4 pressed
+keyState.registerEvent(event, (uint32)'a' | PRESS | NUMPAD);
+0x6C 		(keypad) 7 pressed 						
+keyState.registerEvent(event, (uint32)'a' | PRESS | NUMPAD);
+0x70 		(keypad) 0 pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS | NUMPAD);
+0x71 		(keypad) . pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS | NUMPAD);
+0x72 		(keypad) 2 pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS | NUMPAD);
+0x73 		(keypad) 5 pressed
+keyState.registerEvent(event, (uint32)'a' | PRESS | NUMPAD);
+0x74 		(keypad) 6 pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS | NUMPAD);
+0x75 		(keypad) 8 pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS | NUMPAD);
+0x79 		(keypad) + pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS | NUMPAD);
+0x7A 		(keypad) 3 pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS | NUMPAD);
+0x7B 		(keypad) - pressed
+keyState.registerEvent(event, (uint32)'a' | PRESS | NUMPAD);
+0x7C 		(keypad) * pressed 	
+keyState.registerEvent(event, (uint32)'a' | PRESS | NUMPAD);
+0x7D 		(keypad) 9 pressed 	
+
+keyState.registerEvent(0xE0, 0);
+keyState.doEvent(0xE0);
+
+	keyState.registerEvent(event, (uint32)'a' | PRESS | NUMPAD);
+	0xE0, 0x4A 	(keypad) / pressed 
+	keyState.registerEvent(event, (uint32)'a' | PRESS | NUMPAD);
+	0xE0, 0x5A 	(keypad) enter pressed
+
+keyState.doEvent(0xFF);
+
+keyState.registerEvent(0xF0, 0);
+keyState.doEvent(0xF0);
+
+	keyState.registerEvent(event, (uint32)'a' | RELEASE | NUMPAD);
+	0x69 	(keypad) 1 released 			
+	keyState.registerEvent(event, (uint32)'a' | RELEASE | NUMPAD);
+	0x6B 	(keypad) 4 released
+	keyState.registerEvent(event, (uint32)'a' | RELEASE | NUMPAD);
+	0x6C 	(keypad) 7 released 						
+	keyState.registerEvent(event, (uint32)'a' | RELEASE | NUMPAD);
+	0x70 	(keypad) 0 released 	
+	keyState.registerEvent(event, (uint32)'a' | RELEASE | NUMPAD);
+	0x71 	(keypad) . released 	
+	keyState.registerEvent(event, (uint32)'a' | RELEASE | NUMPAD);
+	0x72 	(keypad) 2 released 	
+	keyState.registerEvent(event, (uint32)'a' | RELEASE | NUMPAD);
+	0x73 	(keypad) 5 released
+	keyState.registerEvent(event, (uint32)'a' | RELEASE | NUMPAD);
+	0x74 	(keypad) 6 released 	
+	keyState.registerEvent(event, (uint32)'a' | RELEASE | NUMPAD);
+	0x75 	(keypad) 8 released 	
+	keyState.registerEvent(event, (uint32)'a' | RELEASE | NUMPAD);
+	0x79 	(keypad) + released 	
+	keyState.registerEvent(event, (uint32)'a' | RELEASE | NUMPAD);
+	0x7A 	(keypad) 3 released 	
+	keyState.registerEvent(event, (uint32)'a' | RELEASE | NUMPAD);
+	0x7B 	(keypad) - released
+	keyState.registerEvent(event, (uint32)'a' | RELEASE | NUMPAD);
+	0x7C 	(keypad) * released 	
+	keyState.registerEvent(event, (uint32)'a' | RELEASE | NUMPAD);
+	0x7D 	(keypad) 9 released
+
+keyState.doEvent(0xFF);
+
+keyState.registerEvent(0xE0, 0);
+keyState.doEvent(0xE0);
+
+	keyState.registerEvent(0xF0, 0);
+	keyState.doEvent(0xF0);
+
+		keyState.registerEvent(event, (uint32)'a' | RELEASE | NUMPAD);
+		0x4A 	(keypad) / released 		
+		keyState.registerEvent(event, (uint32)'a' | RELEASE | NUMPAD);
+		0x5A 	(keypad) enter released 		
+
+		keyState.registerEvent(event, POWER_RELEASE);
+		0x37 	(ACPI) power released
+		keyState.registerEvent(event, POWER_RELEASE);
+		0x3F 	(ACPI) sleep released
+		keyState.registerEvent(event, POWER_RELEASE);
+		0x5E 	(ACPI) wake released
+
+		keyState.registerEvent(event, NOT_USED_KEY); 		
+		0xE0, 0xF0, 0x10 	(multimedia) WWW search released
+		keyState.registerEvent(event, NOT_USED_KEY); 	
+		0xE0, 0xF0, 0x15 	(multimedia) previous track released
+		keyState.registerEvent(event, NOT_USED_KEY); 				
+		0xE0, 0xF0, 0x18 	(multimedia) WWW favourites released 						
+		keyState.registerEvent(event, NOT_USED_KEY);
+		0xE0, 0xF0, 0x20 	(multimedia) WWW refresh released 	
+		keyState.registerEvent(event, NOT_USED_KEY);
+		0xE0, 0xF0, 0x21 	(multimedia) volume down released
+		keyState.registerEvent(event, NOT_USED_KEY); 			
+		0xE0, 0xF0, 0x23 	(multimedia) mute released
+		keyState.registerEvent(event, NOT_USED_KEY);
+		0xE0, 0xF0, 0x28 	(multimedia) WWW stop released 				
+		keyState.registerEvent(event, NOT_USED_KEY);	
+		0xE0, 0xF0, 0x2B 	(multimedia) calculator released
+		keyState.registerEvent(event, NOT_USED_KEY);
+		0xE0, 0xF0, 0x30 	(multimedia) WWW forward released 			
+		keyState.registerEvent(event, NOT_USED_KEY);
+		0xE0, 0xF0, 0x32 	(multimedia) volume up released
+		keyState.registerEvent(event, NOT_USED_KEY); 		
+		0xE0, 0xF0, 0x34 	(multimedia) play/pause released
+		keyState.registerEvent(event, NOT_USED_KEY); 					
+		0xE0, 0xF0, 0x38 	(multimedia) WWW back released
+		keyState.registerEvent(event, NOT_USED_KEY); 			
+		0xE0, 0xF0, 0x3A 	(multimedia) WWW home released
+		keyState.registerEvent(event, NOT_USED_KEY); 	
+		0xE0, 0xF0, 0x3B 	(multimedia) stop released
+		keyState.registerEvent(event, NOT_USED_KEY);
+		0xE0, 0xF0, 0x40 	(multimedia) my computer released
+		keyState.registerEvent(event, NOT_USED_KEY); 						
+		0xE0, 0xF0, 0x48 	(multimedia) email released 	
+		keyState.registerEvent(event, NOT_USED_KEY);		
+		0xE0, 0xF0, 0x4D 	(multimedia) next track released
+		keyState.registerEvent(event, NOT_USED_KEY); 				
+		0xE0, 0xF0, 0x50 	(multimedia) media select released
+
+	keyState.doEvent(0xFF);
+keyState.doEvent(0xFF);
+
+keyState.registerEvent(0xE0, 0);
+keyState.doEvent(0xE0);
+
+	keyState.registerEvent(event, POWER_PRESS);
+	0xE0, 0x37 			(ACPI) power pressed
+	keyState.registerEvent(event, POWER_PRESS);
+	0xE0, 0x3F 			(ACPI) sleep pressed
+	keyState.registerEvent(event, POWER_PRESS);
+	0xE0, 0x5E 			(ACPI) wake pressed 		
+
+	keyState.registerEvent(event, NOT_USED_KEY);
+	0xE0, 0x10 			(multimedia) WWW search pressed
+	keyState.registerEvent(event, NOT_USED_KEY); 	
+	0xE0, 0x15 			(multimedia) previous track pressed
+	keyState.registerEvent(event, NOT_USED_KEY); 				
+	0xE0, 0x18 			(multimedia) WWW favourites pressed
+	keyState.registerEvent(event, NOT_USED_KEY); 						
+	0xE0, 0x20 			(multimedia) WWW refresh pressed 
+	keyState.registerEvent(event, NOT_USED_KEY);	
+	0xE0, 0x21 			(multimedia) volume down pressed
+	keyState.registerEvent(event, NOT_USED_KEY); 			
+	0xE0, 0x23 			(multimedia) mute pressed
+	keyState.registerEvent(event, NOT_USED_KEY);
+	0xE0, 0x28 			(multimedia) WWW stop pressed
+	keyState.registerEvent(event, NOT_USED_KEY); 					
+	0xE0, 0x2B 			(multimedia) calculator pressed
+	keyState.registerEvent(event, NOT_USED_KEY);
+	0xE0, 0x30 			(multimedia) WWW forward pressed
+	keyState.registerEvent(event, NOT_USED_KEY); 			
+	0xE0, 0x32 			(multimedia) volume up pressed
+	keyState.registerEvent(event, NOT_USED_KEY); 		
+	0xE0, 0x34 			(multimedia) play/pause pressed
+	keyState.registerEvent(event, NOT_USED_KEY); 					
+	0xE0, 0x38 			(multimedia) WWW back pressed
+	keyState.registerEvent(event, NOT_USED_KEY); 			
+	0xE0, 0x3A 			(multimedia) WWW home pressed
+	keyState.registerEvent(event, NOT_USED_KEY); 	
+	0xE0, 0x3B 			(multimedia) stop pressed
+	keyState.registerEvent(event, NOT_USED_KEY);
+	0xE0, 0x40 			(multimedia) my computer pressed
+	keyState.registerEvent(event, NOT_USED_KEY); 						
+	0xE0, 0x48 			(multimedia) email pressed
+	keyState.registerEvent(event, NOT_USED_KEY); 			
+	0xE0, 0x4D 			(multimedia) next track pressed
+	keyState.registerEvent(event, NOT_USED_KEY); 				
+	0xE0, 0x50 			(multimedia) media select pressed 	
+
+keyState.doEvent(0xFF);
+

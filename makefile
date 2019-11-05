@@ -26,9 +26,9 @@ CXX = g++-7
 ASM = nasm
 # LD = ld
 
-CXX_FLAGS_2 = -m32 -ffreestanding -fno-rtti -fno-exceptions -g -std=c++1z -O2 -Wall -Wextra -Werror
+CXX_FLAGS_2 = -m32 -ffreestanding -fno-rtti -fno-exceptions -g -std=c++17 -O2 -Wall -Wextra -Werror
 CXX_FLAGS_3 = -m32 -ffreestanding -fno-rtti -nostartfiles -g				\
-				-fno-exceptions -std=c++1z -O2 -Wall -Wextra -Werror
+				-fno-exceptions -std=c++17 -O2 -Wall -Wextra -Werror
 
 CRTBEGIN_OBJ:=$(shell $(CXX) $(CXX_FLAGS_3) -print-file-name=crtbegin.o)
 CRTEND_OBJ:=$(shell $(CXX) $(CXX_FLAGS_3) -print-file-name=crtend.o)
@@ -117,14 +117,17 @@ $(OS_IMAGE): stage1.bin stage2.bin stage3.bin superblock.ext2
 	cat stage12 stage3.bin > ${OS_IMAGE}
 	rm -f stage12
 
+run: $(OS_HDD) run_only
+
 # run the operating system on a virtual machine
-run: $(OS_HDD)
+run_only:
 	sudo qemu-system-x86_64 $(OS_HDD)\
 			-device isa-debug-exit,iobase=0xf4,iosize=0x04\
 			-gdb tcp::9000\
 			-serial file:os_serial.log\
 			-net nic,model=e1000\
-			-net tap,ifname=tap0
+			-net tap,ifname=tap0\
+			-vga std
 # 	sudo ifconfig tap0 10.0.0.1 netmask 255.255.255.0 up
 
 

@@ -41,7 +41,7 @@ DATA_GDT:
 	db 0x0			;	base bits (24:31)
 
 ADDITIONAL_SPACE:
-	times 4 db 0	;	for TSS and a bonus one maybe ?
+	times 4 dq 0	;	for TSS and a bonus one maybe ?
 
 GDT_END:
 

@@ -15,7 +15,10 @@ namespace kthread
 	}
 
 	uint32 Atomic32::operator = (uint32 desired) volatile noexcept {
-		return (*this = desired);
+		uint32 expected = desired;
+		while (!compare_exchange32(&container, &expected, desired))
+			asm volatile ("pause");
+		return expected;
 	}
 
 	void Atomic32::store(uint32 desired) noexcept {
@@ -33,7 +36,9 @@ namespace kthread
 	}
 
 	uint32 Atomic32::load() volatile noexcept {
-		return this->load();
+		uint32 expected = 0;
+		compare_exchange32(&container, &expected, expected);
+		return expected;
 	}
 
 	Atomic32::operator uint32() noexcept {

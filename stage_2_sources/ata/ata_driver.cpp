@@ -3,6 +3,20 @@
 #include "c_asm_func.h"
 #include "stdio.h"
 
+extern "C" void	*memset(void *s, int c, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+	{
+		*((char *)s + i) = c;
+		i++;
+	}
+	return (s);
+}
+
+
 void ata::waitBSY() {
 	while (inb(PRIMARY_PORT | STATUS) & 0x80)
 		;

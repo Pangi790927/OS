@@ -38,22 +38,80 @@
 #include "hash.h"
 #include "avl.h"
 #include "static_avl.h"
+#include "video.h"
+#include "ps2.h"
+#include "mouse.h"
 
 /*
 	Tasks:
-		* Network Driver
-		* MAKE MALLOC(done), PRINTF and other functions THREAD SAFE !!!!!!
+		* File system
+		* GUI
+			* fonts
+			* buttons, text_box, etc.
+		* VBE Graphics Mode
+			* add a way to redirect text and make text devices
+			* create a graphics pipeline of the sorts, maybe use another
+				procesor to do the graphics
+			* create a basic graphics library (including fonts)
+		* MAKE PRINTF and other functions THREAD SAFE !!!!!!
 	Posible tasks:
 		* Make debbuger with elf help
-		* File system
 		* Read/Write with DMA from HDD
 		* Shell
-		* support multiple media for boot
-		* VGA Graphics Mode
+		* Browser
+			* TCP and other protocols
+			* html parser
+			* css parser
+		* USB
 		* More advanced graphics 
+		* Driver Manager
+			* also load drivers at runtime (after file system)
+		* support multiple media for boot
 		* Global constructors
-		* Repair keyboard initialization
+		* Add real processes and process exec
+		* Port a compiler (this will make the system hosted)
+		* Add 16bit C code to stage 1 and expand stage 1 (more than 512 bytes) 
 		# Fix bug in hexdump ??---is it fixed---??
+	Features:
+		* bootloader
+			- loads more kernel
+			- gets info about pc
+			- enables vesa
+		* paging
+		* ata read
+		* elf
+		* pci
+		* serial
+		* interupts
+		* debuging KDBG
+		* threads
+			- atomic
+			- cond_var
+			- lock
+			- mutex
+			- semaphore
+			- thread
+		* malloc
+		* network
+			- i8254x
+			- ethernet
+			- arp
+			- udp
+			- ip4 (not completed)
+		* pit - programable interrupt timer
+		* ps2
+			- keyboard
+			- mouse (dodgy mouse implementation)
+		* scheduler
+		* vesa graphics
+		* libc & libc++ (far from complete)
+			- c++
+				- vector, string, deque, shared_ptr & unique_ptr,
+						new, delete, lock_guard
+			- c
+				- str*, mem*, is*, 
+			- utils
+				- avl, callbacks, hash, snprintf, static_queue
 */
 
 extern int _init() asm("_init");
@@ -262,6 +320,13 @@ struct TestThreads {
 	}
 };
 
+void clear() {
+	int *vbuff = (int *)(uint32 *)V_VBE_MEM_BASE;
+	int max = 600 * 800 * 1;
+	for (int i = 0; i < max; i++)
+		vbuff[i] = 0;
+}
+
 void printUserMode() {
 
 	std::cout << "Wellcome to OS" << std::endl;
@@ -279,12 +344,60 @@ void printUserMode() {
 	keyboard::KeyTranslator keyTranslate;
 
 	std::deque<uint32> keyList;
+
 	std::cout << "os$ ";
 	std::cout.flush();
+
+	vesa_print_data();
+	clear();
+
+	// std::cout << "modes" << boot::get_vesa_modes_cnt() << std::endl;
+	// std::cout << "boot_data: " <<
+	// 		((char *)boot::get_vesa_info_ptr())[0] <<
+	// 		((char *)boot::get_vesa_info_ptr())[1] <<
+	// 		((char *)boot::get_vesa_info_ptr())[2] <<
+	// 		((char *)boot::get_vesa_info_ptr())[3] << std::endl;
 
 	bool kernel_alive = true;
 	while (kernel_alive) {
 		/* main kernel loop */
+
+		/* mouse events */
+		while (mouse::event_cnt()) {
+			auto ev = mouse::pop_event();
+			if (ev.ev_type == mouse::MOUSE_MOVE) {
+				static int x = 0;
+				static int y = 0;
+				int max_x = 800 - 1;
+				int max_y = 600 - 1;
+				int *vbuff = (int *)(uint32 *)V_VBE_MEM_BASE;
+				x += ev.mov_x;
+				y -= ev.mov_y;
+				if (x < 0)
+					x = 0;
+				if (y < 0)
+					y = 0;
+				if (x > max_x)
+					x = max_x;
+				if (y > max_y)
+					y = max_y;
+				// // clear();
+				// for (int i = 0; i < x; i++)
+				// 	vbuff[i + y * (max_x + 1)] = 0xffff'ffff;
+				// for (int i = 0; i < y; i++)
+
+				vbuff[x + y * (max_x + 1)] = 0xffff'ffff;
+				// KDBG("x: %d, y: %d", x, y);
+			}
+			if (ev.ev_type == mouse::RBTN_DOWN)
+				KDBG("rmb_down");
+			if (ev.ev_type == mouse::LBTN_DOWN)
+				KDBG("lmb_down");
+			if (ev.ev_type == mouse::MBTN_DOWN)
+				KDBG("mmb_down");
+		}
+
+		/* keyboard events */
 		if (keyboard::hasNewKey()) {
 			while (keyboard::keyCount()) {
 				using namespace keyboard;
@@ -384,13 +497,27 @@ int main()
 	elf::init_kinfo();
 	kdbg::init();
 
+	KDBG("----------------------------------------"
+			"----------------------------------------");
+	KDBG("Enetered main kernel");
+	KDBG("Till now the following were initialized: screen, gdt, malloc, ata,"
+			"elf_info, kdbg, video");
+	KDBG("Initialized in the previous phases: paging, boot_info, a20line");
+	KDBG("----------------------------------------"
+			"----------------------------------------");
+
+	ps2::init();
+	video::init();
+
 	/* Global constructors till we are able to call them automaticaly*/
+	KDBG("initializing kernel output streams");
 	new (&std::buff) std::kiobuf<char>(256);
 	new (&std::cout) std::ostream(std::buff);
 	new (&std::cin) std::istream(std::buff);
 	// _init(); // !@#$ global constructors don't work
 
 	asm volatile ("cli");
+		KDBG("initializing irq's");
 		set_error_ISR();
 		set_irq_ISR();
 
@@ -400,12 +527,18 @@ int main()
 		irq_isr::sendMasterMask(0b0000'0000);
 		irq_isr::sendSlaveMask(0b0000'0000);
 		
+		KDBG("initializing pit");
 		pit::initDefault(1000);
+		
+		KDBG("initializing kernel threads");
 		kthread::init();
 		kthread::init_block();
 
+		KDBG("initializing keyboard/mouse");
+		mouse::init();
 		keyboard::init();
 
+		KDBG("starting the scheduler");
 		__setIOPL(3);
 		scheduler::init(V_K_STACK_START, (uint32)&printUserMode);
 		
@@ -413,6 +546,7 @@ int main()
 		scheduler::addProcess((uint32)put_char_stack, (uint32)&putCharAt,
 				USER_DATA_SEL | 3, USER_CODE_SEL | 3, K_PAGING, 10);
 
+	KDBG("Switching to kernel main thread");
 	/// will enable interrupts:
 	__switchToProcess(KERNEL_DATA_SEL, KERNEL_CODE_SEL,
 			V_K_STACK_START, (uint32)&printUserMode);

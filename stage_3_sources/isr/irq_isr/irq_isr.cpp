@@ -1,12 +1,14 @@
 #include "irq_isr.h"
 #include "Types.h"
 #include "c_asm_func.h"
-#include "kstdio.h"
+#include "kerndiag.h"
 #include "idt.h"
 #include "isr.h"
 #include "gdt.h"
 #include "keyboard.h"
+#include "mouse.h"
 #include "scheduler.h"
+#include "ps2.h"
 
 extern void irq0 () asm ("irq0");
 extern void irq1 () asm ("irq1");
@@ -31,7 +33,7 @@ volatile static uint64 irq0_count = 0;
 
 int irq_isr::add_interupt_fn (int int_number, const cbk_t<fn_type>& cbk) {
 	if (int_number < 0 || int_number > 15) {
-		kprintf("int_number must be between 0 and 15\n");
+		KDBG("int_number must be between 0 and 15\n");
 		return -1;
 	}
 	return cbk_vec[int_number].insert(cbk);
@@ -39,7 +41,7 @@ int irq_isr::add_interupt_fn (int int_number, const cbk_t<fn_type>& cbk) {
 
 int irq_isr::remove_interupt_fn(int int_number, const cbk_t<fn_type>& cbk) {
 	if (int_number < 0 || int_number > 15) {
-		kprintf("int_number must be between 0 and 15\n");
+		KDBG("int_number must be between 0 and 15\n");
 		return -1;
 	}
 	cbk_vec[int_number].remove(cbk);
@@ -128,39 +130,43 @@ uint32 isr_irq_0 (uint32 base) {
 }
 
 void isr_irq_1 () {
-	if (keyboard::checkInit())
-		keyboard::irq(inb(keyboard::DATA_PORT));
-
+	if (keyboard::checkInit()) {
+		while ((inb(ps2::COMM_PORT) & ps2::OUT_STATUS) &&
+				!(inb(ps2::COMM_PORT) & ps2::AUX_DEV))
+		{
+			keyboard::irq();
+		}
+	}
 	exec_custom_interupts(1);
 	irq_isr::aknowledge_irq_master();
 }
 
 void isr_irq_2 () {
-	kprintf("irq 2\n");
+	KDBG("irq 2\n");
 	exec_custom_interupts(2);
 	irq_isr::aknowledge_irq_master();
 }
 
 void isr_irq_3 () {
-	kprintf("irq 3\n");
+	KDBG("irq 3\n");
 	exec_custom_interupts(3);
 	irq_isr::aknowledge_irq_master();
 }
 
 void isr_irq_4 () {
-	kprintf("irq 4\n");
+	KDBG("irq 4\n");
 	exec_custom_interupts(4);
 	irq_isr::aknowledge_irq_master();
 }
 
 void isr_irq_5 () {
-	kprintf("irq 5\n");
+	KDBG("irq 5\n");
 	exec_custom_interupts(5);
 	irq_isr::aknowledge_irq_master();
 }
 
 void isr_irq_6 () {
-	kprintf("irq 6\n"); 
+	KDBG("irq 6\n"); 
 	exec_custom_interupts(6);
 	irq_isr::aknowledge_irq_master();
 }
@@ -168,50 +174,56 @@ void isr_irq_6 () {
 void isr_irq_7 () {
 	uint32 map = irq_isr::getIsr();
 	if (!(map & (1 << 7))) {
-		kprintf("irq 7 spourious\n");
+		KDBG("irq 7 spourious\n");
 	}
 	else {
-		kprintf("irq 7 non spourious\n");
+		KDBG("irq 7 non spourious\n");
 		while (true);
 	}
 }
 void isr_irq_8 () {
-	kprintf("irq 8\n");
+	KDBG("irq 8\n");
 	exec_custom_interupts(8);
 	irq_isr::aknowledge_irq_slave();
 }
 void isr_irq_9 () {
-	kprintf("irq 9\n"); 
+	KDBG("irq 9\n"); 
 	exec_custom_interupts(9);
 	irq_isr::aknowledge_irq_slave();
 }
 void isr_irq_10 () {
-	kprintf("irq 10\n"); 
+	KDBG("irq 10\n"); 
 	exec_custom_interupts(10);
 	irq_isr::aknowledge_irq_slave();
 }
 void isr_irq_11 () {
-	// kprintf("irq 11\n"); 
+	// KDBG("irq 11\n"); 
 	exec_custom_interupts(11);
 	irq_isr::aknowledge_irq_slave();
 }
 void isr_irq_12 () {
-	kprintf("irq 12\n"); 
+	if (mouse::is_init()) {
+		while ((inb(ps2::COMM_PORT) & ps2::OUT_STATUS) &&
+				(inb(ps2::COMM_PORT) & ps2::AUX_DEV))
+		{
+			mouse::irq();
+		}
+	}
 	exec_custom_interupts(12);
 	irq_isr::aknowledge_irq_slave();
 }
 void isr_irq_13 () {
-	kprintf("irq 13\n"); 
+	KDBG("irq 13\n"); 
 	exec_custom_interupts(13);
 	irq_isr::aknowledge_irq_slave();
 }
 void isr_irq_14 () {
-	kprintf("irq 14\n");
+	KDBG("irq 14\n");
 	exec_custom_interupts(14);
 	irq_isr::aknowledge_irq_slave();
 }
 void isr_irq_15 () {
-	kprintf("irq 15\n"); 
+	KDBG("irq 15\n"); 
 	exec_custom_interupts(15);
 	irq_isr::aknowledge_irq_slave();
 }

@@ -5,7 +5,7 @@
 
 namespace elf
 {
-	static const int sector_size = 512;
+	// static const int sector_size = 512;
 
 	file_hdr_t load_file_hdr (uint32 hdd_addr, load_fn load, void *ctx) {
 		file_hdr_t file_hdr;
@@ -59,8 +59,10 @@ namespace elf
 		auto str_sect_hdr = load_sect_hdr(hdd_addr + elf_hdr.sect_off,
 				elf_hdr.sect_hdr_size, elf_hdr.shstrndx, load, ctx);
 
-		char names[str_sect_hdr.size] = {0};
-		char names_copy[str_sect_hdr.size] = {0};
+		char names[str_sect_hdr.size];
+		char names_copy[str_sect_hdr.size];
+		for (uint32 i = 0; i < str_sect_hdr.size; i++)
+			names[i] = names_copy[i] = 0;
 		if (load(names, str_sect_hdr.offset + hdd_addr, str_sect_hdr.size,
 				ctx))
 		{

@@ -25,9 +25,9 @@ bios_load_memory:
 		jmp .end
 
 		.error:
-			mov si, LOAD_ERROR_MESSAGE
-			call bios_print_const_string
-			call bios_print_end_of_line
+			; mov si, LOAD_ERROR_MESSAGE
+			; call bios_print_const_string
+			; call bios_print_end_of_line
 			
 			jmp $		;	halt
 		.end:

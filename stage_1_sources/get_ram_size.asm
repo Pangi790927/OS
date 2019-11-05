@@ -2,6 +2,7 @@
 ; AX = extended memory between 1M and 16M, in K (max 3C00h = 15MB)
 ; BX = extended memory above 16M, in 64K blocks 
 get_ram_size:
+	; shouldn't I pusha popa?
 	xor cx, cx
 	xor dx, dx
 	mov ax, 0xE801

@@ -2,24 +2,31 @@
 #define KERNDIAG
 
 #include "Types.h"
+#include "snprintf.h"
 
 #define PRINT_LOG
+#define BUFF_SIZE 1024
 
-#define KLOG(fmt, ...)\
-		kdbg::log(__FILE__, __LINE__, __func__\
-				, fmt ##__VA_ARGS__)
+#define KDBG(fmt, ...)\
+do {\
+	char buff[BUFF_SIZE] = {0};\
+	strings::snprintf(sizeof(buff), buff,\
+			"[%s][%d][%s()] " fmt "\n",\
+			__FILE__, __LINE__, __func__, ##__VA_ARGS__);\
+	kdbg::log_str(buff);\
+} while (0)
 
-#define PANIC(reason)\
-		panic(__FILE__, __LINE__, __func__, reason)
+#define PANIC(fmt, ...)\
+	do {\
+		KDBG(fmt, ##__VA_ARGS__)\
+		*(int *)NULL = 122;\
+	} while (0)
 
 namespace kdbg
 {
-	int init (size_t size = 1024 * 32);
+	int init();
 	void uninit();
-	void log (const char *srcfile, int line, const char *func,
-			const char *fmt, ...);
-	void panic(const char *srcfile, int line, const char *func,
-			const char *reason);
+	void log_str (const char *str);
 }
 
 #endif

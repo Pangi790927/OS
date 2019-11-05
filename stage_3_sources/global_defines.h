@@ -65,12 +65,29 @@
 /* Must be updated here
 */
 #define V_NET_MEM_BASE		V_KERNEL_END
-#define V_NET_MEM_BASE_END	V_NET_MEM_BASE + 0x20000
+#define V_NET_MEM_BASE_END	(V_NET_MEM_BASE + 0x20000)
+
+/* Must be updated here
+*/
+#define V_VBE_MEM_BASE		V_NET_MEM_BASE_END
+#define V_VBE_MEM_BASE_END	(V_VBE_MEM_BASE + 0x1000000)
 
 /* Must be updated here in README and in kernel_stage_1.asm
 */
-#define RAM_SIZE_LOCATION	0x00000500
-#define V_RAM_SIZE_LOCATION	(RAM_SIZE_LOCATION + V_KERNEL_BASE)
+#define RAM_SIZE_LOCATION	0x500
+
+/* Must be updated here in README and in kernel_stage_1.asm
+*/
+#define VESA_MODES_LOC 0x504
+
+/* Must be updated here in README and in kernel_stage_1.asm
+*/
+#define VESA_CURR_MODE 0x506
+
+/* Must be updated here in README and in kernel_stage_1.asm
+*/
+#define VESA_INFO_LOC		0x1000
+
 
 /* Must be updated here
 */
