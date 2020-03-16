@@ -1,5 +1,5 @@
 ; al - character
-bios_print_character:		
+bios_print_character:
 	pusha
 		mov ah, 0x0e
 		int 0x10

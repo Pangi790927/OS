@@ -1,0 +1,14 @@
+[bootloader.cpp][line:61][bootloader]  -->
+[bootloader.cpp][line:63][bootloader] Starting bootloader
+[bootloader.cpp][line:33][gather_info]  -->
+[bootloader.cpp][line:37][gather_info] RAM size: kb: 15360 + 64kb: 1790
+[bootloader.cpp][line:44][gather_info] part0
+field: [0], start_lo [0], start_hi: [0], len_lo [-1], len_hi[0], sys_id[238]
+[bootloader.cpp][line:50][gather_info] Found boot part: 0
+[bootloader.cpp][line:44][gather_info] part1
+field: [0], start_lo [0], start_hi: [0], len_lo [0], len_hi[0], sys_id[0]
+[bootloader.cpp][line:44][gather_info] part2
+field: [0], start_lo [0], start_hi: [0], len_lo [0], len_hi[0], sys_id[0]
+[bootloader.cpp][line:44][gather_info] part3
+field: [0], start_lo [0], start_hi: [0], len_lo [0], len_hi[0], sys_id[0]
+[bootloader.cpp][line:33][gather_info]  <--
