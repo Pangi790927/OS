@@ -1,0 +1,11 @@
+{
+	"main_boot" : "boot.boot",
+	"boot_ext": ["vesa.boot", "loader.boot", "cpuid.boot"],
+	"kernel_stage1": "stage1.kern",
+	"kernel_stage2": "kernel.kern",
+	"mbr_opt": {},
+	"gpt_opt": {},
+	"fs_opt": {
+		"boot_dir": "/boot"
+	}
+}

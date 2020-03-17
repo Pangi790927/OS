@@ -1,3 +1,0 @@
-[submodule "experiments/ext2fs"]
-	path = experiments/ext2fs
-	url = git@github.com:Pangi790927/ext2fs.git
