@@ -3,3 +3,5 @@ OS.img
 os_image
 *.o
 *.bin
+*.elf
+*.img
