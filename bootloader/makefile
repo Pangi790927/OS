@@ -11,6 +11,7 @@ ASM_SRC = $(shell find src/ -type f -name "*.asm")
 CPP_SRC = $(shell find src/ -type f -name "*.cpp")
 ASM_OBJS = $(patsubst %.asm, %.o, $(ASM_SRC))
 CPP_OBJS = $(patsubst %.cpp, %.o, $(CPP_SRC))
+DEPS = $(patsubst %.cpp, %.dep, $(CPP_SRC))
 OBJS = ${ASM_OBJS} ${CPP_OBJS}
 
 all: image.img
@@ -21,10 +22,17 @@ mbrboot.bin:
 ${ASM_OBJS}: %.o: %.asm $(HEADERS)
 	$(ASM) $< -f elf -F stabs -o $@ $(INCLUDES)
 
-${CPP_OBJS}: %.o: %.cpp $(HEADERS)
+${CPP_OBJS}: %.o: %.cpp %.dep
 	$(CXX) -c $< -o $@ $(CXX_FLAGS) $(INCLUDES)
 
-bootloader.bin: ${CPP_OBJS} ${ASM_OBJS}
+${DEPS}: %.dep: %.cpp
+	rm -f $@
+	$(CXX) -MM -c $< -MF $@ $(CXX_FLAGS) $(INCLUDES)
+
+bootloader.dep:
+	$(CXX) -MM -MF bootloader.dep -c $(CXX_FLAGS) bootloader.cpp $(INCLUDES)
+
+bootloader.bin: ${CPP_OBJS} ${ASM_OBJS} bootloader.dep bootloader.cpp
 	$(ASM) bootcall.asm -f elf -F stabs -o bootcall
 	objdump -d -Mi8086 -Mintel bootcall
 	$(CXX) -c $(CXX_FLAGS) bootloader.cpp $(INCLUDES) -o bootloader.o
@@ -33,7 +41,7 @@ bootloader.bin: ${CPP_OBJS} ${ASM_OBJS}
 	objcopy -O binary bootloader.elf bootloader.bin
 	rm -f bootcall
 
-image.img: clean mbrboot.bin bootloader.bin
+image.img: mbrboot.bin bootloader.bin
 	dd if=/dev/zero of=bootloader.img  bs=1K  count=64
 	dd conv=notrunc if=bootloader.bin of=bootloader.img
 	cat mbrboot.bin bootloader.img > image.img
@@ -45,11 +53,16 @@ test: image.img
 		-gdb tcp::9000\
 		-serial file:boot_serial.log\
 		-vga std
+	cat boot_serial.log 
 
 clean:
+	rm -f $(DEPS)
 	rm -f $(OBJS)
 	rm -f bootloader.o
 	rm -f bootloader.elf
 	rm -f bootloader.bin
 	rm -f mbrboot.bin
 	rm -f image.img
+
+include ${DEPS}
+include bootloader.dep

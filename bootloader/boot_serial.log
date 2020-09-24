@@ -1,14 +1,60 @@
-[bootloader.cpp][line:77][bootloader]  -->
-[bootloader.cpp][line:79][bootloader] Starting bootloader
-[bootloader.cpp][line:33][gather_info]  -->
-[bootloader.cpp][line:37][gather_info] RAM size: kb: 15360 + 64kb: 1790
-[bootloader.cpp][line:44][gather_info] part0
+[bootloader.cpp][line:165][bootloader]  -->
+[bootloader.cpp][line:167][bootloader] Starting bootloader
+[bootloader.cpp][line:119][gather_info]  -->
+[bootloader.cpp][line:123][gather_info] RAM size: kb: 15360 + 64kb: 1790
+[bootloader.cpp][line:130][gather_info] part0
 field: [0], start_lo [0], start_hi: [0], len_lo [-1], len_hi[0], sys_id[238]
-[bootloader.cpp][line:50][gather_info] Found boot part: 0
-[bootloader.cpp][line:44][gather_info] part1
+[bootloader.cpp][line:136][gather_info] Found boot part: 0
+[bootloader.cpp][line:130][gather_info] part1
 field: [0], start_lo [0], start_hi: [0], len_lo [0], len_hi[0], sys_id[0]
-[bootloader.cpp][line:44][gather_info] part2
+[bootloader.cpp][line:130][gather_info] part2
 field: [0], start_lo [0], start_hi: [0], len_lo [0], len_hi[0], sys_id[0]
-[bootloader.cpp][line:44][gather_info] part3
+[bootloader.cpp][line:130][gather_info] part3
 field: [0], start_lo [0], start_hi: [0], len_lo [0], len_hi[0], sys_id[0]
-[bootloader.cpp][line:33][gather_info]  <--
+[bootloader.cpp][line:54][find_vesa_mode] vesa info ptr: 79bc
+[bootloader.cpp][line:58][find_vesa_mode] vesa sig: VESA
+[bootloader.cpp][line:60][find_vesa_mode] vesa version: 300
+[bootloader.cpp][line:61][find_vesa_mode] oem str ptr: c57d8
+[bootloader.cpp][line:62][find_vesa_mode] oem str: SeaBIOS VBE(C) 2011
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 100, [640X400] bpp: 8 pitch 640 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 101, [640X480] bpp: 8 pitch 640 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[3b] 102, [800X600] bpp: 4 pitch 100 base: 0
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 103, [800X600] bpp: 8 pitch 800 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[3b] 104, [1024X768] bpp: 4 pitch 128 base: 0
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 105, [1024X768] bpp: 8 pitch 1024 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[3b] 106, [1280X1024] bpp: 4 pitch 160 base: 0
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 107, [1280X1024] bpp: 8 pitch 1280 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 10d, [320X200] bpp: 15 pitch 640 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 10e, [320X200] bpp: 16 pitch 640 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 10f, [320X200] bpp: 24 pitch 960 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 110, [640X480] bpp: 15 pitch 1280 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 111, [640X480] bpp: 16 pitch 1280 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 112, [640X480] bpp: 24 pitch 1920 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 113, [800X600] bpp: 15 pitch 1600 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 114, [800X600] bpp: 16 pitch 1600 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 115, [800X600] bpp: 24 pitch 2400 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 116, [1024X768] bpp: 15 pitch 2048 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 117, [1024X768] bpp: 16 pitch 2048 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 118, [1024X768] bpp: 24 pitch 3072 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 119, [1280X1024] bpp: 15 pitch 2560 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 11a, [1280X1024] bpp: 16 pitch 2560 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 11b, [1280X1024] bpp: 24 pitch 3840 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 11c, [1600X1200] bpp: 8 pitch 1600 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 11d, [1600X1200] bpp: 15 pitch 3200 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 11e, [1600X1200] bpp: 16 pitch 3200 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 11f, [1600X1200] bpp: 24 pitch 4800 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 140, [320X200] bpp: 32 pitch 1280 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 141, [640X400] bpp: 32 pitch 2560 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 142, [640X480] bpp: 32 pitch 2560 base: fd000000
+[bootloader.cpp][line:80][find_vesa_mode] vesa mode: attr[bb] 143, [800X600] bpp: 32 pitch 3200 base: fd000000
+[bootloader.cpp][line:99][find_vesa_mode] selected mode: 143
+[bootloader.cpp][line:119][gather_info]  <--
+[../ext2fs/ext2.h][line:44][Ext2]  -->
+[../ext2fs/ext2.h][line:48][Ext2] blk cnt: 100
+[../ext2fs/ext2.h][line:44][Ext2]  <--
+[../ext2fs/ext2.h][line:54][init]  -->
+[../ext2fs/ext2.h][line:55][init] Reading superblock
+[include/ext2_boot_reader.h][line:17][read_sector] Outside of bounds lba: 102 max: 0, cnt: 2
+[../ext2fs/dev.h][line:155][get_sect] Driver couldn't load sector
+[../ext2fs/dev.h][line:78][get] Invalid sector
+[../ext2fs/ext2.h][line:54][init]  <--

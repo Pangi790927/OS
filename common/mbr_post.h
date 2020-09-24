@@ -26,6 +26,14 @@ struct mbr_hdr_t {
 	uint16_t	boot_sig;
 } __attribute__((__packed__));
 
+struct vesa_display_t {
+	uint16_t	width;
+	uint16_t	height;
+	uint16_t	pitch;			// bytes_per_scan_line
+	uint8_t		bpp;
+	uint16_t	attr;
+	uint32_t	physbase;
+} __attribute__((__packed__));
 
 struct mbr_post_t {
 	union {
@@ -33,8 +41,10 @@ struct mbr_post_t {
 			union {
 				struct {
 					/* here we will put data that must remain post boot and this
-					structure must be known from kernel */
+					structure must be known from kernel, reutilizes the mbr
+					code to store those values */
 					ramsize_t ramsize;
+					vesa_display_t vesa_display;
 					int mbr_boot;
 				} __attribute__((__packed__));
 				uint8_t data1[400];

@@ -1,6 +1,7 @@
 #ifndef EXT2DEFS_H
 #define EXT2DEFS_H
 
+// it will allways be 1024, don't change it
 #define BLK_SIZE 1024
 
 /* I usually don't use defines for naming constants but I'm taking those from
@@ -218,11 +219,11 @@ struct ext2_indir_t {
 
 /* name should be 4byte aligned so that dir_entry_t will also be aligned */
 struct dir_entry_t {
-	uint32_t ino = -1;
-	uint16_t next = sizeof(dir_entry_t);
-	uint8_t name_len;
-	uint8_t file_type;
-	uint8_t name[248] = {0};
+	uint32_t ino = 0;
+	uint16_t rec_len = sizeof(dir_entry_t);
+	uint8_t name_len = 0;
+	uint8_t file_type = EXT2_FT_UNKNOWN;
+	uint8_t name[4] = {0};
 } __attribute__((__packed__));
 
 #endif

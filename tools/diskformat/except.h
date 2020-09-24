@@ -1,5 +1,5 @@
-#ifndef DEBUG_H
-#define DEBUG_H
+#ifndef EXCEPT_H
+#define EXCEPT_H
 
 #include <execinfo.h>
 #include <exception>

@@ -1,16 +1,14 @@
 #ifndef EXT2_H
 #define EXT2_H
 
-#include <cmath>
 #include "ext2defs.h"
-#include "ext2dev.h"
 #include "round_util.h"
 #include "bitmap.h"
 #include "inodes.h"
 #include "dirs.h"
-#include "to_str.h"
 #include "uuid.h"
-#include "hexdump.h"
+#include "except.h"
+
 
 inline uint32_t log2_int(uint32_t num) {
 	uint32_t res = 0;
@@ -21,44 +19,64 @@ inline uint32_t log2_int(uint32_t num) {
 	return res;
 }
 
-struct lazy_commit_t {
-	void *from = NULL;
-	uint64_t faddr = 0;
-	uint64_t size = 0;
-};
-
 class Ext2 {
 public:
-	Ext2Dev ext2dev;
+	ExtDev &ext_dev;
+	ExtDev::Sector sup_sector;
+
 	ext2_sup_t *sup;
-	blk_grp_desc_t *desc_table;
 	uint32_t blk_cnt;
+
 	Inodes inodes;
 	Dirs dirs;
-	std::vector<Bitmap> ino_bitmaps;
-	std::vector<Bitmap> blk_bitmaps;
-	std::vector<lazy_commit_t> lazy_commit;
 
-	Ext2(Dev &dev, uint32_t sect_start, uint32_t sect_cnt)
-	: blk_cnt(sect_cnt / (BLK_SIZE / SECTOR_SZ)),
-			ext2dev(dev, sect_start, sect_cnt),
-			inodes(ext2dev, ino_bitmaps, blk_bitmaps, sup, desc_table),
+	Ext2(ExtDev &ext_dev, uint32_t blk_cnt)
+	: ext_dev(ext_dev), blk_cnt(blk_cnt),
+			inodes(
+					ext_dev,
+					sup,
+					(void *)this,
+					load_desc,
+					load_ino_bmap,
+					load_blk_bmap),
 			dirs(inodes)
 	{
+		DBGSCOPE();
 		if (blk_cnt < 64)
 			EXCEPTION("I refuse tu use such a small filesystem, go away: %d",
 					blk_cnt);
+		DBG("blk cnt: %d", blk_cnt)
 	}
 
-	~Ext2() {
-		commit_backups();
+	~Ext2() {}
+
+	int init() {
+		DBGSCOPE();
+		DBG("Reading superblock");
+		sup_sector = ext_move(ext_dev.get_sect(1));
+		sup = (ext2_sup_t *)sup_sector.get();
+		if (!sup)
+			return -1;
+		return 0;
+	}
+
+	void uninit() {
+		DBGSCOPE();
+		sup_sector.unload();	
+	}
+
+	int check_fs() {
+		DBGSCOPE();
+		if (sup->log_blk_size != 0) {
+			DBG("Block size must be 1024, if you want more implement it!");
+			return -1;
+		}
+		/* more to do */
+		return 0;
 	}
 
 	int create_fs() {
-		printf("Reading superblock\n");
-		sup = ext2dev.load<ext2_sup_t>(1024, sizeof(ext2_sup_t));
-		if (!sup)
-			return -1;
+		DBGSCOPE();
 		memset((void *)sup, 0, sizeof(ext2_sup_t));
 
 		init_per_grp_stats(sup, blk_cnt);
@@ -104,114 +122,168 @@ public:
 		create_uuid((char *)sup->uuid, sizeof(sup->uuid));
 		sup->algo_bitmap = 0;
 
-		printf("Init groups\n");
-		init_groups();
-		printf("Load bitmaps\n");
-		load_bitmaps(true);
-		register_backups();
+		DBG("Init groups");
+		if (init_groups() != 0) {
+			DBG("Can't init groups");
+			return -1;
+		}
 
-		printf("Create reserved inodes\n");
+		DBG("Create reserved inodes");
 		if (inodes.alloc_reserved_inodes()) {
-			printf("Can't create reserved inodes\n");
+			DBG("Can't create reserved inodes");
 			return -1;
 		}
 		if (dirs.add_file(2, 2, ".", EXT2_FT_DIR)) {
-			printf("Can't add '.' to root inode\n");
+			DBG("Can't add '.' to root inode");
 			return -1;
 		}
 		if (dirs.add_file(2, 2, "..", EXT2_FT_DIR)) {
-			printf("Can't add '..' to root inode\n");
+			DBG("Can't add '..' to root inode");
 			return -1;
 		}
 
 		return 0;
 	}
 
-	void read_fs() {
-		/* because this is fairly complex we will asume the easiest to
-		read/write file system. That means:
-			- BLK_CNT allways 1024
-			- all groups have a backup
-		*/
-		sup = ext2dev.load<ext2_sup_t>(blk2faddr(1), sizeof(ext2_sup_t));
-		desc_table = ext2dev.load<blk_grp_desc_t>(blk2faddr(2),
-						sizeof(blk_grp_desc_t) * grp_cnt());
-		load_bitmaps(false);
-		register_backups();
+	int commit_backups() {
+		DBGSCOPE();
+		if (sup_sector.save(false) != 0) {
+			DBG("Failed to commit back superblock");
+			return -1;
+		}
+		for (uint32_t i = 1; i < grp_cnt(); i++) {
+			for (uint32_t j = 0; j < desc_bsize(); j++) {
+				auto blk_orig = ext_dev.get_sect(1 + j);
+				auto blk_back = ext_dev.get_sect(1 + i * grp_bsize() + j);
+
+				if (!blk_orig.get()) {
+					DBG("Failed to load orig blk: %d at steps: %d", j, i);
+					return -1;
+				}
+
+				if (!blk_back.get()) {
+					DBG("Failed to load backup blk: %d at step: %d", j, i);
+					return -1;
+				}
+
+				memcpy(blk_back.get(), blk_orig.get(), BLK_SIZE);
+
+				blk_orig.unload();
+				if (blk_back.save(true) != 0) {
+					DBG("Failed to save backup blk: %d at step: %d", j, i);
+					return -1;
+				}
+			}
+		}
+
+		return 0;
 	}
 
-	void register_backups() {
-		/* we will schedule all superblocks for a later commit to file */
-		for (int i = 0; i < grp_cnt(); i++)
-			lazy_commit.push_back({
-				.from = sup,
-				.faddr = blk2faddr(1 + i * grp_bsize()),
-				.size = sizeof(ext2_sup_t)
-			});
-
-		/* we will register all desc table backups for a later commit */
-		for (int i = 0; i < grp_cnt(); i++)
-			lazy_commit.push_back({
-				.from = desc_table,
-				.faddr = blk2faddr(2 + i * grp_bsize()),
-				.size = sizeof(blk_grp_desc_t) * grp_cnt()
-			});
+	static SectorDesc load_desc(void *c, int i) {
+		return ((Ext2 *)c)->load_desc(i);
 	}
 
-	void commit_backups() {
-		for (auto &&lc : lazy_commit)
-			ext2dev.write(lc.from, lc.faddr, lc.size);
+	SectorDesc load_desc(int i) {
+		SectorDesc ret;
+		const int desc_in_blk = BLK_SIZE / sizeof(blk_grp_desc_t);
+		const int grp_blk_index = roundup_div(i, desc_in_blk);
+		ret.sect = ext_dev.get_sect(2 + grp_blk_index);
+		if (!ret.sect.get())
+			return ret;
+		ret.desc = (blk_grp_desc_t *)ret.sect.get() +
+				sizeof(blk_grp_desc_t) * (i % desc_in_blk);
+		return ret;
 	}
 
-	void init_groups() {
-		// we know that if we are building this fs first descriptor table will
-		// be at block 2
-		desc_table = ext2dev.load<blk_grp_desc_t>(blk2faddr(2),
-						sizeof(blk_grp_desc_t) * grp_cnt());
+	static SectorBitmap load_ino_bmap(void *c, int i) {
+		return ((Ext2 *)c)->load_ino_bmap(i);
+	}
 
-		
+	SectorBitmap load_ino_bmap(int i) {
+		auto desc = load_desc(i);
+		int bmap_ino = desc.desc->ino_bitmap;
+		desc.sect.unload();
 
+		SectorBitmap ret;
+		ret.sect = ext_dev.get_sect(bmap_ino);
+		if (!ret.sect.get())
+			return ret;
+		ret.bmap = Bitmap(ret.sect.get(), BLK_SIZE);
+		return ret;
+	}
+
+	static SectorBitmap load_blk_bmap(void *c, int i) {
+		return ((Ext2 *)c)->load_blk_bmap(i);
+	}
+
+	SectorBitmap load_blk_bmap(int i) {
+		auto desc = load_desc(i);
+		int bmap_blk = desc.desc->blk_bitmap;
+		desc.sect.unload();
+
+		SectorBitmap ret;
+		ret.sect = ext_dev.get_sect(bmap_blk);
+		if (!ret.sect.get())
+			return ret;
+		ret.bmap = Bitmap(ret.sect.get(), BLK_SIZE);
+		return ret;
+	}
+
+	int init_groups() {
+		DBGSCOPE();
 		/* now we will add in each descriptor the group that it references */
 		uint32_t free_ino = sup->ino_cnt;
 		uint32_t free_blk = sup->blk_cnt;
-		for (int i = 0; i < grp_cnt(); i++) {
-			desc_table[i].ino_bitmap = 2 + desc_bsize() + i * grp_bsize();
-			desc_table[i].blk_bitmap = 3 + desc_bsize() + i * grp_bsize();
-			desc_table[i].ino_table = 4 + desc_bsize() + i * grp_bsize();
-			desc_table[i].used_dir_cnt = 0;
+		for (uint32_t i = 0; i < grp_cnt(); i++) {
+			auto sd = load_desc(i);
+			if (!sd.sect.get()) {
+				DBG("Couldn't load desc: %d", i);
+				sd.sect.unload();
+				return -1;
+			}
+			sd.desc->ino_bitmap = 2 + desc_bsize() + i * grp_bsize();
+			sd.desc->blk_bitmap = 3 + desc_bsize() + i * grp_bsize();
+			sd.desc->ino_table = 4 + desc_bsize() + i * grp_bsize();
+			sd.desc->used_dir_cnt = 0;
 
-			desc_table[i].free_blk_cnt = 
-					std::min(free_blk, (uint32_t)BLK_SIZE * 8);
+			sd.desc->free_blk_cnt = ext_min(free_blk, (uint32_t)BLK_SIZE * 8);
 			free_blk -= BLK_SIZE * 8;
-			desc_table[i].free_ino_cnt = 
-					std::min(free_ino, (uint32_t)BLK_SIZE * 8);
+			sd.desc->free_ino_cnt = ext_min(free_ino, (uint32_t)BLK_SIZE * 8);
 			free_ino -= BLK_SIZE * 8;
-		}
-	}
 
-	void load_bitmaps(bool commit) {
-		for (int i = 0; i < grp_cnt(); i++) {
-			uint8_t *ino = ext2dev.load<uint8_t>(
-					blk2faddr(desc_table[i].ino_bitmap), BLK_SIZE);
-			uint8_t *blk = ext2dev.load<uint8_t>(
-					blk2faddr(desc_table[i].blk_bitmap), BLK_SIZE);
-			memset((char *)ino, 0, BLK_SIZE);
-			memset((char *)blk, 0, BLK_SIZE);
-			ino_bitmaps.emplace_back(ino, BLK_SIZE);
-			blk_bitmaps.emplace_back(blk, BLK_SIZE);
-			if (commit) {
-				lazy_commit.push_back({
-					.from = ino,
-					.faddr = blk2faddr(desc_table[i].ino_bitmap),
-					.size = BLK_SIZE
-				});
-				lazy_commit.push_back({
-					.from = blk,
-					.faddr = blk2faddr(desc_table[i].blk_bitmap),
-					.size = BLK_SIZE
-				});
+			auto bm_ino = load_ino_bmap(i);
+			if (!bm_ino.sect.get()) {
+				DBG("Couldn't load inode bitmap: %d", i);
+				return -1;
+			}
+			auto bm_blk = load_blk_bmap(i);
+			if (!bm_blk.sect.get()) {
+				DBG("Couldn't load block bitmap: %d", i);
+				return -1;
+			}
+
+			memset((char *)bm_ino.sect.get(), 0, BLK_SIZE);
+			memset((char *)bm_ino.sect.get(), 0, BLK_SIZE);
+			
+			if (sd.sect.save(true) != 0) {
+				DBG("Couldn't save desc: %d", i);
+				bm_ino.sect.unload();
+				bm_blk.sect.unload();
+				return -1;
+			}
+
+			if (bm_ino.sect.save(true) != 0) {
+				DBG("Couldn't save inode bitmap: %d", i);
+				bm_blk.sect.unload();
+				return -1;
+			}
+
+			if (bm_blk.sect.save(true) != 0) {
+				DBG("Couldn't save inode bitmap: %d", i);
+				return -1;
 			}
 		}
+		return 0;
 	}
 
 	uint32_t grp_cnt() {
@@ -231,10 +303,11 @@ public:
 
 	/* returns size of group descriptor array in blocks */
 	uint32_t desc_bsize() {
-		return roundup_div(grp_cnt() * 32, BLK_SIZE);
+		return roundup_div(grp_cnt() * sizeof(blk_grp_desc_t), BLK_SIZE);
 	}
 
 	void init_per_grp_stats(ext2_sup_t *sup, uint32_t blk_cnt) {
+		DBGSCOPE();
 		/* this funcion only fills those:
 			sup->blk_cnt = 0;
 			sup->ino_cnt = 0;
@@ -322,8 +395,8 @@ public:
 				used_blk_cnt += added_if_more_grps;
 				
 				uint32_t usable_blks_cnt = blk_cnt - used_blk_cnt;
-				sup->ino_cnt += std::min(sup->ino_per_grp, usable_blks_cnt);
-				usable_blks_cnt -= std::min(sup->ino_per_grp, usable_blks_cnt);
+				sup->ino_cnt += ext_min(sup->ino_per_grp, usable_blks_cnt);
+				usable_blks_cnt -= ext_min(sup->ino_per_grp, usable_blks_cnt);
 				sup->blk_cnt += usable_blks_cnt;
 
 			}
@@ -332,33 +405,35 @@ public:
 			if (grp_cnt != roundup_div(sup->ino_cnt, sup->ino_per_grp))
 				EXCEPTION("Something went wrong in code");
 		}
+		DBG("resulting grp stats: blk: %d, ino: %d, blk/grp: %d, ino/grp: %d",
+				sup->blk_cnt, sup->ino_cnt, sup->blk_per_grp, sup->ino_per_grp);
 	}
 
-	uint64_t blk2faddr(uint32_t blk) {
-		return blk * blk_size();
-	}
+	// uint64_t blk2faddr(uint32_t blk) {
+	// 	return blk * blk_size();
+	// }
 
-	uint64_t blk_size() {
-		return 1 << (sup->log_blk_size + 10);
-	}
+	// uint64_t blk_size() {
+	// 	return 1 << (sup->log_blk_size + 10);
+	// }
 
-	std::string to_string() {
-		std::string ret = sformat("%s\n", ext_sup_str(sup));
-		ret += sformat("%s\n", ext_grp_table_str(desc_table, grp_cnt()));
-		for (int i = 0; i < grp_cnt(); i++) {
-			ret += sformat("ino_bitmap[%d]:\n%s\n",
-					i, ext_bitmap_str(ino_bitmaps[i]));
-			ret += sformat("blk_bitmap[%d]:\n%s\n",
-					i, ext_bitmap_str(blk_bitmaps[i]));
-		}
-		ret += sformat("inodes: %s\n", inodes.to_string().c_str());
-		ret += sformat("Reading root inode: \n");
-		dirs.listdir("/", [&](auto a) {
-			ret += sformat("%s  ", a.name);
-		});
-		ret += "\n";
-		return ret;
-	}
+	// std::string to_string() {
+	// 	std::string ret = sformat("%s\n", ext_sup_str(sup));
+	// 	ret += sformat("%s\n", ext_grp_table_str(desc_table, grp_cnt()));
+	// 	for (int i = 0; i < grp_cnt(); i++) {
+	// 		ret += sformat("ino_bitmap[%d]:\n%s\n",
+	// 				i, ext_bitmap_str(ino_bitmaps[i]));
+	// 		ret += sformat("blk_bitmap[%d]:\n%s\n",
+	// 				i, ext_bitmap_str(blk_bitmaps[i]));
+	// 	}
+	// 	ret += sformat("inodes: %s\n", inodes.to_string().c_str());
+	// 	ret += sformat("Reading root inode: \n");
+	// 	dirs.listdir("/", [&](auto a) {
+	// 		ret += sformat("%s  ", a.name);
+	// 	});
+	// 	ret += "\n";
+	// 	return ret;
+	// }
 };
 
 #endif

@@ -11,7 +11,7 @@
 [bits 16]
 
 ; inits
-mov bp, 0x7BF0			; 0xA000 - stack for stage_1 and 1/2 of stage_2
+mov bp, 0x7BF0			; stack for stage_1 and 1/2 of stage_2
 mov sp, bp
 mov [boot_drive], dl	; saving the boot drive
 

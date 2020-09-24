@@ -1,7 +1,7 @@
 #ifndef CRC32_H
 #define CRC32_H
 
-inline uint32_t crc32(uint8_t *data, uint32_t len) {
+inline uint32_t crc32(char *data, uint32_t len) {
 	uint32_t crc = 0xffff'ffff;
 	for (int i = 0; i < len; i++) {
 		uint32_t byte = data[i];

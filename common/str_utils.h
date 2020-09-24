@@ -1,6 +1,7 @@
 #ifndef STR_UTILS_H
 #define STR_UTILS_H
 
+#include <vector>
 template <typename Arg>
 auto sformat_arg(Arg&& arg) {
 	return std::forward<Arg>(arg);

@@ -1,6 +1,8 @@
 #ifndef MBR_HDR_H
 #define MBR_HDR_H
 
+#include "mbr_opts.h"
+
 struct mbr_part_t {
 	uint8_t		bit_field;
 	uint8_t		sig1;
@@ -13,7 +15,8 @@ struct mbr_part_t {
 } __attribute__((__packed__));
 
 struct mbr_hdr_t {
-	uint8_t		code[440];
+	uint8_t		code[400];
+	mbr_opts_t	opts;
 	uint32_t	disk_sig;
 	uint16_t	zero2;
 	mbr_part_t	part1;

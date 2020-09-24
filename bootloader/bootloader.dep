@@ -1,0 +1,4 @@
+bootloader.o: bootloader.cpp include/serial.h include/dbg.h \
+ include/rmode.h ../common/types.h include/serial.h \
+ ../common/simple_printf.h ../common/mbr_post.h ../common/types.h \
+ ../common/mbr_opts.h ../common/ramsize.h include/rmode.h ../common/gpt.h

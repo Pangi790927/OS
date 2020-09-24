@@ -4,8 +4,11 @@
 #include "rmode.h"
 #include "serial.h"
 #include "simple_printf.h"
+#include "except.h"
 
-#define VGA_PRINTF(fmt, ...) printf([](char c){ bios_putchr(c); },\
+inline uint16_t (*intern_putchar) (uint16_t) = &bios_putchr;
+
+#define VGA_PRINTF(fmt, ...) printf([](char c){ intern_putchar(c); },\
 		fmt, ##__VA_ARGS__);
 
 #define SERIAL_PRINTF(fmt, ...) printf(serial::sendchr, fmt, ##__VA_ARGS__);
@@ -20,7 +23,7 @@
 #define DBG(fmt, ...) DBG_PRINT(__FILE__, __LINE__, __func__, fmt,\
 		##__VA_ARGS__)
 
-#define DBGSCOP() DbgScope dbg_scope(__FILE__, __LINE__, __func__);
+#define DBGSCOPE() DbgScope dbg_scope(__FILE__, __LINE__, __func__);
 
 struct DbgScope {
 	const char *file;
