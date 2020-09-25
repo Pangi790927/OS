@@ -43,7 +43,7 @@ dev = "/dev/loop10"
 mount_point = "mount_point"
 try:
 	attach_to_dev(fs_image, dev, "17408")
-	# os.system("sudo e2fsck -f " + dev)
+	os.system("sudo e2fsck -f " + dev)
 	print("------------------------")
 	try:
 		run_stats()
@@ -51,6 +51,8 @@ try:
 		os.system("ls -la " + mount_point)
 		os.system("ls -la " + mount_point + "/etc")
 		os.system("ls -la " + mount_point + "/boot")
+		os.system("cat " + mount_point + "/boot/boot.conf")
+		# time.sleep(20);
 		umount_fs(mount_point)
 	except:
 		dmesg_print()

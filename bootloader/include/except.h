@@ -1,8 +1,14 @@
 #ifndef EXCEPT_H
 #define EXCEPT_H
 
-inline const char *backtrace_fn() {
-	return "backtrace not yet implemented...";
+struct string_placeholder {
+	const char *c_str() {
+		return "backtrace not yet implemented...";
+	}
+};
+
+inline string_placeholder backtrace_fn() {
+	return string_placeholder();
 }
 
 #define EXCEPTION(fmt, ...) \

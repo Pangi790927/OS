@@ -11,7 +11,7 @@ field: [0], start_lo [0], start_hi: [0], len_lo [0], len_hi[0], sys_id[0]
 field: [0], start_lo [0], start_hi: [0], len_lo [0], len_hi[0], sys_id[0]
 [bootloader.cpp][line:130][gather_info] part3
 field: [0], start_lo [0], start_hi: [0], len_lo [0], len_hi[0], sys_id[0]
-[bootloader.cpp][line:54][find_vesa_mode] vesa info ptr: 79bc
+[bootloader.cpp][line:54][find_vesa_mode] vesa info ptr: 7790
 [bootloader.cpp][line:58][find_vesa_mode] vesa sig: VESA
 [bootloader.cpp][line:60][find_vesa_mode] vesa version: 300
 [bootloader.cpp][line:61][find_vesa_mode] oem str ptr: c57d8
@@ -55,6 +55,6 @@ field: [0], start_lo [0], start_hi: [0], len_lo [0], len_hi[0], sys_id[0]
 [../ext2fs/ext2.h][line:54][init]  -->
 [../ext2fs/ext2.h][line:55][init] Reading superblock
 [include/ext2_boot_reader.h][line:17][read_sector] Outside of bounds lba: 102 max: 0, cnt: 2
-[../ext2fs/dev.h][line:155][get_sect] Driver couldn't load sector
-[../ext2fs/dev.h][line:78][get] Invalid sector
+[../ext2fs/dev.h][line:156][get_sect] Driver couldn't load sector
+[../ext2fs/dev.h][line:78][get] Invalid sector backtrace not yet implemented...
 [../ext2fs/ext2.h][line:54][init]  <--

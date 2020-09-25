@@ -75,7 +75,7 @@ struct Dev {
 
 		char *get() {
 			if (verdict) {
-				DBG("Invalid sector");
+				DBG("Invalid sector %s", backtrace_fn().c_str());
 				return NULL;
 			}
 			return (char *)addr;
@@ -140,7 +140,8 @@ struct Dev {
 
 	Sector get_sect(uint32_t sect_index) {
 		if (sect_index >= sect_cnt) {
-			DBG("Sector index outside of dev boundry");
+			DBG("Sector index outside of dev boundry %d %s",
+					sect_index, backtrace_fn().c_str());
 			return Sector();
 		}
 		int cache_index = cache_bitmap.get_first_free();

@@ -36,12 +36,17 @@ struct DevLayout {
 		return jconf[opt_name];
 	}
 
-	auto path(std::string opt_name) {
+	std::string path(std::string src_dst, std::string opt_name) {
 		if (jconf.find(opt_name) == jconf.end())
 			EXCEPTION("Path not found: %s", opt_name.c_str());
 		fs::path p1 = confpath;
-		return p1.parent_path().string() + "/" +
-				jconf[opt_name].get<std::string>();
+		if (src_dst == "src_path")
+			return p1.parent_path().string() + "/" +
+					jconf[opt_name][src_dst].get<std::string>();
+		else if (src_dst == "dst_path")
+			return jconf[opt_name][src_dst].get<std::string>();
+		else
+			return "";
 	}
 };
 

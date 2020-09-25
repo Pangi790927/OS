@@ -34,11 +34,13 @@ using GptDev = Dev<LBA_SZ>;
 char part_cache[128 * PART_SIZE];
 char dev_cache[LBA_SZ * 64];
 uint32_t cache_size = sizeof(dev_cache);
+uint16_t boot_lba = 0;
+uint16_t boot_lba_cnt = 0;
 
 void install_mbr(FileProvDev &file_dev, DevLayout &layout) {
 	MbrDev mbr_dev(file_dev.get_if(), 0, 1, dev_cache, cache_size);
 
-	auto mbr_code = read_file(layout.path("main_boot"));
+	auto mbr_code = read_file(layout.path("src_path", "mbr_boot"));
 	if (mbr_code.empty())
 		mbr_code.resize(LBA_SZ);
 
@@ -58,6 +60,11 @@ void install_mbr(FileProvDev &file_dev, DevLayout &layout) {
 	mbr.part2 = {0};
 	mbr.part3 = {0};
 	mbr.part4 = {0};
+
+	// mbr.opts.boot_drive = 0;
+	mbr.opts.boot_start = boot_lba;
+	mbr.opts.boot_size = boot_lba_cnt;
+	mbr.opts.boot_addr = 0x7e00;
 
 	// printf("mbr: %s\n", mbr_str(mbr).c_str());
 	sect.save(true);
@@ -136,6 +143,107 @@ void install_gpt(FileProvDev &file_dev, DevLayout &layout) {
 	part1_sect.save(true);
 	gpt_sect.save(true);
 }
+
+int install_boot(Ext2 &ext2, DevLayout &layout) {
+	int bootloader_ino = ext2.inodes.create(EXT2_S_IFREG | EXT2_S_RMASK, 0, 0);
+	if (bootloader_ino <= 0) {
+		printf("can't create bootloader file\n");
+		return -1;
+	}
+	printf("bootload ino: %d\n", bootloader_ino);
+
+	auto bootloader_code = read_file(layout.path("src_path", "bootloader"));
+	if (bootloader_code.size() == 0) {
+		printf("empty bootloader\n");
+		return -1;
+	}
+	if (bootloader_code.size() % LBA_SZ != 0)
+		bootloader_code.resize(roundup(bootloader_code.size(), LBA_SZ));
+
+	if (ext2.inodes.write_imutable(bootloader_ino, (char *)&bootloader_code[0],
+			bootloader_code.size()))
+	{
+		printf("Can't write bootloader file\n");
+		return -1;
+	}
+
+	inode_t bootloader_inode;
+	if (ext2.inodes.getino(bootloader_ino, &bootloader_inode) < 0) {
+		printf("Can't get bootloader inode info\n");
+		return -1;
+	}
+
+	if (bootloader_inode.size == 0 || bootloader_inode.block[0] == 0) {
+		printf("Invalid bootloader inode size %d\n", bootloader_inode.size);
+		return -1;
+	}
+
+	boot_lba = bootloader_inode.block[0] * (BLK_SIZE / LBA_SZ);
+	boot_lba_cnt = bootloader_inode.size * (BLK_SIZE / LBA_SZ);
+
+	std::string bootloader_path = layout.path("dst_path", "bootloader");
+	std::string bootconf_path = layout.path("dst_path", "bootconf");
+
+	int bootdir_ino = ext2.dirs.find_rec("/boot");
+	if (bootdir_ino < 1) {
+		printf("can't find boot inode\n");
+		return -1;
+	}
+
+	if (ext2.dirs.add_file(bootdir_ino, bootloader_ino,
+			bootloader_path.c_str()))
+	{
+		printf("Can't add %s to boot inode\n", bootloader_path.c_str());
+		return -1;
+	}
+
+	int bootconf_ino = ext2.inodes.create(EXT2_S_IFREG | EXT2_S_RMASK, 0, 0);
+	if (bootconf_ino <= 0) {
+		printf("can't create boot config\n");
+		return -1;
+	}
+
+	auto bootconfig = read_config(layout.path("src_path", "bootconf"));
+	if (bootconfig.size() >= BLK_SIZE) {
+		printf("boot config must be max %d bytes\n", BLK_SIZE);
+		return -1;
+	}
+	bootconfig.resize(BLK_SIZE, 0);
+
+	if (ext2.inodes.write(bootconf_ino, 0, (char *)&bootconfig[0], BLK_SIZE)
+			!= BLK_SIZE)
+	{
+		printf("Failed to write boot config\n");
+		return -1;
+	}
+
+	int ret = ext2.dirs.add_file(bootdir_ino, bootconf_ino,
+			bootconf_path.c_str());
+	if (ret < 0) {
+		printf("can't add boot config in boot directory\n");
+		return -1;
+	}
+
+	inode_t bootconf_inode;
+	if (ext2.inodes.getino(bootconf_ino, &bootconf_inode)) {
+		printf("Failed to get conf inode\n");
+		return -1;
+	}
+	char confbuf[BLK_SIZE];
+	if (ext2.inodes.read(bootconf_ino, 0, confbuf, sizeof(confbuf))
+			!= sizeof(confbuf))
+	{
+		printf("Failed to read boot config\n");
+		return -1;
+	}
+	printf("config: [size: %lu]: %s\n", sizeof(confbuf), confbuf);
+
+	/* TO DO:
+		- write kernel into /boot
+	 */
+	return 0;
+}
+
 /*
 	TO FIX:
 		- commit fcn
@@ -180,73 +288,30 @@ void install_ext2(FileProvDev &file_dev, DevLayout &layout) {
 	ext2.dirs.mkdir("/etc", "init.d");
 	ext2.dirs.mkdir("/etc", "net");
 	ext2.dirs.mkdir("/etc", "vesa");
-	ext2.dirs.mkdir("/etc", "vesa1");
-	ext2.dirs.mkdir("/etc", "vesa2");
-	// ext2.dirs.mkdir("/etc", "vesa3");
 
-	printf("Create boot file(inode 5)\n");
-	char boot[] = "Ana are mere multe aici";
-	if (ext2.inodes.write_imutable(5, boot, sizeof(boot))) {
-		printf("Can't create boot file\n");
-		return ;
-	}
-	int boot_ino = ext2.dirs.find_rec("/boot");
-	if (boot_ino < 1) {
-		printf("can't find boot inode\n");
-		return ;
-	}
-
-	int config_ino = ext2.inodes.create(EXT2_S_IFREG | EXT2_S_RMASK, 0, 0);
-	ext2.dirs.add_file(boot_ino, config_ino, "boot.config", EXT2_FT_REG_FILE);
-
-	if (ext2.dirs.add_file(boot_ino, 5, "boot.boot", EXT2_FT_REG_FILE)) {
-		printf("Can't add boot.boot to boot inode\n");
-		return ;
-	}
-
-	if (ext2.dirs.add_file(2, 11, "lost+found", EXT2_FT_DIR)) {
+	if (ext2.dirs.add_file(2, 11, "lost+found")) {
 		printf("Can't add lost+found to root inode\n");
 		return ;
 	}
 
-	printf("Hexdump boot:\n");
-	inode_t bootino;
-	if (ext2.inodes.getino(5, &bootino)) {
-		printf("Failed to get boot inode\n");
+	if (install_boot(ext2, layout) < 0) {
+		printf("couldn't install boot data\n");
 		return ;
 	}
-	char bootbuf[bootino.size];
-	if (ext2.inodes.read(5, 0, bootbuf, sizeof(bootbuf)) != sizeof(bootbuf)) {
-		printf("Failed to read boot.boot\n");
-		return ;
-	}
-	printf("boot.boot[size: %lu]: \n", sizeof(bootbuf));
-	util::hexdump(bootbuf, sizeof(bootbuf));
-
-	/* TO DO:
-		- write real boot program here
-		- write kernel into /boot
-	 */
 
 	printf("Listing dirs\n");
-	ext2.dirs.listdir("/", [](auto& entry) {
+	ext2.dirs.listdir("/", [](auto& entry, int, int) {
 		printf("[%3d]/%s\n", entry.ino, entry.name);
+		return 0;
 	});
-	ext2.dirs.listdir("/etc", [](auto& entry) {
+	ext2.dirs.listdir("/etc", [](auto& entry, int, int) {
 		printf("[%3d]/etc/%s\n", entry.ino, entry.name);
+		return 0;
 	});
-	ext2.dirs.listdir("/boot", [](auto& entry) {
+	ext2.dirs.listdir("/boot", [](auto& entry, int, int) {
 		printf("[%3d]/boot/%s\n", entry.ino, entry.name);
+		return 0;
 	});
-
-	/* TO DO:
-		- read and save boot sector into mbr
-		- save bootloader in filesystem and set it's lba address in mbr
-			* obs, save booltloader as a continous file
-		- save boot-options in filesystem
-		- save stage 1 of kernel in filesystem as .elf file
-		- save stage 2 of kernel in filesystem as .elf file
-	*/
 
 	ext2.commit_backups();
 	// printf("Ext2: %s\n", ext2.to_string().c_str());
@@ -281,9 +346,6 @@ catch (std::exception& ex) {
 }
 
 /*
-	
-
-
 		bellow is old: 
 	boot-code (400 bytes) + mbr_opts (40) + prot-mbr (rest)
 		-> zipped toghether in a single mbr sector

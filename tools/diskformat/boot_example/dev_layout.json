@@ -1,11 +1,19 @@
 {
-	"main_boot" : "boot.boot",
-	"boot_ext": ["vesa.boot", "loader.boot", "cpuid.boot"],
-	"kernel_stage1": "stage1.kern",
-	"kernel_stage2": "kernel.kern",
-	"mbr_opt": {},
-	"gpt_opt": {},
-	"fs_opt": {
-		"boot_dir": "/boot"
-	}
+	"mbr_boot" : {"src_path": "boot.boot"},
+	"bootloader": {
+		"src_path": "../../../bootloader/bootloader.bin",
+		"dst_path": "bootloader.bin"
+	},
+	"bootconf": {
+		"src_path": "boot.conf",
+		"dst_path": "boot.conf"
+	},
+	"kernel_stage1": {
+		"src_path": "../../../stage1.kern",
+		"dst_path": "kern1.kern"
+	},
+	"kernel_stage2": {
+		"src_path": "../../../stage2.kern",
+		"dst_path": "kern2.kern"
+	},
 }

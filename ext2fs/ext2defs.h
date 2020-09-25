@@ -85,14 +85,14 @@ oportunity to increase the compatibility with linux */
 #define EXT2_S_IXOTH						0x0001 // others execute
 #define EXT2_S_RMASK						0x01ff // all
 
-#define EXT2_FT_UNKNOWN						0
-#define EXT2_FT_REG_FILE					1
-#define EXT2_FT_DIR 						2
-#define EXT2_FT_CHRDEV 						3
-#define EXT2_FT_BLKDEV 						4
-#define EXT2_FT_FIFO 						5
-#define EXT2_FT_SOCK 						6
-#define EXT2_FT_SYMLINK						7
+// #define EXT2_FT_UNKNOWN						0
+// #define EXT2_FT_REG_FILE					1
+// #define EXT2_FT_DIR 						2
+// #define EXT2_FT_CHRDEV 						3
+// #define EXT2_FT_BLKDEV 						4
+// #define EXT2_FT_FIFO 						5
+// #define EXT2_FT_SOCK 						6
+// #define EXT2_FT_SYMLINK						7
 
 #define EXT2_SECRM_FL						0x00000001 // secure deletion
 #define EXT2_UNRM_FL						0x00000002 // record for undelete
@@ -221,9 +221,10 @@ struct ext2_indir_t {
 struct dir_entry_t {
 	uint32_t ino = 0;
 	uint16_t rec_len = sizeof(dir_entry_t);
-	uint8_t name_len = 0;
-	uint8_t file_type = EXT2_FT_UNKNOWN;
-	uint8_t name[4] = {0};
+	uint16_t name_len = 0;
+	uint8_t name[0];
 } __attribute__((__packed__));
+
+static_assert(sizeof(dir_entry_t) == 8, "bubabu, dir_entry_t invalid size");
 
 #endif

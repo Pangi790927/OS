@@ -78,6 +78,7 @@ public:
 	int create_fs() {
 		DBGSCOPE();
 		memset((void *)sup, 0, sizeof(ext2_sup_t));
+		sup_sector.save(false);
 
 		init_per_grp_stats(sup, blk_cnt);
 
@@ -133,11 +134,27 @@ public:
 			DBG("Can't create reserved inodes");
 			return -1;
 		}
-		if (dirs.add_file(2, 2, ".", EXT2_FT_DIR)) {
+		if (dirs.init_dir(2)) {
+			DBG("Can't init root inode");
+			return -1;
+		}
+		if (dirs.add_file(2, 2, ".")) {
 			DBG("Can't add '.' to root inode");
 			return -1;
 		}
-		if (dirs.add_file(2, 2, "..", EXT2_FT_DIR)) {
+		if (dirs.add_file(2, 2, "..")) {
+			DBG("Can't add '..' to root inode");
+			return -1;
+		}
+		if (dirs.init_dir(11)) {
+			DBG("Can't init lost+found inode");
+			return -1;
+		}
+		if (dirs.add_file(11, 11, ".")) {
+			DBG("Can't add '.' to root inode");
+			return -1;
+		}
+		if (dirs.add_file(11, 2, "..")) {
 			DBG("Can't add '..' to root inode");
 			return -1;
 		}
@@ -251,32 +268,31 @@ public:
 			sd.desc->free_ino_cnt = ext_min(free_ino, (uint32_t)BLK_SIZE * 8);
 			free_ino -= BLK_SIZE * 8;
 
+			if (sd.sect.save(true) != 0) {
+				DBG("Couldn't save desc: %d", i);
+				return -1;
+			}
+
 			auto bm_ino = load_ino_bmap(i);
 			if (!bm_ino.sect.get()) {
 				DBG("Couldn't load inode bitmap: %d", i);
 				return -1;
 			}
+
+			memset((char *)bm_ino.sect.get(), 0, BLK_SIZE);
+
+			if (bm_ino.sect.save(true) != 0) {
+				DBG("Couldn't save inode bitmap: %d", i);
+				return -1;
+			}
+			
 			auto bm_blk = load_blk_bmap(i);
 			if (!bm_blk.sect.get()) {
 				DBG("Couldn't load block bitmap: %d", i);
 				return -1;
 			}
 
-			memset((char *)bm_ino.sect.get(), 0, BLK_SIZE);
-			memset((char *)bm_ino.sect.get(), 0, BLK_SIZE);
-			
-			if (sd.sect.save(true) != 0) {
-				DBG("Couldn't save desc: %d", i);
-				bm_ino.sect.unload();
-				bm_blk.sect.unload();
-				return -1;
-			}
-
-			if (bm_ino.sect.save(true) != 0) {
-				DBG("Couldn't save inode bitmap: %d", i);
-				bm_blk.sect.unload();
-				return -1;
-			}
+			memset((char *)bm_blk.sect.get(), 0, BLK_SIZE);
 
 			if (bm_blk.sect.save(true) != 0) {
 				DBG("Couldn't save inode bitmap: %d", i);

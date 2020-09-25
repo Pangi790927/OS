@@ -26,8 +26,31 @@ using load_desc_t = SectorDesc (*)(void *ctx, int grp);
 using load_ino_bitmap_t = SectorBitmap (*)(void *ctx, int grp);
 using load_blk_bitmap_t = SectorBitmap (*)(void *ctx, int grp);
 
+template <typename UnloadFn>
+struct UnloadScope {
+	UnloadFn fn;
+	int line;
+	UnloadScope(UnloadFn fn, int line) : fn(fn), line(line) {}
+	~UnloadScope() {
+		fn(line);
+	}
+};
+
+#define CONCAT_(x,y) x##y
+#define CONCAT(x,y) CONCAT_(x,y)
+
+#define EXPAND_(x, y) x ## y
+#define EXPAND__(x, y) EXPAND_(x, y)
+#define EXPAND(x) EXPAND__(x, __LINE__)
+
 #define EXT_LOAD_BLK(name, blk, ret)\
 auto name = ext_dev.get_sect(blk);\
+UnloadScope EXPAND(unload_scope)([&](int line){\
+	if (!name.verdict) {\
+		DBG("Unload scope called in inodes.h: line: %d", line);\
+		name.unload();\
+	}\
+}, __LINE__);\
 if (!name.get()) {\
 	DBG("[ERROR] Couldn't load block: %d", (blk));\
 	return ret;\
@@ -35,6 +58,12 @@ if (!name.get()) {\
 
 #define EXT_LOAD_DESC(name, grp, ret)\
 auto name = load_desc(grp);\
+UnloadScope EXPAND(unload_scope)([&](int line){\
+	if (!name.sect.verdict) {\
+		DBG("Unload scope called in inodes.h: line: %d", line);\
+		name.sect.unload();\
+	}\
+}, __LINE__);\
 if (!name.sect.get()) {\
 	DBG("[ERROR] Couldn't load desc: %d", (grp));\
 	return ret;\
@@ -42,6 +71,12 @@ if (!name.sect.get()) {\
 
 #define EXT_LOAD_INO_BM(name, grp, ret)\
 auto name = load_ino_bmap(grp);\
+UnloadScope EXPAND(unload_scope)([&](int line){\
+	if (!name.sect.verdict) {\
+		DBG("Unload scope called in inodes.h: line: %d", line);\
+		name.sect.unload();\
+	}\
+}, __LINE__);\
 if (!name.sect.get()) {\
 	DBG("[ERROR] Couldn't load inode bitmap: %d", (grp));\
 	return ret;\
@@ -49,6 +84,12 @@ if (!name.sect.get()) {\
 
 #define EXT_LOAD_BLK_BM(name, grp, ret)\
 auto name = load_blk_bmap(grp);\
+UnloadScope EXPAND(unload_scope)([&](int line){\
+	if (!name.sect.verdict) {\
+		DBG("Unload scope called in inodes.h: line: %d", line);\
+		name.sect.unload();\
+	}\
+}, __LINE__);\
 if (!name.sect.get()) {\
 	DBG("[ERROR] Couldn't load block bitmap: %d", (grp));\
 	return ret;\
@@ -112,13 +153,6 @@ public:
 		}
 		return roundup_div(sup->ino_cnt, sup->ino_per_grp);
 	}
-
-	// write, read, truncate, create, remove
-	// create(mode, uid, gid) -> ino
-	// write(ino, off, buf, len) -> num_write
-	// read(ino, off, buf, len) -> num_read
-	// truncate(ino, newsz) -> success
-	// remove(ino) -> success
 
 	int create(int mode, int uid, int gid) {
 		DBGSCOPE();
@@ -273,16 +307,17 @@ public:
 
 	int alloc_reserved_inodes() {
 		DBGSCOPE();
-		alloc_specific_ino(1, EXT2_S_IFREG | EXT2_S_RMASK);
+		alloc_specific_ino(1, 0);
 		alloc_specific_ino(2, EXT2_S_IFDIR | EXT2_S_RMASK);
-		alloc_specific_ino(3, EXT2_S_IFREG | EXT2_S_RMASK);
-		alloc_specific_ino(4, EXT2_S_IFREG | EXT2_S_RMASK);
-		alloc_specific_ino(5, EXT2_S_IFREG | EXT2_S_RMASK);
-		alloc_specific_ino(6, EXT2_S_IFREG | EXT2_S_RMASK);
-		alloc_specific_ino(7, EXT2_S_IFREG | EXT2_S_RMASK);
-		alloc_specific_ino(8, EXT2_S_IFREG | EXT2_S_RMASK);
-		alloc_specific_ino(9, EXT2_S_IFREG | EXT2_S_RMASK);
-		alloc_specific_ino(10, EXT2_S_IFREG | EXT2_S_RMASK);
+		alloc_specific_ino(3, 0);
+		alloc_specific_ino(4, 0);
+		alloc_specific_ino(5, 0);
+		alloc_specific_ino(6, 0);
+		alloc_specific_ino(7, 0);
+		alloc_specific_ino(8, 0);
+		alloc_specific_ino(9, 0);
+		alloc_specific_ino(10, 0);
+		alloc_specific_ino(11, EXT2_S_IFDIR | EXT2_S_RMASK);
 		return 0;
 	}
 
@@ -302,8 +337,8 @@ public:
 		int bsize = roundup_div(size, BLK_SIZE);
 		int start_blk = -1;
 		int grp = 0;
-		inode->bsize = bsize;
-		inode->size = size;
+		inode->bsize = 0;
+		inode->size = 0;
 		for (; grp < grp_cnt(); grp++) {
 			bool found = false;
 			int curr_bsize = 0;
@@ -313,8 +348,8 @@ public:
 			EXT_LOAD_BLK_BM(sb_blk, grp, -1);
 			for (; free_idxs < desc.desc->free_blk_cnt; i++) {
 				if (sb_blk.bmap.get(i) == 0) {
-					free_idxs++;
 					curr_bsize++;
+					free_idxs++;
 				}
 				if (sb_blk.bmap.get(i) != 0) {
 					curr_bsize = 0;
@@ -327,6 +362,7 @@ public:
 			desc.sect.unload();
 			sb_blk.sect.unload();
 			if (found) {
+				i = i - bsize + 1;
 				for (int j = 0; j < bsize; j++, i++) {
 					if ((start_blk = alloc_spec_blk(grp, i)) < 0) {
 						DBG("Can't alloc blk for imutable: [grp:%d]rel:%d",
@@ -340,7 +376,10 @@ public:
 		}
 		if (start_blk < 0) {
 			DBG("Didn't find contiguous space for imutable");
+			return -1;
 		}
+		grp--;
+		DBG("Adding blocks to imutable: ino: %d start: %d", ino, start_blk);
 		if (add_blocks(inode, bsize, grp,
 				[&start_blk, this, &grp](){
 					return start_blk++;
@@ -349,12 +388,14 @@ public:
 			ino_sect.unload();
 			return -1;
 		}
+		inode->bsize = bsize;
+		inode->size = size;
+		EXT_SAVE_BLK(ino_sect, index, -1);
+		DBG("Imutable is set and ready to be written");
 		if (write(ino, 0, buff, size) != size) {
 			DBG("Failed to write imutable");
-			ino_sect.unload();
 			return -1;
 		}
-		EXT_SAVE_BLK(ino_sect, index, -1);
 		return 0;
 	}
 
@@ -435,12 +476,14 @@ private:
 	int add_blocks(inode_t *inode, int cnt, int grp, BlkAlloc&& blk_alloc) {
 		auto alloc_indir = [this, &grp] () {
 			int blk = alloc_blk(grp);
-			if (blk < 0)
+			if (blk < 0) {
+				DBG("Can't alloc block in group!");
 				return -1;
+			}
 			EXT_LOAD_BLK(blk_sect, blk, -1);
 			memset(blk_sect.get(), 0, BLK_SIZE);
 			EXT_SAVE_BLK(blk_sect, blk, -1);
-			return 0;
+			return blk;
 		};
 		auto add =
 		[this, &grp, &inode, &alloc_indir, &blk_alloc] (int i) {
@@ -640,12 +683,13 @@ private:
 	}
 
 	int alloc_ino(int sugested_grp) {
-		EXT_LOAD_DESC(sd_desc, sugested_grp, -1);
-		if (sd_desc.desc->free_ino_cnt != 0) {
-			sd_desc.sect.unload();
+		EXT_LOAD_DESC(sugested_desc, sugested_grp, -1);
+		if (sugested_desc.desc->free_ino_cnt != 0) {
+			sugested_desc.sect.unload();
 			return alloc_ino_in_grp(sugested_grp);
 		}
 		else {
+			sugested_desc.sect.unload();
 			for (int i = 0; i < grp_cnt(); i++) {
 				EXT_LOAD_DESC(sd_desc, i, -1);
 				if (sd_desc.desc->free_ino_cnt != 0) {
@@ -711,12 +755,14 @@ private:
 	}
 
 	int alloc_blk(int sugested_grp) {
-		EXT_LOAD_DESC(desc, sugested_grp, -1);
-		if (desc.desc->free_blk_cnt != 0) {
-			desc.sect.unload();
+		printf("sugested_grp: %d\n", sugested_grp);
+		EXT_LOAD_DESC(sugested_desc, sugested_grp, -1);
+		if (sugested_desc.desc->free_blk_cnt != 0) {
+			sugested_desc.sect.unload();
 			return alloc_blk_in_grp(sugested_grp);
 		}
-		else
+		else {
+			sugested_desc.sect.unload();
 			for (int i = 0; i < grp_cnt(); i++) {
 				EXT_LOAD_DESC(desc, i, -1);
 				if (desc.desc->free_blk_cnt != 0) {
@@ -725,6 +771,7 @@ private:
 				}
 				desc.sect.unload();
 			}
+		}
 		return -1;
 	}
 
@@ -755,7 +802,6 @@ private:
 			DBG("blk already allocated");
 			return -1;
 		}
-
 		sb_blk.bmap.set(rel_blk, true);
 
 		EXT_LOAD_DESC(sd_desc, grp, -1);
@@ -764,6 +810,8 @@ private:
 		
 		EXT_SAVE_BLK_BM(sb_blk, grp, -1);
 		sup->free_blk_cnt--;
+		
+		printf("add block: %d\n", rel_blk + blk_table(grp));
 		return rel_blk + blk_table(grp);
 	}
 
@@ -781,6 +829,7 @@ private:
 
 		EXT_SAVE_BLK_BM(sb_blk, grp, -1);
 		sup->free_blk_cnt--;
+		printf("sepc add block: %d\n", rel_blk + blk_table(grp));
 		return rel_blk + blk_table(grp);
 	}
 
