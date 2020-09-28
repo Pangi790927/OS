@@ -3,52 +3,60 @@
 ; DISK FUNCTIONS
 ; =============================================================================
 
-; $1 - addr off
-; $2 - addr seg
-; $3 - lba_lo0
-; $4 - sect count
-; $5 - drive
+; $1 - addr off		+ 8
+; $2 - addr seg		+ 12
+; $3 - lba_lo0		+ 16
+; $4 - sect count	+ 20
+; $5 - drive		+ 24
 [global disk_read]
 disk_read:
-	push bp
-	mov bp, sp
+	push ebp
+	mov ebp, esp
 	pusha
 		; first test for extension presence
 		mov ah, 0x41 
 		mov bx, 0x55aa
-		mov dl, [bp + 14]
+		mov dl, [ebp + 24]
+		or dl, 0x80
 		int 0x13
 		jc .err_ext
 
 		; now move the data
-		mov ax, [bp + 10]
+		mov ax, [ebp + 16]
 		mov [disk_packet.lba_lo0], ax
-		mov ax, [bp + 12]
+		mov ax, [ebp + 20]
 		mov [disk_packet.numt], ax
-		mov ax, [bp + 6]
+		mov ax, [ebp + 8]
 		mov [disk_packet.off], ax
-		mov ax, [bp + 8]
+		mov ax, [ebp + 12]
 		mov [disk_packet.seg], ax
 
-		mov si, disk_packet
+		mov esi, disk_packet
 		mov ah, 0x42
-		mov dl, [bp + 14]
+		mov dl, [ebp + 24]
 		int 0x13
 
 		jc .err_load
+
+		mov word [err_code], 0
 		jmp .done
 		.err_load:
-			mov si, load_error
+			mov esi, load_error
 			call bios_print
+			mov word [err_code], 1
 			jmp .done
 		.err_ext:
-			mov si, ext_error
+			mov esi, ext_error
 			call bios_print
+			mov word [err_code], 2
 			jmp .done
 		.done:
 	popa
-	pop bp
+	mov eax, [err_code]
+	pop ebp
 	ret
+
+err_code: dd 0
 
 ; RAM FUNCTIONS
 ; =============================================================================
@@ -60,8 +68,8 @@ disk_read:
 [global get_ram_size]
 get_ram_size:
 	; shouldn't I pusha popa?
-	push bp
-	mov bp, sp
+	push ebp
+	mov ebp, esp
 	pusha
 
 	xor cx, cx
@@ -70,7 +78,7 @@ get_ram_size:
 	int 0x15
 	jc .err
 
-	mov di, [bp + 6]
+	mov edi, [ebp + 8]
 	cmp ah, 0x86	; unsupported function
 	je .err
 
@@ -79,8 +87,8 @@ get_ram_size:
 
 	jcxz .use_eax	; was the CX result invalid?
 		
-		mov [di], cx
-		mov [di + 2], dx
+		mov [edi], cx
+		mov [edi + 2], dx
 
 	.use_eax:
 
@@ -88,12 +96,13 @@ get_ram_size:
 	.err:
 		mov word [di], -1
 		mov word [di + 2], -2
-		mov si, ram_error
+		mov esi, ram_error
 		call bios_print
+		jmp $
 	.done:
 
 	popa
-	pop bp
+	pop ebp
 	ret
 
 ; PRINT FUNCTIONS
@@ -102,93 +111,102 @@ get_ram_size:
 ; $1 char
 [global bios_putchr]
 bios_putchr:
-	push bp
-	mov bp, sp
-		push ax
-		mov ax, [bp + 6]
+	push ebp
+	mov ebp, esp
+		push eax
+		mov ax, [ebp + 8]
 		mov ah, 0x0e
 		int 0x10
-		pop ax
-	pop bp
+		pop eax
+	pop ebp
 	ret
 
 bios_intern_putchr:
-	push bp
+	push ebp
 	mov bp, sp
-		push ax
+		push eax
 		mov ah, 0x0e
 		int 0x10
-		pop ax
-	pop bp
+		pop eax
+	pop ebp
 	ret
 
-; si - pointer to string
+; esi - pointer to string
 bios_print:
 	pusha
-		xor bx, bx	; bx = 0
+		xor ebx, ebx	; ebx = 0
 		jmp .while_condition
 		.while_start:
-			mov al, byte [si + bx]
+			mov al, byte [esi + ebx]
 			call bios_intern_putchr
 
-			add bx, 1
+			add ebx, 1
 		.while_condition:
-			mov cl, byte [si + bx]
+			mov cl, byte [esi + ebx]
 			cmp cl, 0
 			jne .while_start
 	popa
 	ret
 
-; ax - number
-; bx - base
+; eax - number
+; ebx - base
 bios_print_number_base_rec:
 	pusha
-		cmp ax, 0
+		cmp eax, 0
 		je .if_end; if (ax != 0)
-			xor dx, dx ; dx = 0
+			xor edx, edx ; edx = 0
 			; mov ax, ax - number to divide already in ax
-			div bx ; dx:ax / bx = ax (reminder dx)
+			div ebx ; edx:eax / ebx = eax (reminder edx)
 			
 			call bios_print_number_base_rec
 
-			push ax	; saving ax and printing the character
-			mov di, dx
-			mov al, byte [digits + di]
+			push eax	; saving ax and printing the character
+			mov edi, edx
+			mov al, byte [digits + edi]
 			call bios_intern_putchr
-			pop ax ; returning ax
+			pop eax ; returning eax
 		.if_end:
 	popa
 	ret
 
-; ax - number 
-; bx - base
+; eax - number 
+; ebx - base
 bios_print_number_base:
 	pusha
-		cmp ax, 0
-		jne .if_else ; if (ax == 0)
+		cmp eax, 0
+		jne .if_else ; if (eax == 0)
 			mov al, '0'
 			call bios_intern_putchr
 		jmp .if_end 
 		.if_else:
-			; ax, bx already set
+			; eax, ebx already set
 			call bios_print_number_base_rec
 		.if_end:
 	popa
 	ret
 
-; ax - number in base 10
+; eax - number in base 10
 bios_putdec:
 	pusha
-		mov bx, 10
+		mov ebx, 10
 		call bios_print_number_base
 	popa
 	ret
 
-; ax - number in base 16
+; eax - number in base 16
 bios_puthex:
 	pusha
-		mov bx, 16
+		mov esi, hex_prefix
+		call bios_print
+		mov ebx, 16
 		call bios_print_number_base
+	popa
+	ret
+
+bios_putendl:
+	pusha
+		mov esi, separator
+		call bios_print
 	popa
 	ret
 
@@ -201,6 +219,7 @@ digits: db '0123456789abcdef'
 ext_error: db "Does not have bios load extension", 0xd, 0xa, 0
 load_error: db "Failed to load from disk", 0xd, 0xa, 0
 ram_error: db "Failed to read ram size", 0xd, 0xa, 0
+hex_prefix: db "0x", 0
 separator: db 0xd, 0xa, 0
 
 disk_packet:

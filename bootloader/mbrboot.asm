@@ -18,6 +18,33 @@ mov [boot_drive], dl	; saving the boot drive
 mov si, printhdr
 call bios_print
 
+; print phy address of bootloader after load
+mov ax, [boot1_addr]
+call bios_puthex
+mov si, line_break
+call bios_print
+
+; print start lba of bootloader
+mov ax, [boot1_lba]
+call bios_puthex
+mov si, line_break
+call bios_print
+
+; print lba count of bootloader
+mov ax, [boot1_cnt]
+call bios_print_number
+mov si, line_break
+call bios_print
+
+; print boot drive
+xor ax, ax
+mov al, [boot_drive]
+call bios_puthex
+mov si, line_break
+call bios_print
+
+mov si, printhdr
+call bios_print
 mov si, init_str
 call bios_print
 
@@ -28,7 +55,7 @@ mov si, start_boot
 call bios_print
 
 ; start bootloader
-call [boot_addr]
+call [boot1_addr]
 
 mov si, cont_err
 call bios_print
@@ -126,11 +153,11 @@ bios_load_memory:
 		jc .err_ext
 
 		; now move the data
-		mov ax, [boot_start]
+		mov ax, [boot1_lba]
 		mov [transf_packet.lba_lo0], ax
-		mov ax, [boot_size]
+		mov ax, [boot1_cnt]
 		mov [transf_packet.numt], ax
-		mov ax, [boot_addr]
+		mov ax, [boot1_addr]
 		mov [transf_packet.off], ax
 
 		mov si, transf_packet
@@ -171,11 +198,12 @@ transf_packet:
 printhdr:
 	db "================================"
 	db 0xd, 0xa, 0x0
-load_error:	db "load failed", 0xd, 0xa, 0x0
-ext_error:	db "no extension", 0xd, 0xa, 0x0
-init_str:	db "Starting mbr load sequence", 0xd, 0xa, 0x0
+line_break:	db 0xd, 0xa, 0x0
+load_error:	db "err_load", 0xd, 0xa, 0x0
+ext_error:	db "err_ext", 0xd, 0xa, 0x0
+init_str:	db "err_load_mbr", 0xd, 0xa, 0x0
 start_boot:	db "bootloader:", 0xd, 0xa, 0x0
-cont_err:	db "err should not be here:", 0xd, 0xa, 0x0
+cont_err:	db "error_exit:", 0xd, 0xa, 0x0
 
 ; EXTERN DATA
 ; ==============================================================================
@@ -184,10 +212,14 @@ cont_err:	db "err should not be here:", 0xd, 0xa, 0x0
 ; start address should be an 16bit unsigned
 times 400-($-$$) db 0
 ; mbr_opts (40 bytes max)
-boot_drive:	db 0
-boot_start:	dw 1
-boot_size:	dw 127
-boot_addr:	dw 0x7e00
+boot_drive:		db 0
+boot1_addr:		dw 0x7e00
+boot1_lba:		dw 1
+boot1_cnt:		dw 127
+boot2_lba:		dw 1
+boot2_cnt:		dw 127
+conf_lba:		dw 1
+conf_cnt:		dw 127
 
 ; mbr
 times 440-($-$$) db 0

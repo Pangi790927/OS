@@ -25,6 +25,9 @@ inline uint16_t (*intern_putchar) (uint16_t) = &bios_putchr;
 
 #define DBGSCOPE() DbgScope dbg_scope(__FILE__, __LINE__, __func__);
 
+// #define DBG(fmt, ...) {}
+// #define DBGSCOPE() {};
+
 struct DbgScope {
 	const char *file;
 	int line;

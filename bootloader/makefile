@@ -11,31 +11,29 @@ ASM_SRC = $(shell find src/ -type f -name "*.asm")
 CPP_SRC = $(shell find src/ -type f -name "*.cpp")
 ASM_OBJS = $(patsubst %.asm, %.o, $(ASM_SRC))
 CPP_OBJS = $(patsubst %.cpp, %.o, $(CPP_SRC))
-DEPS = $(patsubst %.cpp, %.dep, $(CPP_SRC))
+DEPS = $(patsubst %.cpp, %.d, $(CPP_SRC))
 OBJS = ${ASM_OBJS} ${CPP_OBJS}
 
 all: image.img
 
-mbrboot.bin:
+mbrboot.bin: mbrboot.asm
 	$(ASM) mbrboot.asm -f bin -o mbrboot.bin
 
 ${ASM_OBJS}: %.o: %.asm $(HEADERS)
 	$(ASM) $< -f elf -F stabs -o $@ $(INCLUDES)
 
-${CPP_OBJS}: %.o: %.cpp %.dep
-	$(CXX) -c $< -o $@ $(CXX_FLAGS) $(INCLUDES)
+${CPP_OBJS}: %.o: %.cpp %.dep makefile
+	$(CXX) -MMD -MP -c $< -o $@ $(CXX_FLAGS) $(INCLUDES)
 
-${DEPS}: %.dep: %.cpp
-	rm -f $@
-	$(CXX) -MM -c $< -MF $@ $(CXX_FLAGS) $(INCLUDES)
+-include ${DEPS}
+-include bootloader.d
 
-bootloader.dep:
-	$(CXX) -MM -MF bootloader.dep -c $(CXX_FLAGS) bootloader.cpp $(INCLUDES)
+bootloader.o: bootloader.cpp makefile
+	$(CXX) -MMD -MP -c $(CXX_FLAGS) bootloader.cpp $(INCLUDES) -o bootloader.o
 
-bootloader.bin: ${CPP_OBJS} ${ASM_OBJS} bootloader.dep bootloader.cpp
+bootloader.bin: ${CPP_OBJS} ${ASM_OBJS} bootloader.o
 	$(ASM) bootcall.asm -f elf -F stabs -o bootcall
 	objdump -d -Mi8086 -Mintel bootcall
-	$(CXX) -c $(CXX_FLAGS) bootloader.cpp $(INCLUDES) -o bootloader.o
 	$(LD) -Tbootloader.ld -m elf_i386 -o bootloader.elf \
 			bootcall bootloader.o $(OBJS)
 	objcopy -O binary bootloader.elf bootloader.bin
@@ -55,6 +53,14 @@ test: image.img
 		-vga std
 	cat boot_serial.log 
 
+test-example: ../tools/diskformat/example2M.img
+	sudo qemu-system-x86_64 ../tools/diskformat/example2M.img\
+		-device isa-debug-exit,iobase=0xf4,iosize=0x04\
+		-gdb tcp::9000\
+		-serial file:boot_serial.log\
+		-vga std
+	cat boot_serial.log 
+
 clean:
 	rm -f $(DEPS)
 	rm -f $(OBJS)
@@ -63,6 +69,3 @@ clean:
 	rm -f bootloader.bin
 	rm -f mbrboot.bin
 	rm -f image.img
-
-include ${DEPS}
-include bootloader.dep

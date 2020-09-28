@@ -34,14 +34,13 @@
 #include "ext2_boot_reader.h"
 
 mbr_post_t *mbr = (mbr_post_t *)0x7c00;
-gpt_hdr_t gpt;
-// vesa_mode_t test_mode;
+gpt_hdr_t *gpt = (gpt_hdr_t *)EXT2_GPT_HDR_START;
 
 static uint16_t no_putchar(uint16_t) {
 	return 0;
 }
 
-void emu_close() {
+static void emu_close() {
 	DBGSCOPE();
 	outw(0xB004, 0x2000); // bochs
 	outw(0x604, 0x2000);  // qemu
@@ -115,14 +114,14 @@ static int find_vesa_mode(vesa_display_t *info) {
 	return -1;
 }
 
-static void gather_info() {
+static void init_ramsize() {
 	DBGSCOPE();
-
-	// get ram size
 	mbr->ramsize = get_ramsize();
 	DBG("RAM size: kb: %d + 64kb: %d", mbr->ramsize.ax, mbr->ramsize.bx);
+}
 
-	// iterate mbr partitions:
+static void init_mbr() {
+	DBGSCOPE();
 	auto parts = {&mbr->mbr_hdr.part1, &mbr->mbr_hdr.part2, &mbr->mbr_hdr.part3,
 			&mbr->mbr_hdr.part4};
 	int i = 0;
@@ -138,26 +137,6 @@ static void gather_info() {
 		}
 		i++;
 	}
-	
-	find_vesa_mode(&mbr->vesa_display);
-	// TO DO: check if partition is gpt
-	/* next steps:
-		- manage vesa and save a pointer to it's structures
-		- read gpt and check it
-		- read superblock from first partition and check it
-		- read inode 2 and search for /boot and find the kernel in it
-		- in dir /boot find 'boot_opts' and read it
-	*/
-	/* obs:
-		- in boot_opts we will find how big is the first phase of the kernel
-		- in boot_opts we will see what we want for vesa(later)
-	*/
-}
-
-void load_kernel() {
-	/* in this phase we will load the firstpart of the kernel after us in memory
-	and to do that we must write a function to read inodes, we need that for
-	dirs too */
 }
 
 extern "C" int bootloader()
@@ -165,14 +144,23 @@ extern "C" int bootloader()
 	DBGSCOPE();
 	serial::init();
 	DBG("Starting bootloader");
-	gather_info();
+	init_ramsize();
+	init_mbr();
 
-	Ext2BootReader ro_dev;
-	ExtDev ext_dev(ro_dev.get_if(), 100, 100,
+	Ext2BootReader ro_dev(mbr->init_opts.boot_drive);
+	init_gpt(ro_dev);
+
+	uint16_t lba_start = 0;
+	uint16_t lba_size = 100;
+	ExtDev ext_dev(ro_dev.get_if(), lba_start, lba_size,
 			(char *)EXT2_CACHE_START, EXT2_CACHE_END - EXT2_CACHE_START);
-	Ext2 ext2(ext_dev, 100);
+	Ext2 ext2(ext_dev, lba_size / (BLK_SIZE / LBA_SZ), lba_start);
 	ext2.init();
 
+	find_vesa_mode(&mbr->vesa_display);
+	load_kernel();
+
+	ext2.uninit();
 	// for (int k = 0; k < 100; k++)
 	// 	DBG("Print a string: %s %d", "a string", k);
 		// fill_rect(&test_mode, 100, 100, 600, 450, 0xffaa55 * k / 100);
@@ -188,7 +176,7 @@ extern "C" int bootloader()
 	// 		for (int j = 100; j < 550; j++)
 	// 			put_pixel(&test_mode, i, j, 0xffaa55 * k / 10);
 
-	// emu_close();
+	emu_close();
 	while (true)
 		asm volatile ("nop");
 	return 0;
