@@ -34,8 +34,12 @@ using GptDev = Dev<LBA_SZ>;
 char part_cache[128 * PART_SIZE];
 char dev_cache[LBA_SZ * 64];
 uint32_t cache_size = sizeof(dev_cache);
-uint16_t boot_lba = 0;
-uint16_t boot_lba_cnt = 0;
+uint16_t boot1_lba = 0;
+uint16_t boot1_cnt = 0;
+uint16_t boot2_lba = 0;
+uint16_t boot2_cnt = 0;
+uint16_t conf_lba = 0;
+uint16_t conf_cnt = 0;
 
 void install_mbr(FileProvDev &file_dev, DevLayout &layout) {
 	MbrDev mbr_dev(file_dev.get_if(), 0, 1, dev_cache, cache_size);
@@ -62,9 +66,14 @@ void install_mbr(FileProvDev &file_dev, DevLayout &layout) {
 	mbr.part4 = {0};
 
 	// mbr.opts.boot_drive = 0;
-	mbr.opts.boot_start = boot_lba;
-	mbr.opts.boot_size = boot_lba_cnt;
-	mbr.opts.boot_addr = 0x7e00;
+	mbr.opts.boot1_lba = boot1_lba;
+	mbr.opts.boot1_cnt = boot1_cnt;
+	mbr.opts.boot1_addr = 0x7e00;
+	mbr.opts.boot2_lba = boot2_lba;
+	mbr.opts.boot2_cnt = boot2_cnt;
+	mbr.opts.boot2_addr = 0x17e00;
+	mbr.opts.conf_lba = conf_lba;
+	mbr.opts.conf_cnt = conf_cnt;
 
 	// printf("mbr: %s\n", mbr_str(mbr).c_str());
 	sect.save(true);
@@ -73,7 +82,7 @@ void install_mbr(FileProvDev &file_dev, DevLayout &layout) {
 void install_gpt(FileProvDev &file_dev, DevLayout &layout) {
 	GptDev gpt_dev(file_dev.get_if(), 0, file_dev.lba_size(),
 			dev_cache, cache_size);
-	
+
 	for (int i = 0; i < 128 / (LBA_SZ / PART_SIZE); i++) {
 		auto sect = gpt_dev.get_sect(2 + i);
 		memset(sect.get(), 0, LBA_SZ);
@@ -122,7 +131,6 @@ void install_gpt(FileProvDev &file_dev, DevLayout &layout) {
 	gpt.hdr_crc = 0;
 	back_gpt.hdr_crc = 0;
 
-
 	for (int i = 0; i < 128 / (LBA_SZ / PART_SIZE); i++) {
 		auto sect = gpt_dev.get_sect(gpt.part_arr_lba + i);
 		memcpy(part_cache + i * LBA_SZ, sect.get(), LBA_SZ);
@@ -144,45 +152,78 @@ void install_gpt(FileProvDev &file_dev, DevLayout &layout) {
 	gpt_sect.save(true);
 }
 
-int install_boot(Ext2 &ext2, DevLayout &layout) {
-	int bootloader_ino = ext2.inodes.create(EXT2_S_IFREG | EXT2_S_RMASK, 0, 0);
-	if (bootloader_ino <= 0) {
-		printf("can't create bootloader file\n");
+static int install_boot_n(Ext2 &ext2, DevLayout &layout, FileProvDev &file_dev,
+		int num, uint16_t &bootn_lba, uint16_t &bootn_cnt)
+{
+	int bootn_ino = ext2.inodes.create(EXT2_S_IFREG | EXT2_S_RMASK, 0, 0);
+	if (bootn_ino <= 0) {
+		printf("can't create boot%d file\n", num);
 		return -1;
 	}
-	printf("bootload ino: %d\n", bootloader_ino);
+	printf("boot%d ino: %d\n", num, bootn_ino);
 
-	auto bootloader_code = read_file(layout.path("src_path", "bootloader"));
-	if (bootloader_code.size() == 0) {
-		printf("empty bootloader\n");
+	auto bootn_code = read_file(layout.path("src_path", "boot" +
+			std::to_string(num)));
+	if (bootn_code.size() == 0) {
+		printf("empty boot%d\n", num);
 		return -1;
 	}
-	if (bootloader_code.size() % LBA_SZ != 0)
-		bootloader_code.resize(roundup(bootloader_code.size(), LBA_SZ));
+	printf("boot%d original size: %ld\n", num, bootn_code.size());
+	if (bootn_code.size() % LBA_SZ != 0)
+		bootn_code.resize(roundup(bootn_code.size(), LBA_SZ), 0);
+	printf("boot%d padded size: %ld\n", num, bootn_code.size());
 
-	if (ext2.inodes.write_imutable(bootloader_ino, (char *)&bootloader_code[0],
-			bootloader_code.size()))
+	if (ext2.inodes.write_imutable(bootn_ino, (char *)&bootn_code[0],
+			bootn_code.size()))
 	{
-		printf("Can't write bootloader file\n");
+		printf("Can't write boot%d file\n", num);
 		return -1;
 	}
 
-	inode_t bootloader_inode;
-	if (ext2.inodes.getino(bootloader_ino, &bootloader_inode) < 0) {
-		printf("Can't get bootloader inode info\n");
+	inode_t bootn_inode;
+	if (ext2.inodes.getino(bootn_ino, &bootn_inode) < 0) {
+		printf("Can't get boot%d inode info\n", num);
 		return -1;
 	}
 
-	if (bootloader_inode.size == 0 || bootloader_inode.block[0] == 0) {
-		printf("Invalid bootloader inode size %d\n", bootloader_inode.size);
+	if (bootn_inode.size == 0 || bootn_inode.block[0] == 0) {
+		printf("Invalid boot%d inode size %d\n", num, bootn_inode.size);
 		return -1;
 	}
 
-	boot_lba = bootloader_inode.block[0] * (BLK_SIZE / LBA_SZ);
-	boot_lba_cnt = bootloader_inode.size * (BLK_SIZE / LBA_SZ);
+	bootn_lba = bootn_inode.block[0] * (BLK_SIZE / LBA_SZ) + ext2.lba_start;
+	bootn_cnt = bootn_inode.size / BLK_SIZE * (BLK_SIZE / LBA_SZ);
 
-	std::string bootloader_path = layout.path("dst_path", "bootloader");
-	std::string bootconf_path = layout.path("dst_path", "bootconf");
+	char test_cache[LBA_SZ * 64];
+	uint32_t test_cache_size = sizeof(test_cache);
+	GptDev lba_dev(file_dev.get_if(), 0, file_dev.lba_size(),
+			test_cache, test_cache_size);
+
+	bool bootloader_ok = true;
+	for (int i = bootn_lba; i < bootn_lba + bootn_cnt; i++) {
+		auto sec = lba_dev.get_sect(i);
+		int orig = i - bootn_lba;
+		if (!sec.get()) {
+			printf("can't load sector %d[orig: %d] of boot%d\n", i, orig, num);
+			sec.unload();
+			bootloader_ok = false;
+			continue ;
+		}
+		int off = (i - bootn_lba) * LBA_SZ;
+		if (memcmp(sec.get(), (char *)&bootn_code[0] + off, LBA_SZ) != 0) {
+			printf("sector %d[orig: %d] does not match boot%d code\n",
+					i, orig, num);
+			util::hexdump(sec.get(), LBA_SZ);
+			printf("vs original: \n");
+			util::hexdump((char *)&bootn_code[0] + off, LBA_SZ);
+			sec.unload();
+			bootloader_ok = false;
+			continue;
+		}
+		sec.unload();
+	}
+	if (!bootloader_ok)
+		return -1;
 
 	int bootdir_ino = ext2.dirs.find_rec("/boot");
 	if (bootdir_ino < 1) {
@@ -190,12 +231,37 @@ int install_boot(Ext2 &ext2, DevLayout &layout) {
 		return -1;
 	}
 
-	if (ext2.dirs.add_file(bootdir_ino, bootloader_ino,
-			bootloader_path.c_str()))
+	std::string bootn_path = layout.path("dst_path", "boot" +
+			std::to_string(num));
+
+	if (ext2.dirs.add_file(bootdir_ino, bootn_ino, bootn_path.c_str()))
 	{
-		printf("Can't add %s to boot inode\n", bootloader_path.c_str());
+		printf("Can't add %s to boot inode\n", bootn_path.c_str());
 		return -1;
 	}
+
+	printf("loaded boot%d lba:0x%x cnt:%d\n", num, bootn_lba, bootn_cnt);
+	return 0;
+}
+
+int install_boot(Ext2 &ext2, DevLayout &layout, FileProvDev &file_dev) {
+	if (install_boot_n(ext2, layout, file_dev, 1, boot1_lba, boot1_cnt) != 0) {
+		printf("couldn't install first stage of bootloader\n");
+		return -1;
+	}
+
+	if (install_boot_n(ext2, layout, file_dev, 2, boot2_lba, boot2_cnt) != 0) {
+		printf("couldn't install second stage of bootloader\n");
+		return -1;
+	}
+
+	std::string bootconf_path = layout.path("dst_path", "bootconf");
+
+	int bootdir_ino = ext2.dirs.find_rec("/boot");
+	if (bootdir_ino < 1) {
+		printf("can't find boot inode\n");
+		return -1;
+	}	
 
 	int bootconf_ino = ext2.inodes.create(EXT2_S_IFREG | EXT2_S_RMASK, 0, 0);
 	if (bootconf_ino <= 0) {
@@ -209,6 +275,11 @@ int install_boot(Ext2 &ext2, DevLayout &layout) {
 		return -1;
 	}
 	bootconfig.resize(BLK_SIZE, 0);
+
+	if (ext2.inodes.truncate(bootconf_ino, BLK_SIZE) < 0) {
+		printf("Failed to truncate boot config\n");
+		return -1;
+	}
 
 	if (ext2.inodes.write(bootconf_ino, 0, (char *)&bootconfig[0], BLK_SIZE)
 			!= BLK_SIZE)
@@ -229,6 +300,15 @@ int install_boot(Ext2 &ext2, DevLayout &layout) {
 		printf("Failed to get conf inode\n");
 		return -1;
 	}
+
+	if (bootconf_inode.bsize != 1) {
+		printf("boot confing should be max 1 block or it should be continuous");
+		return -1;
+	}
+
+	conf_lba = bootconf_inode.block[0] * (BLK_SIZE / LBA_SZ) + ext2.lba_start;
+	conf_cnt = bootconf_inode.size / BLK_SIZE * (BLK_SIZE / LBA_SZ);
+
 	char confbuf[BLK_SIZE];
 	if (ext2.inodes.read(bootconf_ino, 0, confbuf, sizeof(confbuf))
 			!= sizeof(confbuf))
@@ -236,7 +316,8 @@ int install_boot(Ext2 &ext2, DevLayout &layout) {
 		printf("Failed to read boot config\n");
 		return -1;
 	}
-	printf("config: [size: %lu]: %s\n", sizeof(confbuf), confbuf);
+	printf("config: [size: %lu, lba: %x, cnt: %d]:\n%s\n",
+			sizeof(confbuf), conf_lba, conf_cnt, confbuf);
 
 	/* TO DO:
 		- write kernel into /boot
@@ -258,16 +339,21 @@ void install_ext2(FileProvDev &file_dev, DevLayout &layout) {
 	auto gpt_sect = gpt_dev.get_sect(1);
 	gpt_hdr_t &gpt = *(gpt_hdr_t *)gpt_sect.get();
 
-	uint32_t first_lba = gpt.first_part_lba;
-	uint32_t lba_cnt = gpt.last_part_lba - gpt.first_part_lba + 1;
+	auto part_sect = gpt_dev.get_sect(gpt.part_arr_lba);
 	gpt_sect.unload();
 
-	ExtDev ext_dev(file_dev.get_if(), first_lba, lba_cnt,
-			dev_cache, cache_size);
-	Ext2 ext2(ext_dev, lba_cnt / (BLK_SIZE / LBA_SZ));
-	
+	gpt_part_t &first_part = *(gpt_part_t *)part_sect.get();
+	part_sect.unload();
+
+	uint32_t first_lba = first_part.first_lba;
+	uint32_t lba_cnt = first_part.last_lba - first_part.first_lba + 1;
+
 	printf("Installling ext2 from: %dlba to: %dlba\n",
 			first_lba, first_lba + lba_cnt);
+	ExtDev ext_dev(file_dev.get_if(), first_lba, lba_cnt,
+			dev_cache, cache_size);
+	Ext2 ext2(ext_dev, lba_cnt / (BLK_SIZE / LBA_SZ), first_lba);
+	
 	if (ext2.init() != 0) {
 		printf("Can't init ext2\n");
 		return ;
@@ -294,7 +380,7 @@ void install_ext2(FileProvDev &file_dev, DevLayout &layout) {
 		return ;
 	}
 
-	if (install_boot(ext2, layout) < 0) {
+	if (install_boot(ext2, layout, file_dev) < 0) {
 		printf("couldn't install boot data\n");
 		return ;
 	}
@@ -314,6 +400,7 @@ void install_ext2(FileProvDev &file_dev, DevLayout &layout) {
 	});
 
 	ext2.commit_backups();
+	ext2.print_dbg();
 	// printf("Ext2: %s\n", ext2.to_string().c_str());
 	ext2.uninit();
 }

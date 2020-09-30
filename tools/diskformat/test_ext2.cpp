@@ -7,18 +7,23 @@
 
 int main(int argc, char const *argv[])
 {
-	if (argc != 2) {
+	if (argc < 2) {
 		printf("Wrong number of arguments, usage : %s fs_image\n", argv[0]);
 		return -1;
 	}
+	int lba_off = 0;
+	if (argc >= 3)
+		lba_off = atoi(argv[2]);
+
 	printf("fs_file: %s\n", argv[1]);
 
 	char cache[LBA_SZ * 64];
 	uint32_t cache_sz = sizeof(cache);
 
 	FileProvDev file_dev(argv[1]);
-	ExtDev ext_dev(file_dev.get_if(), 0, file_dev.lba_size(), cache, cache_sz);
-	Ext2 ext2(ext_dev, file_dev.lba_size() / (BLK_SIZE / LBA_SZ));
+	ExtDev ext_dev(file_dev.get_if(), lba_off, file_dev.lba_size(),
+			cache, cache_sz);
+	Ext2 ext2(ext_dev, file_dev.lba_size() / (BLK_SIZE / LBA_SZ), lba_off);
 
 	if (ext2.init() != 0) {
 		printf("Can't init ext2\n");
@@ -56,53 +61,59 @@ int main(int argc, char const *argv[])
 
 	printf("/boot: %d\n", ext2.dirs.find_rec("/boot"));
 
-	int sample_ino = ext2.dirs.find_rec("/a_sample_0.txt");
-	if (sample_ino <= 0) {
-		printf("Can't find a_sample_0.txt\n");
-		return -1;
-	}
+	do {
+		int sample_ino = ext2.dirs.find_rec("/a_sample_0.txt");
+		if (sample_ino <= 0) {
+			printf("Can't find a_sample_0.txt\n");
+			break;
+		}
 
-	inode_t sample_inode;
-	if (ext2.inodes.getino(sample_ino, &sample_inode) < 0) {
-		printf("can't get inode: %d\n", sample_ino);
-		return -1;
-	}
+		inode_t sample_inode;
+		if (ext2.inodes.getino(sample_ino, &sample_inode) < 0) {
+			printf("can't get inode: %d\n", sample_ino);
+			break;
+		}
 
-	char content[80];
-	if (ext2.inodes.read(sample_ino, 0, content, sample_inode.size) <
-			sample_inode.size)
-	{
-		printf("can't read inode: %d\n", sample_ino);
-		return -1;
-	}
+		char content[80];
+		if (ext2.inodes.read(sample_ino, 0, content, sample_inode.size) <
+				sample_inode.size)
+		{
+			printf("can't read inode: %d\n", sample_ino);
+			break;
+		}
 
-	printf("a_sample_0: ino: %d size: %d content: %s",
-			sample_ino, sample_inode.size, content);
+		printf("a_sample_0: ino: %d size: %d content: %s",
+				sample_ino, sample_inode.size, content);
 
-	int ret = ext2.dirs.listdir("/", [](auto& entry, int, int) {
-		char name[256];
-		memcpy(name, entry.name, entry.name_len);
-		name[entry.name_len] = 0;
-		printf("[%3d]/%s\n", entry.ino, name);
-		return 0;
-	});
-	if (ret != 0) {
-		printf("error listsing dir %d\n", ret);
-		return -1;
-	}
-	ret = ext2.dirs.listdir("/boot", [](auto& entry, int, int) {
-		char name[256];
-		memcpy(name, entry.name, entry.name_len);
-		name[entry.name_len] = 0;
-		printf("[%3d]/boot/%s\n", entry.ino, name);
-		return 0;
-	});
+		int ret = ext2.dirs.listdir("/", [](auto& entry, int, int) {
+			char name[256];
+			memcpy(name, entry.name, entry.name_len);
+			name[entry.name_len] = 0;
+			printf("[%3d]/%s\n", entry.ino, name);
+			return 0;
+		});
+		if (ret != 0) {
+			printf("error listsing dir %d\n", ret);
+			break;
+		}
+		ret = ext2.dirs.listdir("/boot", [](auto& entry, int, int) {
+			char name[256];
+			memcpy(name, entry.name, entry.name_len);
+			name[entry.name_len] = 0;
+			printf("[%3d]/boot/%s\n", entry.ino, name);
+			return 0;
+		});
 
-	if (ret != 0) {
-		printf("error listsing dir %d\n", ret);
-		return -1;
-	}
+		if (ret != 0) {
+			printf("error listsing dir %d\n", ret);
+			break;
+		}
+	} while (0);
 
+
+	
+
+	ext2.print_dbg();
 	ext2.uninit();
 
 	return 0;

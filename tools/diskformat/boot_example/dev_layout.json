@@ -1,8 +1,12 @@
 {
-	"mbr_boot" : {"src_path": "boot.boot"},
-	"bootloader": {
-		"src_path": "../../../bootloader/bootloader.bin",
-		"dst_path": "bootloader.bin"
+	"mbr_boot" : {"src_path": "../../../bootloader/mbrboot.bin"},
+	"boot1": {
+		"src_path": "../../../bootloader/boot1.bin",
+		"dst_path": "boot1.bin"
+	},
+	"boot2": {
+		"src_path": "../../../bootloader/boot2.bin",
+		"dst_path": "boot2.bin"
 	},
 	"bootconf": {
 		"src_path": "boot.conf",
@@ -15,5 +19,5 @@
 	"kernel_stage2": {
 		"src_path": "../../../stage2.kern",
 		"dst_path": "kern2.kern"
-	},
+	}
 }

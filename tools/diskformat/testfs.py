@@ -51,6 +51,7 @@ try:
 		os.system("ls -la " + mount_point)
 		os.system("ls -la " + mount_point + "/etc")
 		os.system("ls -la " + mount_point + "/boot")
+		os.system("cp " + mount_point + "/boot/boot1.bin .")
 		os.system("cat " + mount_point + "/boot/boot.conf")
 		# time.sleep(20);
 		umount_fs(mount_point)
