@@ -1,9 +1,11 @@
 #ifndef MEM_MAPPINGS_H
 #define MEM_MAPPINGS_H
 
-/* 0x00007BFF under is our stack, over is our program(max 64kb) */
+/*
+	mappings to be used in the second stage of the bootloader
+*/
 
-#define VESA_PUTCHAR_BUFF_START (0x00007C00 + 64 * 1024) 
+#define VESA_PUTCHAR_BUFF_START (0x00100000) 
 #define VESA_PUTCHAR_BUFF_END (VESA_PUTCHAR_BUFF_START + sizeof(char [84][214]))
 
 #define VESA_PUTCHAR_FONT_START (VESA_PUTCHAR_BUFF_END) 
@@ -15,5 +17,7 @@
 #define EXT2_GPT_HDR_START (EXT2_CACHE_END) 
 #define EXT2_GPT_HDR_END (EXT2_GPT_HDR_START + 512)
 
+#define EXT2_GPT_PART_SEC_START (EXT2_GPT_HDR_END) 
+#define EXT2_GPT_PART_SEC_END (EXT2_GPT_PART_SEC_START + 512)
 
 #endif

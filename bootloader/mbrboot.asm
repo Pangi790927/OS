@@ -10,6 +10,16 @@
 [org 0x7c00]
 [bits 16]
 
+mov ax, 0x0
+mov ds, ax
+mov ss, ax
+mov es, ax
+mov fs, ax
+mov gs, ax
+jmp 0x0:start
+
+start:
+
 ; inits
 mov bp, 0x7BF0			; stack for stage_1 and 1/2 of stage_2
 mov sp, bp
@@ -43,8 +53,6 @@ call bios_puthex
 mov si, line_break
 call bios_print
 
-mov si, printhdr
-call bios_print
 mov si, init_str
 call bios_print
 
@@ -201,9 +209,9 @@ printhdr:
 line_break:	db 0xd, 0xa, 0x0
 load_error:	db "err_load", 0xd, 0xa, 0x0
 ext_error:	db "err_ext", 0xd, 0xa, 0x0
-init_str:	db "err_load_mbr", 0xd, 0xa, 0x0
-start_boot:	db "bootloader:", 0xd, 0xa, 0x0
-cont_err:	db "error_exit:", 0xd, 0xa, 0x0
+init_str:	db "loading_mbr", 0xd, 0xa, 0x0
+start_boot:	db "booting", 0xd, 0xa, 0x0
+cont_err:	db "error_exit", 0xd, 0xa, 0x0
 
 ; EXTERN DATA
 ; ==============================================================================
@@ -213,13 +221,14 @@ cont_err:	db "error_exit:", 0xd, 0xa, 0x0
 times 400-($-$$) db 0
 ; mbr_opts (40 bytes max)
 boot_drive:		db 0
-boot1_addr:		dw 0x7e00
+boot1_addr:		dw 0x7E00
+boot2_addr:		dd 0x17E00
 boot1_lba:		dw 1
 boot1_cnt:		dw 127
-boot2_lba:		dw 1
-boot2_cnt:		dw 127
-conf_lba:		dw 1
-conf_cnt:		dw 127
+boot2_lba:		dw 128
+boot2_cnt:		dw 512
+conf_lba:		dw 640
+conf_cnt:		dw 1
 
 ; mbr
 times 440-($-$$) db 0

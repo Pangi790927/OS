@@ -103,10 +103,12 @@ int _manage_escape (void (*putchar)(char), const char *str, const uint64_t& v) {
 		case 'c': putchar((char)v); return 1;
 		case 's': putstr(putchar, (char *)v); return 1;
 
+		case 'i':
 		case 'd': putdec(putchar, (int)v); return 1;
 
 		case 'X':
-		case 'x': puthex(putchar, (unsigned int)v); return 1;
+		case 'x': printf_(putchar, "0x"); puthex(putchar, (unsigned int)v);
+			return 1;
 		
 		case 'O':
 		case 'o': putoct(putchar, (unsigned int)v); return 1;

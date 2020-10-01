@@ -4,6 +4,7 @@
 #include "types.h"
 #include "mbr_opts.h"
 #include "ramsize.h"
+#include "gdt.h"
 
 struct mbr_part_t {
 	uint8_t		bit_field;
@@ -33,6 +34,8 @@ struct vesa_display_t {
 	uint8_t		bpp;
 	uint16_t	attr;
 	uint32_t	physbase;
+	uint8_t		reserved;
+	uint16_t	reserved2;
 } __attribute__((__packed__));
 
 struct mbr_post_t {
@@ -40,6 +43,9 @@ struct mbr_post_t {
 		struct {
 			union {
 				struct {
+					gdt_entry_t gdt[32];
+					gdt_desc_t gdt_desc;
+					/* to do: move gdt here, max 32 entryes(256 bytes) */
 					/* here we will put data that must remain post boot and this
 					structure must be known from kernel, reutilizes the mbr
 					code to store those values */

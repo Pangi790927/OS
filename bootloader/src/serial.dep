@@ -1,2 +1,0 @@
-serial.o: src/serial.cpp include/serial.h ../common/types.h \
- include/ioports.h

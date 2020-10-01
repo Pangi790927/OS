@@ -42,12 +42,12 @@ disk_read:
 		jmp .done
 		.err_load:
 			mov esi, load_error
-			call bios_print
+			call intern_print
 			mov word [err_code], 1
 			jmp .done
 		.err_ext:
 			mov esi, ext_error
-			call bios_print
+			call intern_print
 			mov word [err_code], 2
 			jmp .done
 		.done:
@@ -57,6 +57,68 @@ disk_read:
 	ret
 
 err_code: dd 0
+
+; PROTECTED MODE FUNCTIONS
+; =============================================================================
+
+; $1 - gdt desc		+ 8
+; $2 - code sel		+ 12
+; $3 - code addr	+ 16
+; $4 - data sel		+ 20
+[global load_prot_mode]
+load_prot_mode:
+	push ebp
+	mov ebp, esp
+	pusha
+		cli
+
+		xor eax, eax
+		xor ebx, ebx
+
+		mov edi, [ebp + 8]
+		lgdt [edi]
+
+		mov cx, [ebp + 20]			; new DS
+		mov bx, [ebp + 12]			; new CS
+		mov eax, load_prot_mode32	; new IP
+
+		push bx						; push new CS
+		push ax						; push new IP
+
+		mov esi, entry_prot
+		call intern_print
+
+		in al, 0x92					; code to disable a20 line
+		or al, 2					;
+		out 0x92, al				;
+
+		mov eax, cr0				; Protected Mode Enable	
+		or eax, 0x1
+		mov cr0, eax
+
+		retf						; Sneaky far jump
+	popa
+	pop ebp
+	ret
+
+[bits 32]
+load_prot_mode32:
+	mov ds, cx
+	mov ss, cx
+	mov es, cx
+	mov fs, cx
+	mov gs, cx
+
+	mov edi, [ebp + 16]
+	mov esp, edi
+	sub esp, 4
+	mov ebp, esp
+
+	jmp edi
+
+	jmp $
+[bits 16]
+
 
 ; RAM FUNCTIONS
 ; =============================================================================
@@ -97,7 +159,7 @@ get_ram_size:
 		mov word [di], -1
 		mov word [di + 2], -2
 		mov esi, ram_error
-		call bios_print
+		call intern_print
 		jmp $
 	.done:
 
@@ -121,6 +183,26 @@ bios_putchr:
 	pop ebp
 	ret
 
+serial_putchar:
+	push ebp
+	mov ebp, esp
+		push bx
+		push dx
+		mov bl, al
+		mov dx, 0x3FD 
+		.retry:
+			in al, dx
+			and al, 0x20
+			jz .retry
+		mov al, bl
+
+		mov dx, 0x3F8 
+		out dx, al
+		pop dx
+		pop bx
+	pop ebp
+	ret
+
 bios_intern_putchr:
 	push ebp
 	mov bp, sp
@@ -131,14 +213,19 @@ bios_intern_putchr:
 	pop ebp
 	ret
 
+intern_putchar:
+	call serial_putchar
+	; call bios_intern_putchr
+	ret
+
 ; esi - pointer to string
-bios_print:
+intern_print:
 	pusha
 		xor ebx, ebx	; ebx = 0
 		jmp .while_condition
 		.while_start:
 			mov al, byte [esi + ebx]
-			call bios_intern_putchr
+			call intern_putchar
 
 			add ebx, 1
 		.while_condition:
@@ -150,7 +237,7 @@ bios_print:
 
 ; eax - number
 ; ebx - base
-bios_print_number_base_rec:
+intern_print_number_base_rec:
 	pusha
 		cmp eax, 0
 		je .if_end; if (ax != 0)
@@ -158,12 +245,12 @@ bios_print_number_base_rec:
 			; mov ax, ax - number to divide already in ax
 			div ebx ; edx:eax / ebx = eax (reminder edx)
 			
-			call bios_print_number_base_rec
+			call intern_print_number_base_rec
 
 			push eax	; saving ax and printing the character
 			mov edi, edx
 			mov al, byte [digits + edi]
-			call bios_intern_putchr
+			call intern_putchar
 			pop eax ; returning eax
 		.if_end:
 	popa
@@ -171,42 +258,42 @@ bios_print_number_base_rec:
 
 ; eax - number 
 ; ebx - base
-bios_print_number_base:
+intern_print_number_base:
 	pusha
 		cmp eax, 0
 		jne .if_else ; if (eax == 0)
 			mov al, '0'
-			call bios_intern_putchr
+			call intern_putchar
 		jmp .if_end 
 		.if_else:
 			; eax, ebx already set
-			call bios_print_number_base_rec
+			call intern_print_number_base_rec
 		.if_end:
 	popa
 	ret
 
 ; eax - number in base 10
-bios_putdec:
+intern_putdec:
 	pusha
 		mov ebx, 10
-		call bios_print_number_base
+		call intern_print_number_base
 	popa
 	ret
 
 ; eax - number in base 16
-bios_puthex:
+intern_puthex:
 	pusha
 		mov esi, hex_prefix
-		call bios_print
+		call intern_print
 		mov ebx, 16
-		call bios_print_number_base
+		call intern_print_number_base
 	popa
 	ret
 
-bios_putendl:
+intern_putendl:
 	pusha
 		mov esi, separator
-		call bios_print
+		call intern_print
 	popa
 	ret
 
@@ -215,10 +302,11 @@ bios_putendl:
 
 digits: db '0123456789abcdef'
 
-; error strings:
+; strings:
 ext_error: db "Does not have bios load extension", 0xd, 0xa, 0
 load_error: db "Failed to load from disk", 0xd, 0xa, 0
 ram_error: db "Failed to read ram size", 0xd, 0xa, 0
+entry_prot: db "======== Will enter protected mode ========", 0xd, 0xa, 0
 hex_prefix: db "0x", 0
 separator: db 0xd, 0xa, 0
 

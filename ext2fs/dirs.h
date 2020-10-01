@@ -412,6 +412,10 @@ public:
 		}
 		return 0;
 	}
+
+	void print_dbg() {
+		
+	}
 };
 
 #endif

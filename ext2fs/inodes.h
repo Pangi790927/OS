@@ -48,6 +48,7 @@ auto name = ext_dev.get_sect(blk);\
 UnloadScope EXPAND(unload_scope)([&](int line){\
 	if (!name.verdict) {\
 		DBG("Unload scope called in inodes.h: line: %d", line);\
+		(void)line;\
 		name.unload();\
 	}\
 }, __LINE__);\
@@ -61,6 +62,7 @@ auto name = load_desc(grp);\
 UnloadScope EXPAND(unload_scope)([&](int line){\
 	if (!name.sect.verdict) {\
 		DBG("Unload scope called in inodes.h: line: %d", line);\
+		(void)line;\
 		name.sect.unload();\
 	}\
 }, __LINE__);\
@@ -74,6 +76,7 @@ auto name = load_ino_bmap(grp);\
 UnloadScope EXPAND(unload_scope)([&](int line){\
 	if (!name.sect.verdict) {\
 		DBG("Unload scope called in inodes.h: line: %d", line);\
+		(void)line;\
 		name.sect.unload();\
 	}\
 }, __LINE__);\
@@ -87,6 +90,7 @@ auto name = load_blk_bmap(grp);\
 UnloadScope EXPAND(unload_scope)([&](int line){\
 	if (!name.sect.verdict) {\
 		DBG("Unload scope called in inodes.h: line: %d", line);\
+		(void)line;\
 		name.sect.unload();\
 	}\
 }, __LINE__);\
@@ -165,7 +169,7 @@ public:
 			DBG("Couldn't populate inode");
 			return -1;	
 		}
-		if (mode == EXT2_S_IFDIR) {
+		if (mode & EXT2_S_IFDIR) {
 			int grp = (ino - 1) / sup->ino_per_grp;
 			EXT_LOAD_DESC(desc, grp, -1);
 			desc.desc->used_dir_cnt++;
@@ -343,9 +347,9 @@ public:
 			bool found = false;
 			int curr_bsize = 0;
 			int free_idxs = 0;
-			int i = 0;
 			EXT_LOAD_DESC(desc, grp, -1);
 			EXT_LOAD_BLK_BM(sb_blk, grp, -1);
+			int i = sb_blk.bmap.get_first_free();
 			for (; free_idxs < desc.desc->free_blk_cnt; i++) {
 				if (sb_blk.bmap.get(i) == 0) {
 					curr_bsize++;
@@ -397,6 +401,20 @@ public:
 			return -1;
 		}
 		return 0;
+	}
+
+	void print_dbg() {
+		for (int i = 0; i < grp_cnt(); i++) {
+			DBG("inode bitmap: ")
+			EXT_LOAD_INO_BM(sb_ino, i, );
+			// util::hexdump(sb_ino.sect.get(), BLK_SIZE);
+			sb_ino.sect.unload();
+
+			DBG("block bitmap: ")
+			EXT_LOAD_BLK_BM(sb_blk, i, );
+			// util::hexdump(sb_blk.sect.get(), BLK_SIZE);
+			sb_blk.sect.unload();
+		}
 	}
 
 	// std::string to_string() {
@@ -706,7 +724,6 @@ private:
 		if (ino < 1)
 			return -1;
 		int grp = (ino - 1) / sup->ino_per_grp;
-		int rel_ino = (ino - 1) % sup->ino_per_grp;
 		auto [blk, off] = get_inob(ino);
 		if (blk < 0) {
 			DBG("Couldn't get inode block and offset: ino: %d", ino);
@@ -725,7 +742,7 @@ private:
 		ino_sect.save(true);
 
 		EXT_LOAD_INO_BM(sb_ino, grp, -1);
-		sb_ino.bmap.set(rel_ino, false);
+		sb_ino.bmap.set(ino - 1, false);
 		EXT_SAVE_INO_BM(sb_ino, grp, -1);
 
 		EXT_LOAD_DESC(desc, grp, -1)
@@ -755,7 +772,6 @@ private:
 	}
 
 	int alloc_blk(int sugested_grp) {
-		printf("sugested_grp: %d\n", sugested_grp);
 		EXT_LOAD_DESC(sugested_desc, sugested_grp, -1);
 		if (sugested_desc.desc->free_blk_cnt != 0) {
 			sugested_desc.sect.unload();
@@ -780,10 +796,9 @@ private:
 			return -1;
 
 		int grp = blk / grp_bsize();
-		int rel_blk = blk - blk_table(grp);
 
 		EXT_LOAD_BLK_BM(sb_blk, grp, -1);
-		sb_blk.bmap.set(rel_blk, false);
+		sb_blk.bmap.set(blk, false);
 
 		EXT_LOAD_DESC(sd_desc, grp, -1);
 		sd_desc.desc->free_blk_cnt++;
@@ -797,12 +812,12 @@ private:
 	int alloc_blk_in_grp(int grp) {
 		EXT_LOAD_BLK_BM(sb_blk, grp, -1);
 
-		int rel_blk = sb_blk.bmap.get_first_free();
-		if (sb_blk.bmap.get(rel_blk)) {
+		int blk = sb_blk.bmap.get_first_free();
+		if (sb_blk.bmap.get(blk)) {
 			DBG("blk already allocated");
 			return -1;
 		}
-		sb_blk.bmap.set(rel_blk, true);
+		sb_blk.bmap.set(blk, true);
 
 		EXT_LOAD_DESC(sd_desc, grp, -1);
 		sd_desc.desc->free_blk_cnt--;
@@ -811,17 +826,16 @@ private:
 		EXT_SAVE_BLK_BM(sb_blk, grp, -1);
 		sup->free_blk_cnt--;
 		
-		printf("add block: %d\n", rel_blk + blk_table(grp));
-		return rel_blk + blk_table(grp);
+		return blk;
 	}
 
-	int alloc_spec_blk(int grp, int rel_blk) {
+	int alloc_spec_blk(int grp, int blk) {
 		EXT_LOAD_BLK_BM(sb_blk, grp, -1);
-		if (sb_blk.bmap.get(rel_blk)) {
+		if (sb_blk.bmap.get(blk)) {
 			DBG("blk already allocated");
 			return -1;
 		}
-		sb_blk.bmap.set(rel_blk, true);
+		sb_blk.bmap.set(blk, true);
 
 		EXT_LOAD_DESC(sd_desc, grp, -1);
 		sd_desc.desc->free_blk_cnt--;
@@ -829,23 +843,22 @@ private:
 
 		EXT_SAVE_BLK_BM(sb_blk, grp, -1);
 		sup->free_blk_cnt--;
-		printf("sepc add block: %d\n", rel_blk + blk_table(grp));
-		return rel_blk + blk_table(grp);
+		return blk;
 	}
 
 	int alloc_ino_in_grp(int grp) {
 		EXT_LOAD_INO_BM(sb_ino, grp, -1);
-		int rel_ino = sb_ino.bmap.get_first_free();
-		sb_ino.bmap.set(rel_ino, true);
-		sup->free_ino_cnt--;
-		int ino = rel_ino + grp * sup->ino_per_grp + 1;
+
+		int ino = sb_ino.bmap.get_first_free();
+		sb_ino.bmap.set(ino, true);
 
 		EXT_LOAD_DESC(sd_desc, grp, -1);
 		sd_desc.desc->free_ino_cnt--;
 		EXT_SAVE_DESC(sd_desc, grp, -1);
 
+		sup->free_ino_cnt--;
 		EXT_SAVE_INO_BM(sb_ino, grp, -1);
-		return ino;
+		return ino + 1;
 	}
 
 	int fill_ino(int ino, int mode = 0, int gid = 0, int uid = 0)
@@ -892,9 +905,7 @@ private:
 	}
 
 	int grp_bsize() {
-		return roundup_div(grp_cnt() * 32, BLK_SIZE) +
-				3 + sup->ino_per_grp * sup->ino_size / BLK_SIZE +
-				sup->blk_per_grp;
+		return sup->blk_per_grp;
 	}
 };
 

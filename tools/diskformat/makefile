@@ -1,3 +1,6 @@
+# life saver:
+# gsettings set org.gnome.desktop.media-handling automount-open false
+
 CXX_FLAGS = -g -std=c++17 -rdynamic -lz -lstdc++fs
 INCLUDES = -I../../common -I../../ext2fs -I.
 FS_OPTS = ^sparse_super,^large_file,^filetype,^resize_inode,^dir_index,^ext_attr
@@ -87,6 +90,15 @@ example20M.img:
 
 example200M.img:
 	dd if=/dev/zero of=example200M.img bs=1M count=200
+
+vbox_example2M:
+	dd conv=notrunc if=example2M.img of=example200M.vhd bs=1M count=200
+
+vbox_example_storage:
+	dd if=/dev/zero of=temp_hdd.img bs=1M count=200
+	VBoxManage convertfromraw --format vhd --variant Fixed\
+		temp_hdd.img example200M.vhd
+	rm -f temp_hdd.img
 
 clean:
 	rm -f test_ext2.d

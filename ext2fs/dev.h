@@ -153,7 +153,7 @@ struct Dev {
 		char *sect_cache = (char *)&cache[cache_index];
 		uint32_t cnt = sect_sz / LBA_SZ;
 		if (iprov.read_sector(lba_index(sect_index), cnt, sect_cache) < 0) {
-			DBG("Driver couldn't load sector");
+			DBG("Driver couldn't load sector %d", sect_index);
 			return Sector();
 		}
 		// DBG("read block: %d cache_index: %d", sect_index, cache_index);

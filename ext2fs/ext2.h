@@ -26,12 +26,13 @@ public:
 
 	ext2_sup_t *sup;
 	uint32_t blk_cnt;
+	const uint32_t lba_start;
 
 	Inodes inodes;
 	Dirs dirs;
 
-	Ext2(ExtDev &ext_dev, uint32_t blk_cnt)
-	: ext_dev(ext_dev), blk_cnt(blk_cnt),
+	Ext2(ExtDev &ext_dev, uint32_t blk_cnt, uint32_t lba_start)
+	: ext_dev(ext_dev), blk_cnt(blk_cnt), lba_start(lba_start),
 			inodes(
 					ext_dev,
 					sup,
@@ -55,6 +56,8 @@ public:
 		DBG("Reading superblock");
 		sup_sector = ext_move(ext_dev.get_sect(1));
 		sup = (ext2_sup_t *)sup_sector.get();
+		DBG("Inode size: %d", sup->ino_size);
+
 		if (!sup)
 			return -1;
 		return 0;
@@ -225,7 +228,7 @@ public:
 		ret.sect = ext_dev.get_sect(bmap_ino);
 		if (!ret.sect.get())
 			return ret;
-		ret.bmap = Bitmap(ret.sect.get(), BLK_SIZE);
+		ret.bmap = Bitmap(ret.sect.get(), BLK_SIZE, sup->ino_per_grp * i);
 		return ret;
 	}
 
@@ -242,7 +245,7 @@ public:
 		ret.sect = ext_dev.get_sect(bmap_blk);
 		if (!ret.sect.get())
 			return ret;
-		ret.bmap = Bitmap(ret.sect.get(), BLK_SIZE);
+		ret.bmap = Bitmap(ret.sect.get(), BLK_SIZE, sup->blk_per_grp * i + !i);
 		return ret;
 	}
 
@@ -258,42 +261,82 @@ public:
 				sd.sect.unload();
 				return -1;
 			}
-			sd.desc->ino_bitmap = 2 + desc_bsize() + i * grp_bsize();
-			sd.desc->blk_bitmap = 3 + desc_bsize() + i * grp_bsize();
-			sd.desc->ino_table = 4 + desc_bsize() + i * grp_bsize();
+			// one for superblock and one for empty space at start(if i == 0)
+			int bmap_offset = desc_bsize() + 1 + (i == 0);
+			sd.desc->ino_bitmap = bmap_offset + i * grp_bsize();
+			sd.desc->blk_bitmap = bmap_offset + 1 + i * grp_bsize();
+			sd.desc->ino_table = bmap_offset + 2 + i * grp_bsize();
 			sd.desc->used_dir_cnt = 0;
 
+			uint32_t used_inode_blk =
+					roundup_div(sup->ino_size * sup->ino_per_grp, BLK_SIZE);
+			uint32_t used_blk = bmap_offset + 2 + used_inode_blk;
+
+			DBG("Used blocks by system metadata: %d", used_blk);
+			sup->free_blk_cnt -= used_blk;
+
 			sd.desc->free_blk_cnt = ext_min(free_blk, (uint32_t)BLK_SIZE * 8);
+			sd.desc->free_blk_cnt -= used_blk;
 			free_blk -= BLK_SIZE * 8;
 			sd.desc->free_ino_cnt = ext_min(free_ino, (uint32_t)BLK_SIZE * 8);
 			free_ino -= BLK_SIZE * 8;
 
-			if (sd.sect.save(true) != 0) {
+			// clear inode table
+			for (uint32_t i = 0; i < used_inode_blk; i++) {
+				int block_index = sd.desc->ino_table + i;
+				auto ino_sect = ext_dev.get_sect(block_index);
+				memset(ino_sect.get(), 0, BLK_SIZE);
+				ino_sect.save(true);
+			}
+
+			if (sd.sect.save(false) != 0) {
 				DBG("Couldn't save desc: %d", i);
+				sd.sect.unload();
 				return -1;
 			}
 
 			auto bm_ino = load_ino_bmap(i);
 			if (!bm_ino.sect.get()) {
 				DBG("Couldn't load inode bitmap: %d", i);
+				sd.sect.unload();
 				return -1;
 			}
 
 			memset((char *)bm_ino.sect.get(), 0, BLK_SIZE);
 
+			// padding
+			if (sd.desc->free_ino_cnt < BLK_SIZE * 8)
+				for (int j = sd.desc->free_ino_cnt; j < BLK_SIZE * 8; j++)
+					bm_ino.bmap.set(j + sup->ino_per_grp * i, true);
+
 			if (bm_ino.sect.save(true) != 0) {
 				DBG("Couldn't save inode bitmap: %d", i);
+				sd.sect.unload();
 				return -1;
 			}
 			
 			auto bm_blk = load_blk_bmap(i);
 			if (!bm_blk.sect.get()) {
 				DBG("Couldn't load block bitmap: %d", i);
+				sd.sect.unload();
 				return -1;
 			}
 
 			memset((char *)bm_blk.sect.get(), 0, BLK_SIZE);
+			for (uint32_t j = 0; j < used_blk - 1; j++) {
+				bm_blk.bmap.set(j + sup->blk_per_grp * i + !i, true);
+			}
 
+			// padding
+			if (sd.desc->free_blk_cnt + used_blk != BLK_SIZE * 8)
+				for (int j = sd.desc->free_blk_cnt + used_blk - 1;
+						j < BLK_SIZE * 8; j++)
+				{
+					bm_blk.bmap.set(j + sup->blk_per_grp * i + !i, true);					
+				}
+			DBG("first free: %d", bm_blk.bmap.get_first_free());
+
+			sd.sect.unload();
 			if (bm_blk.sect.save(true) != 0) {
 				DBG("Couldn't save inode bitmap: %d", i);
 				return -1;
@@ -313,8 +356,7 @@ public:
 
 	/* returns size of group in BLK_SIZE units */
 	uint32_t grp_bsize() {
-		return 3 + desc_bsize() + sup->ino_per_grp * sup->ino_size / BLK_SIZE +
-				sup->blk_per_grp;
+		return sup->blk_per_grp;
 	}
 
 	/* returns size of group descriptor array in blocks */
@@ -432,6 +474,10 @@ public:
 	// uint64_t blk_size() {
 	// 	return 1 << (sup->log_blk_size + 10);
 	// }
+
+	void print_dbg() {
+		inodes.print_dbg();	
+	}
 
 	// std::string to_string() {
 	// 	std::string ret = sformat("%s\n", ext_sup_str(sup));

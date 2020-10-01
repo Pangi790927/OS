@@ -29,12 +29,9 @@
 #include "vesa_bios.h"
 // #include "vesa_putchar.h"
 #include "ioports.h"
-#include "mem_mappings.h"
-#include "ext2.h"
-#include "ext2_boot_reader.h"
+// #include "mem_mappings.h"
 
 mbr_post_t *mbr = (mbr_post_t *)0x7c00;
-gpt_hdr_t *gpt = (gpt_hdr_t *)EXT2_GPT_HDR_START;
 
 static uint16_t no_putchar(uint16_t) {
 	return 0;
@@ -48,6 +45,7 @@ static void emu_close() {
 }
 
 static int find_vesa_mode(vesa_display_t *info) {
+	DBGSCOPE();
 	vesa_info_t vesa_info;
 	uint16_t ret = 0;
 	DBG("vesa info ptr: %x", (void *)(&vesa_info));
@@ -58,9 +56,9 @@ static int find_vesa_mode(vesa_display_t *info) {
 			vesa_info.sig[2], vesa_info.sig[3]);
 	DBG("vesa version: %x", vesa_info.version);
 	DBG("oem str ptr: %x", PTR_ARR(vesa_info.oem_str_ptr))
-	DBG("oem str: %s", PTR_ARR(vesa_info.oem_str_ptr))
+	// DBG("oem str: %s", PTR_ARR(vesa_info.oem_str_ptr))
 
-	if (vesa_info.version != 0x300) {
+	if (vesa_info.version != 0x200 && vesa_info.version != 0x300) {
 		DBG("Version not supported");
 		ret = -1;
 		return -1;
@@ -116,7 +114,7 @@ static int find_vesa_mode(vesa_display_t *info) {
 
 static void init_ramsize() {
 	DBGSCOPE();
-	mbr->ramsize = get_ramsize();
+	mbr->ramsize = get_ramsize([](const char *err){ DBG("[err]: %s", err); });
 	DBG("RAM size: kb: %d + 64kb: %d", mbr->ramsize.ax, mbr->ramsize.bx);
 }
 
@@ -139,43 +137,110 @@ static void init_mbr() {
 	}
 }
 
-extern "C" int bootloader()
-{
+static void load_stage2() {
 	DBGSCOPE();
+	// TO DO: enter protected mode
+	// STAGE_2_OFFSET equ 0xA000
+
+	void *addr = (void *)mbr->init_opts.boot2_addr;
+	uint16_t lba = mbr->init_opts.boot2_lba;
+	uint16_t cnt = mbr->init_opts.boot2_cnt;
+	uint16_t drive = mbr->init_opts.boot_drive;
+
+	DBG("Will read disk to: %x, lba: %x, cnt: %d, drive: %x",
+			addr, lba, cnt, drive);
+
+	uint16_t addr_off = OFF(addr);
+	uint16_t addr_seg = SEG(addr);
+	uint16_t lba_aux = lba;
+	while (cnt) {
+		uint16_t to_read = cnt > 128 ? 128 : cnt;
+		DBG("read block: cnt: %d lba: %d off: %x seg %x",
+				to_read, lba_aux, addr_off, addr_seg);
+		int ret = disk_read(addr_off, addr_seg, lba_aux,
+				to_read, drive);
+		if (ret != 0) {
+			DBG("Can't read from disk: %d", ret);
+			return ;
+		}
+		addr_seg += 0x1000;
+		lba_aux += to_read;
+		cnt -= to_read;
+	}
+
+	DBG("Will init gdt");
+
+	for (uint16_t i = 0; i < sizeof(mbr->gdt) / sizeof(mbr->gdt[0]); i++)
+		mbr->gdt[i].zero();
+
+	// null desc
+	mbr->gdt[0].zero();
+	
+	// code gdt entry
+	mbr->gdt[1].zero();
+	mbr->gdt[1].access.rw = 1;
+	mbr->gdt[1].access.ex = 1;
+	mbr->gdt[1].access.s = 1;
+	mbr->gdt[1].access.pr = 1;
+	mbr->gdt[1].flag_sz = 1;
+	mbr->gdt[1].flag_gr = 1;
+	mbr->gdt[1].set_limit(0xf'ffff);
+	mbr->gdt[1].set_base(0);
+	DBG("code selector: limit: %x, base: %x, access: %x, gr: %d, sz: %d",
+			mbr->gdt[1].get_limit(), mbr->gdt[1].get_base(),
+			mbr->gdt[1].access_val, mbr->gdt[1].flag_gr, mbr->gdt[1].flag_sz);
+
+	// data gdt entry
+	mbr->gdt[2].zero();
+	mbr->gdt[2].access.rw = 1;
+	mbr->gdt[2].access.s = 1;
+	mbr->gdt[2].access.pr = 1;
+	mbr->gdt[2].flag_sz = 1;
+	mbr->gdt[2].flag_gr = 1;
+	mbr->gdt[2].set_limit(0xf'ffff);
+	mbr->gdt[2].set_base(0);
+	DBG("data selector: limit: %x, base: %x, access: %x, gr: %d, sz: %d",
+			mbr->gdt[2].get_limit(), mbr->gdt[2].get_base(),
+			mbr->gdt[2].access_val, mbr->gdt[2].flag_gr, mbr->gdt[2].flag_sz);
+
+	DBG("dump gdt: %p", mbr->gdt);
+	for (int i = 0; i < 6; i++)
+		DBG("%b", *((uint32_t *)mbr->gdt + i));
+
+	mbr->gdt_desc.addr = (uint32_t)mbr->gdt;
+	mbr->gdt_desc.size = sizeof(mbr->gdt[0]) * 3 - 1;
+
+	DBG("gdt addr: %x, gdt size %d", mbr->gdt_desc.addr, mbr->gdt_desc.size);
+	DBG("desc addr: %x", (void *)&mbr->gdt_desc);
+
+	gdt_sel_t code_sel;
+	code_sel.index = 1;
+	code_sel.t = 0;
+	code_sel.priv = 0;
+
+	gdt_sel_t data_sel;
+	data_sel.index = 2;
+	data_sel.t = 0;
+	data_sel.priv = 0;
+
+	DBG("code sel: %x, data sel %x", (uint16_t)code_sel, (uint16_t)data_sel);
+	DBG("&load_prot_mode: %p", (void *)&load_prot_mode);
+
+	load_prot_mode((long)&mbr->gdt_desc, code_sel, (long)addr, data_sel);
+}
+
+extern "C" int boot1()
+{
 	serial::init();
-	DBG("Starting bootloader");
+	DBGSCOPE();
+	DBG("Starting boot1");
 	init_ramsize();
 	init_mbr();
-
-	Ext2BootReader ro_dev(mbr->init_opts.boot_drive);
-	init_gpt(ro_dev);
-
-	uint16_t lba_start = 0;
-	uint16_t lba_size = 100;
-	ExtDev ext_dev(ro_dev.get_if(), lba_start, lba_size,
-			(char *)EXT2_CACHE_START, EXT2_CACHE_END - EXT2_CACHE_START);
-	Ext2 ext2(ext_dev, lba_size / (BLK_SIZE / LBA_SZ), lba_start);
-	ext2.init();
-
+	// if (false)
 	find_vesa_mode(&mbr->vesa_display);
-	load_kernel();
+	load_stage2();
 
-	ext2.uninit();
-	// for (int k = 0; k < 100; k++)
-	// 	DBG("Print a string: %s %d", "a string", k);
-		// fill_rect(&test_mode, 100, 100, 600, 450, 0xffaa55 * k / 100);
-
-	// for (int i = 0; i < 100; i++)
-	// 	for (int j = 0; j < 100; j++) {
-	// 		fill_rect(&test_mode, 0, 0, test_mode.width, test_mode.height, 0);
-	// 		fill_rect(&test_mode, 0, 0, 50, 100, 0x00ffaa);
-	// 		move_rect(&test_mode, 0, 0, i * 10, j * 10, 50, 100);
-	// 	}
-
-	// 	for (int i = 100; i < 700; i++)
-	// 		for (int j = 100; j < 550; j++)
-	// 			put_pixel(&test_mode, i, j, 0xffaa55 * k / 10);
-
+	DBG("[FATAL ERROR] returned to caller in boot1");
 	emu_close();
 	while (true)
 		asm volatile ("nop");

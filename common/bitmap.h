@@ -2,11 +2,12 @@
 #define BITMAP_H
 
 struct Bitmap {
-	char *addr = NULL;
+	uint8_t *addr = NULL;
 	uint32_t byte_cnt = 0;
+	uint32_t start = 0;
 
-	Bitmap(char *addr = 0, uint32_t byte_cnt = 0)
-	: addr(addr), byte_cnt(byte_cnt) {}
+	Bitmap(char *addr = 0, uint32_t byte_cnt = 0, uint32_t start = 0)
+	: addr((uint8_t *)addr), byte_cnt(byte_cnt), start(start) {}
 
 	void reset() {
 		for (uint32_t i = 0; i < byte_cnt; i++)
@@ -14,6 +15,7 @@ struct Bitmap {
 	}
 
 	bool get(int index) const {
+		index -= start;
 		if (!valid_index(index))
 			return false;
 		uint8_t bit_index = index & 0x7;
@@ -22,6 +24,7 @@ struct Bitmap {
 	}
 
 	void set(int index, bool val) {
+		index -= start;
 		if (!valid_index(index))
 			return ;
 		uint8_t bit_index = index & 0x7;
@@ -34,10 +37,10 @@ struct Bitmap {
 		if (!addr)
 			return -1;
 		for (uint32_t i = 0; i < byte_cnt; i++) {
-			if (~addr[i]) {
+			if (addr[i] != 0xff) {
 				for (int j = 0; j < 8; j++) {
 					if (!((1 << (j)) & addr[i])) {
-						return i * 8 + j;
+						return i * 8 + j + start;
 					}
 				}
 			}

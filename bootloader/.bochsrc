@@ -1,0 +1,5 @@
+ata0-master: type=disk, path="../tools/diskformat/example2M.img", mode=flat, cylinders=0, heads=0, spt=0
+boot: disk
+display_library: sdl
+megs: 128
+com1: enabled=1, mode=file, dev=boot_serial.log
