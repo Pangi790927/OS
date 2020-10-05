@@ -1,0 +1,137 @@
+[boot1.cpp][line:235][boot1]  -->
+[boot1.cpp][line:236][boot1] Starting boot1
+[boot1.cpp][line:116][init_ramsize]  -->
+[boot1.cpp][line:118][init_ramsize] RAM size: kb: 15360 + 64kb: 1792
+[boot1.cpp][line:116][init_ramsize]  <--
+[boot1.cpp][line:122][init_mbr]  -->
+[boot1.cpp][line:127][init_mbr] part0
+field: [0x0], start_lo [1], start_hi: [0], len_lo [4095], len_hi[0], sys_id[238]
+[boot1.cpp][line:133][init_mbr] Found boot part: 0
+[boot1.cpp][line:127][init_mbr] part1
+field: [0x0], start_lo [0], start_hi: [0], len_lo [0], len_hi[0], sys_id[0]
+[boot1.cpp][line:127][init_mbr] part2
+field: [0x0], start_lo [0], start_hi: [0], len_lo [0], len_hi[0], sys_id[0]
+[boot1.cpp][line:127][init_mbr] part3
+field: [0x0], start_lo [0], start_hi: [0], len_lo [0], len_hi[0], sys_id[0]
+[boot1.cpp][line:122][init_mbr]  <--
+[boot1.cpp][line:48][find_vesa_mode]  -->
+[boot1.cpp][line:51][find_vesa_mode] vesa info ptr: 0x78ea
+[boot1.cpp][line:55][find_vesa_mode] vesa sig: VESA
+[boot1.cpp][line:57][find_vesa_mode] vesa version: 0x200
+[boot1.cpp][line:58][find_vesa_mode] oem str ptr: 0xc7de6
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x100, [640X400] bpp: 8 pitch 640 base: 0xe0000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x101, [640X480] bpp: 8 pitch 640 base: 0xe0000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x1f] 0x102, [800X600] bpp: 4 pitch 100 base: 0xe0000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x103, [800X600] bpp: 8 pitch 800 base: 0xe0000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x1f] 0x104, [1024X768] bpp: 4 pitch 128 base: 0xe0000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x105, [1024X768] bpp: 8 pitch 1024 base: 0xe0000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x1f] 0x106, [1280X1024] bpp: 4 pitch 160 base: 0xe0000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x107, [1280X1024] bpp: 8 pitch 1280 base: 0xe0000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x10d, [320X200] bpp: 15 pitch 640 base: 0xe0000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x10e, [320X200] bpp: 16 pitch 640 base: 0xe0000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x10f, [320X200] bpp: 24 pitch 960 base: 0xe0000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x110, [640X480] bpp: 15 pitch 1280 base: 0xe0000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x111, [640X480] bpp: 16 pitch 1280 base: 0xe0000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x112, [640X480] bpp: 24 pitch 1920 base: 0xe0000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x113, [800X600] bpp: 15 pitch 1600 base: 0xe0000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x114, [800X600] bpp: 16 pitch 1600 base: 0xe0000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x115, [800X600] bpp: 24 pitch 2400 base: 0xe0000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x116, [1024X768] bpp: 15 pitch 2048 base: 0xe0000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x117, [1024X768] bpp: 16 pitch 2048 base: 0xe0000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x118, [1024X768] bpp: 24 pitch 3072 base: 0xe0000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x119, [1280X1024] bpp: 15 pitch 2560 base: 0xe0000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x11a, [1280X1024] bpp: 16 pitch 2560 base: 0xe0000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x11b, [1280X1024] bpp: 24 pitch 3840 base: 0xe0000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x140, [320X200] bpp: 32 pitch 1280 base: 0xe0000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x141, [640X400] bpp: 32 pitch 2560 base: 0xe0000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x142, [640X480] bpp: 32 pitch 2560 base: 0xe0000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x143, [800X600] bpp: 32 pitch 3200 base: 0xe0000000
+[boot1.cpp][line:96][find_vesa_mode] selected mode: 0x143
+[boot1.cpp][line:48][find_vesa_mode]  <--
+[boot1.cpp][line:141][load_stage2]  -->
+[boot1.cpp][line:150][load_stage2] Will read disk to: 0x17e00, lba: 0xee, cnt: 108, drive: 0x80
+[boot1.cpp][line:158][load_stage2] read block: cnt: 108 lba: 238 off: 0x7e00 seg 0x1000
+[boot1.cpp][line:171][load_stage2] Will init gdt
+[boot1.cpp][line:189][load_stage2] code selector: limit: 0xfffff, base: 0x0, access: 0x9a, gr: 1, sz: 1
+[boot1.cpp][line:202][load_stage2] data selector: limit: 0xfffff, base: 0x0, access: 0x92, gr: 1, sz: 1
+[boot1.cpp][line:206][load_stage2] dump gdt: 0x7c00
+[boot1.cpp][line:208][load_stage2] 00000000'00000000'00000000'00000000
+[boot1.cpp][line:208][load_stage2] 00000000'00000000'00000000'00000000
+[boot1.cpp][line:208][load_stage2] 00000000'00000000'11111111'11111111
+[boot1.cpp][line:208][load_stage2] 00000000'11001111'10011010'00000000
+[boot1.cpp][line:208][load_stage2] 00000000'00000000'11111111'11111111
+[boot1.cpp][line:208][load_stage2] 00000000'11001111'10010010'00000000
+[boot1.cpp][line:213][load_stage2] gdt addr: 0x7c00, gdt size 23
+[boot1.cpp][line:214][load_stage2] desc addr: 0x7d00
+[boot1.cpp][line:226][load_stage2] code sel: 0x8, data sel 0x10
+[boot1.cpp][line:227][load_stage2] &load_prot_mode: 0xa338
+======== Will enter protected mode ========
+boot2-addr: 0x190ae
+entry-addr: 0x17e00
+eax: 0x11
+ebx: 0x8
+ecx: 0x10
+edx: 0x0
+edi: 0x17e00
+esi: 0xa502
+ebp: 0x17dfc
+esp: 0x17de4
+cr0: 0x11
+cr2: 0x0
+cr3: 0x0
+cr4: 0x0
+========= Entering protected mode =========
+[boot2.cpp][line:84][boot2]  -->
+[../common/pci/pci.cpp][line:70][scan_buses] Found dev:
+[../common/pci/pci.cpp][line:50][dbg_print_addr_reg] bus: 0x0 dev: 0x0 fn: 0x0 off: 0x0 
+[../common/pci/pci.cpp][line:41][dbg_print_hdr] helper string: Bridge Device | Host Bridge 
+[../common/pci/pci.cpp][line:42][dbg_print_hdr] vendor_id: 0x8086 device_id: 0x1237
+[../common/pci/pci.cpp][line:43][dbg_print_hdr] command: 00000000'00000000'00000000'00000000 status: 00000000'00000000'00000000'00000000
+[../common/pci/pci.cpp][line:44][dbg_print_hdr] rev_id: 0x2 prog_if: 0x0 subclass: 0x0 class_code: 0x6
+[../common/pci/pci.cpp][line:46][dbg_print_hdr] hdr_type: 0x0
+[../common/pci/pci.cpp][line:70][scan_buses] Found dev:
+[../common/pci/pci.cpp][line:50][dbg_print_addr_reg] bus: 0x0 dev: 0x1 fn: 0x0 off: 0x0 
+[../common/pci/pci.cpp][line:41][dbg_print_hdr] helper string: Bridge Device | ISA Bridge 
+[../common/pci/pci.cpp][line:42][dbg_print_hdr] vendor_id: 0x8086 device_id: 0x7000
+[../common/pci/pci.cpp][line:43][dbg_print_hdr] command: 00000000'00000000'00000000'00000111 status: 00000000'00000000'00000010'00000000
+[../common/pci/pci.cpp][line:44][dbg_print_hdr] rev_id: 0x0 prog_if: 0x0 subclass: 0x1 class_code: 0x6
+[../common/pci/pci.cpp][line:46][dbg_print_hdr] hdr_type: 0x80
+[../common/pci/pci.cpp][line:70][scan_buses] Found dev:
+[../common/pci/pci.cpp][line:50][dbg_print_addr_reg] bus: 0x0 dev: 0x2 fn: 0x0 off: 0x0 
+[../common/pci/pci.cpp][line:41][dbg_print_hdr] helper string: Display Controller | VGA Compatible Controller 
+[../common/pci/pci.cpp][line:42][dbg_print_hdr] vendor_id: 0x80ee device_id: 0xbeef
+[../common/pci/pci.cpp][line:43][dbg_print_hdr] command: 00000000'00000000'00000000'00000011 status: 00000000'00000000'00000000'00000000
+[../common/pci/pci.cpp][line:44][dbg_print_hdr] rev_id: 0x0 prog_if: 0x0 subclass: 0x0 class_code: 0x3
+[../common/pci/pci.cpp][line:46][dbg_print_hdr] hdr_type: 0x0
+[../common/pci/pci.cpp][line:70][scan_buses] Found dev:
+[../common/pci/pci.cpp][line:50][dbg_print_addr_reg] bus: 0x0 dev: 0x4 fn: 0x0 off: 0x0 
+[../common/pci/pci.cpp][line:41][dbg_print_hdr] helper string: Base System Peripheral | Other
+[../common/pci/pci.cpp][line:42][dbg_print_hdr] vendor_id: 0x80ee device_id: 0xcafe
+[../common/pci/pci.cpp][line:43][dbg_print_hdr] command: 00000000'00000000'00000000'00000011 status: 00000000'00000000'00000000'00000000
+[../common/pci/pci.cpp][line:44][dbg_print_hdr] rev_id: 0x0 prog_if: 0x0 subclass: 0x80 class_code: 0x8
+[../common/pci/pci.cpp][line:46][dbg_print_hdr] hdr_type: 0x0
+[../common/pci/pci.cpp][line:70][scan_buses] Found dev:
+[../common/pci/pci.cpp][line:50][dbg_print_addr_reg] bus: 0x0 dev: 0x5 fn: 0x0 off: 0x0 
+[../common/pci/pci.cpp][line:41][dbg_print_hdr] helper string: Multimedia Controller | Multimedia Audio Controller 
+[../common/pci/pci.cpp][line:42][dbg_print_hdr] vendor_id: 0x8086 device_id: 0x2415
+[../common/pci/pci.cpp][line:43][dbg_print_hdr] command: 00000000'00000000'00000000'00000001 status: 00000000'00000000'00000010'10000000
+[../common/pci/pci.cpp][line:44][dbg_print_hdr] rev_id: 0x1 prog_if: 0x0 subclass: 0x1 class_code: 0x4
+[../common/pci/pci.cpp][line:46][dbg_print_hdr] hdr_type: 0x0
+[../common/pci/pci.cpp][line:70][scan_buses] Found dev:
+[../common/pci/pci.cpp][line:50][dbg_print_addr_reg] bus: 0x0 dev: 0x7 fn: 0x0 off: 0x0 
+[../common/pci/pci.cpp][line:41][dbg_print_hdr] helper string: Bridge Device | Other
+[../common/pci/pci.cpp][line:42][dbg_print_hdr] vendor_id: 0x8086 device_id: 0x7113
+[../common/pci/pci.cpp][line:43][dbg_print_hdr] command: 00000000'00000000'00000000'00000001 status: 00000000'00000000'00000010'10000000
+[../common/pci/pci.cpp][line:44][dbg_print_hdr] rev_id: 0x8 prog_if: 0x0 subclass: 0x80 class_code: 0x6
+[../common/pci/pci.cpp][line:46][dbg_print_hdr] hdr_type: 0x80
+[../common/pci/pci.cpp][line:70][scan_buses] Found dev:
+[../common/pci/pci.cpp][line:50][dbg_print_addr_reg] bus: 0x0 dev: 0xd fn: 0x0 off: 0x0 
+[../common/pci/pci.cpp][line:41][dbg_print_hdr] helper string: Mass Storage Controller | Serial ATA 
+[../common/pci/pci.cpp][line:42][dbg_print_hdr] vendor_id: 0x8086 device_id: 0x2829
+[../common/pci/pci.cpp][line:43][dbg_print_hdr] command: 00000000'00000000'00000000'00000111 status: 00000000'00000000'00000000'00010000
+[../common/pci/pci.cpp][line:44][dbg_print_hdr] rev_id: 0x2 prog_if: 0x1 subclass: 0x6 class_code: 0x1
+[../common/pci/pci.cpp][line:46][dbg_print_hdr] hdr_type: 0x0
+[../common/ata/ata_driver.cpp][line:146][sendIdentify] floating, no device here, 0xff
+[stage_2/boot_reader.h][line:19][init] Identify Failed
+[boot2.cpp][line:95][boot2] can't init boot driver
+[boot2.cpp][line:84][boot2]  <--

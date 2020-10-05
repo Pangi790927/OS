@@ -92,8 +92,8 @@ bool ata::lba28PIORead (void *address, uint32_t lba, uint8_t sectorCount,
 
 	for (int i = 0; i < sectorCount; i++) {
 		waitBSY();
-		for (int i = 0; i < 3; i++)
-			inb(PRIMARY_COMMAND);
+		// for (int i = 0; i < 3; i++)
+		// 	inb(PRIMARY_COMMAND);
 		if (!waitDSQ())
 			return false;
 
@@ -125,8 +125,8 @@ bool ata::lba48PIORead (void *address, uint64_t lba, uint16_t sectorCount,
 
 	for (int i = 0; i < sectorCount; i++) {
 		waitBSY();
-		for (int i = 0; i < 3; i++)
-			inb(PRIMARY_COMMAND);
+		// for (int i = 0; i < 3; i++)
+		// 	inb(PRIMARY_COMMAND);
 		if (!waitDSQ())
 			return false;
 
@@ -142,13 +142,15 @@ bool ata::sendIdentify (uint8_t device, bool &lba28, bool printData,
 		uint32_t &lba_cnt)
 {
 	// floating, no device here 
-	if (inb(PRIMARY_PORT | STATUS) == 0xff)
+	if (inb(PRIMARY_PORT | STATUS) == 0xff) {
+		DBG("floating, no device here, 0xff")
 		return false;
+	}
 
 	outb(PRIMARY_PORT | DEVICE, (device << 4) | DEVICE_DEFAULT);
 
-	for (int i = 0; i < 3; i++)
-		inb(PRIMARY_COMMAND);
+	// for (int i = 0; i < 3; i++)
+	// 	inb(PRIMARY_COMMAND);
 
 	// we must wait for the bussy to clear
 	while (inb(PRIMARY_PORT | STATUS) & 0x80)
@@ -162,16 +164,23 @@ bool ata::sendIdentify (uint8_t device, bool &lba28, bool printData,
 	outb(PRIMARY_PORT | COMMAND, IDENTIFY_COMMAND);
 
 	// drive does not exist
-	if (inb(PRIMARY_PORT | STATUS) == 0)
+	int ret;
+	if ((ret = inb(PRIMARY_PORT | STATUS)) == 0) {
+		DBG("drive does not exist: %d", ret);
 		return false;
+	}
 
 	waitBSY();
 
-	if (inb(PRIMARY_PORT | LBA_MI) != 0 || inb(PRIMARY_PORT | LBA_HI) != 0)
+	if (inb(PRIMARY_PORT | LBA_MI) != 0 || inb(PRIMARY_PORT | LBA_HI) != 0) {
+		DBG("LBA_MI or LBA_HI != 0")
 		return false;
+	}
 
-	if (!waitDSQ())
+	if (!waitDSQ()) {
+		DBG("waitDSQ false")
 		return false;
+	}
 
 	uint16_t res[256] = {0};
 

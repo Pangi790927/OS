@@ -1,11 +1,11 @@
 {
-	"mbr_boot" : {"src_path": "mbr.bin"},
+	"mbr_boot" : {"src_path": "../mbrboot.bin"},
 	"boot1": {
-		"src_path": "boot1.bin",
+		"src_path": "../boot1.bin",
 		"dst_path": "boot1.bin"
 	},
 	"boot2": {
-		"src_path": "boot2.bin",
+		"src_path": "../boot2.bin",
 		"dst_path": "boot2.bin"
 	},
 	"bootconf": {

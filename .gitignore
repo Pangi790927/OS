@@ -5,3 +5,6 @@ os_image
 *.bin
 *.elf
 *.img
+*.vhd
+*.vdi
+*.vmdk

@@ -22,38 +22,38 @@ diskformat.elf: main.cpp makefile
 test_ext2.elf: test_ext2.cpp makefile
 	g++-9 $(CXX_FLAGS) -MMD -MP test_ext2.cpp $(INCLUDES) -o test_ext2.elf
 
-test128K: example128K.img diskformat.elf test_ext2.elf
-	./diskformat.elf example128K.img boot_example/dev_layout.json 
-	sudo python testfs.py example128K.img
-	./test_ext2.elf example128K.img 34
-	xxd ../../bootloader/boot1.bin > b1.hex
+test128K: boot_example/example128K.img diskformat.elf test_ext2.elf
+	./diskformat.elf boot_example/example128K.img boot_example/dev_layout.json 
+	sudo python testfs.py boot_example/example128K.img
+	./test_ext2.elf boot_example/example128K.img 34
+	xxd boot_example/boot1.bin > b1.hex
 	xxd boot1.bin > b2.hex
 	-diff b1.hex b2.hex
 	rm b1.hex b2.hex
 
-test2M: example2M.img diskformat.elf test_ext2.elf
-	./diskformat.elf example2M.img boot_example/dev_layout.json 
-	sudo python testfs.py example2M.img
-	./test_ext2.elf example2M.img 34
-	xxd ../../bootloader/boot1.bin > b1.hex
+test2M: boot_example/example2M.img diskformat.elf test_ext2.elf
+	./diskformat.elf boot_example/example2M.img boot_example/dev_layout.json 
+	sudo python testfs.py boot_example/example2M.img
+	./test_ext2.elf boot_example/example2M.img 34
+	xxd boot_example/boot1.bin > b1.hex
 	xxd boot1.bin > b2.hex
 	-diff b1.hex b2.hex
 	rm b1.hex b2.hex
 
-test20M: example20M.img diskformat.elf test_ext2.elf
-	./diskformat.elf example20M.img boot_example/dev_layout.json 
-	sudo python testfs.py example20M.img
-	./test_ext2.elf example20M.img 34
-	xxd ../../bootloader/boot1.bin > b1.hex
+test20M: boot_example/example20M.img diskformat.elf test_ext2.elf
+	./diskformat.elf boot_example/example20M.img boot_example/dev_layout.json 
+	sudo python testfs.py boot_example/example20M.img
+	./test_ext2.elf boot_example/example20M.img 34
+	xxd boot_example/boot1.bin > b1.hex
 	xxd boot1.bin > b2.hex
 	-diff b1.hex b2.hex
 	rm b1.hex b2.hex
 
-test200M: example200M.img diskformat.elf test_ext2.elf
-	./diskformat.elf example200M.img boot_example/dev_layout.json 
-	sudo python testfs.py example200M.img
-	./test_ext2.elf example200M.img 34
-	xxd ../../bootloader/boot1.bin > b1.hex
+test200M: boot_example/example200M.img diskformat.elf test_ext2.elf
+	./diskformat.elf boot_example/example200M.img boot_example/dev_layout.json 
+	sudo python testfs.py boot_example/example200M.img
+	./test_ext2.elf boot_example/example200M.img 34
+	xxd boot_example/boot1.bin > b1.hex
 	xxd boot1.bin > b2.hex
 	-diff b1.hex b2.hex
 	rm b1.hex b2.hex
@@ -79,33 +79,36 @@ test_ext2: test_ext2.elf
 	@./test_ext2.elf floppy.img
 	@echo "--------------------------- DONE -----------------------------------"
 
-example128K.img:
-	dd if=/dev/zero of=example128K.img bs=1k count=128
+base_example:
+	dd if=/dev/urandom of=boot_example/mbr.bin bs=1b count=512
+	dd if=/dev/urandom of=boot_example/boot1.bin bs=1k count=16
+	dd if=/dev/urandom of=boot_example/boot2.bin bs=1k count=16
+	dd if=/dev/urandom of=boot_example/stage1.bin bs=1k count=16
+	dd if=/dev/urandom of=boot_example/stage2.bin bs=1k count=16
 
-example2M.img:
-	dd if=/dev/zero of=example2M.img bs=1M count=2
+boot_example/example128K.img: base_example
+	dd if=/dev/zero of=boot_example/example128K.img bs=1k count=128
 
-example20M.img:
-	dd if=/dev/zero of=example20M.img bs=1M count=20
+boot_example/example2M.img: base_example
+	dd if=/dev/zero of=boot_example/example2M.img bs=1M count=2
 
-example200M.img:
-	dd if=/dev/zero of=example200M.img bs=1M count=200
+boot_example/example20M.img: base_example
+	dd if=/dev/zero of=boot_example/example20M.img bs=1M count=20
 
-vbox_example2M:
-	dd conv=notrunc if=example2M.img of=example200M.vhd bs=1M count=200
-
-vbox_example_storage:
-	dd if=/dev/zero of=temp_hdd.img bs=1M count=200
-	VBoxManage convertfromraw --format vhd --variant Fixed\
-		temp_hdd.img example200M.vhd
-	rm -f temp_hdd.img
+boot_example/example200M.img: base_example
+	dd if=/dev/zero of=boot_example/example200M.img bs=1M count=200
 
 clean:
 	rm -f test_ext2.d
 	rm -f test_ext2.elf
 	rm -f diskformat.d
 	rm -f diskformat.elf
-	rm -f example128K.img
-	rm -f example2M.img
-	rm -f example20M.img
-	rm -f example200M.img
+	rm -f boot_example/example128K.img
+	rm -f boot_example/example2M.img
+	rm -f boot_example/example20M.img
+	rm -f boot_example/example200M.img
+	rm -f boot_example/mbr.bin
+	rm -f boot_example/boot1.bin
+	rm -f boot_example/boot2.bin
+	rm -f boot_example/stage1.bin
+	rm -f boot_example/stage2.bin

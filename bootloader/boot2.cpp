@@ -10,6 +10,7 @@
 // TO DO: rename dev.h
 #include "ext2.h"
 #include "boot_reader.h"
+#include "pci.h"
 
 mbr_post_t *mbr = (mbr_post_t *)0x7c00;
 gpt_hdr_t *gpt_hdr = (gpt_hdr_t *)EXT2_GPT_HDR_START;
@@ -78,14 +79,16 @@ static int read_gpt(BootReader &boot_rodev) {
 extern "C" int boot2()
 {
 	intern_putchar = &no_putchar;
+	serial::init();
 	serial::sendstr("========= Entering protected mode =========\n\r");
+	DBGSCOPE();
 
 	// no need to re-init serial
-	// serial::init();
 	vesa::init((void *)VESA_PUTCHAR_BUFF_START, (void *)VESA_PUTCHAR_FONT_START,
 			mbr->vesa_display);
 	intern_putchar = &vesa::putchar;
-	DBGSCOPE();
+
+	pci::scan_buses();
 
 	BootReader boot_rodev;
 	if (boot_rodev.init() != 0) {
@@ -98,13 +101,12 @@ extern "C" int boot2()
 		return -1;
 	}
 
-while (true)
-		asm volatile ("nop");
 	ExtDev ext_dev(boot_rodev.get_if(), gpt_part_cache->first_lba,
 			boot_rodev.lba_cnt - gpt_part_cache->first_lba,
 			cache, cache_size);
 	Ext2 ext2(ext_dev, ext_dev.sect_cnt / (BLK_SIZE / LBA_SZ),
 			gpt_part_cache->first_lba);
+
 	if (ext2.init() != 0){
 		DBG("Can't init ext2");
 		return -1;
@@ -133,9 +135,6 @@ while (true)
 	}
 
 	DBG("boot.conf:\n%s", conf);
-
-	for (int i = 0; i < 100; i++)
-		DBG("printing i: %d", i);
 
 	ext2.uninit();
 

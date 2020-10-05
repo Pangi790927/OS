@@ -12,11 +12,15 @@
 
 namespace fs = std::filesystem;
 
+/* every path you find in the dev config file is relative to the location of
+the config file */
 struct DevLayout {
 	nlohmann::json jconf;
-	std::string confpath;
+	fs::path confpath;
+	fs::path confdir;
 
 	DevLayout(std::string confpath) : confpath(confpath) {
+		confdir = fs::absolute(this->confpath.parent_path());
 		std::ifstream file(confpath.c_str());
 		if (!file.good()) {
 			EXCEPTION("Couldn't open file: %s\n", confpath.c_str());
@@ -39,14 +43,18 @@ struct DevLayout {
 	std::string path(std::string src_dst, std::string opt_name) {
 		if (jconf.find(opt_name) == jconf.end())
 			EXCEPTION("Path not found: %s", opt_name.c_str());
-		fs::path p1 = confpath;
 		if (src_dst == "src_path")
-			return p1.parent_path().string() + "/" +
-					jconf[opt_name][src_dst].get<std::string>();
+			return rel_to_conf(jconf[opt_name][src_dst].get<std::string>());
 		else if (src_dst == "dst_path")
 			return jconf[opt_name][src_dst].get<std::string>();
 		else
 			return "";
+	}
+
+	fs::path rel_to_conf(fs::path p) {
+		if (p.is_absolute())
+			return p;
+		return fs::canonical(confdir / p);
 	}
 };
 

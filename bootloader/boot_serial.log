@@ -1,7 +1,7 @@
 [boot1.cpp][line:235][boot1]  -->
 [boot1.cpp][line:236][boot1] Starting boot1
 [boot1.cpp][line:116][init_ramsize]  -->
-[boot1.cpp][line:118][init_ramsize] RAM size: kb: 15360 + 64kb: 1792
+[boot1.cpp][line:118][init_ramsize] RAM size: kb: 15360 + 64kb: 1790
 [boot1.cpp][line:116][init_ramsize]  <--
 [boot1.cpp][line:122][init_mbr]  -->
 [boot1.cpp][line:127][init_mbr] part0
@@ -17,35 +17,39 @@ field: [0x0], start_lo [0], start_hi: [0], len_lo [0], len_hi[0], sys_id[0]
 [boot1.cpp][line:48][find_vesa_mode]  -->
 [boot1.cpp][line:51][find_vesa_mode] vesa info ptr: 0x78ea
 [boot1.cpp][line:55][find_vesa_mode] vesa sig: VESA
-[boot1.cpp][line:57][find_vesa_mode] vesa version: 0x200
-[boot1.cpp][line:58][find_vesa_mode] oem str ptr: 0xc7c5e
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x100, [640X400] bpp: 8 pitch 640 base: 0xe0000000
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x101, [640X480] bpp: 8 pitch 640 base: 0xe0000000
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x1f] 0x102, [800X600] bpp: 4 pitch 100 base: 0xe0000000
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x103, [800X600] bpp: 8 pitch 800 base: 0xe0000000
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x1f] 0x104, [1024X768] bpp: 4 pitch 128 base: 0xe0000000
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x105, [1024X768] bpp: 8 pitch 1024 base: 0xe0000000
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x1f] 0x106, [1280X1024] bpp: 4 pitch 160 base: 0xe0000000
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x107, [1280X1024] bpp: 8 pitch 1280 base: 0xe0000000
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x10d, [320X200] bpp: 15 pitch 640 base: 0xe0000000
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x10e, [320X200] bpp: 16 pitch 640 base: 0xe0000000
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x10f, [320X200] bpp: 24 pitch 960 base: 0xe0000000
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x110, [640X480] bpp: 15 pitch 1280 base: 0xe0000000
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x111, [640X480] bpp: 16 pitch 1280 base: 0xe0000000
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x112, [640X480] bpp: 24 pitch 1920 base: 0xe0000000
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x113, [800X600] bpp: 15 pitch 1600 base: 0xe0000000
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x114, [800X600] bpp: 16 pitch 1600 base: 0xe0000000
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x115, [800X600] bpp: 24 pitch 2400 base: 0xe0000000
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x116, [1024X768] bpp: 15 pitch 2048 base: 0xe0000000
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x117, [1024X768] bpp: 16 pitch 2048 base: 0xe0000000
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x118, [1024X768] bpp: 24 pitch 3072 base: 0xe0000000
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x119, [1280X1024] bpp: 15 pitch 2560 base: 0xe0000000
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x11a, [1280X1024] bpp: 16 pitch 2560 base: 0xe0000000
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x11b, [1280X1024] bpp: 24 pitch 3840 base: 0xe0000000
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x140, [320X200] bpp: 32 pitch 1280 base: 0xe0000000
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x141, [640X400] bpp: 32 pitch 2560 base: 0xe0000000
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x142, [640X480] bpp: 32 pitch 2560 base: 0xe0000000
-[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x9b] 0x143, [800X600] bpp: 32 pitch 3200 base: 0xe0000000
+[boot1.cpp][line:57][find_vesa_mode] vesa version: 0x300
+[boot1.cpp][line:58][find_vesa_mode] oem str ptr: 0xc57d8
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x100, [640X400] bpp: 8 pitch 640 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x101, [640X480] bpp: 8 pitch 640 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x3b] 0x102, [800X600] bpp: 4 pitch 100 base: 0x0
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x103, [800X600] bpp: 8 pitch 800 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x3b] 0x104, [1024X768] bpp: 4 pitch 128 base: 0x0
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x105, [1024X768] bpp: 8 pitch 1024 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0x3b] 0x106, [1280X1024] bpp: 4 pitch 160 base: 0x0
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x107, [1280X1024] bpp: 8 pitch 1280 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x10d, [320X200] bpp: 15 pitch 640 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x10e, [320X200] bpp: 16 pitch 640 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x10f, [320X200] bpp: 24 pitch 960 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x110, [640X480] bpp: 15 pitch 1280 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x111, [640X480] bpp: 16 pitch 1280 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x112, [640X480] bpp: 24 pitch 1920 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x113, [800X600] bpp: 15 pitch 1600 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x114, [800X600] bpp: 16 pitch 1600 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x115, [800X600] bpp: 24 pitch 2400 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x116, [1024X768] bpp: 15 pitch 2048 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x117, [1024X768] bpp: 16 pitch 2048 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x118, [1024X768] bpp: 24 pitch 3072 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x119, [1280X1024] bpp: 15 pitch 2560 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x11a, [1280X1024] bpp: 16 pitch 2560 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x11b, [1280X1024] bpp: 24 pitch 3840 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x11c, [1600X1200] bpp: 8 pitch 1600 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x11d, [1600X1200] bpp: 15 pitch 3200 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x11e, [1600X1200] bpp: 16 pitch 3200 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x11f, [1600X1200] bpp: 24 pitch 4800 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x140, [320X200] bpp: 32 pitch 1280 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x141, [640X400] bpp: 32 pitch 2560 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x142, [640X480] bpp: 32 pitch 2560 base: 0xfd000000
+[boot1.cpp][line:77][find_vesa_mode] vesa mode: attr[0xbb] 0x143, [800X600] bpp: 32 pitch 3200 base: 0xfd000000
 [boot1.cpp][line:96][find_vesa_mode] selected mode: 0x143
 [boot1.cpp][line:48][find_vesa_mode]  <--
 [boot1.cpp][line:141][load_stage2]  -->
@@ -66,7 +70,7 @@ field: [0x0], start_lo [0], start_hi: [0], len_lo [0], len_hi[0], sys_id[0]
 [boot1.cpp][line:226][load_stage2] code sel: 0x8, data sel 0x10
 [boot1.cpp][line:227][load_stage2] &load_prot_mode: 0xa338
 ======== Will enter protected mode ========
-boot2-addr: 0x19130
+boot2-addr: 0x19150
 entry-addr: 0x17e00
 eax: 0x11
 ebx: 0x8
@@ -81,7 +85,61 @@ cr2: 0x0
 cr3: 0x0
 cr4: 0x0
 ========= Entering protected mode =========
-[boot2.cpp][line:88][boot2]  -->
-[stage_2/boot_reader.h][line:19][init] Identify Failed
-[boot2.cpp][line:92][boot2] can't init boot driver
-[boot2.cpp][line:88][boot2]  <--
+[boot2.cpp][line:82][boot2]  -->
+[boot2.cpp][line:91][boot2] I will print i: 0
+[boot2.cpp][line:91][boot2] I will print i: 1
+[boot2.cpp][line:91][boot2] I will print i: 2
+[boot2.cpp][line:91][boot2] I will print i: 3
+[boot2.cpp][line:91][boot2] I will print i: 4
+[boot2.cpp][line:91][boot2] I will print i: 5
+[boot2.cpp][line:91][boot2] I will print i: 6
+[boot2.cpp][line:91][boot2] I will print i: 7
+[boot2.cpp][line:91][boot2] I will print i: 8
+[boot2.cpp][line:91][boot2] I will print i: 9
+[boot2.cpp][line:91][boot2] I will print i: 10
+[boot2.cpp][line:91][boot2] I will print i: 11
+[boot2.cpp][line:91][boot2] I will print i: 12
+[boot2.cpp][line:91][boot2] I will print i: 13
+[boot2.cpp][line:91][boot2] I will print i: 14
+[boot2.cpp][line:91][boot2] I will print i: 15
+[boot2.cpp][line:91][boot2] I will print i: 16
+[boot2.cpp][line:91][boot2] I will print i: 17
+[boot2.cpp][line:91][boot2] I will print i: 18
+[boot2.cpp][line:91][boot2] I will print i: 19
+[boot2.cpp][line:91][boot2] I will print i: 20
+[boot2.cpp][line:91][boot2] I will print i: 21
+[boot2.cpp][line:91][boot2] I will print i: 22
+[boot2.cpp][line:91][boot2] I will print i: 23
+[boot2.cpp][line:91][boot2] I will print i: 24
+[boot2.cpp][line:91][boot2] I will print i: 25
+[boot2.cpp][line:91][boot2] I will print i: 26
+[boot2.cpp][line:91][boot2] I will print i: 27
+[boot2.cpp][line:91][boot2] I will print i: 28
+[boot2.cpp][line:91][boot2] I will print i: 29
+[boot2.cpp][line:91][boot2] I will print i: 30
+[boot2.cpp][line:91][boot2] I will print i: 31
+[boot2.cpp][line:91][boot2] I will print i: 32
+[boot2.cpp][line:91][boot2] I will print i: 33
+[boot2.cpp][line:91][boot2] I will print i: 34
+[boot2.cpp][line:91][boot2] I will print i: 35
+[boot2.cpp][line:91][boot2] I will print i: 36
+[boot2.cpp][line:91][boot2] I will print i: 37
+[boot2.cpp][line:91][boot2] I will print i: 38
+[boot2.cpp][line:91][boot2] I will print i: 39
+[boot2.cpp][line:91][boot2] I will print i: 40
+[boot2.cpp][line:91][boot2] I will print i: 41
+[boot2.cpp][line:91][boot2] I will print i: 42
+[boot2.cpp][line:91][boot2] I will print i: 43
+[boot2.cpp][line:91][boot2] I will print i: 44
+[boot2.cpp][line:91][boot2] I will print i: 45
+[boot2.cpp][line:91][boot2] I will print i: 46
+[boot2.cpp][line:91][boot2] I will print i: 47
+[boot2.cpp][line:91][boot2] I will print i: 48
+[boot2.cpp][line:91][boot2] I will print i: 49
+[boot2.cpp][line:91][boot2] I will print i: 50
+[boot2.cpp][line:91][boot2] I will print i: 51
+[boot2.cpp][line:91][boot2] I will print i: 52
+[boot2.cpp][line:91][boot2] I will print i: 53
+[boot2.cpp][line:91][boot2] I will print i: 54
+[boot2.cpp][line:91][boot2] I will print i: 55
+[boot2.cpp][line:91][boot2] I will print i: 56
