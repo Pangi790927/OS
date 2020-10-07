@@ -8,3 +8,8 @@ os_image
 *.vhd
 *.vdi
 *.vmdk
+cross_compiler/gcc
+cross_compiler/binutils
+cross_compiler/build-binutils
+cross_compiler/build-gcc
+cross_compiler/cross*
