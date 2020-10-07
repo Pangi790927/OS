@@ -221,12 +221,15 @@ cont_err:	db "error_exit", 0xd, 0xa, 0x0
 times 400-($-$$) db 0
 ; mbr_opts (40 bytes max)
 boot_drive:		db 0
+boot_uid:		dd 0xffbadadd
 boot1_addr:		dw 0x7E00
 boot2_addr:		dd 0x17E00
 boot1_lba:		dw 1
 boot1_cnt:		dw 127
+boot1_crc:		dd 0
 boot2_lba:		dw 128
 boot2_cnt:		dw 512
+boot2_crc:		dd 0
 conf_lba:		dw 640
 conf_cnt:		dw 1
 

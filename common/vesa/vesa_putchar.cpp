@@ -1,11 +1,9 @@
 #include "vesa_putchar.h"
 #include "char_pixel_font.h"
 #include "mem_mappings.h"
+#include "dbg.h"
 
 namespace vesa {
-
-using buff_t = char [84][214];
-using font_t = uint32_t[96][9 * 14];
 
 static bool was_init = 0;
 static int row = 0;
@@ -51,6 +49,8 @@ void init(void *buff_mem, void *font_mem, const vesa_display_t& _mode) {
 	if (was_init)
 		return ;
 	mode = _mode;
+	DBG("Init vesa: WxH: %dx%d, bpp %d, pitch: %d",
+			mode.width, mode.height, mode.bpp, mode.pitch);
 	was_init = true;
 	char_x = 9;
 	char_y = 14;

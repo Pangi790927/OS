@@ -3,6 +3,52 @@
 ; DISK FUNCTIONS
 ; =============================================================================
 
+; $1 - drive		+ 8
+; $2 - addr off		+ 12
+; $3 - addr seg		+ 16
+[global get_boot_dev]
+get_boot_dev:
+	push ebp
+	mov ebp, esp
+	pusha
+		mov ah, 0x41 
+		mov bx, 0x55aa
+		mov dl, [ebp + 8]
+		int 0x13
+		jc .err_ext
+
+		cmp ah, 0x30
+		jnz .err_ext
+
+		mov si, [ebp + 12]
+		mov ax, [ebp + 16]
+		mov ds, ax
+
+		mov ah, 0x48
+		mov dl, [ebp + 8]
+		int 0x13
+		jc .err_get_info
+
+		mov word [err_code], 0
+		jmp .done
+		.err_get_info:
+			mov esi, get_info_error
+			call intern_print
+			mov byte [err_code], 1
+			mov byte [err_code + 1], ah
+			jmp .done
+		.err_ext:
+			mov esi, ext_error
+			call intern_print
+			mov byte [err_code], 2
+			mov byte [err_code + 1], ah
+			jmp .done
+		.done:
+	popa
+	mov eax, [err_code]
+	pop ebp
+	ret
+
 ; $1 - addr off		+ 8
 ; $2 - addr seg		+ 12
 ; $3 - lba_lo0		+ 16
@@ -17,7 +63,6 @@ disk_read:
 		mov ah, 0x41 
 		mov bx, 0x55aa
 		mov dl, [ebp + 24]
-		or dl, 0x80
 		int 0x13
 		jc .err_ext
 
@@ -43,12 +88,14 @@ disk_read:
 		.err_load:
 			mov esi, load_error
 			call intern_print
-			mov word [err_code], 1
+			mov byte [err_code], 1
+			mov byte [err_code + 1], ah
 			jmp .done
 		.err_ext:
 			mov esi, ext_error
 			call intern_print
-			mov word [err_code], 2
+			mov byte [err_code], 2
+			mov byte [err_code + 1], ah
 			jmp .done
 		.done:
 	popa
@@ -305,6 +352,7 @@ digits: db '0123456789abcdef'
 ; strings:
 ext_error: db "Does not have bios load extension", 0xd, 0xa, 0
 load_error: db "Failed to load from disk", 0xd, 0xa, 0
+get_info_error: db "Failed to get disk info", 0xd, 0xa, 0
 ram_error: db "Failed to read ram size", 0xd, 0xa, 0
 entry_prot: db "======== Will enter protected mode ========", 0xd, 0xa, 0
 hex_prefix: db "0x", 0

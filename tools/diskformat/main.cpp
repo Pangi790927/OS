@@ -36,8 +36,10 @@ char dev_cache[LBA_SZ * 64];
 uint32_t cache_size = sizeof(dev_cache);
 uint16_t boot1_lba = 0;
 uint16_t boot1_cnt = 0;
+uint32_t boot1_crc = 0;
 uint16_t boot2_lba = 0;
 uint16_t boot2_cnt = 0;
+uint32_t boot2_crc = 0;
 uint16_t conf_lba = 0;
 uint16_t conf_cnt = 0;
 
@@ -69,9 +71,11 @@ void install_mbr(FileProvDev &file_dev, DevLayout &layout) {
 	mbr.opts.boot1_lba = boot1_lba;
 	mbr.opts.boot1_cnt = boot1_cnt;
 	mbr.opts.boot1_addr = 0x7e00;
+	mbr.opts.boot1_crc = boot1_crc;
 	mbr.opts.boot2_lba = boot2_lba;
 	mbr.opts.boot2_cnt = boot2_cnt;
 	mbr.opts.boot2_addr = 0x17e00;
+	mbr.opts.boot2_crc = boot2_crc;
 	mbr.opts.conf_lba = conf_lba;
 	mbr.opts.conf_cnt = conf_cnt;
 
@@ -153,7 +157,7 @@ void install_gpt(FileProvDev &file_dev, DevLayout &layout) {
 }
 
 static int install_boot_n(Ext2 &ext2, DevLayout &layout, FileProvDev &file_dev,
-		int num, uint16_t &bootn_lba, uint16_t &bootn_cnt)
+		int num, uint16_t &bootn_lba, uint16_t &bootn_cnt, uint32_t &bootn_crc)
 {
 	int bootn_ino = ext2.inodes.create(EXT2_S_IFREG | EXT2_S_RMASK, 0, 0);
 	if (bootn_ino <= 0) {
@@ -173,6 +177,7 @@ static int install_boot_n(Ext2 &ext2, DevLayout &layout, FileProvDev &file_dev,
 		bootn_code.resize(roundup(bootn_code.size(), LBA_SZ), 0);
 	printf("boot%d padded size: %ld\n", num, bootn_code.size());
 
+	bootn_crc = crc32((char *)&bootn_code[0], bootn_code.size());
 	if (ext2.inodes.write_imutable(bootn_ino, (char *)&bootn_code[0],
 			bootn_code.size()))
 	{
@@ -245,12 +250,16 @@ static int install_boot_n(Ext2 &ext2, DevLayout &layout, FileProvDev &file_dev,
 }
 
 int install_boot(Ext2 &ext2, DevLayout &layout, FileProvDev &file_dev) {
-	if (install_boot_n(ext2, layout, file_dev, 1, boot1_lba, boot1_cnt) != 0) {
+	if (install_boot_n(ext2, layout, file_dev, 1, boot1_lba, boot1_cnt,
+			boot1_crc) != 0)
+	{
 		printf("couldn't install first stage of bootloader\n");
 		return -1;
 	}
 
-	if (install_boot_n(ext2, layout, file_dev, 2, boot2_lba, boot2_cnt) != 0) {
+	if (install_boot_n(ext2, layout, file_dev, 2, boot2_lba, boot2_cnt,
+			boot2_crc) != 0)
+	{
 		printf("couldn't install second stage of bootloader\n");
 		return -1;
 	}

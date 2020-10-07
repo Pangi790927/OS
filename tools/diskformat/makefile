@@ -2,7 +2,14 @@
 # gsettings set org.gnome.desktop.media-handling automount-open false
 
 CXX_FLAGS = -g -std=c++17 -rdynamic -lz -lstdc++fs
-INCLUDES = -I../../common -I../../ext2fs -I.
+# INCLUDES = -I../../common -I../../ext2fs -I.
+
+DIRS := ../../common ../../ext2fs .
+DIRS := $(foreach dir, $(DIRS), \
+		$(shell find $(dir) -type d -print))
+
+INCLUDES := $(patsubst %, -I%/, $(DIRS))
+
 FS_OPTS = ^sparse_super,^large_file,^filetype,^resize_inode,^dir_index,^ext_attr
 
 all: diskformat.elf

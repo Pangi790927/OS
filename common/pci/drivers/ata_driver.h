@@ -2,12 +2,40 @@
 #define ATA_DRIVER_H
 
 #include "types.h"
+#include "pci.h"
+// #include "interfaces.h"
 
-// we will asume the ports:
-// Primary 0x1F0, 0x3F6
-// Secondary 0x170, 0x376
-// next_1 0x1E8, 0x3E6
-// next_2 0x168, 0x366
+/* creates a new pci device to be added in the pci queue */
+// pci::pci_dev_t *create_pci_dev(void *(*alloc)(size_t));
+
+struct ata_driver_t : public drv_if, public pcidrv_if {
+	dev_mgr_if *idev_mgr;
+
+	ata_driver_t(dev_mgr_if *idev_mgr) : idev_mgr(idev_mgr) {}
+
+	virtual void *get_if(int if_num) {
+		if (if_num == dev_if::n)
+			return (dev_if *)this;
+		if (if_num == pcidrv_if::n)
+			return (pcidrv_if *)this;
+		return NULL;
+	}
+
+	virtual int pci_init(void *reg, int bus, int dev, int fn) {
+		auto _reg = (pci::config_reg_t *)reg;
+		(void)_reg;
+		(void)bus;
+		(void)dev;
+		(void)fn;
+		/* TO DO: implement
+		it should work like this: this driver is initialized with a pointer to
+		dev_mgr and it is registered as a driver not as a device into dev_mgr.
+		*/
+		return 0;
+	}
+};
+
+
 namespace ata
 {
 	const uint16_t PRIMARY_PORT = 0x1F0;

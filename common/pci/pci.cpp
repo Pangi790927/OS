@@ -1,9 +1,16 @@
 #include "pci.h"
 #include "ioports.h"
 #include "dbg.h"
+#include "stdlib.h"
 
 namespace pci
 {
+	static dev_mgr_if *_idev_mgr;
+
+	void init(dev_mgr_if *idev_mgr) {
+		_idev_mgr = idev_mgr;
+	}
+
 	uint32_t read_reg(addr_reg_t addr) {
 		outl(PCI_CONFIG_ADDR, addr);
 		return inl(PCI_CONFIG_DATA);
@@ -66,11 +73,46 @@ namespace pci
 				for (int fn_num = 0; fn_num < fn_num_max; fn_num++) {
 					addr.fn_num = fn_num;
 					read_conf_hdr(addr, &hdr);
-					if (hdr.vendor_id != 0xffff) {
-						DBG("Found dev:");
-						dbg_print_addr_reg(&addr);
-						dbg_print_hdr(&hdr);
+
+					if (hdr.vendor_id == 0xffff)
+						continue ;
+
+					DBG("Found dev:");
+					dbg_print_addr_reg(&addr);
+					dbg_print_hdr(&hdr);
+
+					drv_if *drv = NULL;
+					do {
+						pci_class_match_t class_match;
+						class_match.class_code = hdr.class_code;
+						class_match.subclass = hdr.subclass;
+						drv = _idev_mgr->find_driver(&class_match);
+						if (drv)
+							break;
+						pci_vendor_match_t vendor_match;
+						vendor_match.vendor_id = hdr.vendor_id;
+						vendor_match.device_id = hdr.device_id;
+						drv = _idev_mgr->find_driver(&vendor_match);
+					} while (0);
+
+					if (!drv) {
+						DBG("Couldn't find driver for device");
+						continue ;
 					}
+					auto pci_dev = (pcidrv_if *)drv->get_if(pcidrv_if::n);
+					if (!pci_dev) {
+						DBG("Couldn't get pci interface for driver");
+						continue ;
+					}
+					config_reg_t reg;
+					read_conf_reg(addr, &reg);
+
+					/* long way here, but we actualy don't really
+					care too much if init failed or not inside scan
+					because we will not do anything about it either way 
+					and in case it succeded, dev_mgr will be notified */
+					if (pci_dev->pci_init(&reg, bus_num, dev_num, fn_num) != 0)
+						DBG("Couldn't init driver for pci device");
 				}
 			}
 		}

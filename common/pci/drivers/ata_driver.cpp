@@ -3,6 +3,35 @@
 #include "ioports.h"
 #include "dbg.h"
 
+// fill this struct in
+// struct pci_dev_t {
+// 	using init_fn = int (*)(pci_dev_t *dev, config_reg_t *pci_reg);
+// 	using uninit_fn = void (*)(pci_dev_t *dev);
+// 	using get_if_fn = void *(*)(pci_dev_t *dev, int if_num);
+// 	using reg_cbk_fn = int *(*)(pci_dev_t *dev, cbk_t cbk, int cbk_type);
+
+// 	// those are set by the user
+// 	uint8_t class_id;
+// 	uint8_t subclass;
+
+// 	init_fn init;
+// 	uninit_fn uninit;
+// 	get_if_fn get_if;
+// 	reg_cbk_fn reg_cbk;
+
+// 	// can be set during init
+// 	void *ctx = NULL;
+
+// 	// those are set by pci, must be null first
+// 	uint8_t pci_bus = 0;
+// 	uint8_t pci_dev = 0;
+// 	uint8_t pci_fn = 0;
+
+// 	pci_dev_t *next = NULL;
+// 	bool init_done = false;
+// };
+
+
 extern "C" void	*memset(void *s, int c, size_t n)
 {
 	size_t	i;

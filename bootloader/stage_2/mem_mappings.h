@@ -5,19 +5,7 @@
 	mappings to be used in the second stage of the bootloader
 */
 
-#define VESA_PUTCHAR_BUFF_START (0x00100000) 
-#define VESA_PUTCHAR_BUFF_END (VESA_PUTCHAR_BUFF_START + sizeof(char [84][214]))
-
-#define VESA_PUTCHAR_FONT_START (VESA_PUTCHAR_BUFF_END) 
-#define VESA_PUTCHAR_FONT_END (VESA_PUTCHAR_FONT_START + sizeof(uint32_t[96][9 * 14]))
-
-#define EXT2_CACHE_START (VESA_PUTCHAR_FONT_END) 
-#define EXT2_CACHE_END (EXT2_CACHE_START + sizeof(char[128 * 512]))
-
-#define EXT2_GPT_HDR_START (EXT2_CACHE_END) 
-#define EXT2_GPT_HDR_END (EXT2_GPT_HDR_START + 512)
-
-#define EXT2_GPT_PART_SEC_START (EXT2_GPT_HDR_END) 
-#define EXT2_GPT_PART_SEC_END (EXT2_GPT_PART_SEC_START + 512)
+#define BRK_START (0x00100000) 
+#define BRK_SIZE (0x00E00000) 
 
 #endif

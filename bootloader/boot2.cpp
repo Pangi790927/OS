@@ -11,13 +11,22 @@
 #include "ext2.h"
 #include "boot_reader.h"
 #include "pci.h"
+#include "brk_alloc.h"
+#include "crc32.h"
+#include "dev_ifaces.h"
+#include "boot_dev_mgr.h"
+
+#define CACHE_SIZE (sizeof(char[128 * 512]))
 
 mbr_post_t *mbr = (mbr_post_t *)0x7c00;
-gpt_hdr_t *gpt_hdr = (gpt_hdr_t *)EXT2_GPT_HDR_START;
-gpt_part_t *gpt_part_cache = (gpt_part_t *)EXT2_GPT_PART_SEC_START;
 
-char *cache = (char *)EXT2_CACHE_START;
-uint32_t cache_size = EXT2_CACHE_END - EXT2_CACHE_START;
+gpt_hdr_t *gpt_hdr = NULL;
+gpt_part_t *gpt_part_cache = NULL;
+char *cache = NULL;
+
+extern "C" void __cxa_pure_virtual() {
+    EXCEPTION("__cxa_pure_virtual call");
+}
 
 static uint16_t no_putchar(uint16_t) {
 	return 0;
@@ -40,7 +49,7 @@ static int read_gpt(BootReader &boot_rodev) {
 
 	DBG("gpt_lba: %x", gpt_lba);
 	GptDev gpt_dev(boot_rodev.get_if(), 0, boot_rodev.lba_cnt,
-			cache, cache_size);
+			cache, CACHE_SIZE);
 
 	auto hdr_sect = gpt_dev.get_sect(gpt_lba);
 	if (!hdr_sect.get()) {
@@ -78,16 +87,51 @@ static int read_gpt(BootReader &boot_rodev) {
 
 extern "C" int boot2()
 {
+	uint32_t crc = crc32((char *)mbr->init_opts.boot2_addr,
+			mbr->init_opts.boot2_cnt * LBA_SZ);
+
+	/* first thing first, initialize debuger */
 	intern_putchar = &no_putchar;
 	serial::init();
 	serial::sendstr("========= Entering protected mode =========\n\r");
 	DBGSCOPE();
 
-	// no need to re-init serial
-	vesa::init((void *)VESA_PUTCHAR_BUFF_START, (void *)VESA_PUTCHAR_FONT_START,
-			mbr->vesa_display);
+	DBG("we check own crc as fast as we can");
+	if (crc != mbr->init_opts.boot2_crc) {
+		DBG("wrong crc: %x, should be: %x", crc, mbr->init_opts.boot2_crc);
+		return -1;
+	}
+	else {
+		DBG("crc ok");
+	}
+
+	DBG("we initialize mem managment");
+	brk_alloc_init((void *)BRK_START, BRK_SIZE);
+	void *vesa_buff = brk_alloc(sizeof(vesa::buff_t));
+	void *vesa_font = brk_alloc(sizeof(vesa::font_t));
+	gpt_hdr = (gpt_hdr_t *)brk_alloc(LBA_SZ);
+	gpt_part_cache = (gpt_part_t *)brk_alloc(LBA_SZ);
+	cache = (char *)brk_alloc(CACHE_SIZE);
+
+	if (!vesa_buff || !vesa_font || !gpt_hdr || !gpt_part_cache || !cache) {
+		DBG("Failed to init memory: %p %p %p %p %p",
+				vesa_buff, vesa_font, gpt_hdr, gpt_part_cache, cache);
+		return -1;
+	}
+
+	DBG("initialize vesa print, from now on we will print on screeen");
+	vesa::init(vesa_buff, vesa_font, mbr->vesa_display);
 	intern_putchar = &vesa::putchar;
 
+	DBG("0x17e00 < %p < %x", (void *)&intern_putchar,
+			mbr->init_opts.boot2_addr + mbr->init_opts.boot2_cnt * LBA_SZ);
+
+	DBG("initialize device manager");
+	dev_mgr_init(brk_alloc, [](void *){});
+	auto dev_mgr = (dev_mgr_if *)dev_mgr_get_if(dev_mgr_if::n);
+	
+	DBG("initialize pci and start reading");
+	pci::init(dev_mgr);
 	pci::scan_buses();
 
 	BootReader boot_rodev;
@@ -103,7 +147,7 @@ extern "C" int boot2()
 
 	ExtDev ext_dev(boot_rodev.get_if(), gpt_part_cache->first_lba,
 			boot_rodev.lba_cnt - gpt_part_cache->first_lba,
-			cache, cache_size);
+			cache, CACHE_SIZE);
 	Ext2 ext2(ext_dev, ext_dev.sect_cnt / (BLK_SIZE / LBA_SZ),
 			gpt_part_cache->first_lba);
 

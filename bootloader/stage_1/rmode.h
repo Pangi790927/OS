@@ -16,6 +16,8 @@ extern "C" long load_prot_mode(long gdt_addr, long code_sel,
 		long code_addr, long data_sel);
 extern "C" uint16_t disk_read(uint16_t addr_off, uint16_t addr_seg, uint16_t lba,
 		uint16_t cnt, uint16_t drive);
+extern "C" uint16_t get_boot_dev(uint16_t drive, uint16_t addr_off,
+		uint16_t addr_seg);
 
 // TO DO: fix bug not reading ram
 inline ramsize_t get_ramsize(void (*perr)(const char *err)) {

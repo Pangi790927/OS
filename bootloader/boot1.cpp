@@ -137,6 +137,43 @@ static void init_mbr() {
 	}
 }
 
+static void drive_info() {
+	uint16_t drive = mbr->init_opts.boot_drive;
+
+	// DRIVE INFO ==============================================================
+	int ret;
+	for (uint i = 0; i < sizeof(mbr->boot_dev_info); i++)
+		((char *)&mbr->boot_dev_info)[i] = 0;
+	mbr->boot_dev_info.size = sizeof(mbr->boot_dev_info);
+	uint16_t binfo_off = OFF(&mbr->boot_dev_info);
+	uint16_t binfo_seg = SEG(&mbr->boot_dev_info);
+	DBG("drive: %x, bioff: %x, biseg: %x", drive, binfo_off, binfo_seg);
+	if ((ret = get_boot_dev(drive, binfo_off, binfo_seg)) != 0) {
+		DBG("Failed to read boot drive info: %x", ret);
+		return ;
+	}
+	DBG("sz: %x", mbr->boot_dev_info.size);
+	DBG("cylinders: %x", mbr->boot_dev_info.cylinders);
+	DBG("heads: %x", mbr->boot_dev_info.heads);
+	DBG("sectors: %x", mbr->boot_dev_info.sectors_per_track);
+	DBG("total sectors1: %x", mbr->boot_dev_info.total_sectors1);
+	DBG("total sectors2: %x", mbr->boot_dev_info.total_sectors2);
+	DBG("sect_sz: %x", mbr->boot_dev_info.sect_sz);
+	DBG("dpte_off: %x", mbr->boot_dev_info.dpte_off);
+	DBG("dpte_seg: %x", mbr->boot_dev_info.dpte_seg);
+	if (mbr->boot_dev_info.sig != 0xbedd && mbr->boot_dev_info.dev_path_size !=
+			0x24)
+	{
+		DBG("Invalid path info for boot dev: sig[%x] path_sz[%x]",
+				mbr->boot_dev_info.sig, mbr->boot_dev_info.dev_path_size);
+		return ;
+	}
+	mbr->boot_dev_info.host_bus[3] = 0;
+	mbr->boot_dev_info.if_type[7] = 0;
+	DBG("host_bus: %s", mbr->boot_dev_info.host_bus);
+	DBG("if_type: %s", mbr->boot_dev_info.if_type);
+}
+
 static void load_stage2() {
 	DBGSCOPE();
 	// TO DO: enter protected mode
@@ -147,6 +184,7 @@ static void load_stage2() {
 	uint16_t cnt = mbr->init_opts.boot2_cnt;
 	uint16_t drive = mbr->init_opts.boot_drive;
 
+	// DRIVE READ ==============================================================
 	DBG("Will read disk to: %x, lba: %x, cnt: %d, drive: %x",
 			addr, lba, cnt, drive);
 
@@ -160,7 +198,7 @@ static void load_stage2() {
 		int ret = disk_read(addr_off, addr_seg, lba_aux,
 				to_read, drive);
 		if (ret != 0) {
-			DBG("Can't read from disk: %d", ret);
+			DBG("Can't read from disk: %x", ret);
 			return ;
 		}
 		addr_seg += 0x1000;
@@ -168,6 +206,7 @@ static void load_stage2() {
 		cnt -= to_read;
 	}
 
+	// GPT INIT ================================================================
 	DBG("Will init gdt");
 
 	for (uint16_t i = 0; i < sizeof(mbr->gdt) / sizeof(mbr->gdt[0]); i++)
@@ -226,6 +265,7 @@ static void load_stage2() {
 	DBG("code sel: %x, data sel %x", (uint16_t)code_sel, (uint16_t)data_sel);
 	DBG("&load_prot_mode: %p", (void *)&load_prot_mode);
 
+	// START PROTECTED MODE ====================================================
 	load_prot_mode((long)&mbr->gdt_desc, code_sel, (long)addr, data_sel);
 }
 
@@ -233,11 +273,12 @@ extern "C" int boot1()
 {
 	serial::init();
 	DBGSCOPE();
-	DBG("Starting boot1");
+	DBG("Starting boot1 %d", sizeof(mbr_part_t));
 	init_ramsize();
 	init_mbr();
 	// if (false)
 	find_vesa_mode(&mbr->vesa_display);
+	drive_info();
 	load_stage2();
 
 	DBG("[FATAL ERROR] returned to caller in boot1");

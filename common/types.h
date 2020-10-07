@@ -26,4 +26,7 @@ static_assert(sizeof(int64_t) == 8, "type sizes mismatch");
 
 #define NULL (0)
 
+using alloc_fn_t = void *(*)(size_t);
+using free_fn_t = void (*)(void *);
+
 #endif

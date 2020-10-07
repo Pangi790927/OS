@@ -1,5 +1,5 @@
-CXX = g++-9
-LD = ld
+CXX = ../cross_compiler/cross/bin/i686-elf-g++
+LD = ../cross_compiler/cross/bin/i686-elf-ld
 ASM = nasm
 DISK_FMT = ../tools/diskformat/diskformat.elf
 
@@ -9,7 +9,7 @@ all: mbrboot.bin boot1.bin boot2.bin
 
 # STAGE 1 ======================================================================
 
-CXX_FLAGS_1 = -ffreestanding -fno-rtti -fno-exceptions \
+CXX_FLAGS_1 = -fno-rtti -fno-exceptions -nostdlib -lgcc \
 		-std=c++17 -Os -Wall -Wextra -Werror
 
 DHDR_1 := stage_1 ../common
@@ -60,8 +60,8 @@ clean_1:
 
 # STAGE 2 ======================================================================
 
-CXX_FLAGS_2 = -ffreestanding -fno-rtti -fno-exceptions \
-		-std=c++17 -Os -Wall -Wextra -Werror
+CXX_FLAGS_2 = -ffreestanding -fno-exceptions -nostdlib -lgcc \
+		-std=c++17 -Os -Wall -Wextra -Werror -libsupc++
 
 DHDR_2 := stage_2 ../ext2fs ../common
 DHDR_2 := $(foreach dir, ${DHDR_2}, \
@@ -108,9 +108,6 @@ clean_2:
 # COMMON =======================================================================
 
 test: mbrboot.bin boot1.bin boot2.bin
-	-pkill tail
-	tail -f boot_serial.log &
-
 	dd if=/dev/zero of=boot_example/hdd.img bs=1M count=2
 	$(DISK_FMT) boot_example/hdd.img \
 			boot_example/boot_layout.json 

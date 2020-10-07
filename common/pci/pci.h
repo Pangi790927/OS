@@ -2,6 +2,8 @@
 #define PCI_H
 
 #include "types.h"
+#include "cbk.h"
+#include "dev_ifaces.h"
 
 #define PCI_CONFIG_ADDR		0xCF8
 #define PCI_CONFIG_DATA		0xCFC
@@ -267,6 +269,44 @@ namespace pci
 
 	} __attribute__((__packed__));
 
+	/* this works in the following way:
+		- you first init one of those with a driver and a callback to notify the
+		module that uses this driver. For example, you would implement more than
+		one network driver and all of them would point to the same tcp/ip stack,
+		or you would have more than one storage device.
+		- when a new pci device is detected, the list of registered pci_dev_t's
+		is iterated and init is called on the first matching driver
+		- 0 is returned when the driver is done initializing and INIT_DEV_CBK
+		is called, which will notify the module of this device initialization
+		- if the driver is already initialized, a copy is made and a new struct
+		is added by pci */
+	struct pci_dev_t {
+		using init_fn = int (*)(pci_dev_t *dev, config_reg_t *pci_reg);
+		using uninit_fn = void (*)(pci_dev_t *dev);
+		using get_if_fn = void *(*)(pci_dev_t *dev, int if_num);
+		using reg_cbk_fn = int *(*)(pci_dev_t *dev, cbk_t cbk, int cbk_type);
+
+		// those are set by the user
+		uint8_t class_id;
+		uint8_t subclass;
+
+		init_fn init;
+		uninit_fn uninit;
+		get_if_fn get_if;
+		reg_cbk_fn reg_cbk;
+
+		// can be set during init
+		void *ctx = NULL;
+
+		// those are set by pci, must be null first
+		uint8_t pci_bus = 0;
+		uint8_t pci_dev = 0;
+		uint8_t pci_fn = 0;
+
+		pci_dev_t *next = NULL;
+		bool init_done = false;
+	};
+
 	static_assert(sizeof(config_reg_hdr_t) == 16, "hdr_reg_t has invalid size");
 	static_assert(sizeof(addr_reg_t) == 4, "addr_reg_t has invalid size");
 	static_assert(sizeof(command_reg_t) == 2, "command_reg_t has invalid size");
@@ -274,12 +314,17 @@ namespace pci
 	static_assert(sizeof(bar_t) == 4, "bar_t has invalid size");
 	static_assert(sizeof(config_reg_t) == 256, "config_reg_t has invalid size");
 
+	void init(dev_mgr_if *_idev_mgr);
+
 	uint32_t read_reg(addr_reg_t addr);
 	void read_conf_reg(addr_reg_t addr, config_reg_t *reg);
 	void read_conf_hdr(addr_reg_t addr, config_reg_hdr_t *hdr);
 	uint16_t read_vendor_id(addr_reg_t addr);
+
 	void dbg_print_hdr(config_reg_hdr_t *hdr);
 	void dbg_print_addr_reg(addr_reg_t *reg);
+
+	void add_driver(pci_dev_t *);
 	void scan_buses();
 	const char *class_info(uint8_t class_code, uint8_t subclass);
 }

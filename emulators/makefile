@@ -25,7 +25,7 @@ vbox: ${OS_IMG} tail_serial
 
 tail_serial:
 	touch boot_serial.log
-	pkill tail
+	-pkill tail
 	tail -f boot_serial.log &
 
 example200M.vhd:

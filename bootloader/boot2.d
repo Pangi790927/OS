@@ -8,7 +8,9 @@ boot2.o: boot2.cpp ../common/dbg/serial.h stage_2/dbg.h \
  ../common/utils/round_util.h ../common/utils/bitmap.h ../ext2fs/inodes.h \
  ../ext2fs/dev.h ../common/stdlib.h ../ext2fs/dirs.h \
  ../common/disk_part/uuid.h stage_2/except.h stage_2/boot_reader.h \
- stage_2/dbg.h ../common/ata/ata_driver.h ../common/pci/pci.h
+ stage_2/dbg.h ../common/pci/pci.h ../common/utils/cbk.h \
+ ../common/dev_mgr/dev_ifaces.h ../common/pci/drivers/ata_driver.h \
+ stage_2/brk_alloc.h ../common/utils/crc32.h stage_2/boot_dev_mgr.h
 
 ../common/dbg/serial.h:
 
@@ -64,6 +66,16 @@ stage_2/boot_reader.h:
 
 stage_2/dbg.h:
 
-../common/ata/ata_driver.h:
-
 ../common/pci/pci.h:
+
+../common/utils/cbk.h:
+
+../common/dev_mgr/dev_ifaces.h:
+
+../common/pci/drivers/ata_driver.h:
+
+stage_2/brk_alloc.h:
+
+../common/utils/crc32.h:
+
+stage_2/boot_dev_mgr.h:

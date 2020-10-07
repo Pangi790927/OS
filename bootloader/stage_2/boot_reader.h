@@ -3,6 +3,7 @@
 
 #include "types.h"
 #include "dbg.h"
+#include "pci.h"
 #include "ata_driver.h"
 
 // loads ext2 fs readonly to find the kernel data 
@@ -22,6 +23,10 @@ struct BootReader {
 
 		return 0;
 	}
+
+	// void add_pci_hook(pci_dev_t *driver) {
+	// 	driver->reg_cbk()
+	// } 
 
 	int read_sector(uint32_t lba, uint32_t cnt, char *buff) {
 		if (!ata::read(buff, lba * LBA_SZ, cnt * LBA_SZ, 0, is_lba_28)) {
