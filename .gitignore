@@ -2,6 +2,7 @@ OS.vhd
 OS.img
 os_image
 *.o
+*.d
 *.bin
 *.elf
 *.img
