@@ -20,7 +20,6 @@
 	in ram. This sector will be referenced by the mbr_opts table inside mbr.
 */
 
-#include <initializer_list>
 #include "rmode.h"
 #include "serial.h"
 #include "dbg.h"
@@ -120,8 +119,8 @@ static void init_ramsize() {
 
 static void init_mbr() {
 	DBGSCOPE();
-	auto parts = {&mbr->mbr_hdr.part1, &mbr->mbr_hdr.part2, &mbr->mbr_hdr.part3,
-			&mbr->mbr_hdr.part4};
+	mbr_part_t *parts[] = {&mbr->mbr_hdr.part1, &mbr->mbr_hdr.part2,
+			&mbr->mbr_hdr.part3, &mbr->mbr_hdr.part4};
 	int i = 0;
 	for (auto part : parts) {
 		DBG("part%d\r\nfield: [%x], start_lo [%d], start_hi: [%d], "

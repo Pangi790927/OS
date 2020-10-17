@@ -12,10 +12,55 @@ struct BootReader {
 	// std::string filename;
 	uint32_t lba_cnt = 0;
 	bool is_lba_28 = false;
+	dev_if *dev = NULL;
 
 	BootReader() {}
 
-	int init() {
+	int init(dev_mgr_if *idev_mgr, mbr_post_t *mbr_post) {
+		/* TO DO: search device manager for a device that has the boot sector */
+
+		struct param_t {
+			mbr_post_t *mbr_post;
+			dev_if **devp;
+		};
+		param_t param {
+			.mbr_post = mbr_post,
+			.devp = &dev,
+		};
+
+		idev_mgr->iter_devices(cbk_t{
+			.fn = (void *)+[](void *ctx, dev_if *dev) {
+				if (!dev)
+					return -1;
+				DBG("potential device ! %x", dev);
+				auto storage = (storage_if *)dev->get_dev_if(storage_if::n);
+				if (!storage)
+					return -1;
+				DBG("potential storage !!");
+				mbr_post_t aux_mbr;
+				if (storage->read(0, (void *)&aux_mbr, 1) < 0)
+					return -1;
+				DBG("potential boot sector !!!");
+				auto param = (param_t *)ctx;
+				if (aux_mbr.init_opts.boot_uid !=
+						param->mbr_post->init_opts.boot_uid)
+				{
+					return -1; 
+				}
+				DBG("found our boot sector !!!!");
+
+				*param->devp = dev;
+				(void)ctx;
+				return -1;
+			},
+			.ctx = (void *)&param,
+		});
+
+		if (!dev) {
+			DBG("Can't find device with boot sector");
+			return -1;
+		}
+
 		if (!ata::sendIdentify(0, is_lba_28, true, lba_cnt)) {
 			DBG("Identify Failed");
 			return -1;

@@ -11,8 +11,8 @@ typedef				short		int16_t;
 typedef				int			int32_t;
 typedef				long long	int64_t;
 
-typedef	unsigned	int			size_t;
-typedef	unsigned	int			uint;
+typedef	unsigned	long		size_t;
+typedef	unsigned	long		uint;
 
 static_assert(sizeof(uint8_t) == 1, "type sizes mismatch");
 static_assert(sizeof(uint16_t) == 2, "type sizes mismatch");

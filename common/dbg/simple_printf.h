@@ -12,6 +12,7 @@ struct PrintfArg {
 	PrintfArg(const void *arg) : v((uint64_t)arg) {}
 	PrintfArg(int arg) : v(arg) {}
 	PrintfArg(unsigned int arg) : v(arg) {}
+	PrintfArg(long unsigned int arg) : v(arg) {}
 	PrintfArg(uint64_t arg) : v(arg) {}
 };
 

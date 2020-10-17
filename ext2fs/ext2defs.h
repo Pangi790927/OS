@@ -201,7 +201,7 @@ struct inode_t {
 	uint32_t bsize;
 	uint32_t flags;
 	uint8_t osd1[4];
-	uint32_t block[15];
+	int32_t block[15];
 	uint32_t generation;
 	uint32_t file_acl;
 	uint32_t dir_acl;

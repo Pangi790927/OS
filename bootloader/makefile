@@ -9,7 +9,7 @@ all: mbrboot.bin boot1.bin boot2.bin
 
 # STAGE 1 ======================================================================
 
-CXX_FLAGS_1 = -fno-rtti -fno-exceptions -nostdlib -lgcc \
+CXX_FLAGS_1 = -fno-rtti -fno-exceptions -lgcc \
 		-std=c++17 -Os -Wall -Wextra -Werror
 
 DHDR_1 := stage_1 ../common
@@ -45,8 +45,7 @@ boot1.o: boot1.cpp makefile
 
 boot1.bin: ${CPP_OBJS_1} ${ASM_OBJS_1} boot1.o bootcall_1.asm boot_1.ld
 	$(ASM) bootcall_1.asm -f elf -F stabs -o bootcall_1
-	$(LD) -Tboot_1.ld -m elf_i386 -o boot1.elf \
-			bootcall_1 boot1.o $(OBJS_1)
+	$(LD) -Tboot_1.ld -o boot1.elf bootcall_1 boot1.o $(OBJS_1)
 	objcopy -O binary boot1.elf boot1.bin
 	rm -f bootcall_1
 
@@ -60,8 +59,8 @@ clean_1:
 
 # STAGE 2 ======================================================================
 
-CXX_FLAGS_2 = -ffreestanding -fno-exceptions -nostdlib -lgcc \
-		-std=c++17 -Os -Wall -Wextra -Werror -libsupc++
+CXX_FLAGS_2 = -fno-exceptions --no-rtti -lgcc -lsupc++ \
+		-std=c++17 -Os -Wall -Wextra -Werror
 
 DHDR_2 := stage_2 ../ext2fs ../common
 DHDR_2 := $(foreach dir, ${DHDR_2}, \
@@ -82,19 +81,18 @@ ${ASM_OBJS_2}: %_2.o: %.asm $(HEADERS_2)
 	$(ASM) $< -f elf -F stabs -o $@ $(INCLUDES_2)
 
 ${CPP_OBJS_2}: %_2.o: %.cpp makefile
-	$(CXX) -m32 -MMD -MP -c $< -o $@ $(CXX_FLAGS_2) $(INCLUDES_2)
+	$(CXX) -MMD -MP -c $< -o $@ $(CXX_FLAGS_2) $(INCLUDES_2)
 
 -include ${DEPS_2}
 -include boot2.d
 
 # custom objects: 
 boot2.o: boot2.cpp makefile
-	$(CXX) -m32 -MMD -MP -c $(CXX_FLAGS_2) boot2.cpp $(INCLUDES_2) -o boot2.o
+	$(CXX) -MMD -MP -c $(CXX_FLAGS_2) boot2.cpp $(INCLUDES_2) -o boot2.o
 
 boot2.bin: ${CPP_OBJS_2} ${ASM_OBJS_2} boot2.o bootcall_2.asm boot_2.ld
 	$(ASM) bootcall_2.asm -f elf -F stabs -o bootcall_2
-	$(LD) -Tboot_2.ld -m elf_i386 -o boot2.elf \
-			bootcall_2 boot2.o $(OBJS_2)
+	$(LD) -Tboot_2.ld -o boot2.elf bootcall_2 boot2.o $(OBJS_2)
 	objcopy -O binary boot2.elf boot2.bin
 	rm -f bootcall_2
 

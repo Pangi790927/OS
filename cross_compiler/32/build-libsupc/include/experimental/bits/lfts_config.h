@@ -1,0 +1,1 @@
+/home/pangi/OS/cross_compiler/gcc/libstdc++-v3/include/experimental/bits/lfts_config.h

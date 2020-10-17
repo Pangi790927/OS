@@ -16,6 +16,9 @@ void *brk_alloc(size_t size) {
 		DBG("[ERROR] Size can't be zero");
 		return (void *)0;
 	}
+	if (size % 16 != 0) {
+		size += (16 + size % 16);
+	}
 	if (brk_start + size > brk_end) {
 		DBG("[ERROR] No enaugh memory");
 		return (void *)0;
