@@ -190,20 +190,22 @@ public:
 		auto [index, off] = get_inob(ino);
 		EXT_LOAD_BLK(ino_sect, index, -1);
 		auto inode = (inode_t *)(ino_sect.get() + off);
-		int bsize = roundup_div(size, BLK_SIZE);
+		int new_bsize = roundup_div(size, BLK_SIZE);
 		if ((int)inode->size == size) {
 			ino_sect.unload();
 			return 0;
 		}
-		if (bsize == (int)inode->bsize) {
+		int prev_bsize = roundup_div(inode->size, BLK_SIZE);
+		if (new_bsize == prev_bsize) {
 			inode->size = size;
 			EXT_SAVE_BLK(ino_sect, index, -1);
 			return 0;
 		}
-		if ((int)inode->bsize < bsize) {
+		if (prev_bsize < new_bsize) {
 			int grp = (ino - 1) / sup->ino_per_grp;
-			if (add_blocks(inode, bsize - inode->bsize, grp,
-					[this, &grp](){
+			if (add_blocks(inode, new_bsize - prev_bsize, grp,
+					[this, &grp, inode](){
+						inode->bsize += BLK_SIZE / LBA_SZ;
 						return alloc_blk(grp);
 					}))
 			{
@@ -211,13 +213,12 @@ public:
 				return -1;
 			}
 		}
-		if (bsize < (int)inode->bsize) {
-			if (rem_blocks(inode, inode->bsize - bsize)) {
+		if (new_bsize < prev_bsize) {
+			if (rem_blocks(inode, prev_bsize - new_bsize)) {
 				ino_sect.unload();
 				return -1;
 			}
 		}
-		inode->bsize = bsize;
 		inode->size = size;
 		EXT_SAVE_BLK(ino_sect, index, -1);
 		return 0;
@@ -276,16 +277,16 @@ public:
 		return 0;
 	}
 
-	int mod_links(int ino, int dir) {
+	int mod_links(int ino, int direction) {
 		auto [index, ino_off] = get_inob(ino);
 		EXT_LOAD_BLK(ino_sect, index, -1);
 		auto inode = (inode_t *)(ino_sect.get() + ino_off);
 
-		if ((int)inode->links_cnt + dir < 0) {
+		if ((int)inode->links_cnt + direction < 0) {
 			ino_sect.unload();
 			return -1;
 		}
-		inode->links_cnt += dir;
+		inode->links_cnt += direction;
 		EXT_SAVE_BLK(ino_sect, index, -1);
 		return 0;
 	}
@@ -385,14 +386,14 @@ public:
 		grp--;
 		DBG("Adding blocks to imutable: ino: %d start: %d", ino, start_blk);
 		if (add_blocks(inode, bsize, grp,
-				[&start_blk, this, &grp](){
+				[&start_blk, this, &grp, inode](){
+					inode->bsize += BLK_SIZE / LBA_SZ;
 					return start_blk++;
 				}))
 		{
 			ino_sect.unload();
 			return -1;
 		}
-		inode->bsize = bsize;
 		inode->size = size;
 		EXT_SAVE_BLK(ino_sect, index, -1);
 		DBG("Imutable is set and ready to be written");
@@ -492,12 +493,13 @@ private:
 
 	template <typename BlkAlloc>
 	int add_blocks(inode_t *inode, int cnt, int grp, BlkAlloc&& blk_alloc) {
-		auto alloc_indir = [this, &grp] () {
+		auto alloc_indir = [this, &grp, inode] () {
 			int blk = alloc_blk(grp);
 			if (blk < 0) {
 				DBG("Can't alloc block in group!");
 				return -1;
 			}
+			inode->bsize += BLK_SIZE / LBA_SZ;
 			EXT_LOAD_BLK(blk_sect, blk, -1);
 			memset(blk_sect.get(), 0, BLK_SIZE);
 			EXT_SAVE_BLK(blk_sect, blk, -1);
@@ -589,9 +591,9 @@ private:
 			}
 			return 0;
 		};
-		int inode_bsize = roundup_div(inode->size, BLK_SIZE);
+		int data_bsize = roundup_div(inode->size, BLK_SIZE);
 		for (int i = 0; i < cnt; i++)
-			if (add(inode_bsize + i) < 0)
+			if (add(data_bsize + i) < 0)
 				return -1;
 		return 0;
 	}
@@ -613,6 +615,7 @@ private:
 				int *blocks = (int *)blk1.get();
 				if (free_blk(blocks[i]))
 					return -1;
+				inode->bsize -= BLK_SIZE / LBA_SZ;
 				blocks[i] = 0;
 				EXT_SAVE_BLK(blk1, inode->block[12], -1);
 
@@ -634,12 +637,14 @@ private:
 
 				if (free_blk(blocks[i % ipb]))
 					return -1;
+				inode->bsize -= BLK_SIZE / LBA_SZ;
 
 				blocks[i % ipb] = 0;
 
 				if (i / ipb == 0) {
 					if (free_blk(indir1[i / ipb]))
 						return -1;
+					inode->bsize -= BLK_SIZE / LBA_SZ;
 					indir1[i / ipb] = 0;
 				}
 
@@ -649,6 +654,7 @@ private:
 				if (i == 0) {
 					if (free_blk(inode->block[13]))
 						return -1;
+					inode->bsize -= BLK_SIZE / LBA_SZ;
 					inode->block[13] = 0;
 				}
 			}
@@ -669,16 +675,19 @@ private:
 
 				if (free_blk(blocks[i % ipb]))
 					return -1;
+				inode->bsize -= BLK_SIZE / LBA_SZ;
 
 				blocks[i % ipb] = 0;
 				if ((i / ipb) % ipb == 0) {
 					if (free_blk(indir1[(i / ipb) % ipb]))
 						return -1;
+					inode->bsize -= BLK_SIZE / LBA_SZ;
 					indir1[(i / ipb) % ipb] = 0;
 				}
 				if (i / (ipb*ipb) == 0) {
 					if (free_blk(indir2[i / ipb]))
 						return -1;
+					inode->bsize -= BLK_SIZE / LBA_SZ;
 				}
 
 				EXT_SAVE_BLK(blk3, indir2[(i / ipb) % ipb], -1);
@@ -688,14 +697,15 @@ private:
 				if (i == 0) {
 					if (free_blk(inode->block[14]))
 						return -1;
+					inode->bsize -= BLK_SIZE / LBA_SZ;
 					inode->block[14] = 0;
 				}
 			}
 			return 0;
 		};
-		int inode_bsize = roundup_div(inode->size, BLK_SIZE);
+		int data_bsize = roundup_div(inode->size, BLK_SIZE);
 		for (int i = cnt - 1; i >= 0; i--)
-			if (rem(inode_bsize + i) < 0)
+			if (rem(data_bsize + i) < 0)
 				return -1;
 		return 0;
 	}

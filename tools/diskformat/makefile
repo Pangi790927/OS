@@ -30,6 +30,7 @@ test_ext2.elf: test_ext2.cpp makefile
 	g++-9 $(CXX_FLAGS) -MMD -MP test_ext2.cpp $(INCLUDES) -o test_ext2.elf
 
 test128K: boot_example/example128K.img diskformat.elf test_ext2.elf
+	-mkdir mount_point
 	./diskformat.elf boot_example/example128K.img boot_example/dev_layout.json 
 	sudo python testfs.py boot_example/example128K.img
 	./test_ext2.elf boot_example/example128K.img 34
@@ -39,6 +40,7 @@ test128K: boot_example/example128K.img diskformat.elf test_ext2.elf
 	rm b1.hex b2.hex
 
 test2M: boot_example/example2M.img diskformat.elf test_ext2.elf
+	-mkdir mount_point
 	./diskformat.elf boot_example/example2M.img boot_example/dev_layout.json 
 	sudo python testfs.py boot_example/example2M.img
 	./test_ext2.elf boot_example/example2M.img 34
@@ -48,6 +50,7 @@ test2M: boot_example/example2M.img diskformat.elf test_ext2.elf
 	rm b1.hex b2.hex
 
 test20M: boot_example/example20M.img diskformat.elf test_ext2.elf
+	-mkdir mount_point
 	./diskformat.elf boot_example/example20M.img boot_example/dev_layout.json 
 	sudo python testfs.py boot_example/example20M.img
 	./test_ext2.elf boot_example/example20M.img 34
@@ -57,6 +60,7 @@ test20M: boot_example/example20M.img diskformat.elf test_ext2.elf
 	rm b1.hex b2.hex
 
 test200M: boot_example/example200M.img diskformat.elf test_ext2.elf
+	-mkdir mount_point
 	./diskformat.elf boot_example/example200M.img boot_example/dev_layout.json 
 	sudo python testfs.py boot_example/example200M.img
 	./test_ext2.elf boot_example/example200M.img 34
@@ -66,6 +70,7 @@ test200M: boot_example/example200M.img diskformat.elf test_ext2.elf
 	rm b1.hex b2.hex
 
 test_ext2: test_ext2.elf
+	-mkdir mount_point
 	-sudo losetup /dev/loop11 floppy.img
 	yes | sudo mkfs -t ext2 -b 1024 -I 128 -O $(FS_OPTS) -r 1 -vvvvv /dev/loop11
 	@echo "--------------------------- REFERENCE ------------------------------"

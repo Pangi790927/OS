@@ -1,5 +1,8 @@
-CXX = ../cross_compiler/cross/bin/i686-elf-g++
-LD = ../cross_compiler/cross/bin/i686-elf-ld
+# CXX = ../cross_compiler/cross/bin/i686-elf-g++
+# LD = ../cross_compiler/cross/bin/i686-elf-ld
+CXX = g++-9 -ffreestanding
+LD = ld
+
 ASM = nasm
 DISK_FMT = ../tools/diskformat/diskformat.elf
 
@@ -60,7 +63,7 @@ clean_1:
 
 # STAGE 2 ======================================================================
 
-CXX_FLAGS_2 = -ffreestanding -fno-exceptions -nostdlib -lgcc \
+CXX_FLAGS_2 = -fno-exceptions -nostdlib -lgcc \
 		-std=c++17 -Os -Wall -Wextra -Werror -libsupc++
 
 DHDR_2 := stage_2 ../ext2fs ../common

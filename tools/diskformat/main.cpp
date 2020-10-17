@@ -310,7 +310,7 @@ int install_boot(Ext2 &ext2, DevLayout &layout, FileProvDev &file_dev) {
 		return -1;
 	}
 
-	if (bootconf_inode.bsize != 1) {
+	if (roundup_div(bootconf_inode.size, BLK_SIZE) != 1) {
 		printf("boot confing should be max 1 block or it should be continuous");
 		return -1;
 	}

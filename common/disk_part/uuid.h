@@ -1,7 +1,7 @@
 #ifndef UUID_H
 #define UUID_H
 
-#include <ctime>
+// #include <ctime>
 #include "stdlib.h"
 
 inline void create_uuid(char *data, uint32_t len) {
