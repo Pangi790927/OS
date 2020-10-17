@@ -50,7 +50,7 @@ struct dev_mgr_t : public dev_mgr_if {
 	}
 };
 
-static if_instance<dev_mgr_t> dev_mgr;
+static obj_instance<dev_mgr_t> dev_mgr;
 
 extern "C" int init(alloc_fn_t alloc_fn, free_fn_t free_fn) {
 	_alloc_fn = alloc_fn;

@@ -1,8 +1,7 @@
 # CXX = ../cross_compiler/cross/bin/i686-elf-g++
 # LD = ../cross_compiler/cross/bin/i686-elf-ld
 CXX = g++-9 -ffreestanding
-LD = ld
-
+LD = ld -m elf_i386
 ASM = nasm
 DISK_FMT = ../tools/diskformat/diskformat.elf
 
@@ -48,7 +47,7 @@ boot1.o: boot1.cpp makefile
 
 boot1.bin: ${CPP_OBJS_1} ${ASM_OBJS_1} boot1.o bootcall_1.asm boot_1.ld
 	$(ASM) bootcall_1.asm -f elf -F stabs -o bootcall_1
-	$(LD) -Tboot_1.ld -m elf_i386 -o boot1.elf \
+	$(LD) -Tboot_1.ld -o boot1.elf \
 			bootcall_1 boot1.o $(OBJS_1)
 	objcopy -O binary boot1.elf boot1.bin
 	rm -f bootcall_1

@@ -1,4 +1,3 @@
-#include <initializer_list>
 #include "serial.h"
 #include "dbg.h"
 #include "mbr_post.h"
@@ -127,15 +126,21 @@ extern "C" int boot2()
 			mbr->init_opts.boot2_addr + mbr->init_opts.boot2_cnt * LBA_SZ);
 
 	DBG("initialize device manager");
-	dev_mgr_init(brk_alloc, [](void *){});
+	/* we first initialize dev_mgr and add our drivers to it */
+	dev_mgr_init(brk_alloc, (free_fn_t)+[](void *){});
 	auto dev_mgr = (dev_mgr_if *)dev_mgr_get_if(dev_mgr_if::n);
+
+	ata_reg_drivers(dev_mgr, brk_alloc, (free_fn_t)+[](void *){});
 	
 	DBG("initialize pci and start reading");
+	/* we then scan pci buses and create virtual devices for our real entries
+	on the pci bus. */
 	pci::init(dev_mgr);
 	pci::scan_buses();
 
+	/* we now let the boot reader to find a device that has our boot sector */
 	BootReader boot_rodev;
-	if (boot_rodev.init() != 0) {
+	if (boot_rodev.init(dev_mgr, mbr) != 0) {
 		DBG("can't init boot driver");
 		return -1;
 	}

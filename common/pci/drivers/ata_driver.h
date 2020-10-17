@@ -3,82 +3,54 @@
 
 #include "types.h"
 #include "pci.h"
-// #include "interfaces.h"
 
-/* creates a new pci device to be added in the pci queue */
-// pci::pci_dev_t *create_pci_dev(void *(*alloc)(size_t));
-
-struct ata_driver_t : public drv_if, public pcidrv_if {
-	dev_mgr_if *idev_mgr;
-
-	ata_driver_t(dev_mgr_if *idev_mgr) : idev_mgr(idev_mgr) {}
-
-	virtual void *get_if(int if_num) {
-		if (if_num == dev_if::n)
-			return (dev_if *)this;
-		if (if_num == pcidrv_if::n)
-			return (pcidrv_if *)this;
-		return NULL;
-	}
-
-	virtual int pci_init(void *reg, int bus, int dev, int fn) {
-		auto _reg = (pci::config_reg_t *)reg;
-		(void)_reg;
-		(void)bus;
-		(void)dev;
-		(void)fn;
-		/* TO DO: implement
-		it should work like this: this driver is initialized with a pointer to
-		dev_mgr and it is registered as a driver not as a device into dev_mgr.
-		*/
-		return 0;
-	}
-};
-
+/* headers of drivers cover a large spectrum of devices and the have a function
+to register one or more drivers that should be added to dev_mgr_t */
+int ata_reg_drivers(dev_mgr_if *idev_mgr, alloc_fn_t alloc, free_fn_t free);
 
 namespace ata
 {
-	const uint16_t PRIMARY_PORT = 0x1F0;
-	const uint16_t PRIMARY_COMMAND = 0x3F6;
+	// const uint16_t PRIMARY_PORT = 0x1F0;
+	// const uint16_t PRIMARY_COMMAND = 0x3F6;
 
-	const uint8_t DATA = 0;
-	const uint8_t ERROR = 1,			FEATURES = 1;
-	const uint8_t SECTOR_COUNT = 2;
-	const uint8_t LBA_LO = 3;
-	const uint8_t LBA_MI = 4;
-	const uint8_t LBA_HI = 5;
-	const uint8_t DEVICE = 6;
-	const uint8_t STATUS = 7,			COMMAND = 7;
+	// const uint8_t DATA = 0;
+	// const uint8_t ERROR = 1,			FEATURES = 1;
+	// const uint8_t SECTOR_COUNT = 2;
+	// const uint8_t LBA_LO = 3;
+	// const uint8_t LBA_MI = 4;
+	// const uint8_t LBA_HI = 5;
+	// const uint8_t DEVICE = 6;
+	// const uint8_t STATUS = 7,			COMMAND = 7;
 
-	const uint16_t DEVICE_DEFAULT = 0xA0;
-	const uint16_t DEVICE_LBA_SEND = 0xE0;
+	// const uint16_t DEVICE_DEFAULT = 0xA0;
+	// const uint16_t DEVICE_LBA_SEND = 0xE0;
 
-	const uint8_t IDENTIFY_COMMAND = 0xEC;
-	const uint8_t READ_COMMAND = 0x20;
-	const uint8_t READ_COMMAND_EXT = 0x24;
+	// const uint8_t IDENTIFY_COMMAND = 0xEC;
+	// const uint8_t READ_COMMAND = 0x20;
+	// const uint8_t READ_COMMAND_EXT = 0x24;
 
-	const uint32_t LBA28_SECTOR_PATCH = 255;
-	const uint32_t LBA48_SECTOR_PATCH = 65535;
-	const uint32_t SECTOR_SIZE = 512;
+	// const uint32_t LBA28_SECTOR_PATCH = 255;
+	// const uint32_t LBA48_SECTOR_PATCH = 65535;
+	// const uint32_t SECTOR_SIZE = 512;
 
-	void waitBSY();
-	bool waitDSQ();
+	// void waitBSY();
+	// bool waitDSQ();
 
-	// will read 512 * sectorCount from ATA and write them to address
-	bool lba28Read (void *address, uint64_t lba,
-			uint32_t sectorCount, uint8_t device);
-	bool lba48Read (void *address, uint64_t lba,
-			uint32_t sectorCount, uint8_t device);
+	// // will read 512 * sectorCount from ATA and write them to address
+	// bool lba28Read (void *address, uint64_t lba,
+	// 		uint32_t sectorCount, uint8_t device);
+	// bool lba48Read (void *address, uint64_t lba,
+	// 		uint32_t sectorCount, uint8_t device);
 
-	bool lba28PIORead (void *address, uint32_t lba,
-			uint8_t sectorCount, uint8_t device);
-	bool lba48PIORead (void *address, uint64_t lba,
-			uint16_t sectorCount, uint8_t device);
-	bool sendIdentify (uint8_t device, bool &lba28, bool printData,
-			uint32_t &lba_cnt);
+	// bool lba28PIORead (void *address, uint32_t lba,
+	// 		uint8_t sectorCount, uint8_t device);
+	// bool lba48PIORead (void *address, uint64_t lba,
+	// 		uint16_t sectorCount, uint8_t device);
+	// bool sendIdentify (uint8_t device, bool &lba28, bool printData,
+	// 		uint32_t &lba_cnt);
 
-	bool read (void *dst, uint64_t hdd_addr, uint32_t size, uint8_t dev,
-			bool is_lba_32);
+	// bool read (void *dst, uint64_t hdd_addr, uint32_t size, uint8_t dev,
+	// 		bool is_lba_32);
 }
 
 // if we decide that we need to discover the devices by hand
