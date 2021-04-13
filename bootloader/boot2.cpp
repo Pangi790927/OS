@@ -185,6 +185,15 @@ extern "C" int boot2()
 
 	DBG("boot.conf:\n%s", conf);
 
+	/* TO DO:
+		- parse config (use it in stage 1 to choose vga)
+		- load first and second stage of kernel
+		- prepare some structures for the kernel, for example we will pass the
+		detected pci-devices so the kernel won't need to find them again
+		- that's all for the bootloader, we now need to structure the kernel
+		in a smarter way, we will have named devices, we need to add a page
+		allocator */
+
 	ext2.uninit();
 
 	// uint32_t conf_lba = mbr->init_opts.conf_lba;

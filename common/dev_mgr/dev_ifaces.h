@@ -107,6 +107,7 @@ struct pcidrv_if {
 struct storage_if {
 	virtual int read(uint32_t lba, void *buff, int cnt) = 0;
 	virtual int write(uint32_t lba, void *buff, int cnt) = 0;
+	virtual uint32_t get_lba_cnt() = 0;
 
 	constexpr const static int n = __LINE__;
 };

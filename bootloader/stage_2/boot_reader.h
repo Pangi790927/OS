@@ -12,13 +12,14 @@ struct BootReader {
 	// std::string filename;
 	uint32_t lba_cnt = 0;
 	bool is_lba_28 = false;
-	dev_if *dev = NULL;
+	storage_if *storage;
 
 	BootReader() {}
 
 	int init(dev_mgr_if *idev_mgr, mbr_post_t *mbr_post) {
 		/* TO DO: search device manager for a device that has the boot sector */
 
+		dev_if *dev = NULL;
 		struct param_t {
 			mbr_post_t *mbr_post;
 			dev_if **devp;
@@ -61,10 +62,13 @@ struct BootReader {
 			return -1;
 		}
 
-		if (!ata::sendIdentify(0, is_lba_28, true, lba_cnt)) {
-			DBG("Identify Failed");
+		storage = (storage_if *)dev->get_dev_if(storage_if::n);
+		if (!storage) {
+			DBG("Not a storage device??");
 			return -1;
 		}
+
+		lba_cnt = storage->get_lba_cnt();
 
 		return 0;
 	}
@@ -74,9 +78,14 @@ struct BootReader {
 	// } 
 
 	int read_sector(uint32_t lba, uint32_t cnt, char *buff) {
-		if (!ata::read(buff, lba * LBA_SZ, cnt * LBA_SZ, 0, is_lba_28)) {
-			DBG("failed to read from disk: addr %p lba 0x%x cnt %d is_28 %d",
-					buff, lba, cnt, is_lba_28);
+		if (lba >= lba_cnt || lba + cnt > lba_cnt) {
+			DBG("Outside of bounds read: %x - %x, max: %x",
+					lba, lba + cnt, lba_cnt);
+			return -1;
+		}
+		int err;
+		if ((err = storage->read(lba, buff, cnt)) != 0) {
+			DBG("can't read: lba: %x, cnt %x, err: %x", lba, cnt, err);
 			return -1;
 		}
 		return 0;

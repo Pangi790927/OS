@@ -1,0 +1,127 @@
+This is the new version of the readme, superseding README.MD.
+
+========
+Description and perks:
+
+The project is split into multiple parts, of which, the most important are:
+	bootloader
+		- this is the program that loads the kernel and enables a lot of stuff
+		in the process
+	kernel
+		- this is the actual kernel, does kernel stuff
+	common
+		- this is code that is used in multiple modules
+
+This kernel will be loaded by the bootloader in predetermined locations
+
+Each module, besides common, should have it's own dbg.h and except.h, sometimes
+multiple stages can have difrent versions of this file. Those should allways
+report on serial and after that they can choose where to write.
+
+Each module and submodule will have an id if they compile source code from
+common. For example stage1 of bootloader has id 1, stage2 of bootloader id 2,
+stage 1 of kernel id 3 and so on.
+
+Other modules at the time of writing the readme:
+	tools
+		- here we find the installer, the program that writes the OS and
+		bootloader on disk. For now it only writes it on a file
+	ext2fs
+		- testing area for the ext2 file system
+	docs
+		- usefull documentation(drivers, cpu docs, etc.)
+	emulators
+		- virtual box, qemu and bochs dir. Each module that builds a subpart
+		that should run on a virtual machine or emulator will call the makefile
+		from this directory. Examples are bootloader, kernel and the os install
+		tool
+
+========
+Feature distribution:
+
+Those are enabled when entering the first stage of the kernel:
+	- vesa
+	- 32 bit protected mode (gdt is set)
+	- ata read, serial, logging (prob reinited by kernel)
+	- boot info
+	- a20 line
+	- pci devices info
+
+First stage of this kernel will have to init:
+	- paging
+	- mem/page allocators
+
+Second stage of this kernel will do:
+	- start scheduler
+	- set interupts
+	+ have dylib loader
+	+ have driver loader
+	+ have process loader
+
+========
+Drivers:
+
+Available drivers in second stage:
+	- keyboard (maybe mouse)
+	- i8254x - nic
+	- ata -> ext2
+	- vesa vbo -> vga graphics
+	- pic, pit
+
+========
+RAM:
+
+Phys Memory Map(needs to take into account other things on pc):
+	- 0x7c00		: 0x7e00		mbr_post.h & mbr (boot info is here)
+	- 0x7e00		: 0x17e00		bootloader stage1 code
+	- 0x17e00		: 0x00100000	bootloader stage2 code
+	- 0x0			: 0x17e00 - 4	bootloader stage2 stack
+	- 0x0			: 0x7BF0		bootloader stage1 stack
+	- 0x00100000	: 0x00E00000	bootloader stage2 heap
+
+From OSDev:
+0x00000000	0x000003FF	1 KiB		Real Mode IVT (Interrupt Vector Table)
+0x00000400	0x000004FF	256 bytes	BDA (BIOS data area)
+0x00000500	0x00007BFF	~30 KiB		Conventional memory	usable memory
+0x00007C00	0x00007DFF	512 bytes	Your OS BootSector
+0x00007E00	0x0007FFFF	480.5 KiB	Conventional memory
+0x00080000	0x0009FFFF	128 KiB		EBDA (Extended BIOS Data Area)
+0x000A0000	0x000BFFFF	128 KiB		Video display memory
+0x000C0000	0x000C7FFF	32 KiB		(typically)	Video BIOS
+0x000C8000	0x000EFFFF	160 KiB		(typically)	BIOS Expansions
+0x000F0000	0x000FFFFF	64 KiB		Motherboard BIOS
+0x00100000	0x00EFFFFF	14 MiB		RAM -- free for use (if it exists)
+0x00F00000	0x00FFFFFF	0x00100000	(1 MiB)	Possible memory mapped hardware
+0x01000000	????????	???????? 	(whatever exists) RAM
+0xC0000000 	0xFFFFFFFF	1 GiB		Memory mapped PCI devices, PnP NVRAM?,
+									IO APIC/s, local APIC/s, BIOS, ...
+
+Virt Memory Map:
+	* for kernel:
+		- TO DO
+	* for usermode process:
+		- TO DO
+
+========
+FS and Disk:
+
+Kernel will reside in the boot volume at:
+	- /boot/kern1.kern
+	- /boot/kern2.kern
+
+Those will be elf files.
+
+(this should be checked in bootloader stage 1, bootloader mbr and os install
+tool)
+OS loading from disks is:
+	- mbr: one of the disks will be chosen by bios,
+		this disk will have an unique id
+	- stage 1: is loaded using bios functions
+	- stage 1: location, boot config and some more are written in the mbr zone
+	- stage 1: (real mode) loads stage 2 (protected mode)
+	- stage 2: now has it's own disk reader
+	- stage 2: all disks are iterated to find the unique id of the boot disk
+	- stage 2: after finding the unique id the fs is loaded by stage 2 and
+		the kernel stages are loaded
+	- stage 2: calls the first kernel stage 
+	- kernel: does kernel stuff

@@ -22,7 +22,7 @@ STAGE_3_CPP_SOURCES = $(shell find stage_3_sources/ -not -path '*/\.*' -type f -
 STAGE_3_ASM_OBJS = $(patsubst %.asm, %.o, $(STAGE_3_ASM_SOURCES))
 STAGE_3_CPP_OBJS = $(patsubst %.cpp, %.o, $(STAGE_3_CPP_SOURCES))
 
-CXX = g++-7
+CXX = g++
 ASM = nasm
 # LD = ld
 

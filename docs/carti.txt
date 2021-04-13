@@ -1,3 +1,0 @@
-carti.txt
-How Linux Works: What Every Superuser Should Know - Brian ward
-Operating System Concepts - Silberschatz, Galvin and Gagne

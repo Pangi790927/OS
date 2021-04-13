@@ -62,7 +62,7 @@ clean_1:
 
 # STAGE 2 ======================================================================
 
-CXX_FLAGS_2 = -fno-exceptions -nostdlib -lgcc \
+CXX_FLAGS_2 = -fno-rtti -fno-exceptions -nostdlib -lgcc \
 		-std=c++17 -Os -Wall -Wextra -Werror -libsupc++
 
 DHDR_2 := stage_2 ../ext2fs ../common

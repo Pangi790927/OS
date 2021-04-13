@@ -275,7 +275,6 @@ extern "C" int boot1()
 	DBG("Starting boot1 %d", sizeof(mbr_part_t));
 	init_ramsize();
 	init_mbr();
-	// if (false)
 	find_vesa_mode(&mbr->vesa_display);
 	drive_info();
 	load_stage2();
